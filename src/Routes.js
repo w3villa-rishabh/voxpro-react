@@ -289,7 +289,7 @@ const Routes = () => {
       <AnimatePresence>
         <Suspense fallback={<SuspenseLoading />}>
           <Switch>
-            <Redirect exact from="/" to="/Overview" />
+            {/* <Redirect exact from="/" to="/Overview" />
             <Route path={['/Overview']}>
               <PresentationLayout>
                 <Switch location={location} key={location.pathname}>
@@ -300,6 +300,21 @@ const Routes = () => {
                     variants={pageVariants}
                     transition={pageTransition}>
                     <Route path="/Overview" component={Overview} />
+                  </motion.div>
+                </Switch>
+              </PresentationLayout>
+            </Route> */}
+            <Redirect exact from="/" to="/login" />
+            <Route path={['/login']}>
+              <PresentationLayout>
+                <Switch location={location} key={location.pathname}>
+                  <motion.div
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    variants={pageVariants}
+                    transition={pageTransition}>
+                    <Route path="/login" component={PageLoginCover} />
                   </motion.div>
                 </Switch>
               </PresentationLayout>
