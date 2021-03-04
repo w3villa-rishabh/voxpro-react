@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /ngrok
+/build.zip
 # testing
 /coverage
 
