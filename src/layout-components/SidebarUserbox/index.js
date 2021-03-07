@@ -59,22 +59,22 @@ const SidebarUserbox = () => {
                   <div className="badge badge-success border-0">{handleUser().user.role}</div>
                 </div>
               </div>
-              <Divider className="w-100" />
+              {/* <Divider className="w-100" />
               <div className="d-flex py-3 justify-content-center">
                 <div className="d-flex align-items-center">
-                  {/* <div>
+                  <div>
                     <FontAwesomeIcon
                       icon={['far', 'user']}
                       className="font-size-xxl text-success"
                     />
-                  </div> */}
-                  {/* <div className="pl-3 line-height-sm">
+                  </div>
+                  <div className="pl-3 line-height-sm">
                     <b className="font-size-lg">14,596</b>
                     <span className="text-black-50 d-block">reports</span>
-                  </div> */}
+                  </div> 
                 </div>
               </div>
-              <Divider className="w-100" />
+              <Divider className="w-100" /> */}
               <div className="d-block rounded-bottom py-3 text-center">
                 <Tooltip arrow title="Facebook">
                   <Button

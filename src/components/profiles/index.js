@@ -183,10 +183,10 @@ export default function LivePreviewExample() {
                             size="small"
                             className="btn-first mr-4 shadow-none rounded-lg text-uppercase line-height-1 font-weight-bold font-size-xs px-3 w-auto py-0 d-40">
                             History
-                          </Button>
-                          <Button className="btn-icon rounded-lg shadow-none hover-scale-lg d-40 p-0 btn-success">
-                            <FontAwesomeIcon icon={['fas', 'plus']} />
                           </Button> */}
+                          <a className="btn-icon rounded-lg shadow-none hover-scale-lg d-40 p-0 btn-success"  href="/profile-edit">
+                            <FontAwesomeIcon icon={['fas', 'edit']} />
+                          </a>
                         </div>
                       </div>
                       <div className="d-flex font-size-xl py-4 align-items-center">
@@ -272,288 +272,200 @@ export default function LivePreviewExample() {
               </div>
             </div>
           </div>
-          <Container className="z-over py-5">
+          <Container className="z-over py-5 ">
             <div
               className={clsx('tab-item-wrapper overflow-visible d-none', {
                 'd-block active': activeTab2 === '1'
               })}
               index={1}>
-              <div className="mb-spacing-6-x2">
-                <Grid container spacing={6}>
-                  <Grid item lg={4}>
-                    {/* <Card className="card-box p-4">
-                      <div className="card-tr-actions">
-                        <Button
-                          className="p-0 d-20 mr-1 btn-transition-none opacity-6 btn-link"
-                          variant="text">
-                          <FontAwesomeIcon
-                            icon={['far', 'heart']}
-                            className="font-size-sm"
-                          />
-                        </Button>
-                        <Button
-                          className="p-0 d-20 btn-transition-none opacity-6 btn-link"
-                          variant="text">
-                          <FontAwesomeIcon
-                            icon={['fas', 'user']}
-                            className="font-size-sm"
-                          />
-                        </Button>
-                      </div>
-                      <div className="d-flex align-items-center justify-content-between py-2">
-                        <div className="d-50 rounded-circle border-0 my-2 card-icon-wrapper bg-second text-white btn-icon text-center">
-                          <FontAwesomeIcon
-                            icon={['far', 'bell']}
-                            className="font-size-xl"
-                          />
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="badge rounded-circle badge-success d-20 btn-icon p-0 mr-0 mr-xl-2">
-                            <FontAwesomeIcon
-                              icon={['fas', 'check']}
-                              className="font-size-sm"
-                            />
-                          </div>
-                          <span className="font-size-xs text-dark d-none d-xl-block">
-                            Target achieved
+
+            <div>
+              <Grid container spacing={3}>
+                <Grid item xl={4}>
+                  <Card className="card-box p-4">
+                    <div className="d-flex align-items-center justify-content-between py-2">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="font-weight-bold"
+                            title="...">
+                            Contact Informations
+                          </a>
+                          <span className="text-black-50 d-block">
                           </span>
                         </div>
                       </div>
-                      <div className="font-size-xl font-weight-bold pt-2 text-black">
-                        Recent Visitors
-                      </div>
-                      <div className="opacity-7">Today's analytics</div>
-                    </Card> */}
-                  </Grid>
-                  <Grid item lg={4}>
-                    {/* <Card className="card-box p-4">
-                      <div className="card-tr-actions">
-                        <Button
-                          className="p-0 d-20 mr-1 btn-transition-none opacity-6 btn-link"
-                          variant="text">
-                          <FontAwesomeIcon
-                            icon={['far', 'heart']}
-                            className="font-size-sm"
-                          />
-                        </Button>
-                        <Button
-                          className="p-0 d-20 btn-transition-none opacity-6 btn-link"
-                          variant="text">
-                          <FontAwesomeIcon
-                            icon={['fas', 'user']}
-                            className="font-size-sm"
-                          />
-                        </Button>
-                      </div>
-                      <div className="d-flex align-items-center justify-content-between py-2">
-                        <div className="d-50 rounded-circle border-0 my-2 card-icon-wrapper bg-info text-white btn-icon text-center">
-                          <FontAwesomeIcon
-                            icon={['fas', 'camera-retro']}
-                            className="font-size-xl"
-                          />
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="badge rounded-circle badge-success d-20 btn-icon p-0 mr-0 mr-xl-2">
-                            <FontAwesomeIcon
-                              icon={['fas', 'check']}
-                              className="font-size-sm"
-                            />
-                          </div>
-                          <span className="font-size-xs text-dark d-none d-xl-block">
-                            Target achieved
-                          </span>
-                        </div>
-                      </div>
-                      <div className="font-size-xl font-weight-bold pt-2 text-black">
-                        Today's Revenue
-                      </div>
-                      <div className="opacity-7">Successful orders</div>
-                    </Card> */}
-                  </Grid>
-                  <Grid item lg={4}>
-                    {/* <Card className="card-box p-4">
-                      <div className="card-tr-actions">
-                        <Button
-                          className="p-0 d-20 mr-1 btn-transition-none opacity-6 btn-link"
-                          variant="text">
-                          <FontAwesomeIcon
-                            icon={['far', 'heart']}
-                            className="font-size-sm"
-                          />
-                        </Button>
-                        <Button
-                          className="p-0 d-20 btn-transition-none opacity-6 btn-link"
-                          variant="text">
-                          <FontAwesomeIcon
-                            icon={['fas', 'user']}
-                            className="font-size-sm"
-                          />
-                        </Button>
-                      </div>
-                      <div className="d-flex align-items-center justify-content-between py-2">
-                        <div className="d-50 rounded-circle border-0 my-2 card-icon-wrapper bg-warning text-white btn-icon text-center">
-                          <FontAwesomeIcon
-                            icon={['far', 'lightbulb']}
-                            className="font-size-xl"
-                          />
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="badge rounded-circle badge-danger d-20 btn-icon p-0 mr-0 mr-xl-2">
-                            <FontAwesomeIcon
-                              icon={['fas', 'times']}
-                              className="font-size-sm"
-                            />
-                          </div>
-                          <span className="font-size-xs text-danger d-none d-xl-block">
-                            Target failed
-                          </span>
-                        </div>
-                      </div>
-                      <div className="font-size-xl font-weight-bold pt-2 text-black">
-                        New Customers
-                      </div>
-                      <div className="opacity-7">Latest statistics</div>
-                    </Card> */}
-                  </Grid>
+                    </div>
+                    <div className="divider mx-auto my-3 w-100" />
+                    <div className="text-center">
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['far', 'eye']} />
+                        </span>
+                      </Button>
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['far', 'heart']} />
+                        </span>
+                      </Button>
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fas', 'user']} />
+                        </span>
+                      </Button>
+                    </div>
+                    <div className="divider mx-auto my-3 w-100" />
+                  </Card>
                 </Grid>
-              </div>
-              {/* <Card className="card-box mb-spacing-6-x2">
-                <Grid container spacing={0}>
+                <Grid item xl={4}>
+                  <Card className="card-box p-4">
+                    <div className="d-flex align-items-center justify-content-between py-2">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="font-weight-bold"
+                            title="...">
+                            Desired employment info
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="divider mx-auto my-3 w-100" />
+                    <div className="text-center">
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['far', 'eye']} />
+                        </span>
+                      </Button>
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['far', 'heart']} />
+                        </span>
+                      </Button>
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fas', 'user']} />
+                        </span>
+                      </Button>
+                    </div>
+                    <div className="divider mx-auto my-3 w-100" />
+                   
+                  </Card>
+                </Grid>
+                <Grid item xl={4}>
+                  <Card className="card-box p-4">
+                    <div className="d-flex align-items-center justify-content-between py-2">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="font-weight-bold"
+                            title="...">
+                            Skills
+                          </a>
+                          <span className="text-black-50 d-block">
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="divider mx-auto my-3 w-100" />
+                    <div className="text-center">
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['far', 'eye']} />
+                        </span>
+                      </Button>
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['far', 'heart']} />
+                        </span>
+                      </Button>
+                      <Button
+                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
+                        variant="text">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fas', 'user']} />
+                        </span>
+                      </Button>
+                    </div>
+                    <div className="divider mx-auto my-3 w-100" />
+                 
+                  </Card>
+                </Grid>
+              </Grid>
+            </div>
+
+
+              <Card className="card-box mb-spacing-6-x2" style={{ marginTop: 50 }}>
+                <Grid container spacing={3}>
                   <Grid item xl={4} className="p-4">
                     <div className="divider-v divider-v-lg" />
 
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Reports</b>
-                        <div className="text-black-50">
-                          Monthly sales reports
+                    <div className="d-flex align-items-center justify-content-between py-2">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <h5>Experience</h5>
                         </div>
                       </div>
-                      <div className="font-weight-bold text-danger font-size-xl">
-                        <CountUp
-                          start={0}
-                          end={2.363}
-                          duration={6}
-                          delay={2}
-                          separator=""
-                          decimals={3}
-                          decimal=","
-                        />
-                      </div>
+                    </div>
+                    <div className="d-flex align-items-center justify-content-between">
+                    
                     </div>
                     <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>User</b>
-                        <div className="text-black-50">Visitors last week</div>
-                      </div>
-                      <div className="font-weight-bold text-success font-size-xl">
-                        <CountUp
-                          start={0}
-                          end={987}
-                          duration={6}
-                          delay={2}
-                          separator=""
-                          decimals={0}
-                          decimal=","
-                        />
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Sales</b>
-                        <div className="text-black-50">
-                          Total average weekly report
-                        </div>
-                      </div>
-                      <div className="font-weight-bold text-warning font-size-xl">
-                        <CountUp
-                          start={0}
-                          end={483}
-                          duration={6}
-                          delay={2}
-                          separator=""
-                          decimals={0}
-                          decimal=","
-                        />
-                      </div>
-                    </div>
                   </Grid>
                   <Grid item xl={4} className="p-4">
                     <div className="divider-v divider-v-lg" />
 
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Stats</b>
-                        <div className="text-black-50">Last month targets</div>
-                      </div>
-                      <div className="font-weight-bold text-warning font-size-xl">
-                        $1,23M
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Payments</b>
-                        <div className="text-black-50">Week's expenses</div>
-                      </div>
-                      <div className="font-weight-bold text-danger font-size-xl">
-                        - $123,305
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Orders</b>
-                        <div className="text-black-50">
-                          Total products ordered
+                    <div className="d-flex align-items-center justify-content-between py-2">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <h5>Education</h5>
                         </div>
                       </div>
-                      <div className="font-weight-bold text-warning font-size-xl">
-                        65
-                      </div>
                     </div>
+
+                    <div className="d-flex align-items-center justify-content-between">
+                     
+                    </div>
+                    <div className="divider my-3" />
+                    
                   </Grid>
                   <Grid item xl={4} className="p-4">
-                    <div className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center justify-content-between py-2">
+                    <div className="d-flex align-items-center">
                       <div>
-                        <b>Deliveries</b>
-                        <div className="text-black-50">
-                          Deliveries total report
-                        </div>
+                        <h5>Certifications</h5>
                       </div>
-                      <div className="font-weight-bold text-info font-size-xl">
-                        $33,1k
-                      </div>
+                    </div>
+                  </div>
+                    <div className="d-flex align-items-center justify-content-between">
+
                     </div>
                     <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Tasks</b>
-                        <div className="text-black-50">
-                          Pending task actions
-                        </div>
-                      </div>
-                      <div className="font-weight-bold text-success font-size-xl">
-                        34
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div>
-                        <b>Issues</b>
-                        <div className="text-black-50">
-                          Server errors and issues
-                        </div>
-                      </div>
-                      <div className="font-weight-bold text-danger font-size-xl">
-                        346
-                      </div>
-                    </div>
                   </Grid>
                 </Grid>
-              </Card> */}
+              </Card>
               {/* <div className="mb-spacing-6-x2">
                 <Grid container spacing={6}>
                   <Grid item lg={6} className="d-flex">
@@ -1050,7 +962,7 @@ export default function LivePreviewExample() {
                 </Grid>
               </div> */}
             </div>
-            <div
+            {/* <div
               className={clsx('tab-item-wrapper overflow-visible d-none', {
                 'd-block active': activeTab2 === '4'
               })}
@@ -1495,8 +1407,8 @@ export default function LivePreviewExample() {
                   </Card>
                 </Grid>
               </Grid>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={clsx('tab-item-wrapper overflow-visible d-none', {
                 'd-block active': activeTab2 === '3'
               })}
@@ -1576,15 +1488,15 @@ export default function LivePreviewExample() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className={clsx('tab-item-wrapper overflow-visible d-none', {
                 'd-block active': activeTab2 === '2'
               })}
               index={2}>
               <Grid container spacing={6}>
                 <Grid item lg={6}>
-                  {/* <Card className="shadow-sm rounded-lg overflow-hidden mb-5">
+                  <Card className="shadow-sm rounded-lg overflow-hidden mb-5">
                     <div className="card-img-wrapper rounded">
                       <a
                         href="#/"
@@ -1624,8 +1536,8 @@ export default function LivePreviewExample() {
                         alt="..."
                       />
                     </div>
-                  </Card> */}
-                  {/* <Card className="shadow-sm rounded-lg overflow-hidden mb-5">
+                  </Card>
+                  <Card className="shadow-sm rounded-lg overflow-hidden mb-5">
                     <div className="card-img-wrapper rounded">
                       <a
                         href="#/"
@@ -1686,10 +1598,10 @@ export default function LivePreviewExample() {
                         alt="..."
                       />
                     </div>
-                  </Card> */}
+                  </Card>
                 </Grid>
                 <Grid item lg={6}>
-                  {/* <Card className="shadow-sm rounded-lg overflow-hidden hover-scale-sm mb-5">
+                  <Card className="shadow-sm rounded-lg overflow-hidden hover-scale-sm mb-5">
                     <div className="card-img-wrapper rounded">
                       <div className="img-wrapper-overlay align-items-end img-wrapper-overlay--visible p-4 p-xl-5">
                         <div className="overlay-btn-wrapper p-4 card-body text-white">
@@ -1726,8 +1638,8 @@ export default function LivePreviewExample() {
                         alt="..."
                       />
                     </div>
-                  </Card> */}
-                  {/* <Card className="shadow-sm rounded-lg overflow-hidden mb-5">
+                  </Card>
+                  <Card className="shadow-sm rounded-lg overflow-hidden mb-5">
                     <div className="card-img-wrapper rounded">
                       <a
                         href="#/"
@@ -1788,63 +1700,11 @@ export default function LivePreviewExample() {
                         alt="..."
                       />
                     </div>
-                  </Card> */}
+                  </Card>
                 </Grid>
               </Grid>
-            </div>
+            </div> */}
           </Container>
-
-          {/* <div
-            className="hero-wrapper bg-composed-wrapper bg-second z-below"
-            style={{ marginTop: '-150px' }}>
-            <div className="hero-wrapper--content flex-column">
-              <div className="shape-container-bottom-2 w-100">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                  <path
-                    fill="var(--white)"
-                    fillOpacity="1"
-                    d="M0,288L34.3,250.7C68.6,213,137,139,206,144C274.3,149,343,235,411,229.3C480,224,549,128,617,101.3C685.7,75,754,117,823,122.7C891.4,128,960,96,1029,112C1097.1,128,1166,192,1234,186.7C1302.9,181,1371,107,1406,69.3L1440,32L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path>
-                </svg>
-              </div>
-              <div
-                className="bg-composed-wrapper--image opacity-3"
-                style={{ backgroundImage: 'url(' + hero1 + ')' }}
-              />
-              <div className="bg-composed-wrapper--bg bg-deep-sky opacity-4" />
-              <div className="bg-composed-wrapper--content pb-5">
-                <Container className="py-5 text-center">
-                  <div className="py-5 py-sm-0">
-                    <div>
-                      <h4 className="font-weight-bold text-white display-4">
-                        Monthly Subscription
-                      </h4>
-                      <Grid item md={8} lg={6} className="mx-auto">
-                        <p className="text-white opacity-8 mt-3 mb-5 font-size-xl">
-                          View any of the 5+ live previews we&#39;ve set up to
-                          learn why this dashboard template is the last one
-                          you&#39;ll ever need!
-                        </p>
-                      </Grid>
-                    </div>
-                    <Button className="btn-success px-5 font-size-lg shadow-sm-dark py-3 btn-pill mx-2">
-                      Buy Now
-                    </Button>
-                    <Button className="btn-primary bg-white px-4 text-second shadow-sm font-weight-bold py-2 btn-pill mx-2">
-                      Learn more
-                    </Button>
-                  </div>
-                </Container>
-              </div>
-              <div className="shape-container-top-1 w-100">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                  <path
-                    fill="var(--white)"
-                    fillOpacity="1"
-                    d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,202.7C672,213,768,235,864,213.3C960,192,1056,128,1152,133.3C1248,139,1344,213,1392,250.7L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                </svg>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </>

@@ -207,6 +207,9 @@ const Overview = lazy(() => import('./components/landing.js'));
 // routes for Dashboard
 const DashboardMonitoring = lazy(() =>  import('./components/dashboard.js'));
 
+//edit profile
+const EditProfile = lazy(() => import('./components/profiles/edit_profile'))
+
 var userData = null
 
 const Routes = () => {
@@ -309,6 +312,7 @@ const Routes = () => {
             <Route
               path={[
                 '/dashboard',
+                '/profile-edit',
                 '/DashboardCommerce',
                 '/DashboardAnalytics',
                 '/DashboardStatistics',
@@ -402,6 +406,10 @@ const Routes = () => {
                     <Route
                       path="/dashboard"
                       component={DashboardMonitoring}
+                    />
+                     <Route
+                      path="/profile-edit"
+                      component={EditProfile}
                     />
                     <Route
                       path="/DashboardCommerce"
