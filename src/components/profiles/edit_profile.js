@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
+
+
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Chip from '@material-ui/core/Chip';
+
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Grid,
@@ -29,12 +36,60 @@ import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 
 import api from '../../api'
-import {handleUser} from '../../helper'
+import { handleUser } from '../../helper'
+
+
+var userDetails = [{}]
+
+const top100Films = [
+  { title: 'HTML', year: 1994 },
+  { title: 'CSS', year: 1972 },
+  { title: 'Bootstrap', year: 1974 },
+  { title: 'React', year: 2008 },
+  { title: 'Ruby On Rails', year: 1957 },
+  { title: "AngularJS", year: 1993 },
+  { title: 'Javascript', year: 1994 },
+  { title: 'Vue.js', year: 2003 },
+  { title: 'Java', year: 1966 },
+];
+
+const Step1 = (props) => {
+
+  // const [firstname, setFirstName] = useState("");
+  // const [lastname, setLastName] = useState("");
 
 
 
+  // async function  handleForm(val, type) {
+  //   var value = await val.target.value
 
-const Step1 = () => {
+  //   switch(type){
+  //       case "firstname":
+  //           setFirstName(value)
+  //       break
+  //       case "lastname":
+  //           setLastName(value)
+  //   }
+  // }
+
+  useEffect(() => {
+    console.log("step 1 >>>>>>>>>>>>>>>>>>>>>>>>", props)
+  }, []);
+
+
+const [data, setData] = useState({first_name: ""});
+
+  useEffect(() => {
+
+    api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
+      if (response.data) {
+        setData(response.data)
+      } else {
+        alert('Something went wrong..')
+      }
+    });
+  }, []);
+
 
   return (
     <>
@@ -50,7 +105,7 @@ const Step1 = () => {
             <Grid item md={4}>
               <TextField
                 fullWidth
-                // onChange={(e)=>handleForm(e, "firstname")}
+                onChange={(e) => props.handleStep1("first_name", e.target.value)}
                 label="First Name"
                 variant="outlined"
               />
@@ -58,7 +113,7 @@ const Step1 = () => {
             <Grid item md={4}>
               <TextField
                 fullWidth
-                // onChange={(e)=>handleForm(e, "lastname")}
+                onChange={(e) => props.handleStep1("middle_name", e.target.value)}
                 label="Middle Name"
                 variant="outlined"
               />
@@ -66,6 +121,7 @@ const Step1 = () => {
             <Grid item md={4}>
               <TextField
                 fullWidth
+                onChange={(e) => props.handleStep1("last_name", e.target.value)}
                 label="Last Name"
                 variant="outlined"
               />
@@ -73,8 +129,8 @@ const Step1 = () => {
 
             <Grid item md={4}>
               <TextField
+                value={data.email}
                 fullWidth
-                label="Primary Email"
                 variant="outlined"
                 disabled
               />
@@ -83,6 +139,7 @@ const Step1 = () => {
               <TextField
                 fullWidth
                 label="Secondary Email"
+                onChange={(e) => props.handleStep1("secondary_email", e.target.value)}
                 variant="outlined"
                 type="email"
               />
@@ -90,7 +147,7 @@ const Step1 = () => {
             <Grid item md={4}>
               <TextField
                 fullWidth
-                label="Role"
+                value={data.role}
                 variant="outlined"
                 disabled
               />
@@ -101,16 +158,16 @@ const Step1 = () => {
     </>
   );
 };
-const Step2 = () => {
+const Step2 = (props) => {
+  useEffect(() => {
+  }, []);
+
+
   const [state, setState] = useState('');
 
   const handleChange2 = (event) => {
     setState(event.target.value);
   };
-
-
-
-
 
   return (
     <>
@@ -125,6 +182,7 @@ const Step2 = () => {
               <TextField
                 fullWidth
                 label="Primary Contact Number"
+                onChange={(e) => props.handleStep1("primary_contact_number", e.target.value)}
                 variant="outlined"
                 type="number"
               />
@@ -133,21 +191,31 @@ const Step2 = () => {
               <TextField
                 fullWidth
                 label="Secondary Contact Number"
+                onChange={(e) => props.handleStep1("secondary_contact_number", e.target.value)}
                 variant="outlined"
                 type="number"
               />
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="House No" variant="outlined" />
+              <TextField fullWidth label="House No"
+                onChange={(e) => props.handleStep1("house_no", e.target.value)}
+                variant="outlined" />
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="Street" variant="outlined" />
+              <TextField fullWidth label="Street"
+                onChange={(e) => props.handleStep1("street_no", e.target.value)}
+                variant="outlined" />
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="County" variant="outlined" />
+              <TextField fullWidth label="County"
+                onChange={(e) => props.handleStep1("county", e.target.value)}
+                variant="outlined" />
             </Grid>
             <Grid item md={4}>
-              <FormControl fullWidth variant="outlined">
+              <TextField fullWidth label="Country"
+                onChange={(e) => props.handleStep1("country", e.target.value)}
+                variant="outlined" />
+              {/* <FormControl fullWidth variant="outlined">
                 <InputLabel id="demo-simple-select-outlined-label">
                   Country
                 </InputLabel>
@@ -155,17 +223,20 @@ const Step2 = () => {
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
                   value={state}
-                  onChange={handleChange2}
+                  onChange={(e)=>props.handleStep1("country", e.target.value)}
                   label="State">
                   <MenuItem value="">None</MenuItem>
                   <MenuItem value={10}>California</MenuItem>
                   <MenuItem value={20}>Texas</MenuItem>
                   <MenuItem value={30}>Alabama</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </Grid>
             <Grid item md={4}>
-              <FormControl fullWidth variant="outlined">
+              <TextField fullWidth label="State"
+                onChange={(e) => props.handleStep1("state", e.target.value)}
+                variant="outlined" />
+              {/* <FormControl fullWidth variant="outlined">
                 <InputLabel id="demo-simple-select-outlined-label">
                   State
                 </InputLabel>
@@ -173,14 +244,14 @@ const Step2 = () => {
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
                   value={state}
-                  onChange={handleChange2}
+                  onChange={(e)=>props.handleStep1("state", e.target.value)}
                   label="State">
                   <MenuItem value="">None</MenuItem>
                   <MenuItem value={10}>California</MenuItem>
                   <MenuItem value={20}>Texas</MenuItem>
                   <MenuItem value={30}>Alabama</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </Grid>
             <Grid item md={4}>
               <TextField fullWidth label="Zip" variant="outlined" />
@@ -191,35 +262,78 @@ const Step2 = () => {
     </>
   );
 };
-const Step3 = () => {
+const Step3 = (props) => {
+  useEffect(() => {
+  }, []);
   return (
     <>
       <Container>
         <div className="p-4">
           <h5 className="font-size-xl mb-1 font-weight-bold">
-            Work Information
+            Other Information
           </h5>
           <p className="text-black-50 mb-4">
             The next and previous buttons help you to navigate through your
             content.
           </p>
           <Grid container spacing={6}>
-            <Grid item md={12}>
+            <Grid item md={6}>
               <TextField
                 fullWidth
-                label="Credit card number"
+                onChange={(e) => props.handleStep1("skype_name", e.target.value)}
+                label="Skype Name"
                 variant="outlined"
               />
             </Grid>
             <Grid item md={6}>
-              <TextField fullWidth label="Name on card" variant="outlined" />
+              <TextField
+                fullWidth
+                label="linkedin Url"
+                onChange={(e) => props.handleStep1("linkedin_url", e.target.value)}
+                variant="outlined" />
             </Grid>
-            <Grid item md={3}>
-              <TextField fullWidth label="Exp. date" variant="outlined" />
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                label="Portfolio Website"
+                onChange={(e) => props.handleStep1("portfolio_website", e.target.value)}
+                variant="outlined" />
             </Grid>
-            <Grid item md={3}>
-              <TextField fullWidth label="CVC/CVV" variant="outlined" />
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                label="Work Eligbility"
+                onChange={(e) => props.handleStep1("work_eligbility", e.target.value)}
+                variant="outlined" />
             </Grid>
+
+
+            <Grid item md={12}>
+              <Autocomplete
+                multiple
+                id="fixed-tags-demo"
+                options={top100Films}
+                getOptionLabel={option => option.title}
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip label={option.title} {...getTagProps({ index })} />
+                  ))
+                }
+                renderInput={params => (
+                  <TextField
+                    {...params}
+                    label="Add Skills"
+                    onChange={(e) => props.handleStep1("skills", e.target.value)}
+                    variant="outlined"
+                    placeholder="Skills"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+
+
           </Grid>
         </div>
       </Container>
@@ -229,24 +343,6 @@ const Step3 = () => {
 
 
 
-
-
-// const [firstname, setFirstName] = useState("");
-// const [lastname, setLastName] = useState("");
-
-
-
-// async function  handleForm(val, type) {
-//   var value = await val.target.value
-
-//   switch(type){
-//       case "firstname":
-//           setFirstName(value)
-//       break
-//       case "lastname":
-//           setLastName(value)
-//   }
-// }
 
 
 function StepIcon(props) {
@@ -281,37 +377,92 @@ StepIcon.propTypes = {
 function getSteps() {
   return ['Personal Information', 'Contact Information', 'Work Information'];
 }
+function handleStep1(type, val) {
+
+  var value = val
+  var type = type
+
+  switch (type) {
+    case "first_name":
+      userDetails.first_name = value
+      break
+    case "last_name":
+      userDetails.last_name = value
+      break
+    case "middle_name":
+      userDetails.middle_name = value
+      break
+    case "secondary_email":
+      userDetails.secondary_email = value
+      break
+    case "primary_contact_number":
+      userDetails.primary_contact_number = value
+      break
+    case "secondary_contact_number":
+      userDetails.secondary_contact_number = value
+      break
+    case "house_no":
+      userDetails.house_no = value
+      break
+    case "street_no":
+      userDetails.street_no = value
+      break
+    case "county":
+      userDetails.county = value
+      break
+    case "country":
+      userDetails.country = value
+      break
+    case "state":
+      userDetails.state = value
+      break
+    case "linkedin_url":
+      userDetails.linkedin_url = value
+      break
+    case "skype_name":
+      userDetails.skype_name = value
+      break
+    case "portfolio_website":
+      userDetails.portfolio_website = value
+      break
+    case "zip":
+      userDetails.postal_code = value
+      break
+    case "skills":
+      userDetails.skills = value
+      break
+  }
+}
 
 function getStepContent(step) {
+
   switch (step) {
     case 0:
-      return <Step1 />;
+      return <Step1 handleStep1={handleStep1} />;
     case 1:
-      return <Step2 />;
+      return <Step2 handleStep1={handleStep1} />;
     case 2:
-      return <Step3 />;
+      return <Step3 handleStep1={handleStep1} />;
     default:
-      return <Step1 />;
+      return <Step1 handleStep1={handleStep1} />;
   }
 }
 
 export default function LivePreviewExample() {
 
 
-const [commitHistory, setCommitHistory] = useState([]);
-const [isLoading, setIsLoading] = useState(true);
+  const [commitHistory, setCommitHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-useEffect(() => {
-    api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
-      if(response.data){
-    }else{
-      alert('Something went wrong..')
-    }
-  });
-});
-
-
-
+  // useEffect(() => {
+  //     api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
+  //       var userdata = response.data
+  //       if(response.data){
+  //     }else{
+  //       alert('Something went wrong..')
+  //     }
+  //   });
+  // });
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
@@ -328,11 +479,13 @@ useEffect(() => {
   // };
 
 
+
+
   function editUser() {
-    api.patch(`/api/user?id=${handleUser().user.id}`, {user: {first_name: "firstname", last_name: "lastname", remember_me: "0"}}).then((response) => {
-      if(response.data){
+    api.patch(`/api/user?id=${handleUser().user.id}`, { user: { first_name: userDetails.first_name, middle_name: userDetails.middle_name, last_name: userDetails.last_name, contact_number: userDetails.primary_contact_number, secondary_email: userDetails.secondary_email, work_eligbility: userDetails.work_eligbility, skype_name: userDetails.skype_name, linkedin_url: userDetails.linkedin_url, portfolio_website: userDetails.portfolio_website, home_number: userDetails.home_number, street: userDetails.street, city: userDetails.city, county: userDetails.county, country: userDetails.country, postal_code: userDetails.postal_code } }).then((response) => {
+      if (response.data) {
         window.location.href = "/dashboard";
-      }else{
+      } else {
         alert('Something went wrong..')
       }
     });

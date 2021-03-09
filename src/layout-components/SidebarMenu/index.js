@@ -163,7 +163,7 @@ const SidebarMenu = (props) => {
                 activeClassName="active"
                 onClick={toggleSidebarMobile}
                 className="nav-link-simple"
-                to="/dashboard">
+                to="/documents">
                 <span className="sidebar-icon">
                   <BallotTwoToneIcon />
                 </span>

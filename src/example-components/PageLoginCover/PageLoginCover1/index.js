@@ -28,14 +28,12 @@ export default function LivePreviewExample() {
   }
 
   function userSignIn() {
-debugger
-    api.post('/login', {user: {email: "rishabh@gmail.com", password: "password", remember_me: "0"}}).then((response) => {
+    api.post('/login', { user: { email: "rishabh@gmail.com", password: "password", remember_me: "0" } }).then((response) => {
       console.log(response);
       // var openUrl = JSON.parse(response.data.createPayPageResponce.body).payment_url
-      if(response.data){
-        debugger
+      if (response.data) {
         window.location.href = "/DashboardMonitoring";
-      }else{
+      } else {
         alert('Something went wrong..')
       }
     });

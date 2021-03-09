@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useLayoutEffect} from 'react';
 
 import clsx from 'clsx';
 
@@ -50,8 +50,11 @@ import avatar6 from '../../assets/images/avatars/avatar6.jpg';
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 import {handleUser} from '../../helper'
+import api from '../../api'
+
 
 export default function LivePreviewExample() {
+
   const [inputBg, setInputBg] = useState(false);
   const toggleInputBg = () => setInputBg(!inputBg);
 
@@ -102,13 +105,31 @@ export default function LivePreviewExample() {
       />
     </div>
   ));
+  
 
-  useEffect(
-    () => () => {
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
+  // useEffect(() => {
+  //  
+  // }, [value]);
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+
+    api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
+          if(response.data){
+            setData(response.data)
+          }else{
+            alert('Something went wrong..')
+          }
+        });
+  },[]);
+
+  // useEffect(
+  //   () => () => {
+  //     files.forEach((file) => URL.revokeObjectURL(file.preview));
+  //   },
+  //   [files]
+  // );
 
   return (
     <>
@@ -295,12 +316,16 @@ export default function LivePreviewExample() {
                           </a>
                           <span className="text-black-50 d-block">
                           </span>
+                            <div>Phone No: {data.contact_number} </div>
+                            <div>Secondary Email: {data.secondary_email}</div>
+                            <div>Address: {data.home_number}, {data.street}, {data.city}, {data.county}, {data.country}</div> 
+                            <div>Postal Code: {data.postal_code} </div>
                         </div>
                       </div>
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
                     <div className="text-center">
-                      <Button
+                      {/* <Button
                         className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
                         variant="text">
                         <span className="btn-wrapper--icon">
@@ -320,7 +345,7 @@ export default function LivePreviewExample() {
                         <span className="btn-wrapper--icon">
                           <FontAwesomeIcon icon={['fas', 'user']} />
                         </span>
-                      </Button>
+                      </Button> */}
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
                   </Card>
@@ -340,9 +365,19 @@ export default function LivePreviewExample() {
                         </div>
                       </div>
                     </div>
+                          <div>
+                          LinkedIn Url: {data.linkedin_url}
+                          </div>
+                          <div>
+                          Skype Name: {data.skype_name}
+                          </div>
+                          <div>Portfolio Website: {data.portfolio_website} </div>
+                          <div>
+                          Work Eligbility: {data.work_eligbility}
+                          </div>
                     <div className="divider mx-auto my-3 w-100" />
                     <div className="text-center">
-                      <Button
+                      {/* <Button
                         className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
                         variant="text">
                         <span className="btn-wrapper--icon">
@@ -362,7 +397,7 @@ export default function LivePreviewExample() {
                         <span className="btn-wrapper--icon">
                           <FontAwesomeIcon icon={['fas', 'user']} />
                         </span>
-                      </Button>
+                      </Button> */}
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
                    
@@ -387,7 +422,7 @@ export default function LivePreviewExample() {
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
                     <div className="text-center">
-                      <Button
+                      {/* <Button
                         className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
                         variant="text">
                         <span className="btn-wrapper--icon">
@@ -407,7 +442,7 @@ export default function LivePreviewExample() {
                         <span className="btn-wrapper--icon">
                           <FontAwesomeIcon icon={['fas', 'user']} />
                         </span>
-                      </Button>
+                      </Button> */}
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
                  

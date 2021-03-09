@@ -210,6 +210,9 @@ const DashboardMonitoring = lazy(() =>  import('./components/dashboard.js'));
 //edit profile
 const EditProfile = lazy(() => import('./components/profiles/edit_profile'))
 
+//onboarding documents
+const Onboarding = lazy(() => import('./components/onboarding_documents'))
+
 var userData = null
 
 const Routes = () => {
@@ -313,6 +316,7 @@ const Routes = () => {
               path={[
                 '/dashboard',
                 '/profile-edit',
+                '/documents',
                 '/DashboardCommerce',
                 '/DashboardAnalytics',
                 '/DashboardStatistics',
@@ -410,6 +414,10 @@ const Routes = () => {
                      <Route
                       path="/profile-edit"
                       component={EditProfile}
+                    />
+                     <Route
+                      path="/documents"
+                      component={Onboarding}
                     />
                     <Route
                       path="/DashboardCommerce"
