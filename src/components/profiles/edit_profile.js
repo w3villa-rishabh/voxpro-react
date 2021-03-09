@@ -42,15 +42,16 @@ import { handleUser } from '../../helper'
 var userDetails = [{}]
 
 const top100Films = [
-  { title: 'HTML', year: 1994 },
-  { title: 'CSS', year: 1972 },
-  { title: 'Bootstrap', year: 1974 },
-  { title: 'React', year: 2008 },
-  { title: 'Ruby On Rails', year: 1957 },
-  { title: "AngularJS", year: 1993 },
-  { title: 'Javascript', year: 1994 },
-  { title: 'Vue.js', year: 2003 },
-  { title: 'Java', year: 1966 },
+  { key: 'HTML', value: 'HTML' },
+  { key: 'CSS', value: 'CSS' },
+  { key: 'Bootstrap', value: 'Bootstrap' },
+  { key: 'React', value: 'React' },
+  { key: 'Ruby On Rails', value: 'Ruby On Rails' },
+  { key: 'AngularJS', value: 'AngularJS' },
+  { key: 'Javascript', value: 'Javascript' },
+  { key: 'Vue.js', value: 'Vue.js' },
+  { key: 'Java', value: 'Java' },
+  { key: 'Scala', value: 'Scala' },
 ];
 
 const Step1 = (props) => {
@@ -203,7 +204,7 @@ const Step2 = (props) => {
             </Grid>
             <Grid item md={4}>
               <TextField fullWidth label="Street"
-                onChange={(e) => props.handleStep1("street_no", e.target.value)}
+                onChange={(e) => props.handleStep1("street", e.target.value)}
                 variant="outlined" />
             </Grid>
             <Grid item md={4}>
@@ -254,7 +255,9 @@ const Step2 = (props) => {
               </FormControl> */}
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="Zip" variant="outlined" />
+              <TextField fullWidth
+              onChange={(e) => props.handleStep1("zip", e.target.value)}
+              label="Zip" variant="outlined" />
             </Grid>
           </Grid>
         </div>
@@ -313,17 +316,18 @@ const Step3 = (props) => {
                 multiple
                 id="fixed-tags-demo"
                 options={top100Films}
-                getOptionLabel={option => option.title}
+                getOptionLabel={option => option.key}
+                onChange={(e) => props.handleStep1("skills", e.target.value)}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
-                    <Chip label={option.title} {...getTagProps({ index })} />
+                    <Chip label={option.key} {...getTagProps({ index })} />
                   ))
                 }
                 renderInput={params => (
                   <TextField
                     {...params}
                     label="Add Skills"
-                    onChange={(e) => props.handleStep1("skills", e.target.value)}
+                    
                     variant="outlined"
                     placeholder="Skills"
                     fullWidth
@@ -404,8 +408,8 @@ function handleStep1(type, val) {
     case "house_no":
       userDetails.house_no = value
       break
-    case "street_no":
-      userDetails.street_no = value
+    case "street":
+      userDetails.street = value
       break
     case "county":
       userDetails.county = value
@@ -418,6 +422,9 @@ function handleStep1(type, val) {
       break
     case "linkedin_url":
       userDetails.linkedin_url = value
+      break
+    case "work_eligbility": 
+      userDetails.work_eligbility = value
       break
     case "skype_name":
       userDetails.skype_name = value
@@ -482,7 +489,7 @@ export default function LivePreviewExample() {
 
 
   function editUser() {
-    api.patch(`/api/user?id=${handleUser().user.id}`, { user: { first_name: userDetails.first_name, middle_name: userDetails.middle_name, last_name: userDetails.last_name, contact_number: userDetails.primary_contact_number, secondary_email: userDetails.secondary_email, work_eligbility: userDetails.work_eligbility, skype_name: userDetails.skype_name, linkedin_url: userDetails.linkedin_url, portfolio_website: userDetails.portfolio_website, home_number: userDetails.home_number, street: userDetails.street, city: userDetails.city, county: userDetails.county, country: userDetails.country, postal_code: userDetails.postal_code } }).then((response) => {
+    api.patch(`/api/user?id=${handleUser().user.id}`, { user: { first_name: userDetails.first_name, middle_name: userDetails.middle_name, last_name: userDetails.last_name, contact_number: userDetails.primary_contact_number, secondary_email: userDetails.secondary_email, work_eligbility: userDetails.work_eligbility, skype_name: userDetails.skype_name, linkedin_url: userDetails.linkedin_url, portfolio_website: userDetails.portfolio_website, home_number: userDetails.home_number, street: userDetails.street, city: userDetails.state, county: userDetails.county, country: userDetails.country, postal_code: userDetails.postal_code, home_number: userDetails.house_no} }).then((response) => {
       if (response.data) {
         window.location.href = "/dashboard";
       } else {
