@@ -205,10 +205,16 @@ export default function LivePreviewExample() {
                             className="btn-first mr-4 shadow-none rounded-lg text-uppercase line-height-1 font-weight-bold font-size-xs px-3 w-auto py-0 d-40">
                             History
                           </Button> */}
-                          <a className="btn-icon rounded-lg shadow-none hover-scale-lg d-40 p-0 btn-success"  href="/profile-edit">
+                          {/* <a className="btn-icon rounded-lg shadow-none hover-scale-lg d-40 p-0 btn-success"  href="/profile-edit">
                             <FontAwesomeIcon icon={['fas', 'edit']} />
-                          </a>
-                        </div>
+                          </a> */}
+                          <Button variant="contained" className="btn-primary m-2" href='/profile-edit'>
+                          <span className="btn-wrapper--icon">
+                              <FontAwesomeIcon icon={['far', 'edit']} />
+                          </span>
+                              <span className="btn-wrapper--label">Edit Profile</span>
+                          </Button>
+                          </div>
                       </div>
                       <div className="d-flex font-size-xl py-4 align-items-center">
                         <div className="mr-2">
@@ -316,15 +322,16 @@ export default function LivePreviewExample() {
                           </a>
                           <span className="text-black-50 d-block">
                           </span>
-                            <div>Phone No: {data.contact_number} </div>
-                            <div>Secondary Email: {data.secondary_email}</div>
-                            <div>Address: {data.home_number}, {data.street}, {data.city}, {data.county}, {data.country}</div> 
-                            <div>Postal Code: {data.postal_code} </div>
+                           
                         </div>
                       </div>
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
-                    <div className="text-center">
+                      <div>Phone No: {data.contact_number} </div>
+                      <div>Secondary Email: {data.secondary_email}</div>
+                      <div>Address: {data.home_number}, {data.street}, {data.city}, {data.county}, {data.country}</div> 
+                      <div>Postal Code: {data.postal_code} </div>
+                      <div className="text-center">
                       {/* <Button
                         className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
                         variant="text">
@@ -365,6 +372,7 @@ export default function LivePreviewExample() {
                         </div>
                       </div>
                     </div>
+                    <div className="divider mx-auto my-3 w-100" />
                           <div>
                           LinkedIn Url: {data.linkedin_url}
                           </div>
@@ -375,30 +383,6 @@ export default function LivePreviewExample() {
                           <div>
                           Work Eligbility: {data.work_eligbility}
                           </div>
-                    <div className="divider mx-auto my-3 w-100" />
-                    <div className="text-center">
-                      {/* <Button
-                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
-                        variant="text">
-                        <span className="btn-wrapper--icon">
-                          <FontAwesomeIcon icon={['far', 'eye']} />
-                        </span>
-                      </Button>
-                      <Button
-                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
-                        variant="text">
-                        <span className="btn-wrapper--icon">
-                          <FontAwesomeIcon icon={['far', 'heart']} />
-                        </span>
-                      </Button>
-                      <Button
-                        className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"
-                        variant="text">
-                        <span className="btn-wrapper--icon">
-                          <FontAwesomeIcon icon={['fas', 'user']} />
-                        </span>
-                      </Button> */}
-                    </div>
                     <div className="divider mx-auto my-3 w-100" />
                    
                   </Card>
@@ -421,6 +405,12 @@ export default function LivePreviewExample() {
                       </div>
                     </div>
                     <div className="divider mx-auto my-3 w-100" />
+                    <div>Rails</div>
+                    <div>React</div>
+                    <div>Vue </div>
+                    <div>HTML</div>
+                    <div>CSS</div>
+                    <div>Bootstrap</div>
                     <div className="text-center">
                       {/* <Button
                         className="p-0 d-30 btn-icon rounded-sm mx-1 btn-transition-none btn-outline-primary border-0"

@@ -20,9 +20,7 @@ export default function LivePreviewExample() {
     const [email, setEmail] = useState("");
 
     function resetPassword() {
-        debugger
         api.post('/api/users/confirmation', { user: { email: email } }).then((response) => {
-            debugger
             if (response.data) {
                 localStorage.setItem("user", JSON.stringify(response.data))
                 window.location.href = "/login";
