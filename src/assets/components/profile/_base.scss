@@ -115,6 +115,34 @@
   }
 }
 
+.recommendations-card {
+  .add-recommendations {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+
+    .icon {
+      color: #6363dc;
+      cursor: pointer;
+    }
+  }
+
+  .rec-header {
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+    border-bottom: 2px solid #ccc;
+
+    li {
+      padding-right: 10px;
+    }
+
+    li:first {
+      color: green;
+    }
+  }
+}
+
 .user-card {
   position: absolute;
   background: aqua;
