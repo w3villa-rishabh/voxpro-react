@@ -41,16 +41,16 @@ export default function LivePreviewExample() {
   }
   
 
-  function addDocument() {
-    api.patch(`/api/user?id=${handleUser().user.id}`, { user: { documents_attributes: {doc_name: "abc", doc: files[0].source }} }).then((response) => {
-        if (response.data) {
-          window.location.href = "/dashboard";
-        } else {
-          alert('Something went wrong..')
-        }
-      });
-    console.log('The link was clicked.');
-  }
+//   function addDocument() {
+//     api.patch(`/api/user?id=${handleUser().user.id}`, { user: { documents_attributes: {doc_name: "abc", doc: files[0].source }} }).then((response) => {
+//         if (response.data) {
+//           window.location.href = "/dashboard";
+//         } else {
+//           alert('Something went wrong..')
+//         }
+//       });
+//     console.log('The link was clicked.');
+//   }
 
   return (
     <>
@@ -130,7 +130,7 @@ export default function LivePreviewExample() {
               </Grid>
               <div className="pt-4">
               <Button
-                onClick={addDocument}
+                // onClick={addDocument}
                 className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
                 size="medium">
                 <span className="btn-wrapper--label">Submit</span>
