@@ -59,14 +59,14 @@ const HeaderUserbox = () => {
   };
   
   function userLogout() {
-    api.delete('/api/users/sign_out').then((response) => {
-      if(response.data.success){
-        localStorage.setItem("user", "")
+    // api.delete('/api/users/sign_out').then((response) => {
+    //   if(response.data.success){
+        localStorage.clear()
         window.location.href = "/login";
-      }else{
-        alert('Something went wrong..')
-      }
-    });
+      // }else{
+      //   alert('Something went wrong..')
+      // }
+    // });
   }
 
   return (
@@ -119,9 +119,9 @@ const HeaderUserbox = () => {
         onClose={handleClose}>
         <div className="dropdown-menu-lg overflow-hidden p-0">
           <div className="d-flex px-3 pt-3 align-items-center justify-content-between">
-            <Typography className="text-capitalize pl-1 font-weight-bold text-primary">
+            {/* <Typography className="text-capitalize pl-1 font-weight-bold text-primary">
               <span>Profile Options</span>
-            </Typography>
+            </Typography> */}
             {/* <div className="font-size-xs pr-1">
               <Tooltip title="Change settings" arrow>
                 <a href="#/" onClick={(e) => e.preventDefault()}>
