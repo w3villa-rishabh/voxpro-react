@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, Button, List, ListItem } from '@material-ui/core';
+import { Grid, Card, Button, List, ListItem, TextField } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 import { useDropzone } from 'react-dropzone';
@@ -8,6 +8,9 @@ import { useDropzone } from 'react-dropzone';
 import CloseTwoToneIcon from '@material-ui/icons/CloseTwoTone';
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import CheckIcon from '@material-ui/icons/Check';
+
+import api from '../api'
+import { handleUser } from '../helper'
 
 export default function LivePreviewExample() {
   const {
@@ -31,13 +34,30 @@ export default function LivePreviewExample() {
       </span>
     </ListItem>
   ));
+ 
+
+  function onFileChange() {
+  
+  }
+  
+
+  function addDocument() {
+    api.patch(`/api/user?id=${handleUser().user.id}`, { user: { documents_attributes: {doc_name: "abc", doc: files[0].source }} }).then((response) => {
+        if (response.data) {
+          window.location.href = "/dashboard";
+        } else {
+          alert('Something went wrong..')
+        }
+      });
+    console.log('The link was clicked.');
+  }
 
   return (
     <>
       <Card className="mt-4 p-3 p-lg-5 shadow-xxl">
         <div className="dropzone">
           <div {...getRootProps({ className: 'dropzone-upload-wrapper' })}>
-            <input {...getInputProps()} />
+            <input {...getInputProps()}  onChange={onFileChange}  />
             <div className="dropzone-inner-wrapper">
               {isDragAccept && (
                 <div>
@@ -99,6 +119,25 @@ export default function LivePreviewExample() {
               <List component="div" className="font-size-sm">
                 {files}
               </List>
+              <Grid container spacing={6}>
+                <Grid item md={12}>
+                <TextField
+                    fullWidth
+                    label="Document Name"
+                    variant="outlined"
+                />
+                </Grid>
+              </Grid>
+              <div className="pt-4">
+              <Button
+                onClick={addDocument}
+                className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
+                size="medium">
+                <span className="btn-wrapper--label">Submit</span>
+              </Button>
+            </div>
+
+
             </div>
           )}
         </div>
