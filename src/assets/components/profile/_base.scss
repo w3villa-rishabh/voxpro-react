@@ -130,7 +130,6 @@
   .rec-header {
     padding: 0;
     display: flex;
-    list-style-type: none;
     border-bottom: 2px solid #ccc;
 
     li {
@@ -152,11 +151,11 @@
 }
 
 .main-card-section {
-  min-height: 340px;
+  // min-height: 340px;
 
   .main-card {
 
-    min-height: 200px;
+    // min-height: 200px;
 
     .user-details {
       .avatar-icon-wrapper {
@@ -166,7 +165,7 @@
       }
 
       .user-info {
-        padding-top: 40px;
+        // padding-top: 40px;
         background: white;
 
         .MuiLinearProgress-root {
@@ -218,4 +217,9 @@
 
 .blue {
   color: blue !important;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
