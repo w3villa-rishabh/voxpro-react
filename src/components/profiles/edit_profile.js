@@ -2,29 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-
-
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Chip from '@material-ui/core/Chip';
 
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  Grid,
-  Container,
-  InputLabel,
-  FormControlLabel,
-  Checkbox,
-  Card,
-  MenuItem,
-  Button,
-  Tooltip,
-  TextField,
-  Input,
-  FormControl,
-  Select
-} from '@material-ui/core';
+import { Grid, Container, Card, Button, TextField } from '@material-ui/core';
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -35,11 +17,10 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 
-import api from '../../api'
-import { handleUser } from '../../helper'
+import api from '../../api';
+import { handleUser } from '../../helper';
 
-
-var userDetails = [{}]
+var userDetails = [{}];
 
 const top100Films = [
   { key: 'HTML', value: 'HTML' },
@@ -51,46 +32,25 @@ const top100Films = [
   { key: 'Javascript', value: 'Javascript' },
   { key: 'Vue.js', value: 'Vue.js' },
   { key: 'Java', value: 'Java' },
-  { key: 'Scala', value: 'Scala' },
+  { key: 'Scala', value: 'Scala' }
 ];
 
 const Step1 = (props) => {
+  useEffect(() => {
+    console.log('step 1 >>>>>>>>>>>>>>>>>>>>>>>>', props);
+  }, [props]);
 
-  // const [firstname, setFirstName] = useState("");
-  // const [lastname, setLastName] = useState("");
-
-
-
-  // async function  handleForm(val, type) {
-  //   var value = await val.target.value
-
-  //   switch(type){
-  //       case "firstname":
-  //           setFirstName(value)
-  //       break
-  //       case "lastname":
-  //           setLastName(value)
-  //   }
-  // }
+  const [data, setData] = useState({ first_name: '' });
 
   useEffect(() => {
-    console.log("step 1 >>>>>>>>>>>>>>>>>>>>>>>>", props)
-  }, []);
-
-
-const [data, setData] = useState({first_name: ""});
-
-  useEffect(() => {
-
     api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
       if (response.data) {
-        setData(response.data)
+        setData(response.data);
       } else {
-        alert('Something went wrong..')
+        alert('Something went wrong..');
       }
     });
   }, []);
-
 
   return (
     <>
@@ -106,7 +66,9 @@ const [data, setData] = useState({first_name: ""});
             <Grid item md={4}>
               <TextField
                 fullWidth
-                onChange={(e) => props.handleStep1("first_name", e.target.value)}
+                onChange={(e) =>
+                  props.handleStep1('first_name', e.target.value)
+                }
                 label="First Name"
                 variant="outlined"
               />
@@ -114,7 +76,9 @@ const [data, setData] = useState({first_name: ""});
             <Grid item md={4}>
               <TextField
                 fullWidth
-                onChange={(e) => props.handleStep1("middle_name", e.target.value)}
+                onChange={(e) =>
+                  props.handleStep1('middle_name', e.target.value)
+                }
                 label="Middle Name"
                 variant="outlined"
               />
@@ -122,7 +86,7 @@ const [data, setData] = useState({first_name: ""});
             <Grid item md={4}>
               <TextField
                 fullWidth
-                onChange={(e) => props.handleStep1("last_name", e.target.value)}
+                onChange={(e) => props.handleStep1('last_name', e.target.value)}
                 label="Last Name"
                 variant="outlined"
               />
@@ -140,7 +104,9 @@ const [data, setData] = useState({first_name: ""});
               <TextField
                 fullWidth
                 label="Secondary Email"
-                onChange={(e) => props.handleStep1("secondary_email", e.target.value)}
+                onChange={(e) =>
+                  props.handleStep1('secondary_email', e.target.value)
+                }
                 variant="outlined"
                 type="email"
               />
@@ -160,16 +126,6 @@ const [data, setData] = useState({first_name: ""});
   );
 };
 const Step2 = (props) => {
-  useEffect(() => {
-  }, []);
-
-
-  const [state, setState] = useState('');
-
-  const handleChange2 = (event) => {
-    setState(event.target.value);
-  };
-
   return (
     <>
       <Container>
@@ -183,39 +139,45 @@ const Step2 = (props) => {
               <TextField
                 fullWidth
                 label="Primary Contact Number"
-                onChange={(e) => props.handleStep1("primary_contact_number", e.target.value)}
+                onChange={(e) =>
+                  props.handleStep1('primary_contact_number', e.target.value)
+                }
                 variant="outlined"
                 type="number"
               />
             </Grid>
-            <Grid item md={6}>
+
+            <Grid item md={4}>
               <TextField
                 fullWidth
-                label="Secondary Contact Number"
-                onChange={(e) => props.handleStep1("secondary_contact_number", e.target.value)}
+                label="House No"
+                onChange={(e) => props.handleStep1('house_no', e.target.value)}
                 variant="outlined"
-                type="number"
               />
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="House No"
-                onChange={(e) => props.handleStep1("house_no", e.target.value)}
-                variant="outlined" />
+              <TextField
+                fullWidth
+                label="Street"
+                onChange={(e) => props.handleStep1('street', e.target.value)}
+                variant="outlined"
+              />
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="Street"
-                onChange={(e) => props.handleStep1("street", e.target.value)}
-                variant="outlined" />
+              <TextField
+                fullWidth
+                label="County"
+                onChange={(e) => props.handleStep1('county', e.target.value)}
+                variant="outlined"
+              />
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="County"
-                onChange={(e) => props.handleStep1("county", e.target.value)}
-                variant="outlined" />
-            </Grid>
-            <Grid item md={4}>
-              <TextField fullWidth label="Country"
-                onChange={(e) => props.handleStep1("country", e.target.value)}
-                variant="outlined" />
+              <TextField
+                fullWidth
+                label="Country"
+                onChange={(e) => props.handleStep1('country', e.target.value)}
+                variant="outlined"
+              />
               {/* <FormControl fullWidth variant="outlined">
                 <InputLabel id="demo-simple-select-outlined-label">
                   Country
@@ -234,9 +196,12 @@ const Step2 = (props) => {
               </FormControl> */}
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth label="State"
-                onChange={(e) => props.handleStep1("state", e.target.value)}
-                variant="outlined" />
+              <TextField
+                fullWidth
+                label="State"
+                onChange={(e) => props.handleStep1('state', e.target.value)}
+                variant="outlined"
+              />
               {/* <FormControl fullWidth variant="outlined">
                 <InputLabel id="demo-simple-select-outlined-label">
                   State
@@ -255,9 +220,12 @@ const Step2 = (props) => {
               </FormControl> */}
             </Grid>
             <Grid item md={4}>
-              <TextField fullWidth
-              onChange={(e) => props.handleStep1("zip", e.target.value)}
-              label="Zip" variant="outlined" />
+              <TextField
+                fullWidth
+                onChange={(e) => props.handleStep1('zip', e.target.value)}
+                label="Zip"
+                variant="outlined"
+              />
             </Grid>
           </Grid>
         </div>
@@ -266,8 +234,6 @@ const Step2 = (props) => {
   );
 };
 const Step3 = (props) => {
-  useEffect(() => {
-  }, []);
   return (
     <>
       <Container>
@@ -283,7 +249,9 @@ const Step3 = (props) => {
             <Grid item md={6}>
               <TextField
                 fullWidth
-                onChange={(e) => props.handleStep1("skype_name", e.target.value)}
+                onChange={(e) =>
+                  props.handleStep1('skype_name', e.target.value)
+                }
                 label="Skype Name"
                 variant="outlined"
               />
@@ -292,42 +260,49 @@ const Step3 = (props) => {
               <TextField
                 fullWidth
                 label="linkedin Url"
-                onChange={(e) => props.handleStep1("linkedin_url", e.target.value)}
-                variant="outlined" />
+                onChange={(e) =>
+                  props.handleStep1('linkedin_url', e.target.value)
+                }
+                variant="outlined"
+              />
             </Grid>
             <Grid item md={6}>
               <TextField
                 fullWidth
                 label="Portfolio Website"
-                onChange={(e) => props.handleStep1("portfolio_website", e.target.value)}
-                variant="outlined" />
+                onChange={(e) =>
+                  props.handleStep1('portfolio_website', e.target.value)
+                }
+                variant="outlined"
+              />
             </Grid>
             <Grid item md={6}>
               <TextField
                 fullWidth
                 label="Work Eligbility"
-                onChange={(e) => props.handleStep1("work_eligbility", e.target.value)}
-                variant="outlined" />
+                onChange={(e) =>
+                  props.handleStep1('work_eligbility', e.target.value)
+                }
+                variant="outlined"
+              />
             </Grid>
-
 
             <Grid item md={12}>
               <Autocomplete
                 multiple
                 id="fixed-tags-demo"
                 options={top100Films}
-                getOptionLabel={option => option.key}
-                onChange={(e) => props.handleStep1("skills", e.target.value)}
+                getOptionLabel={(option) => option.key}
+                onChange={(e) => props.handleStep1('skills', e.target.value)}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
                     <Chip label={option.key} {...getTagProps({ index })} />
                   ))
                 }
-                renderInput={params => (
+                renderInput={(params) => (
                   <TextField
                     {...params}
                     label="Add Skills"
-                    
                     variant="outlined"
                     placeholder="Skills"
                     fullWidth
@@ -335,19 +310,12 @@ const Step3 = (props) => {
                 )}
               />
             </Grid>
-
-
-
           </Grid>
         </div>
       </Container>
     </>
   );
 };
-
-
-
-
 
 function StepIcon(props) {
   const { active, completed } = props;
@@ -382,67 +350,65 @@ function getSteps() {
   return ['Personal Information', 'Contact Information', 'Work Information'];
 }
 function handleStep1(type, val) {
+  var value = val;
 
-  var value = val
-  var type = type
-
+  // eslint-disable-next-line default-case
   switch (type) {
-    case "first_name":
-      userDetails.first_name = value
-      break
-    case "last_name":
-      userDetails.last_name = value
-      break
-    case "middle_name":
-      userDetails.middle_name = value
-      break
-    case "secondary_email":
-      userDetails.secondary_email = value
-      break
-    case "primary_contact_number":
-      userDetails.primary_contact_number = value
-      break
-    case "secondary_contact_number":
-      userDetails.secondary_contact_number = value
-      break
-    case "house_no":
-      userDetails.house_no = value
-      break
-    case "street":
-      userDetails.street = value
-      break
-    case "county":
-      userDetails.county = value
-      break
-    case "country":
-      userDetails.country = value
-      break
-    case "state":
-      userDetails.state = value
-      break
-    case "linkedin_url":
-      userDetails.linkedin_url = value
-      break
-    case "work_eligbility": 
-      userDetails.work_eligbility = value
-      break
-    case "skype_name":
-      userDetails.skype_name = value
-      break
-    case "portfolio_website":
-      userDetails.portfolio_website = value
-      break
-    case "zip":
-      userDetails.postal_code = value
-      break
-    case "skills":
-      userDetails.skills = value
-      break
+    case 'first_name':
+      userDetails.first_name = value;
+      break;
+    case 'last_name':
+      userDetails.last_name = value;
+      break;
+    case 'middle_name':
+      userDetails.middle_name = value;
+      break;
+    case 'secondary_email':
+      userDetails.secondary_email = value;
+      break;
+    case 'primary_contact_number':
+      userDetails.primary_contact_number = value;
+      break;
+    case 'secondary_contact_number':
+      userDetails.secondary_contact_number = value;
+      break;
+    case 'house_no':
+      userDetails.house_no = value;
+      break;
+    case 'street':
+      userDetails.street = value;
+      break;
+    case 'county':
+      userDetails.county = value;
+      break;
+    case 'country':
+      userDetails.country = value;
+      break;
+    case 'state':
+      userDetails.state = value;
+      break;
+    case 'linkedin_url':
+      userDetails.linkedin_url = value;
+      break;
+    case 'work_eligbility':
+      userDetails.work_eligbility = value;
+      break;
+    case 'skype_name':
+      userDetails.skype_name = value;
+      break;
+    case 'portfolio_website':
+      userDetails.portfolio_website = value;
+      break;
+    case 'zip':
+      userDetails.postal_code = value;
+      break;
+    case 'skills':
+      userDetails.skills = value;
+      break;
   }
 }
 
 function getStepContent(step) {
-
   switch (step) {
     case 0:
       return <Step1 handleStep1={handleStep1} />;
@@ -456,20 +422,6 @@ function getStepContent(step) {
 }
 
 export default function LivePreviewExample() {
-
-
-  const [commitHistory, setCommitHistory] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //     api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
-  //       var userdata = response.data
-  //       if(response.data){
-  //     }else{
-  //       alert('Something went wrong..')
-  //     }
-  //   });
-  // });
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
@@ -485,17 +437,34 @@ export default function LivePreviewExample() {
   //   setActiveStep(0);
   // };
 
-
-
-
   function editUser() {
-    api.patch(`/api/user?id=${handleUser().user.id}`, { user: { first_name: userDetails.first_name, middle_name: userDetails.middle_name, last_name: userDetails.last_name, contact_number: userDetails.primary_contact_number, secondary_email: userDetails.secondary_email, work_eligbility: userDetails.work_eligbility, skype_name: userDetails.skype_name, linkedin_url: userDetails.linkedin_url, portfolio_website: userDetails.portfolio_website, home_number: userDetails.home_number, street: userDetails.street, city: userDetails.state, county: userDetails.county, country: userDetails.country, postal_code: userDetails.postal_code, home_number: userDetails.house_no} }).then((response) => {
-      if (response.data) {
-        window.location.href = "/dashboard";
-      } else {
-        alert('Something went wrong..')
-      }
-    });
+    api
+      .patch(`/api/user?id=${handleUser().user.id}`, {
+        user: {
+          first_name: userDetails.first_name,
+          middle_name: userDetails.middle_name,
+          last_name: userDetails.last_name,
+          contact_number: userDetails.primary_contact_number,
+          secondary_email: userDetails.secondary_email,
+          work_eligbility: userDetails.work_eligbility,
+          skype_name: userDetails.skype_name,
+          linkedin_url: userDetails.linkedin_url,
+          portfolio_website: userDetails.portfolio_website,
+          home_number: userDetails.house_no,
+          street: userDetails.street,
+          city: userDetails.state,
+          county: userDetails.county,
+          country: userDetails.country,
+          postal_code: userDetails.postal_code
+        }
+      })
+      .then((response) => {
+        if (response.data) {
+          window.location.href = '/dashboard';
+        } else {
+          alert('Something went wrong..');
+        }
+      });
     console.log('The link was clicked.');
   }
 

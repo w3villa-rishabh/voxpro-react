@@ -1,0 +1,193 @@
+.about {
+  position: absolute !important;
+  top: 15px;
+  right: 15px;
+  color: #6363dc;
+  cursor: pointer;
+}
+
+.feature-card {
+  position: relative;
+  border-style: dotted;
+  border-radius: 4px;
+  padding: 10px;
+  color: #ccc;
+
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: black;
+    cursor: pointer;
+  }
+
+  .info {
+    font-size: 14px;
+    margin-right: 10px;
+    color: black !important;
+  }
+}
+
+.dashboard-card {
+  background-color: #e0eeff !important;
+  min-height: 220px;
+
+  .raging {
+    display: flex;
+    padding: 12px;
+    background-color: white;
+    border-radius: 5px;
+
+    .rating-count {
+      font-size: 22px;
+      color: #3e7fe6;
+    }
+
+    p {
+      margin-bottom: 0px;
+    }
+  }
+
+  .star-icon {
+    position: absolute;
+    right: 28px;
+    top: 18px;
+  }
+
+  .info {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 5px;
+  }
+}
+
+.experience-card {
+  .icon {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    color: #6363dc;
+    cursor: pointer;
+  }
+
+  .edit-icon {
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    color: #6363dc;
+    cursor: pointer;
+  }
+}
+
+.education-card {
+  .icon {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    color: #6363dc;
+    cursor: pointer;
+  }
+
+  .edit-icon {
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    color: #6363dc;
+    cursor: pointer;
+  }
+}
+
+.skill-card {
+  .add-skill {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+
+    .icon {
+      color: #6363dc;
+      cursor: pointer;
+    }
+  }
+
+  .quiz-btn {
+    padding: 1px 12px;
+  }
+}
+
+.user-card {
+  position: absolute;
+  background: aqua;
+  width: 100%;
+  margin-left: 0;
+  left: 0;
+}
+
+.main-card-section {
+  min-height: 340px;
+
+  .main-card {
+
+    min-height: 200px;
+
+    .user-details {
+      .avatar-icon-wrapper {
+        position: absolute;
+        left: 13px;
+        top: 90px;
+      }
+
+      .user-info {
+        padding-top: 40px;
+        background: white;
+
+        .MuiLinearProgress-root {
+          height: 18px !important;
+          width: calc(100% - 105px);
+
+          .MuiLinearProgress-bar {
+            background: #3fd2c4;
+          }
+        }
+
+        .edit {
+          position: absolute;
+          right: 25px;
+          top: 0;
+        }
+
+        .right-corner-info {
+          position: relative;
+          border-style: dotted;
+          padding: 5px;
+          margin-top: 14px;
+          border-radius: 5px;
+          color: #ccc;
+          font-size: 10px;
+
+          .icon {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            color: black;
+            cursor: pointer;
+          }
+
+          span {
+            color: black;
+            padding-right: 10px;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+.skill-section {
+  margin: 0 46px;
+}
+
+.blue {
+  color: blue !important;
+}
