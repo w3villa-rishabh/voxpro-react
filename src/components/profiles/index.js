@@ -341,6 +341,19 @@ export default function LivePreviewExample() {
 
                   <Card className="card-box p-4 recommendations-card mt-4">
                     <h5>Recommendations</h5>
+                    <div className="add-recommendations">
+                      <span className="pr-3">Ask for recommendation</span>
+                      <FontAwesomeIcon
+                        icon={['fas', 'pencil-alt']}
+                        className="icon"
+                      />
+                    </div>
+                    <div>
+                      <ul className="rec-header">
+                        <li>Received (5)</li>
+                        <li>Given (0)</li>
+                      </ul>
+                    </div>
                   </Card>
                 </Grid>
               </Grid>
