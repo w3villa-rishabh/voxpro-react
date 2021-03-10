@@ -104,11 +104,11 @@ export default function LivePreviewExample() {
                     <input {...getInputProps()} />
                     <div className="dropzone-inner-wrapper d-140 rounded-circle dropzone-avatar">
                       <div className="avatar-icon-wrapper d-140 rounded-circle m-2">
-                        <Button
+                        {/* <Button
                           onClick={open}
                           className="btn-first avatar-button badge shadow-sm-dark btn-icon badge-position badge-position--bottom-right border-0 text-indent-0 d-40 badge-circle badge-first text-white">
                           <PublishTwoToneIcon className="d-20" />
-                        </Button>
+                        </Button> */}
 
                         <div>
                           {isDragAccept && (
