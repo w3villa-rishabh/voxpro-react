@@ -13,7 +13,7 @@ import {
   TextField
 } from '@material-ui/core';
 
-import api from '../api'
+import api from '../api';
 
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
@@ -23,40 +23,39 @@ import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
 export default function LivePreviewExample() {
   const [checked1, setChecked1] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleChange1 = (event) => {
     setChecked1(event.target.checked);
-  }
+  };
 
   function userSignIn() {
-    api.post('/api/users/login', {user: {email: email, password: password, remember_me: "0"}}).then((response) => {
-      if(response.data){
-          localStorage.setItem("user", JSON.stringify(response.data))
-        window.location.href = "/dashboard";
-      }else{
-        alert('Something went wrong..')
-      }
-    });
+    api
+      .post('/api/users/login', {
+        user: { email: email, password: password, remember_me: '0' }
+      })
+      .then((response) => {
+        if (response.data) {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          window.location.href = '/dashboard';
+        } else {
+          alert('Something went wrong..');
+        }
+      });
     console.log('The link was clicked.');
   }
 
-async function  handleForm(val, type) {
-    var value = await val.target.value
-
-    switch(type){
-        case "email":
-            setEmail(value)
-        break
-        case "password":
-            setPassword(value)
+  async function handleForm(val, type) {
+    var value = await val.target.value;
+    // eslint-disable-next-line default-case
+    switch (type) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
     }
-
-    // console.log("value -==>>>", value)
-    // console.log("type -==>>>", type)
-
   }
   return (
     <>
@@ -75,11 +74,12 @@ async function  handleForm(val, type) {
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
                           <div className="text-center">
-                          <h3 className="display-4 mb-2 font-weight-bold">
-                              <img alt="..."
-                                  className="img-fluid"
-                                  src={logo}
-                                  width="200"
+                            <h3 className="display-4 mb-2 font-weight-bold">
+                              <img
+                                alt="..."
+                                className="img-fluid"
+                                src={logo}
+                                width="200"
                               />
                             </h3>
                             {/* <h1 className="display-4 mb-1 font-weight-bold">
@@ -122,7 +122,7 @@ async function  handleForm(val, type) {
                                 id="textfield-email"
                                 label="Email address"
                                 name="email"
-                                onChange={(e)=>handleForm(e, "email")}
+                                onChange={(e) => handleForm(e, 'email')}
                                 InputProps={{
                                   startAdornment: (
                                     <InputAdornment position="start">
@@ -139,7 +139,7 @@ async function  handleForm(val, type) {
                                 id="textfield-password"
                                 label="Password"
                                 type="password"
-                                onChange={(e)=>handleForm(e, "password")}
+                                onChange={(e) => handleForm(e, 'password')}
                                 InputProps={{
                                   startAdornment: (
                                     <InputAdornment position="start">
@@ -164,14 +164,16 @@ async function  handleForm(val, type) {
                               <div>
                                 <a
                                   href="/recover-password"
-                                //   onClick={(e) => e.preventDefault()}
+                                  //   onClick={(e) => e.preventDefault()}
                                   className="text-first">
                                   Recover password
                                 </a>
                               </div>
                             </div>
                             <div className="text-center py-4">
-                              <Button className="btn-second font-weight-bold w-50 my-2" onClick={userSignIn}>
+                              <Button
+                                className="btn-second font-weight-bold w-50 my-2"
+                                onClick={userSignIn}>
                                 Sign in
                               </Button>
                             </div>
@@ -200,12 +202,11 @@ async function  handleForm(val, type) {
                           <div className="bg-composed-wrapper--content text-center p-5">
                             <div className="text-white px-0 px-lg-2 px-xl-4">
                               <h1 className="display-3 mb-4 font-weight-bold">
-                               Voxpro
+                                Voxpro
                               </h1>
                               <p className="font-size-lg mb-0 opacity-8">
-                               financial complexity made simple.
+                                financial complexity made simple.
                               </p>
-                              
                             </div>
                           </div>
                         </div>

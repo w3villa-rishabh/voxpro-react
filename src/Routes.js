@@ -26,7 +26,6 @@ import PageError404 from './example-pages/PageError404';
 import PageError500 from './example-pages/PageError500';
 import PageError505 from './example-pages/PageError505';
 
-
 const DashboardCommerce = lazy(() =>
   import('./example-pages/DashboardCommerce')
 );
@@ -193,7 +192,7 @@ const PageRecoverOverlay = lazy(() =>
 const PageInvoice = lazy(() => import('./example-pages/PageInvoice'));
 
 // routes for Registration
-const PageRegisterCover = lazy(() =>  import('./components/register.js'));
+const PageRegisterCover = lazy(() => import('./components/register.js'));
 
 // routes for login
 const PageLoginCover = lazy(() => import('./components/login.js'));
@@ -205,15 +204,15 @@ const Profile = lazy(() => import('./components/profile'));
 const Overview = lazy(() => import('./components/landing.js'));
 
 // routes for Dashboard
-const DashboardMonitoring = lazy(() =>  import('./components/dashboard.js'));
+const DashboardMonitoring = lazy(() => import('./components/dashboard.js'));
 
 //edit profile
-const EditProfile = lazy(() => import('./components/profiles/edit_profile'))
+const EditProfile = lazy(() => import('./components/profiles/edit_profile'));
 
 //onboarding documents
-const Onboarding = lazy(() => import('./components/onboarding_documents'))
+const Onboarding = lazy(() => import('./components/onboarding_documents'));
 
-var userData = null
+var userData = null;
 
 const Routes = () => {
   const location = useLocation();
@@ -246,21 +245,21 @@ const Routes = () => {
     }, []);
 
     function fallBackPath() {
-      window.location = '/login'
+      window.location = '/login';
     }
 
     function handleUser() {
-      userData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+      userData = localStorage.getItem('user')
+        ? JSON.parse(localStorage.getItem('user'))
+        : null;
       // const [user, setUser] = useState(userData);
-      console.log("user data ===>>>>", userData)
-      return userData
+      console.log('user data ===>>>>', userData);
+      return userData;
     }
 
     useEffect(() => {
-      handleUser()
+      handleUser();
     }, []);
-
-    
 
     return (
       <>
@@ -407,18 +406,9 @@ const Routes = () => {
                     exit="out"
                     variants={pageVariants}
                     transition={pageTransition}>
-                    <Route
-                      path="/dashboard"
-                      component={DashboardMonitoring}
-                    />
-                     <Route
-                      path="/profile-edit"
-                      component={EditProfile}
-                    />
-                     <Route
-                      path="/documents"
-                      component={Onboarding}
-                    />
+                    <Route path="/dashboard" component={DashboardMonitoring} />
+                    <Route path="/profile-edit" component={EditProfile} />
+                    <Route path="/documents" component={Onboarding} />
                     <Route
                       path="/DashboardCommerce"
                       component={DashboardCommerce}
@@ -739,10 +729,7 @@ const Routes = () => {
                       path="/PageRegisterBasic"
                       component={PageRegisterBasic}
                     />
-                    <Route
-                      path="/sign-up"
-                      component={PageRegisterCover}
-                    />
+                    <Route path="/sign-up" component={PageRegisterCover} />
                     <Route
                       path="/PageRegisterIllustration"
                       component={PageRegisterIllustration}
