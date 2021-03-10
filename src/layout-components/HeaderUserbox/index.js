@@ -16,6 +16,7 @@ import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 import { withStyles } from '@material-ui/core/styles';
 import {handleUser} from '../../helper'
+import api from '../../api'
 
 const StyledBadge = withStyles({
   badge: {  
@@ -56,13 +57,23 @@ const HeaderUserbox = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  
+  function userLogout() {
+    api.delete('/api/users/sign_out').then((response) => {
+      if(response.data.success){
+        localStorage.setItem("user", "")
+        window.location.href = "/login";
+      }else{
+        alert('Something went wrong..')
+      }
+    });
+  }
 
   return (
     <>
       <Button
         variant="text"
-        // onClick={handleClick}
+        onClick={handleClick}
         className="ml-2 btn-transition-none text-left ml-2 p-0 bg-transparent d-flex align-items-center"
         disableRipple>
         <div className="d-block p-0 avatar-icon-wrapper">
@@ -87,9 +98,9 @@ const HeaderUserbox = () => {
           </div>
           <span className="text-black-50">{handleUser().user.role}</span>
         </div>
-        {/* <span className="pl-1 pl-xl-3">
+        <span className="pl-1 pl-xl-3">
           <FontAwesomeIcon icon={['fas', 'angle-down']} className="opacity-5" />
-        </span> */}
+        </span>
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -111,29 +122,27 @@ const HeaderUserbox = () => {
             <Typography className="text-capitalize pl-1 font-weight-bold text-primary">
               <span>Profile Options</span>
             </Typography>
-            <div className="font-size-xs pr-1">
+            {/* <div className="font-size-xs pr-1">
               <Tooltip title="Change settings" arrow>
                 <a href="#/" onClick={(e) => e.preventDefault()}>
                   <FontAwesomeIcon icon={['fas', 'plus-circle']} />
                 </a>
               </Tooltip>
-            </div>
+            </div> */}
           </div>
           <List
             component="div"
             className="nav-neutral-primary text-left d-flex align-items-center flex-column px-3 pb-3">
-            <ListItem button className="d-block text-left">
-              My Account
+            <ListItem button className="d-block text-left" onClick={userLogout}>
+              Logout
             </ListItem>
-            <ListItem button className="d-block text-left">
-              Profile settings
-            </ListItem>
-            <ListItem button className="d-block text-left">
+          
+            {/* <ListItem button className="d-block text-left">
               Active tasks
-            </ListItem>
+            </ListItem> */}
           </List>
           <Divider className="w-100" />
-          <div className="d-flex py-3 justify-content-center">
+          {/* <div className="d-flex py-3 justify-content-center">
             <div className="d-flex align-items-center">
               <div>
                 <FontAwesomeIcon
@@ -146,9 +155,9 @@ const HeaderUserbox = () => {
                 <span className="text-black-50 d-block">revenue</span>
               </div>
             </div>
-          </div>
+          </div> */}
           <Divider className="w-100" />
-          <div className="d-block rounded-bottom py-3 text-center">
+          {/* <div className="d-block rounded-bottom py-3 text-center">
             <Tooltip arrow title="Facebook">
               <Button
                 size="large"
@@ -176,7 +185,7 @@ const HeaderUserbox = () => {
                 </span>
               </Button>
             </Tooltip>
-          </div>
+          </div> */}
         </div>
       </Menu>
     </>

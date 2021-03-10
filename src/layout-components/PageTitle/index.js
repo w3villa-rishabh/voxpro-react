@@ -74,7 +74,7 @@ const PageTitle = (props) => {
         </div>
         <div className="d-flex align-items-center">
           {children}
-          <Button
+          {/* <Button
             variant="contained"
             onClick={openUserMenu}
             size="small"
@@ -86,7 +86,7 @@ const PageTitle = (props) => {
                 className="opacity-5"
               />
             </span>
-          </Button>
+          </Button> */}
           <Menu
             id="userMenu"
             component="div"
@@ -173,7 +173,7 @@ const PageTitle = (props) => {
             </div>
           </Menu>
 
-          <Tooltip title="Add new entry">
+          {/* <Tooltip title="Add new entry">
             <Button
               variant="contained"
               size="small"
@@ -183,7 +183,7 @@ const PageTitle = (props) => {
                 <FontAwesomeIcon icon={['fas', 'plus']} className="opacity-8" />
               </span>
             </Button>
-          </Tooltip>
+          </Tooltip> */}
         </div>
       </div>
       <Dialog
