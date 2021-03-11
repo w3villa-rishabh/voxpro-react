@@ -35,6 +35,9 @@ export default function OnBoardDocument() {
   const handleDrop = (acceptedFiles) => setFiles(acceptedFiles);
 
   function addDocument() {
+    if (!files.length) {
+      return;
+    }
     const formData = new FormData();
 
     formData.append('user[documents_attributes][][doc_name]', filesName);
@@ -123,6 +126,7 @@ export default function OnBoardDocument() {
           <div className="pt-4">
             <Button
               onClick={addDocument}
+              disabled={!files.length}
               className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
               size="medium">
               <span className="btn-wrapper--label">Submit</span>
