@@ -1,0 +1,34 @@
+.dropzone {
+    height: 300px;
+    width: 100%;
+    position: relative;
+    background-color: aliceblue;
+    margin-bottom: 15px;
+    border: dotted #0065ff;
+    border-radius: 5px;
+
+    .center-info {
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        min-height: 100%;
+    }
+
+    .icon-up {
+        text-align: center;
+    }
+}
+
+.show-doc {
+    display: flex;
+
+    li {
+        flex: auto;
+    }
+}

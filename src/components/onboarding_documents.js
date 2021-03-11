@@ -1,88 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Grid, Card, Button, List, ListItem, TextField } from '@material-ui/core';
+import {
+  Grid,
+  Card,
+  Button,
+  List,
+  ListItem,
+  TextField
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-
-import { useDropzone } from 'react-dropzone';
-
-import CloseTwoToneIcon from '@material-ui/icons/CloseTwoTone';
+import Dropzone from 'react-dropzone';
+import api from '../api';
+import { handleUser } from '../helper';
+import stock1 from '../assets/images/stock-photos/stock-1.jpg';
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
-import CheckIcon from '@material-ui/icons/Check';
 
-import api from '../api'
-import { handleUser } from '../helper'
+export default function OnBoardDocument() {
+  const [files, setFiles] = useState([]);
+  const [documents, setDocuments] = useState([]);
+  const [filesName, setFilesName] = useState();
 
-export default function LivePreviewExample() {
-  const {
-    acceptedFiles,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-    getRootProps,
-    getInputProps
-  } = useDropzone({
-    accept: 'image/jpeg, image/png'
-  });
-
-  const files = acceptedFiles.map((file) => (
-    <ListItem
-      className="font-size-sm px-3 py-2 text-primary d-flex justify-content-between align-items-center"
-      key={file.path}>
-      <span>{file.path}</span>{' '}
-      <span className="badge badge-pill bg-neutral-warning text-warning">
-        {file.size} bytes
-      </span>
-    </ListItem>
-  ));
-  
-
-  function addDocument() {
-      const formData = new FormData();
-    
-      // Update the formData object
-      formData.append(
-        "myFile",
-       files[0]
-      );
-    api.patch(`/api/user?id=${handleUser().user.id}`, {user: { documents_attributes: [{doc_name: "abc"}]}} ).then((response) => {
+  useEffect(() => {
+    api
+      .get(`/api/user/show_user_documents?id=${handleUser().user.id}`)
+      .then((response) => {
         if (response.data) {
-          window.location.href = "/dashboard";
+          setDocuments(response.data);
         } else {
-          alert('Something went wrong..')
+          alert('Something went wrong..');
         }
       });
-    console.log('The link was clicked.');
+  }, []);
+
+  const handleDrop = (acceptedFiles) => setFiles(acceptedFiles);
+
+  function addDocument() {
+    const formData = new FormData();
+
+    formData.append('user[documents_attributes][][doc_name]', filesName);
+    formData.append('user[documents_attributes][][doc]', files[0]);
+
+    api
+      .patch(`/api/user?id=${handleUser().user.id}`, formData)
+      .then((response) => {
+        if (response.data) {
+          console.log('response.data', response.data);
+          // window.location.href = "/dashboard";
+        } else {
+          alert('Something went wrong..');
+        }
+      });
+    console.log('The link was clicked.', files);
   }
 
   return (
     <>
+      <div>
+        <ul className="show-doc">
+          {documents.map((file) => (
+            // <img alt="..." className="card-img-top" src={file.stock1} />
+            // <CardContent>
+            //   <h5 className="card-title font-weight-bold font-size-xxl">
+            //     Image 1
+            //   </h5>
+            // </CardContent>
+            <li>
+              <img alt="..." className="card-img-top" src={stock1} />
+              {file.doc_name}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <Card className="mt-4 p-3 p-lg-5 shadow-xxl">
-        <div className="dropzone">
-          <div {...getRootProps({ className: 'dropzone-upload-wrapper' })}>
-            <input {...getInputProps()} />
-            <div className="dropzone-inner-wrapper">
-              {isDragAccept && (
-                <div>
-                  <div className="d-100 btn-icon mb-3 hover-scale-lg bg-success shadow-success-sm rounded-circle text-white">
-                    <CheckIcon className="d-50" />
-                  </div>
-                  <div className="font-size-sm text-success">
-                    All files will be uploaded!
-                  </div>
-                </div>
-              )}
-              {isDragReject && (
-                <div>
-                  <div className="d-100 btn-icon mb-3 hover-scale-lg bg-danger shadow-danger-sm rounded-circle text-white">
-                    <CloseTwoToneIcon className="d-50" />
-                  </div>
-                  <div className="font-size-sm text-danger">
-                    Some files will be rejected!
-                  </div>
-                </div>
-              )}
-              {!isDragActive && (
-                <div>
+        <Dropzone
+          styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
+          onDrop={handleDrop}>
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps({ className: 'dropzone' })}>
+              <input {...getInputProps()} />
+              <div className="center-info">
+                <div className="icon-up">
                   <div className="d-100 btn-icon mb-3 hover-scale-lg bg-white shadow-light-sm rounded-circle text-primary">
                     <CloudUploadTwoToneIcon className="d-50" />
                   </div>
@@ -93,55 +91,43 @@ export default function LivePreviewExample() {
                     </span>
                   </div>
                 </div>
-              )}
-
-              <small className="py-2 text-black-50">or</small>
-              <div>
+                <div>or</div>
                 <Button className="btn-primary hover-scale-sm font-weight-bold btn-pill px-4">
                   <span className="px-2">Browse Files</span>
                 </Button>
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </Dropzone>
         <div>
-          <div className="font-weight-bold my-4 text-uppercase text-dark font-size-sm text-center">
-            Uploaded Files
+          <Alert severity="success" className="text-center mb-3">
+            You have uploaded <b>{files.length}</b> files!
+          </Alert>
+          <List component="div" className="font-size-sm">
+            <ListItem>
+              {files.map((fileName) => (
+                <span key={fileName.name}>{fileName.name}</span>
+              ))}
+            </ListItem>
+          </List>
+          <Grid container spacing={6}>
+            <Grid item md={12}>
+              <TextField
+                fullWidth
+                label="Document Name"
+                variant="outlined"
+                onChange={(event) => setFilesName(event.target.value)}
+              />
+            </Grid>
+          </Grid>
+          <div className="pt-4">
+            <Button
+              onClick={addDocument}
+              className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
+              size="medium">
+              <span className="btn-wrapper--label">Submit</span>
+            </Button>
           </div>
-          {files.length <= 0 && (
-            <div className="text-info text-center font-size-sm">
-              Uploaded demo files will appear here!
-            </div>
-          )}
-          {files.length > 0 && (
-            <div>
-              <Alert severity="success" className="text-center mb-3">
-                You have uploaded <b>{files.length}</b> files!
-              </Alert>
-              <List component="div" className="font-size-sm">
-                {files}
-              </List>
-              <Grid container spacing={6}>
-                <Grid item md={12}>
-                <TextField
-                    fullWidth
-                    label="Document Name"
-                    variant="outlined"
-                />
-                </Grid>
-              </Grid>
-              <div className="pt-4">
-              <Button
-                onClick={addDocument}
-                className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
-                size="medium">
-                <span className="btn-wrapper--label">Submit</span>
-              </Button>
-            </div>
-
-
-            </div>
-          )}
         </div>
       </Card>
     </>
