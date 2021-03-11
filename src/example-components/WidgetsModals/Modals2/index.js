@@ -33,6 +33,8 @@ import avatar3 from '../../../assets/images/avatars/avatar3.jpg';
 import avatar5 from '../../../assets/images/avatars/avatar5.jpg';
 import avatar6 from '../../../assets/images/avatars/avatar6.jpg';
 import avatar7 from '../../../assets/images/avatars/avatar7.jpg';
+
+
 import stock1 from '../../../assets/images/stock-photos/stock-1.jpg';
 import svgImage1 from '../../../assets/images/illustrations/pack1/wireframe.svg';
 import hero1 from '../../../assets/images/hero-bg/hero-1.jpg';

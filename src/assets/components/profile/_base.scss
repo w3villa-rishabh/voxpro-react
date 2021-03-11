@@ -115,6 +115,33 @@
   }
 }
 
+.recommendations-card {
+  .add-recommendations {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+
+    .icon {
+      color: #6363dc;
+      cursor: pointer;
+    }
+  }
+
+  .rec-header {
+    padding: 0;
+    display: flex;
+    border-bottom: 2px solid #ccc;
+
+    li {
+      padding-right: 10px;
+    }
+
+    li:first {
+      color: green;
+    }
+  }
+}
+
 .user-card {
   position: absolute;
   background: aqua;
@@ -124,11 +151,11 @@
 }
 
 .main-card-section {
-  min-height: 340px;
+  // min-height: 340px;
 
   .main-card {
 
-    min-height: 200px;
+    // min-height: 200px;
 
     .user-details {
       .avatar-icon-wrapper {
@@ -138,7 +165,7 @@
       }
 
       .user-info {
-        padding-top: 40px;
+        // padding-top: 40px;
         background: white;
 
         .MuiLinearProgress-root {
@@ -154,6 +181,7 @@
           position: absolute;
           right: 25px;
           top: 0;
+          cursor: pointer;
         }
 
         .right-corner-info {
@@ -190,4 +218,18 @@
 
 .blue {
   color: blue !important;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.edit-user-info {
+  overflow: scroll;
+  height: calc(100vh - 230px);
+}
+
+.font-12 {
+  font-size: 12px;
 }
