@@ -181,6 +181,7 @@
           position: absolute;
           right: 25px;
           top: 0;
+          cursor: pointer;
         }
 
         .right-corner-info {
@@ -222,4 +223,13 @@
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+.edit-user-info {
+  overflow: scroll;
+  height: calc(100vh - 230px);
+}
+
+.font-12 {
+  font-size: 12px;
 }

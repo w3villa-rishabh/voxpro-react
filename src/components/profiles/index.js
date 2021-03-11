@@ -8,7 +8,14 @@ import {
   Card,
   Button,
   LinearProgress,
-  CardContent
+  CardContent,
+  Dialog,
+  TextField,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  List,
+  ListItem
 } from '@material-ui/core';
 
 import { useDropzone } from 'react-dropzone';
@@ -89,6 +96,54 @@ export default function LivePreviewExample() {
   //   [files]
   // );
 
+  const [checked1, setChecked1] = useState(true);
+
+  const handleChange1 = (event) => {
+    setChecked1(event.target.checked);
+  };
+
+  const [completed, setCompleted] = useState(0);
+
+  React.useEffect(() => {
+    function progress() {
+      setCompleted((oldCompleted) => {
+        if (oldCompleted === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(oldCompleted + diff, 100);
+      });
+    }
+
+    const timer = setInterval(progress, 500);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const [modal1, seModal1] = useState(false);
+
+  const toggle1 = () => {
+    // seModal1(!modal1);
+  };
+
+  const [activeTab, setActiveTab] = useState('0');
+
+  const toggle = (tab) => {
+    // if (activeTab !== tab) setActiveTab(tab);
+  };
+
+  //Example 2
+  const [open1, setOpen1] = useState(false);
+
+  const handleClickOpen1 = () => {
+    // setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+
   return (
     <div className="app-inner-content-layout">
       <div className="app-inner-content-layout--main bg-white p-0">
@@ -133,10 +188,6 @@ export default function LivePreviewExample() {
                         </div>
                       </Grid>
                       <Grid item xs={3}>
-                        {/* <ul>
-                          <li>Frank Belford</li>
-                          <li>University of the Arts London</li>
-                        </ul> */}
                         <div className="d-flex justify-content-between">
                           <div>
                             <small className="d-flex pt-2 align-items-center">
@@ -162,6 +213,7 @@ export default function LivePreviewExample() {
                         <FontAwesomeIcon
                           icon={['fas', 'pencil-alt']}
                           className="edit"
+                          onClick={toggle1}
                         />
                         <div>
                           <div className="d-flex mb-1 font-weight-bold justify-content-between font-size-sm">
@@ -224,6 +276,7 @@ export default function LivePreviewExample() {
                     <FontAwesomeIcon
                       icon={['fas', 'pencil-alt']}
                       className="about"
+                      onClick={handleClickOpen1}
                     />
                     <div>
                       Frank Belford providing delivery, implementation, Support,
@@ -267,7 +320,9 @@ export default function LivePreviewExample() {
                           <div className="position-relative">
                             <span>Inez Conley</span>
                             <span className="text-black-50 d-block">
-                              Project Manager
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
                             </span>
                           </div>
                         </div>
@@ -283,7 +338,9 @@ export default function LivePreviewExample() {
                           <div className="position-relative">
                             <span>Sothwark College</span>
                             <span className="text-black-50 d-block">
-                              Project Manager
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
                             </span>
                           </div>
                         </div>
@@ -299,7 +356,9 @@ export default function LivePreviewExample() {
                           <div className="position-relative">
                             <span>Sothwark College</span>
                             <span className="text-black-50 d-block">
-                              Project Manager
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
                             </span>
                           </div>
                         </div>
@@ -315,7 +374,9 @@ export default function LivePreviewExample() {
                           <div className="position-relative">
                             <span>Sothwark College</span>
                             <span className="text-black-50 d-block">
-                              Project Manager
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
                             </span>
                           </div>
                         </div>
@@ -331,7 +392,9 @@ export default function LivePreviewExample() {
                           <div className="position-relative">
                             <span>Sothwark College</span>
                             <span className="text-black-50 d-block">
-                              Project Manager
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
                             </span>
                           </div>
                         </div>
@@ -347,7 +410,27 @@ export default function LivePreviewExample() {
                           <div className="position-relative">
                             <span>Sothwark College</span>
                             <span className="text-black-50 d-block">
-                              Project Manager
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                      <hr></hr>
+                      <li>
+                        <div className="d-flex align-items-center">
+                          <div className="avatar-icon-wrapper mr-3">
+                            <div className="avatar-icon rounded">
+                              <img alt="..." src={avatar2} />
+                            </div>
+                          </div>
+                          <div className="position-relative">
+                            <span>Sothwark College</span>
+                            <span className="text-black-50 d-block">
+                              Frank Belford is a leading professional services
+                              Consultancy for selesforce and bullhorn for
+                              selesforce product.
                             </span>
                           </div>
                         </div>
@@ -361,7 +444,7 @@ export default function LivePreviewExample() {
                     <p className="font-italic">Private to you</p>
                     <div className="star-icon">
                       <FontAwesomeIcon
-                        icon={['fas', 'star-o']}
+                        icon={['fas', 'pencil-alt']}
                         className="icon"
                       />
                       <span>All Start</span>
@@ -551,32 +634,99 @@ export default function LivePreviewExample() {
                       />
                     </div>
                     <div>
-                      <ul className="rec-header">
+                      {/* <ul className="rec-header">
                         <li>Received (5)</li>
                         <li>Given (0)</li>
-                      </ul>
-                      <Grid container spacing={1}>
-                        <Grid item xs={5}>
-                          <div className="d-flex">
-                            <div className="d-flex align-items-center">
-                              <div className="avatar-icon-wrapper mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar1} />
+                      </ul> */}
+                      <List className="nav-tabs nav-tabs-primary tabs-animated tabs-animated-line d-flex">
+                        <ListItem
+                          button
+                          className="px-0 mx-3 pb-0"
+                          disableRipple
+                          selected={activeTab === '0'}
+                          onClick={() => {
+                            toggle('0');
+                          }}>
+                          <span className="py-1 font-weight-bold">
+                            Received (5)
+                          </span>
+                        </ListItem>
+                        <ListItem
+                          button
+                          className="px-0 mx-3 pb-0"
+                          disableRipple
+                          selected={activeTab === '1'}
+                          onClick={() => {
+                            toggle('1');
+                          }}>
+                          <span className="py-1 font-weight-bold">
+                            Given (9)
+                          </span>
+                        </ListItem>
+                      </List>
+                      <div className="font-12">
+                        <div
+                          className={clsx('tab-item-wrapper', {
+                            active: activeTab === '0'
+                          })}
+                          index={0}>
+                          <Grid container spacing={1} className="pt-3">
+                            <Grid item xs={5}>
+                              <div className="d-flex">
+                                <div className="d-flex align-items-center">
+                                  <div className="avatar-icon-wrapper mr-2">
+                                    <div className="avatar-icon">
+                                      <img alt="..." src={avatar1} />
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <span>Isaiah Ruiz</span>
+                                    <p className="text-black-50 d-block">
+                                      Senior Web Developer
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
-                              <div>
-                                <span>Isaiah Ruiz</span>
-                                <p className="text-black-50 d-block">
-                                  Senior Web Developer
-                                </p>
+                            </Grid>
+                            <Grid item xs={7}>
+                              <span>Nazim Kidd</span>
+                            </Grid>
+                          </Grid>
+                        </div>
+                        <div
+                          className={clsx('tab-item-wrapper', {
+                            active: activeTab === '1'
+                          })}
+                          index={1}>
+                          <Grid container spacing={1} className="pt-3">
+                            <Grid item xs={5}>
+                              <div className="d-flex">
+                                <div className="d-flex align-items-center">
+                                  <div className="avatar-icon-wrapper mr-2">
+                                    <div className="avatar-icon">
+                                      <img alt="..." src={avatar1} />
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <span>Deepak Kumar</span>
+                                    <p className="text-black-50 d-block">
+                                      Senior Software Developer
+                                    </p>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid item xs={7}>
-                          <span>Nazim Kidd</span>
-                        </Grid>
-                      </Grid>
+                            </Grid>
+                            <Grid item xs={7}>
+                              <span>
+                                I was fortunate enough to work with twin while
+                                at talent rover/ bullhorn where twain was
+                                responsible for the implementation of the
+                                bullhorn fo salesforce product.
+                              </span>
+                            </Grid>
+                          </Grid>
+                        </div>
+                      </div>
                     </div>
                   </Card>
                 </Grid>
@@ -585,6 +735,180 @@ export default function LivePreviewExample() {
           </div>
         </div>
       </div>
+      {/* About dialog modal open */}
+      <Dialog
+        classes={{ paper: 'modal-content' }}
+        fullWidth
+        maxWidgh="lg"
+        open={open1}
+        onClose={handleClose1}
+        aria-labelledby="form-dialog-title2">
+        <DialogTitle id="form-dialog-title">Edit about</DialogTitle>
+
+        <DialogContent className="p-0">
+          <div>
+            <div className="border-0">
+              <div className="card-body px-lg-5 py-lg-5">
+                <div className="mb-3">
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    id="textfield-email"
+                    label="Edit about"
+                    multiline
+                    rowsMax={4}
+                    value="Frank Belford providing delivery, implementation, Support,
+                            trancing and advanced customization for the selesforce
+                            platform"
+                  // InputProps={{
+                  //   startAdornment: (
+                  //     <InputAdornment position="start">
+                  //       <MailOutlineTwoToneIcon />
+                  //     </InputAdornment>
+                  //   )
+                  // }}
+                  />
+                </div>
+
+                <div className="text-right">
+                  <Button
+                    variant="contained"
+                    className="font-weight-bold btn-second px-4 my-2">
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* User edit modal open */}
+      <Dialog
+        scroll="body"
+        maxWidth="lg"
+        open={modal1}
+        onClose={toggle1}
+        classes={{
+          paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+        }}>
+        <DialogTitle id="form-dialog-title">Edit info</DialogTitle>
+        <div className="edit-user-info">
+          <Grid spacing={6} className="border">
+            <Grid>
+              <div className="card-img-wrapper h-180px">
+                <img alt="..." className="img-fit-container" src={stock2} />
+              </div>
+              <CardContent className="card-body-avatar">
+                <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
+                  <div className="avatar-icon rounded-circle">
+                    <img alt="..." src={avatar5} />
+                  </div>
+                </div>
+              </CardContent>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={2} className="mt-3">
+            <Grid item xs={6}>
+              <div>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="First name"
+                />
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <div>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Second name"
+                />
+              </div>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Current Position"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Headline"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Education"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Country/Region"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Locations in this Country/Region"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Industry"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="textfield-user"
+                label="Contact info"
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <div className="text-right">
+          <DialogActions className="p-4">
+            <Button
+              variant="contained"
+              onClick={toggle1}
+              className="font-weight-bold btn-second px-4 my-3">
+              Cancel
+            </Button>
+
+            <Button
+              variant="contained"
+              className="font-weight-bold btn-second px-4 my-3">
+              Save
+            </Button>
+          </DialogActions>
+        </div>
+      </Dialog>
     </div>
   );
 }
