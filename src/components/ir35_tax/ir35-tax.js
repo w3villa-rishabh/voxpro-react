@@ -427,9 +427,7 @@ export default function IR35TaxComponent() {
                     </span>
                     <span>
                       Read more about{' '}
-                      <a href="#!">
-                        Office Holders (opens in a new window).
-                      </a>
+                      <a href="#!">Office Holders (opens in a new window).</a>
                     </span>
                   </div>
 
