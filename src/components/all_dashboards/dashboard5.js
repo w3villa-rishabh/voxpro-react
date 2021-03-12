@@ -1,7 +1,17 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid, Box, Card, Button } from '@material-ui/core';
+import { Grid, Box, Card, Button, LinearProgress, ListItem, List } from '@material-ui/core';
+import CountUp from 'react-countup';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+
+
+import avatar1 from '../../assets/images/avatars/avatar2.jpg';
+import avatar3 from '../../assets/images/avatars/avatar3.jpg';
+import avatar4 from '../../assets/images/avatars/avatar4.jpg';
+import avatar5 from '../../assets/images/avatars/avatar5.jpg';
+import avatar2 from '../../assets/images/avatars/avatar6.jpg';
+import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 import {
   CircularProgressbar,
@@ -13,157 +23,279 @@ export default function LivePreviewExample() {
   return (
     <>
       <div className="mb-spacing-6">
-        <Grid container spacing={6}>
-          <Grid item xl={4} className="d-flex">
-            <Card className="card-box w-100 d-flex align-items-center">
-              <Box className="card-tr-actions">
-                <Button
-                  variant="text"
-                  className="p-0 d-30 border-0 btn-transition-none text-dark"
-                  disableRipple>
-                  <FontAwesomeIcon
-                    icon={['fas', 'ellipsis-v']}
-                    className="font-size-lg"
-                  />
-                </Button>
-              </Box>
-              <div className="d-flex flex-column flex-grow-1 justify-content-center w-100">
-                <div className="card-header-alt d-flex justify-content-center px-4 pt-4 pb-2">
-                  <h6 className="font-weight-bold font-size-xl mb-1 text-black">
-                    Storage status
-                  </h6>
-                </div>
-                <div className="mx-auto">
-                  <CircularProgressbar
-                    value={56}
-                    text={56 + '%'}
-                    strokeWidth={8}
-                    className="m-3 circular-progress-xxl circular-progress-primary"
-                  />
-                </div>
-                <div className="px-4 pb-4 pt-2">
-                  <div className="d-flex text-uppercase justify-content-center text-black-50 font-size-xs font-weight-bold mb-4">
-                    <div className="d-flex align-items-center">
-                      <div className="badge badge-success badge-circle mx-2">
-                        available
-                      </div>
-                      <span className="d-20 w-auto">Available</span>
-                    </div>
-                    <div className="d-flex align-items-center">
-                      <div className="badge badge-danger badge-circle mx-2">
-                        total
-                      </div>
-                      <span className="d-20 w-auto">Total</span>
-                    </div>
-                  </div>
-                  <Button
-                    fullWidth
-                    className="btn-neutral-dark font-weight-bold text-uppercase font-size-sm hover-scale-sm">
-                    Increase Storage
-                  </Button>
+        <Grid container spacing={2}>
+          <Grid item xl={6}>
+            <Card className="shadow-xxl">
+              <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4">
+                <div>
+                  <h6 className="font-weight-bold font-size-lg mb-1 text-black">New Jobs Added</h6>
                 </div>
               </div>
-            </Card>
-          </Grid>
-          <Grid item xl={4} className="d-flex">
-            <Card className="card-box w-100 d-flex align-items-center">
-              <div className="d-flex flex-column flex-grow-1 justify-content-center w-100">
-                <div className="card-header-alt d-flex justify-content-center px-4 pt-4 pb-2">
-                  <h6 className="font-weight-bold font-size-xl mb-1 text-black">
-                    Active Issues
-                  </h6>
-                </div>
-                <div className="mx-auto">
-                  <CircularProgressbarWithChildren
-                    circleRatio={0.75}
-                    styles={buildStyles({ rotation: 1 / 2 + 1 / 8 })}
-                    value={84}
-                    strokeWidth={7}
-                    className="m-3 circular-progress-xxl circular-progress-danger">
-                    <div className="badge badge-danger p-3 badge-pill h-auto font-weight-normal font-size-lg">
-                      453
-                    </div>
-                  </CircularProgressbarWithChildren>
-                </div>
-                <p className="mb-3 text-black-50 text-center">
-                  These issues require immediate action !
-                </p>
-                <div className="px-4 pb-4 pt-2">
-                  <Button
-                    fullWidth
-                    className="btn-neutral-dark font-weight-bold text-uppercase font-size-sm hover-scale-sm">
-                    View all Issues
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          </Grid>
-          <Grid item xl={4} className="d-flex">
-            <Card className="card-box w-100 d-flex align-items-center">
-              <div className="d-flex flex-column flex-grow-1 justify-content-center w-100">
-                <div className="card-header-alt d-flex justify-content-center px-4 pt-4 pb-2">
-                  <h6 className="font-weight-bold font-size-xl mb-1 text-black">
-                    Email Marketing
-                  </h6>
-                </div>
-                <div className="mx-auto">
-                  <CircularProgressbarWithChildren
-                    value={78}
-                    strokeWidth={6}
-                    className="m-3 circular-progress-xl circular-progress-warning">
-                    <span className="text-warning font-size-xxl font-weight-normal">
-                      78
+              <div className="divider" />
+                <div className="divider" />
+                  <div className="scroll-area shadow-overflow" style={{height: '380px'}}>
+                    <PerfectScrollbar>
+                      <List component="div" className="list-group-flush">
+                        <ListItem className="py-4 d-block">
+                          <div className="d-flex align-items-center flex-column flex-sm-row">
+                            <div>
+                              <div className="bg-premium-dark text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
+                                <FontAwesomeIcon icon={['fas', 'suitcase']} />
+                              </div>
+                              
+                            </div>
+                            <div className="pl-0 pl-sm-3">
+                                <div className="d-block text-center d-sm-flex align-items-center">
+                                    <span className="font-size-lg">Business Analyst</span>
+                                    <div className="badge badge-neutral-info text-info ml-2">New</div>
+                                </div>
+                                <p className="text-black-50 mb-0">
+                                Administration Careers.
+                                </p>
+                                <p className="text-black-50 mb-0">
+                                53 Lairg Road, Newbold On Avon, UK
+                                </p>
+                            </div>
+                                    
+                                </div>
+                            </ListItem>
+                            <ListItem className="py-4 d-block">
+                                <div className="d-flex align-items-center flex-column flex-sm-row">
+                                    <div>
+                                        <div className="bg-warning text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
+                                            <FontAwesomeIcon icon={['fas', 'suitcase']} />
+                                        </div>
+                                    </div>
+                                    <div className="pl-0 pl-sm-3">
+                                        <div className="d-block text-center d-sm-flex align-items-center">
+                                            <span className="font-size-lg">Bussiness Developer</span>
+                                        </div>
+                                        <p className="text-black-50 mb-0">
+                                        Administration Careers.
+                                        </p>
+                                        <p className="text-black-50 mb-0">
+                                        53 Lairg Road, Newbold On Avon, UK
+                                        </p>
+                                    </div>
+                                
+                                </div>
+                            </ListItem>
+                            <ListItem className="py-4 d-block">
+                                <div className="d-flex align-items-center flex-column flex-sm-row">
+                                    <div>
+                                        <div className="bg-white border-primary border-2 text-center text-primary font-size-xl d-50 rounded-circle mb-3 mb-sm-0">
+                                            <FontAwesomeIcon icon={['fas', 'suitcase']} />
+                                        </div>
+                                    </div>
+                                    <div className="pl-0 pl-sm-3">
+                                        <div className="d-block text-center d-sm-flex align-items-center">
+                                            <span className="font-size-lg">Bussiness Analyst</span>
+                                        </div>
+                                        <p className="text-black-50 mb-0">
+                                        Administration Careers.
+                                        </p>
+                                        <p className="text-black-50 mb-0">
+                                        53 Lairg Road, Newbold On Avon, UK
+                                        </p>
+                                    </div>
+                                </div>
+                            </ListItem>
+                                    <ListItem className="py-4 d-block">
+                                        <div className="d-flex align-items-center flex-column flex-sm-row">
+                                            <div>
+                                                <div className="bg-premium-dark text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
+                                                    <FontAwesomeIcon icon={['fas', 'suitcase']} />
+                                                </div>
+                                            </div>
+                                            <div className="pl-0 pl-sm-3">
+                                                <div className="d-block text-center d-sm-flex align-items-center">
+                                                    <span className="font-size-lg">Business Analyst</span>
+                                                    <div className="badge badge-neutral-info text-info ml-2">New</div>
+                                                </div>
+                                                <p className="text-black-50 mb-0">
+                                                Administration Careers.
+                                                </p>
+                                                <p className="text-black-50 mb-0">
+                                                  53 Lairg Road, Newbold On Avon, UK
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </ListItem>
+                                    <ListItem className="py-4 d-block">
+                                        <div className="d-flex align-items-center flex-column flex-sm-row">
+                                            <div>
+                                                <div className="bg-warning text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
+                                                    <FontAwesomeIcon icon={['fas', 'suitcase']} />
+                                                </div>
+                                            </div>
+                                            <div className="pl-0 pl-sm-3">
+                                                <div className="d-block text-center d-sm-flex align-items-center">
+                                                    <span className="font-size-lg">Bussiness Executive</span>
+                                                </div>
+                                                <p className="text-black-50 mb-0">
+                                                Administration Careers.
+                                                </p>
+                                                <p className="text-black-50 mb-0">
+                                                  53 Lairg Road, Newbold On Avon, UK
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </ListItem>
+                            </List>
+                            </PerfectScrollbar>
+                        </div>
+                        <div className="card-footer p-3 text-center">
+                            <Button size="small" className="py-2 px-4 btn-primary">
+                    <span className="btn-wrapper--label text-uppercase font-weight-bold">
+                        View more items
                     </span>
-                  </CircularProgressbarWithChildren>
-                </div>
-                <div className="px-5 mt-2">
-                  <Grid
-                    container
-                    spacing={6}
-                    className="text-black-50 font-size-sm">
-                    <Grid item md={6} className="d-flex justify-content-center">
-                      <div>
-                        <div className="d-flex p-1 align-items-center">
-                          <div className="badge badge-success badge-circle mr-2">
-                            success
-                          </div>
-                          <span className="d-20 w-auto">successful</span>
+                            </Button>
                         </div>
-                        <div className="d-flex p-1 align-items-center">
-                          <div className="badge badge-first badge-circle mr-2">
-                            fail
-                          </div>
-                          <span className="d-20 w-auto">failed</span>
-                        </div>
-                      </div>
-                    </Grid>
-                    <Grid item md={6} className="d-flex justify-content-center">
-                      <div>
-                        <div className="d-flex p-1 align-items-center">
-                          <div className="badge badge-warning badge-circle mr-2">
-                            success
-                          </div>
-                          <span className="d-20 w-auto">opened</span>
-                        </div>
-                        <div className="d-flex p-1 align-items-center">
-                          <div className="badge badge-danger badge-circle mr-2">
-                            fail
-                          </div>
-                          <span className="d-20 w-auto">reported</span>
-                        </div>
-                      </div>
-                    </Grid>
-                  </Grid>
-                </div>
-                <div className="p-4">
-                  <Button
-                    fullWidth
-                    className="btn-neutral-dark font-weight-bold text-uppercase font-size-sm hover-scale-sm">
-                    Generate Report
-                  </Button>
-                </div>
-              </div>
             </Card>
+          </Grid>
+          <Grid item xl={6} className="d-flex">
+            <Grid container spacing={2}>
+            <Grid item xl={12} >
+              <Card className="card-box p-3">
+                <div className="d-flex align-items-center pb-4 justify-content-between">
+                  <div>
+                    <div className="font-weight-bold">Profile Readiness</div>
+                    <span className="text-black-50 d-block">Additional steps to complete profile</span>
+                  </div>
+                </div>
+                <div>
+                <div className="align-box-row progress-bar--label text-muted">
+                  <div className="ml-auto">80%</div>
+                </div>
+                  <LinearProgress variant="determinate" className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second" value={85} />
+                </div>
+              </Card>
+            </Grid>
+            <Grid item xl={12} >
+
+
+            <Card className="shadow-xxl">                  
+                        <div className="card-header-alt px-4 pt-4 pb-2">
+                            <h6 className="font-weight-bold font-size-lg mb-1 text-black">New Agencies</h6>
+                            {/* <p className="text-black-50 mb-0">Reports for what we sold this week.</p> */}
+                        </div>
+                        <div className="scroll-area shadow-overflow" style={{height: '230px'}}>
+                            <PerfectScrollbar options={{ wheelPropagation: false }}>
+                                <List component="div" className="list-group-flush">
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar2} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                    Agency 1
+                                                </a>
+                                                <span className="text-black-50 d-block">UI Engineer, Apple Inc.</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar3} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                Agency 2
+                                                </a>
+                                                <span className="text-black-50 d-block">Manager, Google Inc.</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar4} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                Agency 3
+                                                </a>
+                                                <span className="text-black-50 d-block">Project Manager, Spotify</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar5} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                Agency 4
+                                                </a>
+                                                <span className="text-black-50 d-block">Senior Designer, Amazon Inc.</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar2} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                Agency 5
+                                                </a>
+                                                <span className="text-black-50 d-block">UI Engineer, Apple Inc.</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar3} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                Agency 6
+                                                </a>
+                                                <span className="text-black-50 d-block">Manager, Google Inc.</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar-icon-wrapper mr-2">
+                                                <div className="avatar-icon"><img alt="..." src={avatar4} /></div>
+                                            </div>
+                                            <div>
+                                                <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
+                                                Agency 7
+                                                </a>
+                                                <span className="text-black-50 d-block">Project Manager, Spotify</span>
+                                            </div>
+                                        </div>
+                                        <Button size="small" className="btn-neutral-dark ml-4">View</Button>
+                                    </ListItem>
+                                </List>
+                            </PerfectScrollbar>
+                        </div>
+                        <div className="card-footer p-3 text-center">
+                            <Button size="small" color="primary" variant="contained">
+                                        <span className="btn-wrapper--label">
+                                            View all Agencies
+                    </span>
+                                <span className="btn-wrapper--icon">
+                                            <FontAwesomeIcon icon={['fas', 'arrow-right']} />
+                                        </span>
+                            </Button>
+                        </div>
+                    </Card>
+            </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </div>

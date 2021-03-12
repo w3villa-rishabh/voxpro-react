@@ -18,8 +18,6 @@ import {
   ListItem
 } from '@material-ui/core';
 
-import { useDropzone } from 'react-dropzone';
-
 import { handleUser } from '../../helper';
 import api from '../../api';
 import avatar5 from '../../assets/images/avatars/avatar5.jpg';
@@ -27,50 +25,12 @@ import avatar5 from '../../assets/images/avatars/avatar5.jpg';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import avatar1 from '../../assets/images/avatars/avatar1.jpg';
 import avatar3 from '../../assets/images/avatars/avatar3.jpg';
-
 import stock2 from '../../assets/images/stock-photos/stock-7.jpg';
 
 export default function LivePreviewExample() {
-  const [files, setFiles] = useState([]);
-  const {
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-    open,
-    getInputProps
-  } = useDropzone({
-    noClick: true,
-    noKeyboard: true,
-    multiple: false,
-    accept: 'image/*',
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      );
-    }
-  });
-
-  const thumbs = files.map((file) => (
-    <div
-      key={file.name}
-      className="rounded-circle avatar-image overflow-hidden d-140 bg-neutral-success text-center font-weight-bold text-success d-flex justify-content-center align-items-center">
-      <img
-        className="img-fluid img-fit-container rounded-sm"
-        src={file.preview}
-        alt="..."
-      />
-    </div>
-  ));
-
-  // useEffect(() => {
-  //
-  // }, [value]);
-
+  const [aboutText, setAboutText] = useState();
   const [, setData] = useState({});
+  const [modal1, seModal1] = useState(false);
 
   useEffect(() => {
     api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
@@ -82,47 +42,6 @@ export default function LivePreviewExample() {
     });
   }, []);
 
-  // function checkContactInfo() {
-  //   if (Object.keys(data).length !== 0) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-  // useEffect(
-  //   () => () => {
-  //     files.forEach((file) => URL.revokeObjectURL(file.preview));
-  //   },
-  //   [files]
-  // );
-
-  const [checked1, setChecked1] = useState(true);
-
-  const handleChange1 = (event) => {
-    setChecked1(event.target.checked);
-  };
-
-  const [completed, setCompleted] = useState(0);
-
-  React.useEffect(() => {
-    function progress() {
-      setCompleted((oldCompleted) => {
-        if (oldCompleted === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldCompleted + diff, 100);
-      });
-    }
-
-    const timer = setInterval(progress, 500);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  const [modal1, seModal1] = useState(false);
-
   const toggle1 = () => {
     // seModal1(!modal1);
   };
@@ -130,7 +49,7 @@ export default function LivePreviewExample() {
   const [activeTab, setActiveTab] = useState('0');
 
   const toggle = (tab) => {
-    // if (activeTab !== tab) setActiveTab(tab);
+    if (activeTab !== tab) setActiveTab(tab);
   };
 
   //Example 2
@@ -138,6 +57,9 @@ export default function LivePreviewExample() {
 
   const handleClickOpen1 = () => {
     // setOpen1(true);
+    setAboutText(
+      'Frank Belford providing delivery, implementation, Support, trancing and advanced customization for the selesforce platform'
+    );
   };
 
   const handleClose1 = () => {
@@ -147,15 +69,11 @@ export default function LivePreviewExample() {
   return (
     <div className="app-inner-content-layout">
       <div className="app-inner-content-layout--main bg-white p-0">
-        <Grid spacing={6} className="mx-5 main-card-section">
-          <Grid>
+        <Grid container spacing={2} className="main-card-section">
+          <Grid item ls={12}>
             <Card>
               <div className="card-img-wrapper h-180px">
                 <div className="card-badges">
-                  {/* <div className="badge badge-pill badge-success mr-2">New</div>
-                  <div className="badge badge-pill badge-neutral-info text-info">
-                    Update Available
-                  </div> */}
                   <FontAwesomeIcon
                     icon={['fas', 'pencil-alt']}
                     className="edit"
@@ -739,7 +657,6 @@ export default function LivePreviewExample() {
       <Dialog
         classes={{ paper: 'modal-content' }}
         fullWidth
-        maxWidgh="lg"
         open={open1}
         onClose={handleClose1}
         aria-labelledby="form-dialog-title2">
@@ -748,7 +665,7 @@ export default function LivePreviewExample() {
         <DialogContent className="p-0">
           <div>
             <div className="border-0">
-              <div className="card-body px-lg-5 py-lg-5">
+              <div className="card-body">
                 <div className="mb-3">
                   <TextField
                     fullWidth
@@ -758,25 +675,28 @@ export default function LivePreviewExample() {
                     label="Edit about"
                     multiline
                     rowsMax={4}
-                    value="Frank Belford providing delivery, implementation, Support,
-                            trancing and advanced customization for the selesforce
-                            platform"
-                  // InputProps={{
-                  //   startAdornment: (
-                  //     <InputAdornment position="start">
-                  //       <MailOutlineTwoToneIcon />
-                  //     </InputAdornment>
-                  //   )
-                  // }}
+                    onChange={(event) => {
+                      setAboutText(event.target.value);
+                    }}
+                    value={aboutText}
                   />
                 </div>
 
                 <div className="text-right">
-                  <Button
-                    variant="contained"
-                    className="font-weight-bold btn-second px-4 my-2">
-                    Save
-                  </Button>
+                  <DialogActions>
+                    <Button
+                      variant="contained"
+                      onClick={handleClose1}
+                      className="font-weight-bold btn-second px-4 my-3">
+                      Cancel
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      className="font-weight-bold btn-second px-4 my-3">
+                      Save
+                    </Button>
+                  </DialogActions>
                 </div>
               </div>
             </div>
@@ -795,20 +715,18 @@ export default function LivePreviewExample() {
         }}>
         <DialogTitle id="form-dialog-title">Edit info</DialogTitle>
         <div className="edit-user-info">
-          <Grid spacing={6} className="border">
-            <Grid>
-              <div className="card-img-wrapper h-180px">
-                <img alt="..." className="img-fit-container" src={stock2} />
-              </div>
-              <CardContent className="card-body-avatar">
-                <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
-                  <div className="avatar-icon rounded-circle">
-                    <img alt="..." src={avatar5} />
-                  </div>
+          <div className="border">
+            <div className="card-img-wrapper h-180px">
+              <img alt="..." className="img-fit-container" src={stock2} />
+            </div>
+            <CardContent className="card-body-avatar">
+              <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
+                <div className="avatar-icon rounded-circle">
+                  <img alt="..." src={avatar5} />
                 </div>
-              </CardContent>
-            </Grid>
-          </Grid>
+              </div>
+            </CardContent>
+          </div>
 
           <Grid container spacing={2} className="mt-3">
             <Grid item xs={6}>
@@ -893,7 +811,7 @@ export default function LivePreviewExample() {
           </Grid>
         </div>
         <div className="text-right">
-          <DialogActions className="p-4">
+          <DialogActions>
             <Button
               variant="contained"
               onClick={toggle1}

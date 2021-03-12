@@ -151,12 +151,10 @@
 }
 
 .main-card-section {
-  // min-height: 340px;
+  width: unset !important;
+  margin: 0 37px !important;
 
   .main-card {
-
-    // min-height: 200px;
-
     .user-details {
       .avatar-icon-wrapper {
         position: absolute;
@@ -165,7 +163,6 @@
       }
 
       .user-info {
-        // padding-top: 40px;
         background: white;
 
         .MuiLinearProgress-root {

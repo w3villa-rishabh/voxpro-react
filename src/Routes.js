@@ -25,6 +25,7 @@ import FormsToggleSwitch from './example-pages/FormsToggleSwitch';
 import PageError404 from './example-pages/PageError404';
 import PageError500 from './example-pages/PageError500';
 import PageError505 from './example-pages/PageError505';
+import IR35TaxComponent from 'components/ir35_tax/ir35-tax';
 
 const DashboardCommerce = lazy(() =>
   import('./example-pages/DashboardCommerce')
@@ -316,6 +317,7 @@ const Routes = () => {
                 '/dashboard',
                 '/profile-edit',
                 '/documents',
+                '/ir35-verify',
                 '/DashboardCommerce',
                 '/DashboardAnalytics',
                 '/DashboardStatistics',
@@ -409,6 +411,7 @@ const Routes = () => {
                     <Route path="/dashboard" component={DashboardMonitoring} />
                     <Route path="/profile-edit" component={EditProfile} />
                     <Route path="/documents" component={Onboarding} />
+                    <Route path="/ir35-verify" component={IR35TaxComponent} />
                     <Route
                       path="/DashboardCommerce"
                       component={DashboardCommerce}

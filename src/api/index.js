@@ -14,7 +14,7 @@ var setupAPI = function () {
       BASE_URL = 'http://54.203.142.83/';
       break;
     default:
-      BASE_URL = 'http://54.203.142.83/';
+      BASE_URL = 'https://d5d99e78af1a.ngrok.io/';
       break;
   }
 };
