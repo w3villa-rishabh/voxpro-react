@@ -43,7 +43,7 @@ export default function LivePreviewExample() {
   }, []);
 
   const toggle1 = () => {
-    seModal1(!modal1);
+    // seModal1(!modal1);
   };
 
   const [activeTab, setActiveTab] = useState('0');
@@ -56,7 +56,7 @@ export default function LivePreviewExample() {
   const [open1, setOpen1] = useState(false);
 
   const handleClickOpen1 = () => {
-    setOpen1(true);
+    // setOpen1(true);
     setAboutText(
       'Frank Belford providing delivery, implementation, Support, trancing and advanced customization for the selesforce platform'
     );

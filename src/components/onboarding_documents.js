@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  Grid,
-  Card,
-  Button,
-  List,
-  ListItem,
-  TextField
-} from '@material-ui/core';
+import { Grid, Card, Button, List, TextField } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import Dropzone from 'react-dropzone';
 import api from '../api';
@@ -17,6 +10,8 @@ import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 
 export default function OnBoardDocument() {
   const [files, setFiles] = useState([]);
+  const [fileUpload, setFileUpload] = useState({});
+
   const [documents, setDocuments] = useState([]);
   const [filesName, setFilesName] = useState();
 
@@ -32,7 +27,19 @@ export default function OnBoardDocument() {
       });
   }, []);
 
-  const handleDrop = (acceptedFiles) => setFiles(acceptedFiles);
+  const handleDrop = (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      const dataURL = reader.result;
+      const imageObj = { url: dataURL, extension, name: file.name };
+      setFileUpload(imageObj);
+    };
+    reader.readAsDataURL(file);
+    setFiles(acceptedFiles);
+  };
 
   function addDocument() {
     if (!files.length) {
@@ -48,7 +55,8 @@ export default function OnBoardDocument() {
       .then((response) => {
         if (response.data) {
           console.log('response.data', response.data);
-          // window.location.href = "/dashboard";
+          setFiles([]);
+          setFileUpload({});
         } else {
           alert('Something went wrong..');
         }
@@ -58,25 +66,33 @@ export default function OnBoardDocument() {
 
   return (
     <>
-      <div>
-        <ul className="show-doc">
+      <Card>
+        <ul className="show-doc mb-1">
           {documents.map((file) => (
-            // <img alt="..." className="card-img-top" src={file.stock1} />
-            // <CardContent>
-            //   <h5 className="card-title font-weight-bold font-size-xxl">
-            //     Image 1
-            //   </h5>
-            // </CardContent>
-            <li>
-              <img alt="..." className="card-img-top" src={stock1} />
-              {file.doc_name}
+            <li className="p-2 w-25">
+              <Card className="card-box">
+                <div className="text-center py-3">
+                  <div className="d-90 rounded-circle border-0 my-2 card-icon-wrapper bg-plum-plate btn-icon mx-auto text-center">
+                    <div className="avatar-icon-wrapper d-80">
+                      <div className="avatar-icon d-80 rounded-circle">
+                        <img alt="..." src={stock1} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="font-size-xl font-weight-bold pt-2 text-black">
+                    {file.doc_name}
+                  </div>
+                </div>
+              </Card>
             </li>
           ))}
         </ul>
-      </div>
+      </Card>
 
       <Card className="mt-4 p-3 p-lg-5 shadow-xxl">
         <Dropzone
+          multiple={false}
+          accept="image/jpeg,image/jpg,image/png"
           styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
           onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
@@ -107,11 +123,18 @@ export default function OnBoardDocument() {
             You have uploaded <b>{files.length}</b> files!
           </Alert>
           <List component="div" className="font-size-sm">
-            <ListItem>
+            <ul>
               {files.map((fileName) => (
-                <span key={fileName.name}>{fileName.name}</span>
+                <li>
+                  <img
+                    alt="..."
+                    className="card-img-top document-img pl-3"
+                    src={fileUpload.url}
+                  />
+                  <span key={fileName.name}>{fileName.name}</span>
+                </li>
               ))}
-            </ListItem>
+            </ul>
           </List>
           <Grid container spacing={6}>
             <Grid item md={12}>
@@ -129,7 +152,7 @@ export default function OnBoardDocument() {
               disabled={!files.length}
               className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
               size="medium">
-              <span className="btn-wrapper--label">Submit</span>
+              <span className="btn-wrapper--label">Upload</span>
             </Button>
           </div>
         </div>
