@@ -189,9 +189,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                    Agency 1
+                                                Nolan Recruitment
                                                 </a>
-                                                <span className="text-black-50 d-block">UI Engineer, Apple Inc.</span>
+                                                <span className="text-black-50 d-block">Automotive, Aviation, Building Services & FM</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
@@ -203,9 +203,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                Agency 2
+                                                Adecco
                                                 </a>
-                                                <span className="text-black-50 d-block">Manager, Google Inc.</span>
+                                                <span className="text-black-50 d-block">IT, technical, architecture, aerospace, railway and oil / gas.</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
@@ -217,9 +217,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                Agency 3
+                                                Propel
                                                 </a>
-                                                <span className="text-black-50 d-block">Project Manager, Spotify</span>
+                                                <span className="text-black-50 d-block">Advertising, Media, Mobile, Marketing</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
@@ -231,9 +231,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                Agency 4
+                                                Huntress Group
                                                 </a>
-                                                <span className="text-black-50 d-block">Senior Designer, Amazon Inc.</span>
+                                                <span className="text-black-50 d-block">Information technology, accounting and finance.</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
@@ -245,9 +245,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                Agency 5
+                                                Satigo
                                                 </a>
-                                                <span className="text-black-50 d-block">UI Engineer, Apple Inc.</span>
+                                                <span className="text-black-50 d-block"> Infrastructure, digital, change / transformation and enterprise sales.</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
@@ -259,9 +259,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                Agency 6
+                                                Deerfoot IT Resources
                                                 </a>
-                                                <span className="text-black-50 d-block">Manager, Google Inc.</span>
+                                                <span className="text-black-50 d-block">Information technology</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
@@ -273,9 +273,9 @@ export default function LivePreviewExample() {
                                             </div>
                                             <div>
                                                 <a href="#/" onClick={e => e.preventDefault()} className="font-weight-bold text-black" title="...">
-                                                Agency 7
+                                                Silicon Milk Roundabout
                                                 </a>
-                                                <span className="text-black-50 d-block">Project Manager, Spotify</span>
+                                                <span className="text-black-50 d-block">Technology, Startups</span>
                                             </div>
                                         </div>
                                         <Button size="small" className="btn-neutral-dark ml-4">View</Button>
