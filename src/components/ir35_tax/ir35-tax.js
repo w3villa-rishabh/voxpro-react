@@ -7,8 +7,8 @@ export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('1');
 
   const [policyObj, setPolicyObj] = useState({
-    limitedCompany: 'b',
-    organization: 'a',
+    limitedCompany: 'a',
+    organization: 'b',
     director: 'a',
     reject: 'a',
     substitute: 'a',
@@ -21,7 +21,16 @@ export default function IR35TaxComponent() {
     stationery: 'a',
     beforePay: 'a',
     paidWork: 'a',
-    workerRight: 'a'
+    workerRight: 'a',
+    corporateBenefits: 'a',
+    suppliers: 'a',
+    similarOrganisations: 'a',
+    ownership: 'a',
+    belongOrganisation: 'a',
+    previousContract: 'a',
+    immediately: 'a',
+    availableWorking: 'a',
+    months: 'a'
   });
 
   const toggle = (tab) => {
@@ -58,12 +67,14 @@ export default function IR35TaxComponent() {
                     Does the worker provide their services through a limited
                     company, partnership or unincorporated association?
                   </h4>
-                  <p>These are also known as intermediaries.</p>
-                  <p>
-                    An ‘unincorporated association’ is an organisation set up by
-                    a group of people for a reason other than to make a profit.
-                    For example, a voluntary group or a sports club.
-                  </p>
+                  <div className="text-f">
+                    <p>These are also known as intermediaries.</p>
+                    <p>
+                      An ‘unincorporated association’ is an organisation set up
+                      by a group of people for a reason other than to make a
+                      profit. For example, a voluntary group or a sports club.
+                    </p>
+                  </div>
                   <div className="d-flex">
                     <Radio
                       checked={policyObj.limitedCompany === 'a'}
@@ -158,10 +169,12 @@ export default function IR35TaxComponent() {
               <Grid container spacing={1} className="pt-3">
                 <Grid item xs={12}>
                   <h4>Will the worker be an ‘Office Holder’?</h4>
-                  <p>
-                    This can include being a board member, treasurer, trustee,
-                    company secretary or company director.
-                  </p>
+                  <div className="text-f">
+                    <span>
+                      This can include being a board member, treasurer, trustee,
+                      company secretary or company director.
+                    </span>
+                  </div>
                   <div className="">
                     <ul>
                       <li>
@@ -213,7 +226,7 @@ export default function IR35TaxComponent() {
                     <h4>
                       Has the worker ever sent a substitute to do this work?
                     </h4>
-                    <div className="d-flex">
+                    <div className="text-f">
                       <span>
                         A substitute is someone the worker sends in their place
                         to do their role.
@@ -241,15 +254,17 @@ export default function IR35TaxComponent() {
                 <Grid container spacing={1} className="pt-3">
                   <Grid item xs={12}>
                     <h4>Do you have the right to reject a substitute?</h4>
-                    <p>
-                      A substitute is someone the worker sends in their place to
-                      do their role.
-                    </p>
-                    <p>
-                      This can include rejecting a substitute even if they are
-                      equally qualified, and meet your interviewing, vetting and
-                      security clearance procedures.
-                    </p>
+                    <div className="text-f">
+                      <span>
+                        A substitute is someone the worker sends in their place
+                        to do their role.
+                      </span>
+                      <span>
+                        This can include rejecting a substitute even if they are
+                        equally qualified, and meet your interviewing, vetting
+                        and security clearance procedures.
+                      </span>
+                    </div>
                     <div className="d-flex">
                       <Radio
                         checked={policyObj.reject === 'a'}
@@ -295,9 +310,12 @@ export default function IR35TaxComponent() {
               <Grid container spacing={1} className="pt-3">
                 <Grid item xs={12}>
                   <h4>Did the worker pay their substitute?</h4>
-                  <span>
-                    This includes payments made by the worker or their business.
-                  </span>
+                  <div className="text-f">
+                    <span>
+                      This includes payments made by the worker or their
+                      business.
+                    </span>
+                  </div>
                   <div className="d-flex">
                     <Radio
                       checked={policyObj.substitute === 'a'}
@@ -345,16 +363,18 @@ export default function IR35TaxComponent() {
                     Does your organisation have the right to move the worker
                     from the task they originally agreed to do?
                   </h4>
-                  <p>
-                    A worker taken on for general tasks, rather than one
-                    specific task, might be moved as and when priorities change.
-                    The client may not need the worker’s permission to move
-                    them.
-                  </p>
-                  <a href="javascript:void(0)">
-                    Read more examples about the client’s control over what the
-                    worker does (opens in a new window).
-                  </a>
+                  <div className="text-f">
+                    <span>
+                      A worker taken on for general tasks, rather than one
+                      specific task, might be moved as and when priorities
+                      change. The client may not need the worker’s permission to
+                      move them.
+                    </span>
+                    <br/><a href="javascript:void(0)">
+                      Read more examples about the client’s control over what
+                      the worker does (opens in a new window).
+                    </a>
+                  </div>
                   <div className="d-flex">
                     <Radio
                       checked={policyObj.originallyAgreed === 'a'}
@@ -402,18 +422,20 @@ export default function IR35TaxComponent() {
                     Does your organisation have the right to decide how the work
                     is done?
                   </h4>
-                  <p>
-                    This can include your organisation instructing, guiding or
-                    advising the way the task should be completed.
-                  </p>
-                  <p>
-                    This is not relevant if it is highly skilled work. For
-                    example, an airline pilot.
-                  </p>
-                  <a href="javascript:void(0)">
-                    Read more examples of how the work is done (opens in a new
-                    window).
-                  </a>
+                  <div className="text-f">
+                    <span>
+                      This can include your organisation instructing, guiding or
+                      advising the way the task should be completed.
+                    </span>
+                    <span>
+                      This is not relevant if it is highly skilled work. For
+                      example, an airline pilot.
+                    </span>
+                    <br/><a href="javascript:void(0)">
+                      Read more examples of how the work is done (opens in a new
+                      window).
+                    </a>
+                  </div>
                   <div className="d-flex">
                     <Radio
                       checked={policyObj.organisationDone === 'a'}
@@ -461,18 +483,6 @@ export default function IR35TaxComponent() {
                     Does your organisation have the right to decide the worker’s
                     working hours?
                   </h4>
-                  {/* <div className="text-f">
-                    <span>
-                      This can include being a board member, treasurer, trustee,
-                      company secretary or company director.
-                    </span>
-                    <span>
-                      Read more about{' '}
-                      <a href="javascript:void(0)">
-                        Office Holders (opens in a new window).
-                      </a>
-                    </span>
-                  </div> */}
 
                   <div className="d-flex">
                     <Radio
@@ -521,18 +531,6 @@ export default function IR35TaxComponent() {
                     Does your organisation have the right to decide where the
                     worker does the work?
                   </h4>
-                  {/* <div className="text-f">
-                    <span>
-                      This can include being a board member, treasurer, trustee,
-                      company secretary or company director.
-                    </span>
-                    <span>
-                      Read more about{' '}
-                      <a href="javascript:void(0)">
-                        Office Holders (opens in a new window).
-                      </a>
-                    </span>
-                  </div> */}
 
                   <div className="d-flex">
                     <Radio
@@ -855,7 +853,7 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.workerRight === 'a'}
                       onChange={() => {
-                        setActiveTab({ workerRight: 'a' });
+                        setPolicyObj({ ...policyObj, workerRight: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -866,7 +864,7 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.workerRight === 'b'}
                       onChange={() => {
-                        setActiveTab({ workerRight: 'b' });
+                        setPolicyObj({ ...policyObj, workerRight: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -878,6 +876,541 @@ export default function IR35TaxComponent() {
                     variant="contained"
                     onClick={() => {
                       setActiveTab('16');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 16 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '16'
+              })}
+              index={16}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Will you provide the worker with paid-for corporate
+                    benefits?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      This can include external gym memberships, health
+                      insurance or retail discounts.
+                    </span>
+                  </div>
+
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, workerRight: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.workerRight === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, workerRight: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('17');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 17 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '17'
+              })}
+              index={17}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Will the worker have any management responsibilities for
+                    your organisation?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      This can include deciding how much to pay someone, hiring
+                      or dismissing workers, and delivering appraisals.
+                    </span>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('18');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 18 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '18'
+              })}
+              index={18}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    How would the worker introduce themselves to your consumers
+                    or suppliers?
+                  </h4>
+
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.suppliers === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, suppliers: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.suppliers === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, suppliers: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('19');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 19 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '19'
+              })}
+              index={19}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Does this contract stop the worker from doing similar work
+                    for other organisations?
+                  </h4>
+                  <div className="text-f">
+                    <span>This includes working for your competitors.</span>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.similarOrganisations === 'a'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          similarOrganisations: 'a'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.similarOrganisations === 'b'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          similarOrganisations: 'b'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('20');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 20 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '20'
+              })}
+              index={20}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Are there any ownership rights relating to this contract?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      These types of rights are usually found in media, arts and
+                      creative industry contracts. This includes all
+                      intellectual property rights, copyright, trademarks,
+                      patents, and image rights.
+                    </span>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.ownership === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, ownership: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.ownership === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, ownership: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('21');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 21 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '21'
+              })}
+              index={21}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Does the contract state the rights to this work belong to
+                    your organisation?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      This does not include the option to buy the rights for a
+                      separate fee.
+                    </span>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.belongOrganisation === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, belongOrganisation: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.belongOrganisation === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, belongOrganisation: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('22');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 22 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '22'
+              })}
+              index={22}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Has the worker had a previous contract with your
+                    organisation?
+                  </h4>
+
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.previousContract === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, previousContract: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.previousContract === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, previousContract: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('23');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 23 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '23'
+              })}
+              index={23}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Will this contract start immediately after the previous one
+                    ended?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      This does not include any holiday period between the two
+                      contracts.
+                    </span>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.immediately === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, immediately: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.immediately === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, immediately: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('24');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 24 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '24'
+              })}
+              index={24}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Will this work take up the majority of the worker’s
+                    available working time?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      This includes preparation or any other time necessary to
+                      deliver the work, even if it is not referred to in the
+                      contract.
+                    </span>
+                    <br/><a href="javascript:void(0)">
+                      Read more about the worker’s available working time (opens
+                      in a new window).
+                    </a>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.availableWorking === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, availableWorking: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.availableWorking === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, availableWorking: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('25');
+                    }}
+                    className="font-weight-bold btn-slack px-4 my-3">
+                    Continue
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+
+            {/* Section 25 */}
+            <div
+              className={clsx('tab-item-wrapper', {
+                active: activeTab === '25'
+              })}
+              index={25}>
+              <Grid container spacing={1} className="pt-3">
+                <Grid item xs={12}>
+                  <h4>
+                    Has the worker done any self-employed work of a similar
+                    nature for other clients in the last 12 months?
+                  </h4>
+                  <div className="text-f">
+                    <span>
+                      This only refers to work requiring similar skills,
+                      responsibilities, knowledge, or ability.
+                    </span>
+                    <span>
+                      Self-employed work is when it is the worker’s
+                      responsibility to pay Income Tax and National Insurance
+                      contributions on their earnings.
+                    </span>
+                  </div>
+                  <div className="d-flex">
+                    <Radio
+                      checked={policyObj.months === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, months: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+
+                    <Radio
+                      checked={policyObj.months === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, months: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </div>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setActiveTab('');
                       console.log('policyObj', policyObj);
                     }}
                     className="font-weight-bold btn-slack px-4 my-3">
