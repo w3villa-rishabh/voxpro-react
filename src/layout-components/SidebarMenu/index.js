@@ -179,7 +179,7 @@ const SidebarMenu = (props) => {
                 activeClassName="active"
                 onClick={toggleSidebarMobile}
                 className="nav-link-simple"
-                to="/dashboard">
+                to="/ir35-verify">
                 <span className="sidebar-icon">
                   <BallotTwoToneIcon />
                 </span>
