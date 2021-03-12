@@ -107,7 +107,7 @@ const HeaderUserbox = () => {
         keepMounted
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'center'
         }}
         transformOrigin={{
@@ -117,8 +117,8 @@ const HeaderUserbox = () => {
         open={Boolean(anchorEl)}
         classes={{ list: 'p-0' }}
         onClose={handleClose}>
-        <div className="dropdown-menu-lg overflow-hidden p-0">
-          <div className="d-flex px-3 pt-3 align-items-center justify-content-between">
+        <div className="dropdown-menu-lg overflow-hidden">
+          <div className="align-items-center justify-content-between">
             {/* <Typography className="text-capitalize pl-1 font-weight-bold text-primary">
               <span>Profile Options</span>
             </Typography> */}
@@ -132,7 +132,7 @@ const HeaderUserbox = () => {
           </div>
           <List
             component="div"
-            className="nav-neutral-primary text-left d-flex align-items-center flex-column px-3 pb-3">
+            className="nav-neutral-primary text-left d-flex align-items-center flex-column">
             <ListItem button className="d-block text-left" onClick={userLogout}>
               Logout
             </ListItem>

@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-// import { PageTitle } from '../layout-components';
+import { PageTitle } from '../layout-components';
 
 import DashboardMonitoring1 from './all_dashboards/dashboard1.js';
 import DashboardMonitoring2 from './all_dashboards/dashboard2.js';
@@ -17,7 +17,7 @@ export default function DashboardMonitoring() {
   return (
     <>
       {/* <PageTitle
-        titleHeading="Voxpro"
+        titleHeading="Dashboard"
         titleDescription= {handleUser().user.role} 
       /> */}
 

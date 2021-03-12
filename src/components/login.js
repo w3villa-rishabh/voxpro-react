@@ -71,7 +71,6 @@ export default function LivePreviewExample() {
 
   let save = (e) => {
     e.preventDefault();
-
     api.post('/api/users/login', {
       user: account
     })
