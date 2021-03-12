@@ -21,7 +21,7 @@ export default function IR35TaxComponent() {
         <div>
           <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
           <a
-            href="javascript:void(0)"
+            href="#!"
             onClick={() => {
               const tabNo = parseInt(activeTab) - 1;
               toggle(tabNo.toString());
@@ -427,7 +427,7 @@ export default function IR35TaxComponent() {
                     </span>
                     <span>
                       Read more about{' '}
-                      <a href="javascript:void(0)">
+                      <a href="#!">
                         Office Holders (opens in a new window).
                       </a>
                     </span>
