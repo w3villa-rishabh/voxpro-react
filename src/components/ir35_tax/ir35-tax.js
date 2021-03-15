@@ -370,7 +370,8 @@ export default function IR35TaxComponent() {
                       change. The client may not need the worker’s permission to
                       move them.
                     </span>
-                    <br/><a className="a-blue" href="javascript:void(0)">
+                    <br />
+                    <a className="a-blue" href="javascript:void(0)">
                       Read more examples about the client’s control over what
                       the worker does (opens in a new window).
                     </a>
@@ -431,7 +432,8 @@ export default function IR35TaxComponent() {
                       This is not relevant if it is highly skilled work. For
                       example, an airline pilot.
                     </span>
-                    <br/><a className="a-blue" href="javascript:void(0)">
+                    <br />
+                    <a className="a-blue" href="javascript:void(0)">
                       Read more examples of how the work is done (opens in a new
                       window).
                     </a>
@@ -907,7 +909,7 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.corporateBenefits === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, workerRight: 'a' });
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -916,9 +918,9 @@ export default function IR35TaxComponent() {
                     <span className="mt-3">Yes</span>
 
                     <Radio
-                      checked={policyObj.workerRight === 'b'}
+                      checked={policyObj.corporateBenefits === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, workerRight: 'b' });
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1321,7 +1323,8 @@ export default function IR35TaxComponent() {
                       deliver the work, even if it is not referred to in the
                       contract.
                     </span>
-                    <br/><a className="a-blue" href="javascript:void(0)">
+                    <br />
+                    <a className="a-blue" href="javascript:void(0)">
                       Read more about the worker’s available working time (opens
                       in a new window).
                     </a>
