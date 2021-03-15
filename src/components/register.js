@@ -28,7 +28,6 @@ export default function LivePreviewExample() {
   let handleChange = (e) => {
     let name = e.target.name;
     let value
-    debugger
     if (name === 'role'){ 
       value = parseInt(e.target.value);
     }
@@ -43,7 +42,7 @@ export default function LivePreviewExample() {
     e.preventDefault();
     api.post('/api/users', {user: account}).then((response) => {
       if(response.data){
-          localStorage.setItem("user", JSON.stringify(response.data))
+        // localStorage.setItem("user", JSON.stringify(response.data))
         window.location.href = "/login";
       }else{
         alert('Something went wrong..')

@@ -31,15 +31,17 @@ export default function LivePreviewExample() {
     setChecked1(event.target.checked);
   }
 
-const search = window.location.search;
-const params = new URLSearchParams(search);
-const foo = params.get('user');
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let foo = params.get('user');
+  let boo = params.get('reset_password_token');
 console.log(foo);
 
+console.log(boo);
 
 
   function userSignIn() {
-    api.post('/api/users/login', {user: {email: email, password: password, remember_me: "0"}}).then((response) => {
+    api.post('/api/password/reset', {user: {email: foo}}).then((response) => {
       if(response.data){
           localStorage.setItem("user", JSON.stringify(response.data))
         window.location.href = "/DashboardMonitoring";

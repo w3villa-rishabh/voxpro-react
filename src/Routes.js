@@ -152,7 +152,7 @@ const Routes = () => {
               </CollapsedSidebar>
             </Route>
 
-            <Route path={['/login', '/sign-up', '/recover-password', '/api/users/confirmation', 'reset-password']}>
+            <Route path={['/login', '/sign-up', '/recover-password', '/api/users/confirmation', '/reset-password']}>
               <MinimalLayout>
                 <Switch location={location} key={location.pathname}>
                   <motion.div
@@ -163,7 +163,7 @@ const Routes = () => {
                     transition={pageTransition}>
                     <Route path="/login" component={LoginPage} />
                     <Route path="/sign-up" component={RegisterPage} />
-                    <Route path="/api/users/confirmation" component={PageLoginCover} />
+                    <Route path="/api/users/confirmation" component={LoginPage} />
                     <Route
                       path="/recover-password"
                       component={PageRecoverCover}
