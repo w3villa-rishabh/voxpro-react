@@ -4,7 +4,7 @@ import { Grid, Card, Button, List, TextField } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import Dropzone from 'react-dropzone';
 import api from '../api';
-import { handleUser } from '../helper';
+import { getCurrentUser } from '../helper';
 import stock1 from '../assets/images/stock-photos/stock-1.jpg';
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 
@@ -14,10 +14,11 @@ export default function OnBoardDocument() {
 
   const [documents, setDocuments] = useState([]);
   const [filesName, setFilesName] = useState();
+  const [currentUser] = useState(getCurrentUser());
 
   useEffect(() => {
     api
-      .get(`/api/user/show_user_documents?id=${handleUser().user.id}`)
+      .get(`/api/user/show_user_documents?id=${currentUser.id}`)
       .then((response) => {
         if (response.data) {
           setDocuments(response.data);
@@ -25,7 +26,7 @@ export default function OnBoardDocument() {
           alert('Something went wrong..');
         }
       });
-  }, []);
+  }, [currentUser.id]);
 
   const handleDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -50,17 +51,15 @@ export default function OnBoardDocument() {
     formData.append('user[documents_attributes][][doc_name]', filesName);
     formData.append('user[documents_attributes][][doc]', files[0]);
 
-    api
-      .patch(`/api/user?id=${handleUser().user.id}`, formData)
-      .then((response) => {
-        if (response.data) {
-          console.log('response.data', response.data);
-          setFiles([]);
-          setFileUpload({});
-        } else {
-          alert('Something went wrong..');
-        }
-      });
+    api.patch(`/api/user?id=${currentUser.id}`, formData).then((response) => {
+      if (response.data) {
+        console.log('response.data', response.data);
+        setFiles([]);
+        setFileUpload({});
+      } else {
+        alert('Something went wrong..');
+      }
+    });
     console.log('The link was clicked.', files);
   }
 

@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  Typography,
   Badge,
   Menu,
   Button,
   List,
   ListItem,
-  Tooltip,
   Divider
 } from '@material-ui/core';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 import { withStyles } from '@material-ui/core/styles';
-import {handleUser} from '../../helper'
-import api from '../../api'
+import { getCurrentUser } from '../../helper';
 
 const StyledBadge = withStyles({
-  badge: {  
+  badge: {
     backgroundColor: 'var(--success)',
     color: 'var(--success)',
     boxShadow: '0 0 0 2px #fff',
@@ -49,7 +46,8 @@ const StyledBadge = withStyles({
 
 const HeaderUserbox = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const [currentUser] = useState(getCurrentUser());
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -57,15 +55,15 @@ const HeaderUserbox = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   function userLogout() {
     // api.delete('/api/users/sign_out').then((response) => {
     //   if(response.data.success){
-        localStorage.clear()
-        window.location.href = "/login";
-      // }else{
-      //   alert('Something went wrong..')
-      // }
+    localStorage.clear();
+    window.location.href = '/login';
+    // }else{
+    //   alert('Something went wrong..')
+    // }
     // });
   }
 
@@ -94,9 +92,9 @@ const HeaderUserbox = () => {
 
         <div className="d-none d-xl-block pl-2">
           <div className="font-weight-bold pt-2 line-height-1">
-            {handleUser().user.first_name}
+            {currentUser.first_name}
           </div>
-          <span className="text-black-50">{handleUser().user.role}</span>
+          <span className="text-black-50">{currentUser.role}</span>
         </div>
         <span className="pl-1 pl-xl-3">
           <FontAwesomeIcon icon={['fas', 'angle-down']} className="opacity-5" />
@@ -136,7 +134,7 @@ const HeaderUserbox = () => {
             <ListItem button className="d-block text-left" onClick={userLogout}>
               Logout
             </ListItem>
-          
+
             {/* <ListItem button className="d-block text-left">
               Active tasks
             </ListItem> */}

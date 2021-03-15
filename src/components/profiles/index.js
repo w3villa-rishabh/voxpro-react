@@ -18,7 +18,7 @@ import {
   ListItem
 } from '@material-ui/core';
 
-import { handleUser } from '../../helper';
+import { getCurrentUser } from '../../helper';
 import api from '../../api';
 import avatar5 from '../../assets/images/avatars/avatar5.jpg';
 
@@ -31,16 +31,17 @@ export default function LivePreviewExample() {
   const [aboutText, setAboutText] = useState();
   const [, setData] = useState({});
   const [modal1, seModal1] = useState(false);
+  const [currentUser] = useState(getCurrentUser());
 
   useEffect(() => {
-    api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
+    api.get(`/api/user?id=${currentUser.id}`).then((response) => {
       if (response.data) {
         setData(response.data);
       } else {
         alert('Something went wrong..');
       }
     });
-  }, []);
+  }, [currentUser.id]);
 
   const toggle1 = () => {
     // seModal1(!modal1);
@@ -92,8 +93,7 @@ export default function LivePreviewExample() {
                     <Grid container spacing={4} className="user-info">
                       <Grid item xs={4}>
                         <div className="font-size-xxl font-weight-bold">
-                          {handleUser().user.first_name}{' '}
-                          {handleUser().user.last_name}
+                          {currentUser.first_name} {currentUser.last_name}
                         </div>
                         <div>
                           <span>

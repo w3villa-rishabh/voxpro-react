@@ -18,7 +18,7 @@ import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 
 import api from '../../api';
-import { handleUser } from '../../helper';
+import { getCurrentUser } from '../../helper';
 
 var userDetails = [{}];
 
@@ -36,14 +36,11 @@ const top100Films = [
 ];
 
 const Step1 = (props) => {
-  useEffect(() => {
-    console.log('step 1 >>>>>>>>>>>>>>>>>>>>>>>>', props);
-  }, [props]);
-
   const [data, setData] = useState({ first_name: '' });
+  const [currentUser] = useState(getCurrentUser());
 
   useEffect(() => {
-    api.get(`/api/user?id=${handleUser().user.id}`).then((response) => {
+    api.get(`/api/user?id=${currentUser.id}`).then((response) => {
       if (response.data) {
         setData(response.data);
       } else {
@@ -423,6 +420,7 @@ function getStepContent(step) {
 
 export default function LivePreviewExample() {
   const [activeStep, setActiveStep] = useState(0);
+  const [currentUser] = useState(getCurrentUser());
   const steps = getSteps();
 
   const handleNext = () => {
@@ -439,7 +437,7 @@ export default function LivePreviewExample() {
 
   function editUser() {
     api
-      .patch(`/api/user?id=${handleUser().user.id}`, {
+      .patch(`/api/user?id=${currentUser.id}`, {
         user: {
           first_name: userDetails.first_name,
           middle_name: userDetails.middle_name,

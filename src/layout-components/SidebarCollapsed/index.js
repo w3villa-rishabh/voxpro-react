@@ -119,7 +119,7 @@ const SidebarCollapsed = (props) => {
                   arrow
                   placement="right"
                   title="Profile">
-                  <NavLink activeClassName="active" to="/Profile">
+                  <NavLink activeClassName="active" to="/view-profile">
                     <span>
                       <FavoriteTwoToneIcon />
                     </span>

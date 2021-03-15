@@ -21,45 +21,11 @@ import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
 import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
-export default function LivePreviewExample() {
+export default function LoginComponent() {
   const [checked1, setChecked1] = useState(true);
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-  // const handleChange1 = (event) => {
-  //   setChecked1(event.target.checked);
-  // };
-
-  // function userSignIn() {
-  //   api.post('/api/users/login', {
-  //       user: { email: email, password: password, remember_me: '0' }
-  //     })
-  //     .then((response) => {
-  //       if (response.data) {
-  //         localStorage.setItem('user', JSON.stringify(response.data));
-  //         window.location.href = '/dashboard';
-  //       } else {
-  //         alert('Something went wrong..');
-  //       }
-  //     });
-  //   console.log('The link was clicked.');
-  // }
-
-  // async function handleForm(val, type) {
-  //   var value = await val.target.value;
-  //   // eslint-disable-next-line default-case
-  //   switch (type) {
-  //     case 'email':
-  //       setEmail(value);
-  //       break;
-  //     case 'password':
-  //       setPassword(value);
-  //   }
-  // }
-  
   let [account, setAccount] = useState({
     email: '',
-    password: '',
+    password: ''
   });
 
   let handleChange = (e) => {
@@ -67,22 +33,23 @@ export default function LivePreviewExample() {
     let value = e.target.value;
     account[name] = value;
     setAccount(account);
-  }
+  };
 
   let save = (e) => {
     e.preventDefault();
-    api.post('/api/users/login', {
-      user: account
-    })
-    .then((response) => {
-      if (response.data) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-        window.location.href = '/dashboard';
-      } else {
-        alert('Something went wrong..');
-      }
-    });
-  }
+    api
+      .post('/api/users/login', {
+        user: account
+      })
+      .then((response) => {
+        if (response.data) {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          window.location.href = '/dashboard';
+        } else {
+          alert('Something went wrong..');
+        }
+      });
+  };
   return (
     <>
       <div className="app-wrapper min-vh-100 bg-white">
@@ -141,74 +108,73 @@ export default function LivePreviewExample() {
                             or sign in with credentials
                           </div>
                           <div>
-                          <form method="post" onSubmit={save}>
-                            <div className="mb-4">
-                            {/* <input type="text" name="email" onChange={handleChange} /> */}
-                              <TextField
-                                fullWidth
-                                variant="outlined"
-                                id="textfield-email"
-                                label="Email address"
-                                name="email"
-                                onChange={handleChange}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <MailOutlineTwoToneIcon />
-                                    </InputAdornment>
-                                  )
-                                }}
-                              />
-                            </div>
-                            <div className="mb-3">
-                              <TextField
-                                fullWidth
-                                variant="outlined"
-                                id="textfield-password"
-                                label="Password"
-                                type="password"
-                                name="password"
-                                onChange={handleChange}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <LockTwoToneIcon />
-                                    </InputAdornment>
-                                  )
-                                }}
-                              />
-                            </div>
-                            <div className="d-flex justify-content-between align-items-center font-size-md">
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={checked1}
-                                    onChange={handleChange}
-                                    value="checked1"
-                                    name="remember_me"
-                                    color="primary"
-                                  />
-                                }
-                                label="Remember me"
-                              />
-                              <div>
-                                <a
-                                  href="/recover-password"
-                                  //   onClick={(e) => e.preventDefault()}
-                                  className="text-first">
-                                  Recover password
-                                </a>
+                            <form method="post" onSubmit={save}>
+                              <div className="mb-4">
+                                {/* <input type="text" name="email" onChange={handleChange} /> */}
+                                <TextField
+                                  fullWidth
+                                  variant="outlined"
+                                  id="textfield-email"
+                                  label="Email address"
+                                  name="email"
+                                  onChange={handleChange}
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <MailOutlineTwoToneIcon />
+                                      </InputAdornment>
+                                    )
+                                  }}
+                                />
                               </div>
-                            </div>
-                            <div className="text-center py-4">
-                            {/* <input className="btn btn-second font-weight-bold w-50 my-2" type="submit" value="Login" /> */}
-                              <Button
-                                type="submit"
-                                className="btn-second font-weight-bold w-50 my-2"
-                                >
-                                Sign in
-                              </Button>
-                            </div>
+                              <div className="mb-3">
+                                <TextField
+                                  fullWidth
+                                  variant="outlined"
+                                  id="textfield-password"
+                                  label="Password"
+                                  type="password"
+                                  name="password"
+                                  onChange={handleChange}
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LockTwoToneIcon />
+                                      </InputAdornment>
+                                    )
+                                  }}
+                                />
+                              </div>
+                              <div className="d-flex justify-content-between align-items-center font-size-md">
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={checked1}
+                                      onChange={handleChange}
+                                      value="checked1"
+                                      name="remember_me"
+                                      color="primary"
+                                    />
+                                  }
+                                  label="Remember me"
+                                />
+                                <div>
+                                  <a
+                                    href="/recover-password"
+                                    //   onClick={(e) => e.preventDefault()}
+                                    className="text-first">
+                                    Recover password
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="text-center py-4">
+                                {/* <input className="btn btn-second font-weight-bold w-50 my-2" type="submit" value="Login" /> */}
+                                <Button
+                                  type="submit"
+                                  className="btn-second font-weight-bold w-50 my-2">
+                                  Sign in
+                                </Button>
+                              </div>
                             </form>
                             <div className="text-center text-black-50 mt-3">
                               Don't have an account?{' '}
