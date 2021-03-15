@@ -38,7 +38,6 @@ const Onboarding = lazy(() => import('./components/onboarding_documents'));
 
 const Routes = () => {
   const location = useLocation();
-
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
 
   if (!isLoggedIn) {
@@ -46,9 +45,11 @@ const Routes = () => {
     console.log('Token not found');
     // eslint-disable-next-line no-unused-expressions
     <Redirect to="/login" />;
-  } else {
-    // eslint-disable-next-line no-unused-expressions
-    <Redirect exact from="/" to="/dashboard" />;
+  } else if (
+    !!isLoggedIn &&
+    (location.pathname === '/login' || location.pathname === '/sign-up')
+  ) {
+    window.location.href = '/dashboard';
   }
 
   const pageVariants = {
