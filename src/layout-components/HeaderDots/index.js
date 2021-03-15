@@ -151,11 +151,24 @@ const HeaderDots = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  function userLogout() {
+    // api.delete('/api/users/sign_out').then((response) => {
+    //   if(response.data.success){
+        localStorage.clear()
+        window.location.href = "/login";
+      // }else{
+      //   alert('Something went wrong..')
+      // }
+    // });
+  }
+
+
   return (
     <>
       <div className="d-flex align-items-center popover-header-wrapper">
         <span className="pr-2">
-          {/* <Badge
+          <Badge
             variant="dot"
             anchorOrigin={{
               vertical: 'top',
@@ -170,7 +183,7 @@ const HeaderDots = () => {
                 <NotificationsActiveTwoToneIcon />
               </span>
             </Button>
-          </Badge> */}
+          </Badge>
 
           <Popover
             open={open1}
@@ -378,7 +391,7 @@ const HeaderDots = () => {
           </Popover>
         </span>
         <span className="pr-2">
-          {/* <Badge
+          <Badge
             variant="dot"
             overlap="circle"
             anchorOrigin={{
@@ -394,7 +407,7 @@ const HeaderDots = () => {
                 <PollTwoToneIcon />
               </span>
             </Button>
-          </Badge> */}
+          </Badge>
           <Popover
             open={open2}
             anchorEl={anchorEl2}
@@ -453,7 +466,8 @@ const HeaderDots = () => {
                 <Button
                   variant="contained"
                   size="small"
-                  className="btn-primary">
+                  className="btn-primary"
+                  onClick={userLogout}>
                   <span className="btn-wrapper--icon">
                     <FontAwesomeIcon icon={['fas', 'sign-out-alt']} />
                   </span>
@@ -464,13 +478,13 @@ const HeaderDots = () => {
           </Popover>
         </span>
         <span className="pr-2">
-          {/* <Button
+          <Button
             onClick={handleClick3}
             className="bg-neutral-first text-first font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 rounded btn-transition-none">
             <span>
               <PeopleAltTwoToneIcon />
             </span>
-          </Button> */}
+          </Button>
           <Popover
             open={open3}
             anchorEl={anchorEl3}

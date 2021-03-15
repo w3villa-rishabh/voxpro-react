@@ -20,9 +20,9 @@ export default function LivePreviewExample() {
     const [email, setEmail] = useState("");
 
     function resetPassword() {
-        api.post('/api/users/confirmation', { user: { email: email } }).then((response) => {
+        api.post('/api/password/forgot', { email: email }).then((response) => {
             if (response.data) {
-                localStorage.setItem("user", JSON.stringify(response.data))
+                // localStorage.setItem("user", JSON.stringify(response.data))
                 window.location.href = "/login";
             } else {
                 alert('Something went wrong..')

@@ -16,55 +16,42 @@ import logo from '../assets/images/voxpro-images/logo_vp.png';
 
 export default function LivePreviewExample() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirm_password, setConfirmPassword] = useState("");
-    const [first_name, setFirstName] = useState("");
-    const [last_name, setLastName] = useState("");
-    const [role, setRole] = useState("");
+  let [account, setAccount] = useState({
+    email: '',
+    password: '',
+    confirm_password: '',
+    first_name: '',
+    last_name: '',
+    role: ''
+  });
 
-    function userRegister() {
-        api.post('/api/users', {user: {email: email, password: password, password_confirmation: confirm_password, first_name: first_name, last_name: last_name, role: Number(role)}}).then((response) => {
-            if(response.data){
-                localStorage.setItem("user", JSON.stringify(response.data))
-              window.location.href = "/Overview";
-            }else{
-              alert('Something went wrong..')
-            }
-          });
-          console.log('The link was clicked.');
+  let handleChange = (e) => {
+    let name = e.target.name;
+    let value
+    debugger
+    if (name === 'role'){ 
+      value = parseInt(e.target.value);
     }
+    else  {
+      value = e.target.value;
+    }
+    account[name] = value;
+    setAccount(account);
+  }
 
-    async function  handleForm(val, type) {
-        var value = await val.target.value
-        switch(type){                                                                                                          
-            case "email":
-                setEmail(value)
-            break
-            case "password":
-                setPassword(value)
-            break
-            case "confirm_password":
-                setConfirmPassword(value)
-            break
-            case "first_name":
-                setFirstName(value)
-            break
-            case "last_name":
-                setLastName(value)
-            break
-            case "role":
-                setRole(value)
-
-        }
-          console.log("value -==>>>", value)
-    console.log("type -==>>>", type)
+  let userRegister = (e) => {
+    e.preventDefault();
+    api.post('/api/users', {user: account}).then((response) => {
+      if(response.data){
+          localStorage.setItem("user", JSON.stringify(response.data))
+        window.location.href = "/login";
+      }else{
+        alert('Something went wrong..')
       }
-      
+    });
+    console.log('The link was clicked.');
+  }
 
-
-
-    
   return (
     <>
       <div className="app-wrapper min-vh-100 bg-white">
@@ -94,111 +81,115 @@ export default function LivePreviewExample() {
                             </p>
                           <p class="font-size-lg mb-5 text-black-50"></p>
                           </div>
-                          <div className="mb-3">
-                            <label className="font-weight-bold mb-2">
-                              Email address
-                            </label>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                              placeholder="Enter your email address"
-                              onChange={(e)=>handleForm(e, "email")}
-                              type="email"
-                            />
-                          </div>
-                          <div className="mb-3">
-                            <div className="d-flex justify-content-between">
-                              <label className="font-weight-bold mb-2">
-                                Password
-                              </label>
-                            </div>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                              placeholder="Enter your password"
-                              onChange={(e)=>handleForm(e, "password")}
-                              type="password"
-                            />
-                          </div>
-                          <div className="mb-3">
-                            <div className="d-flex justify-content-between">
-                              <label className="font-weight-bold mb-2">
-                                Password Confirmation
-                              </label>
-                            </div>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                              placeholder="Re-Enter your password"
-                              onChange={(e)=>handleForm(e, "confirm_password")}
-                              type="password"
-                            />
-                          </div>
-                          <div className="mb-3">
-                            <label className="font-weight-bold mb-2">
-                              First name
-                            </label>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                              placeholder="Enter your first name"
-                              onChange={(e)=>handleForm(e, "first_name")}
-                            />
-                          </div>
-                          <div className="mb-3">
-                            <label className="font-weight-bold mb-2">
-                              Last name
-                            </label>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              fullWidth
-                              placeholder="Enter your last name"
-                              onChange={(e)=>handleForm(e, "last_name")}
-                            />
-                          </div>
-                        
-                          <div className="mb-3">
-                            {/* <label className="font-weight-bold mb-2">
-                              Select Role
-                            </label> */}
-                          <select 
-                          class="MuiTextField-root MuiFormControl-fullWidth"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                            onChange={(e)=>handleForm(e, "role")}
-                            >
-                            <option value="">Select Role</option>
-                            <option value="0">Admin</option>
-                            <option value="3">Candidate</option>
-                            <option value="1">Agency</option>
-                            <option value="2">Company</option>
-                            </select>
-                          </div>
-                          <div className="form-group mb-5">
-                            By clicking the <strong>Create account</strong>{' '}
-                            button below you agree to our terms of service and
-                            privacy statement.
-                          </div>
 
-                          <Button
-                            size="large"
-                            fullWidth
-                            className="btn-primary mb-5"
-                            onClick={userRegister}>
-                            
+                          <form method="post" onSubmit={userRegister}>
+                            <div className="mb-3">
+                              <label className="font-weight-bold mb-2">
+                                Email address
+                              </label>
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                name="email"
+                                onChange={handleChange}
+                                fullWidth
+                                placeholder="Enter your email address"
+                                type="email"
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <div className="d-flex justify-content-between">
+                                <label className="font-weight-bold mb-2">
+                                  Password
+                                </label>
+                              </div>
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                name="password"
+                                onChange={handleChange}
+                                fullWidth
+                                placeholder="Enter your password"
+                                type="password"
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <div className="d-flex justify-content-between">
+                                <label className="font-weight-bold mb-2">
+                                  Password Confirmation
+                                </label>
+                              </div>
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                                name="confirm_password"
+                                onChange={handleChange}
+                                placeholder="Re-Enter your password"
+                                type="password"
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <label className="font-weight-bold mb-2">
+                                First name
+                              </label>
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                                name="first_name"
+                                onChange={handleChange}
+                                placeholder="Enter your first name"
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <label className="font-weight-bold mb-2">
+                                Last name
+                              </label>
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                                name="last_name"
+                                onChange={handleChange}
+                                placeholder="Enter your last name"
+                              />
+                            </div>
+                        
+                            <div className="mb-3">
+                              <select class="MuiTextField-root MuiFormControl-fullWidth"
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                                name="role"
+                                onChange={handleChange}
+                                >
+                                <option value="">Select Role</option>
+                                <option value='0'>Admin</option>
+                                <option value='3'>Candidate</option>
+                                <option value='1'>Agency</option>
+                                <option value='2'>Company</option>
+                              </select>
+                            </div>
+                            <div className="form-group mb-5">
+                              By clicking the <strong>Create account</strong>{' '}
+                              button below you agree to our terms of service and
+                              privacy statement.
+                            </div>
+
+                            <Button
+                              type="submit"
+                              size="large"
+                              fullWidth
+                              className="btn-primary mb-5"
+                              >
                             Create Account
-                          </Button>
+                            </Button>
+                          </form>
                           <div className="text-center text-black-50 mt-3">
                              Already have account?{' '}
                               <a
                                 href="/login"
-                                // onClick={(e) => e.preventDefault()}
                                 className="text-first">
                                 Login
                               </a>

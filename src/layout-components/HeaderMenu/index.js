@@ -45,12 +45,12 @@ const HeaderMenu = () => {
   return (
     <>
       <div className="app-header-menu">
-        {/* <Button
+        <Button
           size="small"
           onClick={handleClick}
           className="btn-transition-none btn-neutral-dark mr-3">
           Mega menu
-        </Button> */}
+        </Button>
         <Popover
           id={id}
           open={open}
@@ -275,12 +275,12 @@ const HeaderMenu = () => {
           </div>
         </Popover>
 
-        {/* <Button
+        <Button
           onClick={handleClickMenu}
           size="small"
           className="btn-transition-none btn-neutral-dark mr-3">
           Dashboards
-        </Button> */}
+        </Button>
         <Menu
           anchorEl={anchorElMenu}
           keepMounted

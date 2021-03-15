@@ -213,6 +213,9 @@ const EditProfile = lazy(() => import('./components/profiles/edit_profile'));
 //onboarding documents
 const Onboarding = lazy(() => import('./components/onboarding_documents'));
 
+//reset password
+
+const ResetPassword = lazy(() => import('./components/reset_password'));
 var userData = null;
 
 const Routes = () => {
@@ -696,6 +699,7 @@ const Routes = () => {
               path={[
                 '/PageLoginBasic',
                 '/login',
+                '/api/users/confirmation',
                 '/PageLoginIllustration',
                 '/PageLoginOverlay',
                 '/PageRegisterBasic',
@@ -704,6 +708,7 @@ const Routes = () => {
                 '/PageRegisterOverlay',
                 '/PageRecoverBasic',
                 '/recover-password',
+                '/reset-password',
                 '/PageRecoverIllustration',
                 '/PageRecoverOverlay',
                 '/PageError404',
@@ -720,6 +725,7 @@ const Routes = () => {
                     transition={pageTransition}>
                     <Route path="/PageLoginBasic" component={PageLoginBasic} />
                     <Route path="/login" component={PageLoginCover} />
+                    <Route path="/api/users/confirmation" component={PageLoginCover} />
                     <Route
                       path="/PageLoginIllustration"
                       component={PageLoginIllustration}
@@ -748,6 +754,10 @@ const Routes = () => {
                     <Route
                       path="/recover-password"
                       component={PageRecoverCover}
+                    />
+                     <Route
+                      path="/reset-password"
+                      component={ResetPassword}
                     />
                     <Route
                       path="/PageRecoverIllustration"

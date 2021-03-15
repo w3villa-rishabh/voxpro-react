@@ -31,6 +31,13 @@ export default function LivePreviewExample() {
     setChecked1(event.target.checked);
   }
 
+const search = window.location.search;
+const params = new URLSearchParams(search);
+const foo = params.get('user');
+console.log(foo);
+
+
+
   function userSignIn() {
     api.post('/api/users/login', {user: {email: email, password: password, remember_me: "0"}}).then((response) => {
       if(response.data){
@@ -82,15 +89,15 @@ async function  handleForm(val, type) {
                                   width="200"
                               />
                             </h3>
-                            {/* <h1 className="display-4 mb-1 font-weight-bold">
-                              Login
-                            </h1> */}
-                            {/* <p className="font-size-lg mb-0 text-black-50">
-                              Fill in the fields below to login to your account
-                            </p> */}
+                            <h1 className="display-4 mb-1 font-weight-bold">
+                              Reset Password
+                            </h1>
+                            <p className="font-size-lg mb-0 text-black-50">
+                              Fill in the fields below to Reset your password
+                            </p>
                           </div>
-                          <div className="text-center py-4 rounded bg-secondary my-4">
-                            <Button
+                          <div className="text-center py-4 rounded ">
+                            {/* <Button
                               className="m-2 btn-pill px-4 font-weight-bold btn-google"
                               size="small">
                               <span className="btn-wrapper--icon">
@@ -109,44 +116,42 @@ async function  handleForm(val, type) {
                               <span className="btn-wrapper--label">
                                 Login with Facebook
                               </span>
-                            </Button>
+                            </Button> */}
                           </div>
                           <div className="text-center text-black-50 mb-4">
-                            or sign in with credentials
+                            {/* or sign in with credentials */}
                           </div>
                           <div>
-                            <div className="mb-4">
+                          <div className="mb-3">
+                              <div className="d-flex justify-content-between">
+                                <label className="font-weight-bold mb-2">
+                                  Password
+                                </label>
+                              </div>
                               <TextField
-                                fullWidth
                                 variant="outlined"
-                                id="textfield-email"
-                                label="Email address"
-                                name="email"
-                                onChange={(e)=>handleForm(e, "email")}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <MailOutlineTwoToneIcon />
-                                    </InputAdornment>
-                                  )
-                                }}
+                                size="small"
+                                name="password"
+                                // onChange={handleChange}
+                                fullWidth
+                                placeholder="Enter your password"
+                                type="password"
                               />
                             </div>
                             <div className="mb-3">
+                              <div className="d-flex justify-content-between">
+                                <label className="font-weight-bold mb-2">
+                                  Password Confirmation
+                                </label>
+                              </div>
                               <TextField
-                                fullWidth
                                 variant="outlined"
-                                id="textfield-password"
-                                label="Password"
+                                size="small"
+                                fullWidth
+                                name="confirm_password"
+                                // onChange={handleChange}
+                                placeholder="Re-Enter your password"
                                 type="password"
-                                onChange={(e)=>handleForm(e, "password")}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <LockTwoToneIcon />
-                                    </InputAdornment>
-                                  )
-                                }}
                               />
                             </div>
                             <div className="d-flex justify-content-between align-items-center font-size-md">
