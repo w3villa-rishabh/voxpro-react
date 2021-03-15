@@ -36,6 +36,8 @@ const EditProfile = lazy(() => import('./components/profiles/edit_profile'));
 //onboarding documents
 const Onboarding = lazy(() => import('./components/onboarding_documents'));
 
+const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -146,7 +148,7 @@ const Routes = () => {
               </CollapsedSidebar>
             </Route>
 
-            <Route path={['/login', '/sign-up']}>
+            <Route path={['/login', '/sign-up', '/recover-password']}>
               <MinimalLayout>
                 <Switch location={location} key={location.pathname}>
                   <motion.div
@@ -157,6 +159,10 @@ const Routes = () => {
                     transition={pageTransition}>
                     <Route path="/login" component={LoginPage} />
                     <Route path="/sign-up" component={RegisterPage} />
+                    <Route
+                      path="/recover-password"
+                      component={PageRecoverCover}
+                    />
                   </motion.div>
                 </Switch>
               </MinimalLayout>
