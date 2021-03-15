@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Box, Badge, Menu, Button, Tooltip, Divider } from '@material-ui/core';
+import { Box, Badge, Menu, Button, Tooltip } from '@material-ui/core';
 
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import { NavLink } from 'react-router-dom';
-import {handleUser} from '../../helper'
+import { getCurrentUser } from '../../helper';
 
 const SidebarUserbox = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [currentUser] = useState(getCurrentUser());
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -55,8 +56,12 @@ const SidebarUserbox = () => {
                   </div>
                 </div>
                 <div className="pl-2">
-                  <span className="font-weight-bold d-block">{handleUser().user.first_name} {handleUser().user.last_name}</span>
-                  <div className="badge badge-success border-0">{handleUser().user.role}</div>
+                  <span className="font-weight-bold d-block">
+                    {currentUser.first_name} {currentUser.last_name}
+                  </span>
+                  <div className="badge badge-success border-0">
+                    {currentUser.role}
+                  </div>
                 </div>
               </div>
               {/* <Divider className="w-100" />
@@ -114,17 +119,15 @@ const SidebarUserbox = () => {
           </Badge>
         </div>
         <div className="my-3 userbox-details">
-          <span>{handleUser().user.first_name} {handleUser().user.last_name}</span>
-          <small className="d-block text-white-50">
-          {handleUser().user.email}
-          </small>
-          <small className="d-block text-white-50">
-          {handleUser().user.role}
-          </small>
+          <span>
+            {currentUser.first_name} {currentUser.last_name}
+          </span>
+          <small className="d-block text-white-50">{currentUser.email}</small>
+          <small className="d-block text-white-50">{currentUser.role}</small>
         </div>
         <Button
           component={NavLink}
-          to="/Profile"
+          to="/view-profile"
           size="small"
           className="btn-userbox">
           View profile
