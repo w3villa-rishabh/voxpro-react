@@ -1413,7 +1413,7 @@ export default function IR35TaxComponent() {
                   <Button
                     variant="contained"
                     onClick={() => {
-                      setActiveTab('');
+                      setActiveTab('25');
                       console.log('policyObj', policyObj);
                     }}
                     className="font-weight-bold btn-slack px-4 my-3">
