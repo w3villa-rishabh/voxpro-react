@@ -11,8 +11,6 @@ import DashboardMonitoring4 from './all_dashboards/dashboard4.js';
 import DashboardMonitoring5 from './all_dashboards/dashboard5.js';
 import DashboardMonitoring6 from './all_dashboards/dashboard6.js';
 
-import {handleUser} from '../helper'
-
 export default function DashboardMonitoring() {
   return (
     <>

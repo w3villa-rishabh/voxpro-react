@@ -6,7 +6,6 @@ import { ClimbingBoxLoader } from 'react-spinners';
 import { ThemeProvider } from '@material-ui/styles';
 
 import MuiTheme from './theme';
-
 // Layout Blueprints
 
 import {
@@ -37,7 +36,6 @@ const EditProfile = lazy(() => import('./components/profiles/edit_profile'));
 //onboarding documents
 const Onboarding = lazy(() => import('./components/onboarding_documents'));
 
-var userData = null;
 const Routes = () => {
   const location = useLocation();
 
@@ -73,24 +71,12 @@ const Routes = () => {
 
   const SuspenseLoading = () => {
     const [show, setShow] = useState(false);
+
     useEffect(() => {
       let timeout = setTimeout(() => setShow(true), 300);
       return () => {
         clearTimeout(timeout);
       };
-    }, []);
-
-    function handleUser() {
-      userData = localStorage.getItem('user')
-        ? JSON.parse(localStorage.getItem('user'))
-        : null;
-      // const [user, setUser] = useState(userData);
-      console.log('user data ===>>>>', userData);
-      return userData;
-    }
-
-    useEffect(() => {
-      handleUser();
     }, []);
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -47,7 +47,7 @@ const StyledBadge = withStyles({
 const HeaderUserbox = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentUser] = useState(getCurrentUser());
-  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
