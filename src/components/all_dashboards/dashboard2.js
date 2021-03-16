@@ -11,6 +11,7 @@ import {
   ListItem
 } from '@material-ui/core';
 
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import GaugeChart from 'react-gauge-chart';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import clsx from 'clsx';
@@ -33,7 +34,7 @@ export default function LivePreviewExample() {
           <Grid item xs={6}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Card className="p-4 text-center">
+                <Card className="p-4 text-center hgh">
                   <div className="mt-2 text-second font-weight-bold">
                     Profile Views
                   </div>
@@ -50,7 +51,7 @@ export default function LivePreviewExample() {
                 </Card>
               </Grid>
               <Grid item xs={6}>
-                <Card className="p-4 text-center">
+                <Card className="p-4 text-center hgh">
                   <div className="mt-2 text-second font-weight-bold">
                     Request For Infos
                   </div>
@@ -61,14 +62,18 @@ export default function LivePreviewExample() {
               </Grid>
 
               <Grid item xs={12}>
-                <div className="mb-spacing-6-x2">
+
+
+              <div className="mb-spacing-6">
                   <Card className="card-box">
                     <div className="card-header">
                       <div className="card-header--title">
                         <b>Connection Requests</b>
                       </div>
                     </div>
-                    <List component="div" className="list-group-flush">
+                        <div className="scroll-area shadow-overflow" style={{height: '327px', borderRadius: 'inherit'}}>
+                            <PerfectScrollbar options={{ wheelPropagation: false }}>
+                            <List component="div" className="list-group-flush">
                       <ListItem className="py-3">
                         <Grid container spacing={0}>
                           <Grid
@@ -262,8 +267,21 @@ export default function LivePreviewExample() {
                         </Grid>
                       </ListItem>
                     </List>
-                  </Card>
-                </div>
+                            </PerfectScrollbar>
+                        </div>
+                        {/* <div className="card-footer p-3 text-center">
+                            <Button size="small" color="primary" variant="contained">
+                                        <span className="btn-wrapper--label">
+                                            View all Agencies
+                    </span>
+                                <span className="btn-wrapper--icon">
+                                            <FontAwesomeIcon icon={['fas', 'arrow-right']} />
+                                        </span>
+                            </Button>
+                        </div> */}
+                    </Card>
+                  </div>
+
               </Grid>
             </Grid>
           </Grid>

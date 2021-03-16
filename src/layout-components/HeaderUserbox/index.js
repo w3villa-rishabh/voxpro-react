@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  Avatar,
   Badge,
   Menu,
   Button,
   List,
   ListItem,
-  Divider
+  Divider,
+  Typography,
+  Tooltip
 } from '@material-ui/core';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
@@ -119,8 +122,8 @@ const HeaderUserbox = () => {
           <div className="align-items-center justify-content-between">
             {/* <Typography className="text-capitalize pl-1 font-weight-bold text-primary">
               <span>Profile Options</span>
-            </Typography> */}
-            {/* <div className="font-size-xs pr-1">
+            </Typography>
+            <div className="font-size-xs pr-1">
               <Tooltip title="Change settings" arrow>
                 <a href="#/" onClick={(e) => e.preventDefault()}>
                   <FontAwesomeIcon icon={['fas', 'plus-circle']} />
@@ -131,13 +134,52 @@ const HeaderUserbox = () => {
           <List
             component="div"
             className="nav-neutral-primary text-left d-flex align-items-center flex-column">
-            <ListItem button className="d-block text-left" onClick={userLogout}>
-              Logout
-            </ListItem>
 
-            {/* <ListItem button className="d-block text-left">
-              Active tasks
-            </ListItem> */}
+              {/* <ListItem>
+                <div className="align-box-row">
+                  <Badge
+                    overlap="circle"
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right'
+                    }}
+                    variant="dot">
+                    <Avatar alt="Travis Howard" src={avatar7} />
+                  </Badge>
+                  <div className="pl-3">
+                    <span className="font-weight-bold d-block">
+                    {currentUser.first_name}
+                    </span>
+                    <small className="pb-0 text-black-50 d-block">
+                    {currentUser.role}
+                    </small>
+                  </div>
+                </div>
+              </ListItem> */}
+           
+            <ListItem button className="d-block text-left">
+              View Profile
+            </ListItem>
+            <ListItem button className="d-block text-left">
+              settings
+            </ListItem>
+            <ListItem button className="d-block text-left">
+              Requests
+            </ListItem>
+            <Divider className="w-100" />
+            <ListItem className="d-block text-center p-3">
+                <Button
+                  variant="contained"
+                  size="small"
+                  className="btn-primary"
+                  onClick={userLogout}>
+                  <span className="btn-wrapper--icon">
+                    <FontAwesomeIcon icon={['fas', 'sign-out-alt']} />
+                  </span>
+                  <span className="btn-wrapper--label">Logout</span>
+                </Button>
+              </ListItem>
+
           </List>
           <Divider className="w-100" />
           {/* <div className="d-flex py-3 justify-content-center">

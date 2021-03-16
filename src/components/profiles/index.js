@@ -584,7 +584,7 @@ export default function LivePreviewExample() {
                       </List>
                       <div className="font-12">
                         <div
-                          className={clsx('tab-item-wrapper', {
+                          className={clsx('tab-item-wrapper no-scroll', {
                             active: activeTab === '0'
                           })}
                           index={0}>
@@ -612,7 +612,7 @@ export default function LivePreviewExample() {
                           </Grid>
                         </div>
                         <div
-                          className={clsx('tab-item-wrapper', {
+                          className={clsx('tab-item-wrapper no-scroll', {
                             active: activeTab === '1'
                           })}
                           index={1}>

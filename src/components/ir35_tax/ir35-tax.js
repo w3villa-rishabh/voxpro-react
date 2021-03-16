@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Card, CardContent, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
+import { PageTitle } from '../../layout-components';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('1');
@@ -39,6 +40,10 @@ export default function IR35TaxComponent() {
 
   return (
     <div>
+       <PageTitle
+        titleHeading="IR 35 Questioner"
+        titleDescription= "Please answer all the questions"
+      /> 
       {activeTab !== '1' && (
         <div>
           <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
@@ -57,7 +62,7 @@ export default function IR35TaxComponent() {
           <div className="font-12">
             {/* //Section 1 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '1'
               })}
               index={1}>
@@ -103,7 +108,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('2');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -111,7 +116,7 @@ export default function IR35TaxComponent() {
             </div>
             {/* //Section 2 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '2'
               })}
               index={2}>
@@ -154,7 +159,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('3');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -162,7 +167,7 @@ export default function IR35TaxComponent() {
             </div>
             {/* Section 3 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '3'
               })}
               index={3}>
@@ -208,7 +213,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('4');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -217,7 +222,7 @@ export default function IR35TaxComponent() {
             {/* Section 4 */}
             {policyObj.organization === 'a' && (
               <div
-                className={clsx('tab-item-wrapper', {
+                className={clsx('tab-item-wrapper no-scroll', {
                   active: activeTab === '4'
                 })}
                 index={4}>
@@ -237,7 +242,7 @@ export default function IR35TaxComponent() {
                       onClick={() => {
                         setActiveTab('5');
                       }}
-                      className="font-weight-bold btn-slack px-4 my-3">
+                      className="font-weight-bold btn-slack px-4 my-3 bg-color">
                       Continue
                     </Button>
                   </Grid>
@@ -247,7 +252,7 @@ export default function IR35TaxComponent() {
             {/* Section 4A */}
             {policyObj.organization === 'b' && (
               <div
-                className={clsx('tab-item-wrapper', {
+                className={clsx('tab-item-wrapper no-scroll', {
                   active: activeTab === '4'
                 })}
                 index={4}>
@@ -293,7 +298,7 @@ export default function IR35TaxComponent() {
                       onClick={() => {
                         setActiveTab('5');
                       }}
-                      className="font-weight-bold btn-slack px-4 my-3">
+                      className="font-weight-bold btn-slack px-4 my-3 bg-color">
                       Continue
                     </Button>
                   </Grid>
@@ -303,7 +308,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 5 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '5'
               })}
               index={5}>
@@ -344,7 +349,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('6');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -353,7 +358,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 6 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '6'
               })}
               index={6}>
@@ -404,7 +409,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('7');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -413,7 +418,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 7 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '7'
               })}
               index={7}>
@@ -466,7 +471,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('8');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -475,7 +480,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 8 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '8'
               })}
               index={8}>
@@ -514,7 +519,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('9');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -523,7 +528,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 9 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '9'
               })}
               index={9}>
@@ -562,7 +567,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('10');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -571,7 +576,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 10 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '10'
               })}
               index={10}>
@@ -618,7 +623,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('11');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -627,7 +632,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 11 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '11'
               })}
               index={11}>
@@ -673,7 +678,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('12');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -682,7 +687,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 12 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '12'
               })}
               index={12}>
@@ -732,7 +737,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('13');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -741,7 +746,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 13 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '13'
               })}
               index={13}>
@@ -786,7 +791,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('14');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -795,7 +800,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 14 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '14'
               })}
               index={14}>
@@ -831,7 +836,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('15');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -840,7 +845,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 15 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '15'
               })}
               index={15}>
@@ -879,7 +884,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('16');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -888,7 +893,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 16 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '16'
               })}
               index={16}>
@@ -933,7 +938,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('17');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -942,7 +947,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 17 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '17'
               })}
               index={17}>
@@ -986,7 +991,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('18');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -995,7 +1000,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 18 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '18'
               })}
               index={18}>
@@ -1034,7 +1039,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('19');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1043,7 +1048,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 19 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '19'
               })}
               index={19}>
@@ -1090,7 +1095,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('20');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1099,7 +1104,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 20 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '20'
               })}
               index={20}>
@@ -1144,7 +1149,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('21');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1153,7 +1158,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 21 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '21'
               })}
               index={21}>
@@ -1197,7 +1202,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('22');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1206,7 +1211,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 22 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '22'
               })}
               index={22}>
@@ -1245,7 +1250,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('23');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1254,7 +1259,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 23 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '23'
               })}
               index={23}>
@@ -1298,7 +1303,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('24');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1307,7 +1312,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 24 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '24'
               })}
               index={24}>
@@ -1357,7 +1362,7 @@ export default function IR35TaxComponent() {
                     onClick={() => {
                       setActiveTab('25');
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>
@@ -1366,7 +1371,7 @@ export default function IR35TaxComponent() {
 
             {/* Section 25 */}
             <div
-              className={clsx('tab-item-wrapper', {
+              className={clsx('tab-item-wrapper no-scroll', {
                 active: activeTab === '25'
               })}
               index={25}>
@@ -1416,7 +1421,7 @@ export default function IR35TaxComponent() {
                       setActiveTab('25');
                       console.log('policyObj', policyObj);
                     }}
-                    className="font-weight-bold btn-slack px-4 my-3">
+                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
                   </Button>
                 </Grid>

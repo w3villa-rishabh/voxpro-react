@@ -439,7 +439,7 @@ const HeaderDots = () => {
                       Emma Taylor
                     </span>
                     <small className="pb-0 text-black-50 d-block">
-                      This is an accountant profile
+                      
                     </small>
                   </div>
                 </div>

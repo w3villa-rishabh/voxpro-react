@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ClimbingBoxLoader } from 'react-spinners';
+import { PropagateLoader } from 'react-spinners';
 
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -98,13 +98,12 @@ const Routes = () => {
               transition={{ duration: 0.4 }}>
               <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
                 <div className="d-flex align-items-center flex-column px-4">
-                  <ClimbingBoxLoader color={'#3c44b1'} loading={true} />
+                  <PropagateLoader color={'var(--primary)'} loading={true}/>
                 </div>
                 <div className="text-muted font-size-xl text-center pt-3">
-                  Please wait while we load the live preview examples
+                  {/* Please wait while we load Voxpro for you */}
                   <span className="font-size-lg d-block text-dark">
-                    This live preview instance can be slower than a real
-                    production build!
+                  Please wait while we load Voxpro for you
                   </span>
                 </div>
               </div>
