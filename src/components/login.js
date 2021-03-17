@@ -14,6 +14,8 @@ import {
 } from '@material-ui/core';
 
 import api from '../api';
+import CloseIcon from '@material-ui/icons/Close';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
@@ -22,6 +24,29 @@ import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
 export default function LoginComponent() {
+
+
+
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+    toastrStyle: '',
+    message: 'This is a toastr/snackbar notification!'
+});
+
+const { vertical, horizontal, open, toastrStyle, message } = state;
+
+const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+};
+
+const handleClose = () => {
+    setState({ ...state, open: false });
+};
+
+
+
   const [checked1, setChecked1] = useState(true);
   let [account, setAccount] = useState({
     email: '',
@@ -42,11 +67,11 @@ export default function LoginComponent() {
         user: account
       })
       .then((response) => {
-        if (response.data) {
-          localStorage.setItem('user', JSON.stringify(response.data));
+        if (response.data.success) {
+          localStorage.setItem('user', JSON.stringify(response.data.user));
           window.location.href = '/dashboard';
         } else {
-          alert('Something went wrong..');
+          handleClick({ message: 'This notification is positioned top right!', toastrStyle: 'toastr-second', vertical: 'top', horizontal: 'right' })
         }
       });
   };

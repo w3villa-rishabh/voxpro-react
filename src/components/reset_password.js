@@ -13,6 +13,12 @@ import {
   TextField
 } from '@material-ui/core';
 
+import Alert from '@material-ui/lab/Alert';
+
+import CloseIcon from '@material-ui/icons/Close';
+import Snackbar from '@material-ui/core/Snackbar';
+
+
 import api from '../api'
 
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
@@ -22,51 +28,65 @@ import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
 export default function LivePreviewExample() {
-  const [checked1, setChecked1] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
 
-  const handleChange1 = (event) => {
-    setChecked1(event.target.checked);
-  }
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+    toastrStyle: '',
+    message: 'This is a toastr/snackbar notification!'
+});
+
+const { vertical, horizontal, open, toastrStyle, message } = state;
+
+const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+};
+
+const handleClose = () => {
+    setState({ ...state, open: false });
+};
+ 
+  let [account, setAccount] = useState({
+    password: ''
+  });
+
+  let handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    account[name] = value;
+    setAccount(account);
+  };
 
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let foo = params.get('user');
-  let boo = params.get('reset_password_token');
-console.log(foo);
+  let email = params.get('user');
+  let token = params.get('reset_password_token');
+  console.log(email)
+  console.log(token)
 
-console.log(boo);
+  let save = (e) => {
+    e.preventDefault();
+    api
+      .post('/api/password/reset', {
+        user: account,
+        token: token,
+        email: email
+      })
+      .then((response) => {
+        debugger
+        if (response.data) {
+        debugger
 
+          window.location.href = '/login';
+        } else {
+          debugger
+          handleClick({ message: 'This notification is positioned top right!', toastrStyle: 'toastr-second', vertical: 'top', horizontal: 'right' })
+        }
+      });
+  };
 
-  function userSignIn() {
-    api.post('/api/password/reset', {user: {email: foo}}).then((response) => {
-      if(response.data){
-          localStorage.setItem("user", JSON.stringify(response.data))
-        window.location.href = "/DashboardMonitoring";
-      }else{
-        alert('Something went wrong..')
-      }
-    });
-    console.log('The link was clicked.');
-  }
-
-async function  handleForm(val, type) {
-    var value = await val.target.value
-
-    switch(type){
-        case "email":
-            setEmail(value)
-        break
-        case "password":
-            setPassword(value)
-    }
-
-    // console.log("value -==>>>", value)
-    // console.log("type -==>>>", type)
-
-  }
   return (
     <>
       <div className="app-wrapper min-vh-100 bg-white">
@@ -124,73 +144,56 @@ async function  handleForm(val, type) {
                             {/* or sign in with credentials */}
                           </div>
                           <div>
-                          <div className="mb-3">
-                              <div className="d-flex justify-content-between">
-                                <label className="font-weight-bold mb-2">
-                                  Password
-                                </label>
-                              </div>
-                              <TextField
-                                variant="outlined"
-                                size="small"
-                                name="password"
-                                // onChange={handleChange}
-                                fullWidth
-                                placeholder="Enter your password"
-                                type="password"
-                              />
-                            </div>
+                          <form method="post" onSubmit={save}>
                             <div className="mb-3">
-                              <div className="d-flex justify-content-between">
-                                <label className="font-weight-bold mb-2">
-                                  Password Confirmation
-                                </label>
+                                <div className="d-flex justify-content-between">
+                                  <label className="font-weight-bold mb-2">
+                                    Password
+                                  </label>
+                                </div>
+                                <TextField
+                                  variant="outlined"
+                                  size="small"
+                                  name="password"
+                                  onChange={handleChange}
+                                  fullWidth
+                                  placeholder="Enter your password"
+                                  type="password"
+                                />
                               </div>
-                              <TextField
-                                variant="outlined"
-                                size="small"
-                                fullWidth
-                                name="confirm_password"
-                                // onChange={handleChange}
-                                placeholder="Re-Enter your password"
-                                type="password"
-                              />
-                            </div>
-                            <div className="d-flex justify-content-between align-items-center font-size-md">
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={checked1}
-                                    onChange={handleChange1}
-                                    value="checked1"
-                                    color="primary"
-                                  />
-                                }
-                                label="Remember me"
-                              />
-                              <div>
+                              <div className="mb-3">
+                                <div className="d-flex justify-content-between">
+                                  <label className="font-weight-bold mb-2">
+                                    Password Confirmation
+                                  </label>
+                                </div>
+                                <TextField
+                                  variant="outlined"
+                                  size="small"
+                                  fullWidth
+                                  name="confirm_password"
+                                  onChange={handleChange}
+                                  placeholder="Re-Enter your password"
+                                  type="password"
+                                />
+                              </div>
+                              <div className="text-center py-4">
+                              <Button
+                                    type="submit"
+                                    className="btn-second font-weight-bold w-50 my-2">
+                                    Set Password
+                                  </Button>
+                              </div>
+                              <div className="text-center text-black-50 mt-3">
+                                Don't have an account?{' '}
                                 <a
-                                  href="#/"
+                                  href="sign-up/"
                                   onClick={(e) => e.preventDefault()}
                                   className="text-first">
-                                  Recover password
+                                  Sign up
                                 </a>
                               </div>
-                            </div>
-                            <div className="text-center py-4">
-                              <Button className="btn-second font-weight-bold w-50 my-2" onClick={userSignIn}>
-                                Sign in
-                              </Button>
-                            </div>
-                            <div className="text-center text-black-50 mt-3">
-                              Don't have an account?{' '}
-                              <a
-                                href="sign-up/"
-                                onClick={(e) => e.preventDefault()}
-                                className="text-first">
-                                Sign up
-                              </a>
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </Grid>

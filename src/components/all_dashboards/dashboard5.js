@@ -157,7 +157,7 @@ export default function LivePreviewExample() {
             <Grid container spacing={2}>
             <Grid item xl={12} >
               <Card className="card-box p-3">
-                <div className="d-flex align-items-center pb-4 justify-content-between">
+                <div className="d-flex align-items-center justify-content-between">
                   <div>
                     <div className="font-weight-bold">Profile Readiness</div>
                     <span className="text-black-50 d-block">Additional steps to complete profile</span>
@@ -167,7 +167,7 @@ export default function LivePreviewExample() {
                 <div className="align-box-row progress-bar--label text-muted">
                   <div className="ml-auto">80%</div>
                 </div>
-                  <LinearProgress variant="determinate" className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second" value={85} />
+                  <LinearProgress variant="determinate" className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second hc-style" value={85} />
                 </div>
               </Card>
             </Grid>

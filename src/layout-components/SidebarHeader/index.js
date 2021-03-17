@@ -45,7 +45,7 @@ const SidebarHeader = (props) => {
               />
             </div>
             <div className="app-sidebar-logo--text">
-              <span>Individual</span>
+              {/* <span>Individual</span> */}
 
               <b>Voxpro</b>
             </div>
