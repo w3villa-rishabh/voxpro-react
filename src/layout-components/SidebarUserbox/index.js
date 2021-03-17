@@ -672,6 +672,7 @@ const SidebarUserbox = () => {
           <small className="d-block font-12 text-white-50">
             Business Analyst | London, United Kingdom
           </small>
+
           <small className="d-block font-12 text-white-50">
             Business Analyst | London, United Kingdom
           </small>
