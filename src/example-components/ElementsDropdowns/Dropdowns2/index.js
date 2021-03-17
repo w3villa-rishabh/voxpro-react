@@ -39,6 +39,15 @@ export default function LivePreviewExample() {
           keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
           classes={{ list: 'p-0' }}>
           <div className="p-3">
             <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
