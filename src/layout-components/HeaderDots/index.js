@@ -120,12 +120,20 @@ const HeaderDots = () => {
   const [anchorEl1, setAnchorEl1] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const [anchorEl3, setAnchorEl3] = useState(null);
+  const [anchorElChat, setAnchorElChat] = useState(null);
 
   const handleClick1 = (event) => {
     setAnchorEl1(event.currentTarget);
   };
   const handleClose1 = () => {
     setAnchorEl1(null);
+  };
+
+  const handleClickChat = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+  const handleCloseChat = () => {
+    setAnchorElChat(null);
   };
 
   const handleClick2 = (event) => {
@@ -145,6 +153,7 @@ const HeaderDots = () => {
   const open1 = Boolean(anchorEl1);
   const open2 = Boolean(anchorEl2);
   const open3 = Boolean(anchorEl3);
+  const openChat = Boolean(anchorElChat);
 
   const [value, setValue] = useState(0);
 
@@ -155,14 +164,13 @@ const HeaderDots = () => {
   function userLogout() {
     // api.delete('/api/users/sign_out').then((response) => {
     //   if(response.data.success){
-    localStorage.clear()
-    window.location.href = "/login";
+    localStorage.clear();
+    window.location.href = '/login';
     // }else{
     //   alert('Something went wrong..')
     // }
     // });
   }
-
 
   return (
     <>
@@ -177,10 +185,10 @@ const HeaderDots = () => {
             badgeContent=" "
             classes={{ badge: 'bg-info badge-circle' }}>
             <Button
-              onClick={handleClick1}
+              onClick={handleClickChat}
               className="btn-transition-none bg-neutral-info text-info font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 rounded position-relative">
               <span>
-              <FontAwesomeIcon
+                <FontAwesomeIcon
                   icon={['far', 'comment']}
                   className="font-size-xl"
                 />
@@ -189,9 +197,9 @@ const HeaderDots = () => {
           </Badge>
 
           <Popover
-            open={open1}
-            anchorEl={anchorEl1}
-            onClose={handleClose1}
+            open={openChat}
+            anchorEl={anchorElChat}
+            onClose={handleCloseChat}
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'center'
@@ -208,7 +216,7 @@ const HeaderDots = () => {
                 <div className="bg-composed-img-3 bg-composed-wrapper--image" />
                 <div className="bg-composed-wrapper--content text-white px-2 py-4">
                   <h4 className="font-size-xl font-weight-bold mb-2">
-                    Notifications
+                    Messages
                   </h4>
                   <p className="opacity-8 mb-0">
                     You have <b className="text-success">472</b> new messages
@@ -665,9 +673,7 @@ const HeaderDots = () => {
                     <span className="font-weight-bold d-block">
                       Emma Taylor
                     </span>
-                    <small className="pb-0 text-black-50 d-block">
-
-                    </small>
+                    <small className="pb-0 text-black-50 d-block"></small>
                   </div>
                 </div>
               </ListItem>
