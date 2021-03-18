@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef
+} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,9 +18,12 @@ import {
   Tooltip,
   Grid,
   CardContent,
-  List
+  List,
+  ButtonGroup,
+  MenuItem
 } from '@material-ui/core';
 
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import avatar1 from '../../assets/images/avatars/avatar1.jpg';
 import PropTypes from 'prop-types';
 
@@ -46,17 +54,123 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired
 };
 
+const OnlineAndAvailability = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    showAlert() {
+      alert('Child Function Called');
+    }
+  }));
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <div className="profile-btn">
+      <ButtonGroup
+        variant="contained"
+        className="btn-second btn-profile mr-1"
+        color="dangler"
+        size="small"
+        aria-label="button">
+        <Button className="btn-transition-none red">Online</Button>
+        <Button
+          className="btn-transition-none red"
+          color="dangler"
+          size="small"
+          aria-haspopup="true"
+          onClick={handleClick}>
+          <ArrowDropDownIcon />
+        </Button>
+      </ButtonGroup>
+      <Menu
+        id="simple-menu2"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        classes={{ list: 'p-0' }}>
+        <div className="p-3">
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            Profile
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            My account
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-danger" onClick={handleClose}>
+            Logout
+          </MenuItem>
+        </div>
+      </Menu>
+      <ButtonGroup
+        variant="contained"
+        className="btn-second btn-profile"
+        color="dangler"
+        size="small"
+        aria-label="button">
+        <Button className="btn-transition-none nowrap light-blue">
+          Availability: Immediate
+        </Button>
+        <Button
+          className="btn-transition-none light-blue"
+          color="dangler"
+          size="small"
+          aria-haspopup="true"
+          onClick={handleClick}>
+          <ArrowDropDownIcon />
+        </Button>
+      </ButtonGroup>
+      <Menu
+        id="simple-menu2"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        classes={{ list: 'p-0' }}>
+        <div className="p-3">
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            Profile
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            My account
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-danger" onClick={handleClose}>
+            Logout
+          </MenuItem>
+        </div>
+      </Menu>
+    </div>
+  );
+});
+
 const SidebarUserbox = () => {
   const [currentUser] = useState(getCurrentUser());
 
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
-
-  const [checked1, setChecked1] = useState(true);
-
-  const handleChange1 = (event) => {
-    setChecked1(event.target.checked);
-  };
-
+  const childRef = useRef();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -91,7 +205,7 @@ const SidebarUserbox = () => {
               onClose={handleCloseMenu1}
               classes={{ list: 'p-0' }}
               getContentAnchorEl={null}
-              className="mt-4"
+              className="mt-1 profile-menu-card"
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left'
@@ -100,12 +214,17 @@ const SidebarUserbox = () => {
                 vertical: 'top',
                 horizontal: 'left'
               }}>
-              <div className="dropdown-menu-xxl profile-menu m-3 p-0">
-                <List component="div" className="text-left d-block p-0">
+              <div className="dropdown-menu-xxl profile-menu">
+                <div className="mini-header">
+                  <span>Mini profile</span>
+                </div>
+                <List
+                  component="div"
+                  className="text-left d-block m-2 mini-profile-list">
                   <Grid container spacing={2}>
                     <Grid item sm={5}>
                       <Card>
-                        <div className="card-img-wrapper h-180px">
+                        <div className="card-img-wrapper h-100px">
                           <img
                             alt="..."
                             className="card-img-top img-fit-container"
@@ -125,12 +244,14 @@ const SidebarUserbox = () => {
                               />
                             </div>
                           </a>
-                          <h3 className="font-weight-bold mt-4 mb-3">
+                          <h3 className="font-weight-bold mt-4 font-size-xxl">
                             {currentUser.first_name} {currentUser.last_name}
                           </h3>
+
                           <p className="font-12 font-weight-bold">
                             Business Analyst | London, United Kingdom
                           </p>
+                          <OnlineAndAvailability ref={childRef} />
                           <TextField
                             fullWidth
                             variant="outlined"
@@ -142,7 +263,7 @@ const SidebarUserbox = () => {
                           <h4 className="font-size-lg font-weight-bold my-2">
                             Social Media Profiles
                           </h4>
-                          <div className="py-3">
+                          <div>
                             <Tooltip title="Github">
                               <Button className="btn-github text-github btn-pill bg-white d-50 p-0">
                                 <span className="btn-wrapper--icon">
@@ -221,26 +342,26 @@ const SidebarUserbox = () => {
                         </CardContent>
                       </Card>
                     </Grid>
-                    <Grid item sm={7}>
-                      <Card>
-                        <div className="mt-4 mt-xl-0">
-                          <div className="tabs-bordered p-3">
-                            <Tabs
-                              className="nav-tabs-primary"
-                              value={value}
-                              variant="fullWidth"
-                              onChange={handleChange}>
-                              <Tab label="Overview" />
-                              <Tab label="Exprience" />
-                              <Tab label="Education" />
-                            </Tabs>
-                          </div>
+                    <Grid item sm={7} className="pr-3">
+                      <div className="card-header-profile">
+                        <div className="card-header--title">
+                          <Tabs
+                            className="nav-tabs-primary"
+                            value={value}
+                            variant="fullWidth"
+                            onChange={handleChange}>
+                            <Tab label="Overview" />
+                            <Tab label="Exprience" />
+                            <Tab label="Education" />
+                          </Tabs>
                         </div>
+                      </div>
 
-                        <div className="pt-2 pt-0">
-                          <TabPanel value={value} index={0}>
+                      <div className="pt-2">
+                        <TabPanel value={value} index={0}>
+                          <Card>
                             <div className="mb-spacing-6">
-                              <Grid container spacing={1}>
+                              <Grid container spacing={1} className="p-2">
                                 <Grid item md={4}>
                                   <Card className="card-box text-black-50 p-3">
                                     <div className="display-3 text-black font-weight-bold">
@@ -273,7 +394,7 @@ const SidebarUserbox = () => {
                                       57
                                     </div>
                                     <div className="divider mt-2 mb-3 w-25 bg-warning rounded border-warning" />
-                                    <div className="font-weight-bold font-12 text-uppercase">
+                                    <div className="font-weight-bold font-12 text-uppercase nowrap">
                                       PROJECT COMPLETED
                                       <br />
                                       YEAR TO DATE
@@ -282,135 +403,347 @@ const SidebarUserbox = () => {
                                 </Grid>
                               </Grid>
                             </div>
-                          </TabPanel>
-                        </div>
 
-                        <div className="card-img-wrapper">
-                          <div className="card-badges card-badges-top">
-                            <div className="badge badge-pill badge-info">
-                              NEW
+                            <div className="card-img-wrapper">
+                              <div className="bg-composed-wrapper bg-plum-plate border-0">
+                                <div className="bg-composed-img-2 bg-composed-wrapper--image" />
+                                <div className="bg-composed-wrapper--content text-center text-white px-2 py-5">
+                                  <h1 className="font-size-xxl font-weight-bold py-2 mb-0">
+                                    Employment Information
+                                  </h1>
+                                  <p className="mb-2 font-size-lg opacity-7">
+                                    Current and Desired Employment details
+                                  </p>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <div className="bg-composed-wrapper bg-plum-plate border-0">
-                            <div className="bg-composed-img-2 bg-composed-wrapper--image" />
-                            <div className="bg-composed-wrapper--content text-center text-white px-2 py-5">
-                              <h1 className="font-size-xxl font-weight-bold py-2 mb-0">
-                                Employment Information
-                              </h1>
-                              <p className="mb-2 font-size-lg opacity-7">
-                                Current and Desired Employment details
-                              </p>
+                            <CardContent className="text-center card-body-button">
+                              <div className="card-body-button-wrapper">
+                                <Button
+                                  size="large"
+                                  className="btn-success btn-pill text-nowrap px-5 shadow-none border-3 border-white">
+                                  Connect
+                                </Button>
+                              </div>
+                              <Grid container spacing={2}>
+                                <Grid item md={4}>
+                                  <div className="bg-secondary p-3 text-center rounded">
+                                    <div>
+                                      <FontAwesomeIcon
+                                        icon={['far', 'user']}
+                                        className="font-size-xxl text-warning"
+                                      />
+                                    </div>
+                                    <div className="mt-2 line-height-sm">
+                                      <b className="font-12">Permanent</b>
+                                      <span className="text-black-50 d-block">
+                                        users
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Grid>
+                                <Grid item md={4}>
+                                  <div className="bg-secondary p-3 text-center rounded">
+                                    <div>
+                                      <FontAwesomeIcon
+                                        icon={['fas', 'lemon']}
+                                        className="font-size-xxl text-success"
+                                      />
+                                    </div>
+                                    <div className="mt-2 line-height-sm">
+                                      <b className="font-12">$3,586</b>
+                                      <span className="text-black-50 d-block">
+                                        sales
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Grid>
+                                <Grid item md={4}>
+                                  <div className="bg-secondary p-3 text-center rounded">
+                                    <div>
+                                      <FontAwesomeIcon
+                                        icon={['far', 'chart-bar']}
+                                        className="font-size-xxl text-info"
+                                      />
+                                    </div>
+                                    <div className="mt-2 line-height-sm">
+                                      <b className="font-12">City of london</b>
+                                      <span className="text-black-50 d-block">
+                                        revenue
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Grid>
+                                <Grid item md={4}>
+                                  <div className="bg-secondary p-3 text-center rounded">
+                                    <div>
+                                      <FontAwesomeIcon
+                                        icon={['far', 'user']}
+                                        className="font-size-xxl text-warning"
+                                      />
+                                    </div>
+                                    <div className="mt-2 line-height-sm">
+                                      <b className="font-12">Permanent</b>
+                                      <span className="text-black-50 d-block">
+                                        users
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Grid>
+                                <Grid item md={4}>
+                                  <div className="bg-secondary p-3 text-center rounded">
+                                    <div>
+                                      <FontAwesomeIcon
+                                        icon={['fas', 'lemon']}
+                                        className="font-size-xxl text-success"
+                                      />
+                                    </div>
+                                    <div className="mt-2 line-height-sm">
+                                      <b className="font-12">$3,586</b>
+                                      <span className="text-black-50 d-block">
+                                        sales
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Grid>
+                                <Grid item md={4}>
+                                  <div className="bg-secondary p-3 text-center rounded">
+                                    <div>
+                                      <FontAwesomeIcon
+                                        icon={['far', 'chart-bar']}
+                                        className="font-size-xxl text-info"
+                                      />
+                                    </div>
+                                    <div className="mt-2 line-height-sm">
+                                      <b className="font-12">City of london</b>
+                                      <span className="text-black-50 d-block">
+                                        revenue
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Grid>
+                              </Grid>
+                            </CardContent>
+                          </Card>
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                          <Card className="mb-2 p-3">
+                            <div className="d-flex">
+                              <div className="card-badges card-badges-top">
+                                <FontAwesomeIcon icon={['fas', 'building']} />
+                              </div>
+                              <div className="avatar-icon-wrapper mr-3">
+                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                  <div className="overflow-hidden">
+                                    <img
+                                      alt="..."
+                                      className="img-fluid"
+                                      src={avatar2}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="w-100">
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold font-size-lg"
+                                  title="...">
+                                  Senior bushiness analyst
+                                </a>
+                                <span className="d-block">
+                                  Freelance Designer, Mutual Inc.
+                                </span>
+                                <p className="text-black-50">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. In eget pharetra dolor, ac
+                                  sollicitudin sem. Nulla facilisi.
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                        <CardContent className="text-center card-body-button">
-                          <div className="card-body-button-wrapper">
-                            <Button
-                              size="large"
-                              className="btn-success btn-pill text-nowrap px-5 shadow-none border-3 border-white">
-                              Connect
-                            </Button>
-                          </div>
-                          <Grid container spacing={2}>
-                            <Grid item md={4}>
-                              <div className="bg-secondary p-3 text-center rounded">
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={['far', 'user']}
-                                    className="font-size-xxl text-warning"
-                                  />
-                                </div>
-                                <div className="mt-2 line-height-sm">
-                                  <b className="font-12">Permanent</b>
-                                  <span className="text-black-50 d-block">
-                                    users
-                                  </span>
+                          </Card>
+                          <Card className="mb-2 p-3">
+                            <div className="d-flex">
+                              <div className="card-badges card-badges-top">
+                                <FontAwesomeIcon icon={['fas', 'building']} />
+                              </div>
+                              <div className="avatar-icon-wrapper mr-3">
+                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                  <div className="overflow-hidden">
+                                    <img
+                                      alt="..."
+                                      className="img-fluid"
+                                      src={avatar2}
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </Grid>
-                            <Grid item md={4}>
-                              <div className="bg-secondary p-3 text-center rounded">
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={['fas', 'lemon']}
-                                    className="font-size-xxl text-success"
-                                  />
-                                </div>
-                                <div className="mt-2 line-height-sm">
-                                  <b className="font-12">$3,586</b>
-                                  <span className="text-black-50 d-block">
-                                    sales
-                                  </span>
+                              <div className="w-100">
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold font-size-lg"
+                                  title="...">
+                                  Bushiness analyst
+                                </a>
+                                <span className="d-block">
+                                  Freelance Designer, Mutual Inc.
+                                </span>
+                                <p className="text-black-50">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. In eget pharetra dolor, ac
+                                  sollicitudin sem. Nulla facilisi.
+                                </p>
+                              </div>
+                            </div>
+                          </Card>
+                          <Card className="mb-2 p-3">
+                            <div className="d-flex">
+                              <div className="card-badges card-badges-top">
+                                <FontAwesomeIcon icon={['fas', 'building']} />
+                              </div>
+                              <div className="avatar-icon-wrapper mr-3">
+                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                  <div className="overflow-hidden">
+                                    <img
+                                      alt="..."
+                                      className="img-fluid"
+                                      src={avatar2}
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </Grid>
-                            <Grid item md={4}>
-                              <div className="bg-secondary p-3 text-center rounded">
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={['far', 'chart-bar']}
-                                    className="font-size-xxl text-info"
-                                  />
-                                </div>
-                                <div className="mt-2 line-height-sm">
-                                  <b className="font-12">City of london</b>
-                                  <span className="text-black-50 d-block">
-                                    revenue
-                                  </span>
+                              <div className="w-100">
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold font-size-lg"
+                                  title="...">
+                                  Bushiness analyst
+                                </a>
+                                <span className="d-block">
+                                  Freelance Designer, Mutual Inc.
+                                </span>
+                                <p className="text-black-50">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. In eget pharetra dolor, ac
+                                  sollicitudin sem. Nulla facilisi.
+                                </p>
+                              </div>
+                            </div>
+                          </Card>
+                        </TabPanel>
+
+                        <TabPanel value={value} index={2}>
+                          <Card className="mb-2 p-3">
+                            <div className="d-flex">
+                              <div className="card-badges card-badges-top">
+                                <FontAwesomeIcon icon={['fas', 'user']} />
+                              </div>
+                              <div className="avatar-icon-wrapper mr-3">
+                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                  <div className="overflow-hidden">
+                                    <img
+                                      alt="..."
+                                      className="img-fluid"
+                                      src={avatar1}
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </Grid>
-                            <Grid item md={4}>
-                              <div className="bg-secondary p-3 text-center rounded">
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={['far', 'user']}
-                                    className="font-size-xxl text-warning"
-                                  />
-                                </div>
-                                <div className="mt-2 line-height-sm">
-                                  <b className="font-12">Permanent</b>
-                                  <span className="text-black-50 d-block">
-                                    users
-                                  </span>
+                              <div className="w-100">
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold font-size-lg"
+                                  title="...">
+                                  Bsc Bushiness & Economics
+                                </a>
+                                <span className="d-block">
+                                  Freelance Designer, Mutual Inc.
+                                </span>
+                                <p className="text-black-50">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. In eget pharetra dolor, ac
+                                  sollicitudin sem. Nulla facilisi.
+                                </p>
+                              </div>
+                            </div>
+                          </Card>
+                          <Card className="mb-2 p-3">
+                            <div className="d-flex">
+                              <div className="card-badges card-badges-top">
+                                <FontAwesomeIcon icon={['fas', 'user']} />
+                              </div>
+                              <div className="avatar-icon-wrapper mr-3">
+                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                  <div className="overflow-hidden">
+                                    <img
+                                      alt="..."
+                                      className="img-fluid"
+                                      src={avatar1}
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </Grid>
-                            <Grid item md={4}>
-                              <div className="bg-secondary p-3 text-center rounded">
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={['fas', 'lemon']}
-                                    className="font-size-xxl text-success"
-                                  />
-                                </div>
-                                <div className="mt-2 line-height-sm">
-                                  <b className="font-12">$3,586</b>
-                                  <span className="text-black-50 d-block">
-                                    sales
-                                  </span>
+                              <div className="w-100">
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold font-size-lg"
+                                  title="...">
+                                  English Literature
+                                </a>
+                                <span className="d-block">
+                                  Freelance Designer, Mutual Inc.
+                                </span>
+                                <p className="text-black-50">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. In eget pharetra dolor, ac
+                                  sollicitudin sem. Nulla facilisi.
+                                </p>
+                              </div>
+                            </div>
+                          </Card>
+                          <Card className="mb-2 p-3">
+                            <div className="d-flex">
+                              <div className="card-badges card-badges-top">
+                                <FontAwesomeIcon icon={['fas', 'user']} />
+                              </div>
+                              <div className="avatar-icon-wrapper mr-3">
+                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                  <div className="overflow-hidden">
+                                    <img
+                                      alt="..."
+                                      className="img-fluid"
+                                      src={avatar1}
+                                    />
+                                  </div>
                                 </div>
                               </div>
-                            </Grid>
-                            <Grid item md={4}>
-                              <div className="bg-secondary p-3 text-center rounded">
-                                <div>
-                                  <FontAwesomeIcon
-                                    icon={['far', 'chart-bar']}
-                                    className="font-size-xxl text-info"
-                                  />
-                                </div>
-                                <div className="mt-2 line-height-sm">
-                                  <b className="font-12">City of london</b>
-                                  <span className="text-black-50 d-block">
-                                    revenue
-                                  </span>
-                                </div>
+                              <div className="w-100">
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold font-size-lg"
+                                  title="...">
+                                  Secondary GCSE's
+                                </a>
+                                <span className="d-block">
+                                  Freelance Designer, Mutual Inc.
+                                </span>
+                                <p className="text-black-50">
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. In eget pharetra dolor, ac
+                                  sollicitudin sem. Nulla facilisi.
+                                </p>
                               </div>
-                            </Grid>
-                          </Grid>
-                        </CardContent>
-                      </Card>
+                            </div>
+                          </Card>
+                        </TabPanel>
+                      </div>
+                      {/* </Card> */}
                     </Grid>
                   </Grid>
                 </List>
@@ -430,6 +763,7 @@ const SidebarUserbox = () => {
           <small className="d-block font-12 text-white-50">
             Business Analyst | London, United Kingdom
           </small>
+          <OnlineAndAvailability ref={childRef} />
 
           <small className="d-block font-12 text-white-50">
             Business Analyst | London, United Kingdom
