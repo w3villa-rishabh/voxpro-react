@@ -2,7 +2,8 @@ import React, {
   useState,
   forwardRef,
   useImperativeHandle,
-  useRef
+  useRef,
+  useEffect
 } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -185,6 +186,10 @@ const SidebarUserbox = () => {
     setAnchorElMenu1(null);
   };
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('resize'));
+  });
+
   return (
     <>
       <div className="app-sidebar--userbox">
@@ -345,7 +350,7 @@ const SidebarUserbox = () => {
                           </CardContent>
                         </Card>
                       </Grid>
-                      <Grid item sm={7} >
+                      <Grid item sm={7}>
                         <div className="card-header-profile">
                           <div className="card-header--title">
                             <Tabs
@@ -354,7 +359,7 @@ const SidebarUserbox = () => {
                               variant="fullWidth"
                               onChange={handleChange}>
                               <Tab label="Overview" />
-                              <Tab label="Exprience" />
+                              <Tab label="Experience" />
                               <Tab label="Education" />
                             </Tabs>
                           </div>
