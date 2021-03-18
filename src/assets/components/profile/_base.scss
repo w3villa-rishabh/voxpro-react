@@ -252,8 +252,8 @@ ul {
   }
 
   .mini-profile-list {
-    height: calc(100vh - 250px);
-    overflow-y: scroll;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
     overflow-x: hidden;
   }
 }

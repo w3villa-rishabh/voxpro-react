@@ -308,12 +308,12 @@ const SidebarUserbox = () => {
                             </Tooltip>
                           </div>
 
-                          <div className="divider my-4" />
+                          <div className="divider my-2" />
                           <h4 className="font-size-lg font-weight-bold my-2">
                             SKILLS
                           </h4>
 
-                          <div className="text-center my-4">
+                          <div className="text-center my-2">
                             <div className="badge badge-pill badge-neutral-first text-first mx-1">
                               Web developer
                             </div>
@@ -333,7 +333,7 @@ const SidebarUserbox = () => {
                             </Button>
                           </div>
 
-                          <div className="divider my-4" />
+                          <div className="divider my-2" />
                           <Button
                             component={NavLink}
                             to="/view-profile"
@@ -362,7 +362,7 @@ const SidebarUserbox = () => {
                       <div className="pt-2">
                         <TabPanel value={value} index={0}>
                           <Card>
-                            <div className="mb-spacing-6">
+                            <div className="mb-2">
                               <Grid container spacing={1} className="p-2">
                                 <Grid item md={4}>
                                   <Card className="card-box text-black-50 p-3">
@@ -423,7 +423,7 @@ const SidebarUserbox = () => {
                               <div className="card-body-button-wrapper">
                                 <Button
                                   size="large"
-                                  className="btn-success btn-pill text-nowrap px-5 shadow-none border-3 border-white">
+                                  className="btn-success btn-pill text-nowrap shadow-none border-3 border-white">
                                   Connect
                                 </Button>
                               </div>
