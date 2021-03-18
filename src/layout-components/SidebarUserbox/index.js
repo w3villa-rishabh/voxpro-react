@@ -174,6 +174,8 @@ const SidebarUserbox = () => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    // parse data parent to child
+    // childRef.current.showAlert();
   };
 
   const handleClickMenu1 = (event) => {
@@ -205,7 +207,7 @@ const SidebarUserbox = () => {
               onClose={handleCloseMenu1}
               classes={{ list: 'p-0' }}
               getContentAnchorEl={null}
-              className="mt-1 profile-menu-card"
+              className="profile-menu-card"
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left'
