@@ -13,24 +13,13 @@ import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
 import SidebarUserbox from '../SidebarUserbox';
 
 import ChevronRightTwoToneIcon from '@material-ui/icons/ChevronRightTwoTone';
-import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
-import RoomTwoToneIcon from '@material-ui/icons/RoomTwoTone';
-import CameraAltTwoToneIcon from '@material-ui/icons/CameraAltTwoTone';
-import CollectionsTwoToneIcon from '@material-ui/icons/CollectionsTwoTone';
-import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
-import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
-import AssessmentTwoToneIcon from '@material-ui/icons/AssessmentTwoTone';
-import MoveToInboxTwoToneIcon from '@material-ui/icons/MoveToInboxTwoTone';
+import WorkIcon from '@material-ui/icons/Work';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
-import DepartureBoardTwoToneIcon from '@material-ui/icons/DepartureBoardTwoTone';
-import LibraryBooksTwoToneIcon from '@material-ui/icons/LibraryBooksTwoTone';
-import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
-import DevicesOtherTwoToneIcon from '@material-ui/icons/DevicesOtherTwoTone';
-import LinkTwoToneIcon from '@material-ui/icons/LinkTwoTone';
-
-import SecurityTwoToneIcon from '@material-ui/icons/SecurityTwoTone';
-import CameraTwoToneIcon from '@material-ui/icons/CameraTwoTone';
+import SecurityIcon from '@material-ui/icons/Security';
+import ChatIcon from '@material-ui/icons/Chat';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import TuneIcon from '@material-ui/icons/Tune';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile, sidebarUserbox } = props;
@@ -38,100 +27,12 @@ const SidebarMenu = (props) => {
   const toggleSidebarMobile = () => setSidebarToggleMobile(false);
 
   const [dashboardOpen, setDashboardOpen] = useState(false);
-  const toggleDashboard = (event) => {
-    setDashboardOpen(!dashboardOpen);
-    event.preventDefault();
-  };
-
-  const [elementsOpen, setElementsOpen] = useState(false);
-  const toggleElements = (event) => {
-    setElementsOpen(!elementsOpen);
-    event.preventDefault();
-  };
-
-  const [pagesOpen, setPagesOpen] = useState(false);
-  const togglePages = (event) => {
-    setPagesOpen(!pagesOpen);
-    event.preventDefault();
-  };
-
-  const [otherPagesOpen, setOtherPagesOpen] = useState(false);
-  const toggleOtherPages = (event) => {
-    setOtherPagesOpen(!otherPagesOpen);
-    event.preventDefault();
-  };
-
-  const [applicationOpen, setApplicationOpen] = useState(false);
-  const toggleApplication = (event) => {
-    setApplicationOpen(!applicationOpen);
-    event.preventDefault();
-  };
-
-  const [designSystemOpen, setDesignSystemOpen] = useState(false);
-  const toggleDesignSystem = (event) => {
-    setDesignSystemOpen(!designSystemOpen);
-    event.preventDefault();
-  };
-
-  const [blocksOpen, setBlocksOpen] = useState(false);
-  const toggleBlocks = (event) => {
-    setBlocksOpen(!blocksOpen);
-    event.preventDefault();
-  };
-
-  const [levelsOpen, setLevelsOpen] = useState(false);
-  const toggleLevels = (event) => {
-    setLevelsOpen(!levelsOpen);
-    event.preventDefault();
-  };
-
-  const [widgetsOpen, setWidgetsOpen] = useState(false);
-  const toggleWidgets = (event) => {
-    setWidgetsOpen(!widgetsOpen);
-    event.preventDefault();
-  };
-
-  const [chartsOpen, setChartsOpen] = useState(false);
-  const toggleCharts = (event) => {
-    setChartsOpen(!chartsOpen);
-    event.preventDefault();
-  };
-
-  const [uiKitComponentsOpen, setUiKitComponents] = useState(false);
-  const toggleUiKitComponents = (event) => {
-    setUiKitComponents(!uiKitComponentsOpen);
-    event.preventDefault();
-  };
-
-  const [formsComponentsOpen, setFormsComponents] = useState(false);
-  const toggleFormsComponents = (event) => {
-    setFormsComponents(!formsComponentsOpen);
-    event.preventDefault();
-  };
-
-  const [collapsedLayoutOpen, setCollapsedLayoutOpen] = useState(false);
-  const toggleCollapsedLayout = (event) => {
-    setCollapsedLayoutOpen(!collapsedLayoutOpen);
-    event.preventDefault();
-  };
-
-  const [pagesLoginOpen, setPagesLoginOpen] = useState(false);
-  const togglePagesLogin = (event) => {
-    setPagesLoginOpen(!pagesLoginOpen);
-    event.preventDefault();
-  };
-
-  const [pagesRegisterOpen, setPagesRegisterOpen] = useState(false);
-  const togglePagesRegister = (event) => {
-    setPagesRegisterOpen(!pagesRegisterOpen);
-    event.preventDefault();
-  };
-
-  const [pagesRecoverOpen, setPagesRecoverOpen] = useState(false);
-  const togglePagesRecover = (event) => {
-    setPagesRecoverOpen(!pagesRecoverOpen);
-    event.preventDefault();
-  };
+  const [IR35, setIR35] = useState(false);
+  const [requestInfo, setRequestInfo] = useState(false);
+  const [search, setSearch] = useState(false);
+  const [jobOpen, setJobOpen] = useState(false);
+  const [availability, setAvailability] = useState(false);
+  const [GDRP, setGDRP] = useState(false);
 
   return (
     <>
@@ -149,7 +50,7 @@ const SidebarMenu = (props) => {
                 className="nav-link-simple"
                 to="/dashboard">
                 <span className="sidebar-icon">
-                  <BallotTwoToneIcon />
+                  <DashboardIcon />
                 </span>
                 Dashboard
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
@@ -159,19 +60,274 @@ const SidebarMenu = (props) => {
             </li>
 
             <li>
-              <NavLink
-                activeClassName="active"
-                onClick={toggleSidebarMobile}
-                className="nav-link-simple"
-                to="/documents">
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setDashboardOpen(!dashboardOpen);
+                }}
+                className={clsx({ active: dashboardOpen })}>
                 <span className="sidebar-icon">
                   <BallotTwoToneIcon />
                 </span>
-                Onboarding Documents
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                <span className="sidebar-item-label">Onboarding Documents</span>
+                <span className="sidebar-icon-indicator">
                   <ChevronRightTwoToneIcon />
                 </span>
-              </NavLink>
+              </a>
+              <Collapse in={dashboardOpen}>
+                <ul>
+                  <li>
+                    <NavLink onClick={toggleSidebarMobile} to="/documents">
+                      My Document
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Upload Document
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setIR35(!IR35);
+                }}
+                className={clsx({ active: IR35 })}>
+                <span className="sidebar-icon">
+                  <BallotTwoToneIcon />
+                </span>
+                <span className="sidebar-item-label">IR35</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={IR35}>
+                <ul>
+                  <li>
+                    <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
+                      New IR35 Submission
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      IR35 History
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      IR35 Enquiries
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setRequestInfo(!requestInfo);
+                }}
+                className={clsx({ active: requestInfo })}>
+                <span className="sidebar-icon">
+                  <TuneIcon />
+                </span>
+                <span className="sidebar-item-label">
+                  Request for Information
+                </span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={requestInfo}>
+                <ul>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      New Request
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Request History
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Request History
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setSearch(!search);
+                }}
+                className={clsx({ active: search })}>
+                <span className="sidebar-icon">
+                  <FavoriteIcon />
+                </span>
+                <span className="sidebar-item-label">Search</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={search}>
+                <ul>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Search Companies
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Search Agencies
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setJobOpen(!jobOpen);
+                }}
+                className={clsx({ active: jobOpen })}>
+                <span className="sidebar-icon">
+                  <WorkIcon />
+                </span>
+                <span className="sidebar-item-label">Jobs</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={jobOpen}>
+                <ul>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Search Job
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Saved Job
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Job Applications
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Placements
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setAvailability(!availability);
+                }}
+                className={clsx({ active: availability })}>
+                <span className="sidebar-icon">
+                  <SecurityIcon />
+                </span>
+                <span className="sidebar-item-label">Availability</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={availability}>
+                <ul>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Availability Calender
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setGDRP(!GDRP);
+                }}
+                className={clsx({ active: GDRP })}>
+                <span className="sidebar-icon">
+                  <SecurityIcon />
+                </span>
+                <span className="sidebar-item-label">GDPR</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={GDRP}>
+                <ul>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Who Has My Info
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      Request Removal
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
+                      GDPR Setting
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
             </li>
 
             <li>
@@ -179,39 +335,9 @@ const SidebarMenu = (props) => {
                 activeClassName="active"
                 onClick={toggleSidebarMobile}
                 className="nav-link-simple"
-                to="/ir35-verify">
-                <span className="sidebar-icon">
-                  <BallotTwoToneIcon />
-                </span>
-                IR35
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                activeClassName="active"
-                onClick={toggleSidebarMobile}
-                className="nav-link-simple"
                 to="/request-information">
                 <span className="sidebar-icon">
-                  <BallotTwoToneIcon />
-                </span>
-                Request for Information
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                activeClassName="active"
-                onClick={toggleSidebarMobile}
-                className="nav-link-simple"
-                to="/request-information">
-                <span className="sidebar-icon">
-                  <BallotTwoToneIcon />
+                  <ChatIcon />
                 </span>
                 Chat
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
@@ -219,7 +345,6 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-
 
             {/* <li>
               <a

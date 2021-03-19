@@ -448,8 +448,8 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">Permanent</b>
-                                        <span className="text-black-50 d-block">
-                                          users
+                                        <span className="text-black-50 font-12 d-block">
+                                          Desired Employment Type
                                         </span>
                                       </div>
                                     </div>
@@ -464,8 +464,8 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">$3,586</b>
-                                        <span className="text-black-50 d-block">
-                                          sales
+                                        <span className="text-black-50 font-12 d-block">
+                                          Desired Annual Salary
                                         </span>
                                       </div>
                                     </div>
@@ -480,10 +480,10 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">
-                                          City of london
+                                          City of London
                                         </b>
-                                        <span className="text-black-50 d-block">
-                                          revenue
+                                        <span className="text-black-50 font-12 d-block">
+                                          Desired Location
                                         </span>
                                       </div>
                                     </div>
@@ -498,8 +498,8 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">Permanent</b>
-                                        <span className="text-black-50 d-block">
-                                          users
+                                        <span className="text-black-50 font-12 d-block">
+                                          Current Employment Type
                                         </span>
                                       </div>
                                     </div>
@@ -513,9 +513,9 @@ const SidebarUserbox = () => {
                                         />
                                       </div>
                                       <div className="mt-2 line-height-sm">
-                                        <b className="font-12">$3,586</b>
-                                        <span className="text-black-50 d-block">
-                                          sales
+                                        <b className="font-12">$57,500</b>
+                                        <span className="text-black-50 font-12 d-block">
+                                          Current Annual Salary
                                         </span>
                                       </div>
                                     </div>
@@ -529,11 +529,9 @@ const SidebarUserbox = () => {
                                         />
                                       </div>
                                       <div className="mt-2 line-height-sm">
-                                        <b className="font-12">
-                                          City of london
-                                        </b>
-                                        <span className="text-black-50 d-block">
-                                          revenue
+                                        <b className="font-12">West London</b>
+                                        <span className="text-black-50 font-12 d-block">
+                                          Current Location
                                         </span>
                                       </div>
                                     </div>
