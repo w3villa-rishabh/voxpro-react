@@ -235,24 +235,39 @@ ul {
   overflow: hidden !important;
 }
 
-.mini-header {
-  background: #1b233e;
-  padding: 20px;
-  color: white;
-}
-
-.profile-menu {
-  width: calc(100vw - 415px) !important;
-  background: #ccc;
-}
 
 .profile-menu-card {
   .MuiMenu-paper {
-    overflow: hidden !important;
+    position: absolute;
+    top: 78px !important;
+    left: 329px !important;
+  }
+
+  .profile-menu {
+    width: calc(100vw - 390px) !important;
+    background: #ccc;
+  }
+
+  .mini-header {
+    background: #1b233e;
+    padding: 14px 20px;
+    color: white;
+  }
+
+  .min-profile-body {
+    padding: 40px 12px 12px !important;
+  }
+
+  .connect-btn {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -17px;
+    text-align: center;
   }
 
   .mini-profile-list {
-    max-height: calc(100vh - 250px);
+    // max-height: calc(100vh - 250px);
   }
 }
 

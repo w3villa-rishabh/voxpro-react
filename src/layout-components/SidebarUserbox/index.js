@@ -63,6 +63,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
   }));
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl1, setAnchorEl1] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -70,6 +71,14 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClick1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
+  const handleClose1 = () => {
+    setAnchorEl1(null);
   };
   return (
     <div className="profile-btn">
@@ -107,13 +116,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         classes={{ list: 'p-0' }}>
         <div className="p-3">
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-            Profile
-          </MenuItem>
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-            My account
-          </MenuItem>
-          <MenuItem className="pr-5 px-3 text-danger" onClick={handleClose}>
-            Logout
+            Offline
           </MenuItem>
         </div>
       </Menu>
@@ -131,16 +134,16 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           color="dangler"
           size="small"
           aria-haspopup="true"
-          onClick={handleClick}>
+          onClick={handleClick1}>
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
       <Menu
         id="simple-menu2"
-        anchorEl={anchorEl}
+        anchorEl={anchorEl1}
         keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
+        open={Boolean(anchorEl1)}
+        onClose={handleClose1}
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
@@ -152,14 +155,8 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-3">
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-            Profile
-          </MenuItem>
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-            My account
-          </MenuItem>
-          <MenuItem className="pr-5 px-3 text-danger" onClick={handleClose}>
-            Logout
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+            No Immediate
           </MenuItem>
         </div>
       </Menu>
@@ -221,14 +218,21 @@ const SidebarUserbox = () => {
                 vertical: 'top',
                 horizontal: 'left'
               }}>
-              <div className="dropdown-menu-xxl profile-menu">
-                <div className="mini-header">
-                  <span>Mini profile</span>
-                </div>
-                <PerfectScrollbar>
+              <PerfectScrollbar>
+                <div className="dropdown-menu-xxl profile-menu">
+                  <div className="mini-header">
+                    <div className="card-badges card-badges-top">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="pointer mr-3"
+                        onClick={handleCloseMenu1}
+                      />
+                    </div>
+                    <span>Mini Profile</span>
+                  </div>
                   <List
                     component="div"
-                    className="text-left d-block m-2 mini-profile-list">
+                    className="text-left d-block pt-0 mini-profile-list">
                     <Grid container spacing={2}>
                       <Grid item sm={5}>
                         <Card>
@@ -239,11 +243,11 @@ const SidebarUserbox = () => {
                               src={stock3}
                             />
                           </div>
-                          <CardContent className="text-center card-body-avatar">
+                          <CardContent className="text-center card-body-avatar min-profile-body">
                             <a
                               href="#/"
                               onClick={(e) => e.preventDefault()}
-                              className="avatar-icon-wrapper shadow-lg rounded-circle card-box-hover-rise d-130">
+                              className="avatar-icon-wrapper shadow-lg rounded-circle card-box-hover-rise d-100">
                               <div className="avatar-icon rounded-circle">
                                 <img
                                   alt="..."
@@ -252,7 +256,7 @@ const SidebarUserbox = () => {
                                 />
                               </div>
                             </a>
-                            <h3 className="font-weight-bold mt-4 font-size-xxl">
+                            <h3 className="font-weight-bold font-size-xxl">
                               {currentUser.first_name} {currentUser.last_name}
                             </h3>
 
@@ -268,7 +272,7 @@ const SidebarUserbox = () => {
                               multiline
                               rowsMax={4}
                             />
-                            <h4 className="font-size-lg font-weight-bold my-2">
+                            <h4 className="font-size-lg font-weight-bold my-1">
                               Social Media Profiles
                             </h4>
                             <div>
@@ -314,12 +318,12 @@ const SidebarUserbox = () => {
                               </Tooltip>
                             </div>
 
-                            <div className="divider my-2" />
-                            <h4 className="font-size-lg font-weight-bold my-2">
+                            <div className="divider my-1" />
+                            <h4 className="font-size-lg font-weight-bold my-1">
                               SKILLS
                             </h4>
 
-                            <div className="text-center my-2">
+                            <div className="text-center my-1">
                               <div className="badge badge-pill badge-neutral-first text-first mx-1">
                                 Web developer
                               </div>
@@ -350,7 +354,7 @@ const SidebarUserbox = () => {
                           </CardContent>
                         </Card>
                       </Grid>
-                      <Grid item sm={7}>
+                      <Grid item sm={7} className="pr-3">
                         <div className="card-header-profile">
                           <div className="card-header--title">
                             <Tabs
@@ -371,7 +375,7 @@ const SidebarUserbox = () => {
                               <div className="mb-2">
                                 <Grid container spacing={1} className="p-2">
                                   <Grid item md={4}>
-                                    <Card className="card-box text-black-50 p-3">
+                                    <Card className="card-box text-black-50 p-2">
                                       <div className="display-3 text-black font-weight-bold">
                                         31
                                       </div>
@@ -384,7 +388,7 @@ const SidebarUserbox = () => {
                                     </Card>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <Card className="card-box text-black-50 p-3">
+                                    <Card className="card-box text-black-50 p-2">
                                       <div className="display-3 text-black font-weight-bold">
                                         68
                                       </div>
@@ -397,7 +401,7 @@ const SidebarUserbox = () => {
                                     </Card>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <Card className="card-box text-black-50 p-3">
+                                    <Card className="card-box text-black-50 p-2">
                                       <div className="display-3 text-black font-weight-bold">
                                         57
                                       </div>
@@ -415,7 +419,7 @@ const SidebarUserbox = () => {
                               <div className="card-img-wrapper">
                                 <div className="bg-composed-wrapper bg-plum-plate border-0">
                                   <div className="bg-composed-img-2 bg-composed-wrapper--image" />
-                                  <div className="bg-composed-wrapper--content text-center text-white px-2 py-5">
+                                  <div className="bg-composed-wrapper--content text-center text-white px-2 py-4">
                                     <h1 className="font-size-xxl font-weight-bold py-2 mb-0">
                                       Employment Information
                                     </h1>
@@ -423,19 +427,19 @@ const SidebarUserbox = () => {
                                       Current and Desired Employment details
                                     </p>
                                   </div>
+                                  <div className="card-body-button-wrapper connect-btn">
+                                    <Button
+                                      size="small"
+                                      className="btn-success btn-pill text-nowrap shadow-none border-3 border-white">
+                                      Connect
+                                    </Button>
+                                  </div>
                                 </div>
                               </div>
-                              <CardContent className="text-center card-body-button">
-                                <div className="card-body-button-wrapper">
-                                  <Button
-                                    size="large"
-                                    className="btn-success btn-pill text-nowrap shadow-none border-3 border-white">
-                                    Connect
-                                  </Button>
-                                </div>
-                                <Grid container spacing={2}>
+                              <CardContent className="text-center">
+                                <Grid container spacing={1}>
                                   <Grid item md={4}>
-                                    <div className="bg-secondary p-3 text-center rounded">
+                                    <div className="bg-secondary p-2 text-center rounded">
                                       <div>
                                         <FontAwesomeIcon
                                           icon={['far', 'user']}
@@ -451,7 +455,7 @@ const SidebarUserbox = () => {
                                     </div>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <div className="bg-secondary p-3 text-center rounded">
+                                    <div className="bg-secondary p-2 text-center rounded">
                                       <div>
                                         <FontAwesomeIcon
                                           icon={['fas', 'lemon']}
@@ -467,7 +471,7 @@ const SidebarUserbox = () => {
                                     </div>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <div className="bg-secondary p-3 text-center rounded">
+                                    <div className="bg-secondary p-2 text-center rounded">
                                       <div>
                                         <FontAwesomeIcon
                                           icon={['far', 'chart-bar']}
@@ -485,7 +489,7 @@ const SidebarUserbox = () => {
                                     </div>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <div className="bg-secondary p-3 text-center rounded">
+                                    <div className="bg-secondary p-2 text-center rounded">
                                       <div>
                                         <FontAwesomeIcon
                                           icon={['far', 'user']}
@@ -501,7 +505,7 @@ const SidebarUserbox = () => {
                                     </div>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <div className="bg-secondary p-3 text-center rounded">
+                                    <div className="bg-secondary p-2 text-center rounded">
                                       <div>
                                         <FontAwesomeIcon
                                           icon={['fas', 'lemon']}
@@ -517,7 +521,7 @@ const SidebarUserbox = () => {
                                     </div>
                                   </Grid>
                                   <Grid item md={4}>
-                                    <div className="bg-secondary p-3 text-center rounded">
+                                    <div className="bg-secondary p-2 text-center rounded">
                                       <div>
                                         <FontAwesomeIcon
                                           icon={['far', 'chart-bar']}
@@ -759,8 +763,8 @@ const SidebarUserbox = () => {
                       </Grid>
                     </Grid>
                   </List>
-                </PerfectScrollbar>
-              </div>
+                </div>
+              </PerfectScrollbar>
             </Menu>
           </div>
         </Box>
