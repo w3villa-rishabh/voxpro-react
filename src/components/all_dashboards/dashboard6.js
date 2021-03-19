@@ -85,7 +85,7 @@ export default function LivePreviewExample() {
                   <td className="text-center">
                     <div className="px-4">12/05/2021</div>
                   </td>
-                  <td>
+                  <td className="text-center">
                     <div className="px-4">€400</div>
                   </td>
                   <td className="text-center">
@@ -115,7 +115,7 @@ export default function LivePreviewExample() {
                   <td className="text-center">
                     <div className="px-4">10/02/2021</div>
                   </td>
-                  <td>
+                  <td className="text-center">
                     <div className="px-4">€ 4002</div>
                   </td>
                   <td className="text-center">
@@ -145,7 +145,7 @@ export default function LivePreviewExample() {
                   <td className="text-center">
                     <div className="px-4">12/05/2021</div>
                   </td>
-                  <td>
+                  <td className="text-center">
                     <div className="px-4">€4000</div>
                   </td>
                   <td className="text-center">
