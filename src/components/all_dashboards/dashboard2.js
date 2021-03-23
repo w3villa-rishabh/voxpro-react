@@ -31,9 +31,9 @@ export default function LivePreviewExample() {
     <>
       <div className="mb-spacing-1">
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Card className="p-4 text-center hgh">
                   <div className="mt-2 text-second font-weight-bold">
                     Profile Views
@@ -50,7 +50,7 @@ export default function LivePreviewExample() {
                   </div>
                 </Card>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Card className="p-4 text-center hgh">
                   <div className="mt-2 text-second font-weight-bold">
                     Request For Infos
@@ -61,215 +61,215 @@ export default function LivePreviewExample() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12}>
-
-
-              <div className="mb-spacing-6">
+              <Grid item xs={12} sm={12}>
+                <div className="mb-spacing-6">
                   <Card className="card-box">
                     <div className="card-header">
                       <div className="card-header--title">
                         <b>Connection Requests</b>
                       </div>
                     </div>
-                        <div className="scroll-area shadow-overflow" style={{height: '327px', borderRadius: 'inherit'}}>
-                            <PerfectScrollbar options={{ wheelPropagation: false }}>
-                            <List component="div" className="list-group-flush">
-                      <ListItem className="py-3">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="d-flex align-items-center">
-                            <div className="d-flex align-items-center">
-                              <div className="avatar-icon-wrapper mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar2} />
+                    <div
+                      className="scroll-area shadow-overflow"
+                      style={{ height: '327px', borderRadius: 'inherit' }}>
+                      <PerfectScrollbar options={{ wheelPropagation: false }}>
+                        <List component="div" className="list-group-flush">
+                          <ListItem className="py-3">
+                            <Grid container spacing={0}>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="d-flex align-items-center">
+                                <div className="d-flex align-items-center">
+                                  <div className="avatar-icon-wrapper mr-2">
+                                    <div className="avatar-icon">
+                                      <img alt="..." src={avatar2} />
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <a
+                                      href="#/"
+                                      onClick={(e) => e.preventDefault()}
+                                      className="font-weight-bold text-black"
+                                      title="...">
+                                      Shanelle Wynn
+                                    </a>
+                                    <span className="text-black-50 d-block">
+                                      UI Engineer, Apple Inc.
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold text-black"
-                                  title="...">
-                                  Shanelle Wynn
-                                </a>
-                                <span className="text-black-50 d-block">
-                                  UI Engineer, Apple Inc.
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="pt-3 pt-xl-0 d-flex align-items-center">
-                            <div className="align-box-row flex-grow-1">
-                              <div className="d-flex flex-column flex-grow-1"></div>
-                              <Button
-                                size="small"
-                                className="btn btn-primary ml-4">
-                                Accept
-                              </Button>
-                              <Button
-                                size="small"
-                                className="btn btn-danger ml-4">
-                                Reject
-                              </Button>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </ListItem>
-                      <ListItem className="py-3">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="d-flex align-items-center">
-                            <div className="d-flex align-items-center">
-                              <div className="avatar-icon-wrapper mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar3} />
+                              </Grid>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="pt-3 pt-xl-0 d-flex align-items-center">
+                                <div className="align-box-row flex-grow-1">
+                                  <div className="d-flex flex-column flex-grow-1"></div>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-primary ml-4">
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-danger ml-4">
+                                    Reject
+                                  </Button>
                                 </div>
-                              </div>
-                              <div>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold text-black"
-                                  title="...">
-                                  Akeem Griffith
-                                </a>
-                                <span className="text-black-50 d-block">
-                                  Manager, Google Inc.
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="pt-3 pt-xl-0 d-flex align-items-center">
-                            <div className="align-box-row flex-grow-1">
-                              <div className="d-flex flex-column flex-grow-1"></div>
-                              <Button
-                                size="small"
-                                className="btn btn-primary ml-4">
-                                Accept
-                              </Button>
-                              <Button
-                                size="small"
-                                className="btn btn-danger ml-4">
-                                Reject
-                              </Button>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </ListItem>
-                      <ListItem className="py-3">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="d-flex align-items-center">
-                            <div className="d-flex align-items-center">
-                              <div className="avatar-icon-wrapper mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar4} />
+                              </Grid>
+                            </Grid>
+                          </ListItem>
+                          <ListItem className="py-3">
+                            <Grid container spacing={0}>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="d-flex align-items-center">
+                                <div className="d-flex align-items-center">
+                                  <div className="avatar-icon-wrapper mr-2">
+                                    <div className="avatar-icon">
+                                      <img alt="..." src={avatar3} />
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <a
+                                      href="#/"
+                                      onClick={(e) => e.preventDefault()}
+                                      className="font-weight-bold text-black"
+                                      title="...">
+                                      Akeem Griffith
+                                    </a>
+                                    <span className="text-black-50 d-block">
+                                      Manager, Google Inc.
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold text-black"
-                                  title="...">
-                                  Abigayle Hicks
-                                </a>
-                                <span className="text-black-50 d-block">
-                                  Project Manager, Spotify
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="pt-3 pt-xl-0 d-flex align-items-center">
-                            <div className="align-box-row flex-grow-1">
-                              <div className="d-flex flex-column flex-grow-1"></div>
-                              <Button
-                                size="small"
-                                className="btn btn-primary ml-4">
-                                Accept
-                              </Button>
-                              <Button
-                                size="small"
-                                className="btn btn-danger ml-4">
-                                Reject
-                              </Button>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </ListItem>
-                      <ListItem className="py-3">
-                        <Grid container spacing={0}>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="d-flex align-items-center">
-                            <div className="d-flex align-items-center">
-                              <div className="avatar-icon-wrapper mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar4} />
+                              </Grid>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="pt-3 pt-xl-0 d-flex align-items-center">
+                                <div className="align-box-row flex-grow-1">
+                                  <div className="d-flex flex-column flex-grow-1"></div>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-primary ml-4">
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-danger ml-4">
+                                    Reject
+                                  </Button>
                                 </div>
-                              </div>
-                              <div>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold text-black"
-                                  title="...">
-                                  Gordon Barnett
-                                </a>
-                                <span className="text-black-50 d-block">
-                                  UI Developer, UiFort
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={6}
-                            md={12}
-                            className="pt-3 pt-xl-0 d-flex align-items-center">
-                            <div className="align-box-row flex-grow-1">
-                              <div className="d-flex flex-column flex-grow-1"></div>
-                              <Button
-                                size="small"
-                                className="btn btn-primary ml-4">
-                                Accept
-                              </Button>
-                              <Button
-                                size="small"
-                                className="btn btn-danger ml-4">
-                                Reject
-                              </Button>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </ListItem>
-                    </List>
-                            </PerfectScrollbar>
-                        </div>
-                        {/* <div className="card-footer p-3 text-center">
+                              </Grid>
+                            </Grid>
+                          </ListItem>
+                          <ListItem className="py-3">
+                            <Grid container spacing={0}>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="d-flex align-items-center">
+                                <div className="d-flex align-items-center">
+                                  <div className="avatar-icon-wrapper mr-2">
+                                    <div className="avatar-icon">
+                                      <img alt="..." src={avatar4} />
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <a
+                                      href="#/"
+                                      onClick={(e) => e.preventDefault()}
+                                      className="font-weight-bold text-black"
+                                      title="...">
+                                      Abigayle Hicks
+                                    </a>
+                                    <span className="text-black-50 d-block">
+                                      Project Manager, Spotify
+                                    </span>
+                                  </div>
+                                </div>
+                              </Grid>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="pt-3 pt-xl-0 d-flex align-items-center">
+                                <div className="align-box-row flex-grow-1">
+                                  <div className="d-flex flex-column flex-grow-1"></div>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-primary ml-4">
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-danger ml-4">
+                                    Reject
+                                  </Button>
+                                </div>
+                              </Grid>
+                            </Grid>
+                          </ListItem>
+                          <ListItem className="py-3">
+                            <Grid container spacing={0}>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="d-flex align-items-center">
+                                <div className="d-flex align-items-center">
+                                  <div className="avatar-icon-wrapper mr-2">
+                                    <div className="avatar-icon">
+                                      <img alt="..." src={avatar4} />
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <a
+                                      href="#/"
+                                      onClick={(e) => e.preventDefault()}
+                                      className="font-weight-bold text-black"
+                                      title="...">
+                                      Gordon Barnett
+                                    </a>
+                                    <span className="text-black-50 d-block">
+                                      UI Developer, UiFort
+                                    </span>
+                                  </div>
+                                </div>
+                              </Grid>
+                              <Grid
+                                item
+                                xs={6}
+                                md={12}
+                                className="pt-3 pt-xl-0 d-flex align-items-center">
+                                <div className="align-box-row flex-grow-1">
+                                  <div className="d-flex flex-column flex-grow-1"></div>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-primary ml-4">
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-danger ml-4">
+                                    Reject
+                                  </Button>
+                                </div>
+                              </Grid>
+                            </Grid>
+                          </ListItem>
+                        </List>
+                      </PerfectScrollbar>
+                    </div>
+                    {/* <div className="card-footer p-3 text-center">
                             <Button size="small" color="primary" variant="contained">
                                         <span className="btn-wrapper--label">
                                             View all Agencies
@@ -279,13 +279,12 @@ export default function LivePreviewExample() {
                                         </span>
                             </Button>
                         </div> */}
-                    </Card>
-                  </div>
-
+                  </Card>
+                </div>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Grid item xs={12} className="d-flex">
               <Card className="card-box w-100">
                 <div className="card-header">

@@ -152,7 +152,7 @@
 
 .main-card-section {
   width: unset !important;
-  margin: 0 37px !important;
+  margin: 0 14px !important;
 
   .main-card {
     .user-details {
@@ -210,7 +210,7 @@
 }
 
 .skill-section {
-  margin: 0 46px;
+  margin: 0 20px;
 }
 
 .blue {
@@ -244,7 +244,6 @@ ul {
   }
 
   .profile-menu {
-    width: calc(100vw - 390px) !important;
     background: #ccc;
   }
 
@@ -267,7 +266,9 @@ ul {
   }
 
   .mini-profile-list {
-    // max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 135px);
+    overflow: scroll;
+    overflow-x: hidden;
   }
 }
 
@@ -315,5 +316,25 @@ ul {
       background: #289aa7;
       padding: 0;
     }
+  }
+}
+
+// For mobile
+@media (max-width: 767px) {
+  .profile-menu {
+    position: fixed;
+    width: calc(100vw - 30px) !important;
+    margin: auto;
+    z-index: 9999;
+    left: 0;
+    right: 0
+  }
+}
+
+// For desktop
+@media (min-width: 767px) {
+  .profile-menu {
+    position: fixed;
+    width: calc(100vw - 390px) !important;
   }
 }

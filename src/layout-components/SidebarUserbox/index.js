@@ -218,21 +218,21 @@ const SidebarUserbox = () => {
                 vertical: 'top',
                 horizontal: 'left'
               }}>
-              <PerfectScrollbar>
-                <div className="dropdown-menu-xxl profile-menu">
-                  <div className="mini-header">
-                    <div className="card-badges card-badges-top">
-                      <FontAwesomeIcon
-                        icon={['fas', 'times']}
-                        className="pointer mr-3"
-                        onClick={handleCloseMenu1}
-                      />
-                    </div>
-                    <span>Mini Profile</span>
+              <div className="dropdown-menu-xxl profile-menu">
+                <div className="mini-header">
+                  <div className="card-badges card-badges-top">
+                    <FontAwesomeIcon
+                      icon={['fas', 'times']}
+                      className="pointer mr-3"
+                      onClick={handleCloseMenu1}
+                    />
                   </div>
-                  <List
-                    component="div"
-                    className="text-left d-block pt-0 mini-profile-list">
+                  <span>Mini Profile</span>
+                </div>
+                <List
+                  component="div"
+                  className="text-left d-block pt-0 mini-profile-list">
+                  <PerfectScrollbar>
                     <Grid container spacing={2}>
                       <Grid item sm={5}>
                         <Card>
@@ -319,7 +319,7 @@ const SidebarUserbox = () => {
                             </div>
 
                             <div className="divider my-1" />
-                            <h4 className="font-size-lg font-weight-bold my-1">
+                            <h4 className="font-size-md font-weight-bold my-1">
                               SKILLS
                             </h4>
 
@@ -376,10 +376,10 @@ const SidebarUserbox = () => {
                                 <Grid container spacing={1} className="p-2">
                                   <Grid item md={4}>
                                     <Card className="card-box text-black-50 p-2">
-                                      <div className="display-3 text-black font-weight-bold">
+                                      <div className="display-4 text-black font-weight-bold">
                                         31
                                       </div>
-                                      <div className="divider mt-2 mb-3 w-25 bg-first rounded border-first" />
+                                      <div className="divider mt-2 border-1 mb-2 w-25 bg-first rounded border-first" />
                                       <div className="font-weight-bold font-12 text-uppercase">
                                         YEAR OF
                                         <br />
@@ -389,10 +389,10 @@ const SidebarUserbox = () => {
                                   </Grid>
                                   <Grid item md={4}>
                                     <Card className="card-box text-black-50 p-2">
-                                      <div className="display-3 text-black font-weight-bold">
+                                      <div className="display-4 text-black font-weight-bold">
                                         68
                                       </div>
-                                      <div className="divider mt-2 mb-3 w-25 bg-success rounded border-success" />
+                                      <div className="divider mt-2 border-1 mb-2 w-25 bg-success rounded border-success" />
                                       <div className="font-weight-bold font-12 text-uppercase">
                                         QUALIFICATION &
                                         <br />
@@ -402,10 +402,10 @@ const SidebarUserbox = () => {
                                   </Grid>
                                   <Grid item md={4}>
                                     <Card className="card-box text-black-50 p-2">
-                                      <div className="display-3 text-black font-weight-bold">
+                                      <div className="display-4 text-black font-weight-bold">
                                         57
                                       </div>
-                                      <div className="divider mt-2 mb-3 w-25 bg-warning rounded border-warning" />
+                                      <div className="divider mt-2 border-1 mb-2 w-25 bg-warning rounded border-warning" />
                                       <div className="font-weight-bold font-12 text-uppercase nowrap">
                                         PROJECT COMPLETED
                                         <br />
@@ -760,9 +760,9 @@ const SidebarUserbox = () => {
                         {/* </Card> */}
                       </Grid>
                     </Grid>
-                  </List>
-                </div>
-              </PerfectScrollbar>
+                  </PerfectScrollbar>
+                </List>
+              </div>
             </Menu>
           </div>
         </Box>

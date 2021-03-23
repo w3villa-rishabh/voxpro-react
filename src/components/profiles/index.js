@@ -71,7 +71,7 @@ export default function LivePreviewExample() {
     <div className="app-inner-content-layout">
       <div className="app-inner-content-layout--main bg-white p-0">
         <Grid container spacing={2} className="main-card-section">
-          <Grid item ls={12}>
+          <Grid item xs={12} sm={12}>
             <Card>
               <div className="card-img-wrapper h-180px">
                 <div className="card-badges">
@@ -91,7 +91,7 @@ export default function LivePreviewExample() {
                 <div className="main-card">
                   <div className="user-details">
                     <Grid container spacing={4} className="user-info">
-                      <Grid item xs={4}>
+                      <Grid item xs={12} sm={4}>
                         <div className="font-size-xxl font-weight-bold">
                           {currentUser.first_name} {currentUser.last_name}
                         </div>
@@ -105,7 +105,7 @@ export default function LivePreviewExample() {
                           </span>
                         </div>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={12} sm={3}>
                         <div className="d-flex justify-content-between">
                           <div>
                             <small className="d-flex pt-2 align-items-center">
@@ -127,7 +127,7 @@ export default function LivePreviewExample() {
                           </div>
                         </div>
                       </Grid>
-                      <Grid item xs={5}>
+                      <Grid item xs={12} sm={5}>
                         <FontAwesomeIcon
                           icon={['fas', 'pencil-alt']}
                           className="edit"
@@ -144,7 +144,7 @@ export default function LivePreviewExample() {
                           />
                         </div>
                         <Grid container spacing={1}>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} sm={6}>
                             <div className="right-corner-info">
                               <FontAwesomeIcon
                                 icon={['fas', 'times']}
@@ -159,7 +159,7 @@ export default function LivePreviewExample() {
                               </a>
                             </div>
                           </Grid>
-                          <Grid item xs={6}>
+                          <Grid item xs={12} sm={6}>
                             <div className="right-corner-info">
                               <span>
                                 Showcase service your offer so you and your
@@ -180,7 +180,7 @@ export default function LivePreviewExample() {
           </Grid>
         </Grid>
 
-        <div className="z-over py-4 skill-section">
+        <div className="z-over py-2 skill-section">
           <div
             className={clsx(
               'tab-item-wrapper overflow-visible d-none d-block active'
@@ -188,7 +188,7 @@ export default function LivePreviewExample() {
             index={1}>
             <div>
               <Grid container spacing={1}>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <Card className="card-box p-4">
                     <h5>About</h5>
                     <FontAwesomeIcon
@@ -203,7 +203,7 @@ export default function LivePreviewExample() {
                     </div>
                   </Card>
 
-                  <Card className="card-box p-4 mt-4">
+                  <Card className="card-box p-4 mt-3">
                     <h5>Feature</h5>
                     <div className="feature-card">
                       <FontAwesomeIcon
@@ -220,7 +220,7 @@ export default function LivePreviewExample() {
                     </div>
                   </Card>
 
-                  <Card className="card-box p-4 mt-4 experience-card">
+                  <Card className="card-box p-4 mt-3 experience-card">
                     <h5>Experience</h5>
                     <FontAwesomeIcon icon={['fas', 'plus']} className="icon" />
                     <ul>
@@ -356,7 +356,7 @@ export default function LivePreviewExample() {
                     </ul>
                   </Card>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <Card className="card-box p-4 dashboard-card">
                     <h5 className="mb-0">Your Dashboard</h5>
                     <p className="font-italic">Private to you</p>
@@ -368,15 +368,15 @@ export default function LivePreviewExample() {
                       <span>All Start</span>
                     </div>
                     <div className="raging">
-                      <Grid item xs={4}>
+                      <Grid item xs={12} sm={4}>
                         <span className="rating-count">254</span>
                         <p>Who viewed your</p>
                       </Grid>
-                      <Grid item xs={4}>
+                      <Grid item xs={12} sm={4}>
                         <span className="rating-count">697</span>
                         <p>Post views</p>
                       </Grid>
-                      <Grid item xs={4}>
+                      <Grid item xs={12} sm={4}>
                         <span className="rating-count">166</span>
                         <p>Search appearances</p>
                       </Grid>
@@ -400,7 +400,7 @@ export default function LivePreviewExample() {
                     </div>
                   </Card>
 
-                  <Card className="card-box p-4 education-card mt-4">
+                  <Card className="card-box p-4 education-card mt-3">
                     <h5>Education</h5>
                     <FontAwesomeIcon icon={['fas', 'plus']} className="icon" />
                     <ul>
@@ -442,7 +442,7 @@ export default function LivePreviewExample() {
                     </ul>
                   </Card>
 
-                  <Card className="card-box p-4 skill-card mt-4">
+                  <Card className="card-box p-4 skill-card mt-3">
                     <h5>Skill & endorsements</h5>
                     <div className="add-skill">
                       <span className="pr-3">Add a new skill </span>
@@ -542,7 +542,7 @@ export default function LivePreviewExample() {
                     </div>
                   </Card>
 
-                  <Card className="card-box p-4 recommendations-card mt-4">
+                  <Card className="card-box p-4 recommendations-card mt-3">
                     <h5>Recommendations</h5>
                     <div className="add-recommendations">
                       <span className="pr-3">Ask for recommendation</span>
