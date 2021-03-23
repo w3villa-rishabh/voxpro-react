@@ -443,7 +443,7 @@ export default function LivePreviewExample() {
                   </Card>
 
                   <Card className="card-box p-4 skill-card mt-3">
-                    <h5>Skill & endorsements</h5>
+                    <h5 className="m-top">Skill & endorsements</h5>
                     <div className="add-skill">
                       <span className="pr-3">Add a new skill </span>
                       <FontAwesomeIcon
@@ -543,7 +543,7 @@ export default function LivePreviewExample() {
                   </Card>
 
                   <Card className="card-box p-4 recommendations-card mt-3">
-                    <h5>Recommendations</h5>
+                    <h5 className="m-top">Recommendations</h5>
                     <div className="add-recommendations">
                       <span className="pr-3">Ask for recommendation</span>
                       <FontAwesomeIcon

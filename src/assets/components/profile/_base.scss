@@ -329,6 +329,9 @@ ul {
     left: 0;
     right: 0
   }
+  .m-top{
+    margin-top: 20px;
+  }
 }
 
 // For desktop
@@ -336,5 +339,8 @@ ul {
   .profile-menu {
     position: fixed;
     width: calc(100vw - 390px) !important;
+  }
+  .m-top{
+    margin-top: 0px;
   }
 }
