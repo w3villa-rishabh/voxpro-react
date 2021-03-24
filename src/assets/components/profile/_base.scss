@@ -240,7 +240,7 @@ ul {
   .MuiMenu-paper {
     position: absolute;
     top: 78px !important;
-    left: 329px !important;
+    left: 335px !important;
   }
 
   .profile-menu {
@@ -269,6 +269,11 @@ ul {
     max-height: calc(100vh - 135px);
     overflow: scroll;
     overflow-x: hidden;
+    border: 2px solid #ccc;
+
+    .card-profile {
+      border-radius : unset !important;
+    }
   }
 }
 
