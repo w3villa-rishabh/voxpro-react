@@ -338,7 +338,7 @@ const SidebarUserbox = () => {
                             rowsMax={4}
                           />
                           <h4 className="font-size-sm font-weight-bold my-1">
-                            SOCIAL MEDIA PROFILEs
+                            SOCIAL MEDIA PROFILES
                           </h4>
                           <div>
                             <Tooltip title="Github">
