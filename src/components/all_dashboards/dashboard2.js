@@ -283,7 +283,7 @@ export default function LivePreviewExample() {
             </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Grid item xs={12} className="d-flex">
+            <Grid item xs={12} className="d-flex h-100">
               <Card className="card-box w-100">
                 <div className="card-header">
                   <div className="card-header--title">
