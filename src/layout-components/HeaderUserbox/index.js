@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  Avatar,
   Badge,
   Menu,
   Button,
   List,
   ListItem,
-  Divider,
-  Typography,
-  Tooltip
+  Divider
 } from '@material-ui/core';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
@@ -87,7 +84,7 @@ const HeaderUserbox = () => {
             badgeContent=" "
             classes={{ badge: 'bg-success badge-circle border-0' }}
             variant="dot">
-            <div className="avatar-icon rounded">
+            <div className="avatar-icon rounded mobile-view-btn">
               <img src={avatar7} alt="..." />
             </div>
           </StyledBadge>
@@ -134,8 +131,7 @@ const HeaderUserbox = () => {
           <List
             component="div"
             className="nav-neutral-primary text-left d-flex align-items-center flex-column">
-
-              {/* <ListItem>
+            {/* <ListItem>
                 <div className="align-box-row">
                   <Badge
                     overlap="circle"
@@ -156,7 +152,7 @@ const HeaderUserbox = () => {
                   </div>
                 </div>
               </ListItem> */}
-           
+
             <ListItem button className="d-block text-left">
               View Profile
             </ListItem>
@@ -168,18 +164,17 @@ const HeaderUserbox = () => {
             </ListItem>
             <Divider className="w-100" />
             <ListItem className="d-block text-center p-3">
-                <Button
-                  variant="contained"
-                  size="small"
-                  className="btn-primary"
-                  onClick={userLogout}>
-                  <span className="btn-wrapper--icon">
-                    <FontAwesomeIcon icon={['fas', 'sign-out-alt']} />
-                  </span>
-                  <span className="btn-wrapper--label">Logout</span>
-                </Button>
-              </ListItem>
-
+              <Button
+                variant="contained"
+                size="small"
+                className="btn-primary"
+                onClick={userLogout}>
+                <span className="btn-wrapper--icon">
+                  <FontAwesomeIcon icon={['fas', 'sign-out-alt']} />
+                </span>
+                <span className="btn-wrapper--label">Logout</span>
+              </Button>
+            </ListItem>
           </List>
           <Divider className="w-100" />
           {/* <div className="d-flex py-3 justify-content-center">

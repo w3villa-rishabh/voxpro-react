@@ -113,3 +113,23 @@
     }
   }
 }
+
+
+// For mobile
+@media (max-width: 767px) {
+  .app-header--pane {
+   .mobile-view-btn{
+    height: 30px !important;
+    line-height: 30px !important;
+    width: 30px !important;
+
+    svg{
+      width: 14px !important;
+    }
+   }
+  }
+
+  #header-search-input {
+    width: calc(100vw - 150px) !important;
+  }
+}

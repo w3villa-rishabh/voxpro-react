@@ -77,8 +77,8 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
                                 <div className="avatar-icon-wrapper mr-2">
@@ -102,8 +102,8 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="pt-3 pt-xl-0 d-flex align-items-center">
                               <div className="align-box-row flex-grow-1">
                                 <div className="d-flex flex-column flex-grow-1"></div>
@@ -125,8 +125,8 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
                                 <div className="avatar-icon-wrapper mr-2">
@@ -150,8 +150,8 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="pt-3 pt-xl-0 d-flex align-items-center">
                               <div className="align-box-row flex-grow-1">
                                 <div className="d-flex flex-column flex-grow-1"></div>
@@ -173,8 +173,8 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
                                 <div className="avatar-icon-wrapper mr-2">
@@ -198,8 +198,8 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="pt-3 pt-xl-0 d-flex align-items-center">
                               <div className="align-box-row flex-grow-1">
                                 <div className="d-flex flex-column flex-grow-1"></div>
@@ -221,8 +221,8 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
                                 <div className="avatar-icon-wrapper mr-2">
@@ -246,8 +246,8 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={6}
-                              md={12}
+                              xs={12}
+                              md={6}
                               className="pt-3 pt-xl-0 d-flex align-items-center">
                               <div className="align-box-row flex-grow-1">
                                 <div className="d-flex flex-column flex-grow-1"></div>

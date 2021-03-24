@@ -186,7 +186,7 @@ const HeaderDots = () => {
             classes={{ badge: 'bg-info badge-circle' }}>
             <Button
               onClick={handleClickChat}
-              className="btn-transition-none bg-neutral-info text-info font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 rounded position-relative">
+              className="btn-transition-none bg-neutral-info text-info font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded position-relative">
               <span>
                 <FontAwesomeIcon
                   icon={['far', 'comment']}
@@ -413,7 +413,7 @@ const HeaderDots = () => {
             classes={{ badge: 'bg-success badge-circle' }}>
             <Button
               onClick={handleClick1}
-              className="btn-transition-none bg-neutral-success text-success font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 rounded position-relative">
+              className="btn-transition-none bg-neutral-success text-success font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded position-relative">
               <span>
                 <NotificationsActiveTwoToneIcon />
               </span>
@@ -637,7 +637,7 @@ const HeaderDots = () => {
             classes={{ badge: 'bg-danger badge-circle-sm' }}>
             <Button
               onClick={handleClick2}
-              className="btn-transition-none bg-neutral-danger text-danger font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 rounded position-relative">
+              className="btn-transition-none bg-neutral-danger text-danger font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded position-relative">
               <span>
                 <PollTwoToneIcon />
               </span>
@@ -713,7 +713,7 @@ const HeaderDots = () => {
         <span className="pr-2">
           <Button
             onClick={handleClick3}
-            className="bg-neutral-first text-first font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 rounded btn-transition-none">
+            className="bg-neutral-first text-first font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded btn-transition-none">
             <span>
               <PeopleAltTwoToneIcon />
             </span>
