@@ -24,7 +24,7 @@ import {
   MenuItem
 } from '@material-ui/core';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink ,useHistory} from 'react-router-dom';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
@@ -165,6 +165,8 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
 });
 
 const SidebarUserbox = () => {
+  const history = useHistory();
+
   const [currentUser] = useState(getCurrentUser());
 
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
@@ -232,7 +234,7 @@ const SidebarUserbox = () => {
                 <List
                   component="div"
                   className="text-left d-block pt-0 mini-profile-list">
-                  <PerfectScrollbar>
+                  {/* <PerfectScrollbar> */}
                     <Grid container spacing={2}>
                       <Grid item sm={5}>
                         <Card>
@@ -268,16 +270,16 @@ const SidebarUserbox = () => {
                               fullWidth
                               variant="outlined"
                               id="textfield-user"
-                              label="Socila media profile"
+                              label="Social media profile"
                               multiline
                               rowsMax={4}
                             />
-                            <h4 className="font-size-lg font-weight-bold my-1">
-                              Social Media Profiles
+                            <h4 className="font-size-sm font-weight-bold my-1">
+                              SOCIAL MEDIA PROFILEs
                             </h4>
                             <div>
                               <Tooltip title="Github">
-                                <Button className="btn-github text-github btn-pill bg-white d-50 p-0">
+                                <Button className="btn-github text-github btn-pill bg-white d-40 p-0">
                                   <span className="btn-wrapper--icon">
                                     <FontAwesomeIcon
                                       icon={['fab', 'github']}
@@ -287,7 +289,7 @@ const SidebarUserbox = () => {
                                 </Button>
                               </Tooltip>
                               <Tooltip title="Instagram" arrow>
-                                <Button className="btn-instagram text-instagram btn-pill bg-white d-50 p-0 mx-2">
+                                <Button className="btn-instagram text-instagram btn-pill bg-white d-40 p-0 mx-2">
                                   <span className="btn-wrapper--icon">
                                     <FontAwesomeIcon
                                       icon={['fab', 'instagram']}
@@ -297,7 +299,7 @@ const SidebarUserbox = () => {
                                 </Button>
                               </Tooltip>
                               <Tooltip title="Google" arrow>
-                                <Button className="btn-google text-google btn-pill bg-white d-50 p-0">
+                                <Button className="btn-google text-google btn-pill bg-white d-40 p-0">
                                   <span className="btn-wrapper--icon">
                                     <FontAwesomeIcon
                                       icon={['fab', 'google']}
@@ -307,7 +309,7 @@ const SidebarUserbox = () => {
                                 </Button>
                               </Tooltip>
                               <Tooltip title="Add">
-                                <Button className="btn-success btn-icon btn-transition-none btn-pill d-50 p-0 m-2">
+                                <Button className="btn-success btn-icon btn-transition-none btn-pill d-40 p-0 m-2">
                                   <span className="btn-wrapper--icon">
                                     <FontAwesomeIcon
                                       icon={['fas', 'plus']}
@@ -319,7 +321,7 @@ const SidebarUserbox = () => {
                             </div>
 
                             <div className="divider my-1" />
-                            <h4 className="font-size-md font-weight-bold my-1">
+                            <h4 className="font-size-sm font-weight-bold my-1">
                               SKILLS
                             </h4>
 
@@ -448,7 +450,7 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">Permanent</b>
-                                        <span className="text-black-50 font-12 d-block">
+                                        <span className="text-black-50 font-10 d-block">
                                           Desired Employment Type
                                         </span>
                                       </div>
@@ -464,7 +466,7 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">$3,586</b>
-                                        <span className="text-black-50 font-12 d-block">
+                                        <span className="text-black-50 font-10 d-block">
                                           Desired Annual Salary
                                         </span>
                                       </div>
@@ -482,7 +484,7 @@ const SidebarUserbox = () => {
                                         <b className="font-12">
                                           City of London
                                         </b>
-                                        <span className="text-black-50 font-12 d-block">
+                                        <span className="text-black-50 font-10 d-block">
                                           Desired Location
                                         </span>
                                       </div>
@@ -498,7 +500,7 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">Permanent</b>
-                                        <span className="text-black-50 font-12 d-block">
+                                        <span className="text-black-50 font-10 d-block">
                                           Current Employment Type
                                         </span>
                                       </div>
@@ -514,7 +516,7 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">$57,500</b>
-                                        <span className="text-black-50 font-12 d-block">
+                                        <span className="text-black-50 font-10 d-block">
                                           Current Annual Salary
                                         </span>
                                       </div>
@@ -530,7 +532,7 @@ const SidebarUserbox = () => {
                                       </div>
                                       <div className="mt-2 line-height-sm">
                                         <b className="font-12">West London</b>
-                                        <span className="text-black-50 font-12 d-block">
+                                        <span className="text-black-50 font-10 d-block">
                                           Current Location
                                         </span>
                                       </div>
@@ -569,7 +571,7 @@ const SidebarUserbox = () => {
                                   <span className="d-block">
                                     Freelance Designer, Mutual Inc.
                                   </span>
-                                  <p className="text-black-50">
+                                  <p className="text-black-50 font-12">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. In eget pharetra dolor, ac
                                     sollicitudin sem. Nulla facilisi.
@@ -604,7 +606,7 @@ const SidebarUserbox = () => {
                                   <span className="d-block">
                                     Freelance Designer, Mutual Inc.
                                   </span>
-                                  <p className="text-black-50">
+                                  <p className="text-black-50 font-12">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. In eget pharetra dolor, ac
                                     sollicitudin sem. Nulla facilisi.
@@ -639,7 +641,7 @@ const SidebarUserbox = () => {
                                   <span className="d-block">
                                     Freelance Designer, Mutual Inc.
                                   </span>
-                                  <p className="text-black-50">
+                                  <p className="text-black-50 font-12">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. In eget pharetra dolor, ac
                                     sollicitudin sem. Nulla facilisi.
@@ -677,7 +679,7 @@ const SidebarUserbox = () => {
                                   <span className="d-block">
                                     Freelance Designer, Mutual Inc.
                                   </span>
-                                  <p className="text-black-50">
+                                  <p className="text-black-50 font-12">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. In eget pharetra dolor, ac
                                     sollicitudin sem. Nulla facilisi.
@@ -712,7 +714,7 @@ const SidebarUserbox = () => {
                                   <span className="d-block">
                                     Freelance Designer, Mutual Inc.
                                   </span>
-                                  <p className="text-black-50">
+                                  <p className="text-black-50 font-12">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. In eget pharetra dolor, ac
                                     sollicitudin sem. Nulla facilisi.
@@ -747,7 +749,7 @@ const SidebarUserbox = () => {
                                   <span className="d-block">
                                     Freelance Designer, Mutual Inc.
                                   </span>
-                                  <p className="text-black-50">
+                                  <p className="text-black-50 font-12">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. In eget pharetra dolor, ac
                                     sollicitudin sem. Nulla facilisi.
@@ -760,15 +762,16 @@ const SidebarUserbox = () => {
                         {/* </Card> */}
                       </Grid>
                     </Grid>
-                  </PerfectScrollbar>
+                  {/* </PerfectScrollbar> */}
                 </List>
               </div>
             </Menu>
           </div>
         </Box>
+        
         <div className="avatar-icon-wrapper avatar-icon-md">
           <div className="avatar-icon rounded-circle">
-            <img alt="..." src={avatar2} />
+            <img className="pointer" alt="..." src={avatar2} onClick={()=>{history.push("/view-profile");}} />
           </div>
         </div>
         <div className="my-3 userbox-details">
@@ -781,7 +784,7 @@ const SidebarUserbox = () => {
           <OnlineAndAvailability ref={childRef} />
 
           <small className="d-block font-12 text-white-50">
-            Business Analyst | London, United Kingdom
+          Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million
           </small>
         </div>
         <div className="py-1">
