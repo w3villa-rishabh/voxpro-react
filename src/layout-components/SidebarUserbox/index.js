@@ -64,21 +64,29 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl1, setAnchorEl1] = useState(null);
+  const [onlineStatus, setOnlineStatus] = useState('Online');
+  const [availability, setAvailability] = useState('Immediate');
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
     setAnchorEl(null);
+    if (event.target.innerText) {
+      setOnlineStatus(event.target.innerText);
+    }
   };
 
   const handleClick1 = (event) => {
     setAnchorEl1(event.currentTarget);
   };
 
-  const handleClose1 = () => {
+  const handleClose1 = (event) => {
     setAnchorEl1(null);
+    if (event.target.innerText) {
+      setAvailability(event.target.innerText);
+    }
   };
   return (
     <div className="profile-btn">
@@ -88,7 +96,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         color="dangler"
         size="small"
         aria-label="button">
-        <Button className="btn-transition-none red">Online</Button>
+        <Button className="btn-transition-none red">{onlineStatus}</Button>
         <Button
           className="btn-transition-none red"
           color="dangler"
@@ -98,28 +106,56 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
-      <Menu
-        id="simple-menu2"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        classes={{ list: 'p-0' }}>
-        <div className="p-3">
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-            Offline
-          </MenuItem>
-        </div>
-      </Menu>
+      {onlineStatus === 'Online' && (
+        <Menu
+          id="simple-menu2"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          classes={{ list: 'p-0' }}>
+          <div className="p-3">
+            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+              Offline
+            </MenuItem>
+          </div>
+        </Menu>
+      )}
+
+      {onlineStatus === 'Offline' && (
+        <Menu
+          id="simple-menu2"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          classes={{ list: 'p-0' }}>
+          <div className="p-3">
+            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+              Online
+            </MenuItem>
+          </div>
+        </Menu>
+      )}
+
       <ButtonGroup
         variant="contained"
         className="btn-second btn-profile"
@@ -127,7 +163,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         size="small"
         aria-label="button">
         <Button className="btn-transition-none nowrap light-blue">
-          Availability: Immediate
+          Availability: {availability}
         </Button>
         <Button
           className="btn-transition-none light-blue"
@@ -138,28 +174,55 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
-      <Menu
-        id="simple-menu2"
-        anchorEl={anchorEl1}
-        keepMounted
-        open={Boolean(anchorEl1)}
-        onClose={handleClose1}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        classes={{ list: 'p-0' }}>
-        <div className="p-3">
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
-            No Immediate
-          </MenuItem>
-        </div>
-      </Menu>
+      {availability === 'Immediate' && (
+        <Menu
+          id="simple-menu2"
+          anchorEl={anchorEl1}
+          keepMounted
+          open={Boolean(anchorEl1)}
+          onClose={handleClose1}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          classes={{ list: 'p-0' }}>
+          <div className="p-3">
+            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+              No Immediate
+            </MenuItem>
+          </div>
+        </Menu>
+      )}
+
+      {availability === 'No Immediate' && (
+        <Menu
+          id="simple-menu2"
+          anchorEl={anchorEl1}
+          keepMounted
+          open={Boolean(anchorEl1)}
+          onClose={handleClose1}
+          getContentAnchorEl={null}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          classes={{ list: 'p-0' }}>
+          <div className="p-3">
+            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+              Immediate
+            </MenuItem>
+          </div>
+        </Menu>
+      )}
     </div>
   );
 });
