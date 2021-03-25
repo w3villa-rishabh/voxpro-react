@@ -23,7 +23,12 @@ import {
   ButtonGroup,
   MenuItem
 } from '@material-ui/core';
-
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 import { useHistory } from 'react-router-dom';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
@@ -66,6 +71,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
   const [anchorEl1, setAnchorEl1] = useState(null);
   const [onlineStatus, setOnlineStatus] = useState('Online');
   const [availability, setAvailability] = useState('Immediate');
+  const [selectedDate, setSelectedDate] = useState(new Date('2020-08-18'));
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -88,73 +94,66 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
       setAvailability(event.target.innerText);
     }
   };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setAvailability(date.toLocaleDateString());
+  };
+
   return (
     <div className="profile-btn">
       <ButtonGroup
         variant="contained"
         className="btn-second btn-profile mr-1"
-        color="dangler"
         size="small"
         aria-label="button">
-        <Button className="btn-transition-none red">{onlineStatus}</Button>
         <Button
-          className="btn-transition-none red"
-          color="dangler"
+          className="btn-transition-none p-1"
+          style={
+            onlineStatus === 'Offline'
+              ? { backgroundColor: 'red' }
+              : { backgroundColor: 'green' }
+          }>
+          {onlineStatus}
+        </Button>
+        <Button
+          className="btn-transition-none p-0"
+          style={
+            onlineStatus === 'Offline'
+              ? { backgroundColor: 'red' }
+              : { backgroundColor: 'green' }
+          }
           size="small"
           aria-haspopup="true"
           onClick={handleClick}>
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
-      {onlineStatus === 'Online' && (
-        <Menu
-          id="simple-menu2"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          classes={{ list: 'p-0' }}>
-          <div className="p-3">
-            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-              Offline
-            </MenuItem>
-          </div>
-        </Menu>
-      )}
-
-      {onlineStatus === 'Offline' && (
-        <Menu
-          id="simple-menu2"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          classes={{ list: 'p-0' }}>
-          <div className="p-3">
-            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
-              Online
-            </MenuItem>
-          </div>
-        </Menu>
-      )}
+      <Menu
+        id="simple-menu2"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        classes={{ list: 'p-0' }}>
+        <div className="p-2">
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            Online
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            Offline
+          </MenuItem>
+        </div>
+      </Menu>
 
       <ButtonGroup
         variant="contained"
@@ -162,7 +161,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         color="dangler"
         size="small"
         aria-label="button">
-        <Button className="btn-transition-none nowrap light-blue">
+        <Button className="btn-transition-none nowrap p-2 light-blue">
           Availability: {availability}
         </Button>
         <Button
@@ -174,55 +173,48 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
-      {availability === 'Immediate' && (
-        <Menu
-          id="simple-menu2"
-          anchorEl={anchorEl1}
-          keepMounted
-          open={Boolean(anchorEl1)}
-          onClose={handleClose1}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          classes={{ list: 'p-0' }}>
-          <div className="p-3">
-            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
-              No Immediate
-            </MenuItem>
-          </div>
-        </Menu>
-      )}
-
-      {availability === 'No Immediate' && (
-        <Menu
-          id="simple-menu2"
-          anchorEl={anchorEl1}
-          keepMounted
-          open={Boolean(anchorEl1)}
-          onClose={handleClose1}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          classes={{ list: 'p-0' }}>
-          <div className="p-3">
-            <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
-              Immediate
-            </MenuItem>
-          </div>
-        </Menu>
-      )}
+      <Menu
+        id="simple-menu2"
+        anchorEl={anchorEl1}
+        keepMounted
+        open={Boolean(anchorEl1)}
+        onClose={handleClose1}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        classes={{ list: 'p-0' }}>
+        <div className="p-2">
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+            Immediate
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+            Not available
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark">
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                label="Available from date"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date'
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          </MenuItem>
+        </div>
+      </Menu>
     </div>
   );
 });
