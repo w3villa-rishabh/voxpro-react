@@ -71,7 +71,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
   const [anchorEl1, setAnchorEl1] = useState(null);
   const [onlineStatus, setOnlineStatus] = useState('Online');
   const [availability, setAvailability] = useState('Immediate');
-  const [selectedDate, setSelectedDate] = useState(new Date('2020-08-18'));
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -199,9 +199,10 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <MenuItem className="pr-5 px-3 text-dark">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
+                disablePast
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="dd/MM/yyyy"
                 margin="normal"
                 id="date-picker-inline"
                 label="Available from date"
