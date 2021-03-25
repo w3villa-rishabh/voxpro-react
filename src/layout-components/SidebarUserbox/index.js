@@ -24,7 +24,7 @@ import {
   MenuItem
 } from '@material-ui/core';
 
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import PropTypes from 'prop-types';
@@ -235,6 +235,10 @@ const SidebarUserbox = () => {
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
   const childRef = useRef();
   const [value, setValue] = useState(0);
+  const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
+
+  const [editSocialProfile, setEditProfile] = useState(editValue);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // parse data parent to child
@@ -243,6 +247,7 @@ const SidebarUserbox = () => {
 
   const handleClickMenu1 = (event) => {
     setAnchorElMenu1(event.currentTarget);
+    setEditProfile(editValue);
   };
   const handleCloseMenu1 = () => {
     setAnchorElMenu1(null);
@@ -271,7 +276,7 @@ const SidebarUserbox = () => {
               anchorEl={anchorElMenu1}
               keepMounted
               open={Boolean(anchorElMenu1)}
-              onClose={handleCloseMenu1}
+              // onClose={handleCloseMenu1}
               classes={{ list: 'p-0' }}
               getContentAnchorEl={null}
               className="profile-menu-card"
@@ -333,9 +338,14 @@ const SidebarUserbox = () => {
                             fullWidth
                             variant="outlined"
                             id="textfield-user"
-                            label="Social media profile"
+                            label="Edit media profile"
                             multiline
                             rowsMax={4}
+                            inputProps={{ style: { fontSize: 10 } }}
+                            onChange={(event) => {
+                              setEditProfile(event.target.value);
+                            }}
+                            value={editSocialProfile}
                           />
                           <h4 className="font-size-sm font-weight-bold my-1">
                             SOCIAL MEDIA PROFILES
@@ -410,8 +420,10 @@ const SidebarUserbox = () => {
 
                           <div className="divider my-2" />
                           <Button
-                            component={NavLink}
-                            to="/view-profile"
+                            onClick={() => {
+                              history.push('/view-profile');
+                              handleCloseMenu1();
+                            }}
                             variant="text"
                             className="btn-outline-first mt-2">
                             View complete profile
@@ -419,7 +431,7 @@ const SidebarUserbox = () => {
                         </CardContent>
                       </Card>
                     </Grid>
-                    <Grid item sm={7} className="pr-3">
+                    <Grid item sm={7}>
                       <div className="card-header-profile">
                         <div className="card-header--title">
                           <Tabs
@@ -853,7 +865,7 @@ const SidebarUserbox = () => {
 
           <small className="d-block font-12 text-white-50">
             Senior Business Analyst with 15 years experience in the retail
-            industry and FMCG industry, with project spending 5-10 million
+            industry and FMCG industry, with project spending 5-10 million.
           </small>
         </div>
         <div className="py-1">

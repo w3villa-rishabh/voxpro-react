@@ -8,11 +8,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import MuiTheme from './theme';
 // Layout Blueprints
 
-import {
-  LeftSidebar,
-  CollapsedSidebar,
-  MinimalLayout
-} from './components/all_sidebars';
+import { LeftSidebar, MinimalLayout } from './components/all_sidebars';
 
 // Example Pages
 
@@ -39,7 +35,6 @@ const Onboarding = lazy(() => import('./components/onboarding_documents'));
 //reset password
 
 const ResetPassword = lazy(() => import('./components/reset_password'));
-var userData = null;
 const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
 
 const Routes = () => {
@@ -98,12 +93,12 @@ const Routes = () => {
               transition={{ duration: 0.4 }}>
               <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
                 <div className="d-flex align-items-center flex-column px-4">
-                  <PropagateLoader color={'var(--primary)'} loading={true}/>
+                  <PropagateLoader color={'var(--primary)'} loading={true} />
                 </div>
                 <div className="text-muted font-size-xl text-center pt-3">
                   {/* Please wait while we load Voxpro for you */}
                   <span className="font-size-lg d-block text-dark">
-                  Please wait while we load Voxpro for you
+                    Please wait while we load Voxpro for you
                   </span>
                 </div>
               </div>
@@ -124,7 +119,8 @@ const Routes = () => {
                 '/profile-edit',
                 '/documents',
                 '/ir35-verify',
-                '/request-information'
+                '/request-information',
+                '/view-profile'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -132,11 +128,12 @@ const Routes = () => {
                   <Route path="/profile-edit" component={EditProfile} />
                   <Route path="/documents" component={Onboarding} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
+                  <Route path="/view-profile" component={Profile} />
                 </Switch>
               </LeftSidebar>
             </Route>
 
-            <Route path={['/view-profile']}>
+            {/* <Route path={['/view-profile']}>
               <CollapsedSidebar>
                 <Switch location={location} key={location.pathname}>
                   <motion.div
@@ -149,9 +146,16 @@ const Routes = () => {
                   </motion.div>
                 </Switch>
               </CollapsedSidebar>
-            </Route>
+            </Route> */}
 
-            <Route path={['/login', '/sign-up', '/recover-password', '/api/users/confirmation', '/reset-password']}>
+            <Route
+              path={[
+                '/login',
+                '/sign-up',
+                '/recover-password',
+                '/api/users/confirmation',
+                '/reset-password'
+              ]}>
               <MinimalLayout>
                 <Switch location={location} key={location.pathname}>
                   <motion.div
@@ -162,15 +166,15 @@ const Routes = () => {
                     transition={pageTransition}>
                     <Route path="/login" component={LoginPage} />
                     <Route path="/sign-up" component={RegisterPage} />
-                    <Route path="/api/users/confirmation" component={LoginPage} />
+                    <Route
+                      path="/api/users/confirmation"
+                      component={LoginPage}
+                    />
                     <Route
                       path="/recover-password"
                       component={PageRecoverCover}
                     />
-                     <Route
-                      path="/reset-password"
-                      component={ResetPassword}
-                    />
+                    <Route path="/reset-password" component={ResetPassword} />
                   </motion.div>
                 </Switch>
               </MinimalLayout>
