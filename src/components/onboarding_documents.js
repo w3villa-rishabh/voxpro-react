@@ -48,7 +48,6 @@ export default function OnBoardDocument() {
         console.log('response.data', response.data);
         setFiles([]);
         setFileUpload({});
-        getDocuments();
       } else {
         alert('Something went wrong..');
       }
