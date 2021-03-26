@@ -64,30 +64,29 @@ export default function LoginComponent() {
 
   const responseGoogle = (response) => {
     console.log('Google response', response.profileObj);
-    debugger
-    if (!response.error) {
-      socialLogin(response.profileObj);
-    }
+    socialLogin(response.profileObj);
   };
 
   const socialLogin = (socialObj) => {
-    api
-      .post('/api/user/social_sign_up', {
-        user: socialObj
-      })
-      .then((response) => {
-        if (response.data.success) {
-          localStorage.setItem('user', JSON.stringify(response.data.user));
-          window.location.href = '/dashboard';
-        } else {
-          handleClick({
-            message: 'This notification is positioned top right!',
-            toastrStyle: 'toastr-second',
-            vertical: 'top',
-            horizontal: 'right'
-          });
-        }
-      });
+    if (socialObj.email) {
+      api
+        .post('/api/user/social_sign_up', {
+          user: socialObj
+        })
+        .then((response) => {
+          if (response.data.success) {
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.location.href = '/dashboard';
+          } else {
+            handleClick({
+              message: 'This notification is positioned top right!',
+              toastrStyle: 'toastr-second',
+              vertical: 'top',
+              horizontal: 'right'
+            });
+          }
+        });
+    }
   };
 
   let save = (e) => {
