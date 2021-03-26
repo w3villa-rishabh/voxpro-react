@@ -632,7 +632,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Senior bushiness analyst
+                                  Senior business analyst
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -667,7 +667,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Bushiness analyst
+                                  Business analyst
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -702,7 +702,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Bushiness analyst
+                                  Business analyst
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -740,7 +740,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Bsc Bushiness & Economics
+                                  BSc Business & Economics
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
