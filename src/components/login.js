@@ -146,6 +146,7 @@ export default function LoginComponent() {
                               onFailure={responseGoogle}
                               cookiePolicy={'single_host_origin'}
                               isSignedIn={false}
+                              autoLoad={false}
                               className="gb-btn"
                               icon={false}>
                               <FontAwesomeIcon icon={['fab', 'google']} />
