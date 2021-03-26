@@ -78,7 +78,7 @@ const SidebarMenu = (props) => {
                 <ul>
                   <li>
                     <NavLink onClick={toggleSidebarMobile} to="/documents">
-                      My Document
+                      My Documents
                     </NavLink>
                   </li>
                   <li>
