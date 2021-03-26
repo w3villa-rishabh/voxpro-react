@@ -64,7 +64,9 @@ export default function LoginComponent() {
 
   const responseGoogle = (response) => {
     console.log('Google response', response.profileObj);
-    socialLogin(response.profileObj);
+    if (response.profileObj) {
+      socialLogin(response.profileObj);
+    }
   };
 
   const socialLogin = (socialObj) => {
