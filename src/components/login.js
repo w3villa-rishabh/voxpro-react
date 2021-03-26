@@ -56,7 +56,7 @@ export default function LoginComponent() {
     let socialObj = {
       email: response.email,
       fbId: response.id,
-      imageUrl: response.picture.url,
+      imageUrl: response.picture.data.url,
       name: response.name
     };
     socialLogin(socialObj);
