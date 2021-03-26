@@ -54,7 +54,7 @@ export default function LoginComponent() {
   const responseFacebook = (response) => {
     console.log('Facebook response', response);
     let socialObj = {
-      email: response.gmail,
+      email: response.email,
       fbId: response.id,
       imageUrl: response.picture.url,
       name: response.name
