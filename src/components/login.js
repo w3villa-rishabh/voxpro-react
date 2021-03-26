@@ -14,8 +14,6 @@ import {
 } from '@material-ui/core';
 
 import api from '../api';
-import CloseIcon from '@material-ui/icons/Close';
-import Snackbar from '@material-ui/core/Snackbar';
 
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
@@ -23,29 +21,22 @@ import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
 import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
+import FacebookLogin from 'react-facebook-login';
+// import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
+import { GoogleLogin } from 'react-google-login';
+
 export default function LoginComponent() {
-
-
-
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
     horizontal: 'center',
     toastrStyle: '',
     message: 'This is a toastr/snackbar notification!'
-});
+  });
 
-const { vertical, horizontal, open, toastrStyle, message } = state;
-
-const handleClick = (newState) => () => {
+  const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
-};
-
-const handleClose = () => {
-    setState({ ...state, open: false });
-};
-
-
+  };
 
   const [checked1, setChecked1] = useState(true);
   let [account, setAccount] = useState({
@@ -60,6 +51,42 @@ const handleClose = () => {
     setAccount(account);
   };
 
+  const responseFacebook = (response) => {
+    console.log('Facebook response', response);
+    let socialObj = {
+      email: response.gmail,
+      fbId: response.id,
+      imageUrl: response.picture.url,
+      name: response.name
+    };
+    socialLogin(socialObj);
+  };
+
+  const responseGoogle = (response) => {
+    console.log('Google response', response.profileObj);
+    socialLogin(response.profileObj);
+  };
+
+  const socialLogin = (socialObj) => {
+    api
+      .post('/api/user/social_sign_up', {
+        user: socialObj
+      })
+      .then((response) => {
+        if (response.data.success) {
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          window.location.href = '/dashboard';
+        } else {
+          handleClick({
+            message: 'This notification is positioned top right!',
+            toastrStyle: 'toastr-second',
+            vertical: 'top',
+            horizontal: 'right'
+          });
+        }
+      });
+  };
+
   let save = (e) => {
     e.preventDefault();
     api
@@ -71,7 +98,12 @@ const handleClose = () => {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           window.location.href = '/dashboard';
         } else {
-          handleClick({ message: 'This notification is positioned top right!', toastrStyle: 'toastr-second', vertical: 'top', horizontal: 'right' })
+          handleClick({
+            message: 'This notification is positioned top right!',
+            toastrStyle: 'toastr-second',
+            vertical: 'top',
+            horizontal: 'right'
+          });
         }
       });
   };
@@ -108,26 +140,27 @@ const handleClose = () => {
                             </p> */}
                           </div>
                           <div className="text-center py-4 rounded bg-secondary my-4">
-                            <Button
-                              className="m-2 btn-pill px-4 font-weight-bold btn-google"
-                              size="small">
-                              <span className="btn-wrapper--icon">
-                                <FontAwesomeIcon icon={['fab', 'google']} />
-                              </span>
-                              <span className="btn-wrapper--label">
-                                Login with Google
-                              </span>
-                            </Button>
-                            <Button
-                              className="m-2 btn-pill px-4 font-weight-bold btn-facebook"
-                              size="small">
-                              <span className="btn-wrapper--icon">
-                                <FontAwesomeIcon icon={['fab', 'facebook']} />
-                              </span>
-                              <span className="btn-wrapper--label">
-                                Login with Facebook
-                              </span>
-                            </Button>
+                            <GoogleLogin
+                              clientId="1021403903346-f2jvk3t2ffaln3ocsnf8sldv2mphifjf.apps.googleusercontent.com"
+                              onSuccess={responseGoogle}
+                              onFailure={responseGoogle}
+                              cookiePolicy={'single_host_origin'}
+                              isSignedIn={false}
+                              className="gb-btn"
+                              icon={false}>
+                              <FontAwesomeIcon icon={['fab', 'google']} />
+                              <span> Login with Google</span>
+                            </GoogleLogin>
+
+                            <FacebookLogin
+                              appId="430160698075558"
+                              autoLoad={false}
+                              fields="name,email,picture"
+                              // onClick={componentClicked}
+                              callback={responseFacebook}
+                              cssClass="fb-btn"
+                              icon="fa-facebook"
+                            />
                           </div>
                           <div className="text-center text-black-50 mb-4">
                             or sign in with credentials
