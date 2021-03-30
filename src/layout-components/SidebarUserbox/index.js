@@ -316,7 +316,7 @@ const SidebarUserbox = () => {
                           <a
                             href="#/"
                             onClick={(e) => e.preventDefault()}
-                            className="avatar-icon-wrapper shadow-lg rounded-circle card-box-hover-rise d-100">
+                            className="avatar-icon-wrapper rounded-circle profile-icon d-100">
                             <div className="avatar-icon rounded-circle">
                               <img
                                 alt="..."
