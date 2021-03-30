@@ -146,12 +146,16 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-2">
+          {/* {onlineStatus === 'Offline' && ( */}
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Online
           </MenuItem>
+          {/* )}
+          {onlineStatus === 'Online' && ( */}
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Offline
           </MenuItem>
+          {/* )} */}
         </div>
       </Menu>
 
@@ -196,6 +200,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
             Not available
           </MenuItem>
+
           <MenuItem className="pr-5 px-3 text-dark">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -231,7 +236,7 @@ const SidebarUserbox = () => {
   const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
 
   const [editSocialProfile, setEditProfile] = useState(editValue);
-  const CHARACTER_LIMIT = 225;
+  const CHARACTER_LIMIT = 255;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -350,7 +355,7 @@ const SidebarUserbox = () => {
                               ' (' +
                               CHARACTER_LIMIT +
                               ') ' +
-                              'max'
+                              'Max'
                             }`}
                           />
                           <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
