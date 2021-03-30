@@ -10,12 +10,13 @@ import {
   TextField
 } from '@material-ui/core';
 
-import api from '../api'
+import api from '../api';
+import { toast } from 'react-toastify';
+
 import hero4 from '../assets/images/voxpro-images/reg-side.jpg';
 import logo from '../assets/images/voxpro-images/logo_vp.png';
 
 export default function LivePreviewExample() {
-
   let [account, setAccount] = useState({
     email: '',
     password: '',
@@ -27,29 +28,34 @@ export default function LivePreviewExample() {
 
   let handleChange = (e) => {
     let name = e.target.name;
-    let value
-    if (name === 'role'){ 
+    let value;
+    if (name === 'role') {
       value = parseInt(e.target.value);
-    }
-    else  {
+    } else {
       value = e.target.value;
     }
     account[name] = value;
     setAccount(account);
-  }
+  };
 
   let userRegister = (e) => {
     e.preventDefault();
-    api.post('/api/users', {user: account}).then((response) => {
-      if(response.data){
-        // localStorage.setItem("user", JSON.stringify(response.data))
-        window.location.href = "/login";
-      }else{
-        alert('Something went wrong..')
-      }
-    });
+    api
+      .post('/api/users', { user: account })
+      .then((response) => {
+        if (response.data) {
+          // localStorage.setItem("user", JSON.stringify(response.data))
+          window.location.href = '/login';
+          toast.success('Sign-up successfully, please verify..');
+        } else {
+          toast.warning(response.data.message);
+        }
+      })
+      .catch(() => {
+        toast.error('Something went wrong');
+      });
     console.log('The link was clicked.');
-  }
+  };
 
   return (
     <>
@@ -69,16 +75,18 @@ export default function LivePreviewExample() {
                         <div className="py-4">
                           <div className="text-center">
                             <h3 className="display-4 mb-2 font-weight-bold">
-                              <img alt="..."
-                                  className="img-fluid"
-                                  src={logo}
-                                  width="200"
+                              <img
+                                alt="..."
+                                className="img-fluid"
+                                src={logo}
+                                width="200"
                               />
                             </h3>
                             <p className="font-size-lg mb-5 text-black-50">
-                              Start using our tools right away! Create an account today!
+                              Start using our tools right away! Create an
+                              account today!
                             </p>
-                          <p class="font-size-lg mb-5 text-black-50"></p>
+                            <p className="font-size-lg mb-5 text-black-50"></p>
                           </div>
 
                           <form method="post" onSubmit={userRegister}>
@@ -154,20 +162,20 @@ export default function LivePreviewExample() {
                                 placeholder="Enter your last name"
                               />
                             </div>
-                        
+
                             <div className="mb-3">
-                              <select class="MuiTextField-root MuiFormControl-fullWidth"
+                              <select
+                                className="MuiTextField-root MuiFormControl-fullWidth"
                                 variant="outlined"
                                 size="small"
                                 fullWidth
                                 name="role"
-                                onChange={handleChange}
-                                >
+                                onChange={handleChange}>
                                 <option value="">Select Role</option>
-                                <option value='0'>Admin</option>
-                                <option value='3'>Candidate</option>
-                                <option value='1'>Agency</option>
-                                <option value='2'>Company</option>
+                                <option value="0">Admin</option>
+                                <option value="3">Candidate</option>
+                                <option value="1">Agency</option>
+                                <option value="2">Company</option>
                               </select>
                             </div>
                             <div className="form-group mb-5">
@@ -180,19 +188,16 @@ export default function LivePreviewExample() {
                               type="submit"
                               size="large"
                               fullWidth
-                              className="btn-primary mb-5"
-                              >
-                            Create Account
+                              className="btn-primary mb-5">
+                              Create Account
                             </Button>
                           </form>
                           <div className="text-center text-black-50 mt-3">
-                             Already have account?{' '}
-                              <a
-                                href="/login"
-                                className="text-first">
-                                Login
-                              </a>
-                            </div>
+                            Already have account?{' '}
+                            <a href="/login" className="text-first">
+                              Login
+                            </a>
+                          </div>
                         </div>
                       </Grid>
                     </Grid>
@@ -214,8 +219,7 @@ export default function LivePreviewExample() {
                                 financial complexity made simple
                               </p>
                               <div className="" />
-                              <div>
-                              </div>
+                              <div></div>
                             </div>
                           </div>
                         </div>
