@@ -354,8 +354,7 @@ const SidebarUserbox = () => {
                               'characters remaining' +
                               ' (' +
                               CHARACTER_LIMIT +
-                              ') ' +
-                              'Max'
+                              ' Max)'
                             }`}
                           />
                           <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
