@@ -325,11 +325,11 @@ const SidebarUserbox = () => {
                               />
                             </div>
                           </a>
-                          <h3 className="font-weight-bold font-size-xxl">
+                          <h3 className="font-weight-bold font-size-xxl mb-0">
                             {currentUser.first_name} {currentUser.last_name}
                           </h3>
 
-                          <p className="font-12 font-weight-bold">
+                          <p className="font-12 font-weight-bold mb-0">
                             Business Analyst | London, United Kingdom
                           </p>
                           <OnlineAndAvailability ref={childRef} />
