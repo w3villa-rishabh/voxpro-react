@@ -1,0 +1,37 @@
+.fb-btn{
+  color: #fff;
+  background-color: #3b5999;
+  border-color: #3b5999;
+  padding: 4px 28px 4px 14px;
+  line-height: normal;
+  border-radius: 4.5rem;
+  text-shadow: 0 -1px 0 #354c8c;
+  border-right: #364e92 1px solid;
+  margin-left: 6px;
+  font-size: medium;
+  border-bottom: 0 !important;
+  .fa-facebook{
+    padding: 0 12px;
+  }
+}
+
+.gb-btn{
+  color: #fff !important;
+  background-color: #dd4b39 !important;
+  border-color: #dd4b39 !important;
+  padding: 0px 20px !important;
+  font-size: 14px !important;
+  line-height: normal;
+  border-radius: 4.5rem !important;
+  cursor: pointer !important;
+  margin-right: 6px;
+
+  div{
+    background: #dd4b39 !important;
+    padding: 0px !important;
+  }
+  span{
+    padding: 7px 7px 7px 0px !important;
+    font-size: medium !important;
+  }
+}

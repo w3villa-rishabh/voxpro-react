@@ -17,16 +17,8 @@ export default function OnBoardDocument() {
   const [currentUser] = useState(getCurrentUser());
 
   useEffect(() => {
-    api
-      .get(`/api/user/show_user_documents?id=${currentUser.id}`)
-      .then((response) => {
-        if (response.data) {
-          setDocuments(response.data);
-        } else {
-          alert('Something went wrong..');
-        }
-      });
-  }, [currentUser.id]);
+    getDocuments();
+  }, [getDocuments]);
 
   const handleDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -63,6 +55,19 @@ export default function OnBoardDocument() {
     console.log('The link was clicked.', files);
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function getDocuments() {
+    api
+      .get(`/api/user/show_user_documents?id=${currentUser.id}`)
+      .then((response) => {
+        if (response.data) {
+          setDocuments(response.data);
+        } else {
+          alert('Something went wrong..');
+        }
+      });
+  }
+
   return (
     <>
       <Card>
@@ -70,18 +75,8 @@ export default function OnBoardDocument() {
           {documents.map((file) => (
             <li className="p-2 w-25">
               <Card className="card-box">
-                <div className="text-center py-3">
-                  <div className="d-90 rounded-circle border-0 my-2 card-icon-wrapper bg-plum-plate btn-icon mx-auto text-center">
-                    <div className="avatar-icon-wrapper d-80">
-                      <div className="avatar-icon d-80 rounded-circle">
-                        <img alt="..." src={stock1} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="font-size-xl font-weight-bold pt-2 text-black">
-                    {file.doc_name}
-                  </div>
-                </div>
+                <img height="100%" width="100%" alt="..." src={stock1} />
+                <div className="p-2">{file.doc_name}</div>
               </Card>
             </li>
           ))}

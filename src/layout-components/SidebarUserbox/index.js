@@ -23,8 +23,13 @@ import {
   ButtonGroup,
   MenuItem
 } from '@material-ui/core';
-
-import { NavLink, useHistory } from 'react-router-dom';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { useHistory } from 'react-router-dom';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import PropTypes from 'prop-types';
@@ -64,34 +69,60 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl1, setAnchorEl1] = useState(null);
+  const [onlineStatus, setOnlineStatus] = useState('Online');
+  const [availability, setAvailability] = useState('Immediate');
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
     setAnchorEl(null);
+    if (event.target.innerText) {
+      setOnlineStatus(event.target.innerText);
+    }
   };
 
   const handleClick1 = (event) => {
     setAnchorEl1(event.currentTarget);
   };
 
-  const handleClose1 = () => {
+  const handleClose1 = (event) => {
     setAnchorEl1(null);
+    if (event.target.innerText) {
+      setAvailability(event.target.innerText);
+    }
   };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setAvailability(date.toLocaleDateString());
+  };
+
   return (
     <div className="profile-btn">
       <ButtonGroup
         variant="contained"
         className="btn-second btn-profile mr-1"
-        color="dangler"
         size="small"
         aria-label="button">
-        <Button className="btn-transition-none red">Online</Button>
         <Button
-          className="btn-transition-none red"
-          color="dangler"
+          className="btn-transition-none p-1"
+          style={
+            onlineStatus === 'Offline'
+              ? { backgroundColor: 'red' }
+              : { backgroundColor: 'green' }
+          }>
+          {onlineStatus}
+        </Button>
+        <Button
+          className="btn-transition-none p-0"
+          style={
+            onlineStatus === 'Offline'
+              ? { backgroundColor: 'red' }
+              : { backgroundColor: 'green' }
+          }
           size="small"
           aria-haspopup="true"
           onClick={handleClick}>
@@ -114,20 +145,24 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           horizontal: 'right'
         }}
         classes={{ list: 'p-0' }}>
-        <div className="p-3">
+        <div className="p-2">
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+            Online
+          </MenuItem>
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Offline
           </MenuItem>
         </div>
       </Menu>
+
       <ButtonGroup
         variant="contained"
         className="btn-second btn-profile"
         color="dangler"
         size="small"
         aria-label="button">
-        <Button className="btn-transition-none nowrap light-blue">
-          Availability: Immediate
+        <Button className="btn-transition-none nowrap p-2 light-blue">
+          Availability: {availability}
         </Button>
         <Button
           className="btn-transition-none light-blue"
@@ -154,9 +189,30 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           horizontal: 'right'
         }}
         classes={{ list: 'p-0' }}>
-        <div className="p-3">
+        <div className="p-2">
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
-            No Immediate
+            Immediate
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+            Not available
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-dark">
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disablePast
+                disableToolbar
+                variant="inline"
+                format="dd/MM/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                label="Available from date"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date'
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </MenuItem>
         </div>
       </Menu>
@@ -172,6 +228,11 @@ const SidebarUserbox = () => {
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
   const childRef = useRef();
   const [value, setValue] = useState(0);
+  const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
+
+  const [editSocialProfile, setEditProfile] = useState(editValue);
+  const CHARACTER_LIMIT = 225;
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // parse data parent to child
@@ -180,6 +241,7 @@ const SidebarUserbox = () => {
 
   const handleClickMenu1 = (event) => {
     setAnchorElMenu1(event.currentTarget);
+    setEditProfile(editValue);
   };
   const handleCloseMenu1 = () => {
     setAnchorElMenu1(null);
@@ -208,7 +270,7 @@ const SidebarUserbox = () => {
               anchorEl={anchorElMenu1}
               keepMounted
               open={Boolean(anchorElMenu1)}
-              onClose={handleCloseMenu1}
+              // onClose={handleCloseMenu1}
               classes={{ list: 'p-0' }}
               getContentAnchorEl={null}
               className="profile-menu-card"
@@ -270,12 +332,30 @@ const SidebarUserbox = () => {
                             fullWidth
                             variant="outlined"
                             id="textfield-user"
-                            label="Social media profile"
+                            label="Edit media profile"
                             multiline
                             rowsMax={4}
+                            inputProps={{
+                              style: { fontSize: 10 },
+                              maxlength: CHARACTER_LIMIT
+                            }}
+                            onChange={(event) => {
+                              setEditProfile(event.target.value);
+                            }}
+                            value={editSocialProfile}
+                            size="small"
+                            helperText={`${
+                              CHARACTER_LIMIT - editSocialProfile.length
+                            } ${
+                              'characters remaining' +
+                              ' (' +
+                              CHARACTER_LIMIT +
+                              ') ' +
+                              'max'
+                            }`}
                           />
-                          <h4 className="font-size-sm font-weight-bold my-1">
-                            SOCIAL MEDIA PROFILEs
+                          <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
+                            SOCIAL MEDIA PROFILES
                           </h4>
                           <div>
                             <Tooltip title="Github">
@@ -347,8 +427,10 @@ const SidebarUserbox = () => {
 
                           <div className="divider my-2" />
                           <Button
-                            component={NavLink}
-                            to="/view-profile"
+                            onClick={() => {
+                              history.push('/view-profile');
+                              handleCloseMenu1();
+                            }}
                             variant="text"
                             className="btn-outline-first mt-2">
                             View complete profile
@@ -356,7 +438,7 @@ const SidebarUserbox = () => {
                         </CardContent>
                       </Card>
                     </Grid>
-                    <Grid item sm={7} className="pr-3">
+                    <Grid item sm={7}>
                       <div className="card-header-profile">
                         <div className="card-header--title">
                           <Tabs
@@ -564,7 +646,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Senior bushiness analyst
+                                  Senior business analyst
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -599,7 +681,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Bushiness analyst
+                                  Business analyst
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -634,7 +716,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Bushiness analyst
+                                  Business analyst
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -672,7 +754,7 @@ const SidebarUserbox = () => {
                                   onClick={(e) => e.preventDefault()}
                                   className="font-weight-bold font-size-lg"
                                   title="...">
-                                  Bsc Bushiness & Economics
+                                  BSc Business & Economics
                                 </a>
                                 <span className="d-block">
                                   Freelance Designer, Mutual Inc.
@@ -790,7 +872,7 @@ const SidebarUserbox = () => {
 
           <small className="d-block font-12 text-white-50">
             Senior Business Analyst with 15 years experience in the retail
-            industry and FMCG industry, with project spending 5-10 million
+            industry and FMCG industry, with project spending 5-10 million.
           </small>
         </div>
         <div className="py-1">
