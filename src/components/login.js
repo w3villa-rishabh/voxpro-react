@@ -209,7 +209,6 @@ export default function LoginComponent() {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
-                                      checked={checked1}
                                       onChange={handleChange}
                                       value="checked1"
                                       name="remember_me"
