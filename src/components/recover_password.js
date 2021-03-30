@@ -121,11 +121,11 @@ export default function LivePreviewExample() {
                                             <div className="hero-wrapper w-100 bg-composed-wrapper bg-happy-green min-vh-lg-100">
                                                 <div className="flex-grow-1 w-100 d-flex align-items-center">
                                                     <div
-                                                        className="bg-composed-wrapper--image opacity-7"
+                                                        className="bg-composed-wrapper--image"
                                                         style={{ backgroundImage: 'url(' + hero6 + ')' }}
                                                     />
-                                                    <div className="bg-composed-wrapper--bg bg-second opacity-7" />
-                                                    <div className="bg-composed-wrapper--bg bg-premium-dark opacity-4" />
+                                                    {/* <div className="bg-composed-wrapper--bg bg-second opacity-7" />
+                                                    <div className="bg-composed-wrapper--bg bg-premium-dark opacity-4" /> */}
                                                     <div className="bg-composed-wrapper--content text-center p-5">
                                                         <div className="text-white px-0 px-lg-2 px-xl-4">
                                                             <h1 className="display-3 mb-4 font-weight-bold">

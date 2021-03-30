@@ -10,7 +10,7 @@ import {
   Divider
 } from '@material-ui/core';
 
-import avatar7 from '../../assets/images/avatars/avatar7.jpg';
+import avatar7 from '../../assets/images/avatars/default.png';
 
 import { withStyles } from '@material-ui/core/styles';
 import { getCurrentUser } from '../../helper';

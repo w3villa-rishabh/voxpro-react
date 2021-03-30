@@ -20,7 +20,7 @@ import {
 
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
-import avatar5 from '../../assets/images/avatars/avatar5.jpg';
+import avatar5 from '../../assets/images/avatars/default.png';
 
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import avatar1 from '../../assets/images/avatars/avatar1.jpg';

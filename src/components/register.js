@@ -202,14 +202,14 @@ export default function LivePreviewExample() {
                       </Grid>
                     </Grid>
                     <Grid item lg={5} xl={6} className="d-flex">
-                      <div className="hero-wrapper w-100 bg-composed-wrapper bg-dark min-vh-lg-100">
+                      <div className="hero-wrapper w-100 bg-composed-wrapper min-vh-lg-100">
                         <div className="flex-grow-1 w-100 d-flex align-items-center">
                           <div
-                            className="bg-composed-wrapper--image opacity-5"
+                            className="bg-composed-wrapper--image"
                             style={{ backgroundImage: 'url(' + hero4 + ')' }}
                           />
-                          <div className="bg-composed-wrapper--bg bg-second opacity-5" />
-                          <div className="bg-composed-wrapper--bg bg-deep-sky opacity-2" />
+                          {/* <div className="bg-composed-wrapper--bg opacity-5" />
+                          <div className="bg-composed-wrapper--bg opacity-2" /> */}
                           <div className="bg-composed-wrapper--content text-center p-5">
                             <div className="text-white px-0 px-lg-2 px-xl-4">
                               <h1 className="display-3 mb-4 font-weight-bold">

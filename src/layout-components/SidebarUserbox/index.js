@@ -34,8 +34,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import PropTypes from 'prop-types';
 
-import avatar1 from '../../assets/images/avatars/avatar1.jpg';
-import avatar2 from '../../assets/images/avatars/avatar2.jpg';
+import avatar1 from '../../assets/images/avatars/default.png';
+import avatar2 from '../../assets/images/avatars/default.png';
 import stock3 from '../../assets/images/stock-photos/stock-3.jpg';
 
 import { getCurrentUser } from '../../helper';
