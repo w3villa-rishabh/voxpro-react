@@ -315,6 +315,22 @@ ul {
   }
 }
 
+.card-header--title{
+  .MuiTab-wrapper{
+    text-transform: capitalize;
+  }
+}
+
+.profile-icon{
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    justify-content: center !important;
+    margin: auto !important;
+    top: -65px !important;
+    border: 3px solid #4191ff;
+    padding: 5px;
+}
 // For mobile
 @media (max-width: 767px) {
   .profile-menu {

@@ -316,7 +316,7 @@ const SidebarUserbox = () => {
                           <a
                             href="#/"
                             onClick={(e) => e.preventDefault()}
-                            className="avatar-icon-wrapper shadow-lg rounded-circle card-box-hover-rise d-100">
+                            className="avatar-icon-wrapper rounded-circle profile-icon d-100">
                             <div className="avatar-icon rounded-circle">
                               <img
                                 alt="..."
@@ -354,8 +354,7 @@ const SidebarUserbox = () => {
                               'characters remaining' +
                               ' (' +
                               CHARACTER_LIMIT +
-                              ') ' +
-                              'Max'
+                              ' Max)'
                             }`}
                           />
                           <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
