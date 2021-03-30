@@ -24,6 +24,7 @@ import side_img from '../assets/images/voxpro-images/login-side.jpg';
 import FacebookLogin from 'react-facebook-login';
 // import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 import { GoogleLogin } from 'react-google-login';
+import { Filter } from '@material-ui/icons';
 
 export default function LoginComponent() {
   const [state, setState] = useState({
@@ -254,11 +255,11 @@ export default function LoginComponent() {
                       <div className="hero-wrapper w-100 bg-composed-wrapper bg-premium-dark min-vh-lg-100">
                         <div className="flex-grow-1 w-100 d-flex align-items-center">
                           <div
-                            className="bg-composed-wrapper--image opacity-5"
-                            style={{ backgroundImage: 'url(' + side_img + ')' }}
+                            className="bg-composed-wrapper--image"
+                            style={{ backgroundImage: 'url(' + side_img + ')'}}
                           />
-                          <div className="bg-composed-wrapper--bg opacity-6" />
-                          <div className="bg-composed-wrapper--bg opacity-2" />
+                          {/* <div className="bg-composed-wrapper--bg opacity-6" />
+                          <div className="bg-composed-wrapper--bg opacity-2" /> */}
                           <div className="bg-composed-wrapper--content text-center p-5">
                             <div className="text-white px-0 px-lg-2 px-xl-4">
                               <h1 className="display-3 mb-4 font-weight-bold">

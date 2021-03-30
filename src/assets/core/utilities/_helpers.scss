@@ -288,7 +288,6 @@ $num: 20;
   height: 100%;
   width: 100%;
   z-index: 3;
-  opacity: .15;
 }
 
 .bg-composed-wrapper {
@@ -298,7 +297,6 @@ $num: 20;
   align-items: center;
 
   &--image {
-    filter: grayscale(80%);
     background-size: cover;
     @include border-top-radius(inherit);
     @extend %composed-bg;
