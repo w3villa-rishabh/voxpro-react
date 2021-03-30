@@ -315,6 +315,11 @@ ul {
   }
 }
 
+.card-header--title{
+  .MuiTab-wrapper{
+    text-transform: capitalize;
+  }
+}
 // For mobile
 @media (max-width: 767px) {
   .profile-menu {
