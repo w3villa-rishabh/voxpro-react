@@ -135,12 +135,12 @@ export default function LivePreviewExample() {
                         />
                         <div>
                           <div className="d-flex mb-1 font-weight-bold justify-content-between font-size-sm">
-                            <div>95%</div>
+                            <div>80%</div>
                           </div>
                           <LinearProgress
                             variant="determinate"
                             className="progress-animated-alt progress-sm progress-bar-first"
-                            value={95}
+                            value={80}
                           />
                         </div>
                         <Grid container spacing={1}>
