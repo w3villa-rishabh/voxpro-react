@@ -332,7 +332,6 @@ const SidebarUserbox = () => {
                             fullWidth
                             variant="outlined"
                             id="textfield-user"
-                            label="Edit media profile"
                             multiline
                             rowsMax={4}
                             inputProps={{
@@ -465,7 +464,7 @@ const SidebarUserbox = () => {
                                     </div>
                                     <div className="divider mt-2 border-1 mb-2 w-25 bg-first rounded border-first" />
                                     <div className="font-weight-bold font-12 text-uppercase">
-                                      YEAR OF
+                                      YEARS OF
                                       <br />
                                       EXPERIENCE
                                     </div>
@@ -478,9 +477,9 @@ const SidebarUserbox = () => {
                                     </div>
                                     <div className="divider mt-2 border-1 mb-2 w-25 bg-success rounded border-success" />
                                     <div className="font-weight-bold font-12 text-uppercase">
-                                      QUALIFICATION &
+                                      QUALIFICATIONS &
                                       <br />
-                                      CERTIFICATION
+                                      CERTIFICATIONS
                                     </div>
                                   </Card>
                                 </Grid>
@@ -491,7 +490,7 @@ const SidebarUserbox = () => {
                                     </div>
                                     <div className="divider mt-2 border-1 mb-2 w-25 bg-warning rounded border-warning" />
                                     <div className="font-weight-bold font-12 text-uppercase nowrap">
-                                      PROJECT COMPLETED
+                                      PROJECTS COMPLETED
                                       <br />
                                       YEAR TO DATE
                                     </div>
