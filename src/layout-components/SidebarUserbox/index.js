@@ -146,12 +146,16 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-2">
+          {/* {onlineStatus === 'Offline' && ( */}
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Online
           </MenuItem>
+          {/* )}
+          {onlineStatus === 'Online' && ( */}
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Offline
           </MenuItem>
+          {/* )} */}
         </div>
       </Menu>
 
@@ -196,6 +200,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
             Not available
           </MenuItem>
+
           <MenuItem className="pr-5 px-3 text-dark">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
@@ -231,7 +236,7 @@ const SidebarUserbox = () => {
   const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
 
   const [editSocialProfile, setEditProfile] = useState(editValue);
-  const CHARACTER_LIMIT = 225;
+  const CHARACTER_LIMIT = 255;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -320,11 +325,11 @@ const SidebarUserbox = () => {
                               />
                             </div>
                           </a>
-                          <h3 className="font-weight-bold font-size-xxl">
+                          <h3 className="font-weight-bold font-size-xxl mb-0">
                             {currentUser.first_name} {currentUser.last_name}
                           </h3>
 
-                          <p className="font-12 font-weight-bold">
+                          <p className="font-12 font-weight-bold mb-0">
                             Business Analyst | London, United Kingdom
                           </p>
                           <OnlineAndAvailability ref={childRef} />
@@ -332,7 +337,6 @@ const SidebarUserbox = () => {
                             fullWidth
                             variant="outlined"
                             id="textfield-user"
-                            label="Edit media profile"
                             multiline
                             rowsMax={4}
                             inputProps={{
@@ -351,7 +355,7 @@ const SidebarUserbox = () => {
                               ' (' +
                               CHARACTER_LIMIT +
                               ') ' +
-                              'max'
+                              'Max'
                             }`}
                           />
                           <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
@@ -465,7 +469,7 @@ const SidebarUserbox = () => {
                                     </div>
                                     <div className="divider mt-2 border-1 mb-2 w-25 bg-first rounded border-first" />
                                     <div className="font-weight-bold font-12 text-uppercase">
-                                      YEAR OF
+                                      YEARS OF
                                       <br />
                                       EXPERIENCE
                                     </div>
@@ -478,9 +482,9 @@ const SidebarUserbox = () => {
                                     </div>
                                     <div className="divider mt-2 border-1 mb-2 w-25 bg-success rounded border-success" />
                                     <div className="font-weight-bold font-12 text-uppercase">
-                                      QUALIFICATION &
+                                      QUALIFICATIONS &
                                       <br />
-                                      CERTIFICATION
+                                      CERTIFICATIONS
                                     </div>
                                   </Card>
                                 </Grid>
@@ -491,7 +495,7 @@ const SidebarUserbox = () => {
                                     </div>
                                     <div className="divider mt-2 border-1 mb-2 w-25 bg-warning rounded border-warning" />
                                     <div className="font-weight-bold font-12 text-uppercase nowrap">
-                                      PROJECT COMPLETED
+                                      PROJECTS COMPLETED
                                       <br />
                                       YEAR TO DATE
                                     </div>

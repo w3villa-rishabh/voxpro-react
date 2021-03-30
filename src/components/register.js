@@ -164,10 +164,12 @@ export default function LivePreviewExample() {
                             </div>
 
                             <div className="mb-3">
+                              <label className="font-weight-bold mb-2">
+                                Role
+                              </label>
                               <select
-                                className="MuiTextField-root MuiFormControl-fullWidth"
+                                className="MuiTextField-root MuiFormControl-fullWidth select-role"
                                 variant="outlined"
-                                size="small"
                                 fullWidth
                                 name="role"
                                 onChange={handleChange}>

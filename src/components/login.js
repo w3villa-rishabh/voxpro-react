@@ -140,7 +140,7 @@ export default function LoginComponent() {
                               Fill in the fields below to login to your account
                             </p> */}
                           </div>
-                          <div className="text-center py-4 rounded bg-secondary my-4">
+                          <div className="text-center py-4 rounded bg-secondary my-4 fb-g-c">
                             <GoogleLogin
                               clientId="1021403903346-f2jvk3t2ffaln3ocsnf8sldv2mphifjf.apps.googleusercontent.com"
                               onSuccess={responseGoogle}
@@ -164,6 +164,31 @@ export default function LoginComponent() {
                               icon="fa-facebook"
                             />
                           </div>
+
+                          {/* <div className="text-center py-4 rounded bg-secondary my-4">
+                      <Button
+                        className="m-2 btn-pill px-4 font-weight-bold btn-google"
+                        size="small">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fab', 'google']} />
+                        </span>
+                        <span className="btn-wrapper--label">
+                          Login with Google
+                        </span>
+                      </Button>
+                      <Button
+                        className="m-2 btn-pill px-4 font-weight-bold btn-facebook"
+                        size="small">
+                        <span className="btn-wrapper--icon">
+                          <FontAwesomeIcon icon={['fab', 'facebook']} />
+                        </span>
+                        <span className="btn-wrapper--label">
+                          Login with Facebook
+                        </span>
+                      </Button>
+                    </div> */}
+
+
                           <div className="text-center text-black-50 mb-4">
                             or sign in with credentials
                           </div>
