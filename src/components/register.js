@@ -43,7 +43,7 @@ export default function LivePreviewExample() {
     api
       .post('/api/users', { user: account })
       .then((response) => {
-        if (response.data) {
+        if (response.success) {
           // localStorage.setItem("user", JSON.stringify(response.data))
           window.location.href = '/login';
           toast.success('Sign-up successfully, please verify..');
