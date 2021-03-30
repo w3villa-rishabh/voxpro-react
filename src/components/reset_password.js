@@ -75,13 +75,9 @@ const handleClose = () => {
         email: email
       })
       .then((response) => {
-        debugger
         if (response.data) {
-        debugger
-
           window.location.href = '/login';
         } else {
-          debugger
           handleClick({ message: 'This notification is positioned top right!', toastrStyle: 'toastr-second', vertical: 'top', horizontal: 'right' })
         }
       });

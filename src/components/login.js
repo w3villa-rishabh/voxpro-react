@@ -90,7 +90,6 @@ export default function LoginComponent() {
   };
 
   let save = (e) => {
-    debugger
     e.preventDefault();
     api
       .post('/api/users/login', {
