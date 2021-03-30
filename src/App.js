@@ -131,6 +131,9 @@ import {
   faSignOutAlt,
   faLink
 } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 library.add(
   far,
   faSquare,
@@ -259,13 +262,16 @@ const store = configureStore();
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <BrowserRouter basename="/">
-          <ScrollToTop>
-            <Routes />
-          </ScrollToTop>
-        </BrowserRouter>
-      </Provider>
+      <>
+        <ToastContainer />
+        <Provider store={store}>
+          <BrowserRouter basename="/">
+            <ScrollToTop>
+              <Routes />
+            </ScrollToTop>
+          </BrowserRouter>
+        </Provider>
+      </>
     );
   }
 }

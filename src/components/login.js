@@ -17,6 +17,7 @@ import api from '../api';
 
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
+import { toast } from 'react-toastify';
 
 import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
@@ -78,18 +79,17 @@ export default function LoginComponent() {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             window.location.href = '/dashboard';
           } else {
-            handleClick({
-              message: 'This notification is positioned top right!',
-              toastrStyle: 'toastr-second',
-              vertical: 'top',
-              horizontal: 'right'
-            });
+            toast.warning(response.data.message);
           }
+        })
+        .catch(() => {
+          toast.success('Something went wrong!');
         });
     }
   };
 
   let save = (e) => {
+    debugger
     e.preventDefault();
     api
       .post('/api/users/login', {
@@ -100,13 +100,11 @@ export default function LoginComponent() {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           window.location.href = '/dashboard';
         } else {
-          handleClick({
-            message: 'This notification is positioned top right!',
-            toastrStyle: 'toastr-second',
-            vertical: 'top',
-            horizontal: 'right'
-          });
+          toast.warning(response.data.message);
         }
+      })
+      .catch(() => {
+        toast.success('Something went wrong!');
       });
   };
   return (
