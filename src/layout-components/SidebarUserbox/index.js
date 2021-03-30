@@ -231,6 +231,7 @@ const SidebarUserbox = () => {
   const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
 
   const [editSocialProfile, setEditProfile] = useState(editValue);
+  const CHARACTER_LIMIT = 225;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -334,13 +335,26 @@ const SidebarUserbox = () => {
                             label="Edit media profile"
                             multiline
                             rowsMax={4}
-                            inputProps={{ style: { fontSize: 10 } }}
+                            inputProps={{
+                              style: { fontSize: 10 },
+                              maxlength: CHARACTER_LIMIT
+                            }}
                             onChange={(event) => {
                               setEditProfile(event.target.value);
                             }}
                             value={editSocialProfile}
+                            size="small"
+                            helperText={`${
+                              CHARACTER_LIMIT - editSocialProfile.length
+                            } ${
+                              'characters remaining' +
+                              ' (' +
+                              CHARACTER_LIMIT +
+                              ') ' +
+                              'max'
+                            }`}
                           />
-                          <h4 className="font-size-sm font-weight-bold my-1">
+                          <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
                             SOCIAL MEDIA PROFILES
                           </h4>
                           <div>
