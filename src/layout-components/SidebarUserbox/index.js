@@ -90,7 +90,6 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
 
   const handleClose1 = (event) => {
     setAnchorEl1(null);
-    debugger
     if (event.target.innerText) {
       setAvailability(event.target.innerText);
       // childRef.current.showAlert();

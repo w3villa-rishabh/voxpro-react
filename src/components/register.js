@@ -46,7 +46,9 @@ export default function LivePreviewExample() {
         if (response.data.success) {
           // localStorage.setItem("user", JSON.stringify(response.data))
           toast.success(response.data.message);
-          window.location.href = '/login';
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 3000);
         } else {
           toast.warning(response.data.message);
         }
