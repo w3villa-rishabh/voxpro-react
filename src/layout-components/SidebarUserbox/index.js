@@ -146,16 +146,16 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-2">
-          {/* {onlineStatus === 'Offline' && ( */}
+          { onlineStatus === 'Offline' && ( 
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Online
           </MenuItem>
-          {/* )}
-          {onlineStatus === 'Online' && ( */}
+          )}
+          {onlineStatus === 'Online' && (
           <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
             Offline
           </MenuItem>
-          {/* )} */}
+           )}
         </div>
       </Menu>
 
