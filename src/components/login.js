@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -27,7 +27,31 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import { Filter } from '@material-ui/icons';
 
+
 export default function LoginComponent() {
+
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let email = params.get('email');
+
+  useEffect(() => {
+    if (email){
+    confirmAccount();
+    }
+  }, []);
+
+  function confirmAccount() {
+    api
+      .post(`/api/user/confirm_account?email=${email}`)
+      .then((response) => {
+        if (response.data.success) {
+          toast.success(response.data.message);
+        } else {
+          toast.warning(response.data.message);
+        }
+      });
+  }
+
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
@@ -35,7 +59,6 @@ export default function LoginComponent() {
     toastrStyle: '',
     message: 'This is a toastr/snackbar notification!'
   });
-
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
   };

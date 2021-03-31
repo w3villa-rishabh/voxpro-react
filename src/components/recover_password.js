@@ -13,6 +13,7 @@ import {
 
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import api from '../api'
+import logo from '../assets/images/voxpro-images/logo_vp.png';
 
 import hero6 from '../assets/images/voxpro-images/recover-side.jpg';
 
@@ -62,9 +63,17 @@ export default function LivePreviewExample() {
                                             <Grid item md={10} lg={8} xl={7} className="mx-auto">
                                                 <div className="py-4">
                                                     <div className="text-center mb-5">
-                                                        <h1 className="display-4 mb-1 font-weight-bold">
+                                                    <h3 className="display-4 mb-5 font-weight-bold">
+                                                        <img
+                                                            alt="..."
+                                                            className="img-fluid"
+                                                            src={logo}
+                                                            width="200"
+                                                        />
+                                                      </h3>
+                                                      <h1 className="display-4 mb-1 font-weight-bold">
                                                             Recover Password
-                            </h1>
+                                                      </h1>
                                                         <p className="font-size-lg mb-0 text-black-50">
                                                             Forgot your password? No worries, we're here to
                                                             help!
