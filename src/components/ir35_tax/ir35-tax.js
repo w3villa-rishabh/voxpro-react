@@ -75,7 +75,7 @@ export default function IR35TaxComponent() {
               CHECK EMPLOYMENT STATUS FOR TAX
             </h5>
             <p className="mb-2">Please answer all question</p>
-            <p className="mb-2">Texts 7+ minutes</p>
+            <p className="mb-2">Takes 7+ minutes</p>
             <Button
               variant="contained"
               onKeyPress={(ev) => {
