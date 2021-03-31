@@ -180,7 +180,7 @@ export default function LivePreviewExample() {
                   </div>
                   <div>
                     <div className="align-box-row progress-bar--label text-muted">
-                      <div className="ml-auto">80%</div>
+                      <div className="ml-auto" style={{color: '#2e2e2e'}}>80%</div>
                     </div>
                     <LinearProgress
                       variant="determinate"

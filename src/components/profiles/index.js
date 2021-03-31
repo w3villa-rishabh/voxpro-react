@@ -139,8 +139,9 @@ export default function LivePreviewExample() {
                           </div>
                           <LinearProgress
                             variant="determinate"
-                            className="progress-animated-alt progress-sm progress-bar-first"
-                            value={80}
+                            className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second hc-style"
+                            value={85}
+                            style={{backgroundColor: "#070919!important"}}
                           />
                         </div>
                         <Grid container spacing={1}>

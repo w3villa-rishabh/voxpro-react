@@ -43,10 +43,10 @@ export default function LivePreviewExample() {
     api
       .post('/api/users', { user: account })
       .then((response) => {
-        if (response.success) {
+        if (response.data.success) {
           // localStorage.setItem("user", JSON.stringify(response.data))
+          toast.success(response.data.message);
           window.location.href = '/login';
-          toast.success('Sign-up successfully, please verify..');
         } else {
           toast.warning(response.data.message);
         }
