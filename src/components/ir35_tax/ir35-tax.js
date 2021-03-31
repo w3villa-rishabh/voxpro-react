@@ -78,12 +78,8 @@ export default function IR35TaxComponent() {
             <p className="mb-2">Takes 7+ minutes</p>
             <Button
               variant="contained"
-              onKeyPress={(ev) => {
-                console.log(`Pressed keyCode ${ev.key}`);
-                if (ev.key === 'Enter') {
-                  // Do code here
-                  ev.preventDefault();
-                }
+              onClick={() => {
+                setActiveTab('1');
               }}
               className="font-weight-bold btn-slack px-4 bg-color">
               START
