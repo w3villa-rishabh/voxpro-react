@@ -90,7 +90,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
 
   const handleClose1 = (event) => {
     setAnchorEl1(null);
-    if (event.target.innerText) {
+    if (event && event.target.innerText) {
       setAvailability(event.target.innerText);
       // childRef.current.showAlert();
     }
@@ -101,6 +101,7 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
     if (date) {
       setAvailability(date.toLocaleDateString());
     }
+    handleClose1();
   };
 
   return (
@@ -204,27 +205,33 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <MenuItem className="text-dark" onClick={handleClose1}>
             Immediate
           </MenuItem>
-          <MenuItem className="text-dark" onClick={handleClose1}>
+          <MenuItem className="text-dark pt-0" onClick={handleClose1}>
             Not available
           </MenuItem>
-
           <MenuItem className="text-dark pt-0">
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                disablePast
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Available from date"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date'
-                }}
-              />
-            </MuiPickersUtilsProvider>
+            <Grid container spacing={0}>
+              <Grid item xs={12} sm={6}>
+                <span>Available from</span>
+              </Grid>
+              <Grid item xs={12} sm={6} className="m-lg-n3">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    disablePast
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    autoOk={true}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date'
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </Grid>
+            </Grid>
           </MenuItem>
         </div>
       </Menu>
