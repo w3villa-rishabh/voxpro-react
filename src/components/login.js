@@ -27,8 +27,30 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import { Filter } from '@material-ui/icons';
 
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input"
+
 
 export default function LoginComponent() {
+
+  const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false,
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  
+  const handlePasswordChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   let search = window.location.search;
   let params = new URLSearchParams(search);
@@ -209,8 +231,11 @@ export default function LoginComponent() {
                         </span>
                       </Button>
                     </div> */}
-
-
+                          
+                          <div className="text-center text-black-50 mb-3">
+                             We won't share your social media details
+                            </div>
+                          <hr></hr>
                           <div className="text-center text-black-50 mb-4">
                             or sign in with credentials
                           </div>
@@ -234,8 +259,9 @@ export default function LoginComponent() {
                                   }}
                                 />
                               </div>
+
                               <div className="mb-3">
-                                <TextField
+                              <TextField
                                   fullWidth
                                   variant="outlined"
                                   id="textfield-password"
@@ -243,14 +269,30 @@ export default function LoginComponent() {
                                   type="password"
                                   name="password"
                                   onChange={handleChange}
+                                  type={values.showPassword ? "text" : "password"}
+                                  onChange={handlePasswordChange("password")}
+                                  value={values.password}
                                   InputProps={{
                                     startAdornment: (
                                       <InputAdornment position="start">
                                         <LockTwoToneIcon />
                                       </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={handleClickShowPassword}
+                                          onMouseDown={handleMouseDownPassword}
+                                        >
+                                          {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                      </InputAdornment>
                                     )
+                                    
                                   }}
                                 />
+
+
                               </div>
                               <div className="d-flex justify-content-between align-items-center font-size-md">
                                 <FormControlLabel
@@ -262,33 +304,37 @@ export default function LoginComponent() {
                                       color="primary"
                                     />
                                   }
-                                  label="Remember me"
+                                  label="Keep me signed in"
                                 />
-                                <div>
-                                  <a
-                                    href="/recover-password"
-                                    //   onClick={(e) => e.preventDefault()}
-                                    className="text-first">
-                                    Recover password
-                                  </a>
-                                </div>
                               </div>
-                              <div className="text-center py-4">
-                                {/* <input className="btn btn-second font-weight-bold w-50 my-2" type="submit" value="Login" /> */}
+                          
+
+                              <div className="text-center mb-4">
                                 <Button
-                                  type="submit"
-                                  className="btn-second font-weight-bold w-50 my-2">
-                                  Sign in
+                                    fullWidth
+                                    type="submit"
+                                    className="font-weight-bold font-size-sm mt-4 btn-primary">
+                                    Sign In
                                 </Button>
                               </div>
                             </form>
+
+                            <div className="text-center text-black-50 mt-3">
+                              <a
+                                href="/recover-password"
+                                //   onClick={(e) => e.preventDefault()}
+                                className="text-first">
+                                Forgot your password
+                              </a>
+                            </div>
+
                             <div className="text-center text-black-50 mt-3">
                               Don't have an account?{' '}
                               <a
                                 href="/sign-up"
                                 // onClick={(e) => e.preventDefault()}
                                 className="text-first">
-                                Sign up
+                                Register
                               </a>
                             </div>
                           </div>
