@@ -129,14 +129,23 @@ export default function LivePreviewExample() {
       confirm_password:
         account.confirm_password.length === 0
           ? 'Confirm password is required!'
-          : ''
+          : account.password === account.confirm_password
+          ? ''
+          : 'Confirm password not match!'
     });
     return valid;
   };
 
   let userRegister = (e) => {
     e.preventDefault();
-    if (validateForm(errors)) {
+    if (
+      validateForm(errors) &&
+      account.first_name &&
+      account.last_name &&
+      account.email &&
+      account.password &&
+      account.confirm_password === account.password
+    ) {
       console.info('Valid Form');
       setDoLogin(true);
       api
