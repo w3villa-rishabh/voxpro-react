@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
+import $ from 'jquery';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
@@ -33,6 +34,23 @@ export default function IR35TaxComponent() {
     availableWorking: 'a',
     months: 'a'
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      $('.app-content--inner').addClass('remove-p');
+      $('.app-footer').css('display', 'none');
+    }, 0);
+  });
+
+  useEffect(() => {
+    // componentWillUnmount
+    return () => {
+      setTimeout(() => {
+        $('.app-content--inner').removeClass('remove-p');
+        $('.app-footer').css('display', 'block');
+      }, 0);
+    };
+  }, []);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
