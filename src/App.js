@@ -263,7 +263,11 @@ class App extends Component {
   render() {
     return (
       <>
-        <ToastContainer />
+        <ToastContainer
+          position="top-left"
+          autoClose={false}
+          hideProgressBar={true}
+        />
         <Provider store={store}>
           <BrowserRouter basename="/">
             <ScrollToTop>

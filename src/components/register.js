@@ -44,13 +44,13 @@ export default function LivePreviewExample() {
       case 'first_name':
         setErrors({
           ...errors,
-          first_name: value.length !== 0 ? '' : 'First name is required!'
+          first_name: value.length > 1 ? '' : 'First name is required!'
         });
         break;
       case 'last_name':
         setErrors({
           ...errors,
-          last_name: value.length !== 0 ? '' : 'Last name is required!'
+          last_name: value.length > 1 ? '' : 'Last name is required!'
         });
         break;
       case 'email':
