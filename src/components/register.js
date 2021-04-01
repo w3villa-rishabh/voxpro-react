@@ -26,20 +26,94 @@ export default function LivePreviewExample() {
     role: ''
   });
 
-  let handleChange = (e) => {
-    let name = e.target.name;
-    let value;
-    if (name === 'role') {
-      value = parseInt(e.target.value);
-    } else {
-      value = e.target.value;
+  const [errors, setErrors] = useState({
+    first_name: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    role: ''
+  });
+
+  let handleChange = (event) => {
+    const { name, value } = event.target;
+
+    switch (name) {
+      case 'first_name':
+        setErrors({
+          ...errors,
+          first_name: value.length !== 0 ? '' : 'First name is required!'
+        });
+        break;
+      case 'email':
+        setErrors({
+          ...errors,
+          email: validEmailRegex.test(value) ? '' : 'Email is not valid!'
+        });
+        break;
+      case 'password':
+        setErrors({
+          ...errors,
+          password: verifyPass(value)
+        });
+        break;
+      case 'confirm_password':
+        setErrors({
+          ...errors,
+          confirm_password:
+            account.password === value ? '' : 'Confirm password not match!'
+        });
+        break;
+      case 'role':
+        setErrors({
+          ...errors,
+          role: value.length < 5 ? '' : 'Role is required!'
+        });
+        break;
+      default:
+        break;
     }
+
     account[name] = value;
     setAccount(account);
   };
 
+  const validEmailRegex = RegExp(
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  );
+
+  // const passwordRegex = new RegExp(
+  //   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+  // );
+
+  const verifyPass = (value) => {
+    let validated = '';
+
+    if (value.length < 8) {
+      validated = 'Your password must be at least 8 characters';
+    }
+    if (!/[A-Z]/.test(value)) {
+      validated = 'Your password must contain at least one upper case.';
+    }
+    if (!/[#?!@$%^&*-]/.test(value)) {
+      validated = 'Your password must contain at least one special case.';
+    }
+    return validated;
+  };
+
+  const validateForm = (errors) => {
+    let valid = true;
+    Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
+    return valid;
+  };
+
   let userRegister = (e) => {
     e.preventDefault();
+    if (validateForm(errors)) {
+      console.info('Valid Form');
+    } else {
+      console.error('Invalid Form');
+    }
     api
       .post('/api/users', { user: account })
       .then((response) => {
@@ -104,7 +178,11 @@ export default function LivePreviewExample() {
                                 fullWidth
                                 placeholder="Enter your email address"
                                 type="email"
+                                required
                               />
+                              {errors.email.length > 0 && (
+                                <span className="error">{errors.email}</span>
+                              )}
                             </div>
                             <div className="mb-3">
                               <div className="d-flex justify-content-between">
@@ -120,7 +198,11 @@ export default function LivePreviewExample() {
                                 fullWidth
                                 placeholder="Enter your password"
                                 type="password"
+                                required
                               />
+                              {errors.password.length > 0 && (
+                                <span className="error">{errors.password}</span>
+                              )}
                             </div>
                             <div className="mb-3">
                               <div className="d-flex justify-content-between">
@@ -137,6 +219,11 @@ export default function LivePreviewExample() {
                                 placeholder="Re-Enter your password"
                                 type="password"
                               />
+                              {errors.confirm_password.length > 0 && (
+                                <span className="error">
+                                  {errors.confirm_password}
+                                </span>
+                              )}
                             </div>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
@@ -149,7 +236,13 @@ export default function LivePreviewExample() {
                                 name="first_name"
                                 onChange={handleChange}
                                 placeholder="Enter your first name"
+                                required
                               />
+                              {errors.first_name.length > 0 && (
+                                <span className="error">
+                                  {errors.first_name}
+                                </span>
+                              )}
                             </div>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
@@ -174,6 +267,7 @@ export default function LivePreviewExample() {
                                 variant="outlined"
                                 fullWidth
                                 name="role"
+                                required
                                 onChange={handleChange}>
                                 <option value="">Select Role</option>
                                 <option value="0">Admin</option>
@@ -181,6 +275,9 @@ export default function LivePreviewExample() {
                                 <option value="1">Agency</option>
                                 <option value="2">Company</option>
                               </select>
+                              {errors.role.length > 0 && (
+                                <span className="error">{errors.role}</span>
+                              )}
                             </div>
                             <div className="form-group mb-5">
                               By clicking the <strong>Create account</strong>{' '}

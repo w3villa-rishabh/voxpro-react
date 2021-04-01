@@ -37,19 +37,21 @@
 //   }
 // }
 
-.fb-g-c{
+.fb-g-c {
 
   display: flex;
   justify-content: center;
-  & > span {
+
+  &>span {
     display: inline-block;
     margin: 5px !important;
     padding: 5px 10px !important;
-    
+
     outline: none;
     flex-basis: 45%;
     background-color: #3b5999 !important;
     border-radius: 4.5rem !important;
+
     .fb-btn {
       margin: 0;
       padding: 0;
@@ -59,25 +61,31 @@
       color: white !important;
       font-size: 14px;
 
-      i{
+      i {
         margin-right: 5px;
       }
     }
   }
+
   .gb-btn {
     margin: 5px !important;
     padding: 5px 10px !important;
-    
+
     outline: none;
     flex-basis: 45%;
     background-color: #dd4b39 !important;
     justify-content: center;
     box-shadow: none !important;
     border-radius: 4.5rem !important;
-    & > span {
+
+    &>span {
       padding: 0 !important;
       color: white !important;
       font-weight: 600px;
     }
   }
+}
+
+.error {
+  color: red;
 }
