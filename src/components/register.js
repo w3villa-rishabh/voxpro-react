@@ -144,6 +144,7 @@ export default function LivePreviewExample() {
       account.last_name &&
       account.email &&
       account.password &&
+      account.role >= 0 &&
       account.confirm_password === account.password
     ) {
       console.info('Valid Form');
