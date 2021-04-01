@@ -44,7 +44,9 @@ export default function LivePreviewExample() {
       .then((response) => {
         if (response.data.success) {
           toast.success(response.data.message);
-          window.location.href = '/login';
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 5000);
         } else {
           toast.error(response.data.message);
         }
