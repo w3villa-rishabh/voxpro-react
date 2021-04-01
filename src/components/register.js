@@ -113,9 +113,24 @@ export default function LivePreviewExample() {
     return validated;
   };
 
-  const validateForm = (errors) => {
+  const validateForm = (error) => {
     let valid = true;
-    Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
+    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+
+    setErrors({
+      ...errors,
+      first_name:
+        account.first_name.length === 0 ? 'First name is required!' : '',
+      last_name: account.last_name.length === 0 ? 'Last name is required!' : '',
+      email: account.email.length === 0 ? 'Email is required' : '',
+      password:
+        account.password.length === 0 ? 'Password name is required!' : '',
+      role: account.role.length === 0 ? 'Role is required!' : '',
+      confirm_password:
+        account.confirm_password.length === 0
+          ? 'Confirm password is required!'
+          : ''
+    });
     return valid;
   };
 
@@ -123,30 +138,30 @@ export default function LivePreviewExample() {
     e.preventDefault();
     if (validateForm(errors)) {
       console.info('Valid Form');
+      setDoLogin(true);
+      api
+        .post('/api/users', { user: account })
+        .then((response) => {
+          if (response.data.success) {
+            // localStorage.setItem("user", JSON.stringify(response.data))
+            toast.success(response.data.message);
+            setTimeout(() => {
+              window.location.href = '/login';
+              setDoLogin(false);
+            }, 3000);
+          } else {
+            toast.warning(response.data.message);
+            setDoLogin(false);
+          }
+        })
+        .catch(() => {
+          setDoLogin(false);
+          toast.error('Something went wrong');
+        });
     } else {
       console.error('Invalid Form');
     }
 
-    setDoLogin(true);
-    api
-      .post('/api/users', { user: account })
-      .then((response) => {
-        if (response.data.success) {
-          // localStorage.setItem("user", JSON.stringify(response.data))
-          toast.success(response.data.message);
-          setTimeout(() => {
-            window.location.href = '/login';
-            setDoLogin(false);
-          }, 3000);
-        } else {
-          toast.warning(response.data.message);
-          setDoLogin(false);
-        }
-      })
-      .catch(() => {
-        setDoLogin(false);
-        toast.error('Something went wrong');
-      });
     console.log('The link was clicked.');
   };
 
@@ -185,7 +200,8 @@ export default function LivePreviewExample() {
                           <form method="post" onSubmit={userRegister}>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                Email address
+                                Email address{' '}
+                                <span className="text-danger">*</span>
                               </label>
                               <TextField
                                 variant="outlined"
@@ -195,7 +211,7 @@ export default function LivePreviewExample() {
                                 fullWidth
                                 placeholder="Enter your email address"
                                 type="email"
-                                required
+                                // required
                               />
                               {errors.email.length > 0 && (
                                 <span className="error">{errors.email}</span>
@@ -204,7 +220,8 @@ export default function LivePreviewExample() {
                             <div className="mb-3">
                               <div className="d-flex justify-content-between">
                                 <label className="font-weight-bold mb-2">
-                                  Password
+                                  Password{' '}
+                                  <span className="text-danger">*</span>
                                 </label>
                               </div>
                               <TextField
@@ -215,7 +232,7 @@ export default function LivePreviewExample() {
                                 fullWidth
                                 placeholder="Enter your password"
                                 type="password"
-                                required
+                                // required
                               />
                               {errors.password.length > 0 && (
                                 <span className="error">{errors.password}</span>
@@ -224,7 +241,8 @@ export default function LivePreviewExample() {
                             <div className="mb-3">
                               <div className="d-flex justify-content-between">
                                 <label className="font-weight-bold mb-2">
-                                  Password Confirmation
+                                  Password Confirmation{' '}
+                                  <span className="text-danger">*</span>
                                 </label>
                               </div>
                               <TextField
@@ -235,7 +253,7 @@ export default function LivePreviewExample() {
                                 onChange={handleChange}
                                 placeholder="Re-Enter your password"
                                 type="password"
-                                required
+                                // required
                               />
                               {errors.confirm_password.length > 0 && (
                                 <span className="error">
@@ -245,7 +263,8 @@ export default function LivePreviewExample() {
                             </div>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                First name
+                                First name{' '}
+                                <span className="text-danger">*</span>
                               </label>
                               <TextField
                                 variant="outlined"
@@ -254,7 +273,7 @@ export default function LivePreviewExample() {
                                 name="first_name"
                                 onChange={handleChange}
                                 placeholder="Enter your first name"
-                                required
+                                // required
                               />
                               {errors.first_name.length > 0 && (
                                 <span className="error">
@@ -264,7 +283,7 @@ export default function LivePreviewExample() {
                             </div>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                Last name
+                                Last name <span className="text-danger">*</span>
                               </label>
                               <TextField
                                 variant="outlined"
@@ -283,14 +302,13 @@ export default function LivePreviewExample() {
 
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                Role
+                                Role <span className="text-danger">*</span>
                               </label>
                               <select
                                 className="MuiTextField-root MuiFormControl-fullWidth select-role"
                                 variant="outlined"
                                 fullWidth
                                 name="role"
-                                required
                                 onChange={handleChange}>
                                 <option value="">Select Role</option>
                                 <option value="0">Admin</option>
