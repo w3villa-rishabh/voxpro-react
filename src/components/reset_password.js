@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Grid,
-  InputAdornment,
-  FormControlLabel,
-  Checkbox,
   Button,
   List,
   ListItem,
@@ -13,41 +10,13 @@ import {
   TextField
 } from '@material-ui/core';
 
-import Alert from '@material-ui/lab/Alert';
-
-import CloseIcon from '@material-ui/icons/Close';
-import Snackbar from '@material-ui/core/Snackbar';
-
-
-import api from '../api'
-
-import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
-import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
+import { toast } from 'react-toastify';
+import api from '../api';
 
 import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
 export default function LivePreviewExample() {
-
-
-  const [state, setState] = useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-    toastrStyle: '',
-    message: 'This is a toastr/snackbar notification!'
-});
-
-const { vertical, horizontal, open, toastrStyle, message } = state;
-
-const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-};
-
-const handleClose = () => {
-    setState({ ...state, open: false });
-};
- 
   let [account, setAccount] = useState({
     password: ''
   });
@@ -61,10 +30,8 @@ const handleClose = () => {
 
   let search = window.location.search;
   let params = new URLSearchParams(search);
-  let email = params.get('user');
+  let id = params.get('user');
   let token = params.get('reset_password_token');
-  console.log(email)
-  console.log(token)
 
   let save = (e) => {
     e.preventDefault();
@@ -72,13 +39,14 @@ const handleClose = () => {
       .post('/api/password/reset', {
         user: account,
         token: token,
-        email: email
+        id: id
       })
       .then((response) => {
-        if (response.data) {
+        if (response.data.success) {
+          toast.success(response.data.message);
           window.location.href = '/login';
         } else {
-          handleClick({ message: 'This notification is positioned top right!', toastrStyle: 'toastr-second', vertical: 'top', horizontal: 'right' })
+          toast.error(response.data.message);
         }
       });
   };
@@ -100,11 +68,12 @@ const handleClose = () => {
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
                           <div className="text-center">
-                          <h3 className="display-4 mb-2 font-weight-bold">
-                              <img alt="..."
-                                  className="img-fluid"
-                                  src={logo}
-                                  width="200"
+                            <h3 className="display-4 mb-2 font-weight-bold">
+                              <img
+                                alt="..."
+                                className="img-fluid"
+                                src={logo}
+                                width="200"
                               />
                             </h3>
                             <h1 className="display-4 mb-1 font-weight-bold">
@@ -140,8 +109,8 @@ const handleClose = () => {
                             {/* or sign in with credentials */}
                           </div>
                           <div>
-                          <form method="post" onSubmit={save}>
-                            <div className="mb-3">
+                            <form method="post" onSubmit={save}>
+                              <div className="mb-3">
                                 <div className="d-flex justify-content-between">
                                   <label className="font-weight-bold mb-2">
                                     Password
@@ -174,11 +143,13 @@ const handleClose = () => {
                                 />
                               </div>
                               <div className="text-center py-4">
-                              <Button
-                                    type="submit"
-                                    className="btn-second font-weight-bold w-50 my-2">
-                                    Set Password
-                                  </Button>
+                                <Button
+                                  type="submit"
+                                  size="large"
+                                  fullWidth
+                                  className="btn-primary mb-5">
+                                  Set Password
+                                </Button>
                               </div>
                               <div className="text-center text-black-50 mt-3">
                                 Don't have an account?{' '}
@@ -206,12 +177,11 @@ const handleClose = () => {
                           <div className="bg-composed-wrapper--content text-center p-5">
                             <div className="text-white px-0 px-lg-2 px-xl-4">
                               <h1 className="display-3 mb-4 font-weight-bold">
-                               Voxpro
+                                Voxpro
                               </h1>
                               <p className="font-size-lg mb-0 opacity-8">
-                               financial complexity made simple.
+                                financial complexity made simple.
                               </p>
-                              
                             </div>
                           </div>
                         </div>
