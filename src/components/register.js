@@ -28,11 +28,14 @@ export default function LivePreviewExample() {
 
   const [errors, setErrors] = useState({
     first_name: '',
+    last_name: '',
     email: '',
     password: '',
     confirm_password: '',
     role: ''
   });
+
+  const [doLogin, setDoLogin] = useState(false);
 
   let handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,6 +45,12 @@ export default function LivePreviewExample() {
         setErrors({
           ...errors,
           first_name: value.length !== 0 ? '' : 'First name is required!'
+        });
+        break;
+      case 'last_name':
+        setErrors({
+          ...errors,
+          last_name: value.length !== 0 ? '' : 'Last name is required!'
         });
         break;
       case 'email':
@@ -117,6 +126,8 @@ export default function LivePreviewExample() {
     } else {
       console.error('Invalid Form');
     }
+
+    setDoLogin(true);
     api
       .post('/api/users', { user: account })
       .then((response) => {
@@ -125,12 +136,15 @@ export default function LivePreviewExample() {
           toast.success(response.data.message);
           setTimeout(() => {
             window.location.href = '/login';
+            setDoLogin(false);
           }, 3000);
         } else {
           toast.warning(response.data.message);
+          setDoLogin(false);
         }
       })
       .catch(() => {
+        setDoLogin(false);
         toast.error('Something went wrong');
       });
     console.log('The link was clicked.');
@@ -221,6 +235,7 @@ export default function LivePreviewExample() {
                                 onChange={handleChange}
                                 placeholder="Re-Enter your password"
                                 type="password"
+                                required
                               />
                               {errors.confirm_password.length > 0 && (
                                 <span className="error">
@@ -259,6 +274,11 @@ export default function LivePreviewExample() {
                                 onChange={handleChange}
                                 placeholder="Enter your last name"
                               />
+                              {errors.last_name.length > 0 && (
+                                <span className="error">
+                                  {errors.last_name}
+                                </span>
+                              )}
                             </div>
 
                             <div className="mb-3">
@@ -292,6 +312,7 @@ export default function LivePreviewExample() {
                               type="submit"
                               size="large"
                               fullWidth
+                              disabled={doLogin}
                               className="btn-primary mb-5">
                               Create Account
                             </Button>
