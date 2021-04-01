@@ -72,8 +72,11 @@ export default function LivePreviewExample() {
       default:
         break;
     }
-
-    account[name] = value;
+    if (name === 'role') {
+      account[name] = parseInt(value);
+    } else {
+      account[name] = value;
+    }
     setAccount(account);
   };
 

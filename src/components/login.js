@@ -25,31 +25,22 @@ import side_img from '../assets/images/voxpro-images/login-side.jpg';
 import FacebookLogin from 'react-facebook-login';
 // import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 import { GoogleLogin } from 'react-google-login';
-import { Filter } from '@material-ui/icons';
 
-import IconButton from "@material-ui/core/IconButton";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Input from "@material-ui/core/Input"
-
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginComponent() {
-
   const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
+    showPassword: false
   });
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-  
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-  };
-  
-  const handlePasswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
   };
 
   let search = window.location.search;
@@ -57,35 +48,22 @@ export default function LoginComponent() {
   let email = params.get('email');
 
   useEffect(() => {
-    if (email){
-    confirmAccount();
+    if (email) {
+      confirmAccount();
     }
-  }, []);
+  }, [confirmAccount, email]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
-    api
-      .post(`/api/user/confirm_account?email=${email}`)
-      .then((response) => {
-        if (response.data.success) {
-          toast.success(response.data.message);
-        } else {
-          toast.warning(response.data.message);
-        }
-      });
+    api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
+      if (response.data.success) {
+        toast.success(response.data.message);
+      } else {
+        toast.warning(response.data.message);
+      }
+    });
   }
 
-  const [state, setState] = useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-    toastrStyle: '',
-    message: 'This is a toastr/snackbar notification!'
-  });
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
-
-  const [checked1, setChecked1] = useState(true);
   let [account, setAccount] = useState({
     email: '',
     password: ''
@@ -231,10 +209,10 @@ export default function LoginComponent() {
                         </span>
                       </Button>
                     </div> */}
-                          
+
                           <div className="text-center text-black-50 mb-3">
-                             We won't share your social media details
-                            </div>
+                            We won't share your social media details
+                          </div>
                           <hr></hr>
                           <div className="text-center text-black-50 mb-4">
                             or sign in with credentials
@@ -261,7 +239,7 @@ export default function LoginComponent() {
                               </div>
 
                               <div className="mb-3">
-                              <TextField
+                                <TextField
                                   fullWidth
                                   variant="outlined"
                                   id="textfield-password"
@@ -269,8 +247,10 @@ export default function LoginComponent() {
                                   type="password"
                                   name="password"
                                   onChange={handleChange}
-                                  type={values.showPassword ? "text" : "password"}
-                                  onChange={handlePasswordChange("password")}
+                                  // eslint-disable-next-line react/jsx-no-duplicate-props
+                                  type={
+                                    values.showPassword ? 'text' : 'password'
+                                  }
                                   value={values.password}
                                   InputProps={{
                                     startAdornment: (
@@ -282,17 +262,17 @@ export default function LoginComponent() {
                                       <InputAdornment position="end">
                                         <IconButton
                                           onClick={handleClickShowPassword}
-                                          onMouseDown={handleMouseDownPassword}
-                                        >
-                                          {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                          onMouseDown={handleMouseDownPassword}>
+                                          {values.showPassword ? (
+                                            <Visibility />
+                                          ) : (
+                                            <VisibilityOff />
+                                          )}
                                         </IconButton>
                                       </InputAdornment>
                                     )
-                                    
                                   }}
                                 />
-
-
                               </div>
                               <div className="d-flex justify-content-between align-items-center font-size-md">
                                 <FormControlLabel
@@ -307,14 +287,13 @@ export default function LoginComponent() {
                                   label="Keep me signed in"
                                 />
                               </div>
-                          
 
                               <div className="text-center mb-4">
                                 <Button
-                                    fullWidth
-                                    type="submit"
-                                    className="font-weight-bold font-size-sm mt-4 btn-primary">
-                                    Sign In
+                                  fullWidth
+                                  type="submit"
+                                  className="font-weight-bold font-size-sm mt-4 btn-primary">
+                                  Sign In
                                 </Button>
                               </div>
                             </form>
@@ -346,7 +325,7 @@ export default function LoginComponent() {
                         <div className="flex-grow-1 w-100 d-flex align-items-center">
                           <div
                             className="bg-composed-wrapper--image"
-                            style={{ backgroundImage: 'url(' + side_img + ')'}}
+                            style={{ backgroundImage: 'url(' + side_img + ')' }}
                           />
                           {/* <div className="bg-composed-wrapper--bg opacity-6" />
                           <div className="bg-composed-wrapper--bg opacity-2" /> */}
