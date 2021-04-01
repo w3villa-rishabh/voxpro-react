@@ -25,45 +25,45 @@ import side_img from '../assets/images/voxpro-images/login-side.jpg';
 import FacebookLogin from 'react-facebook-login';
 // import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 import { GoogleLogin } from 'react-google-login';
-import { Filter } from '@material-ui/icons';
 
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginComponent() {
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   let search = window.location.search;
   let params = new URLSearchParams(search);
   let email = params.get('email');
 
   useEffect(() => {
-    if (email){
-    confirmAccount();
+    if (email) {
+      confirmAccount();
     }
-  }, []);
+  }, [confirmAccount, email]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
-    api
-      .post(`/api/user/confirm_account?email=${email}`)
-      .then((response) => {
-        if (response.data.success) {
-          toast.success(response.data.message);
-        } else {
-          toast.warning(response.data.message);
-        }
-      });
+    api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
+      if (response.data.success) {
+        toast.success(response.data.message);
+      } else {
+        toast.warning(response.data.message);
+      }
+    });
   }
 
-  const [state, setState] = useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-    toastrStyle: '',
-    message: 'This is a toastr/snackbar notification!'
-  });
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
-
-  const [checked1, setChecked1] = useState(true);
   let [account, setAccount] = useState({
     email: '',
     password: ''
@@ -210,7 +210,10 @@ export default function LoginComponent() {
                       </Button>
                     </div> */}
 
-
+                          <div className="text-center text-black-50 mb-3">
+                            We won't share your social media details
+                          </div>
+                          <hr></hr>
                           <div className="text-center text-black-50 mb-4">
                             or sign in with credentials
                           </div>
@@ -234,6 +237,7 @@ export default function LoginComponent() {
                                   }}
                                 />
                               </div>
+
                               <div className="mb-3">
                                 <TextField
                                   fullWidth
@@ -243,10 +247,28 @@ export default function LoginComponent() {
                                   type="password"
                                   name="password"
                                   onChange={handleChange}
+                                  // eslint-disable-next-line react/jsx-no-duplicate-props
+                                  type={
+                                    values.showPassword ? 'text' : 'password'
+                                  }
+                                  value={values.password}
                                   InputProps={{
                                     startAdornment: (
                                       <InputAdornment position="start">
                                         <LockTwoToneIcon />
+                                      </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={handleClickShowPassword}
+                                          onMouseDown={handleMouseDownPassword}>
+                                          {values.showPassword ? (
+                                            <Visibility />
+                                          ) : (
+                                            <VisibilityOff />
+                                          )}
+                                        </IconButton>
                                       </InputAdornment>
                                     )
                                   }}
@@ -262,33 +284,36 @@ export default function LoginComponent() {
                                       color="primary"
                                     />
                                   }
-                                  label="Remember me"
+                                  label="Keep me signed in"
                                 />
-                                <div>
-                                  <a
-                                    href="/recover-password"
-                                    //   onClick={(e) => e.preventDefault()}
-                                    className="text-first">
-                                    Recover password
-                                  </a>
-                                </div>
                               </div>
-                              <div className="text-center py-4">
-                                {/* <input className="btn btn-second font-weight-bold w-50 my-2" type="submit" value="Login" /> */}
+
+                              <div className="text-center mb-4">
                                 <Button
+                                  fullWidth
                                   type="submit"
-                                  className="btn-second font-weight-bold w-50 my-2">
-                                  Sign in
+                                  className="font-weight-bold font-size-sm mt-4 btn-primary">
+                                  Sign In
                                 </Button>
                               </div>
                             </form>
+
+                            <div className="text-center text-black-50 mt-3">
+                              <a
+                                href="/recover-password"
+                                //   onClick={(e) => e.preventDefault()}
+                                className="text-first">
+                                Forgot your password
+                              </a>
+                            </div>
+
                             <div className="text-center text-black-50 mt-3">
                               Don't have an account?{' '}
                               <a
                                 href="/sign-up"
                                 // onClick={(e) => e.preventDefault()}
                                 className="text-first">
-                                Sign up
+                                Register
                               </a>
                             </div>
                           </div>
@@ -300,7 +325,7 @@ export default function LoginComponent() {
                         <div className="flex-grow-1 w-100 d-flex align-items-center">
                           <div
                             className="bg-composed-wrapper--image"
-                            style={{ backgroundImage: 'url(' + side_img + ')'}}
+                            style={{ backgroundImage: 'url(' + side_img + ')' }}
                           />
                           {/* <div className="bg-composed-wrapper--bg opacity-6" />
                           <div className="bg-composed-wrapper--bg opacity-2" /> */}
