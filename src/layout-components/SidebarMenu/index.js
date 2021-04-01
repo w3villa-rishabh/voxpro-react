@@ -169,7 +169,7 @@ const SidebarMenu = (props) => {
                     <NavLink
                       onClick={toggleSidebarMobile}
                       to="/request-information">
-                      Request History
+                      Request Setting
                     </NavLink>
                   </li>
                 </ul>
