@@ -92,12 +92,15 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
     setAnchorEl1(null);
     if (event.target.innerText) {
       setAvailability(event.target.innerText);
+      // childRef.current.showAlert();
     }
   };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setAvailability(date.toLocaleDateString());
+    if (date) {
+      setAvailability(date.toLocaleDateString());
+    }
   };
 
   return (
@@ -145,18 +148,22 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           horizontal: 'right'
         }}
         classes={{ list: 'p-0' }}>
-        <div className="p-2">
-          { onlineStatus === 'Offline' && ( 
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+        {onlineStatus === 'Offline' && (
+          <MenuItem
+            className="text-dark b-login-btn"
+            style={{ backgroundColor: 'green' }}
+            onClick={handleClose}>
             Online
           </MenuItem>
-          )}
-          {onlineStatus === 'Online' && (
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose}>
+        )}
+        {onlineStatus === 'Online' && (
+          <MenuItem
+            className="text-dark b-login-btn"
+            style={{ backgroundColor: 'red' }}
+            onClick={handleClose}>
             Offline
           </MenuItem>
-           )}
-        </div>
+        )}
       </Menu>
 
       <ButtonGroup
@@ -194,14 +201,14 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-2">
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+          <MenuItem className="text-dark" onClick={handleClose1}>
             Immediate
           </MenuItem>
-          <MenuItem className="pr-5 px-3 text-dark" onClick={handleClose1}>
+          <MenuItem className="text-dark" onClick={handleClose1}>
             Not available
           </MenuItem>
 
-          <MenuItem className="pr-5 px-3 text-dark">
+          <MenuItem className="text-dark pt-0">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disablePast

@@ -1,11 +1,3 @@
-.app-content--inner {
-    padding: 0 !important;
-}
-
-.app-footer {
-    display: none !important;
-}
-
 .ir35-background {
     position: relative;
     content: ' ';
@@ -16,6 +8,11 @@
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
+
+}
+
+.remove-p {
+    padding: 0 !important;
 }
 
 .img-bg {

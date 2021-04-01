@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
+import $ from 'jquery';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
@@ -33,6 +34,23 @@ export default function IR35TaxComponent() {
     availableWorking: 'a',
     months: 'a'
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      $('.app-content--inner').addClass('remove-p');
+      $('.app-footer').css('display', 'none');
+    }, 0);
+  });
+
+  useEffect(() => {
+    // componentWillUnmount
+    return () => {
+      setTimeout(() => {
+        $('.app-content--inner').removeClass('remove-p');
+        $('.app-footer').css('display', 'block');
+      }, 0);
+    };
+  }, []);
 
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
@@ -78,12 +96,8 @@ export default function IR35TaxComponent() {
             <p className="mb-2">Takes 7+ minutes</p>
             <Button
               variant="contained"
-              onKeyPress={(ev) => {
-                console.log(`Pressed keyCode ${ev.key}`);
-                if (ev.key === 'Enter') {
-                  // Do code here
-                  ev.preventDefault();
-                }
+              onClick={() => {
+                setActiveTab('1');
               }}
               className="font-weight-bold btn-slack px-4 bg-color">
               START
