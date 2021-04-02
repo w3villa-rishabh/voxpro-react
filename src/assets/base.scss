@@ -43,14 +43,23 @@
   transition: opacity 300ms ease-in;
 }
 
-#textfield-user-helper-text{
+#textfield-user-helper-text {
   margin: auto;
   text-align: right;
   width: 100%;
 }
 
-.select-role{
+.select-role {
   border-radius: 0.2rem;
   border: 1px solid #ccc;
   padding: 7px;
+}
+
+
+.alertify-notifier .ajs-message {
+  background: rgba(255, 255, 255, 0.95);
+  color: #000;
+  text-align: center;
+  border: solid 1px #ddd;
+  border-radius: 2px;
 }

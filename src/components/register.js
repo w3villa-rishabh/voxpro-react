@@ -191,6 +191,7 @@ export default function LivePreviewExample() {
     ) {
       console.info('Valid Form');
       setDoLogin(true);
+      toast.dismiss();
       api
         .post('/api/users', { user: account })
         .then((response) => {

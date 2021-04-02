@@ -265,7 +265,7 @@ class App extends Component {
       <>
         <ToastContainer
           position="top-left"
-          autoClose={4000}
+          autoClose={5000}
           hideProgressBar={true}
           newestOnTop={true}
         />
