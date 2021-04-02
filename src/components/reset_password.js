@@ -119,6 +119,7 @@ export default function LivePreviewExample() {
       account.password &&
       account.confirm_password === account.password
     ) {
+      toast.dismiss();
       api
         .post('/api/password/reset', {
           user: account,
