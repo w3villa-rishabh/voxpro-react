@@ -23,6 +23,16 @@ import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
 export default function LivePreviewExample() {
+  let [account, setAccount] = useState({
+    password: '',
+    confirm_password: ''
+  });
+
+  const [errors, setErrors] = useState({
+    password: '',
+    confirm_password: ''
+  });
+
   const [values, setValues] = React.useState({
     showPassword: false
   });
@@ -42,15 +52,42 @@ export default function LivePreviewExample() {
     event.preventDefault();
   };
 
-  let [account, setAccount] = useState({
-    password: ''
-  });
+  let handleChange = (event) => {
+    const { name, value } = event.target;
 
-  let handleChange = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
+    switch (name) {
+      case 'password':
+        setErrors({
+          ...errors,
+          password: verifyPass(value)
+        });
+        break;
+      case 'confirm_password':
+        setErrors({
+          ...errors,
+          confirm_password:
+            account.password === value ? '' : 'Passwords does not match!'
+        });
+        break;
+      default:
+        break;
+    }
     account[name] = value;
     setAccount(account);
+  };
+
+  const verifyPass = (value) => {
+    let validated = '';
+    if (value.length < 8) {
+      validated = 'Your password must be at least 8 characters';
+    }
+    if (!/[A-Z]/.test(value)) {
+      validated = 'Your password must contain at least one upper case.';
+    }
+    if (!/[#?!@$%^&*-]/.test(value)) {
+      validated = 'Your password must contain at least one special case.';
+    }
+    return validated;
   };
 
   let search = window.location.search;
@@ -58,24 +95,49 @@ export default function LivePreviewExample() {
   let id = params.get('user');
   let token = params.get('reset_password_token');
 
+  const validateForm = (error) => {
+    let valid = true;
+    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+
+    setErrors({
+      ...errors,
+      password: account.password.length === 0 ? 'Password is required!' : '',
+      confirm_password:
+        account.confirm_password.length === 0
+          ? 'Confirm password is required!'
+          : account.password === account.confirm_password
+          ? ''
+          : 'Confirm password not match!'
+    });
+    return valid;
+  };
+
   let save = (e) => {
     e.preventDefault();
-    api
-      .post('/api/password/reset', {
-        user: account,
-        token: token,
-        id: id
-      })
-      .then((response) => {
-        if (response.data.success) {
-          toast.success(response.data.message);
-          setTimeout(() => {
-            window.location.href = '/login';
-          }, 5000);
-        } else {
-          toast.error(response.data.message);
-        }
-      });
+    if (
+      validateForm(errors) &&
+      account.password &&
+      account.confirm_password === account.password
+    ) {
+      api
+        .post('/api/password/reset', {
+          user: account,
+          token: token,
+          id: id
+        })
+        .then((response) => {
+          if (response.data.success) {
+            toast.success(response.data.message);
+            setTimeout(() => {
+              window.location.href = '/login';
+            }, 5000);
+          } else {
+            toast.error(response.data.message);
+          }
+        });
+    } else {
+      console.error('Invalid Form');
+    }
   };
 
   return (
@@ -149,6 +211,7 @@ export default function LivePreviewExample() {
                                   name="password"
                                   onChange={handleChange}
                                   fullWidth
+                                  required
                                   placeholder="Enter your password"
                                   // eslint-disable-next-line react/jsx-no-duplicate-props
                                   type={
@@ -176,6 +239,11 @@ export default function LivePreviewExample() {
                                     )
                                   }}
                                 />
+                                {errors.password.length > 0 && (
+                                  <span className="error">
+                                    {errors.password}
+                                  </span>
+                                )}
                               </div>
                               <div className="mb-3">
                                 <div className="d-flex justify-content-between">
@@ -190,6 +258,7 @@ export default function LivePreviewExample() {
                                   name="confirm_password"
                                   onChange={handleChange}
                                   placeholder="Re-Enter your password"
+                                  required
                                   // eslint-disable-next-line react/jsx-no-duplicate-props
                                   type={
                                     values1.showPassword ? 'text' : 'password'
@@ -216,6 +285,11 @@ export default function LivePreviewExample() {
                                     )
                                   }}
                                 />
+                                {errors.confirm_password.length > 0 && (
+                                  <span className="error">
+                                    {errors.confirm_password}
+                                  </span>
+                                )}
                               </div>
                               <div className="text-center py-4">
                                 <Button
