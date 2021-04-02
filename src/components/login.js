@@ -18,13 +18,9 @@ import api from '../api';
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
 import { toast } from 'react-toastify';
+import LoginSocialComponent from '../components/login-social';
 
-import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
-
-import FacebookLogin from 'react-facebook-login';
-// import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
-import { GoogleLogin } from 'react-google-login';
 
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -76,42 +72,6 @@ export default function LoginComponent() {
     setAccount(account);
   };
 
-  const responseFacebook = (response) => {
-    console.log('Facebook response', response);
-    let socialObj = {
-      email: response.email,
-      fbId: response.id,
-      imageUrl: response.picture.data.url,
-      name: response.name
-    };
-    socialLogin(socialObj);
-  };
-
-  const responseGoogle = (response) => {
-    console.log('Google response', response.profileObj);
-    socialLogin(response.profileObj);
-  };
-
-  const socialLogin = (socialObj) => {
-    if (socialObj.email) {
-      api
-        .post('/api/user/social_sign_up', {
-          user: socialObj
-        })
-        .then((response) => {
-          if (response.data.success) {
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            window.location.href = '/dashboard';
-          } else {
-            toast.warning(response.data.message);
-          }
-        })
-        .catch(() => {
-          toast.success('Something went wrong!');
-        });
-    }
-  };
-
   let save = (e) => {
     e.preventDefault();
     api
@@ -146,77 +106,8 @@ export default function LoginComponent() {
                       className="d-flex align-items-center">
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
-                          <div className="text-center">
-                            <h3 className="display-4 mb-2 font-weight-bold">
-                              <img
-                                alt="..."
-                                className="img-fluid"
-                                src={logo}
-                                width="200"
-                              />
-                            </h3>
-                            {/* <h1 className="display-4 mb-1 font-weight-bold">
-                              Login
-                            </h1> */}
-                            {/* <p className="font-size-lg mb-0 text-black-50">
-                              Fill in the fields below to login to your account
-                            </p> */}
-                          </div>
-                          <div className="text-center py-4 rounded bg-secondary my-4 fb-g-c">
-                            <GoogleLogin
-                              clientId="1021403903346-f2jvk3t2ffaln3ocsnf8sldv2mphifjf.apps.googleusercontent.com"
-                              onSuccess={responseGoogle}
-                              onFailure={responseGoogle}
-                              cookiePolicy={'single_host_origin'}
-                              isSignedIn={false}
-                              autoLoad={false}
-                              className="gb-btn"
-                              icon={false}>
-                              <FontAwesomeIcon icon={['fab', 'google']} />
-                              <span> Login with Google</span>
-                            </GoogleLogin>
+                          <LoginSocialComponent name={'Sign-In'} />
 
-                            <FacebookLogin
-                              appId="430160698075558"
-                              autoLoad={false}
-                              fields="name,email,picture"
-                              // onClick={componentClicked}
-                              callback={responseFacebook}
-                              cssClass="fb-btn"
-                              icon="fa-facebook"
-                            />
-                          </div>
-
-                          {/* <div className="text-center py-4 rounded bg-secondary my-4">
-                      <Button
-                        className="m-2 btn-pill px-4 font-weight-bold btn-google"
-                        size="small">
-                        <span className="btn-wrapper--icon">
-                          <FontAwesomeIcon icon={['fab', 'google']} />
-                        </span>
-                        <span className="btn-wrapper--label">
-                          Login with Google
-                        </span>
-                      </Button>
-                      <Button
-                        className="m-2 btn-pill px-4 font-weight-bold btn-facebook"
-                        size="small">
-                        <span className="btn-wrapper--icon">
-                          <FontAwesomeIcon icon={['fab', 'facebook']} />
-                        </span>
-                        <span className="btn-wrapper--label">
-                          Login with Facebook
-                        </span>
-                      </Button>
-                    </div> */}
-
-                          <div className="text-center text-black-50 mb-3">
-                            We won't share your social media details
-                          </div>
-                          <hr></hr>
-                          <div className="text-center text-black-50 mb-4">
-                            or sign in with credentials
-                          </div>
                           <div>
                             <form method="post" onSubmit={save}>
                               <div className="mb-4">

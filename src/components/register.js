@@ -12,9 +12,9 @@ import {
 
 import api from '../api';
 import { toast } from 'react-toastify';
+import LoginSocialComponent from '../components/login-social';
 
 import hero4 from '../assets/images/voxpro-images/reg-side.jpg';
-import logo from '../assets/images/voxpro-images/logo_vp.png';
 
 export default function LivePreviewExample() {
   let [account, setAccount] = useState({
@@ -183,7 +183,7 @@ export default function LivePreviewExample() {
             <div className="app-inner-content-layout--main">
               <div className="flex-grow-1 w-100 d-flex align-items-center">
                 <div className="bg-composed-wrapper--content">
-                  <Grid container spacing={0} className="min-vh-100">
+                  <Grid container spacing={2} className="min-vh-100">
                     <Grid
                       item
                       lg={7}
@@ -191,21 +191,7 @@ export default function LivePreviewExample() {
                       className="d-flex align-items-center">
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
-                          <div className="text-center">
-                            <h3 className="display-4 mb-2 font-weight-bold">
-                              <img
-                                alt="..."
-                                className="img-fluid"
-                                src={logo}
-                                width="200"
-                              />
-                            </h3>
-                            <p className="font-size-lg mb-5 text-black-50">
-                              Start using our tools right away! Create an
-                              account today!
-                            </p>
-                            <p className="font-size-lg mb-5 text-black-50"></p>
-                          </div>
+                          <LoginSocialComponent name={'Sign-Up'} />
 
                           <form method="post" onSubmit={userRegister}>
                             <div className="mb-3">
