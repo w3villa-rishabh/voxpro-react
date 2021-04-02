@@ -110,7 +110,7 @@ export default function LivePreviewExample() {
         setErrors({
           ...errors,
           confirm_password:
-            account.password === value ? '' : 'Confirm password not match!'
+            account.password === value ? '' : 'Passwords does not match!'
         });
         break;
       case 'role':
