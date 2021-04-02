@@ -8,14 +8,18 @@ import {
   ListItem,
   Tooltip,
   InputAdornment,
-  TextField
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Dialog,
+  DialogTitle
 } from '@material-ui/core';
 
 import api from '../api';
 import { toast } from 'react-toastify';
+import LoginSocialComponent from '../components/login-social';
 
 import hero4 from '../assets/images/voxpro-images/reg-side.jpg';
-import logo from '../assets/images/voxpro-images/logo_vp.png';
 
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -56,10 +60,21 @@ export default function LivePreviewExample() {
     email: '',
     password: '',
     confirm_password: '',
-    role: ''
+    role: '',
+    policyCheckbox: ''
   });
 
+  const [modal1, seModal1] = useState(false);
   const [doLogin, setDoLogin] = useState(false);
+  const [policyCheckbox, setPolicyCheckbox] = useState(false);
+
+  const toggle1 = () => {
+    seModal1(!modal1);
+  };
+
+  const policyVerify = () => {
+    setPolicyCheckbox(!policyCheckbox);
+  };
 
   let handleChange = (event) => {
     const { name, value } = event.target;
@@ -137,40 +152,67 @@ export default function LivePreviewExample() {
     return validated;
   };
 
-  const validateForm = (errors) => {
+  const validateForm = (error) => {
     let valid = true;
-    Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
+    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+
+    setErrors({
+      ...errors,
+      first_name:
+        account.first_name.length === 0 ? 'First name is required!' : '',
+      last_name: account.last_name.length === 0 ? 'Last name is required!' : '',
+      email: account.email.length === 0 ? 'Email is required' : '',
+      password:
+        account.password.length === 0 ? 'Password name is required!' : '',
+      role: account.role.length === 0 ? 'Role is required!' : '',
+      confirm_password:
+        account.confirm_password.length === 0
+          ? 'Confirm password is required!'
+          : account.password === account.confirm_password
+          ? ''
+          : 'Confirm password not match!',
+      policyCheckbox: policyCheckbox === false ? 'Please read policy!' : ''
+    });
     return valid;
   };
 
   let userRegister = (e) => {
     e.preventDefault();
-    if (validateForm(errors)) {
+    if (
+      validateForm(errors) &&
+      account.first_name &&
+      account.last_name &&
+      account.email &&
+      account.password &&
+      account.role >= 0 &&
+      policyCheckbox &&
+      account.confirm_password === account.password
+    ) {
       console.info('Valid Form');
+      setDoLogin(true);
+      api
+        .post('/api/users', { user: account })
+        .then((response) => {
+          if (response.data.success) {
+            // localStorage.setItem("user", JSON.stringify(response.data))
+            toast.success(response.data.message);
+            setTimeout(() => {
+              window.location.href = '/login';
+              setDoLogin(false);
+            }, 3000);
+          } else {
+            toast.warning(response.data.message);
+            setDoLogin(false);
+          }
+        })
+        .catch(() => {
+          setDoLogin(false);
+          toast.error('Something went wrong');
+        });
     } else {
       console.error('Invalid Form');
     }
 
-    setDoLogin(true);
-    api
-      .post('/api/users', { user: account })
-      .then((response) => {
-        if (response.data.success) {
-          // localStorage.setItem("user", JSON.stringify(response.data))
-          toast.success(response.data.message);
-          setTimeout(() => {
-            window.location.href = '/login';
-            setDoLogin(false);
-          }, 3000);
-        } else {
-          toast.warning(response.data.message);
-          setDoLogin(false);
-        }
-      })
-      .catch(() => {
-        setDoLogin(false);
-        toast.error('Something went wrong');
-      });
     console.log('The link was clicked.');
   };
 
@@ -182,7 +224,7 @@ export default function LivePreviewExample() {
             <div className="app-inner-content-layout--main">
               <div className="flex-grow-1 w-100 d-flex align-items-center">
                 <div className="bg-composed-wrapper--content">
-                  <Grid container spacing={0} className="min-vh-100">
+                  <Grid container spacing={2} className="min-vh-100">
                     <Grid
                       item
                       lg={7}
@@ -190,26 +232,13 @@ export default function LivePreviewExample() {
                       className="d-flex align-items-center">
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
-                          <div className="text-center">
-                            <h3 className="display-4 mb-2 font-weight-bold">
-                              <img
-                                alt="..."
-                                className="img-fluid"
-                                src={logo}
-                                width="200"
-                              />
-                            </h3>
-                            <p className="font-size-lg mb-5 text-black-50">
-                              Start using our tools right away! Create an
-                              account today!
-                            </p>
-                            <p className="font-size-lg mb-5 text-black-50"></p>
-                          </div>
+                          <LoginSocialComponent name={'Sign-Up'} />
 
                           <form method="post" onSubmit={userRegister}>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                Email address
+                                Email address{' '}
+                                <span className="text-danger">*</span>
                               </label>
                               <TextField
                                 variant="outlined"
@@ -219,7 +248,7 @@ export default function LivePreviewExample() {
                                 fullWidth
                                 placeholder="Enter your email address"
                                 type="email"
-                                required
+                                // required
                               />
                               {errors.email.length > 0 && (
                                 <span className="error">{errors.email}</span>
@@ -228,7 +257,8 @@ export default function LivePreviewExample() {
                             <div className="mb-3">
                               <div className="d-flex justify-content-between">
                                 <label className="font-weight-bold mb-2">
-                                  Password
+                                  Password{' '}
+                                  <span className="text-danger">*</span>
                                 </label>
                               </div>
                               <TextField
@@ -264,7 +294,8 @@ export default function LivePreviewExample() {
                             <div className="mb-3">
                               <div className="d-flex justify-content-between">
                                 <label className="font-weight-bold mb-2">
-                                  Password Confirmation
+                                  Password Confirmation{' '}
+                                  <span className="text-danger">*</span>
                                 </label>
                               </div>
                               <TextField
@@ -303,7 +334,8 @@ export default function LivePreviewExample() {
                             </div>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                First name
+                                First name{' '}
+                                <span className="text-danger">*</span>
                               </label>
                               <TextField
                                 variant="outlined"
@@ -312,7 +344,7 @@ export default function LivePreviewExample() {
                                 name="first_name"
                                 onChange={handleChange}
                                 placeholder="Enter your first name"
-                                required
+                                // required
                               />
                               {errors.first_name.length > 0 && (
                                 <span className="error">
@@ -322,7 +354,7 @@ export default function LivePreviewExample() {
                             </div>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                Last name
+                                Last name <span className="text-danger">*</span>
                               </label>
                               <TextField
                                 variant="outlined"
@@ -341,14 +373,13 @@ export default function LivePreviewExample() {
 
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
-                                Role
+                                Role <span className="text-danger">*</span>
                               </label>
                               <select
                                 className="MuiTextField-root MuiFormControl-fullWidth select-role"
                                 variant="outlined"
                                 fullWidth
                                 name="role"
-                                required
                                 onChange={handleChange}>
                                 <option value="">Select Role</option>
                                 <option value="0">Admin</option>
@@ -360,11 +391,53 @@ export default function LivePreviewExample() {
                                 <span className="error">{errors.role}</span>
                               )}
                             </div>
-                            <div className="form-group mb-5">
+                            <div className="form-group mb-3">
                               By clicking the <strong>Create account</strong>{' '}
                               button below you agree to our terms of service and
                               privacy statement.
                             </div>
+                            <div className="d-flex justify-content-between align-items-center font-size-md">
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    onChange={policyVerify}
+                                    value={policyCheckbox}
+                                    name="policy"
+                                    color="primary"
+                                  />
+                                }
+                                label={
+                                  <div className="font-size-sm">
+                                    <span>
+                                      I accept Term of Service and agree with{' '}
+                                    </span>
+                                    {/* <a
+                                      className="a-blue"
+                                      href="javascript:void(0)"
+                                      onClick={() => {
+                                        seModal1(!modal1);
+                                      }}>
+                                      Terms of use
+                                    </a> */}
+                                    {/* <span> and </span> */}
+                                    <a
+                                      className="a-blue"
+                                      href="javascript:void(0)"
+                                      onClick={() => {
+                                        seModal1(!modal1);
+                                      }}>
+                                      Private Policy
+                                    </a>
+                                    <span> of Voxpro. </span>
+                                  </div>
+                                }
+                              />
+                            </div>
+                            {errors.policyCheckbox.length > 0 && (
+                              <span className="error">
+                                {errors.policyCheckbox}
+                              </span>
+                            )}
 
                             <Button
                               type="submit"
@@ -463,6 +536,92 @@ export default function LivePreviewExample() {
             </div>
           </div>
         </div>
+        {/* User edit modal open */}
+        <Dialog
+          scroll="body"
+          maxWidth="lg"
+          open={modal1}
+          onClose={toggle1}
+          classes={{
+            paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+          }}>
+          <DialogTitle id="form-dialog-title" className="p-2">
+            <div className="card-badges card-badges-top">
+              <FontAwesomeIcon
+                icon={['fas', 'times']}
+                className="pointer mr-3"
+                onClick={toggle1}
+              />
+            </div>
+            <span>Private policy</span>
+          </DialogTitle>
+          <div className="">
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+          </div>
+        </Dialog>
       </div>
     </>
   );
