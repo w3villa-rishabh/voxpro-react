@@ -7,7 +7,9 @@ import {
   List,
   ListItem,
   Tooltip,
-  TextField
+  TextField,
+  FormControlLabel,
+  Checkbox
 } from '@material-ui/core';
 
 import api from '../api';
@@ -32,10 +34,16 @@ export default function LivePreviewExample() {
     email: '',
     password: '',
     confirm_password: '',
-    role: ''
+    role: '',
+    policyCheckbox: ''
   });
 
   const [doLogin, setDoLogin] = useState(false);
+  const [policyCheckbox, setPolicyCheckbox] = useState(false);
+
+  const policyVerify = () => {
+    setPolicyCheckbox(!policyCheckbox);
+  };
 
   let handleChange = (event) => {
     const { name, value } = event.target;
@@ -131,7 +139,8 @@ export default function LivePreviewExample() {
           ? 'Confirm password is required!'
           : account.password === account.confirm_password
           ? ''
-          : 'Confirm password not match!'
+          : 'Confirm password not match!',
+      policyCheckbox: policyCheckbox === false ? 'Please read policy!' : ''
     });
     return valid;
   };
@@ -145,6 +154,7 @@ export default function LivePreviewExample() {
       account.email &&
       account.password &&
       account.role >= 0 &&
+      policyCheckbox &&
       account.confirm_password === account.password
     ) {
       console.info('Valid Form');
@@ -316,11 +326,47 @@ export default function LivePreviewExample() {
                                 <span className="error">{errors.role}</span>
                               )}
                             </div>
-                            <div className="form-group mb-5">
+                            <div className="form-group mb-3">
                               By clicking the <strong>Create account</strong>{' '}
                               button below you agree to our terms of service and
                               privacy statement.
                             </div>
+                            <div className="d-flex justify-content-between align-items-center font-size-md">
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    onChange={policyVerify}
+                                    value={policyCheckbox}
+                                    name="policy"
+                                    color="primary"
+                                  />
+                                }
+                                label={
+                                  <div>
+                                    <span>
+                                      I accept Term of Service and agree with{' '}
+                                    </span>
+                                    <a
+                                      className="a-blue"
+                                      href="javascript:void(0)">
+                                      Terms of use
+                                    </a>
+                                    <span> and </span>
+                                    <a
+                                      className="a-blue"
+                                      href="javascript:void(0)">
+                                      Private Policy
+                                    </a>
+                                    <span> of Voxpro. </span>
+                                  </div>
+                                }
+                              />
+                            </div>
+                            {errors.policyCheckbox.length > 0 && (
+                              <span className="error">
+                                {errors.policyCheckbox}
+                              </span>
+                            )}
 
                             <Button
                               type="submit"
