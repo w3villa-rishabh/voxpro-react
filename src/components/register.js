@@ -201,7 +201,7 @@ export default function LivePreviewExample() {
               setDoLogin(false);
             }, 3000);
           } else {
-            toast.warning(response.data.message);
+            toast.error(response.data.message);
             setDoLogin(false);
           }
         })

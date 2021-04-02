@@ -83,11 +83,11 @@ export default function LoginComponent() {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           window.location.href = '/dashboard';
         } else {
-          toast.warning(response.data.message);
+          toast.error(response.data.message);
         }
       })
       .catch(() => {
-        toast.success('Something went wrong!');
+        toast.error('Something went wrong!');
       });
   };
   return (
