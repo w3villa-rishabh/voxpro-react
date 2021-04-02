@@ -83,13 +83,15 @@ export default function LivePreviewExample() {
       case 'first_name':
         setErrors({
           ...errors,
-          first_name: value.length > 1 ? '' : 'First name is required!'
+          first_name:
+            value.length > 1 ? '' : 'Minimum two character is required!'
         });
         break;
       case 'last_name':
         setErrors({
           ...errors,
-          last_name: value.length > 1 ? '' : 'Last name is required!'
+          last_name:
+            value.length > 1 ? '' : 'Minimum two character is required!'
         });
         break;
       case 'email':
@@ -162,8 +164,7 @@ export default function LivePreviewExample() {
         account.first_name.length === 0 ? 'First name is required!' : '',
       last_name: account.last_name.length === 0 ? 'Last name is required!' : '',
       email: account.email.length === 0 ? 'Email is required' : '',
-      password:
-        account.password.length === 0 ? 'Password name is required!' : '',
+      password: account.password.length === 0 ? 'Password is required!' : '',
       role: account.role.length === 0 ? 'Role is required!' : '',
       confirm_password:
         account.confirm_password.length === 0
