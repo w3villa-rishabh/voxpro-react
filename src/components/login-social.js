@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -18,29 +18,6 @@ export default function LoginSocialComponent({ name }) {
   //     alert('Child Function Called');
   //   }
   // }));
-
-  let search = window.location.search;
-  let params = new URLSearchParams(search);
-  let email = params.get('email');
-
-  useEffect(() => {
-    console.log('name', name);
-    if (email) {
-      confirmAccount();
-    }
-  }, [confirmAccount, email, name]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function confirmAccount() {
-    toast.dismiss();
-    api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
-      if (response.data.success) {
-        toast.success(response.data.message);
-      } else {
-        toast.error(response.data.message);
-      }
-    });
-  }
 
   const responseFacebook = (response) => {
     console.log('Facebook response', response);
@@ -105,7 +82,7 @@ export default function LoginSocialComponent({ name }) {
           autoLoad={false}
           fields="name,email,picture"
           // onClick={componentClicked}
-          textButton={name + ' with Facebook'}
+          textButton={name + ' using Facebook'}
           callback={responseFacebook}
           cssClass="fb-btn"
           icon="fa-facebook"
@@ -118,7 +95,7 @@ export default function LoginSocialComponent({ name }) {
       <div className="separator">OR</div>
 
       <div className="text-center text-black-50 mb-4">
-        {name} with credentials
+        {name} using credentials
       </div>
     </>
   );

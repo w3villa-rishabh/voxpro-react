@@ -202,18 +202,20 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         PaperProps={{
           style: {
-            width: 290
+            width: 250
           }
         }}
-        classes={{ list: 'p-2' }}>
-        <div className="p-1">
-          <MenuItem className="text-dark" onClick={handleClose1}>
+        classes={{ list: 'p-0' }}>
+        <div className="p-0">
+          <MenuItem className="text-dark font-10 list-profile-available" onClick={handleClose1}>
             Immediate
           </MenuItem>
-          <MenuItem className="text-dark pt-0" onClick={handleClose1}>
+          <MenuItem
+            className="text-dark font-10 pt-0 list-profile-available"
+            onClick={handleClose1}>
             Not available
           </MenuItem>
-          <MenuItem className="text-dark pt-0">
+          <MenuItem className="text-dark font-10 pt-0 list-profile-available">
             <Grid container spacing={0}>
               <Grid item xs={12} sm={6}>
                 <span>Available from</span>

@@ -191,28 +191,33 @@ export default function IR35TaxComponent() {
                   example, a voluntary group or a sports club.
                 </p>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.limitedCompany === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, limitedCompany: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.limitedCompany === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, limitedCompany: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.limitedCompany === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, limitedCompany: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.limitedCompany === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, limitedCompany: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -236,7 +241,7 @@ export default function IR35TaxComponent() {
               <h4>
                 Has the worker already started working for your organisation?
               </h4>
-              <div className="">
+              <div>
                 <ul>
                   <li>
                     <Radio
@@ -290,7 +295,7 @@ export default function IR35TaxComponent() {
                   company secretary or company director.
                 </span>
               </div>
-              <div className="">
+              <div>
                 <ul>
                   <li>
                     <Radio
@@ -378,28 +383,33 @@ export default function IR35TaxComponent() {
                     security clearance procedures.
                   </span>
                 </div>
-                <div className="d-flex">
-                  <Radio
-                    checked={policyObj.reject === 'a'}
-                    onChange={() => {
-                      setPolicyObj({ ...policyObj, reject: 'a' });
-                    }}
-                    value="b"
-                    name="radio-button-demo"
-                    aria-label="B"
-                  />
-                  <span className="mt-3">Yes</span>
-
-                  <Radio
-                    checked={policyObj.reject === 'b'}
-                    onChange={() => {
-                      setPolicyObj({ ...policyObj, reject: 'b' });
-                    }}
-                    value="b"
-                    name="radio-button-demo"
-                    aria-label="B"
-                  />
-                  <span className="mt-3">No</span>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.reject === 'a'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, reject: 'a' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.reject === 'b'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, reject: 'b' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3">No</span>
+                    </li>
+                  </ul>
                 </div>
                 <Button
                   variant="contained"
@@ -428,28 +438,33 @@ export default function IR35TaxComponent() {
                   This includes payments made by the worker or their business.
                 </span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.substitute === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, substitute: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.substitute === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, substitute: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.substitute === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, substitute: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.substitute === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, substitute: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -487,28 +502,33 @@ export default function IR35TaxComponent() {
                   worker does (opens in a new window).
                 </a>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.originallyAgreed === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.originallyAgreed === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.originallyAgreed === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.originallyAgreed === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -549,28 +569,33 @@ export default function IR35TaxComponent() {
                   window).
                 </a>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.organisationDone === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, organisationDone: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.organisationDone === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, organisationDone: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.organisationDone === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, organisationDone: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.organisationDone === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, organisationDone: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -597,28 +622,33 @@ export default function IR35TaxComponent() {
                 working hours?
               </h4>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.organisationHours === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, organisationHours: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.organisationHours === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, organisationHours: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.organisationHours === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, organisationHours: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.organisationHours === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, organisationHours: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -645,28 +675,33 @@ export default function IR35TaxComponent() {
                 does the work?
               </h4>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.organisationWork === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, organisationWork: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.organisationWork === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, organisationWork: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.organisationWork === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, organisationWork: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.organisationWork === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, organisationWork: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -701,28 +736,33 @@ export default function IR35TaxComponent() {
                 <span>Vehicle costs are covered in the next question.</span>
               </div>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.equipmentPay === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, equipmentPay: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.equipmentPay === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, equipmentPay: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.equipmentPay === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, equipmentPay: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.equipmentPay === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, equipmentPay: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -756,28 +796,33 @@ export default function IR35TaxComponent() {
                 </span>
               </div>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.vehicleCost === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, vehicleCost: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.vehicleCost === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, vehicleCost: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.vehicleCost === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, vehicleCost: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.vehicleCost === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, vehicleCost: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -815,28 +860,33 @@ export default function IR35TaxComponent() {
                 </span>
               </div>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.stationery === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, stationery: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.stationery === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, stationery: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.stationery === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, stationery: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.stationery === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, stationery: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -869,28 +919,33 @@ export default function IR35TaxComponent() {
                 </span>
               </div>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.beforePay === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, beforePay: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.beforePay === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, beforePay: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.beforePay === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, beforePay: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.beforePay === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, beforePay: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -914,28 +969,33 @@ export default function IR35TaxComponent() {
             <Grid item xs={12}>
               <h4>How will the worker be paid for this work?</h4>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.paidWork === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, paidWork: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.paidWork === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, paidWork: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.paidWork === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, paidWork: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.paidWork === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, paidWork: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -962,28 +1022,33 @@ export default function IR35TaxComponent() {
                 worker have to put it right?{' '}
               </h4>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.workerRight === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, workerRight: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.workerRight === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, workerRight: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.workerRight === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, workerRight: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.workerRight === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, workerRight: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1015,28 +1080,33 @@ export default function IR35TaxComponent() {
                 </span>
               </div>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.corporateBenefits === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.corporateBenefits === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1068,28 +1138,33 @@ export default function IR35TaxComponent() {
                   dismissing workers, and delivering appraisals.
                 </span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.corporateBenefits === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.corporateBenefits === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.corporateBenefits === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1116,28 +1191,33 @@ export default function IR35TaxComponent() {
                 suppliers?
               </h4>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.suppliers === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, suppliers: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.suppliers === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, suppliers: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.suppliers === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, suppliers: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.suppliers === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, suppliers: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1166,34 +1246,39 @@ export default function IR35TaxComponent() {
               <div className="text-f">
                 <span>This includes working for your competitors.</span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.similarOrganisations === 'a'}
-                  onChange={() => {
-                    setPolicyObj({
-                      ...policyObj,
-                      similarOrganisations: 'a'
-                    });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.similarOrganisations === 'b'}
-                  onChange={() => {
-                    setPolicyObj({
-                      ...policyObj,
-                      similarOrganisations: 'b'
-                    });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.similarOrganisations === 'a'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          similarOrganisations: 'a'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.similarOrganisations === 'b'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          similarOrganisations: 'b'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1224,28 +1309,33 @@ export default function IR35TaxComponent() {
                   rights.
                 </span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.ownership === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, ownership: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.ownership === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, ownership: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.ownership === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, ownership: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.ownership === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, ownership: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1277,28 +1367,33 @@ export default function IR35TaxComponent() {
                   separate fee.
                 </span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.belongOrganisation === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, belongOrganisation: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.belongOrganisation === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, belongOrganisation: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.belongOrganisation === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, belongOrganisation: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.belongOrganisation === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, belongOrganisation: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1324,28 +1419,33 @@ export default function IR35TaxComponent() {
                 Has the worker had a previous contract with your organisation?
               </h4>
 
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.previousContract === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, previousContract: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.previousContract === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, previousContract: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.previousContract === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, previousContract: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.previousContract === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, previousContract: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1377,28 +1477,33 @@ export default function IR35TaxComponent() {
                   contracts.
                 </span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.immediately === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, immediately: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.immediately === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, immediately: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.immediately === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, immediately: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.immediately === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, immediately: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1436,28 +1541,33 @@ export default function IR35TaxComponent() {
                   a new window).
                 </a>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.availableWorking === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, availableWorking: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.availableWorking === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, availableWorking: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.availableWorking === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, availableWorking: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.availableWorking === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, availableWorking: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
@@ -1494,28 +1604,33 @@ export default function IR35TaxComponent() {
                   their earnings.
                 </span>
               </div>
-              <div className="d-flex">
-                <Radio
-                  checked={policyObj.months === 'a'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, months: 'a' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">Yes</span>
-
-                <Radio
-                  checked={policyObj.months === 'b'}
-                  onChange={() => {
-                    setPolicyObj({ ...policyObj, months: 'b' });
-                  }}
-                  value="b"
-                  name="radio-button-demo"
-                  aria-label="B"
-                />
-                <span className="mt-3">No</span>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.months === 'a'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, months: 'a' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.months === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, months: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3">No</span>
+                  </li>
+                </ul>
               </div>
               <Button
                 variant="contained"
