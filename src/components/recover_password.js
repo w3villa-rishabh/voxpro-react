@@ -89,10 +89,10 @@ export default function LivePreviewExample() {
                                 <h2>Please check your inbox</h2>
                                 <p>
                                   We've sent an email with a link to reset your
-                                  password. This link will expires in 24 hours
+                                  password. This link will expire in 24 hours
                                   <br></br> <br></br>
                                   <b>Can't find the email? </b> Check your junk
-                                  and spam folder
+                                  and spam folders
                                 </p>
                                 <div className="text-center text-black-50 mb-4">
                                   <a href="/login" className="text-first">
