@@ -207,13 +207,15 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-0">
-          <MenuItem className="text-dark font-10 list-profile-available" onClick={handleClose1}>
-            Immediate
+          <MenuItem
+            className="text-dark font-10 list-profile-available"
+            onClick={handleClose1}>
+            Immediately
           </MenuItem>
           <MenuItem
             className="text-dark font-10 pt-0 list-profile-available"
             onClick={handleClose1}>
-            Not available
+            Unavailable
           </MenuItem>
           <MenuItem className="text-dark font-10 pt-0 list-profile-available">
             <Grid container spacing={0}>
