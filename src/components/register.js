@@ -234,7 +234,7 @@ export default function LivePreviewExample() {
                       className="d-flex align-items-center">
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
-                          <LoginSocialComponent name={'Sign-Up'} />
+                          <LoginSocialComponent name={'Register'} />
 
                           <form method="post" onSubmit={userRegister}>
                             <div className="mb-3">
