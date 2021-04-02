@@ -201,7 +201,7 @@ export default function LivePreviewExample() {
             setTimeout(() => {
               window.location.href = '/login';
               setDoLogin(false);
-            }, 3000);
+            }, 7000);
           } else {
             toast.error(response.data.message);
             setDoLogin(false);
