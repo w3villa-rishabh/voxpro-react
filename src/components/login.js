@@ -27,6 +27,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginComponent() {
+  const [isLogin, setIsLogin] = React.useState(false);
   const [values, setValues] = React.useState({
     showPassword: false
   });
@@ -51,6 +52,7 @@ export default function LoginComponent() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
+    toast.dismiss();
     api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
       if (response.data.success) {
         toast.success(response.data.message);
@@ -74,6 +76,8 @@ export default function LoginComponent() {
 
   let save = (e) => {
     e.preventDefault();
+    setIsLogin(true);
+    toast.dismiss();
     api
       .post('/api/users/login', {
         user: account
@@ -83,10 +87,12 @@ export default function LoginComponent() {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           window.location.href = '/dashboard';
         } else {
+          setIsLogin(false);
           toast.error(response.data.message);
         }
       })
       .catch(() => {
+        setIsLogin(false);
         toast.error('Something went wrong!');
       });
   };
@@ -183,6 +189,7 @@ export default function LoginComponent() {
                                 <Button
                                   fullWidth
                                   type="submit"
+                                  disabled={isLogin}
                                   className="font-weight-bold font-size-sm mt-4 btn-primary">
                                   Sign In
                                 </Button>
@@ -226,7 +233,7 @@ export default function LoginComponent() {
                                 Voxpro
                               </h1>
                               <p className="font-size-lg mb-0 opacity-8">
-                                financial complexity made simple.
+                                Financial complexity made simple.
                               </p>
                             </div>
                           </div>

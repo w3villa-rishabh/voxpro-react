@@ -32,11 +32,12 @@ export default function LoginSocialComponent({ name }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
+    toast.dismiss();
     api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
       if (response.data.success) {
         toast.success(response.data.message);
       } else {
-        toast.warning(response.data.message);
+        toast.error(response.data.message);
       }
     });
   }
@@ -59,6 +60,7 @@ export default function LoginSocialComponent({ name }) {
 
   const socialLogin = (socialObj) => {
     if (socialObj.email) {
+      toast.dismiss();
       api
         .post('/api/user/social_sign_up', {
           user: socialObj
@@ -68,7 +70,7 @@ export default function LoginSocialComponent({ name }) {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             window.location.href = '/dashboard';
           } else {
-            toast.warning(response.data.message);
+            toast.error(response.data.message);
           }
         })
         .catch(() => {

@@ -34,6 +34,7 @@ export default function LivePreviewExample() {
 
   let resetPassword = (e) => {
     e.preventDefault();
+    toast.dismiss();
     api
       .post('/api/password/forgot', {
         email: account.email
