@@ -200,8 +200,13 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           vertical: 'top',
           horizontal: 'right'
         }}
-        classes={{ list: 'p-0' }}>
-        <div className="p-2">
+        PaperProps={{
+          style: {
+            width: 290
+          }
+        }}
+        classes={{ list: 'p-2' }}>
+        <div className="p-1">
           <MenuItem className="text-dark" onClick={handleClose1}>
             Immediate
           </MenuItem>
@@ -213,14 +218,14 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
               <Grid item xs={12} sm={6}>
                 <span>Available from</span>
               </Grid>
-              <Grid item xs={12} sm={6} className="m-lg-n3">
+              <Grid item xs={12} sm={6} className="date-picker">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     disablePast
                     disableToolbar
                     variant="inline"
                     format="dd/MM/yyyy"
-                    margin="normal"
+                    // margin="normal"
                     id="date-picker-inline"
                     value={selectedDate}
                     onChange={handleDateChange}
