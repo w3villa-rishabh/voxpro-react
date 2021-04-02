@@ -27,6 +27,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginComponent() {
+  const [isLogin, setIsLogin] = React.useState(false);
   const [values, setValues] = React.useState({
     showPassword: false
   });
@@ -74,6 +75,7 @@ export default function LoginComponent() {
 
   let save = (e) => {
     e.preventDefault();
+    setIsLogin(true);
     api
       .post('/api/users/login', {
         user: account
@@ -83,11 +85,13 @@ export default function LoginComponent() {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           window.location.href = '/dashboard';
         } else {
+          setIsLogin(false);
           toast.warning(response.data.message);
         }
       })
       .catch(() => {
-        toast.success('Something went wrong!');
+        setIsLogin(false);
+        toast.error('Something went wrong!');
       });
   };
   return (
@@ -183,6 +187,7 @@ export default function LoginComponent() {
                                 <Button
                                   fullWidth
                                   type="submit"
+                                  disabled={isLogin}
                                   className="font-weight-bold font-size-sm mt-4 btn-primary">
                                   Sign In
                                 </Button>
