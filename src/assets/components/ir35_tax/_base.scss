@@ -46,3 +46,14 @@
     width: 15%;
     height: auto;
 }
+
+.question-box {
+    background: white;
+    color: black;
+    width: 120px;
+    padding: 0 10px;
+
+    .border-1 {
+        color: #ccc;
+    }
+}
