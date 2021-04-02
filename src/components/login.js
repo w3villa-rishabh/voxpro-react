@@ -56,7 +56,7 @@ export default function LoginComponent() {
       if (response.data.success) {
         toast.success(response.data.message);
       } else {
-        toast.warning(response.data.message);
+        toast.error(response.data.message);
       }
     });
   }

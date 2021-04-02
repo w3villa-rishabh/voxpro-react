@@ -7,6 +7,7 @@ import {
   List,
   ListItem,
   Tooltip,
+  InputAdornment,
   TextField,
   FormControlLabel,
   Checkbox,
@@ -20,7 +21,30 @@ import LoginSocialComponent from '../components/login-social';
 
 import hero4 from '../assets/images/voxpro-images/reg-side.jpg';
 
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
 export default function LivePreviewExample() {
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
+  const [values1, setValues1] = React.useState({
+    showPassword: false
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleClickShowPassword1 = () => {
+    setValues1({ ...values1, showPassword: !values1.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   let [account, setAccount] = useState({
     email: '',
     password: '',
@@ -177,7 +201,7 @@ export default function LivePreviewExample() {
               setDoLogin(false);
             }, 3000);
           } else {
-            toast.warning(response.data.message);
+            toast.error(response.data.message);
             setDoLogin(false);
           }
         })
@@ -244,8 +268,24 @@ export default function LivePreviewExample() {
                                 onChange={handleChange}
                                 fullWidth
                                 placeholder="Enter your password"
-                                type="password"
-                                // required
+                                required
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={values.password}
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}>
+                                        {values.showPassword ? (
+                                          <Visibility />
+                                        ) : (
+                                          <VisibilityOff />
+                                        )}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  )
+                                }}
                               />
                               {errors.password.length > 0 && (
                                 <span className="error">{errors.password}</span>
@@ -265,8 +305,26 @@ export default function LivePreviewExample() {
                                 name="confirm_password"
                                 onChange={handleChange}
                                 placeholder="Re-Enter your password"
-                                type="password"
-                                // required
+                                type={
+                                  values1.showPassword ? 'text' : 'password'
+                                }
+                                value={values1.password}
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        onClick={handleClickShowPassword1}
+                                        onMouseDown={handleMouseDownPassword}>
+                                        {values1.showPassword ? (
+                                          <Visibility />
+                                        ) : (
+                                          <VisibilityOff />
+                                        )}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  )
+                                }}
+                                required
                               />
                               {errors.confirm_password.length > 0 && (
                                 <span className="error">

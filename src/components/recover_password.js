@@ -49,7 +49,7 @@ export default function LivePreviewExample() {
         }
       })
       .catch(() => {
-        toast.success('Something went wrong!');
+        toast.error('Something went wrong!');
       });
   };
 

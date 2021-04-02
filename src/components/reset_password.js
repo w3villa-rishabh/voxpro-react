@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Grid,
   Button,
+  InputAdornment,
   List,
   ListItem,
   Tooltip,
   TextField
 } from '@material-ui/core';
+import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
+
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import { toast } from 'react-toastify';
 import api from '../api';
@@ -17,6 +23,25 @@ import logo from '../assets/images/voxpro-images/logo_vp.png';
 import side_img from '../assets/images/voxpro-images/login-side.jpg';
 
 export default function LivePreviewExample() {
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
+  const [values1, setValues1] = React.useState({
+    showPassword: false
+  });
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleClickShowPassword1 = () => {
+    setValues1({ ...values1, showPassword: !values1.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   let [account, setAccount] = useState({
     password: ''
   });
@@ -125,7 +150,31 @@ export default function LivePreviewExample() {
                                   onChange={handleChange}
                                   fullWidth
                                   placeholder="Enter your password"
-                                  type="password"
+                                  // eslint-disable-next-line react/jsx-no-duplicate-props
+                                  type={
+                                    values.showPassword ? 'text' : 'password'
+                                  }
+                                  value={values.password}
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LockTwoToneIcon />
+                                      </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={handleClickShowPassword}
+                                          onMouseDown={handleMouseDownPassword}>
+                                          {values.showPassword ? (
+                                            <Visibility />
+                                          ) : (
+                                            <VisibilityOff />
+                                          )}
+                                        </IconButton>
+                                      </InputAdornment>
+                                    )
+                                  }}
                                 />
                               </div>
                               <div className="mb-3">
@@ -141,7 +190,31 @@ export default function LivePreviewExample() {
                                   name="confirm_password"
                                   onChange={handleChange}
                                   placeholder="Re-Enter your password"
-                                  type="password"
+                                  // eslint-disable-next-line react/jsx-no-duplicate-props
+                                  type={
+                                    values1.showPassword ? 'text' : 'password'
+                                  }
+                                  value={values1.password}
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LockTwoToneIcon />
+                                      </InputAdornment>
+                                    ),
+                                    endAdornment: (
+                                      <InputAdornment position="end">
+                                        <IconButton
+                                          onClick={handleClickShowPassword1}
+                                          onMouseDown={handleMouseDownPassword}>
+                                          {values1.showPassword ? (
+                                            <Visibility />
+                                          ) : (
+                                            <VisibilityOff />
+                                          )}
+                                        </IconButton>
+                                      </InputAdornment>
+                                    )
+                                  }}
                                 />
                               </div>
                               <div className="text-center py-4">
@@ -156,8 +229,8 @@ export default function LivePreviewExample() {
                               <div className="text-center text-black-50 mt-3">
                                 Don't have an account?{' '}
                                 <a
-                                  href="sign-up/"
-                                  onClick={(e) => e.preventDefault()}
+                                  href="/sign-up"
+                                  // onClick={(e) => e.preventDefault()}
                                   className="text-first">
                                   Sign up
                                 </a>
