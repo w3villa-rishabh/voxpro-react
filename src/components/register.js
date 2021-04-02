@@ -9,7 +9,9 @@ import {
   Tooltip,
   TextField,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Dialog,
+  DialogTitle
 } from '@material-ui/core';
 
 import api from '../api';
@@ -38,8 +40,13 @@ export default function LivePreviewExample() {
     policyCheckbox: ''
   });
 
+  const [modal1, seModal1] = useState(false);
   const [doLogin, setDoLogin] = useState(false);
   const [policyCheckbox, setPolicyCheckbox] = useState(false);
+
+  const toggle1 = () => {
+    seModal1(!modal1);
+  };
 
   const policyVerify = () => {
     setPolicyCheckbox(!policyCheckbox);
@@ -342,19 +349,25 @@ export default function LivePreviewExample() {
                                   />
                                 }
                                 label={
-                                  <div>
+                                  <div className="font-size-sm">
                                     <span>
                                       I accept Term of Service and agree with{' '}
                                     </span>
-                                    <a
+                                    {/* <a
                                       className="a-blue"
-                                      href="javascript:void(0)">
+                                      href="javascript:void(0)"
+                                      onClick={() => {
+                                        seModal1(!modal1);
+                                      }}>
                                       Terms of use
-                                    </a>
-                                    <span> and </span>
+                                    </a> */}
+                                    {/* <span> and </span> */}
                                     <a
                                       className="a-blue"
-                                      href="javascript:void(0)">
+                                      href="javascript:void(0)"
+                                      onClick={() => {
+                                        seModal1(!modal1);
+                                      }}>
                                       Private Policy
                                     </a>
                                     <span> of Voxpro. </span>
@@ -465,6 +478,92 @@ export default function LivePreviewExample() {
             </div>
           </div>
         </div>
+        {/* User edit modal open */}
+        <Dialog
+          scroll="body"
+          maxWidth="lg"
+          open={modal1}
+          onClose={toggle1}
+          classes={{
+            paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+          }}>
+          <DialogTitle id="form-dialog-title" className="p-2">
+            <div className="card-badges card-badges-top">
+              <FontAwesomeIcon
+                icon={['fas', 'times']}
+                className="pointer mr-3"
+                onClick={toggle1}
+              />
+            </div>
+            <span>Private policy</span>
+          </DialogTitle>
+          <div className="">
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+            <p>
+              A Privacy Policy is a legal statement that specifies what the
+              business owner does with the personal data collected from users,
+              along with how the data is processed and for what purposes. In
+              1968, Council of Europe did studies on the threat of the Internet
+              expansion as they were concerned with the effects of technology on
+              human rights. This lead to the development of policies that were
+              to be developed to protect personal data. This marks the start of
+              what we know now as a "Privacy Policy." While the name "Privacy
+              Policy" refers to the legal agreement, the concept of privacy and
+              protecting user data is closely related. This agreement can also
+              be known under these names: Privacy Statement Privacy Notice
+              Privacy Information Privacy Page A Privacy Policy can be used for
+              both your website and mobile app if it's adapted to include the
+              platforms your business operates on.
+            </p>
+          </div>
+        </Dialog>
       </div>
     </>
   );
