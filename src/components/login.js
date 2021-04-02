@@ -86,7 +86,7 @@ export default function LoginComponent() {
           window.location.href = '/dashboard';
         } else {
           setIsLogin(false);
-          toast.warning(response.data.message);
+          toast.error(response.data.message);
         }
       })
       .catch(() => {

@@ -267,6 +267,7 @@ class App extends Component {
           position="top-left"
           autoClose={4000}
           hideProgressBar={true}
+          newestOnTop={true}
         />
         <Provider store={store}>
           <BrowserRouter basename="/">

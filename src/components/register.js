@@ -268,7 +268,7 @@ export default function LivePreviewExample() {
                                 onChange={handleChange}
                                 fullWidth
                                 placeholder="Enter your password"
-                                required
+                                // required
                                 type={values.showPassword ? 'text' : 'password'}
                                 value={values.password}
                                 InputProps={{
@@ -324,7 +324,7 @@ export default function LivePreviewExample() {
                                     </InputAdornment>
                                   )
                                 }}
-                                required
+                                // required
                               />
                               {errors.confirm_password.length > 0 && (
                                 <span className="error">
@@ -382,20 +382,20 @@ export default function LivePreviewExample() {
                                 name="role"
                                 onChange={handleChange}>
                                 <option value="">Select Role</option>
-                                <option value="0">Admin</option>
+                                {/* <option value="0">Admin</option> */}
                                 <option value="3">Candidate</option>
-                                <option value="1">Agency</option>
-                                <option value="2">Company</option>
+                                {/* <option value="1">Agency</option>
+                                <option value="2">Company</option> */}
                               </select>
                               {errors.role.length > 0 && (
                                 <span className="error">{errors.role}</span>
                               )}
                             </div>
-                            <div className="form-group mb-3">
+                            {/* <div className="form-group mb-3">
                               By clicking the <strong>Create account</strong>{' '}
                               button below you agree to our terms of service and
                               privacy statement.
-                            </div>
+                            </div> */}
                             <div className="d-flex justify-content-between align-items-center font-size-md">
                               <FormControlLabel
                                 control={
@@ -407,7 +407,7 @@ export default function LivePreviewExample() {
                                   />
                                 }
                                 label={
-                                  <div className="font-size-sm">
+                                  <div>
                                     <span>
                                       I accept Term of Service and agree with{' '}
                                     </span>
@@ -426,24 +426,19 @@ export default function LivePreviewExample() {
                                       onClick={() => {
                                         seModal1(!modal1);
                                       }}>
-                                      Private Policy
+                                      Privacy Policy
                                     </a>
                                     <span> of Voxpro. </span>
                                   </div>
                                 }
                               />
                             </div>
-                            {errors.policyCheckbox.length > 0 && (
-                              <span className="error">
-                                {errors.policyCheckbox}
-                              </span>
-                            )}
 
                             <Button
                               type="submit"
                               size="large"
                               fullWidth
-                              disabled={doLogin}
+                              disabled={policyCheckbox === false}
                               className="btn-primary mb-5">
                               Create Account
                             </Button>
@@ -553,9 +548,9 @@ export default function LivePreviewExample() {
                 onClick={toggle1}
               />
             </div>
-            <span>Private policy</span>
+            <span>Privacy policy</span>
           </DialogTitle>
-          <div className="">
+          <div className="p-3">
             <p>
               A Privacy Policy is a legal statement that specifies what the
               business owner does with the personal data collected from users,
