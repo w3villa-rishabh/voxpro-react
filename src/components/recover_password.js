@@ -25,6 +25,10 @@ export default function LivePreviewExample() {
     email: ''
   });
 
+  const [showMessage, setShowMessage] = useState({
+    notification: 'hide'
+  });
+
   let handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -41,10 +45,11 @@ export default function LivePreviewExample() {
       })
       .then((response) => {
         if (response.data.success) {
-          toast.success(response.data.message);
-          setTimeout(() => {
-            window.location.href = '/login';
-          }, 4000);
+          setShowMessage({ ...showMessage, notification: 'show' });
+          // toast.success(response.data.message);
+          // setTimeout(() => {
+          //   window.location.href = '/login';
+          // }, 4000);
         } else {
           toast.error(response.data.message);
         }
@@ -79,6 +84,23 @@ export default function LivePreviewExample() {
                                 width="200"
                               />
                             </h3>
+                            {showMessage.notification === 'show' && (
+                              <div>
+                                <h2>Please check your inbox</h2>
+                                <p>
+                                  We've sent an email with a link to reset your
+                                  password. This link will expires in 24 hours
+                                  <br></br> <br></br>
+                                  <b>Can't find the email? </b> Check your junk
+                                  and spam folder
+                                </p>
+                                <div className="text-center text-black-50 mb-4">
+                                  <a href="/login" className="text-first">
+                                    Return to homepage
+                                  </a>
+                                </div>
+                              </div>
+                            )}
                             <h1 className="display-4 mb-1 font-weight-bold">
                               Recover Password
                             </h1>
