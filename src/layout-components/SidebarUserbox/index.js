@@ -28,6 +28,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import 'date-fns';
+import $ from 'jquery';
 import DateFnsUtils from '@date-io/date-fns';
 import { useHistory } from 'react-router-dom';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -270,9 +271,12 @@ const SidebarUserbox = () => {
   const handleClickMenu1 = (event) => {
     setAnchorElMenu1(event.currentTarget);
     setEditProfile(editValue);
+    $('.sidebar-navigation').addClass('sidebar-navigation-unset');
   };
+
   const handleCloseMenu1 = () => {
     setAnchorElMenu1(null);
+    $('.sidebar-navigation').removeClass('sidebar-navigation-unset');
   };
 
   useEffect(() => {

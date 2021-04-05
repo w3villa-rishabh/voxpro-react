@@ -235,8 +235,9 @@ ul {
   overflow: hidden !important;
 }
 
-
 .profile-menu-card {
+  z-index: 10 !important;
+
   .MuiMenu-paper {
     position: absolute;
     top: 78px !important;
