@@ -757,14 +757,14 @@ export default function LivePreviewExample() {
                         });
                       }}
                       value={userdetails.description}
-                      helperText={`${
-                        CHARACTER_LIMIT - userdetails.description.length
-                      } ${
-                        'characters remaining' +
-                        ' (' +
-                        CHARACTER_LIMIT +
-                        ' Max)'
-                      }`}
+                      // helperText={`${
+                      //   CHARACTER_LIMIT - userdetails.description.length
+                      // } ${
+                      //   'characters remaining' +
+                      //   ' (' +
+                      //   CHARACTER_LIMIT +
+                      //   ' Max)'
+                      // }`}
                     />
                   </div>
                   <div className="text-right">
