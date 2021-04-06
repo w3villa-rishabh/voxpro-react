@@ -63,9 +63,9 @@ const PageTitle = (props) => {
               </div>
             )}
             <div className="app-page-title--heading">
-              <h1>{titleHeading}</h1>
+              <h5 className="m-0">{titleHeading}</h5>
               {pageTitleDescription && (
-                <div className="app-page-title--description">
+                <div className="app-page-title--description mt-0">
                   {titleDescription}
                 </div>
               )}

@@ -1,8 +1,9 @@
 //  Core
 
 .app-page-title {
-  margin: (-$layout-spacer) (-$layout-spacer) $layout-spacer;
-  padding: $layout-spacer;
+  // margin: (-$layout-spacer) (-$layout-spacer) $layout-spacer;
+  // padding: $layout-spacer;
+  padding: 10px 0 34px;
 
   @include media-breakpoint-down(sm) {
     margin: (-($layout-spacer / 3)) (-($layout-spacer / 3)) ($layout-spacer / 3);
@@ -12,14 +13,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba($white, .8);
+  // background: rgba($white, .8);
   transition: $transition-base;
+
   &--shadow {
     box-shadow: $page-title-shadow;
   }
+
   @include media-breakpoint-down(md) {
     flex-direction: column;
   }
+
   &--dark {
     color: rgba($white, 1);
   }
@@ -39,6 +43,7 @@
     display: flex;
     align-items: center;
   }
+
   &--heading {
     padding-right: ($spacer);
 
@@ -53,6 +58,7 @@
       margin: 0;
     }
   }
+
   &--iconbox {
     background: $white;
     @include border-radius($border-radius-sm);

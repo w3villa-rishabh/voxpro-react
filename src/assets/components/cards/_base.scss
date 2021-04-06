@@ -45,7 +45,7 @@ button.card {
   top: $card-spacer-y;
   z-index: 2;
 
-  & > * {
+  &>* {
     box-shadow: $box-shadow-layout-bottom;
   }
 }
@@ -89,11 +89,11 @@ body {
   .card-header--title {
     flex-grow: 1;
 
-    & > b {
+    &>b {
       display: block;
     }
 
-    & > small {
+    &>small {
       text-transform: uppercase;
       display: block;
       opacity: .3;
@@ -114,7 +114,7 @@ body {
 
 
 .MuiCard-root {
-  & > .bg-composed-wrapper {
+  &>.bg-composed-wrapper {
     top: -1px;
     margin-left: -1px;
     margin-right: -1px;
@@ -148,6 +148,51 @@ body {
 // Chat wrapper
 
 .chat-wrapper {
+
+  .chat-item {
+
+    .chat-box {
+      position: relative;
+      opacity: 1;
+      border: 0;
+      padding: ($spacer / 1.2) ($spacer * 2);
+      @include border-radius($border-radius-lg * 2);
+      border-top-left-radius: $border-radius-sm;
+      max-width: 50%;
+      min-width: 100%;
+      font-size: $font-size-sm;
+
+      p {
+        margin-bottom: ($spacer / 3);
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .avatar-icon-wrapper {
+      margin-right: ($spacer / 2);
+    }
+  }
+
+  .chat-item-reverse {
+    .chat-box {
+      border-top-left-radius: ($border-radius-lg * 2);
+      border-top-right-radius: $border-radius-sm;
+    }
+
+    .avatar-icon-wrapper {
+      margin-left: ($spacer / 2);
+      margin-right: 0;
+    }
+  }
+}
+
+.chat-wrapper-message {
+  height: 315px;
+  overflow: scroll;
+
   .chat-item {
 
     .chat-box {
@@ -250,10 +295,10 @@ body {
   }
 
   &--bottom {
-    background: -moz-linear-gradient(top,  rgba($black,0) 0%, rgba($black,0.8) 100%);
-    background: -webkit-linear-gradient(top,  rgba($black,0) 0%,rgba($black,0.8) 100%);
-    background: linear-gradient(to bottom,  rgba($black,0) 0%,rgba($black,0.8) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#cc000000',GradientType=0 );
+    background: -moz-linear-gradient(top, rgba($black, 0) 0%, rgba($black, 0.8) 100%);
+    background: -webkit-linear-gradient(top, rgba($black, 0) 0%, rgba($black, 0.8) 100%);
+    background: linear-gradient(to bottom, rgba($black, 0) 0%, rgba($black, 0.8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#cc000000', GradientType=0);
     transition: $transition-base;
     z-index: 3;
 
@@ -378,7 +423,7 @@ body {
   position: relative;
   padding-top: calc(#{$card-spacer-x} + 50px) !important;
 
-  & > .avatar-icon-wrapper {
+  &>.avatar-icon-wrapper {
     margin: 0;
     position: absolute;
     height: 120px;
@@ -406,7 +451,7 @@ body {
   }
 
   &.text-center {
-    & > .avatar-icon-wrapper {
+    &>.avatar-icon-wrapper {
       left: 50%;
       margin-left: -60px;
 
@@ -490,7 +535,7 @@ body {
     @include border-top-radius(inherit);
 
     @include media-breakpoint-down(sm) {
-      & + img {
+      &+img {
         width: 100% !important;
       }
     }

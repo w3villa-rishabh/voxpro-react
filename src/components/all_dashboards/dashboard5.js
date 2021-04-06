@@ -1,14 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  Grid,
-  Card,
-  Button,
-  LinearProgress,
-  ListItem,
-  List
-} from '@material-ui/core';
+import { Grid, Card, Button, ListItem, List } from '@material-ui/core';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
@@ -168,28 +161,6 @@ export default function LivePreviewExample() {
           </Grid>
           <Grid item xs={12} sm={6} className="d-flex h-100">
             <Grid container spacing={2}>
-              <Grid item xl={12}>
-                <Card className="card-box p-3">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div>
-                      <div className="font-weight-bold">Profile Readiness</div>
-                      <span className="text-black-50 d-block">
-                        Additional steps to complete profile
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="align-box-row progress-bar--label text-muted">
-                      <div className="ml-auto" style={{color: '#2e2e2e'}}>80%</div>
-                    </div>
-                    <LinearProgress
-                      variant="determinate"
-                      className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second hc-style"
-                      value={85}
-                    />
-                  </div>
-                </Card>
-              </Grid>
               <Grid item xl={12} className="h-100">
                 <Card className="shadow-xxl">
                   <div className="card-header-alt px-4 pt-4 pb-2">
