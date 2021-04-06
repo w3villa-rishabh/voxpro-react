@@ -113,13 +113,14 @@ export default function LivePreviewExample() {
   };
 
   let save = (e) => {
+    toast.dismiss();
     e.preventDefault();
     if (
       validateForm(errors) &&
       account.password &&
+      verifyPass(account.password) === '' &&
       account.confirm_password === account.password
     ) {
-      toast.dismiss();
       api
         .post('/api/password/reset', {
           user: account,
@@ -137,6 +138,7 @@ export default function LivePreviewExample() {
           }
         });
     } else {
+      toast.error('Invalid Password Pattern');
       console.error('Invalid Form');
     }
   };

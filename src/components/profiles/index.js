@@ -26,17 +26,64 @@ import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import avatar1 from '../../assets/images/avatars/avatar1.jpg';
 import avatar3 from '../../assets/images/avatars/avatar3.jpg';
 import stock2 from '../../assets/images/stock-photos/stock-7.jpg';
+import { toast } from 'react-toastify';
 
 export default function LivePreviewExample() {
   const [aboutText, setAboutText] = useState();
+  const CHARACTER_LIMIT = 255;
   const [, setData] = useState({});
   const [modal1, seModal1] = useState(false);
   const [currentUser] = useState(getCurrentUser());
+
+  const [description, setDescription] = useState({
+    description: ''
+  });
+
+  const [userdetails, setUserDetials] = useState({
+    first_name: '',
+    middle_name: '',
+    description: '',
+    email: '',
+    secondary_email: ''
+  });
+
+  let handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    userdetails[name] = value;
+    setUserDetials(userdetails);
+  };
+
+  let editInfo = (e) => {
+    e.preventDefault();
+    toast.dismiss();
+    api
+      .patch('/api/user', {
+        id: userdetails.id,
+        user: userdetails
+      })
+      .then((response) => {
+        if (response.data.success) {
+          setDescription(response.data.user);
+          toast.success(response.data.message);
+          setOpen1(false);
+          seModal1(!modal1);
+        } else {
+          toast.error(response.data.message);
+        }
+      })
+      .catch(() => {
+        toast.error('Something went wrong!');
+      });
+  };
 
   useEffect(() => {
     api.get(`/api/user?id=${currentUser.id}`).then((response) => {
       if (response.data) {
         setData(response.data);
+        setUserDetials(response.data);
+        setDescription(response.data);
+        // setAboutText(response.data.description);
       } else {
         alert('Something went wrong..');
       }
@@ -44,7 +91,7 @@ export default function LivePreviewExample() {
   }, [currentUser.id]);
 
   const toggle1 = () => {
-    // seModal1(!modal1);
+    seModal1(!modal1);
   };
 
   const [activeTab, setActiveTab] = useState('0');
@@ -57,14 +104,33 @@ export default function LivePreviewExample() {
   const [open1, setOpen1] = useState(false);
 
   const handleClickOpen1 = () => {
-    // setOpen1(true);
-    setAboutText(
-      'Frank Belford providing delivery, implementation, Support, trancing and advanced customization for the selesforce platform'
-    );
+    setOpen1(true);
+    setAboutText(userdetails.description);
   };
 
   const handleClose1 = () => {
     setOpen1(false);
+  };
+  // education
+  const [openEducation, setOpenEducation] = useState(false);
+
+  const handleEducation = () => {
+    setOpenEducation(true);
+  };
+
+  const closeEducation = () => {
+    setOpenEducation(false);
+  };
+
+  // experience
+  const [openExperience, setOpenExperience] = useState(false);
+
+  const handleExperience = () => {
+    setOpenExperience(true);
+  };
+
+  const closeExperience = () => {
+    setOpenExperience(false);
   };
 
   return (
@@ -141,7 +207,7 @@ export default function LivePreviewExample() {
                             variant="determinate"
                             className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second hc-style"
                             value={85}
-                            style={{backgroundColor: "#070919!important"}}
+                            style={{ backgroundColor: '#070919!important' }}
                           />
                         </div>
                         <Grid container spacing={1}>
@@ -197,11 +263,7 @@ export default function LivePreviewExample() {
                       className="about"
                       onClick={handleClickOpen1}
                     />
-                    <div>
-                      Frank Belford providing delivery, implementation, Support,
-                      trancing and advanced customization for the selesforce
-                      platform
-                    </div>
+                    <div>{description.description}</div>
                   </Card>
 
                   <Card className="card-box p-4 mt-3">
@@ -223,7 +285,11 @@ export default function LivePreviewExample() {
 
                   <Card className="card-box p-4 mt-3 experience-card">
                     <h5>Experience</h5>
-                    <FontAwesomeIcon icon={['fas', 'plus']} className="icon" />
+                    <FontAwesomeIcon
+                      icon={['fas', 'plus']}
+                      className="icon"
+                      onClick={handleExperience}
+                    />
                     <ul>
                       <li className="position-relative">
                         <FontAwesomeIcon
@@ -361,13 +427,13 @@ export default function LivePreviewExample() {
                   <Card className="card-box p-4 dashboard-card">
                     <h5 className="mb-0">Your Dashboard</h5>
                     <p className="font-italic">Private to you</p>
-                    <div className="star-icon">
+                    {/* <div className="star-icon">
                       <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
                         className="icon"
                       />
                       <span>All Start</span>
-                    </div>
+                    </div> */}
                     <div className="raging">
                       <Grid item xs={12} sm={4}>
                         <span className="rating-count">254</span>
@@ -403,7 +469,11 @@ export default function LivePreviewExample() {
 
                   <Card className="card-box p-4 education-card mt-3">
                     <h5>Education</h5>
-                    <FontAwesomeIcon icon={['fas', 'plus']} className="icon" />
+                    <FontAwesomeIcon
+                      icon={['fas', 'plus']}
+                      className="icon"
+                      onClick={handleEducation}
+                    />
                     <ul>
                       <li className="position-relative">
                         <FontAwesomeIcon
@@ -667,38 +737,54 @@ export default function LivePreviewExample() {
           <div>
             <div className="border-0">
               <div className="card-body">
-                <div className="mb-3">
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    size="small"
-                    id="textfield-email"
-                    label="Edit about"
-                    multiline
-                    rowsMax={4}
-                    onChange={(event) => {
-                      setAboutText(event.target.value);
-                    }}
-                    value={aboutText}
-                  />
-                </div>
+                <form method="post" onSubmit={editInfo}>
+                  <div className="mb-3">
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      size="small"
+                      id="textfield-email"
+                      name="description"
+                      // onChange={handleChange}
+                      inputProps={{ maxLength: 255 }}
+                      label="Edit about"
+                      multiline
+                      rowsMax={4}
+                      onChange={(event) => {
+                        setUserDetials({
+                          ...userdetails,
+                          description: event.target.value
+                        });
+                      }}
+                      value={userdetails.description}
+                      helperText={`${
+                        CHARACTER_LIMIT - userdetails.description.length
+                      } ${
+                        'characters remaining' +
+                        ' (' +
+                        CHARACTER_LIMIT +
+                        ' Max)'
+                      }`}
+                    />
+                  </div>
+                  <div className="text-right">
+                    <DialogActions>
+                      <Button
+                        variant="contained"
+                        onClick={handleClose1}
+                        className="font-weight-bold btn-second px-4 my-3">
+                        Cancel
+                      </Button>
 
-                <div className="text-right">
-                  <DialogActions>
-                    <Button
-                      variant="contained"
-                      onClick={handleClose1}
-                      className="font-weight-bold btn-second px-4 my-3">
-                      Cancel
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      className="font-weight-bold btn-second px-4 my-3">
-                      Save
-                    </Button>
-                  </DialogActions>
-                </div>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        className="font-weight-bold btn-second px-4 my-3">
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -715,118 +801,474 @@ export default function LivePreviewExample() {
           paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
         }}>
         <DialogTitle id="form-dialog-title">Edit info</DialogTitle>
-        <div className="edit-user-info">
-          <div className="border">
-            <div className="card-img-wrapper h-180px">
-              <img alt="..." className="img-fit-container" src={stock2} />
-            </div>
-            <CardContent className="card-body-avatar">
-              <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
-                <div className="avatar-icon rounded-circle">
-                  <img alt="..." src={avatar5} />
+        <form method="post" onSubmit={editInfo}>
+          <div className="edit-user-info">
+            <div className="border">
+              <div className="card-img-wrapper h-180px">
+                <img alt="..." className="img-fit-container" src={stock2} />
+              </div>
+              <CardContent className="card-body-avatar">
+                <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
+                  <div className="avatar-icon rounded-circle">
+                    <img alt="..." src={avatar5} />
+                  </div>
                 </div>
-              </div>
-            </CardContent>
+              </CardContent>
+            </div>
+
+            <Grid container spacing={2} className="mt-3">
+              <Grid item xs={4}>
+                <div>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="First Name"
+                    name="first_name"
+                    onChange={handleChange}
+                    value={userdetails.first_name}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Middle Name"
+                    name="middle_name"
+                    onChange={handleChange}
+                    value={userdetails.middle_name}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Last Name"
+                    name="last_name"
+                    onChange={handleChange}
+                    value={userdetails.last_name}
+                  />
+                </div>
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Email"
+                  name="email"
+                  onChange={handleChange}
+                  value={userdetails.email}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Secondary Email"
+                  name="secondary_email"
+                  onChange={handleChange}
+                  value={userdetails.secondary_email}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Mobile Number"
+                  name="contact_number"
+                  onChange={handleChange}
+                  value={userdetails.contact_number}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Home Number"
+                  name="home_number"
+                  onChange={handleChange}
+                  value={userdetails.home_number}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Headline"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Education"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Country/Region"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Locations in this Country/Region"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Industry"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id="textfield-user"
+                  label="Contact info"
+                />
+              </Grid>
+            </Grid>
           </div>
+          <div className="text-right">
+            <DialogActions>
+              <Button
+                variant="contained"
+                onClick={toggle1}
+                className="font-weight-bold btn-second px-4 my-3">
+                Cancel
+              </Button>
 
-          <Grid container spacing={2} className="mt-3">
-            <Grid item xs={6}>
-              <div>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="First name"
-                />
+              <Button
+                variant="contained"
+                type="submit"
+                className="font-weight-bold btn-second px-4 my-3">
+                Save
+              </Button>
+            </DialogActions>
+          </div>
+        </form>
+      </Dialog>
+
+      {/* dialog for add education */}
+      <Dialog
+        classes={{ paper: 'modal-content' }}
+        fullWidth
+        open={openExperience}
+        onClose={closeEducation}
+        aria-labelledby="form-dialog-title2">
+        <DialogTitle id="form-dialog-title">Add education</DialogTitle>
+
+        <DialogContent className="p-0">
+          <div>
+            <div className="border-0">
+              <div className="card-body">
+                <form method="post" onSubmit={editInfo}>
+                  <div className="mb-3">
+                    <Grid container spacing={2} className="mt-3">
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="School"
+                            name="first_name"
+                            onChange={handleChange}
+                            // value={userdetails.first_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Degree"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Field of Study"
+                            name="last_name"
+                            onChange={handleChange}
+                            // value={userdetails.last_name}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2} className="mt-3">
+                      <Grid item xs={6}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Start date"
+                            name="first_name"
+                            onChange={handleChange}
+                            // value={userdetails.first_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="End Date"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Grade (optional)"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Activities and societies"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Description"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </div>
+                  <div className="text-right">
+                    <DialogActions>
+                      <Button
+                        variant="contained"
+                        onClick={closeEducation}
+                        className="font-weight-bold btn-second px-4 my-3">
+                        Cancel
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        className="font-weight-bold btn-second px-4 my-3">
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </div>
+                </form>
               </div>
-            </Grid>
-            <Grid item xs={6}>
-              <div>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Second name"
-                />
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* dialog for add experience */}
+      <Dialog
+        classes={{ paper: 'modal-content' }}
+        fullWidth
+        open={openEducation}
+        onClose={closeExperience}
+        aria-labelledby="form-dialog-title2">
+        <DialogTitle id="form-dialog-title">Add experience</DialogTitle>
+
+        <DialogContent className="p-0">
+          <div>
+            <div className="border-0">
+              <div className="card-body">
+                <form method="post" onSubmit={editInfo}>
+                  <div className="mb-3">
+                    <Grid container spacing={2} className="mt-3">
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="School"
+                            name="first_name"
+                            onChange={handleChange}
+                            // value={userdetails.first_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Degree"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Field of Study"
+                            name="last_name"
+                            onChange={handleChange}
+                            // value={userdetails.last_name}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2} className="mt-3">
+                      <Grid item xs={6}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Start date"
+                            name="first_name"
+                            onChange={handleChange}
+                            // value={userdetails.first_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="End Date"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Grade (optional)"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Activities and societies"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>
+                          <TextField
+                            fullWidth
+                            variant="outlined"
+                            id="textfield-user"
+                            label="Description"
+                            name="middle_name"
+                            onChange={handleChange}
+                            // value={userdetails.middle_name}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </div>
+                  <div className="text-right">
+                    <DialogActions>
+                      <Button
+                        variant="contained"
+                        onClick={closeExperience}
+                        className="font-weight-bold btn-second px-4 my-3">
+                        Cancel
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        className="font-weight-bold btn-second px-4 my-3">
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </div>
+                </form>
               </div>
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Current Position"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Headline"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Education"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Country/Region"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Locations in this Country/Region"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Industry"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                id="textfield-user"
-                label="Contact info"
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className="text-right">
-          <DialogActions>
-            <Button
-              variant="contained"
-              onClick={toggle1}
-              className="font-weight-bold btn-second px-4 my-3">
-              Cancel
-            </Button>
-
-            <Button
-              variant="contained"
-              className="font-weight-bold btn-second px-4 my-3">
-              Save
-            </Button>
-          </DialogActions>
-        </div>
+            </div>
+          </div>
+        </DialogContent>
       </Dialog>
     </div>
   );
