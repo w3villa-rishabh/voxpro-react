@@ -16,7 +16,7 @@ export default function LivePreviewExample() {
       <div className="">
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Card className="shadow-xxl h-100">
+            <Card className="shadow-xxl">
               <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4">
                 <div>
                   <h6 className="font-weight-bold font-size-lg mb-1 text-black">
@@ -25,10 +25,9 @@ export default function LivePreviewExample() {
                 </div>
               </div>
               <div className="divider" />
-              <div className="divider" />
               <div
                 className="scroll-area shadow-overflow"
-                style={{ height: '380px' }}>
+                style={{ height: '412px', borderRadius: 'inherit' }}>
                 <PerfectScrollbar>
                   <List component="div" className="list-group-flush">
                     <ListItem className="py-4 d-block">
@@ -161,7 +160,7 @@ export default function LivePreviewExample() {
           </Grid>
           <Grid item xs={12} sm={6} className="d-flex h-100">
             <Grid container spacing={2}>
-              <Grid item xl={12} className="h-100">
+              <Grid item xl={12}>
                 <Card className="shadow-xxl">
                   <div className="card-header-alt px-4 pt-4 pb-2">
                     <h6 className="font-weight-bold font-size-lg mb-1 text-black">
@@ -169,7 +168,9 @@ export default function LivePreviewExample() {
                     </h6>
                     {/* <p className="text-black-50 mb-0">Reports for what we sold this week.</p> */}
                   </div>
-                  <div className="scroll-area shadow-overflow">
+                  <div
+                    className="scroll-area shadow-overflow"
+                    style={{ height: '433px', borderRadius: 'inherit' }}>
                     <PerfectScrollbar options={{ wheelPropagation: false }}>
                       <List component="div" className="list-group-flush">
                         <ListItem className="d-flex justify-content-between align-items-center py-3">

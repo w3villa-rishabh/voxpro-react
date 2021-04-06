@@ -36,7 +36,7 @@
   // right: 0;
   top: 9px;
   z-index: 10;
-  height: 100vh;
+  // height: 100vh;
   transform: translate(220px);
   transition: $header-drawer-transition;
   box-shadow: 0 0 0 0 transparent;
@@ -44,7 +44,7 @@
   background: $white;
   left: -520px !important;
   margin-left: 10px;
-  background: #253154;
+  background: #f8f9ff;
   color: white;
 
   .close-drawer-btn {
@@ -63,6 +63,41 @@
     z-index: 1155;
     opacity: 0;
     visibility: hidden;
+  }
+
+  .chat-wrapper-message {
+    height: 327px;
+  }
+
+  .scroll-menu {
+    overflow: scroll;
+    height: 445px;
+  }
+
+  .active-card {
+    border: 1px solid #12c5db;
+    border-left: 4px solid #12c5db;
+  }
+
+  .pending-card {
+    border: 1px solid #f4772f;
+    border-left: 4px solid #f4772f;
+  }
+
+  .resolved-card {
+    border: 1px solid #1fb147;
+    border-left: 4px solid #1fb147;
+  }
+
+  .active-card,
+  .pending-card,
+  .resolved-card {
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: white;
+    color: black;
+    box-shadow: $box-shadow-layout-bottom;
   }
 }
 
@@ -87,6 +122,23 @@
     margin: 0 0 0 $spacer;
   }
 }
+
+.app-drawer-wrapper-message {
+  // border-left: rgba($black, .1) solid 1px;
+  // padding: ($spacer / 3.5) 0 ($spacer / 3.5) ($spacer * 2);
+  // margin: 0 ($layout-spacer / 3) 0 ($spacer * 2);
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 50px;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-down(lg) {
+    padding: ($spacer / 3.5) 0 ($spacer / 3.5) ($spacer);
+    margin: 0 0 0 $spacer;
+  }
+}
+
 
 // Open header drawer section
 
@@ -143,7 +195,17 @@
     display: none;
   }
 
-  .app-drawer-content-message {
-    display: none;
+  .chat-wrapper-message {
+    height: 365px;
   }
+
+  .scroll-menu {
+    height: 490px !important;
+  }
+}
+
+.send-btn {
+  position: absolute;
+  right: 24px;
+  cursor: pointer;
 }

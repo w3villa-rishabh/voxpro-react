@@ -174,7 +174,7 @@ const LivePreviewExample = (props) => {
                   </div>
                   <div
                     className="scroll-area shadow-overflow"
-                    style={{ height: '327px', borderRadius: 'inherit' }}>
+                    style={{ height: '412px', borderRadius: 'inherit' }}>
                     <PerfectScrollbar options={{ wheelPropagation: false }}>
                       <List component="div" className="list-group-flush">
                         <ListItem className="py-3">
@@ -369,6 +369,102 @@ const LivePreviewExample = (props) => {
                             </Grid>
                           </Grid>
                         </ListItem>
+                        <ListItem className="py-3">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar4} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Gordon Barnett
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    UI Developer, UiFort
+                                  </span>
+                                </div>
+                              </div>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              md={6}
+                              className="pt-3 pt-xl-0 d-flex align-items-center">
+                              <div className="align-box-row flex-grow-1">
+                                <div className="d-flex flex-column flex-grow-1"></div>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-4">
+                                  Accept
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-danger ml-4">
+                                  Reject
+                                </Button>
+                              </div>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                        <ListItem className="py-3">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar4} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Gordon Barnett
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    UI Developer, UiFort
+                                  </span>
+                                </div>
+                              </div>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              md={6}
+                              className="pt-3 pt-xl-0 d-flex align-items-center">
+                              <div className="align-box-row flex-grow-1">
+                                <div className="d-flex flex-column flex-grow-1"></div>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-4">
+                                  Accept
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-danger ml-4">
+                                  Reject
+                                </Button>
+                              </div>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
                       </List>
                     </PerfectScrollbar>
                   </div>
@@ -416,22 +512,123 @@ const LivePreviewExample = (props) => {
                     </Button>
                   </Tooltip>
 
-                  <div className="vh-100 shadow-overflow">
+                  <div className="shadow-overflow">
                     <PerfectScrollbar>
-                      <div>
+                      <div className="p-2 scroll-menu">
                         <TextField
                           onFocus={toggleHeaderSearchHover}
                           onBlur={toggleHeaderSearchHover}
                           id="header-search-input"
                           name="header-search-input"
                           type="search"
-                          placeholder="Search terms..."
+                          placeholder="Search conversations.."
                           variant="outlined"
-                          style={{ background: 'white', margin: '10px' }}
+                          style={{
+                            background: 'white',
+                            'margin-bottom': '10px'
+                          }}
                         />
-                        <b>Pending</b>
-                        <b>Active conversions</b>
-                        <b>Resolved conversations</b>
+                        <div className="py-4">
+                          <FontAwesomeIcon
+                            icon={['far', 'clock']}
+                            className="font-size-sm text-warning"
+                          />
+                          <b className="text-warning ml-1">Pending</b>
+                        </div>
+                        <ul>
+                          <li className="pending-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="pending-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="pending-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="pending-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                        </ul>
+                        <div className="py-4">
+                          <FontAwesomeIcon
+                            icon={['far', 'comments']}
+                            className="font-size-sm text-info"
+                          />
+                          <b className="text-info ml-1">Active conversions</b>
+                        </div>
+                        <ul>
+                          <li className="active-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="active-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="active-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="active-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                        </ul>
+                        <div className="py-4">
+                          <FontAwesomeIcon
+                            icon={['far', 'comment-alt']}
+                            className="font-size-sm text-success"
+                          />
+                          <b className="text-success ml-1">
+                            Resolved conversations
+                          </b>
+                        </div>
+                        <ul>
+                          <li className="resolved-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="resolved-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="resolved-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                          <li className="resolved-card">
+                            <b>Jerome Macoy</b>
+                            <p className="mb-0 text-black-50">
+                              So I need new sheets and..
+                            </p>
+                          </li>
+                        </ul>
                       </div>
                     </PerfectScrollbar>
                   </div>
@@ -440,7 +637,7 @@ const LivePreviewExample = (props) => {
                   <PerfectScrollbar>
                     <div className="card-header rounded-0 bg-white border-bottom">
                       <div className="card-header--title">
-                        <div className="app-drawer-wrapper">
+                        <div className="app-drawer-wrapper-message">
                           <Button
                             size="small"
                             onClick={toogleHeaderDrawer}
@@ -459,7 +656,7 @@ const LivePreviewExample = (props) => {
                           </div>
                         </div>
                       </div>
-                      <div className="card-header--actions">
+                      {/* <div className="card-header--actions">
                         <Tooltip title="Add in conversation">
                           <Button
                             size="small"
@@ -467,7 +664,7 @@ const LivePreviewExample = (props) => {
                             <FontAwesomeIcon icon={['fas', 'plus']} />
                           </Button>
                         </Tooltip>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="chat-wrapper-message p-3">
                       <div className="chat-item p-2 mb-2">
@@ -662,7 +859,7 @@ const LivePreviewExample = (props) => {
                           </div>
                           <TextField
                             variant="outlined"
-                            size="medium"
+                            size="small"
                             className="bg-white w-100"
                             classes={{ root: 'input-border-0' }}
                             id="input-with-icon-textfield225-1"
@@ -670,6 +867,12 @@ const LivePreviewExample = (props) => {
                             onFocus={toggleInputBg}
                             onBlur={toggleInputBg}
                           />
+                          <div className="avatar-icon-wrapper avatar-initials mr-3 send-btn">
+                            <FontAwesomeIcon
+                              icon={['fas', 'paper-plane']}
+                              className="font-size-sm"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
