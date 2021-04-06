@@ -210,12 +210,12 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
           <MenuItem
             className="text-dark font-10 list-profile-available"
             onClick={handleClose1}>
-            Immediate
+            Immediately
           </MenuItem>
           <MenuItem
             className="text-dark font-10 pt-0 list-profile-available"
             onClick={handleClose1}>
-            Not available
+            Unavailable
           </MenuItem>
           <MenuItem className="text-dark font-10 pt-0 list-profile-available">
             <Grid container spacing={0}>
@@ -271,6 +271,7 @@ const SidebarUserbox = () => {
     setAnchorElMenu1(event.currentTarget);
     setEditProfile(editValue);
   };
+
   const handleCloseMenu1 = () => {
     setAnchorElMenu1(null);
   };

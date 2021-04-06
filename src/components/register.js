@@ -67,6 +67,7 @@ export default function LivePreviewExample() {
   const [modal1, seModal1] = useState(false);
   const [doLogin, setDoLogin] = useState(false);
   const [policyCheckbox, setPolicyCheckbox] = useState(false);
+  let passwordVerified = false;
 
   const toggle1 = () => {
     seModal1(!modal1);
@@ -141,15 +142,18 @@ export default function LivePreviewExample() {
 
   const verifyPass = (value) => {
     let validated = '';
-
+    passwordVerified = true;
     if (value.length < 8) {
       validated = 'Your password must be at least 8 characters';
+      passwordVerified = false;
     }
     if (!/[A-Z]/.test(value)) {
       validated = 'Your password must contain at least one upper case.';
+      passwordVerified = false;
     }
     if (!/[#?!@$%^&*-]/.test(value)) {
       validated = 'Your password must contain at least one special case.';
+      passwordVerified = false;
     }
     return validated;
   };
@@ -179,12 +183,16 @@ export default function LivePreviewExample() {
 
   let userRegister = (e) => {
     e.preventDefault();
+    verifyPass(account.password);
+    if (passwordVerified === false) {
+      return;
+    }
     if (
       validateForm(errors) &&
       account.first_name &&
       account.last_name &&
       account.email &&
-      account.password &&
+      passwordVerified &&
       account.role >= 0 &&
       policyCheckbox &&
       account.confirm_password === account.password
