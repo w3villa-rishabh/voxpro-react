@@ -207,7 +207,9 @@ const OnlineAndAvailability = forwardRef((props, ref) => {
         }}
         classes={{ list: 'p-0' }}>
         <div className="p-0">
-          <MenuItem className="text-dark font-10 list-profile-available" onClick={handleClose1}>
+          <MenuItem
+            className="text-dark font-10 list-profile-available"
+            onClick={handleClose1}>
             Immediate
           </MenuItem>
           <MenuItem
