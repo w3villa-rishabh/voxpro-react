@@ -283,7 +283,6 @@ export default function LivePreviewExample() {
               </Card>
             </Grid>
           </Grid>
-          
         </Container>
       </div>
     </>
