@@ -36,6 +36,9 @@ const Onboarding = lazy(() =>
   import('./components/documents/onboarding_documents')
 );
 
+// show document list
+const DocList = lazy(() => import('./components/documents/documents_list'));
+
 //onboarding documents
 const UploadDocument = lazy(() =>
   import('./components/documents/upload_documents')
@@ -132,7 +135,8 @@ const Routes = () => {
                 '/upload',
                 '/ir35-verify',
                 '/request-information',
-                '/view-profile'
+                '/view-profile',
+                '/view-document'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -140,6 +144,7 @@ const Routes = () => {
                   <Route path="/profile-edit" component={EditProfile} />
                   <Route path="/documents" component={Onboarding} />
                   <Route path="/upload" component={UploadDocument} />
+                  <Route path="/view-document" component={DocList} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route path="/view-profile" component={Profile} />
                 </Switch>
