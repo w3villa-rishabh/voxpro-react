@@ -6,6 +6,7 @@ import { Grid, List, ListItem, Tooltip, Card } from '@material-ui/core';
 import logo from '../assets/images/voxpro-images/logo_vp.png';
 
 import hero6 from '../assets/images/voxpro-images/recover-side.jpg';
+
 import illustration1 from '../assets/images/illustrations/pack1/analysis.svg';
 import illustration2 from '../assets/images/illustrations/pack1/businessman.svg';
 import illustration3 from '../assets/images/illustrations/pack1/handshake.svg';
@@ -54,7 +55,7 @@ export default function LivePreviewExample() {
                                 </div>
                               </div>
                             )} */}
-                            <h1 className="display-4 mb-1 font-weight-bold">
+                            <h1 className="display-4 mb-1 font-weight-bold font-size-xl">
                               Register As
                             </h1>
                             <p className="font-size-lg mb-0 text-black-50 mb-3">
@@ -64,39 +65,35 @@ export default function LivePreviewExample() {
                               <Card className="card-size card-center">
                                 <div>
                                   <Grid container spacing={0}>
-                                    <Grid item md={4}>
-                                      <img
-                                        alt="..."
-                                        className="img-fluid"
-                                        style={{
-                                          minHeight: '40px',
-                                          maxHeight: '60px'
-                                        }}
-                                        src={illustration4}
-                                      />
-                                    </Grid>
-                                    <Grid
-                                      item
-                                      md={6}
-                                      className="d-flex align-items-center">
-                                      <div>
-                                        <div className="font-size-lg font-weight-bold mb-1">
-                                          Candidate
+                                    <Grid item md={12}>
+                                      <div className="d-flex align-items-center justify-content-between">
+                                        <div className="d-flex">
+                                          <img
+                                            alt="..."
+                                            className="img-fluid"
+                                            style={{
+                                              minHeight: '40px',
+                                              maxHeight: '60px'
+                                            }}
+                                            src={illustration2}
+                                          />
+                                          <span
+                                            className="font-size-sm font-size-lg pt-3 px-2"
+                                            title="Total downloads">
+                                            Candidate
+                                          </span>
+                                        </div>
+                                        <div className="font-size-sm text-black px-2 opacity-7">
+                                          <a
+                                            href="/sign-up?as=candidate"
+                                            // onClick={(e) => e.preventDefault()}
+                                            className="px-4 py-3 text-first btn btn-white shadow-none d-flex justify-content-between align-items-center">
+                                            <FontAwesomeIcon
+                                              icon={['fas', 'chevron-right']}
+                                            />
+                                          </a>
                                         </div>
                                       </div>
-                                    </Grid>
-                                    <Grid
-                                      item
-                                      md={2}
-                                      className="d-flex align-items-center">
-                                      <a
-                                        href="/sign-up?as=candidate"
-                                        // onClick={(e) => e.preventDefault()}
-                                        className="px-4 py-3 text-first btn btn-white shadow-none d-flex justify-content-between align-items-center">
-                                        <FontAwesomeIcon
-                                          icon={['fas', 'chevron-right']}
-                                        />
-                                      </a>
                                     </Grid>
                                   </Grid>
                                 </div>
@@ -104,39 +101,35 @@ export default function LivePreviewExample() {
                               <Card className="card-size card-center">
                                 <div className="">
                                   <Grid container spacing={0}>
-                                    <Grid item md={4}>
-                                      <img
-                                        alt="..."
-                                        className="img-fluid"
-                                        style={{
-                                          minHeight: '40px',
-                                          maxHeight: '60px'
-                                        }}
-                                        src={illustration2}
-                                      />
-                                    </Grid>
-                                    <Grid
-                                      item
-                                      md={6}
-                                      className="d-flex align-items-center">
-                                      <div>
-                                        <div className="font-size-lg font-weight-bold mb-1">
-                                          Agency
+                                    <Grid item md={12}>
+                                      <div className="d-flex align-items-center justify-content-between">
+                                        <div className="d-flex">
+                                          <img
+                                            alt="..."
+                                            className="img-fluid"
+                                            style={{
+                                              minHeight: '40px',
+                                              maxHeight: '60px'
+                                            }}
+                                            src={illustration1}
+                                          />
+                                          <span
+                                            className="font-size-sm font-size-lg pt-3 px-2"
+                                            title="Total downloads">
+                                            Agency
+                                          </span>
+                                        </div>
+                                        <div className="font-size-sm text-black px-2 opacity-7">
+                                          <a
+                                            href="/sign-up?as=agency"
+                                            // onClick={(e) => e.preventDefault()}
+                                            className="px-4 py-3 text-first btn btn-white shadow-none d-flex justify-content-between align-items-center">
+                                            <FontAwesomeIcon
+                                              icon={['fas', 'chevron-right']}
+                                            />
+                                          </a>
                                         </div>
                                       </div>
-                                    </Grid>
-                                    <Grid
-                                      item
-                                      md={2}
-                                      className="d-flex align-items-center">
-                                      <a
-                                        href="/sign-up?as=agency"
-                                        // onClick={(e) => e.preventDefault()}
-                                        className="px-4 py-3 text-first btn btn-white shadow-none d-flex justify-content-between align-items-center">
-                                        <FontAwesomeIcon
-                                          icon={['fas', 'chevron-right']}
-                                        />
-                                      </a>
                                     </Grid>
                                   </Grid>
                                 </div>
@@ -144,39 +137,35 @@ export default function LivePreviewExample() {
                               <Card className="card-size card-center">
                                 <div className="">
                                   <Grid container spacing={0}>
-                                    <Grid item md={4}>
-                                      <img
-                                        alt="..."
-                                        className="img-fluid"
-                                        style={{
-                                          minHeight: '40px',
-                                          maxHeight: '60px'
-                                        }}
-                                        src={illustration3}
-                                      />
-                                    </Grid>
-                                    <Grid
-                                      item
-                                      md={6}
-                                      className="d-flex align-items-center">
-                                      <div>
-                                        <div className="font-size-lg font-weight-bold mb-1">
-                                          Company
+                                    <Grid item md={12}>
+                                      <div className="d-flex align-items-center justify-content-between">
+                                        <div className="d-flex">
+                                          <img
+                                            alt="..."
+                                            className="img-fluid"
+                                            style={{
+                                              minHeight: '40px',
+                                              maxHeight: '60px'
+                                            }}
+                                            src={illustration3}
+                                          />
+                                          <span
+                                            className="font-size-sm font-size-lg pt-3 px-2"
+                                            title="Total downloads">
+                                            Company
+                                          </span>
+                                        </div>
+                                        <div className="font-size-sm text-black px-2 opacity-7">
+                                          <a
+                                            href="/sign-up?as=company"
+                                            // onClick={(e) => e.preventDefault()}
+                                            className="px-4 py-3 text-first btn btn-white shadow-none d-flex justify-content-between align-items-center">
+                                            <FontAwesomeIcon
+                                              icon={['fas', 'chevron-right']}
+                                            />
+                                          </a>
                                         </div>
                                       </div>
-                                    </Grid>
-                                    <Grid
-                                      item
-                                      md={2}
-                                      className="d-flex align-items-center">
-                                      <a
-                                        href="/sign-up?as=company"
-                                        // onClick={(e) => e.preventDefault()}
-                                        className="px-4 py-3 text-first btn btn-white shadow-none d-flex justify-content-between align-items-center">
-                                        <FontAwesomeIcon
-                                          icon={['fas', 'chevron-right']}
-                                        />
-                                      </a>
                                     </Grid>
                                   </Grid>
                                 </div>
