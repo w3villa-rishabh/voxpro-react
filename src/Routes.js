@@ -30,7 +30,14 @@ const DashboardMonitoring = lazy(() => import('./components/dashboard.js'));
 const EditProfile = lazy(() => import('./components/profiles/edit_profile'));
 
 //onboarding documents
-const Onboarding = lazy(() => import('./components/onboarding_documents'));
+const Onboarding = lazy(() =>
+  import('./components/documents/onboarding_documents')
+);
+
+//onboarding documents
+const UploadDocument = lazy(() =>
+  import('./components/documents/upload_documents')
+);
 
 //reset password
 
@@ -118,6 +125,7 @@ const Routes = () => {
                 '/dashboard',
                 '/profile-edit',
                 '/documents',
+                '/upload',
                 '/ir35-verify',
                 '/request-information',
                 '/view-profile'
@@ -127,6 +135,7 @@ const Routes = () => {
                   <Route path="/dashboard" component={DashboardMonitoring} />
                   <Route path="/profile-edit" component={EditProfile} />
                   <Route path="/documents" component={Onboarding} />
+                  <Route path="/upload" component={UploadDocument} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route path="/view-profile" component={Profile} />
                 </Switch>

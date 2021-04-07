@@ -1,5 +1,5 @@
 .dropzone {
-    height: 300px;
+    height: 260px;
     width: 100%;
     position: relative;
     background-color: aliceblue;
@@ -17,12 +17,20 @@
         flex-direction: column;
         justify-content: center;
         width: 100%;
-        min-height: 100%;
+        top: 0;
+        bottom: 0;
     }
 
     .icon-up {
         text-align: center;
     }
+}
+
+.select-doc {
+    border-radius: 0.2rem;
+    border: 1px solid #ccc;
+    padding: 4px;
+    font-size: 14px;
 }
 
 .show-doc {

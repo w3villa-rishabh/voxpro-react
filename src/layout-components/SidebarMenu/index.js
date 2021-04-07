@@ -82,9 +82,7 @@ const SidebarMenu = (props) => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      onClick={toggleSidebarMobile}
-                      to="/request-information">
+                    <NavLink onClick={toggleSidebarMobile} to="/upload">
                       Upload Document
                     </NavLink>
                   </li>
