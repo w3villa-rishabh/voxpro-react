@@ -37,7 +37,7 @@ export default function OnBoardDocument() {
           <h5 className="heading">Document Management</h5>
           <p>Upload your document and manage yout request for informations</p>
         </div>
-        <Button className="btn-danger hover-scale-sm font-weight-bold px-4 float-right">
+        <Button className="btn-danger hover-scale-sm px-4 float-right">
           <span className="px-2">Select Doc Type</span>
         </Button>
       </div>
@@ -53,18 +53,14 @@ export default function OnBoardDocument() {
           ))}
         </ul> */}
       <Grid container spacing={2}>
-        <Grid item md={3} lg={12} xl={3}>
-          <div className="text-center font-weight-bold text-black mb-2">
-            Personal Documents
-          </div>
+        <Grid item md={3} xs={12}>
+          <div className="text-center text-black mb-2 text-black-50">Personal Documents</div>
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
                 <FontAwesomeIcon icon={['far', 'bell']} className="display-4" />
               </div>
-              <div className="font-weight-bold text-black mt-4 mb-1">
-                4 Documents Uploaded
-              </div>
+              <div className="text-black mt-4 mb-1">4 Documents Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center mb-2">
@@ -84,8 +80,8 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={3} lg={12} xl={3}>
-          <div className="text-center font-weight-bold text-black mb-2">
+        <Grid item md={3} xs={12}>
+          <div className="text-center text-black mb-2 text-black-50">
             Limited Company Documents
           </div>
           <Card className="card-box">
@@ -96,9 +92,7 @@ export default function OnBoardDocument() {
                   className="display-4"
                 />
               </div>
-              <div className="font-weight-bold text-black mt-4 mb-1">
-                3 Documents Uploaded
-              </div>
+              <div className="text-black mt-4 mb-1">3 Documents Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Monthly Income</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center">
@@ -114,18 +108,14 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={3} lg={12} xl={3}>
-          <div className="text-center font-weight-bold text-black mb-2">
-            General Documents
-          </div>
+        <Grid item md={3} xs={12}>
+          <div className="text-center text-black mb-2 text-black-50">General Documents</div>
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
                 <FontAwesomeIcon icon={['far', 'user']} className="display-4" />
               </div>
-              <div className="font-weight-bold text-black mt-4 mb-1">
-                2 Documents Uploaded
-              </div>
+              <div className="text-black mt-4 mb-1">2 Documents Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Total 2Sales</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center mb-2">
@@ -141,8 +131,8 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={3} lg={12} xl={3}>
-          <div className="text-center font-weight-bold text-black mb-2">
+        <Grid item md={3} xs={12}>
+          <div className="text-center text-black mb-2 text-black-50">
             Onboarding Documents
           </div>
 
@@ -151,9 +141,7 @@ export default function OnBoardDocument() {
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
                 <FontAwesomeIcon icon={['far', 'user']} className="display-4" />
               </div>
-              <div className="font-weight-bold text-black mt-4 mb-1">
-                4 Document Uploaded
-              </div>
+              <div className="text-black mt-4 mb-1">4 Document Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Total Sales</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center mb-2">
@@ -169,20 +157,23 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={6} xl={3}>
-          <Card className="card-box p-4 card-h">
-            <div className="font-weight-bold font-size-sm text-uppercase text-second mt-2">
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item md={3} xl={12}>
+          <Card className="card-box p-3 h-100">
+            <div className="font-12 text-uppercase text-second mt-2">
               Request for Information
             </div>
-            <div className="d-flex py-4 align-items-center">
-              <div className="d-60 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
+            <div className="d-flex py-2 mb-4 align-items-center">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
                 <FontAwesomeIcon
                   icon={['far', 'comment-dots']}
                   className="display-4"
                 />
               </div>
-              <div className="display-3 font-weight-bold ml-1">7</div>
+              <div className="ml-1">7</div>
             </div>
+            <div className="divider my-2" />
             <div className="text-center mb-2">
               <Button size="small" className="px-4 btn-neutral-success">
                 Respond
@@ -190,20 +181,21 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={6} xl={3}>
-          <Card className="card-box p-4 card-h">
-            <div className="font-weight-bold font-size-sm text-uppercase text-second mt-2">
+        <Grid item md={3} xl={12}>
+          <Card className="card-box p-3 h-100">
+            <div className="font-12 text-uppercase text-second mt-2">
               Remaining Document to upload
             </div>
-            <div className="d-flex py-4 align-items-center">
-              <div className="d-60 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-warning mr-3">
+            <div className="d-flex py-2 align-items-center">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-warning mr-3">
                 <FontAwesomeIcon
                   icon={['fas', 'map-marked-alt']}
                   className="display-4"
                 />
               </div>
-              <div className="display-3 font-weight-bold ml-1">5</div>
+              <div className="ml-1">5</div>
             </div>
+            <div className="divider my-2" />
             <div className="text-center mb-2">
               <Button size="small" className="px-4 btn-neutral-info">
                 View
@@ -211,20 +203,21 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={6} xl={3}>
-          <Card className="card-box p-4 card-h">
-            <div className="font-weight-bold font-size-sm text-uppercase text-second mt-2">
+        <Grid item md={3} xl={12}>
+          <Card className="card-box p-3 h-100">
+            <div className="font-12 text-uppercase text-second mt-2">
               Documents due to expire
             </div>
-            <div className="d-flex py-4 align-items-center">
-              <div className="d-60 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
+            <div className="d-flex py-2 mb-4 align-items-center">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
                 <FontAwesomeIcon
                   icon={['far', 'envelope']}
                   className="display-4"
                 />
               </div>
-              <div className="display-3 font-weight-bold ml-1">2</div>
+              <div className="ml-1">2</div>
             </div>
+            <div className="divider my-2" />
             <div className="text-center mb-2">
               <Button size="small" className="px-4 btn-neutral-danger">
                 View Documents
@@ -232,28 +225,28 @@ export default function OnBoardDocument() {
             </div>
           </Card>
         </Grid>
-        <Grid item md={6} xl={3}>
-          <Card className="card-box p-4 card-h">
-            <div className="font-weight-bold font-size-sm text-uppercase text-second mt-2">
+        <Grid item md={3} xl={12}>
+          <Card className="card-box p-3 h-100">
+            <div className="font-12 text-uppercase text-second mt-2">
               Tasks Overview
             </div>
-            <div className="d-flex py-4 align-items-center">
-              <div className="d-60 rounded border-0 card-icon-wrapper flex-shrink-0 bg-success text-white btn-icon text-center shadow-success mr-3">
+            <div className="d-flex py-2 align-items-center">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-success text-white btn-icon text-center shadow-success mr-3">
                 <FontAwesomeIcon
                   icon={['fas', 'tachometer-alt']}
                   className="display-4"
                 />
               </div>
-              <div className="display-3 font-weight-bold ml-1">
+              <div className="ml-1">
                 2 tasks
                 <br />
-                <div className="text-black-50 font-weight-bold mb-2 font-style">
+                <div className="text-black-50 mb-2 font-style">
                   due today
                 </div>{' '}
               </div>
             </div>
 
-            {/* <div className="text-black-50 font-weight-bold mb-2">
+            {/* <div className="text-black-50 mb-2">
               <a
                 className="text-first"
                 href="#/"
