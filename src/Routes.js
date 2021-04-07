@@ -13,6 +13,8 @@ import { LeftSidebar, MinimalLayout } from './components/all_sidebars';
 // Example Pages
 
 import IR35TaxComponent from 'components/ir35_tax/ir35-tax';
+// routes for Register as
+const RegisterAs = lazy(() => import('./components/register_as'));
 
 // routes for Registration
 const RegisterPage = lazy(() => import('./components/register.js'));
@@ -39,8 +41,10 @@ const UploadDocument = lazy(() =>
   import('./components/documents/upload_documents')
 );
 
-//reset password
+// Subscription plans
+const Subscription = lazy(() => import('./components/subscription_plans'));
 
+//reset password
 const ResetPassword = lazy(() => import('./components/reset_password'));
 const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
 
@@ -163,7 +167,9 @@ const Routes = () => {
                 '/sign-up',
                 '/recover-password',
                 '/api/users/confirmation',
-                '/reset-password'
+                '/reset-password',
+                '/subscription-plans',
+                '/register-as'
               ]}>
               <MinimalLayout>
                 <Switch location={location} key={location.pathname}>
@@ -184,6 +190,11 @@ const Routes = () => {
                       component={PageRecoverCover}
                     />
                     <Route path="/reset-password" component={ResetPassword} />
+                    <Route
+                      path="/subscription-plans"
+                      component={Subscription}
+                    />
+                    <Route path="/register-as" component={RegisterAs} />
                   </motion.div>
                 </Switch>
               </MinimalLayout>

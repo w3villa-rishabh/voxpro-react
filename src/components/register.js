@@ -26,6 +26,10 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LivePreviewExample() {
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let type = params.get('as');
+
   const [values, setValues] = React.useState({
     showPassword: false
   });
@@ -51,7 +55,8 @@ export default function LivePreviewExample() {
     confirm_password: '',
     first_name: '',
     last_name: '',
-    role: ''
+    contact_number: '',
+    role: type
   });
 
   const [errors, setErrors] = useState({
@@ -61,6 +66,7 @@ export default function LivePreviewExample() {
     password: '',
     confirm_password: '',
     role: '',
+    contact_number: '',
     policyCheckbox: ''
   });
 
@@ -123,11 +129,11 @@ export default function LivePreviewExample() {
       default:
         break;
     }
-    if (name === 'role') {
-      account[name] = parseInt(value);
-    } else {
-      account[name] = value;
-    }
+    // if (name === 'role') {
+    //   account[name] = parseInt(value);
+    // } else {
+    account[name] = value;
+    // }
     setAccount(account);
   };
 
@@ -193,7 +199,6 @@ export default function LivePreviewExample() {
       account.last_name &&
       account.email &&
       passwordVerified &&
-      account.role >= 0 &&
       policyCheckbox &&
       account.confirm_password === account.password
     ) {
@@ -242,8 +247,7 @@ export default function LivePreviewExample() {
                       className="d-flex align-items-center">
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="py-4">
-                          <LoginSocialComponent name={'Register'} />
-
+                          <LoginSocialComponent name={'Register'} type={type} />
                           <form method="post" onSubmit={userRegister}>
                             <div className="mb-3">
                               <label className="font-weight-bold mb-2">
@@ -343,64 +347,132 @@ export default function LivePreviewExample() {
                               )}
                             </div>
                             <div className="mb-3">
-                              <label className="font-weight-bold mb-2">
-                                First name{' '}
-                                <span className="text-danger">*</span>
-                              </label>
-                              <TextField
-                                variant="outlined"
-                                size="small"
-                                fullWidth
-                                name="first_name"
-                                onChange={handleChange}
-                                placeholder="Enter your first name"
-                                // required
-                              />
-                              {errors.first_name.length > 0 && (
-                                <span className="error">
-                                  {errors.first_name}
-                                </span>
-                              )}
+                              <Grid container spacing={2}>
+                                <Grid item lg={6} xl={6}>
+                                  <label className="font-weight-bold mb-2">
+                                    First name{' '}
+                                    <span className="text-danger">*</span>
+                                  </label>
+                                  <TextField
+                                    variant="outlined"
+                                    size="small"
+                                    fullWidth
+                                    name="first_name"
+                                    onChange={handleChange}
+                                    placeholder="Enter your first name"
+                                    // required
+                                  />
+                                  {errors.first_name.length > 0 && (
+                                    <span className="error">
+                                      {errors.first_name}
+                                    </span>
+                                  )}
+                                </Grid>
+                                <Grid item lg={6} xl={6}>
+                                  <label className="font-weight-bold mb-2">
+                                    Last name{' '}
+                                    <span className="text-danger">*</span>
+                                  </label>
+                                  <TextField
+                                    variant="outlined"
+                                    size="small"
+                                    fullWidth
+                                    name="last_name"
+                                    onChange={handleChange}
+                                    placeholder="Enter your last name"
+                                  />
+                                  {errors.last_name.length > 0 && (
+                                    <span className="error">
+                                      {errors.last_name}
+                                    </span>
+                                  )}
+                                </Grid>
+                              </Grid>
                             </div>
-                            <div className="mb-3">
-                              <label className="font-weight-bold mb-2">
-                                Last name <span className="text-danger">*</span>
-                              </label>
-                              <TextField
-                                variant="outlined"
-                                size="small"
-                                fullWidth
-                                name="last_name"
-                                onChange={handleChange}
-                                placeholder="Enter your last name"
-                              />
-                              {errors.last_name.length > 0 && (
+                            {type != 'candidate' && (
+                              <div>
+                                <div className="mb-3">
+                                  <Grid container spacing={2}>
+                                    <Grid item lg={6} xl={6}>
+                                      <label className="font-weight-bold mb-2">
+                                        Contact Number{' '}
+                                        <span className="text-danger">*</span>
+                                      </label>
+                                      <TextField
+                                        variant="outlined"
+                                        size="small"
+                                        fullWidth
+                                        name="contact_number"
+                                        onChange={handleChange}
+                                        placeholder="Enter your Contact number"
+                                      />
+                                      {/* {errors.last_name.length > 0 && (
                                 <span className="error">
                                   {errors.last_name}
                                 </span>
-                              )}
-                            </div>
-
-                            <div className="mb-3">
-                              <label className="font-weight-bold mb-2">
-                                Role <span className="text-danger">*</span>
-                              </label>
-                              <select
-                                className="MuiTextField-root MuiFormControl-fullWidth select-role"
-                                variant="outlined"
-                                fullWidth
-                                name="role"
-                                onChange={handleChange}>
-                                <option value="">Select Role</option>
-                                {/* <option value="0">Admin</option> */}
-                                <option value="3">Candidate</option>
-                                {/* <option value="1">Agency</option>
-                                <option value="2">Company</option> */}
-                              </select>
-                              {errors.role.length > 0 && (
-                                <span className="error">{errors.role}</span>
-                              )}
-                            </div>
+                              )} */}
+                                    </Grid>
+                                    <Grid item lg={6} xl={6}>
+                                      <label className="font-weight-bold mb-2">
+                                        Company Name{' '}
+                                        <span className="text-danger">*</span>
+                                      </label>
+                                      <TextField
+                                        variant="outlined"
+                                        size="small"
+                                        fullWidth
+                                        name="company_name"
+                                        onChange={handleChange}
+                                        placeholder="Enter your Company Name"
+                                      />
+                                      {/* {errors.last_name.length > 0 && (
+                                <span className="error">
+                                  {errors.last_name}
+                                </span>
+                              )} */}
+                                    </Grid>
+                                  </Grid>
+                                </div>
+                                <div className="mb-3">
+                                  <label className="font-weight-bold mb-2">
+                                    Address{' '}
+                                    <span className="text-danger">*</span>
+                                  </label>
+                                  <TextField
+                                    variant="outlined"
+                                    size="small"
+                                    fullWidth
+                                    name="address"
+                                    onChange={handleChange}
+                                    placeholder="Enter your Address"
+                                  />
+                                  {/* {errors.last_name.length > 0 && (
+                                <span className="error">
+                                  {errors.last_name}
+                                </span>
+                              )} */}
+                                </div>
+                                <div className="mb-3">
+                                  <label className="font-weight-bold mb-2">
+                                    Country of Registration{' '}
+                                    <span className="text-danger">*</span>
+                                  </label>
+                                  <TextField
+                                    variant="outlined"
+                                    size="small"
+                                    fullWidth
+                                    name="address"
+                                    onChange={handleChange}
+                                    placeholder="Enter your Company of registration"
+                                  />
+                                  {/* {errors.last_name.length > 0 && (
+                                <span className="error">
+                                  {errors.last_name}
+                                </span>
+                              )} */}
+                                </div>
+                              </div>
+                            )}
                             {/* <div className="form-group mb-3">
                               By clicking the <strong>Create account</strong>{' '}
                               button below you agree to our terms of service and
@@ -453,6 +525,16 @@ export default function LivePreviewExample() {
                               Create Account
                             </Button>
                           </form>
+                          {type != 'candidate' && (
+                            <div className="text-center text-black-50 mt-3">
+                              View our Subscription Plans{' '}
+                              <a
+                                href="/subscription-plans"
+                                className="text-first">
+                                Subscription Plans
+                              </a>
+                            </div>
+                          )}
                           <div className="text-center text-black-50 mt-3">
                             Already have account?{' '}
                             <a href="/login" className="text-first">

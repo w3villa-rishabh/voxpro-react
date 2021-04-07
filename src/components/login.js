@@ -48,11 +48,10 @@ export default function LoginComponent() {
     if (email) {
       confirmAccount();
     }
-  }, [confirmAccount, email]);
+  }, [confirmAccount]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
-    toast.dismiss();
     api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
       if (response.data.success) {
         toast.success(response.data.message);
@@ -208,7 +207,7 @@ export default function LoginComponent() {
                             <div className="text-center text-black-50 mt-3">
                               Don't have an account?{' '}
                               <a
-                                href="/sign-up"
+                                href="/register-as"
                                 // onClick={(e) => e.preventDefault()}
                                 className="text-first">
                                 Register
