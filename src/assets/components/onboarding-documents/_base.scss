@@ -55,3 +55,21 @@
     width: 50px;
     height: 50px;
 }
+
+.city-card {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    justify-content: center;
+    right: 0;
+    left: 0;
+    font-weight: 800;
+    text-align: center;
+    width: 100%;
+    align-content: center;
+    background-image: url('https://media.cntraveler.com/photos/5ca60f7f7b531a5e47949cde/master/w_4000,h_2400,c_limit/NYC_GettyImages-500619014.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
