@@ -159,12 +159,12 @@ export default function OnBoardDocument() {
         </Grid>
       </Grid>
       <Grid container spacing={2}>
-        <Grid item md={3} xl={12}>
+        <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
-            <div className="font-12 text-uppercase text-second mt-2">
+            <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               Request for Information
             </div>
-            <div className="d-flex py-2 mb-4 align-items-center">
+            <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
                 <FontAwesomeIcon
                   icon={['far', 'comment-dots']}
@@ -173,17 +173,16 @@ export default function OnBoardDocument() {
               </div>
               <div className="ml-1">7</div>
             </div>
-            <div className="divider my-2" />
-            <div className="text-center mb-2">
+            <div className="text-center mt-3">
               <Button size="small" className="px-4 btn-neutral-success">
                 Respond
               </Button>
             </div>
           </Card>
         </Grid>
-        <Grid item md={3} xl={12}>
+        <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
-            <div className="font-12 text-uppercase text-second mt-2">
+            <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               Remaining Document to upload
             </div>
             <div className="d-flex py-2 align-items-center">
@@ -195,20 +194,19 @@ export default function OnBoardDocument() {
               </div>
               <div className="ml-1">5</div>
             </div>
-            <div className="divider my-2" />
-            <div className="text-center mb-2">
+            <div className="text-center mt-3">
               <Button size="small" className="px-4 btn-neutral-info">
                 View
               </Button>
             </div>
           </Card>
         </Grid>
-        <Grid item md={3} xl={12}>
+        <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
-            <div className="font-12 text-uppercase text-second mt-2">
+            <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               Documents due to expire
             </div>
-            <div className="d-flex py-2 mb-4 align-items-center">
+            <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
                 <FontAwesomeIcon
                   icon={['far', 'envelope']}
@@ -217,17 +215,16 @@ export default function OnBoardDocument() {
               </div>
               <div className="ml-1">2</div>
             </div>
-            <div className="divider my-2" />
-            <div className="text-center mb-2">
+            <div className="text-center mt-3">
               <Button size="small" className="px-4 btn-neutral-danger">
                 View Documents
               </Button>
             </div>
           </Card>
         </Grid>
-        <Grid item md={3} xl={12}>
+        <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
-            <div className="font-12 text-uppercase text-second mt-2">
+            <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               Tasks Overview
             </div>
             <div className="d-flex py-2 align-items-center">

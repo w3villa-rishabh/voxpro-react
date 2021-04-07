@@ -57,15 +57,18 @@
 }
 
 .float-right {
-    float: right!important;
-    margin-right: 20px!important;
+    float: right !important;
+    margin-right: 20px !important;
 }
+
 .font-style {
     font-size: 21px;
 }
-.card-h{
+
+.card-h {
     height: 28vh;
 }
+
 .text-center {
     text-align: center;
 }
@@ -86,4 +89,11 @@
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
+}
+
+.bottom-doc-view {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    left: 0;
 }
