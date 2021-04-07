@@ -8,10 +8,9 @@ import {
   TextField,
   List,
   ListItem,
-  LinearProgress,
   Tooltip
 } from '@material-ui/core';
-
+import { CircularProgressbar } from 'react-circular-progressbar';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import GaugeChart from 'react-gauge-chart';
 
@@ -31,12 +30,6 @@ import people1 from '../../assets/images/stock-photos/people-2.jpg';
 const LivePreviewExample = (props) => {
   const [inputBg, setInputBg] = useState(false);
   const toggleInputBg = () => setInputBg(!inputBg);
-
-  const [activeTab, setActiveTab] = useState('1');
-
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
-  };
 
   const { headerDrawerToggle, setHeaderDrawerToggle } = props;
 
@@ -80,7 +73,15 @@ const LivePreviewExample = (props) => {
                 </div>
                 <div className="text-black-50">Profile completion</div>
               </div>
-              <div className="align-box-row progress-bar--label text-muted mt-3">
+              <div className="mx-auto text-center">
+                <CircularProgressbar
+                  value={56}
+                  text={56 + '%'}
+                  strokeWidth={8}
+                  className="circular-progress-first w-50"
+                />
+              </div>
+              {/* <div className="align-box-row progress-bar--label text-muted mt-3">
                 <div className="ml-auto" style={{ color: '#2e2e2e' }}>
                   80%
                 </div>
@@ -89,7 +90,7 @@ const LivePreviewExample = (props) => {
                 variant="determinate"
                 className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second hc-style"
                 value={85}
-              />
+              /> */}
             </Card>
           </Grid>
           <Grid item xs={12} sm={3}>

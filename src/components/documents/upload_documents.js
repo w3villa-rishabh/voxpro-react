@@ -18,15 +18,18 @@ import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
-  const [fileUpload, setFileUpload] = useState({});
-
-  const [documents, setDocuments] = useState([]);
-  const [filesName, setFilesName] = useState();
   const [currentUser] = useState(getCurrentUser());
+  const [documents, setDocuments] = useState({
+    categoryId: 0,
+    docId: 0,
+    notify: 1,
+    privacy: 0,
+    copy: 'yes'
+  });
 
   useEffect(() => {
-    getDocuments();
-  }, [getDocuments]);
+    // getDocuments();
+  }, []);
 
   const handleDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -36,10 +39,23 @@ export default function UploadDocument() {
     reader.onload = function () {
       const dataURL = reader.result;
       const imageObj = { url: dataURL, extension, name: file.name };
-      setFileUpload(imageObj);
+      // setFileUpload(imageObj);
+      console.log('imageObj', imageObj);
     };
     reader.readAsDataURL(file);
     setFiles(acceptedFiles);
+  };
+
+  const removeDoc = () => {
+    setDocuments({
+      ...documents,
+      categoryId: 0,
+      docId: 0,
+      notify: 1,
+      privacy: 0,
+      copy: 'yes'
+    });
+    setFiles([]);
   };
 
   function addDocument() {
@@ -48,14 +64,14 @@ export default function UploadDocument() {
     }
     const formData = new FormData();
 
-    formData.append('user[documents_attributes][][doc_name]', filesName);
+    formData.append('user[documents_attributes][][doc_name]', 'filesName');
     formData.append('user[documents_attributes][][doc]', files[0]);
 
     api.patch(`/api/user?id=${currentUser.id}`, formData).then((response) => {
       if (response.data) {
         console.log('response.data', response.data);
         setFiles([]);
-        setFileUpload({});
+        // setFileUpload({});
       } else {
         alert('Something went wrong..');
       }
@@ -64,17 +80,17 @@ export default function UploadDocument() {
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  function getDocuments() {
-    api
-      .get(`/api/user/show_user_documents?id=${currentUser.id}`)
-      .then((response) => {
-        if (response.data) {
-          setDocuments(response.data);
-        } else {
-          alert('Something went wrong..');
-        }
-      });
-  }
+  // function getDocuments() {
+  //   api
+  //     .get(`/api/user/show_user_documents?id=${currentUser.id}`)
+  //     .then((response) => {
+  //       if (response.data) {
+  //         setDocuments(response.data);
+  //       } else {
+  //         alert('Something went wrong..');
+  //       }
+  //     });
+  // }
 
   return (
     <>
@@ -85,19 +101,6 @@ export default function UploadDocument() {
           {/* <p>Private to you</p> */}
         </div>
       </div>
-
-      {/* <Card>
-        <ul className="show-doc mb-1">
-          {documents.map((file) => (
-            <li className="p-2 w-25">
-              <Card className="card-box">
-                <img height="100%" width="100%" alt="..." src={stock1} />
-                <div className="p-2">{file.doc_name}</div>
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </Card> */}
 
       <Card className="p-3 p-lg-5 shadow-xxl">
         <Dropzone
@@ -115,9 +118,9 @@ export default function UploadDocument() {
                   </div>
                   <div className="font-size-sm">
                     Drag and drop files here{' '}
-                    <span className="font-size-xs text-dark">
+                    {/* <span className="font-size-xs text-dark">
                       (jpg/png images)
-                    </span>
+                    </span> */}
                   </div>
                 </div>
                 <div>or</div>
@@ -139,16 +142,18 @@ export default function UploadDocument() {
                   className="MuiTextField-root MuiFormControl-fullWidth select-doc"
                   variant="outlined"
                   fullWidth
-                  name="role">
-                  <option value="">Select Category</option>
-                  {/* <option value="0">Admin</option> */}
-                  <option value="3">Candidate</option>
-                  {/* <option value="1">Agency</option>
-                                <option value="2">Company</option> */}
+                  name="role"
+                  onChange={(event) => {
+                    setDocuments({
+                      ...documents,
+                      categoryId: event.target.value
+                    });
+                  }}
+                  value={documents.categoryId}>
+                  <option value="0">Select Category</option>
+                  <option value="1">Category 1</option>
+                  <option value="2">Category 2</option>
                 </select>
-                {/* {errors.role.length > 0 && (
-                  <span className="error">{errors.role}</span>
-                )} */}
               </div>
             </Grid>
             <Grid item xs={12} sm={3} className="d-flex">
@@ -160,16 +165,18 @@ export default function UploadDocument() {
                   className="MuiTextField-root MuiFormControl-fullWidth select-doc"
                   variant="outlined"
                   fullWidth
+                  value={documents.docId}
+                  onChange={(event) => {
+                    setDocuments({
+                      ...documents,
+                      docId: event.target.value
+                    });
+                  }}
                   name="role">
-                  <option value="">Select Doc</option>
-                  {/* <option value="0">Admin</option> */}
-                  <option value="3">Candidate</option>
-                  {/* <option value="1">Agency</option>
-                                <option value="2">Company</option> */}
+                  <option value="0">Select Doc</option>
+                  <option value="1">Doc 1</option>
+                  <option value="2">Doc 1</option>
                 </select>
-                {/* {errors.role.length > 0 && (
-                  <span className="error">{errors.role}</span>
-                )} */}
               </div>
               <Tooltip title="Add Doc Expiration Date" arrow>
                 <FormControlLabel
@@ -195,10 +202,16 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   name="role"
-                  value={0}>
-                  <option value="">Select Notify</option>
-                  <option value="0">No</option>
-                  <option value="1">Yes</option>
+                  onChange={(event) => {
+                    setDocuments({
+                      ...documents,
+                      notify: event.target.value
+                    });
+                  }}
+                  value={documents.notify}>
+                  <option value="0">Select Notify</option>
+                  <option value="1">No</option>
+                  <option value="2">Yes</option>
                 </select>
               </div>
             </Grid>
@@ -211,16 +224,18 @@ export default function UploadDocument() {
                   className="MuiTextField-root MuiFormControl-fullWidth select-doc"
                   variant="outlined"
                   fullWidth
+                  value={documents.privacy}
+                  onChange={(event) => {
+                    setDocuments({
+                      ...documents,
+                      privacy: event.target.value
+                    });
+                  }}
                   name="role">
-                  <option value="">Select Privacy</option>
-                  {/* <option value="0">Admin</option> */}
-                  <option value="3">Candidate</option>
-                  {/* <option value="1">Agency</option>
-                                <option value="2">Company</option> */}
+                  <option value="0">Select Privacy</option>
+                  <option value="1">Privacy 1</option>
+                  <option value="2">Privacy 2</option>
                 </select>
-                {/* {errors.role.length > 0 && (
-                  <span className="error">{errors.role}</span>
-                )} */}
               </div>
             </Grid>
           </Grid>
@@ -228,12 +243,15 @@ export default function UploadDocument() {
             <Button
               onClick={addDocument}
               disabled={!files.length}
-              className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
+              className="btn-primary font-weight-bold rounded hover-scale-lg mx-1"
               size="medium">
               <span className="btn-wrapper--label">Upload</span>
             </Button>
             <span>Or</span>
-            <a href="javascript:void(0)" className="a-blue border-bottom ml-2">
+            <a
+              href="javascript:void(0)"
+              onClick={removeDoc}
+              className="a-blue border-bottom ml-2">
               Cancel
             </a>
           </div>
@@ -241,8 +259,13 @@ export default function UploadDocument() {
             <FormControlLabel
               control={
                 <Checkbox
-                  // onChange={handleChange}
-                  value="checked1"
+                  onChange={(event) => {
+                    setDocuments({
+                      ...documents,
+                      copy: event.target.value
+                    });
+                  }}
+                  checked={documents.copy}
                   name="remember_me"
                   color="primary"
                 />
@@ -263,44 +286,6 @@ export default function UploadDocument() {
               width="100%"></iframe>
           </div>
         </div>
-        {/* <div>
-          <Alert severity="success" className="text-center mb-3">
-            You have uploaded <b>{files.length}</b> files!
-          </Alert>
-          <List component="div" className="font-size-sm">
-            <ul>
-              {files.map((fileName) => (
-                <li>
-                  <img
-                    alt="..."
-                    className="card-img-top document-img pl-3"
-                    src={fileUpload.url}
-                  />
-                  <span key={fileName.name}>{fileName.name}</span>
-                </li>
-              ))}
-            </ul>
-          </List>
-          <Grid container spacing={6}>
-            <Grid item md={12}>
-              <TextField
-                fullWidth
-                label="Document Name"
-                variant="outlined"
-                onChange={(event) => setFilesName(event.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <div className="pt-4">
-            <Button
-              onClick={addDocument}
-              disabled={!files.length}
-              className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
-              size="medium">
-              <span className="btn-wrapper--label">Upload</span>
-            </Button>
-          </div>
-        </div> */}
       </Card>
     </>
   );
