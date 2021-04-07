@@ -24,8 +24,8 @@ export default function LivePreviewExample() {
                   <Grid container spacing={0} className="min-vh-100">
                     <Grid
                       item
-                      lg={9}
-                      xl={8}
+                      lg={7}
+                      xl={6}
                       className="d-flex align-items-center">
                       <Grid item md={10} lg={8} xl={7} className="mx-auto">
                         <div className="">
@@ -186,7 +186,7 @@ export default function LivePreviewExample() {
                         </div>
                       </Grid>
                     </Grid>
-                    <Grid item lg={3} xl={4} className="d-flex">
+                    <Grid item lg={5} xl={6} className="d-flex">
                       <div className="hero-wrapper w-100 bg-composed-wrapper bg-happy-green min-vh-lg-100">
                         <div className="flex-grow-1 w-100 d-flex align-items-center">
                           <div

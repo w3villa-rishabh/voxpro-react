@@ -97,6 +97,14 @@ export default function LoginSocialComponent({ name, type }) {
           <div className="separator">OR</div>
         </div>
       )}
+      {type != 'candidate' && (
+        <div className="text-center font-inc text-black-50 mb-2 mt-2">
+          View our{' '}
+          <a href="/subscription-plans" className="text-first">
+            Subscription Plans
+          </a>
+        </div>
+      )}
       <div className="text-center text-black-50 mb-4">
         {name} using credentials
       </div>

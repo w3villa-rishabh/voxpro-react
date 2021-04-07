@@ -525,17 +525,7 @@ export default function LivePreviewExample() {
                               Create Account
                             </Button>
                           </form>
-                          {type != 'candidate' && (
-                            <div className="text-center text-black-50 mt-3">
-                              View our Subscription Plans{' '}
-                              <a
-                                href="/subscription-plans"
-                                className="text-first">
-                                Subscription Plans
-                              </a>
-                            </div>
-                          )}
-                          <div className="text-center text-black-50 mt-3">
+                          <div className="text-center text-black-50">
                             Already have account?{' '}
                             <a href="/login" className="text-first">
                               Login
