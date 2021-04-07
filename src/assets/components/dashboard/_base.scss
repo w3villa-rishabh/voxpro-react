@@ -1,8 +1,25 @@
-.hgh{
+.hgh {
     height: 100% !important;
 }
 
-.hc-style{
+.hc-style {
     height: 1rem !important;
     background: #c0c1c7 !important;
+}
+
+.u-details {
+    color: black;
+    padding: 25px 14px;
+    position: relative;
+
+    .send-icon {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        top: -22px;
+
+        svg {
+            transform: rotateZ(51deg);
+        }
+    }
 }
