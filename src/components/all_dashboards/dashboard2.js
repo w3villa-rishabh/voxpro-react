@@ -71,7 +71,7 @@ const LivePreviewExample = (props) => {
                 <div className="d-40 btn-icon rounded-circle bg-success text-white text-center font-size-lg mr-3">
                   <FontAwesomeIcon icon={['fas', 'address-card']} />
                 </div>
-                <div className="text-black-50">Profile completion</div>
+                <div className="text-black-50">Profile Completion</div>
               </div>
               <div className="mx-auto text-center">
                 <CircularProgressbar
