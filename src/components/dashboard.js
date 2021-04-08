@@ -21,7 +21,7 @@ export default function DashboardMonitoring() {
         </div>
       </div>
 
-      {currentUser.role === 'candidatess' && (
+      {currentUser.role === 'candidate' && (
         <div>
           <DashboardMonitoring2 />
           <DashboardMonitoring6 />
