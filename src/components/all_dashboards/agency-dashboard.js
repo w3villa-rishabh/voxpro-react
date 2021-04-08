@@ -262,7 +262,7 @@ const AgencyDashboard = (props) => {
                         <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-danger mr-3">
                           <FontAwesomeIcon icon={['fas', 'microphone']} />
                         </div>
-                        <div className="ml-1 font-size-xxl">23</div>
+                        <div className="ml-1 font-size-xxl font-weight-bold">23</div>
                       </div>
                     </Grid>
                     <Grid item xs={12}>
@@ -279,7 +279,7 @@ const AgencyDashboard = (props) => {
                         <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
                           <FontAwesomeIcon icon={['fas', 'camera-retro']} />
                         </div>
-                        <div className="ml-1 font-size-xxl">87</div>
+                        <div className="ml-1 font-size-xxl font-weight-bold">87</div>
                       </div>
                     </Grid>
                     <Grid item xs={12}>
@@ -657,9 +657,9 @@ const AgencyDashboard = (props) => {
           <Grid item xs={12} sm={4}>
             <Card className="h-100 border-0 shadow-danger-sm h-100">
               <div className="card-header--title p-3">
-                <h4 className="font-size-lg font-weight-bold font-weight-bolder mb-0">
+                <b className="font-weight-bold font-weight-bolder mb-0">
                   New Connection
-                </h4>
+                </b>
                 <p className="text-black-50">Last activity was 2 days ago</p>
               </div>
               <div className="card-header--actions">
@@ -1340,9 +1340,9 @@ const AgencyDashboard = (props) => {
           <Grid item xs={12} sm={8}>
             <Card className="card-box h-100">
               <div className="card-header-alt px-4 pt-4 pb-2">
-                <h4 className="font-weight-bold font-size-lg mb-1 text-black">
+                <b className="font-weight-bold font-size-lg mb-1">
                   List of live jobs
-                </h4>
+                </b>
               </div>
 
               <div className="scroll-area shadow-overflow">
@@ -1570,9 +1570,9 @@ const AgencyDashboard = (props) => {
           <Grid item xs={12} sm={4}>
             <Card className="h-100 border-0 shadow-danger-sm p-3">
               <div className="card-header--title">
-                <h4 className="font-size-lg font-weight-bold font-weight-bolder mb-0">
+                <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
                   Recent Activities
-                </h4>
+                </b>
                 <p className="text-black-50">Last activity was 2 days ago</p>
               </div>
               <div className="card-header--actions">
