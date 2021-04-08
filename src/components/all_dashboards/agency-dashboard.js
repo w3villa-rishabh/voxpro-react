@@ -266,22 +266,18 @@ const AgencyDashboard = (props) => {
                 </Card>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Card className="p-2 h-100">
-                  <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                      <div className="d-flex py-1 align-items-center">
-                        <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
-                          <FontAwesomeIcon icon={['fas', 'camera-retro']} />
-                        </div>
-                        <div className="ml-1 font-size-xxl">87</div>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <div className="text-center font-12">
+                <Card>
+                  <div className="align-items-center d-flex font-12 p-3">
+                    <div className="d-40 rounded-circle bg-danger text-white mr-2 text-center">
+                      <FontAwesomeIcon icon={['fas', 'camera-retro']} />
+                    </div>
+                    <div className="flex-grow-1">
+                      <div>87</div>
+                      <div className="text-black-50 pb-1">
                         Pending Placements
                       </div>
-                    </Grid>
-                  </Grid>
+                    </div>
+                  </div>
                 </Card>
               </Grid>
             </Grid>
