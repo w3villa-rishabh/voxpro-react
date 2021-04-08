@@ -262,7 +262,9 @@ const AgencyDashboard = (props) => {
                         <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-danger mr-3">
                           <FontAwesomeIcon icon={['fas', 'microphone']} />
                         </div>
-                        <div className="ml-1 font-size-xxl font-weight-bold">23</div>
+                        <div className="ml-1 font-size-xxl font-weight-bold">
+                          23
+                        </div>
                       </div>
                     </Grid>
                     <Grid item xs={12}>
@@ -279,7 +281,9 @@ const AgencyDashboard = (props) => {
                         <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
                           <FontAwesomeIcon icon={['fas', 'camera-retro']} />
                         </div>
-                        <div className="ml-1 font-size-xxl font-weight-bold">87</div>
+                        <div className="ml-1 font-size-xxl font-weight-bold">
+                          87
+                        </div>
                       </div>
                     </Grid>
                     <Grid item xs={12}>
@@ -313,7 +317,7 @@ const AgencyDashboard = (props) => {
               <Grid item xs={12} sm={12}>
                 <Card className="h-100">
                   <div className="p-2">
-                    <div className="font-weight-bold">Orders (293)</div>
+                    <div className="font-weight-bold">Task due (293)</div>
                   </div>
                   <div className="rounded-bottom overflow-hidden">
                     <Chart
