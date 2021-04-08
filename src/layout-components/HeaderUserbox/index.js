@@ -90,11 +90,13 @@ const HeaderUserbox = () => {
           </StyledBadge>
         </div>
 
-        <div className="d-none d-xl-block pl-2">
+        <div className="d-none d-md-block pl-2">
           <div className="font-weight-bold pt-2 line-height-1">
             {currentUser.first_name}
           </div>
-          <span className="text-black-50">{currentUser.role}</span>
+          <span className="text-black-50 text-capitalize">
+            {currentUser.role}
+          </span>
         </div>
         <span className="pl-1 pl-xl-3">
           <FontAwesomeIcon icon={['fas', 'angle-down']} className="opacity-5" />
