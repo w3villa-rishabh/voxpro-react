@@ -191,10 +191,16 @@ const AgencyDashboard = (props) => {
     xaxis: {
       crosshairs: {
         width: 1
+      },
+      lines: {
+        show: false
       }
     },
     yaxis: {
-      min: 0
+      min: 0,
+      lines: {
+        show: false
+      }
     }
   };
   const chartsSmall1AData = [
