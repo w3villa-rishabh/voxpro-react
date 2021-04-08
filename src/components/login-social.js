@@ -97,7 +97,7 @@ export default function LoginSocialComponent({ name, type }) {
           <div className="separator">OR</div>
         </div>
       )}
-      {type === 'candidate' && type === 'agency' && (
+      {(type === 'company' || type === 'agency') && (
         <div className="text-center font-inc text-black-50 mb-2 mt-2">
           View our{' '}
           <a href="/subscription-plans" className="text-first">
