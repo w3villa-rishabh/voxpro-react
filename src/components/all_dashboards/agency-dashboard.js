@@ -1362,8 +1362,10 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button
+                        size="small"
+                        className="bg-brand-slack ml-4 text-white">
+                        Live
                       </Button>
                     </ListItem>
                     <ListItem className="d-flex justify-content-between align-items-center py-3">
@@ -1386,8 +1388,8 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button size="small" className="bg-info text-white">
+                        Interview
                       </Button>
                     </ListItem>
                     <ListItem className="d-flex justify-content-between align-items-center py-3">
@@ -1410,8 +1412,10 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button
+                        size="small"
+                        className="bg-mixed-hopes text-white">
+                        Offer
                       </Button>
                     </ListItem>
                     <ListItem className="d-flex justify-content-between align-items-center py-3">
@@ -1435,8 +1439,10 @@ const AgencyDashboard = (props) => {
                         </div>
                       </div>
                       <div>
-                        <Button size="small" className="btn-neutral-dark ml-4">
-                          View
+                        <Button
+                          size="small"
+                          className="bg-brand-discord text-white">
+                          Placement
                         </Button>
                       </div>
                     </ListItem>
@@ -1460,8 +1466,10 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button
+                        size="small"
+                        className="bg-mixed-hopes text-white">
+                        Offer
                       </Button>
                     </ListItem>
                     <ListItem className="d-flex justify-content-between align-items-center py-3">
@@ -1484,8 +1492,8 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button size="small" className="bg-info text-white">
+                        Interview
                       </Button>
                     </ListItem>
                     <ListItem className="d-flex justify-content-between align-items-center py-3">
@@ -1508,8 +1516,10 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button
+                        size="small"
+                        className="bg-brand-slack ml-4 text-white">
+                        Live
                       </Button>
                     </ListItem>
                     <ListItem className="d-flex justify-content-between align-items-center py-3">
@@ -1532,8 +1542,10 @@ const AgencyDashboard = (props) => {
                           </span>
                         </div>
                       </div>
-                      <Button size="small" className="btn-neutral-dark ml-4">
-                        View
+                      <Button
+                        size="small"
+                        className="bg-brand-discord text-white">
+                        Placement
                       </Button>
                     </ListItem>
                   </List>

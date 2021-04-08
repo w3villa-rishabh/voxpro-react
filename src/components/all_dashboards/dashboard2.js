@@ -517,8 +517,8 @@ const LivePreviewExample = (props) => {
                     <PerfectScrollbar>
                       <div className="p-2 scroll-menu">
                         <TextField
-                          onFocus={toggleHeaderSearchHover}
-                          onBlur={toggleHeaderSearchHover}
+                          // onFocus={toggleHeaderSearchHover}
+                          // onBlur={toggleHeaderSearchHover}
                           id="header-search-input"
                           name="header-search-input"
                           type="search"
