@@ -306,7 +306,7 @@ export default function LivePreviewExample() {
                               <div className="text-center text-black-50 mt-3">
                                 Don't have an account?{' '}
                                 <a
-                                  href="/sign-up"
+                                  href="/register-as"
                                   // onClick={(e) => e.preventDefault()}
                                   className="text-first">
                                   Sign up

@@ -8,7 +8,11 @@ export default function OnBoardDocument() {
   return (
     <>
       <Card className="p-4 shadow-xxl mb-spacing-6-x2">
-        Personal Documents
+        <div className="page-title">
+          <div className="">
+            <h5 className="heading">Personal Documents</h5>
+          </div>
+        </div>
         <div className="table-responsive-md">
           <Table className="table table-alternate-spaced">
             <thead>
@@ -17,7 +21,9 @@ export default function OnBoardDocument() {
                 <th scope="col">Name</th>
                 <th scope="col">Status</th>
                 <th scope="col">Required</th>
-                <th scope="col text-right">Actions</th>
+                <th scope="col" className="text-center">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -28,7 +34,9 @@ export default function OnBoardDocument() {
                     {/* Lorem ipsum dolor sic amet */}
                   </span>
                 </td>
-                <td><span>Document Name</span></td>
+                <td>
+                  <span>Document Name</span>
+                </td>
                 <td className="font-size-lg font-weight-bold">
                   {/* <small></small> */}
                   <span>Uploaded</span>
@@ -68,7 +76,9 @@ export default function OnBoardDocument() {
                     {/* Lorem ipsum dolor sic amet */}
                   </span>
                 </td>
-                <td><span>Document Name</span></td>
+                <td>
+                  <span>Document Name</span>
+                </td>
                 <td className="font-size-lg font-weight-bold">
                   {/* <small></small> */}
                   <span>Uploaded</span>
@@ -108,7 +118,9 @@ export default function OnBoardDocument() {
                     {/* Lorem ipsum dolor sic amet */}
                   </span>
                 </td>
-                <td><span>Document Name</span></td>
+                <td>
+                  <span>Document Name</span>
+                </td>
                 <td className="font-size-lg font-weight-bold">
                   {/* <small></small> */}
                   <span>Uploaded</span>
@@ -148,7 +160,9 @@ export default function OnBoardDocument() {
                     {/* Lorem ipsum dolor sic amet */}
                   </span>
                 </td>
-                <td><span>Document Name</span></td>
+                <td>
+                  <span>Document Name</span>
+                </td>
                 <td className="font-size-lg font-weight-bold">
                   {/* <small></small> */}
                   <span>Uploaded</span>
@@ -188,7 +202,9 @@ export default function OnBoardDocument() {
                     {/* Lorem ipsum dolor sic amet */}
                   </span>
                 </td>
-                <td><span>Document Name</span></td>
+                <td>
+                  <span>Document Name</span>
+                </td>
                 <td className="font-size-lg font-weight-bold">
                   {/* <small></small> */}
                   <span>Uploaded</span>
