@@ -52,7 +52,7 @@ export default function LoginComponent() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
-    api.post(`/api/user/confirm_account?email=${email}`).then((response) => {
+    api.post('/api/user/confirm_account', { email: email }).then((response) => {
       if (response.data.success) {
         toast.success(response.data.message);
       } else {

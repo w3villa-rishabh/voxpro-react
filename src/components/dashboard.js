@@ -29,7 +29,7 @@ export default function DashboardMonitoring() {
         </div>
       )}
 
-      {currentUser.role === 'company' && <CompanyDashboard />}
+      {currentUser.role === 'company1' && <CompanyDashboard />}
 
       {currentUser.role === 'agency' && <AgencyDashboard />}
     </>

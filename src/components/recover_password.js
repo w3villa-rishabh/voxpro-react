@@ -101,41 +101,47 @@ export default function LivePreviewExample() {
                                 </div>
                               </div>
                             )}
-                            <h1 className="display-4 mb-1 font-weight-bold">
-                              Recover Password
-                            </h1>
-                            <p className="font-size-lg mb-0 text-black-50">
-                              Forgot your password? No worries, we're here to
-                              help!
-                            </p>
+                            {showMessage.notification === 'hide' && (
+                              <div>
+                                <h1 className="display-4 mb-1 font-weight-bold">
+                                  Recover Password
+                                </h1>
+                                <p className="font-size-lg mb-0 text-black-50">
+                                  Forgot your password? No worries, we're here
+                                  to help!
+                                </p>
+                              </div>
+                            )}
                           </div>
-                          <form method="post" onSubmit={resetPassword}>
-                            <div>
-                              <TextField
-                                fullWidth
-                                variant="outlined"
-                                id="textfield-email"
-                                label="Email address"
-                                name="email"
-                                onChange={handleChange}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <MailOutlineTwoToneIcon />
-                                    </InputAdornment>
-                                  )
-                                }}
-                              />
-                            </div>
-                            <div className="text-center mb-4">
-                              <Button
-                                fullWidth
-                                className="text-uppercase font-weight-bold font-size-sm mt-4 btn-primary"
-                                onClick={resetPassword}>
-                                Send password
-                              </Button>
-                            </div>
-                          </form>
+                          {showMessage.notification === 'hide' && (
+                            <form method="post" onSubmit={resetPassword}>
+                              <div>
+                                <TextField
+                                  fullWidth
+                                  variant="outlined"
+                                  id="textfield-email"
+                                  label="Email address"
+                                  name="email"
+                                  onChange={handleChange}
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <MailOutlineTwoToneIcon />
+                                      </InputAdornment>
+                                    )
+                                  }}
+                                />
+                              </div>
+                              <div className="text-center mb-4">
+                                <Button
+                                  fullWidth
+                                  className="text-uppercase font-weight-bold font-size-sm mt-4 btn-primary"
+                                  onClick={resetPassword}>
+                                  Send password
+                                </Button>
+                              </div>
+                            </form>
+                          )}
                           <div className="text-center mb-4">
                             <div className="text-center text-black-50 mt-3">
                               Already have account?{' '}
@@ -149,7 +155,7 @@ export default function LivePreviewExample() {
                             <div className="text-center text-black-50 mt-3">
                               Don't have an account?{' '}
                               <a
-                                href="/sign-up"
+                                href="/register-as"
                                 // onClick={(e) => e.preventDefault()}
                                 className="text-first">
                                 Sign up
