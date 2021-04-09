@@ -325,7 +325,7 @@ const AgencyDashboard = (props) => {
                   className="circular-progress-warning"
                 />
               </div>
-              <div className="pt-2 text-black-50 text-center">
+              <div className="font-size-lg opacity-8 pt-3 text-center">
                 Candidates Requests
               </div>
             </Card>
@@ -340,14 +340,14 @@ const AgencyDashboard = (props) => {
                   className="circular-progress-primary"
                 />
               </div>
-              <div className="pt-2 text-black-50 text-center">
+              <div className="font-size-lg opacity-8 pt-3 text-center">
                 Connections Companies
               </div>
             </Card>
           </Grid>
 
           <Grid item xs={12} sm={3}>
-            <Card className="card-box">
+            <Card className="card-box h-100">
               <div className="card-content-overlay text-center py-4">
                 <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
                   <FontAwesomeIcon
