@@ -383,7 +383,7 @@ const AgencyDashboard = (props) => {
         </Grid>
 
         <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <Card className="h-100 border-0 shadow-danger-sm p-3">
               <div className="card-header--title">
                 <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
@@ -820,8 +820,6 @@ const AgencyDashboard = (props) => {
               </div>
             </Card>
           </Grid>
-
-          
         </Grid>
 
         <Grid container spacing={2}>
@@ -843,134 +841,152 @@ const AgencyDashboard = (props) => {
 
               <div className="divider" />
               <div className="table-responsive-md">
-                <Table className="table table-hover text-nowrap mb-0">
-                  <thead>
-                    <tr>
-                      <th className="bg-white text-left">Jov ID</th>
-                      <th className="bg-white">Role</th>
-                      <th className="bg-white text-left">Consultant</th>
-                      <th className="bg-white text-center">Locations</th>
-                      <th className="bg-white text-center">Created date</th>
-                      <th className="bg-white text-center">Status</th>
-                      <th className="bg-white text-center">Applications</th>
-                      <th className="bg-white text-center">Closing On</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 1</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
-                          </div>
-                        </div>
-                      </td>
-                      <td>When, while the lovely valley teems</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#584</td>
-                      <td>Role 2</td>
-                      <td className="text-center">
-                        <Tooltip title="Arvin Weston">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                <PerfectScrollbar>
+                  <Table className="table table-hover text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th className="bg-white text-left">Jov ID</th>
+                        <th className="bg-white">Role</th>
+                        <th className="bg-white text-left">Consultant</th>
+                        <th className="bg-white text-center">Locations</th>
+                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-center">Status</th>
+                        <th className="bg-white text-center">Applications</th>
+                        <th className="bg-white text-center">Closing On</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 1</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Lili Pemberton">
                             <div className="avatar-icon">
-                              <img alt="..." src={avatar4} />
+                              <img alt="..." src={avatar2} />
                             </div>
                           </div>
-                        </Tooltip>
-                      </td>
-                      <td>I am so happy, my dear friend</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Open
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">07/25/2023</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#764</td>
-                      <td>Role 3</td>
-                      <td className="text-center">
-                        <Tooltip title="Mali Rosario">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                        </td>
+                        <td>When, while the lovely valley teems</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#584</td>
+                        <td>Role 2</td>
+                        <td className="text-center">
+                          <Tooltip title="Arvin Weston">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar4} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td>I am so happy, my dear friend</td>
+                        <td className="text-center text-black-50">
+                          06/08/2022
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          07/25/2023
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#764</td>
+                        <td>Role 3</td>
+                        <td className="text-center">
+                          <Tooltip title="Mali Rosario">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar7} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td>His own image, and the breath</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 4</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Marion Devine">
                             <div className="avatar-icon">
                               <img alt="..." src={avatar7} />
                             </div>
                           </div>
-                        </Tooltip>
-                      </td>
-                      <td>His own image, and the breath</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 4</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Marion Devine">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar7} />
+                        </td>
+                        <td>When I hear the buzz</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
                           </div>
-                        </div>
-                      </td>
-                      <td>When I hear the buzz</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Open
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </PerfectScrollbar>
               </div>
             </Card>
           </Grid>
@@ -986,134 +1002,152 @@ const AgencyDashboard = (props) => {
 
               <div className="divider" />
               <div className="table-responsive-md">
-                <Table className="table table-hover text-nowrap mb-0">
-                  <thead>
-                    <tr>
-                      <th className="bg-white text-left">Jov ID</th>
-                      <th className="bg-white">Role</th>
-                      <th className="bg-white text-left">Consultant</th>
-                      <th className="bg-white text-center">Locations</th>
-                      <th className="bg-white text-center">Created date</th>
-                      <th className="bg-white text-center">Status</th>
-                      <th className="bg-white text-center">Applications</th>
-                      <th className="bg-white text-center">Closing On</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 1</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
-                          </div>
-                        </div>
-                      </td>
-                      <td>When, while the lovely valley teems</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#584</td>
-                      <td>Role 2</td>
-                      <td className="text-center">
-                        <Tooltip title="Arvin Weston">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                <PerfectScrollbar>
+                  <Table className="table table-hover text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th className="bg-white text-left">Jov ID</th>
+                        <th className="bg-white">Role</th>
+                        <th className="bg-white text-left">Consultant</th>
+                        <th className="bg-white text-center">Locations</th>
+                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-center">Status</th>
+                        <th className="bg-white text-center">Applications</th>
+                        <th className="bg-white text-center">Closing On</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 1</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Lili Pemberton">
                             <div className="avatar-icon">
-                              <img alt="..." src={avatar4} />
+                              <img alt="..." src={avatar2} />
                             </div>
                           </div>
-                        </Tooltip>
-                      </td>
-                      <td>I am so happy, my dear friend</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Open
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">07/25/2023</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#764</td>
-                      <td>Role 3</td>
-                      <td className="text-center">
-                        <Tooltip title="Mali Rosario">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                        </td>
+                        <td>When, while the lovely valley teems</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#584</td>
+                        <td>Role 2</td>
+                        <td className="text-center">
+                          <Tooltip title="Arvin Weston">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar4} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td>I am so happy, my dear friend</td>
+                        <td className="text-center text-black-50">
+                          06/08/2022
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          07/25/2023
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#764</td>
+                        <td>Role 3</td>
+                        <td className="text-center">
+                          <Tooltip title="Mali Rosario">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar7} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td>His own image, and the breath</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 4</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Marion Devine">
                             <div className="avatar-icon">
                               <img alt="..." src={avatar7} />
                             </div>
                           </div>
-                        </Tooltip>
-                      </td>
-                      <td>His own image, and the breath</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 4</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Marion Devine">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar7} />
+                        </td>
+                        <td>When I hear the buzz</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
                           </div>
-                        </div>
-                      </td>
-                      <td>When I hear the buzz</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Open
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </PerfectScrollbar>
               </div>
             </Card>
           </Grid>
@@ -1129,134 +1163,152 @@ const AgencyDashboard = (props) => {
 
               <div className="divider" />
               <div className="table-responsive-md">
-                <Table className="table table-hover text-nowrap mb-0">
-                  <thead>
-                    <tr>
-                      <th className="bg-white text-left">Jov ID</th>
-                      <th className="bg-white">Role</th>
-                      <th className="bg-white text-left">Consultant</th>
-                      <th className="bg-white text-center">Locations</th>
-                      <th className="bg-white text-center">Created date</th>
-                      <th className="bg-white text-center">Status</th>
-                      <th className="bg-white text-center">Applications</th>
-                      <th className="bg-white text-center">Closing On</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 1</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
-                          </div>
-                        </div>
-                      </td>
-                      <td>When, while the lovely valley teems</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#584</td>
-                      <td>Role 2</td>
-                      <td className="text-center">
-                        <Tooltip title="Arvin Weston">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                <PerfectScrollbar>
+                  <Table className="table table-hover text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th className="bg-white text-left">Jov ID</th>
+                        <th className="bg-white">Role</th>
+                        <th className="bg-white text-left">Consultant</th>
+                        <th className="bg-white text-center">Locations</th>
+                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-center">Status</th>
+                        <th className="bg-white text-center">Applications</th>
+                        <th className="bg-white text-center">Closing On</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 1</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Lili Pemberton">
                             <div className="avatar-icon">
-                              <img alt="..." src={avatar4} />
+                              <img alt="..." src={avatar2} />
                             </div>
                           </div>
-                        </Tooltip>
-                      </td>
-                      <td>I am so happy, my dear friend</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Open
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">07/25/2023</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#764</td>
-                      <td>Role 3</td>
-                      <td className="text-center">
-                        <Tooltip title="Mali Rosario">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                        </td>
+                        <td>When, while the lovely valley teems</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#584</td>
+                        <td>Role 2</td>
+                        <td className="text-center">
+                          <Tooltip title="Arvin Weston">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar4} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td>I am so happy, my dear friend</td>
+                        <td className="text-center text-black-50">
+                          06/08/2022
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          07/25/2023
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#764</td>
+                        <td>Role 3</td>
+                        <td className="text-center">
+                          <Tooltip title="Mali Rosario">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar7} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td>His own image, and the breath</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 4</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Marion Devine">
                             <div className="avatar-icon">
                               <img alt="..." src={avatar7} />
                             </div>
                           </div>
-                        </Tooltip>
-                      </td>
-                      <td>His own image, and the breath</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 4</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Marion Devine">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar7} />
+                        </td>
+                        <td>When I hear the buzz</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
                           </div>
-                        </div>
-                      </td>
-                      <td>When I hear the buzz</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-dark text-dark">
-                          Closed
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">08/30/2021</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 btn-neutral-danger">
+                            View
+                          </Button>
+                        </td>
+                        <td className="text-center text-black-50">
+                          08/30/2021
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </PerfectScrollbar>
               </div>
             </Card>
           </Grid>
