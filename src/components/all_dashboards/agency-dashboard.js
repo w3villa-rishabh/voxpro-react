@@ -663,7 +663,7 @@ const AgencyDashboard = (props) => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Jov ID</th>
+                        <th className="bg-white text-left">Job ID</th>
                         <th className="bg-white">Role</th>
                         <th className="bg-white text-left">Consultant</th>
                         <th className="bg-white text-center">Locations</th>
@@ -824,7 +824,7 @@ const AgencyDashboard = (props) => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Jov ID</th>
+                        <th className="bg-white text-left">Job ID</th>
                         <th className="bg-white">Role</th>
                         <th className="bg-white text-left">Consultant</th>
                         <th className="bg-white text-center">Locations</th>
@@ -985,7 +985,7 @@ const AgencyDashboard = (props) => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Jov ID</th>
+                        <th className="bg-white text-left">Job ID</th>
                         <th className="bg-white">Role</th>
                         <th className="bg-white text-left">Consultant</th>
                         <th className="bg-white text-center">Locations</th>

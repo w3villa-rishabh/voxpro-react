@@ -5,9 +5,13 @@ import {
   Card,
   Button,
   FormControlLabel,
-  Checkbox,
-  Tooltip
+  Checkbox
 } from '@material-ui/core';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 import Dropzone from 'react-dropzone';
 import api from '../../api';
@@ -15,21 +19,37 @@ import { getCurrentUser } from '../../helper';
 
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
+// import { KeyboardDatePicker } from '@material-ui/pickers';
+import 'date-fns';
 
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
   const [currentUser] = useState(getCurrentUser());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [documents, setDocuments] = useState({
     categoryId: 0,
     docId: 0,
     notify: 1,
     privacy: 0,
-    copy: 'yes'
+    copy: 'yes',
+    expiration: 0
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     // getDocuments();
   }, []);
+
+  const handleDateChange = (date) => {
+    if (date) {
+      setDocuments({
+        ...documents,
+        expiration: date.toLocaleDateString()
+      });
+      setIsOpen(false);
+      // setAvailability(date.toLocaleDateString());
+    }
+  };
 
   const handleDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -156,8 +176,8 @@ export default function UploadDocument() {
                 </select>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3} className="d-flex">
-              <div className="mb-3 w-100">
+            <Grid item xs={12} sm={3}>
+              <div className="mb-3">
                 <label className="font-12 mb-2">
                   Select Doc <span className="text-danger">*</span>
                 </label>
@@ -178,21 +198,57 @@ export default function UploadDocument() {
                   <option value="2">Doc 1</option>
                 </select>
               </div>
-              <Tooltip title="Add Doc Expiration Date" arrow>
-                <FormControlLabel
-                  className="m-0 pt-2"
-                  control={
-                    <Checkbox
-                      // onChange={handleChange}
-                      value="checked1"
-                      name="remember_me"
-                      color="primary"
-                    />
-                  }
-                />
-              </Tooltip>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={2}>
+              <div className="mb-3">
+                <label className="font-12 mb-2">
+                  Expiration <span className="text-danger">*</span>
+                </label>
+                <div className="position-relative">
+                  {isOpen && (
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <KeyboardDatePicker
+                        disablePast
+                        disableToolbar
+                        variant="inline"
+                        format="dd/MM/yyyy"
+                        // margin="normal"
+                        id="date-picker-inline"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        autoOk={true}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date'
+                        }}
+                        // InputProps={{ left: '930px !important;' }}
+                        open={isOpen}
+                      />
+                    </MuiPickersUtilsProvider>
+                  )}
+                  <select
+                    className="MuiTextField-root MuiFormControl-fullWidth select-doc date-pic"
+                    variant="outlined"
+                    fullWidth
+                    name="expiration"
+                    onChange={(event) => {
+                      setDocuments({
+                        ...documents,
+                        expiration: event.target.value
+                      });
+                      if (event.target.value === '2') {
+                        setIsOpen(true);
+                      }
+                      console.log('documents.expiration', event.target.value );
+                    }}
+                    value={documents.expiration}>
+                    <option value="0">Select Expiration</option>
+                    <option value="1">No Expiration</option>
+                    <option value="2">Date</option>
+                  </select>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={2}>
               <div className="mb-3">
                 <label className="font-12 mb-2">
                   Notify by Email <span className="text-danger">*</span>
@@ -215,7 +271,7 @@ export default function UploadDocument() {
                 </select>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={2}>
               <div className="mb-3">
                 <label className="font-12 mb-2">
                   Privacy <span className="text-danger">*</span>
