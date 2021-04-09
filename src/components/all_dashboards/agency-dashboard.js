@@ -26,188 +26,6 @@ import people2 from '../../assets/images/stock-photos/people-3.jpg';
 import people1 from '../../assets/images/stock-photos/people-2.jpg';
 
 const AgencyDashboard = (props) => {
-  const chartsLarge3Options = {
-    tooltip: {
-      enabled: false,
-      enabledOnSeries: undefined,
-      shared: false,
-      followCursor: false,
-      intersect: false,
-      inverseOrder: false,
-      custom: undefined,
-      fillSeriesColor: false,
-      theme: false,
-      style: {
-        fontSize: '12px',
-        fontFamily: undefined
-      },
-      onDatasetHover: {
-        highlightDataSeries: false
-      },
-      x: {
-        show: false,
-        format: 'dd MMM',
-        formatter: undefined
-      },
-      y: {
-        formatter: undefined,
-        title: {
-          formatter: (seriesName) => seriesName
-        }
-      },
-      z: {
-        formatter: undefined,
-        title: 'Size: '
-      },
-      marker: {
-        show: false
-      }
-    },
-    chart: {
-      toolbar: {
-        show: false
-      },
-      sparkline: {
-        enabled: true
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      show: true,
-      color: '#3c44b1',
-      curve: 'smooth',
-      width: 2
-    },
-    fill: {
-      color: '#3c44b1'
-    },
-    colors: ['#3c44b1'],
-    legend: {
-      show: false
-    },
-    grid: {
-      strokeDashArray: '5',
-      borderColor: 'rgba(125, 138, 156, 0.3)',
-      xaxis: {
-        lines: {
-          show: false
-        }
-      },
-      yaxis: {
-        lines: {
-          show: false
-        }
-      }
-    }
-  };
-  const chartsLarge3Data = [
-    {
-      name: 'Expense',
-      data: [3.3, 3.1, 4.0, 5.8, 2.1, 3.6, 3.2]
-    },
-    {
-      name: 'Income',
-      data: [2.1, 2.1, 2.8, 2.8, 4.3, 2.7, 1.4]
-    }
-  ];
-
-  const chartsSmall1AOptions = {
-    tooltip: {
-      enabled: false,
-      enabledOnSeries: undefined,
-      shared: false,
-      followCursor: false,
-      intersect: false,
-      inverseOrder: false,
-      custom: undefined,
-      fillSeriesColor: false,
-      theme: false,
-      style: {
-        fontSize: '12px',
-        fontFamily: undefined
-      },
-      onDatasetHover: {
-        highlightDataSeries: false
-      },
-      x: {
-        show: false,
-        format: 'dd MMM',
-        formatter: undefined
-      },
-      y: {
-        formatter: undefined,
-        title: {
-          formatter: (seriesName) => seriesName
-        }
-      },
-      z: {
-        formatter: undefined,
-        title: 'Size: '
-      },
-      marker: {
-        show: false
-      }
-    },
-    chart: {
-      toolbar: {
-        show: false
-      },
-      sparkline: {
-        enabled: true
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      show: true,
-      color: '#f4772e',
-      curve: 'smooth',
-      width: 2
-    },
-    fill: {
-      color: '#f4772e'
-    },
-    colors: ['#f4772e'],
-    legend: {
-      show: false
-    },
-    // labels: [
-    //   'Monday',
-    //   'Tuesday',
-    //   'Wednesday',
-    //   'Thursday',
-    //   'Friday',
-    //   'Saturday',
-    //   'Sunday',
-    //   'Last Week',
-    //   'Last Month',
-    //   'Last Year'
-    // ],
-    xaxis: {
-      crosshairs: {
-        width: 1
-      },
-      lines: {
-        show: false
-      }
-    },
-    yaxis: {
-      min: 0,
-      lines: {
-        show: false
-      }
-    }
-  };
-  const chartsSmall1AData = [
-    {
-      name: 'Sales',
-      data: [32, 52, 45, 32, 54, 56, 28, 25, 36, 62]
-    }
-  ];
-
   const [inputBg, setInputBg] = useState(false);
   const toggleInputBg = () => setInputBg(!inputBg);
 
@@ -326,7 +144,7 @@ const AgencyDashboard = (props) => {
                 />
               </div>
               <div className="font-size-lg opacity-8 pt-3 text-center">
-                Candidates Requests
+                Candidates registered
               </div>
             </Card>
           </Grid>
@@ -341,7 +159,7 @@ const AgencyDashboard = (props) => {
                 />
               </div>
               <div className="font-size-lg opacity-8 pt-3 text-center">
-                Connections Companies
+                Companies connected
               </div>
             </Card>
           </Grid>
