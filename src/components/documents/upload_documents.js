@@ -216,7 +216,6 @@ export default function UploadDocument() {
                         KeyboardButtonProps={{
                           'aria-label': 'change date'
                         }}
-                        // InputProps={{ left: '930px !important;' }}
                         open={isOpen}
                       />
                     </MuiPickersUtilsProvider>
@@ -231,7 +230,6 @@ export default function UploadDocument() {
                         ...documents,
                         expiration: event.target.value
                       });
-                      debugger
                       if (event.target.value === '2') {
                         setIsOpen(true);
                       }
