@@ -42,10 +42,6 @@ export default function UploadDocument() {
 
   const handleDateChange = (date) => {
     if (date) {
-      setDocuments({
-        ...documents,
-        expiration: date.toLocaleDateString()
-      });
       setIsOpen(false);
       // setAvailability(date.toLocaleDateString());
     }
@@ -235,10 +231,11 @@ export default function UploadDocument() {
                         ...documents,
                         expiration: event.target.value
                       });
+                      debugger
                       if (event.target.value === '2') {
                         setIsOpen(true);
                       }
-                      console.log('documents.expiration', event.target.value );
+                      console.log('documents.expiration', event.target.value);
                     }}
                     value={documents.expiration}>
                     <option value="0">Select Expiration</option>
