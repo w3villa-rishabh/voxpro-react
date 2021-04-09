@@ -4,17 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Grid,
   Card,
-  CardContent,
   Button,
-  List,
-  ListItem,
   TextField,
-  Tooltip
+  Tooltip,
+  Table
 } from '@material-ui/core';
 
-import Chart from 'react-apexcharts';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { CircularProgressbar } from 'react-circular-progressbar';
+
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
@@ -228,441 +226,168 @@ const AgencyDashboard = (props) => {
   return (
     <>
       <div className="mb-spacing-2">
-        <Grid container spacing={2} className="mb-3">
-          <Grid item xs={12} sm={4}>
-            <Card className="">
-              <CardContent className="p-0 font-weight-bold">
-                <div className="p-3">
-                  <span className="pb-4">User Statics</span>
-                  <span className="d-block">
-                    <div>
-                      <span className="font-weight-light">Expense</span>
-                      <br></br>
-                      <span className="font-weight-light">Income</span>
-                    </div>
-                  </span>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={2}>
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
+                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
                 </div>
-
-                <Chart
-                  options={chartsLarge3Options}
-                  series={chartsLarge3Data}
-                  type="area"
-                  height={170}
-                />
-              </CardContent>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  4,745
+                </div>
+                <div className="opacity-8">Live Roles</div>
+              </div>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid container spacing={1}>
-              <Grid item xs={12} sm={6}>
-                <Card className="p-2 h-100">
-                  <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                      <div className="d-flex py-1 align-items-center">
-                        <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-danger mr-3">
-                          <FontAwesomeIcon icon={['fas', 'microphone']} />
-                        </div>
-                        <div className="ml-1 font-size-xxl font-weight-bold">
-                          23
-                        </div>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <div className="text-center font-12">Live Jobs</div>
-                    </Grid>
-                  </Grid>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Card className="p-2 h-100">
-                  <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                      <div className="d-flex py-1 align-items-center">
-                        <div className="d-40 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center shadow-danger mr-3">
-                          <FontAwesomeIcon icon={['fas', 'camera-retro']} />
-                        </div>
-                        <div className="ml-1 font-size-xxl font-weight-bold">
-                          87
-                        </div>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <div className="text-center font-12">
-                        Pending Placements
-                      </div>
-                    </Grid>
-                  </Grid>
-                </Card>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} className="mt-2">
-              <Grid item xs={12} sm={12}>
-                <Card>
-                  <div className="city-card-h">
-                    <Grid container spacing={1} className="city-card">
-                      <Grid item xs={12} sm={6}>
-                        <span>11 City</span>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <span>11 City</span>
-                      </Grid>
-                    </Grid>
-                  </div>
-                </Card>
-              </Grid>
-            </Grid>
+          <Grid item xs={12} sm={2}>
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
+                  <FontAwesomeIcon icon={['fas', 'map-marker']} />
+                </div>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  4,45
+                </div>
+                <div className="opacity-8">Placements</div>
+              </div>
+            </Card>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                <Card className="h-100">
-                  <div className="p-2">
-                    <div className="font-weight-bold">Task due (293)</div>
-                  </div>
-                  <div className="rounded-bottom overflow-hidden">
-                    <Chart
-                      options={chartsSmall1AOptions}
-                      series={chartsSmall1AData}
-                      type="area"
-                      height={50}
-                    />
-                  </div>
-                </Card>
-              </Grid>
 
-              <Grid item xs={12} sm={12}>
-                <Card className="h-100 p-3">
-                  <div className="d-flex align-items-center">
-                    <div className="d-40 btn-icon rounded-circle bg-success text-white text-center font-size-lg mr-3">
-                      <FontAwesomeIcon icon={['fas', 'address-card']} />
-                    </div>
-                    <div className="font-weight-bold">Profile Completion</div>
-                  </div>
-                  <div className="mx-auto text-center">
+          <Grid item xs={12} sm={2}>
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-primary text-white btn-icon mx-auto text-center shadow-primary">
+                  <FontAwesomeIcon icon={['fas', 'signal']} />
+                </div>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  5,745
+                </div>
+                <div className="opacity-8">IR35 Questions Status</div>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-warning text-white btn-icon mx-auto text-center shadow-warning">
+                  <FontAwesomeIcon icon={['fas', 'clock']} />
+                </div>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  745
+                </div>
+                <div className="opacity-8">Pending Documents</div>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <Card className="p-2 h-100">
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <div className="mx-auto text-center mt-3">
                     <CircularProgressbar
                       value={56}
                       text={56 + '%'}
                       strokeWidth={8}
-                      className="circular-progress-first"
+                      className="circular-progress-warning"
                     />
                   </div>
-                </Card>
+                </Grid>
+                <Grid item xs={12}>
+                  <div className="text-center">Scheduled Interviews</div>
+                </Grid>
               </Grid>
-            </Grid>
+            </Card>
           </Grid>
-        </Grid>
-
-        <Grid container spacing={2} className="mb-3">
-          <Grid item xs={12} sm={4}>
-            <Card className="h-100">
-              <div className="card-header">
-                <div className="card-header--title">
-                  <b>Connection Requests</b>
+          <Grid item xs={12} sm={2}>
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-success text-white btn-icon mx-auto text-center shadow-success">
+                  <FontAwesomeIcon icon={['fas', 'thumbtack']} />
                 </div>
-              </div>
-              <div
-                className="scroll-area shadow-overflow"
-                style={{ height: '412px', borderRadius: 'inherit' }}>
-                <PerfectScrollbar options={{ wheelPropagation: false }}>
-                  <List component="div" className="list-group-flush">
-                    <ListItem className="py-3">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Shanelle Wynn
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Engineer, Apple Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Accept
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-4">
-                              Reject
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="py-3">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar3} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Akeem Griffith
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Manager, Google Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Accept
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-4">
-                              Reject
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="py-3">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Abigayle Hicks
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Project Manager, Spotify
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Accept
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-4">
-                              Reject
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="py-3">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Gordon Barnett
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Developer, UiFort
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Accept
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-4">
-                              Reject
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="py-3">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Gordon Barnett
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Developer, UiFort
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Accept
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-4">
-                              Reject
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="py-3">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Gordon Barnett
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Developer, UiFort
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Accept
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-4">
-                              Reject
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                  </List>
-                </PerfectScrollbar>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  74
+                </div>
+                <div className="opacity-8">Tasks</div>
               </div>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card className="h-100 border-0 shadow-danger-sm h-100">
-              <div className="card-header--title p-3">
-                <b className="font-weight-bold font-weight-bolder mb-0">
-                  New Connection
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box shadow-success-sm p-3 h-100">
+              <div className="mx-auto text-center">
+                <CircularProgressbar
+                  value={56}
+                  text={56 + '%'}
+                  strokeWidth={8}
+                  className="circular-progress-warning"
+                />
+              </div>
+              <div className="pt-2 text-black-50 text-center">
+                Candidates Requests
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box shadow-success-sm p-3 h-100">
+              <div className="mx-auto text-center">
+                <CircularProgressbar
+                  value={56}
+                  text={56 + '%'}
+                  strokeWidth={8}
+                  className="circular-progress-primary"
+                />
+              </div>
+              <div className="pt-2 text-black-50 text-center">
+                Connections Companies
+              </div>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
+                  <FontAwesomeIcon
+                    icon={['far', 'bell']}
+                    className="display-4"
+                  />
+                </div>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  4,745
+                </div>
+                <div className="font-size-lg opacity-8">New Connections</div>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center">
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  745
+                </div>
+                <div className="font-size-lg opacity-8">
+                  Connections Requests
+                </div>
+                <div className="divider mx-3 my-3" />
+                <div className="text-center">
+                  <Button size="small" className="px-4 btn-neutral-danger">
+                    View
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+            <Card className="h-100 border-0 shadow-danger-sm p-3">
+              <div className="card-header--title">
+                <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
+                  Recent Activities
                 </b>
                 <p className="text-black-50">Last activity was 2 days ago</p>
               </div>
@@ -672,283 +397,49 @@ const AgencyDashboard = (props) => {
                   className="opacity-8 font-size-xs position-absolute ribbon-angle--top-right m-3"
                 />
               </div>
-              <div
-                className="scroll-area shadow-overflow"
-                style={{ height: '325px', borderRadius: 'inherit' }}>
-                <PerfectScrollbar options={{ wheelPropagation: false }}>
-                  <List component="div" className="list-group-flush">
-                    <ListItem className="">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Shanelle Wynn
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Engineer, Apple Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              UnFollow
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar3} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Akeem Griffith
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Manager, Google Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              UnFollow
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Abigayle Hicks
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Project Manager, Spotify
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Follow
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Gordon Barnett
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Developer, UiFort
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Follow
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Gordon Barnett
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Developer, UiFort
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Follow
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Gordon Barnett
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Developer, UiFort
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          //   md={6}
-                          className="pt-3 pt-xl-0 d-flex align-items-center">
-                          <div className="align-box-row flex-grow-1">
-                            <div className="d-flex flex-column flex-grow-1"></div>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-4">
-                              Follow
-                            </Button>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                  </List>
-                </PerfectScrollbar>
+              <div className="timeline-list ml-3">
+                <div className="timeline-item timeline-item-icon">
+                  <div className="timeline-item--content">
+                    <div className="timeline-item--icon-wrapper bg-primary text-white">
+                      <FontAwesomeIcon icon={['far', 'building']} />
+                    </div>
+                    <h4 className="timeline-item--label mb-2 font-weight-bold">
+                      Business meeting
+                    </h4>
+                    <p>The World Wide Web goes live with its first web page.</p>
+                  </div>
+                </div>
+                <div className="timeline-item timeline-item-icon">
+                  <div className="timeline-item--content">
+                    <div className="timeline-item--icon-wrapper bg-danger text-white">
+                      <FontAwesomeIcon icon={['far', 'gem']} />
+                    </div>
+                    <h4 className="timeline-item--label mb-2 font-weight-bold">
+                      Reports generation date
+                    </h4>
+                    <p>Bill Clinton's presidential scandal makes it online.</p>
+                  </div>
+                </div>
+                <div className="timeline-item timeline-item-icon">
+                  <div className="timeline-item--content">
+                    <div className="timeline-item--icon-wrapper bg-warning text-white">
+                      <FontAwesomeIcon icon={['far', 'object-group']} />
+                    </div>
+                    <h4 className="timeline-item--label mb-2 font-weight-bold">
+                      Lunch with investors
+                    </h4>
+                    <p>
+                      Mosaic, the first graphical browser, is introduced to the
+                      average consumer.
+                    </p>
+                  </div>
+                </div>
               </div>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <Card>
               <div className="app-inner-content-layout">
-                {/* <div
-                onClick={toogleHeaderDrawer}
-                className={clsx('app-drawer-overlay', {
-                  'is-active': headerDrawerToggle
-                })}
-              /> */}
                 <div className="app-drawer-content-message">
                   <Tooltip arrow title="Close drawer" placement="left">
                     <Button
@@ -1114,15 +605,6 @@ const AgencyDashboard = (props) => {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="card-header--actions">
-                        <Tooltip title="Add in conversation">
-                          <Button
-                            size="small"
-                            className="btn-first btn-pill d-40 p-0">
-                            <FontAwesomeIcon icon={['fas', 'plus']} />
-                          </Button>
-                        </Tooltip>
-                      </div> */}
                     </div>
                     <div className="chat-wrapper-message p-3">
                       <div className="chat-item p-2 mb-2">
@@ -1299,7 +781,6 @@ const AgencyDashboard = (props) => {
                     </div>
                     <div className="bg-white">
                       <div className="card-footer p-0">
-                        {/* <div className="divider" /> */}
                         <div
                           className={clsx(
                             'd-flex align-items-center transition-base px-4 py-2',
@@ -1339,289 +820,443 @@ const AgencyDashboard = (props) => {
               </div>
             </Card>
           </Grid>
+
+          
         </Grid>
-        <Grid container spacing={2} className="mb-3">
-          <Grid item xs={12} sm={8}>
-            <Card className="card-box h-100">
-              <div className="card-header-alt px-4 pt-4 pb-2">
-                <b className="font-weight-bold font-size-lg mb-1">
-                  List of live jobs
-                </b>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <Card className="card-box">
+              <div className="card-header py-3">
+                <div className="card-header--title font-size-lg">
+                  <b>List Of Jobs</b>
+                </div>
+                {/* <div className="card-header--actions">
+                  <Button size="small" className="btn-neutral-primary">
+                    <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon icon={['fas', 'plus-circle']} />
+                    </span>
+                    <span className="btn-wrapper--label">Add ticket</span>
+                  </Button>
+                </div> */}
               </div>
 
-              <div className="scroll-area shadow-overflow">
-                <PerfectScrollbar options={{ wheelPropagation: false }}>
-                  <List component="div" className="list-group-flush">
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
+              <div className="divider" />
+              <div className="table-responsive-md">
+                <Table className="table table-hover text-nowrap mb-0">
+                  <thead>
+                    <tr>
+                      <th className="bg-white text-left">Jov ID</th>
+                      <th className="bg-white">Role</th>
+                      <th className="bg-white text-left">Consultant</th>
+                      <th className="bg-white text-center">Locations</th>
+                      <th className="bg-white text-center">Created date</th>
+                      <th className="bg-white text-center">Status</th>
+                      <th className="bg-white text-center">Applications</th>
+                      <th className="bg-white text-center">Closing On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="font-weight-bold">#453</td>
+                      <td>Role 1</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Lili Pemberton">
                           <div className="avatar-icon">
                             <img alt="..." src={avatar2} />
                           </div>
                         </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Shanelle Wynn
-                          </a>
-                          <span className="text-black-50 d-block">
-                            UI Engineer, Apple Inc.
-                          </span>
+                      </td>
+                      <td>When, while the lovely valley teems</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
                         </div>
-                      </div>
-                      <Button
-                        size="small"
-                        className="bg-brand-slack ml-4 text-white">
-                        Live
-                      </Button>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar3} />
-                          </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Akeem Griffith
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Manager, Google Inc.
-                          </span>
-                        </div>
-                      </div>
-                      <Button size="small" className="bg-info text-white">
-                        Interview
-                      </Button>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar4} />
-                          </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Abigayle Hicks
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Project Manager, Spotify
-                          </span>
-                        </div>
-                      </div>
-                      <Button
-                        size="small"
-                        className="bg-mixed-hopes text-white">
-                        Offer
-                      </Button>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
-                          </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Reece Corbett
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Senior Designer, Amazon Inc.
-                          </span>
-                        </div>
-                      </div>
-                      <div>
+                      </td>
+                      <td className="text-center">
                         <Button
                           size="small"
-                          className="bg-brand-discord text-white">
-                          Placement
+                          className="px-4 btn-neutral-danger">
+                          View
                         </Button>
-                      </div>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#584</td>
+                      <td>Role 2</td>
+                      <td className="text-center">
+                        <Tooltip title="Arvin Weston">
+                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar4} />
+                            </div>
+                          </div>
+                        </Tooltip>
+                      </td>
+                      <td>I am so happy, my dear friend</td>
+                      <td className="text-center text-black-50">06/08/2022</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-success text-success">
+                          Open
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">07/25/2023</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#764</td>
+                      <td>Role 3</td>
+                      <td className="text-center">
+                        <Tooltip title="Mali Rosario">
+                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar7} />
+                            </div>
+                          </div>
+                        </Tooltip>
+                      </td>
+                      <td>His own image, and the breath</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#453</td>
+                      <td>Role 4</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Marion Devine">
                           <div className="avatar-icon">
                             <img alt="..." src={avatar7} />
                           </div>
                         </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Reece Corbett
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Senior Designer, Amazon Inc.
-                          </span>
+                      </td>
+                      <td>When I hear the buzz</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-success text-success">
+                          Open
                         </div>
-                      </div>
-                      <Button
-                        size="small"
-                        className="bg-mixed-hopes text-white">
-                        Offer
-                      </Button>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </Card>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <Card className="card-box">
+              <div className="card-header py-3">
+                <div className="card-header--title font-size-lg">
+                  <b>List of Companies Recently Added</b>
+                </div>
+              </div>
+
+              <div className="divider" />
+              <div className="table-responsive-md">
+                <Table className="table table-hover text-nowrap mb-0">
+                  <thead>
+                    <tr>
+                      <th className="bg-white text-left">Jov ID</th>
+                      <th className="bg-white">Role</th>
+                      <th className="bg-white text-left">Consultant</th>
+                      <th className="bg-white text-center">Locations</th>
+                      <th className="bg-white text-center">Created date</th>
+                      <th className="bg-white text-center">Status</th>
+                      <th className="bg-white text-center">Applications</th>
+                      <th className="bg-white text-center">Closing On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="font-weight-bold">#453</td>
+                      <td>Role 1</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Lili Pemberton">
                           <div className="avatar-icon">
                             <img alt="..." src={avatar2} />
                           </div>
                         </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Shanelle Wynn
-                          </a>
-                          <span className="text-black-50 d-block">
-                            UI Engineer, Apple Inc.
-                          </span>
+                      </td>
+                      <td>When, while the lovely valley teems</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
                         </div>
-                      </div>
-                      <Button size="small" className="bg-info text-white">
-                        Interview
-                      </Button>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#584</td>
+                      <td>Role 2</td>
+                      <td className="text-center">
+                        <Tooltip title="Arvin Weston">
+                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar4} />
+                            </div>
+                          </div>
+                        </Tooltip>
+                      </td>
+                      <td>I am so happy, my dear friend</td>
+                      <td className="text-center text-black-50">06/08/2022</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-success text-success">
+                          Open
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">07/25/2023</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#764</td>
+                      <td>Role 3</td>
+                      <td className="text-center">
+                        <Tooltip title="Mali Rosario">
+                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar7} />
+                            </div>
+                          </div>
+                        </Tooltip>
+                      </td>
+                      <td>His own image, and the breath</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#453</td>
+                      <td>Role 4</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Marion Devine">
                           <div className="avatar-icon">
-                            <img alt="..." src={avatar3} />
+                            <img alt="..." src={avatar7} />
                           </div>
                         </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Akeem Griffith
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Manager, Google Inc.
-                          </span>
+                      </td>
+                      <td>When I hear the buzz</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-success text-success">
+                          Open
                         </div>
-                      </div>
-                      <Button
-                        size="small"
-                        className="bg-brand-slack ml-4 text-white">
-                        Live
-                      </Button>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar4} />
-                          </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Abigayle Hicks
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Project Manager, Spotify
-                          </span>
-                        </div>
-                      </div>
-                      <Button
-                        size="small"
-                        className="bg-brand-discord text-white">
-                        Placement
-                      </Button>
-                    </ListItem>
-                  </List>
-                </PerfectScrollbar>
-              </div>
-              <div className="card-footer p-3 text-center">
-                <Button size="small" color="primary" variant="contained">
-                  <span className="btn-wrapper--label">View all employees</span>
-                  <span className="btn-wrapper--icon">
-                    <FontAwesomeIcon icon={['fas', 'arrow-right']} />
-                  </span>
-                </Button>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                  </tbody>
+                </Table>
               </div>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card className="h-100 border-0 shadow-danger-sm p-3">
-              <div className="card-header--title">
-                <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
-                  Recent Activities
-                </b>
-                <p className="text-black-50">Last activity was 2 days ago</p>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <Card className="card-box">
+              <div className="card-header py-3">
+                <div className="card-header--title font-size-lg">
+                  <b>List of Companies Recently Joined</b>
+                </div>
               </div>
-              <div className="card-header--actions">
-                <FontAwesomeIcon
-                  icon={['fas', 'chevron-down']}
-                  className="opacity-8 font-size-xs position-absolute ribbon-angle--top-right m-3"
-                />
-              </div>
-              <div className="timeline-list ml-3">
-                <div className="timeline-item timeline-item-icon">
-                  <div className="timeline-item--content">
-                    <div className="timeline-item--icon-wrapper bg-primary text-white">
-                      <FontAwesomeIcon icon={['far', 'building']} />
-                    </div>
-                    <h4 className="timeline-item--label mb-2 font-weight-bold">
-                      Business meeting
-                    </h4>
-                    <p>The World Wide Web goes live with its first web page.</p>
-                  </div>
-                </div>
-                <div className="timeline-item timeline-item-icon">
-                  <div className="timeline-item--content">
-                    <div className="timeline-item--icon-wrapper bg-danger text-white">
-                      <FontAwesomeIcon icon={['far', 'gem']} />
-                    </div>
-                    <h4 className="timeline-item--label mb-2 font-weight-bold">
-                      Reports generation date
-                    </h4>
-                    <p>Bill Clinton's presidential scandal makes it online.</p>
-                  </div>
-                </div>
-                <div className="timeline-item timeline-item-icon">
-                  <div className="timeline-item--content">
-                    <div className="timeline-item--icon-wrapper bg-warning text-white">
-                      <FontAwesomeIcon icon={['far', 'object-group']} />
-                    </div>
-                    <h4 className="timeline-item--label mb-2 font-weight-bold">
-                      Lunch with investors
-                    </h4>
-                    <p>
-                      Mosaic, the first graphical browser, is introduced to the
-                      average consumer.
-                    </p>
-                  </div>
-                </div>
+
+              <div className="divider" />
+              <div className="table-responsive-md">
+                <Table className="table table-hover text-nowrap mb-0">
+                  <thead>
+                    <tr>
+                      <th className="bg-white text-left">Jov ID</th>
+                      <th className="bg-white">Role</th>
+                      <th className="bg-white text-left">Consultant</th>
+                      <th className="bg-white text-center">Locations</th>
+                      <th className="bg-white text-center">Created date</th>
+                      <th className="bg-white text-center">Status</th>
+                      <th className="bg-white text-center">Applications</th>
+                      <th className="bg-white text-center">Closing On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="font-weight-bold">#453</td>
+                      <td>Role 1</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Lili Pemberton">
+                          <div className="avatar-icon">
+                            <img alt="..." src={avatar2} />
+                          </div>
+                        </div>
+                      </td>
+                      <td>When, while the lovely valley teems</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#584</td>
+                      <td>Role 2</td>
+                      <td className="text-center">
+                        <Tooltip title="Arvin Weston">
+                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar4} />
+                            </div>
+                          </div>
+                        </Tooltip>
+                      </td>
+                      <td>I am so happy, my dear friend</td>
+                      <td className="text-center text-black-50">06/08/2022</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-success text-success">
+                          Open
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">07/25/2023</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#764</td>
+                      <td>Role 3</td>
+                      <td className="text-center">
+                        <Tooltip title="Mali Rosario">
+                          <div className="avatar-icon-wrapper avatar-icon-sm">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar7} />
+                            </div>
+                          </div>
+                        </Tooltip>
+                      </td>
+                      <td>His own image, and the breath</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">#453</td>
+                      <td>Role 4</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Marion Devine">
+                          <div className="avatar-icon">
+                            <img alt="..." src={avatar7} />
+                          </div>
+                        </div>
+                      </td>
+                      <td>When I hear the buzz</td>
+                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-dark text-dark">
+                          Closed
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <Button
+                          size="small"
+                          className="px-4 btn-neutral-danger">
+                          View
+                        </Button>
+                      </td>
+                      <td className="text-center text-black-50">08/30/2021</td>
+                    </tr>
+                  </tbody>
+                </Table>
               </div>
             </Card>
           </Grid>

@@ -15,10 +15,22 @@ export default function DashboardMonitoring() {
     <>
       <div className="page-title">
         <DashboardIcon />
-        <div className="title">
-          <h5 className="heading">This is your Dashboard</h5>
-          <p>Private to you</p>
-        </div>
+        {currentUser.role === 'candidate' && (
+          <div className="title">
+            <h5 className="heading">This is your Dashboard</h5>
+            <p>Private to you</p>
+          </div>
+        )}
+        {currentUser.role === 'company' && (
+          <div className="title">
+            <h5 className="heading pt-3">Company Dashboard</h5>
+          </div>
+        )}
+        {currentUser.role === 'agency' && (
+          <div className="title">
+            <h5 className="heading pt-3">Agency Dashboard</h5>
+          </div>
+        )}
       </div>
 
       {currentUser.role === 'candidate' && (
