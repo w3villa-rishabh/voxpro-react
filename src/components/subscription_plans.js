@@ -1,8 +1,9 @@
 import React from 'react';
-
+import { StripeProvider, Elements } from 'react-stripe-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Button, Card, Container } from '@material-ui/core';
 import logo from '../assets/images/voxpro-images/logo_vp.png';
+import Form from '../form';
 
 export default function LivePreviewExample() {
   return (
@@ -227,7 +228,9 @@ export default function LivePreviewExample() {
                   <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
                     <small></small>
                   </div>
-                  <div className="font-size-md text-black-50">price on quote</div>
+                  <div className="font-size-md text-black-50">
+                    price on quote
+                  </div>
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
@@ -285,6 +288,17 @@ export default function LivePreviewExample() {
           </Grid>
         </Container>
       </div>
+      <StripeProvider apiKey="pk_test_51IeDwoSEqn4qAqJH1u7VYZHHsDBITZyV7p8NeuCeLud1qif0kpkBCNPBCH7zQXROKBX6Y2h6ijjrrqoGg8k7Tkzy00UEBHtoRf">
+        <Elements
+          fonts={[
+            {
+              cssSrc:
+                'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,600'
+            }
+          ]}>
+          <Form />
+        </Elements>
+      </StripeProvider>
     </>
   );
 }
