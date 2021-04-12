@@ -254,6 +254,14 @@ const AgencyDashboard = (props) => {
                   </div>
                 </div>
               </div>
+              <div className="card-footer py-3 text-center see-more">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View More
+                </Button>
+              </div>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6}>
