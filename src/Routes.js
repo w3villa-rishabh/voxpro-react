@@ -136,7 +136,7 @@ const Routes = () => {
                 '/ir35-verify',
                 '/request-information',
                 '/view-profile',
-                '/view-document'
+                '/view-document',
               ]}>
               <LeftSidebar>
                 <Switch>

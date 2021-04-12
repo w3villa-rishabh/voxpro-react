@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,7 +12,7 @@ import {
   FormControlLabel,
   Checkbox,
   Dialog,
-  DialogTitle
+  DialogTitle,
 } from '@material-ui/core';
 
 import api from '../api';
@@ -24,8 +24,17 @@ import hero4 from '../assets/images/voxpro-images/reg-side.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Select from 'react-select';
+import countryList from 'react-select-country-list';
 
 export default function LivePreviewExample() {
+  const [value, setValue] = useState('');
+  const options = useMemo(() => countryList().getData(), []);
+
+  const changeHandler = (value) => {
+    setValue(value);
+  };
+
   let search = window.location.search;
   let params = new URLSearchParams(search);
   let type = params.get('as');
@@ -457,13 +466,10 @@ export default function LivePreviewExample() {
                                     Country of Registration{' '}
                                     <span className="text-danger">*</span>
                                   </label>
-                                  <TextField
-                                    variant="outlined"
-                                    size="small"
-                                    fullWidth
-                                    name="address"
-                                    onChange={handleChange}
-                                    placeholder="Enter your Company of registration"
+                                  <Select
+                                    options={options}
+                                    value={value}
+                                    onChange={changeHandler}
                                   />
                                   {/* {errors.last_name.length > 0 && (
                                 <span className="error">
