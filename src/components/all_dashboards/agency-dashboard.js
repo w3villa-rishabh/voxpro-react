@@ -806,6 +806,14 @@ const AgencyDashboard = (props) => {
                   </Table>
                 </PerfectScrollbar>
               </div>
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View more
+                </Button>
+              </div>
             </Card>
           </Grid>
         </Grid>
@@ -967,6 +975,14 @@ const AgencyDashboard = (props) => {
                   </Table>
                 </PerfectScrollbar>
               </div>
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View more
+                </Button>
+              </div>
             </Card>
           </Grid>
         </Grid>
@@ -1127,6 +1143,14 @@ const AgencyDashboard = (props) => {
                     </tbody>
                   </Table>
                 </PerfectScrollbar>
+              </div>
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View more
+                </Button>
               </div>
             </Card>
           </Grid>
