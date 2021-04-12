@@ -191,8 +191,8 @@ export default function LivePreviewExample() {
     <>
       <div className="page-title">
         <PersonIcon />
-        <div className="title">
-          <h5 className="heading pt-3">Candidate Profile</h5>
+        <div className="title pt-3">
+          <b className="heading">Candidate Profile</b>
         </div>
       </div>
       <div className="app-inner-content-layout">
@@ -312,13 +312,15 @@ export default function LivePreviewExample() {
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={8}>
                     <Card className="card-box p-3 h-100">
-                      <h5>About</h5>
+                      <div className="py-3">
+                        <b>About</b>
+                      </div>
                       {/* <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
                         className="about"
                         onClick={handleClickOpen1}
                       /> */}
-                      <div>{description.description}</div>
+                      <p className="h-100px">{description.description}</p>
                       <div className="card-footer see-more py-3 text-center">
                         <Button
                           size="small"
@@ -330,8 +332,8 @@ export default function LivePreviewExample() {
                     </Card>
                   </Grid>
                   <Grid item xs={12} sm={4}>
-                    <Card className="card-box p-3 dashboard-card">
-                      <h5 className="mb-0">Your Dashboard</h5>
+                    <Card className="card-box p-3 dashboard-card h-100">
+                      <b className="mb-0">Your Dashboard</b>
                       <div className="info">
                         <div className="d-flex align-items-center">
                           <FontAwesomeIcon
@@ -364,13 +366,15 @@ export default function LivePreviewExample() {
                 <Grid container spacing={1} className="mt-2">
                   <Grid item xs={12} sm={6}>
                     <Card className="card-box p-3 h-100 experience-card">
-                      <h5>Experience</h5>
+                      <div className="py-3">
+                        <b>Experience</b>
+                      </div>
                       {/* <FontAwesomeIcon
                         icon={['fas', 'plus']}
                         className="icon"
                         onClick={handleExperience}
                       /> */}
-                      <ul>
+                      <ul className="mt-2">
                         <li className="position-relative">
                           {/* <FontAwesomeIcon
                             icon={['fas', 'pencil-alt']}
@@ -477,13 +481,15 @@ export default function LivePreviewExample() {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Card className="card-box p-3 education-card">
-                      <h5>Education</h5>
+                      <div className="py-3">
+                        <b>Education</b>
+                      </div>
                       {/* <FontAwesomeIcon
                         icon={['fas', 'plus']}
                         className="icon"
                         onClick={handleEducation}
                       /> */}
-                      <ul>
+                      <ul className="mt-2">
                         <li className="position-relative">
                           {/* <FontAwesomeIcon
                             icon={['fas', 'pencil-alt']}
@@ -547,7 +553,9 @@ export default function LivePreviewExample() {
                     </Card>
 
                     <Card className="card-box p-3 mt-3">
-                      <h5 className="m-top">Skills & Endorsements</h5>
+                      <div className="py-3">
+                        <b className="m-top">Skills & Endorsements</b>
+                      </div>
                       {/* <div className="add-skill">
                         <span className="pr-3">Add a new skill </span>
                         <FontAwesomeIcon
@@ -564,9 +572,7 @@ export default function LivePreviewExample() {
                       {/* <div className="divider my-3" /> */}
                       <div className="justify-content-between">
                         <div>
-                          <div className="font-weight-bold">
-                            Business Analysis
-                          </div>
+                          <div className="text-black-50">Business Analysis</div>
 
                           <Grid container spacing={1}>
                             <Grid item xs={6}>
@@ -599,9 +605,7 @@ export default function LivePreviewExample() {
                       <div className="divider my-3" />
                       <div className="d-flex justify-content-between">
                         <div>
-                          <div className="font-weight-bold">
-                            Team management
-                          </div>
+                          <div className="text-black-50">Team management</div>
                           <small className="d-flex pt-2 align-items-center">
                             <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
                               <div className="avatar-icon">
@@ -617,7 +621,7 @@ export default function LivePreviewExample() {
                       <div className="divider my-3" />
                       <div className="d-flex justify-content-between">
                         <div>
-                          <div className="font-weight-bold">Management</div>
+                          <div className="text-black-50">Management</div>
                           <small className="d-flex pt-2 align-items-center">
                             <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
                               <div className="avatar-icon">
