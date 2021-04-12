@@ -47,8 +47,6 @@ const UploadDocument = lazy(() =>
 // Subscription plans
 const Subscription = lazy(() => import('./components/subscription_plans'));
 
-// 
-const Payment = lazy(() => import('./components/pay'));
 //reset password
 const ResetPassword = lazy(() => import('./components/reset_password'));
 const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
@@ -139,7 +137,6 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
-                '/pay'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -150,7 +147,6 @@ const Routes = () => {
                   <Route path="/view-document" component={DocList} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route path="/view-profile" component={Profile} />
-                  <Route path="/pay" component={Payment} />
                 </Switch>
               </LeftSidebar>
             </Route>
