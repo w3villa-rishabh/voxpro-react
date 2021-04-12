@@ -1,11 +1,62 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Button, Card, Container } from '@material-ui/core';
 import logo from '../assets/images/voxpro-images/logo_vp.png';
+import api from '../api';
+
+const stripePromise = loadStripe(
+  'pk_test_51IeDwoSEqn4qAqJH1u7VYZHHsDBITZyV7p8NeuCeLud1qif0kpkBCNPBCH7zQXROKBX6Y2h6ijjrrqoGg8k7Tkzy00UEBHtoRf'
+);
+
+const Message = ({ message }) => (
+  <section>
+    <p>{message}</p>
+  </section>
+);
 
 export default function LivePreviewExample() {
-  return (
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get('success')) {
+      setMessage('Order placed! You will receive an email confirmation.');
+    }
+
+    if (query.get('canceled')) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
+
+  async function handleClickPurchase(event) {
+    // event.preventDefault()
+    const stripe = await stripePromise;
+    const response = await api.post('/api/create_checkout_session', {
+      amount: event
+    });
+
+    const session = await response.data;
+
+    // When the customer clicks on the button, redirect them to Checkout.
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id
+    });
+
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    }
+  }
+
+  return message ? (
+    <Message message={message} />
+  ) : (
     <>
       <div className="py-4">
         <Container style={{ maxWidth: '1300px' }}>
@@ -34,8 +85,11 @@ export default function LivePreviewExample() {
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
-                      variant="text">
-                      Purchase now
+                      type="button"
+                      id="checkout-button"
+                      role="link"
+                      onClick={() => handleClickPurchase('350')}>
+                      Purchase Now
                     </Button>
                   </div>
                 </div>
@@ -98,8 +152,11 @@ export default function LivePreviewExample() {
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
-                      variant="text">
-                      Purchase now
+                      type="button"
+                      id="checkout-button"
+                      role="link"
+                      onClick={() => handleClickPurchase('600')}>
+                      Purchase Now
                     </Button>
                   </div>
                 </div>
@@ -165,8 +222,11 @@ export default function LivePreviewExample() {
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
-                      variant="text">
-                      Purchase now
+                      type="button"
+                      id="checkout-button"
+                      role="link"
+                      onClick={() => handleClickPurchase('800')}>
+                      Purchase Now
                     </Button>
                   </div>
                 </div>
@@ -227,12 +287,17 @@ export default function LivePreviewExample() {
                   <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
                     <small></small>
                   </div>
-                  <div className="font-size-md text-black-50">price on quote</div>
+                  <div className="font-size-md text-black-50">
+                    price on quote
+                  </div>
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
-                      variant="text">
-                      Purchase now
+                      type="button"
+                      id="checkout-button"
+                      role="link"
+                      onClick={() => handleClickPurchase('9')}>
+                      Purchase Now
                     </Button>
                   </div>
                 </div>
