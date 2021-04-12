@@ -312,9 +312,7 @@ export default function LivePreviewExample() {
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={8}>
                     <Card className="card-box p-3 h-100">
-                      <div className="py-3">
-                        <b>About</b>
-                      </div>
+                    <b>About</b>
                       {/* <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
                         className="about"
