@@ -13,18 +13,16 @@ import {
   TextField,
   DialogContent,
   DialogTitle,
-  DialogActions,
-  List,
-  ListItem
+  DialogActions
 } from '@material-ui/core';
-
+import PersonIcon from '@material-ui/icons/Person';
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
 import avatar5 from '../../assets/images/avatars/default.png';
 
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import avatar1 from '../../assets/images/avatars/avatar1.jpg';
-import avatar3 from '../../assets/images/avatars/avatar3.jpg';
+
 import stock2 from '../../assets/images/stock-photos/stock-7.jpg';
 import { toast } from 'react-toastify';
 
@@ -67,7 +65,6 @@ export default function LivePreviewExample() {
           setDescription(response.data.user);
           toast.success(response.data.message);
           setOpen1(false);
-          seModal1(!modal1);
         } else {
           toast.error(response.data.message);
         }
@@ -134,1142 +131,974 @@ export default function LivePreviewExample() {
   };
 
   return (
-    <div className="app-inner-content-layout">
-      <div className="app-inner-content-layout--main bg-white p-0">
-        <Grid container spacing={2} className="main-card-section">
-          <Grid item xs={12} sm={12}>
-            <Card>
-              <div className="card-img-wrapper h-180px">
-                <div className="card-badges">
-                  <FontAwesomeIcon
-                    icon={['fas', 'pencil-alt']}
-                    className="edit"
-                  />
-                </div>
-                <img alt="..." className="img-fit-container" src={stock2} />
-              </div>
-              <CardContent className="card-body-avatar">
-                <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
-                  <div className="avatar-icon rounded-circle">
-                    <img alt="..." src={avatar5} />
-                  </div>
-                </div>
-                <div className="main-card">
-                  <div className="user-details">
-                    <Grid container spacing={4} className="user-info">
-                      <Grid item xs={12} sm={4}>
-                        <div className="font-size-xxl font-weight-bold">
-                          {currentUser.first_name} {currentUser.last_name}
-                        </div>
-                        <div>
-                          <span>
-                            Founder & Director | Frank Belford a Consultancy for
-                            Salesforce and Bulhorn for Salesforce Product.{' '}
-                            <a className="blue" href="javascript:void(0)">
-                              500+ connection Contact info
-                            </a>
-                          </span>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} sm={3}>
-                        <div className="d-flex justify-content-between">
-                          <div>
-                            <small className="d-flex pt-2 align-items-center">
-                              <div className="avatar-icon-xs mr-2 rounded-0">
-                                <div className="avatar-icon rounded-0">
-                                  <img alt="..." src={avatar1} />
-                                </div>
-                              </div>
-                              <span>Frank Belford</span>
-                            </small>
-                            <small className="d-flex pt-2 align-items-center">
-                              <div className="avatar-icon-xs mr-2 rounded-0">
-                                <div className="avatar-icon rounded-0">
-                                  <img alt="..." src={avatar3} />
-                                </div>
-                              </div>
-                              <span>University of the Arts London</span>
-                            </small>
-                          </div>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} sm={5}>
-                        <FontAwesomeIcon
-                          icon={['fas', 'pencil-alt']}
-                          className="edit"
-                          onClick={toggle1}
-                        />
-                        <div>
-                          <div className="d-flex mb-1 font-weight-bold justify-content-between font-size-sm">
-                            <div>80%</div>
-                          </div>
-                          <LinearProgress
-                            variant="determinate"
-                            className="progress-sm progress-bar-rounded progress-animated-alt progress-bar-second hc-style"
-                            value={85}
-                            style={{ backgroundColor: '#070919!important' }}
-                          />
-                        </div>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} sm={6}>
-                            <div className="right-corner-info">
-                              <FontAwesomeIcon
-                                icon={['fas', 'times']}
-                                className="icon"
-                              />
-                              <span className="pr-3">
-                                Show recruiters you's open to work -- you
-                                controls who see this.
-                              </span>
-                              <a className="blue" href="javascript:void(0)">
-                                Get started
-                              </a>
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <div className="right-corner-info">
-                              <span>
-                                Showcase service your offer so you and your
-                                bushiness can found in search.
-                              </span>
-                              <a className="blue" href="javascript:void(0)">
-                                Get started
-                              </a>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-
-        <div className="z-over py-2 skill-section">
-          <div
-            className={clsx(
-              'tab-item-wrapper overflow-visible d-none d-block active'
-            )}
-            index={1}>
-            <div>
-              <Grid container spacing={1}>
-                <Grid item xs={12} sm={6}>
-                  <Card className="card-box p-4">
-                    <h5>About</h5>
+    <>
+      <div className="page-title">
+        <PersonIcon />
+        <div className="title">
+          <h5 className="heading pt-3">Candidate Profile</h5>
+        </div>
+      </div>
+      <div className="app-inner-content-layout">
+        <div className="app-inner-content-layout--main p-0">
+          <Grid container spacing={2} className="main-card-section">
+            <Grid item xs={12} sm={12}>
+              <Card>
+                <div className="card-img-wrapper h-180px">
+                  <div className="card-badges text-white">
                     <FontAwesomeIcon
                       icon={['fas', 'pencil-alt']}
-                      className="about"
-                      onClick={handleClickOpen1}
+                      className="edit"
                     />
-                    <div>{description.description}</div>
-                  </Card>
-
-                  <Card className="card-box p-4 mt-3">
-                    <h5>Feature</h5>
-                    <div className="feature-card">
-                      <FontAwesomeIcon
-                        icon={['fas', 'times']}
-                        className="icon"
-                      />
-                      <div className="info">
-                        Showcase your work by featuring your best posts,
-                        documents, media, and website.
-                      </div>
-                      <a className="blue" href="javascript:void(0)">
-                        Add featured
-                      </a>
+                  </div>
+                  <img alt="..." className="img-fit-container" src={stock2} />
+                </div>
+                <CardContent className="card-body-avatar">
+                  <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
+                    <div className="avatar-icon rounded-circle">
+                      <img alt="..." src={avatar5} />
                     </div>
-                  </Card>
+                  </div>
+                  <div className="main-card">
+                    <div className="user-details">
+                      <Grid container spacing={4} className="user-info">
+                        <Grid item xs={12} sm={5}>
+                          <div className="font-size-xxl font-weight-bold text-capitalize">
+                            {currentUser.first_name} {currentUser.last_name}
+                          </div>
+                          <small>
+                            Founder & Director | Frank Belford a Consultancy
+                          </small>
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
+                          <div className="justify-content-between">
+                            <div className="d-flex align-items-center">
+                              <FontAwesomeIcon
+                                icon={['fas', 'map-marker']}
+                                className="font-size-lg d-block mr-3 text-dark opacity-5"
+                              />
+                              <span>Location</span>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <FontAwesomeIcon
+                                icon={['fas', 'money-bill']}
+                                className="font-size-lg d-block mr-2 text-dark opacity-5"
+                              />
+                              <span>Availability</span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid item xs={12} sm={4}>
+                          <div>
+                            <div className="d-flex mb-1 font-weight-bold justify-content-between font-size-sm">
+                              <div>80%</div>
+                            </div>
+                            <LinearProgress
+                              variant="determinate"
+                              className="progress-sm w-auto progress-bar-rounded progress-animated-alt progress-bar-second hc-style"
+                              value={85}
+                            />
+                            <small>Profile Connection</small>
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
 
-                  <Card className="card-box p-4 mt-3 experience-card">
-                    <h5>Experience</h5>
-                    <FontAwesomeIcon
-                      icon={['fas', 'plus']}
-                      className="icon"
-                      onClick={handleExperience}
-                    />
-                    <ul>
-                      <li className="position-relative">
+          <div className="z-over py-2">
+            <div
+              className={clsx(
+                'tab-item-wrapper overflow-visible d-none d-block active'
+              )}
+              index={1}>
+              <div>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={8}>
+                    <Card className="card-box p-3 h-100">
+                      <h5>About</h5>
+                      {/* <FontAwesomeIcon
+                        icon={['fas', 'pencil-alt']}
+                        className="about"
+                        onClick={handleClickOpen1}
+                      /> */}
+                      <div>{description.description}</div>
+                      <div className="see-more py-3 text-center">
+                        <Button
+                          size="small"
+                          className="btn-outline-second"
+                          variant="text">
+                          See More
+                        </Button>
+                      </div>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <Card className="card-box p-3 dashboard-card">
+                      <h5 className="mb-0">Your Dashboard</h5>
+                      <div className="info">
+                        <div className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={['fas', 'money-bill']}
+                            className="font-size-lg d-block mr-3 text-dark opacity-5"
+                          />
+                          <span>Desired Sale</span>
+                        </div>
+                        <div className="divider my-2" />
+                        <div className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={['fas', 'tag']}
+                            className="font-size-lg d-block mr-3 text-dark opacity-5"
+                          />
+                          <span>Desired Salary</span>
+                        </div>
+                        <div className="divider my-2" />
+                        <div className="d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={['fas', 'map-marker']}
+                            className="font-size-lg d-block mr-3 text-dark opacity-5"
+                          />
+                          <span>Desired Location</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </Grid>
+                </Grid>
+
+                <Grid container spacing={1} className="mt-2">
+                  <Grid item xs={12} sm={6}>
+                    <Card className="card-box p-3 h-100 experience-card">
+                      <h5>Experience</h5>
+                      {/* <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                        className="icon"
+                        onClick={handleExperience}
+                      /> */}
+                      <ul>
+                        <li className="position-relative">
+                          {/* <FontAwesomeIcon
+                            icon={['fas', 'pencil-alt']}
+                            className="edit-icon"
+                          /> */}
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <hr></hr>
+                        <li>
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Sothwark College</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <hr></hr>
+                        <li>
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Sothwark College</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <hr></hr>
+                        <li>
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Sothwark College</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <hr></hr>
+                        <li>
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Sothwark College</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div className="card-footer py-3 text-center">
+                        <Button
+                          size="small"
+                          className="btn-outline-second"
+                          variant="text">
+                          See More
+                        </Button>
+                      </div>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Card className="card-box p-3 education-card">
+                      <h5>Education</h5>
+                      {/* <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                        className="icon"
+                        onClick={handleEducation}
+                      /> */}
+                      <ul>
+                        <li className="position-relative">
+                          {/* <FontAwesomeIcon
+                            icon={['fas', 'pencil-alt']}
+                            className="edit-icon"
+                          /> */}
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Project Manager
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <hr></hr>
+                        <li>
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Sothwark College</span>
+                              <span className="text-black-50 d-block">
+                                Project Manager
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <hr></hr>
+                        <li>
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Sothwark College</span>
+                              <span className="text-black-50 d-block">
+                                Project Manager
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div className="card-footer py-3 text-center">
+                        <Button
+                          size="small"
+                          className="btn-outline-second"
+                          variant="text">
+                          See More
+                        </Button>
+                      </div>
+                    </Card>
+
+                    <Card className="card-box p-3 mt-3">
+                      <h5 className="m-top">Skills & Endorsements</h5>
+                      {/* <div className="add-skill">
+                        <span className="pr-3">Add a new skill </span>
                         <FontAwesomeIcon
                           icon={['fas', 'pencil-alt']}
-                          className="edit-icon"
+                          className="icon"
                         />
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
+                      </div>
+                      <Button
+                        variant="text"
+                        className="btn-pill btn-outline-primary quiz-btn">
+                        Take skill quiz
+                      </Button> */}
+                      {/* <p className="pt-2">View 2 pending endorsements</p> */}
+                      {/* <div className="divider my-3" /> */}
+                      <div className="justify-content-between">
+                        <div>
+                          <div className="font-weight-bold">
+                            Business Analysis
                           </div>
-                          <div className="position-relative">
-                            <span>Inez Conley</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
+
+                          <Grid container spacing={1}>
+                            <Grid item xs={6}>
+                              <small className="d-flex pt-2 align-items-center">
+                                <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar1} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <span>Nazim Kidd</span>
+                                </div>
+                              </small>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <small className="d-flex pt-2 align-items-center">
+                                <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar1} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <span>Nazim Kidd</span>
+                                </div>
+                              </small>
+                            </Grid>
+                          </Grid>
                         </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Frank Belford is a leading professional services
-                              Consultancy for selesforce and bullhorn for
-                              selesforce product.
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </Card>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Card className="card-box p-4 dashboard-card">
-                    <h5 className="mb-0">Your Dashboard</h5>
-                    <p className="font-italic">Private to you</p>
-                    {/* <div className="star-icon">
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon"
-                      />
-                      <span>All Start</span>
-                    </div> */}
-                    <div className="raging">
-                      <Grid item xs={12} sm={4}>
-                        <span className="rating-count">254</span>
-                        <p>Who viewed your</p>
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <span className="rating-count">697</span>
-                        <p>Post views</p>
-                      </Grid>
-                      <Grid item xs={12} sm={4}>
-                        <span className="rating-count">166</span>
-                        <p>Search appearances</p>
-                      </Grid>
-                    </div>
-                    <div className="info">
-                      <div className="d-flex align-items-center">
-                        <FontAwesomeIcon
-                          icon={['fas', 'money-bill']}
-                          className="font-size-lg d-block mr-3 text-dark opacity-5"
-                        />
-                        <span>Salary</span>
                       </div>
                       <div className="divider my-3" />
-                      <div className="d-flex align-items-center">
-                        <FontAwesomeIcon
-                          icon={['fas', 'tag']}
-                          className="font-size-lg d-block mr-3 text-dark opacity-5"
-                        />
-                        <span>My Item</span>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="card-box p-4 education-card mt-3">
-                    <h5>Education</h5>
-                    <FontAwesomeIcon
-                      icon={['fas', 'plus']}
-                      className="icon"
-                      onClick={handleEducation}
-                    />
-                    <ul>
-                      <li className="position-relative">
-                        <FontAwesomeIcon
-                          icon={['fas', 'pencil-alt']}
-                          className="edit-icon"
-                        />
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
+                      <div className="d-flex justify-content-between">
+                        <div>
+                          <div className="font-weight-bold">
+                            Team management
+                          </div>
+                          <small className="d-flex pt-2 align-items-center">
+                            <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar1} />
+                              </div>
                             </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Inez Conley</span>
-                            <span className="text-black-50 d-block">
-                              Project Manager
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                      <hr></hr>
-                      <li>
-                        <div className="d-flex align-items-center">
-                          <div className="avatar-icon-wrapper mr-3">
-                            <div className="avatar-icon rounded">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                          <div className="position-relative">
-                            <span>Sothwark College</span>
-                            <span className="text-black-50 d-block">
-                              Project Manager
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </Card>
-
-                  <Card className="card-box p-4 skill-card mt-3">
-                    <h5 className="m-top">Skill & endorsements</h5>
-                    <div className="add-skill">
-                      <span className="pr-3">Add a new skill </span>
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon"
-                      />
-                    </div>
-                    <Button
-                      variant="text"
-                      className="btn-pill btn-outline-primary quiz-btn">
-                      Take skill quiz
-                    </Button>
-                    <p className="pt-2">View 2 pending endorsements</p>
-                    <div className="divider my-3" />
-                    <div className="justify-content-between">
-                      <div>
-                        <div className="font-weight-bold">
-                          Business Analysis
-                        </div>
-
-                        <Grid container spacing={1}>
-                          <Grid item xs={6}>
-                            <small className="d-flex pt-2 align-items-center">
-                              <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar1} />
-                                </div>
-                              </div>
-                              <div>
-                                <span>Nazim Kidd</span>
-                              </div>
-                            </small>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <small className="d-flex pt-2 align-items-center">
-                              <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar1} />
-                                </div>
-                              </div>
-                              <div>
-                                <span>Nazim Kidd</span>
-                              </div>
-                            </small>
-                          </Grid>
-                        </Grid>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex justify-content-between">
-                      <div>
-                        <div className="font-weight-bold">Team management</div>
-                        <small className="d-flex pt-2 align-items-center">
-                          <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar1} />
-                            </div>
-                          </div>
-                          <div>
-                            <span>Nazim Kidd</span>
-                          </div>
-                        </small>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="justify-content-between">
-                      <div>
-                        <div className="font-weight-bold">Management</div>
-                        <Grid container spacing={1}>
-                          <Grid item xs={6}>
-                            <small className="d-flex pt-2 align-items-center">
-                              <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar1} />
-                                </div>
-                              </div>
-                              <div>
-                                <span>Nazim Kidd</span>
-                              </div>
-                            </small>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <small className="d-flex pt-2 align-items-center">
-                              <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar1} />
-                                </div>
-                              </div>
-                              <div>
-                                <span>Nazim Kidd</span>
-                              </div>
-                            </small>
-                          </Grid>
-                        </Grid>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="card-box p-4 recommendations-card mt-3">
-                    <h5 className="m-top">Recommendations</h5>
-                    <div className="add-recommendations">
-                      <span className="pr-3">Ask for recommendation</span>
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon"
-                      />
-                    </div>
-                    <div>
-                      {/* <ul className="rec-header">
-                        <li>Received (5)</li>
-                        <li>Given (0)</li>
-                      </ul> */}
-                      <List className="nav-tabs nav-tabs-primary tabs-animated tabs-animated-line d-flex">
-                        <ListItem
-                          button
-                          className="px-0 mx-3 pb-0"
-                          disableRipple
-                          selected={activeTab === '0'}
-                          onClick={() => {
-                            toggle('0');
-                          }}>
-                          <span className="py-1 font-weight-bold">
-                            Received (5)
-                          </span>
-                        </ListItem>
-                        <ListItem
-                          button
-                          className="px-0 mx-3 pb-0"
-                          disableRipple
-                          selected={activeTab === '1'}
-                          onClick={() => {
-                            toggle('1');
-                          }}>
-                          <span className="py-1 font-weight-bold">
-                            Given (9)
-                          </span>
-                        </ListItem>
-                      </List>
-                      <div className="font-12">
-                        <div
-                          className={clsx('tab-item-wrapper no-scroll', {
-                            active: activeTab === '0'
-                          })}
-                          index={0}>
-                          <Grid container spacing={1} className="pt-3">
-                            <Grid item xs={5}>
-                              <div className="d-flex">
-                                <div className="d-flex align-items-center">
-                                  <div className="avatar-icon-wrapper mr-2">
-                                    <div className="avatar-icon">
-                                      <img alt="..." src={avatar1} />
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <span>Isaiah Ruiz</span>
-                                    <p className="text-black-50 d-block">
-                                      Senior Web Developer
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid item xs={7}>
+                            <div>
                               <span>Nazim Kidd</span>
-                            </Grid>
-                          </Grid>
-                        </div>
-                        <div
-                          className={clsx('tab-item-wrapper no-scroll', {
-                            active: activeTab === '1'
-                          })}
-                          index={1}>
-                          <Grid container spacing={1} className="pt-3">
-                            <Grid item xs={5}>
-                              <div className="d-flex">
-                                <div className="d-flex align-items-center">
-                                  <div className="avatar-icon-wrapper mr-2">
-                                    <div className="avatar-icon">
-                                      <img alt="..." src={avatar1} />
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <span>Deepak Kumar</span>
-                                    <p className="text-black-50 d-block">
-                                      Senior Software Developer
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid item xs={7}>
-                              <span>
-                                I was fortunate enough to work with twin while
-                                at talent rover/ bullhorn where twain was
-                                responsible for the implementation of the
-                                bullhorn fo salesforce product.
-                              </span>
-                            </Grid>
-                          </Grid>
+                            </div>
+                          </small>
                         </div>
                       </div>
-                    </div>
-                  </Card>
+                      <div className="divider my-3" />
+                      <div className="d-flex justify-content-between">
+                        <div>
+                          <div className="font-weight-bold">Management</div>
+                          <small className="d-flex pt-2 align-items-center">
+                            <div className="avatar-icon-wrapper avatar-icon-xs mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar1} />
+                              </div>
+                            </div>
+                            <div>
+                              <span>Nazim Kidd</span>
+                            </div>
+                          </small>
+                        </div>
+                      </div>
+
+                      <div className="card-footer py-3 mt-2 text-center">
+                        <Button
+                          size="small"
+                          className="btn-outline-second"
+                          variant="text">
+                          See More
+                        </Button>
+                      </div>
+                    </Card>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* About dialog modal open */}
-      <Dialog
-        classes={{ paper: 'modal-content' }}
-        fullWidth
-        open={open1}
-        onClose={handleClose1}
-        aria-labelledby="form-dialog-title2">
-        <DialogTitle id="form-dialog-title">Edit about</DialogTitle>
+        {/* About dialog modal open */}
+        <Dialog
+          classes={{ paper: 'modal-content' }}
+          fullWidth
+          open={open1}
+          onClose={handleClose1}
+          aria-labelledby="form-dialog-title2">
+          <DialogTitle id="form-dialog-title">Edit about</DialogTitle>
 
-        <DialogContent className="p-0">
-          <div>
-            <div className="border-0">
-              <div className="card-body">
-                <form method="post" onSubmit={editInfo}>
-                  <div className="mb-3">
+          <DialogContent className="p-0">
+            <div>
+              <div className="border-0">
+                <div className="card-body">
+                  <form method="post" onSubmit={editInfo}>
+                    <div className="mb-3">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        size="small"
+                        id="textfield-email"
+                        name="description"
+                        // onChange={handleChange}
+                        inputProps={{ maxLength: 255 }}
+                        label="Edit about"
+                        multiline
+                        rowsMax={4}
+                        onChange={(event) => {
+                          setUserDetials({
+                            ...userdetails,
+                            description: event.target.value
+                          });
+                        }}
+                        value={userdetails.description}
+                        // helperText={`${
+                        //   CHARACTER_LIMIT - userdetails.description.length
+                        // } ${
+                        //   'characters remaining' +
+                        //   ' (' +
+                        //   CHARACTER_LIMIT +
+                        //   ' Max)'
+                        // }`}
+                      />
+                    </div>
+                    <div className="text-right">
+                      <DialogActions>
+                        <Button
+                          variant="contained"
+                          onClick={handleClose1}
+                          className="font-weight-bold btn-second px-4 my-3">
+                          Cancel
+                        </Button>
+
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          className="font-weight-bold btn-second px-4 my-3">
+                          Save
+                        </Button>
+                      </DialogActions>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* User edit modal open */}
+        <Dialog
+          scroll="body"
+          maxWidth="lg"
+          open={modal1}
+          onClose={toggle1}
+          classes={{
+            paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+          }}>
+          <DialogTitle id="form-dialog-title">Edit info</DialogTitle>
+          <form method="post" onSubmit={editInfo}>
+            <div className="edit-user-info">
+              <div className="border">
+                <div className="card-img-wrapper h-180px">
+                  <img alt="..." className="img-fit-container" src={stock2} />
+                </div>
+                <CardContent className="card-body-avatar">
+                  <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
+                    <div className="avatar-icon rounded-circle">
+                      <img alt="..." src={avatar5} />
+                    </div>
+                  </div>
+                </CardContent>
+              </div>
+
+              <Grid container spacing={2} className="mt-3">
+                <Grid item xs={4}>
+                  <div>
                     <TextField
                       fullWidth
                       variant="outlined"
-                      size="small"
-                      id="textfield-email"
-                      name="description"
-                      // onChange={handleChange}
-                      inputProps={{ maxLength: 255 }}
-                      label="Edit about"
-                      multiline
-                      rowsMax={4}
-                      onChange={(event) => {
-                        setUserDetials({
-                          ...userdetails,
-                          description: event.target.value
-                        });
-                      }}
-                      value={userdetails.description}
-                      // helperText={`${
-                      //   CHARACTER_LIMIT - userdetails.description.length
-                      // } ${
-                      //   'characters remaining' +
-                      //   ' (' +
-                      //   CHARACTER_LIMIT +
-                      //   ' Max)'
-                      // }`}
+                      id="textfield-user"
+                      label="First Name"
+                      name="first_name"
+                      onChange={handleChange}
+                      value={userdetails.first_name}
                     />
                   </div>
-                  <div className="text-right">
-                    <DialogActions>
-                      <Button
-                        variant="contained"
-                        onClick={handleClose1}
-                        className="font-weight-bold btn-second px-4 my-3">
-                        Cancel
-                      </Button>
-
-                      <Button
-                        variant="contained"
-                        type="submit"
-                        className="font-weight-bold btn-second px-4 my-3">
-                        Save
-                      </Button>
-                    </DialogActions>
+                </Grid>
+                <Grid item xs={4}>
+                  <div>
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      id="textfield-user"
+                      label="Middle Name"
+                      name="middle_name"
+                      onChange={handleChange}
+                      value={userdetails.middle_name}
+                    />
                   </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* User edit modal open */}
-      <Dialog
-        scroll="body"
-        maxWidth="lg"
-        open={modal1}
-        onClose={toggle1}
-        classes={{
-          paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
-        }}>
-        <DialogTitle id="form-dialog-title">Edit info</DialogTitle>
-        <form method="post" onSubmit={editInfo}>
-          <div className="edit-user-info">
-            <div className="border">
-              <div className="card-img-wrapper h-180px">
-                <img alt="..." className="img-fit-container" src={stock2} />
-              </div>
-              <CardContent className="card-body-avatar">
-                <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
-                  <div className="avatar-icon rounded-circle">
-                    <img alt="..." src={avatar5} />
+                </Grid>
+                <Grid item xs={4}>
+                  <div>
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      id="textfield-user"
+                      label="Last Name"
+                      name="last_name"
+                      onChange={handleChange}
+                      value={userdetails.last_name}
+                    />
                   </div>
-                </div>
-              </CardContent>
-            </div>
+                </Grid>
+              </Grid>
 
-            <Grid container spacing={2} className="mt-3">
-              <Grid item xs={4}>
-                <div>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
                   <TextField
                     fullWidth
                     variant="outlined"
                     id="textfield-user"
-                    label="First Name"
-                    name="first_name"
+                    label="Email"
+                    name="email"
                     onChange={handleChange}
-                    value={userdetails.first_name}
+                    value={userdetails.email}
                   />
-                </div>
-              </Grid>
-              <Grid item xs={4}>
-                <div>
+                </Grid>
+                <Grid item xs={6}>
                   <TextField
                     fullWidth
                     variant="outlined"
                     id="textfield-user"
-                    label="Middle Name"
-                    name="middle_name"
+                    label="Secondary Email"
+                    name="secondary_email"
                     onChange={handleChange}
-                    value={userdetails.middle_name}
+                    value={userdetails.secondary_email}
                   />
-                </div>
-              </Grid>
-              <Grid item xs={4}>
-                <div>
+                </Grid>
+                <Grid item xs={6}>
                   <TextField
                     fullWidth
                     variant="outlined"
                     id="textfield-user"
-                    label="Last Name"
-                    name="last_name"
+                    label="Mobile Number"
+                    name="contact_number"
                     onChange={handleChange}
-                    value={userdetails.last_name}
+                    value={userdetails.contact_number}
                   />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Home Number"
+                    name="home_number"
+                    onChange={handleChange}
+                    value={userdetails.home_number}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Headline"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Education"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Country/Region"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Locations in this Country/Region"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Industry"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    id="textfield-user"
+                    label="Contact info"
+                  />
+                </Grid>
+              </Grid>
+            </div>
+            <div className="text-right">
+              <DialogActions>
+                <Button
+                  variant="contained"
+                  onClick={toggle1}
+                  className="font-weight-bold btn-second px-4 my-3">
+                  Cancel
+                </Button>
+
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className="font-weight-bold btn-second px-4 my-3">
+                  Save
+                </Button>
+              </DialogActions>
+            </div>
+          </form>
+        </Dialog>
+
+        {/* dialog for add education */}
+        <Dialog
+          classes={{ paper: 'modal-content' }}
+          fullWidth
+          open={openExperience}
+          onClose={closeEducation}
+          aria-labelledby="form-dialog-title2">
+          <DialogTitle id="form-dialog-title">Add education</DialogTitle>
+
+          <DialogContent className="p-0">
+            <div>
+              <div className="border-0">
+                <div className="card-body">
+                  <form method="post" onSubmit={editInfo}>
+                    <div className="mb-3">
+                      <Grid container spacing={2} className="mt-3">
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="School"
+                              name="first_name"
+                              onChange={handleChange}
+                              // value={userdetails.first_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Degree"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Field of Study"
+                              name="last_name"
+                              onChange={handleChange}
+                              // value={userdetails.last_name}
+                            />
+                          </div>
+                        </Grid>
+                      </Grid>
+
+                      <Grid container spacing={2} className="mt-3">
+                        <Grid item xs={6}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Start date"
+                              name="first_name"
+                              onChange={handleChange}
+                              // value={userdetails.first_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="End Date"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Grade (optional)"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Activities and societies"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Description"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </div>
+                    <div className="text-right">
+                      <DialogActions>
+                        <Button
+                          variant="contained"
+                          onClick={closeEducation}
+                          className="font-weight-bold btn-second px-4 my-3">
+                          Cancel
+                        </Button>
+
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          className="font-weight-bold btn-second px-4 my-3">
+                          Save
+                        </Button>
+                      </DialogActions>
+                    </div>
+                  </form>
                 </div>
-              </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Email"
-                  name="email"
-                  onChange={handleChange}
-                  value={userdetails.email}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Secondary Email"
-                  name="secondary_email"
-                  onChange={handleChange}
-                  value={userdetails.secondary_email}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Mobile Number"
-                  name="contact_number"
-                  onChange={handleChange}
-                  value={userdetails.contact_number}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Home Number"
-                  name="home_number"
-                  onChange={handleChange}
-                  value={userdetails.home_number}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Headline"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Education"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Country/Region"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Locations in this Country/Region"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Industry"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id="textfield-user"
-                  label="Contact info"
-                />
-              </Grid>
-            </Grid>
-          </div>
-          <div className="text-right">
-            <DialogActions>
-              <Button
-                variant="contained"
-                onClick={toggle1}
-                className="font-weight-bold btn-second px-4 my-3">
-                Cancel
-              </Button>
-
-              <Button
-                variant="contained"
-                type="submit"
-                className="font-weight-bold btn-second px-4 my-3">
-                Save
-              </Button>
-            </DialogActions>
-          </div>
-        </form>
-      </Dialog>
-
-      {/* dialog for add education */}
-      <Dialog
-        classes={{ paper: 'modal-content' }}
-        fullWidth
-        open={openExperience}
-        onClose={closeEducation}
-        aria-labelledby="form-dialog-title2">
-        <DialogTitle id="form-dialog-title">Add education</DialogTitle>
-
-        <DialogContent className="p-0">
-          <div>
-            <div className="border-0">
-              <div className="card-body">
-                <form method="post" onSubmit={editInfo}>
-                  <div className="mb-3">
-                    <Grid container spacing={2} className="mt-3">
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="School"
-                            name="first_name"
-                            onChange={handleChange}
-                            // value={userdetails.first_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Degree"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Field of Study"
-                            name="last_name"
-                            onChange={handleChange}
-                            // value={userdetails.last_name}
-                          />
-                        </div>
-                      </Grid>
-                    </Grid>
-
-                    <Grid container spacing={2} className="mt-3">
-                      <Grid item xs={6}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Start date"
-                            name="first_name"
-                            onChange={handleChange}
-                            // value={userdetails.first_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="End Date"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Grade (optional)"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Activities and societies"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Description"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </div>
-                  <div className="text-right">
-                    <DialogActions>
-                      <Button
-                        variant="contained"
-                        onClick={closeEducation}
-                        className="font-weight-bold btn-second px-4 my-3">
-                        Cancel
-                      </Button>
-
-                      <Button
-                        variant="contained"
-                        type="submit"
-                        className="font-weight-bold btn-second px-4 my-3">
-                        Save
-                      </Button>
-                    </DialogActions>
-                  </div>
-                </form>
               </div>
             </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
 
-      {/* dialog for add experience */}
-      <Dialog
-        classes={{ paper: 'modal-content' }}
-        fullWidth
-        open={openEducation}
-        onClose={closeExperience}
-        aria-labelledby="form-dialog-title2">
-        <DialogTitle id="form-dialog-title">Add experience</DialogTitle>
+        {/* dialog for add experience */}
+        <Dialog
+          classes={{ paper: 'modal-content' }}
+          fullWidth
+          open={openEducation}
+          onClose={closeExperience}
+          aria-labelledby="form-dialog-title2">
+          <DialogTitle id="form-dialog-title">Add experience</DialogTitle>
 
-        <DialogContent className="p-0">
-          <div>
-            <div className="border-0">
-              <div className="card-body">
-                <form method="post" onSubmit={editInfo}>
-                  <div className="mb-3">
-                    <Grid container spacing={2} className="mt-3">
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="School"
-                            name="first_name"
-                            onChange={handleChange}
-                            // value={userdetails.first_name}
-                          />
-                        </div>
+          <DialogContent className="p-0">
+            <div>
+              <div className="border-0">
+                <div className="card-body">
+                  <form method="post" onSubmit={editInfo}>
+                    <div className="mb-3">
+                      <Grid container spacing={2} className="mt-3">
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="School"
+                              name="first_name"
+                              onChange={handleChange}
+                              // value={userdetails.first_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Degree"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Field of Study"
+                              name="last_name"
+                              onChange={handleChange}
+                              // value={userdetails.last_name}
+                            />
+                          </div>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Degree"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Field of Study"
-                            name="last_name"
-                            onChange={handleChange}
-                            // value={userdetails.last_name}
-                          />
-                        </div>
-                      </Grid>
-                    </Grid>
 
-                    <Grid container spacing={2} className="mt-3">
-                      <Grid item xs={6}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Start date"
-                            name="first_name"
-                            onChange={handleChange}
-                            // value={userdetails.first_name}
-                          />
-                        </div>
+                      <Grid container spacing={2} className="mt-3">
+                        <Grid item xs={6}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Start date"
+                              name="first_name"
+                              onChange={handleChange}
+                              // value={userdetails.first_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="End Date"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Grade (optional)"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Activities and societies"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div>
+                            <TextField
+                              fullWidth
+                              variant="outlined"
+                              id="textfield-user"
+                              label="Description"
+                              name="middle_name"
+                              onChange={handleChange}
+                              // value={userdetails.middle_name}
+                            />
+                          </div>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={6}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="End Date"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Grade (optional)"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Activities and societies"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            id="textfield-user"
-                            label="Description"
-                            name="middle_name"
-                            onChange={handleChange}
-                            // value={userdetails.middle_name}
-                          />
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </div>
-                  <div className="text-right">
-                    <DialogActions>
-                      <Button
-                        variant="contained"
-                        onClick={closeExperience}
-                        className="font-weight-bold btn-second px-4 my-3">
-                        Cancel
-                      </Button>
+                    </div>
+                    <div className="text-right">
+                      <DialogActions>
+                        <Button
+                          variant="contained"
+                          onClick={closeExperience}
+                          className="font-weight-bold btn-second px-4 my-3">
+                          Cancel
+                        </Button>
 
-                      <Button
-                        variant="contained"
-                        type="submit"
-                        className="font-weight-bold btn-second px-4 my-3">
-                        Save
-                      </Button>
-                    </DialogActions>
-                  </div>
-                </form>
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          className="font-weight-bold btn-second px-4 my-3">
+                          Save
+                        </Button>
+                      </DialogActions>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 }
