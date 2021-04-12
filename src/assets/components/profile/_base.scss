@@ -30,7 +30,7 @@
 
 .dashboard-card {
   background-color: #e0eeff !important;
-  min-height: 220px;
+  min-height: 200px;
 
   .raging {
     display: flex;
@@ -151,8 +151,8 @@
 }
 
 .main-card-section {
-  width: unset !important;
-  margin: 0 14px !important;
+  // width: unset !important;
+  // margin: 0 14px !important;
 
   .main-card {
     .user-details {

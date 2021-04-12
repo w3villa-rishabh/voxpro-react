@@ -12,7 +12,6 @@ import {
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { CircularProgressbar } from 'react-circular-progressbar';
-
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
@@ -24,6 +23,7 @@ import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 import people2 from '../../assets/images/stock-photos/people-3.jpg';
 import people1 from '../../assets/images/stock-photos/people-2.jpg';
+import AddsComponents from 'components/add_component';
 
 const CompanyDashboard = (props) => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -276,6 +276,14 @@ const CompanyDashboard = (props) => {
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className="card-footer py-3 text-center see-more">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View More
+                </Button>
               </div>
             </Card>
           </Grid>
@@ -1031,6 +1039,7 @@ const CompanyDashboard = (props) => {
           </Grid>
         </Grid>
       </div>
+      <AddsComponents />
     </>
   );
 };
