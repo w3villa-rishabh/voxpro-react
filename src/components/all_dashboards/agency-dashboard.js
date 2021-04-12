@@ -24,6 +24,7 @@ import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 import people2 from '../../assets/images/stock-photos/people-3.jpg';
 import people1 from '../../assets/images/stock-photos/people-2.jpg';
+import AddsComponents from 'components/add_component';
 
 const AgencyDashboard = (props) => {
   const [inputBg, setInputBg] = useState(false);
@@ -1156,6 +1157,7 @@ const AgencyDashboard = (props) => {
           </Grid>
         </Grid>
       </div>
+      <AddsComponents />
     </>
   );
 };

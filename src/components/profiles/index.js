@@ -25,6 +25,11 @@ import avatar1 from '../../assets/images/avatars/avatar1.jpg';
 
 import stock2 from '../../assets/images/stock-photos/stock-7.jpg';
 import { toast } from 'react-toastify';
+import AddsComponents from 'components/add_component';
+import CloseTwoToneIcon from '@material-ui/icons/CloseTwoTone';
+import CreateIcon from '@material-ui/icons/Create';
+import CheckIcon from '@material-ui/icons/Check';
+import { useDropzone } from 'react-dropzone';
 
 export default function LivePreviewExample() {
   const [aboutText, setAboutText] = useState();
@@ -44,6 +49,64 @@ export default function LivePreviewExample() {
     email: '',
     secondary_email: ''
   });
+
+  const [inputBg, setInputBg] = useState(false);
+  const toggleInputBg = () => setInputBg(!inputBg);
+
+  const [activeTab, setActiveTab] = useState('1');
+
+  const toggle = (tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  };
+
+  const [activeTab2, setActiveTab2] = useState('1');
+
+  const toggle2 = (tab) => {
+    if (activeTab2 !== tab) setActiveTab2(tab);
+  };
+
+  const [files, setFiles] = useState([]);
+  const {
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+    open,
+    getRootProps,
+    getInputProps
+  } = useDropzone({
+    noClick: true,
+    noKeyboard: true,
+    multiple: false,
+    accept: 'image/*',
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        )
+      );
+    }
+  });
+
+  const thumbs = files.map((file) => (
+    <div
+      key={file.name}
+      className="rounded-circle avatar-image overflow-hidden bg-neutral-success text-center font-weight-bold text-success d-flex justify-content-center align-items-center">
+      <img
+        className="img-fluid img-fit-container rounded-sm"
+        src={file.preview}
+        alt="..."
+      />
+    </div>
+  ));
+
+  useEffect(
+    () => () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    },
+    [files]
+  );
 
   let handleChange = (e) => {
     let name = e.target.name;
@@ -89,12 +152,6 @@ export default function LivePreviewExample() {
 
   const toggle1 = () => {
     seModal1(!modal1);
-  };
-
-  const [activeTab, setActiveTab] = useState('0');
-
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
   };
 
   //Example 2
@@ -154,10 +211,47 @@ export default function LivePreviewExample() {
                 </div>
                 <CardContent className="card-body-avatar">
                   <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded-circle">
-                    <div className="avatar-icon rounded-circle">
+                    {/* <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar5} />
+                    </div> */}
+                    <div
+                      {...getRootProps({
+                        className: 'dropzone-upload-wrapper'
+                      })}>
+                      <input {...getInputProps()} />
+                      <div className="dropzone-inner-wrapper d-120 rounded-circle dropzone-avatar">
+                        <div className="avatar-icon-wrapper d-120 rounded-circle m-2">
+                          <Button
+                            onClick={open}
+                            className="btn-first avatar-button badge shadow-sm-dark btn-icon badge-position badge-position--bottom-right border-0 text-indent-0 d-40 badge-circle badge-first text-white">
+                            <CreateIcon className="d-20" />
+                          </Button>
+
+                          <div>
+                            {isDragAccept && (
+                              <div className="rounded-circle overflow-hidden d-120 bg-success text-center font-weight-bold text-white d-flex justify-content-center align-items-center">
+                                <CheckIcon className="d-40" />
+                              </div>
+                            )}
+                            {isDragReject && (
+                              <div className="rounded-circle overflow-hidden d-120 bg-danger text-center font-weight-bold text-white d-flex justify-content-center align-items-center">
+                                <CloseTwoToneIcon className="d-60" />
+                              </div>
+                            )}
+                            {!isDragActive && (
+                              <div className="rounded-circle overflow-hidden d-120 bg-second text-center font-weight-bold text-white-50 d-flex justify-content-center align-items-center">
+                                {/* <AccountCircleTwoToneIcon className="d-50" /> */}
+                                <img alt="..." src={avatar5} />
+                              </div>
+                            )}
+                          </div>
+
+                          {thumbs.length > 0 && <div>{thumbs}</div>}
+                        </div>
+                      </div>
                     </div>
                   </div>
+
                   <div className="main-card">
                     <div className="user-details">
                       <Grid container spacing={4} className="user-info">
@@ -225,7 +319,7 @@ export default function LivePreviewExample() {
                         onClick={handleClickOpen1}
                       /> */}
                       <div>{description.description}</div>
-                      <div className="see-more py-3 text-center">
+                      <div className="card-footer see-more py-3 text-center">
                         <Button
                           size="small"
                           className="btn-outline-second"
@@ -371,7 +465,7 @@ export default function LivePreviewExample() {
                           </div>
                         </li>
                       </ul>
-                      <div className="card-footer py-3 text-center">
+                      <div className="card-footer see-more py-3 text-center">
                         <Button
                           size="small"
                           className="btn-outline-second"
@@ -1099,6 +1193,7 @@ export default function LivePreviewExample() {
           </DialogContent>
         </Dialog>
       </div>
+      <AddsComponents />
     </>
   );
 }
