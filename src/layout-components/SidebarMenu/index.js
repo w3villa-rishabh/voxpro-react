@@ -170,26 +170,27 @@ const SidebarMenu = (props) => {
             </li>
 
             <li>
-              <a
-                href="javascript:void(0)"
+              <NavLink
+                activeClassName="active"
                 onClick={() => {
                   setRequestInfo(!requestInfo);
                 }}
-                className={clsx({ active: requestInfo })}>
+                className="nav-link-simple"
+                to="/new-request">
                 <span className="sidebar-icon">
                   <TuneIcon />
                 </span>
-                <span className="sidebar-item-label">
-                  Request for Information
-                </span>
-                <span className="sidebar-icon-indicator">
+                Request for Information
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
-              </a>
+              </NavLink>
               <Collapse in={requestInfo}>
                 <ul>
                   <li>
-                    <NavLink onClick={toggleSidebarMobile} to="/new-request">
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-information">
                       New Request
                     </NavLink>
                   </li>

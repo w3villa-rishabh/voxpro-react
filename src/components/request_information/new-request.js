@@ -14,7 +14,7 @@ export default function NewRequestComponent() {
       <div className="page-title">
         <TuneIcon />
         <div className="title pt-3">
-          <b className="heading">New Request</b>
+          <b className="heading">Request for Information</b>
         </div>
       </div>
       <div className="app-inner-content-layout">
@@ -25,9 +25,7 @@ export default function NewRequestComponent() {
                 <div className="display-3 font-weight-bold">31</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Implemented
-                  <br />
-                  bugfixes
+                  New Requests
                 </div>
               </Card>
             </Grid>
@@ -36,9 +34,7 @@ export default function NewRequestComponent() {
                 <div className="display-3 font-weight-bold">68</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Unresolved
-                  <br />
-                  tickets
+                  Due
                 </div>
               </Card>
             </Grid>
@@ -47,9 +43,7 @@ export default function NewRequestComponent() {
                 <div className="display-3 font-weight-bold">57</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Support
-                  <br />
-                  requests
+                  Due today!
                 </div>
               </Card>
             </Grid>
