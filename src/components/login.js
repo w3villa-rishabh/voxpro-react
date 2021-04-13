@@ -84,7 +84,15 @@ export default function LoginComponent() {
       .then((response) => {
         if (response.data.success) {
           localStorage.setItem('user', JSON.stringify(response.data.user));
-          window.location.href = '/dashboard';
+          if (
+            !response.data.user.subscribed &&
+            (response.data.user.role === 'agency' ||
+              response.data.user.role === 'company')
+          ) {
+            window.location.href = '/subscription-plans';
+          } else {
+            window.location.href = '/dashboard';
+          }
         } else {
           setIsLogin(false);
           toast.error(response.data.message);

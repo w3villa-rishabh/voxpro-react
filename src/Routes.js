@@ -15,6 +15,9 @@ import { LeftSidebar, MinimalLayout } from './components/all_sidebars';
 import IR35TaxComponent from 'components/ir35_tax/ir35-tax';
 // routes for Register as
 const RegisterAs = lazy(() => import('./components/register_as'));
+// routes for payment success
+const Success = lazy(() => import('./components/payment_success'));
+
 
 // routes for Registration
 const RegisterPage = lazy(() => import('./components/register.js'));
@@ -54,7 +57,7 @@ const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
-
+  const user = JSON.parse(localStorage.getItem('user'));
   if (!isLoggedIn) {
     localStorage.clear();
     console.log('Token not found');
@@ -65,6 +68,9 @@ const Routes = () => {
     (location.pathname === '/login' || location.pathname === '/sign-up')
   ) {
     window.location.href = '/dashboard';
+  } else if (!!isLoggedIn && !user.subscribed) {
+    // eslint-disable-next-line no-unused-expressions
+    <Redirect to="/subscription-plans" />;
   }
 
   const pageVariants = {
@@ -136,7 +142,7 @@ const Routes = () => {
                 '/ir35-verify',
                 '/request-information',
                 '/view-profile',
-                '/view-document',
+                '/view-document'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -174,7 +180,8 @@ const Routes = () => {
                 '/api/users/confirmation',
                 '/reset-password',
                 '/subscription-plans',
-                '/register-as'
+                '/register-as',
+                '/success'
               ]}>
               <MinimalLayout>
                 <Switch location={location} key={location.pathname}>
@@ -200,6 +207,7 @@ const Routes = () => {
                       component={Subscription}
                     />
                     <Route path="/register-as" component={RegisterAs} />
+                    <Route path="/success" component={Success} />
                   </motion.div>
                 </Switch>
               </MinimalLayout>

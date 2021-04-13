@@ -287,12 +287,12 @@ export default function LivePreviewExample() {
                   <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
                     <small></small>
                   </div>
-                  <div className="font-size-md text-black-50">
+                  <div className="font-size-md text-black-50 mt-5">
                     price on quote
                   </div>
                   <div className="mt-4 pb-4">
                     <Button
-                      className="rounded-sm font-weight-bold px-4 btn-outline-second"
+                      className="rounded-sm font-weight-bold px-4 btn-outline-second "
                       type="button"
                       id="checkout-button"
                       role="link"
