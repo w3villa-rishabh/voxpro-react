@@ -29,6 +29,7 @@ export default function LoginComponent() {
       .put('/api/user', { user: userdetails, id: currentUser.id })
       .then((response) => {
         if (response.data.success) {
+          localStorage.setItem('user', JSON.stringify(response.data.user))
           // toast.success(response.data.message);
         } else {
           toast.error(response.data.message);

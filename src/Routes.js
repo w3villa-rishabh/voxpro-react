@@ -69,7 +69,14 @@ const Routes = () => {
       user.role === 'company'
     ) {
       if (location.pathname !== '/subscription-plans') {
-        window.location.replace(window.location.origin + '/subscription-plans');
+        if (location.pathname === '/success') {
+          // eslint-disable-next-line no-unused-expressions
+          <Redirect to="/success" />;
+        } else {
+          window.location.replace(
+            window.location.origin + '/subscription-plans'
+          );
+        }
       }
     } else {
       if (!isLoggedIn) {
