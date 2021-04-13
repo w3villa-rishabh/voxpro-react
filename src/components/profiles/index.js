@@ -318,7 +318,11 @@ export default function LivePreviewExample() {
                         className="about"
                         onClick={handleClickOpen1}
                       /> */}
-                      <p className="h-100px">{description.description}</p>
+                      <p className="h-100px">
+                        {description.description
+                          ? description.description
+                          : 'Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million'}
+                      </p>
                       <div className="card-footer see-more py-3 text-center">
                         <Button
                           size="small"
