@@ -15,6 +15,8 @@ import { LeftSidebar, MinimalLayout } from './components/all_sidebars';
 import IR35TaxComponent from 'components/ir35_tax/ir35-tax';
 // routes for Register as
 const RegisterAs = lazy(() => import('./components/register_as'));
+// routes for payment success
+const Success = lazy(() => import('./components/payment_success'));
 
 // routes for Registration
 const RegisterPage = lazy(() => import('./components/register.js'));
@@ -51,20 +53,63 @@ const Subscription = lazy(() => import('./components/subscription_plans'));
 const ResetPassword = lazy(() => import('./components/reset_password'));
 const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
 
+//New request
+const NewRequestComponent = lazy(() =>
+  import('./components/request_information/new-request')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  if (!isLoggedIn) {
-    localStorage.clear();
-    console.log('Token not found');
-    // eslint-disable-next-line no-unused-expressions
-    <Redirect to="/login" />;
-  } else if (
-    !!isLoggedIn &&
-    (location.pathname === '/login' || location.pathname === '/sign-up')
-  ) {
-    window.location.href = '/dashboard';
+  if (!!isLoggedIn && user !== 'null') {
+    if (
+      !user.subscribed &&
+      (user.role === 'agency' || user.role === 'company')
+    ) {
+      if (location.pathname !== '/subscription-plans') {
+        if (location.pathname === '/success') {
+          // eslint-disable-next-line no-unused-expressions
+          <Redirect to="/success" />;
+        } else {
+          window.location.replace(
+            window.location.origin + '/subscription-plans'
+          );
+        }
+      }
+    } else {
+      if (!isLoggedIn) {
+        localStorage.clear();
+        console.log('Token not found');
+        // eslint-disable-next-line no-unused-expressions
+        <Redirect to="/login" />;
+      } else if (
+        !!isLoggedIn &&
+        (location.pathname === '/login' || location.pathname === '/sign-up')
+      ) {
+        if (
+          !user.subscribed &&
+          (user.role === 'agency' || user.role === 'company')
+        ) {
+          // eslint-disable-next-line no-unused-expressions
+          <Redirect to="/subscription-plans" />;
+        } else if (user.role === 'candidate') {
+          window.location.href = '/dashboard';
+        } else if (
+          user.subscribed &&
+          (user.role === 'agency' || user.role === 'company')
+        ) {
+          window.location.href = '/dashboard';
+        }
+      } else if (
+        (!!isLoggedIn && !user.subscribed && user.role === 'agency') ||
+        user.role === 'company'
+      ) {
+        // eslint-disable-next-line no-unused-expressions
+        <Redirect to="/subscription-plans" />;
+      }
+    }
   }
 
   const pageVariants = {
@@ -137,6 +182,7 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
+                '/new-request'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -147,6 +193,7 @@ const Routes = () => {
                   <Route path="/view-document" component={DocList} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route path="/view-profile" component={Profile} />
+                  <Route path="/new-request" component={NewRequestComponent} />
                 </Switch>
               </LeftSidebar>
             </Route>
@@ -174,7 +221,8 @@ const Routes = () => {
                 '/api/users/confirmation',
                 '/reset-password',
                 '/subscription-plans',
-                '/register-as'
+                '/register-as',
+                '/success'
               ]}>
               <MinimalLayout>
                 <Switch location={location} key={location.pathname}>
@@ -200,6 +248,7 @@ const Routes = () => {
                       component={Subscription}
                     />
                     <Route path="/register-as" component={RegisterAs} />
+                    <Route path="/success" component={Success} />
                   </motion.div>
                 </Switch>
               </MinimalLayout>

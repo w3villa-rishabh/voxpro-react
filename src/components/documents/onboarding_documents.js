@@ -5,7 +5,7 @@ import { Card, Button, Grid } from '@material-ui/core';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
 
-import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function OnBoardDocument() {
@@ -32,7 +32,7 @@ export default function OnBoardDocument() {
   return (
     <>
       <div className="page-title">
-        <BallotTwoToneIcon />
+        <PostAddIcon />
         <div className="title">
           <h5 className="heading">Document Management</h5>
           <p>Upload your document and manage yout request for informations</p>

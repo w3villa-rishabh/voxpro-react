@@ -65,7 +65,8 @@ export default function LivePreviewExample() {
     first_name: '',
     last_name: '',
     contact_number: '',
-    role: type
+    role: type,
+    subscribed: false
   });
 
   const [errors, setErrors] = useState({

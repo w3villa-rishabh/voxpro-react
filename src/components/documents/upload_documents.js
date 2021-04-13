@@ -18,7 +18,7 @@ import api from '../../api';
 import { getCurrentUser } from '../../helper';
 
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
-import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 // import { KeyboardDatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import AddsComponents from 'components/add_component';
@@ -112,7 +112,7 @@ export default function UploadDocument() {
   return (
     <>
       <div className="page-title">
-        <BallotTwoToneIcon />
+        <PostAddIcon />
         <div className="title">
           <h5 className="heading pt-3">Upload Document</h5>
           {/* <p>Private to you</p> */}
