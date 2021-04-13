@@ -109,7 +109,7 @@ const MuiTheme = createMuiTheme({
     }
   },
   typography: {
-    fontFamily: ['Heebo', 'sans-serif'].join(','),
+    fontFamily: ['Mukta', 'sans-serif'].join(','),
     htmlFontSize: 16,
     fontSize: 14
   },

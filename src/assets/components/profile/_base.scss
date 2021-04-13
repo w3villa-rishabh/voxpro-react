@@ -30,7 +30,7 @@
 
 .dashboard-card {
   background-color: #e0eeff !important;
-  min-height: 220px;
+  min-height: 200px;
 
   .raging {
     display: flex;
@@ -151,8 +151,8 @@
 }
 
 .main-card-section {
-  width: unset !important;
-  margin: 0 14px !important;
+  // width: unset !important;
+  // margin: 0 14px !important;
 
   .main-card {
     .user-details {
@@ -241,7 +241,7 @@ ul {
   .MuiMenu-paper {
     position: absolute;
     top: 78px !important;
-    left: 335px !important;
+    left: 300px !important;
   }
 
   .profile-menu {
@@ -350,6 +350,11 @@ ul {
 
 // For mobile
 @media (max-width: 767px) {
+
+  .profile-menu-card {
+    z-index: 1300 !important;
+  }
+
   .profile-menu {
     position: fixed;
     width: calc(100vw - 30px) !important;
