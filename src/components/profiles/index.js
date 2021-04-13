@@ -302,7 +302,7 @@ export default function LivePreviewExample() {
             </Grid>
           </Grid>
 
-          <div className="z-over py-2">
+          <div className="z-over py-2 z-below">
             <div
               className={clsx(
                 'tab-item-wrapper overflow-visible d-none d-block active'
@@ -312,7 +312,7 @@ export default function LivePreviewExample() {
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={8}>
                     <Card className="card-box p-3 h-100">
-                    <b>About</b>
+                      <b>About</b>
                       {/* <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
                         className="about"
