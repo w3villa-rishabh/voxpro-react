@@ -51,6 +51,11 @@ const Subscription = lazy(() => import('./components/subscription_plans'));
 const ResetPassword = lazy(() => import('./components/reset_password'));
 const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
 
+//New request
+const NewRequestComponent = lazy(() =>
+  import('./components/request_information/new-request')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -137,6 +142,7 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
+                '/new-request'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -147,6 +153,7 @@ const Routes = () => {
                   <Route path="/view-document" component={DocList} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route path="/view-profile" component={Profile} />
+                  <Route path="/new-request" component={NewRequestComponent} />
                 </Switch>
               </LeftSidebar>
             </Route>

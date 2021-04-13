@@ -17,7 +17,6 @@ import WorkIcon from '@material-ui/icons/Work';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import SecurityIcon from '@material-ui/icons/Security';
 import ChatIcon from '@material-ui/icons/Chat';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import TuneIcon from '@material-ui/icons/Tune';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SearchIcon from '@material-ui/icons/Search';
@@ -190,9 +189,7 @@ const SidebarMenu = (props) => {
               <Collapse in={requestInfo}>
                 <ul>
                   <li>
-                    <NavLink
-                      onClick={toggleSidebarMobile}
-                      to="/request-information">
+                    <NavLink onClick={toggleSidebarMobile} to="/new-request">
                       New Request
                     </NavLink>
                   </li>
