@@ -241,7 +241,7 @@ ul {
   .MuiMenu-paper {
     position: absolute;
     top: 78px !important;
-    left: 335px !important;
+    left: 300px !important;
   }
 
   .profile-menu {
@@ -350,6 +350,11 @@ ul {
 
 // For mobile
 @media (max-width: 767px) {
+
+  .profile-menu-card {
+    z-index: 1300 !important;
+  }
+
   .profile-menu {
     position: fixed;
     width: calc(100vw - 30px) !important;

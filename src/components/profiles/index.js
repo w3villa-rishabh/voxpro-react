@@ -302,7 +302,7 @@ export default function LivePreviewExample() {
             </Grid>
           </Grid>
 
-          <div className="z-over py-2">
+          <div className="z-over py-2 z-below">
             <div
               className={clsx(
                 'tab-item-wrapper overflow-visible d-none d-block active'
@@ -312,13 +312,17 @@ export default function LivePreviewExample() {
                 <Grid container spacing={1}>
                   <Grid item xs={12} sm={8}>
                     <Card className="card-box p-3 h-100">
-                    <b>About</b>
+                      <b>About</b>
                       {/* <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
                         className="about"
                         onClick={handleClickOpen1}
                       /> */}
-                      <p className="h-100px">{description.description}</p>
+                      <p className="h-100px">
+                        {description.description
+                          ? description.description
+                          : 'Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million'}
+                      </p>
                       <div className="card-footer see-more py-3 text-center">
                         <Button
                           size="small"
