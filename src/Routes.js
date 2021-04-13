@@ -62,19 +62,47 @@ const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
   const user = JSON.parse(localStorage.getItem('user'));
-  if (!isLoggedIn) {
-    localStorage.clear();
-    console.log('Token not found');
-    // eslint-disable-next-line no-unused-expressions
-    <Redirect to="/login" />;
-  } else if (
-    !!isLoggedIn &&
-    (location.pathname === '/login' || location.pathname === '/sign-up')
-  ) {
-    window.location.href = '/dashboard';
-  } else if (!!isLoggedIn && !user.subscribed) {
-    // eslint-disable-next-line no-unused-expressions
-    <Redirect to="/subscription-plans" />;
+
+  if (!!isLoggedIn && user !== 'null') {
+    if (
+      (!user.subscribed && user.role === 'agency') ||
+      user.role === 'company'
+    ) {
+      if (location.pathname !== '/subscription-plans') {
+        window.location.replace(window.location.origin + '/subscription-plans');
+      }
+    } else {
+      if (!isLoggedIn) {
+        localStorage.clear();
+        console.log('Token not found');
+        // eslint-disable-next-line no-unused-expressions
+        <Redirect to="/login" />;
+      } else if (
+        !!isLoggedIn &&
+        (location.pathname === '/login' || location.pathname === '/sign-up')
+      ) {
+        if (
+          !user.subscribed &&
+          (user.role === 'agency' || user.role === 'company')
+        ) {
+          // eslint-disable-next-line no-unused-expressions
+          <Redirect to="/subscription-plans" />;
+        } else if (user.role === 'candidate') {
+          window.location.href = '/dashboard';
+        } else if (
+          user.subscribed &&
+          (user.role === 'agency' || user.role === 'company')
+        ) {
+          window.location.href = '/dashboard';
+        }
+      } else if (
+        (!!isLoggedIn && !user.subscribed && user.role === 'agency') ||
+        user.role === 'company'
+      ) {
+        // eslint-disable-next-line no-unused-expressions
+        <Redirect to="/subscription-plans" />;
+      }
+    }
   }
 
   const pageVariants = {
