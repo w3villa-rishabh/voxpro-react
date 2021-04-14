@@ -53,6 +53,16 @@ export default function LivePreviewExample() {
       // using `result.error.message`.
     }
   }
+  function userLogout() {
+    // api.delete('/api/users/sign_out').then((response) => {
+    //   if(response.data.success){
+    localStorage.clear();
+    window.location.href = '/login';
+    // }else{
+    //   alert('Something went wrong..')
+    // }
+    // });
+  }
 
   return message ? (
     <Message message={message} />
@@ -287,7 +297,9 @@ export default function LivePreviewExample() {
                   <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
                     <small></small>
                   </div>
-                  <h1 className="font-size-lg mt-3">Price on quote</h1>
+                  <h1 className="mt-3 mb-3" style={{ fontSize: '25px' }}>
+                    Price <br /> on quote
+                  </h1>
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second "
@@ -347,6 +359,12 @@ export default function LivePreviewExample() {
             </Grid>
           </Grid>
         </Container>
+        <div className="text-center text-black-50 mt-3">
+          Go to{' '}
+          <a onClick={userLogout} className="text-first">
+            login
+          </a>
+        </div>
       </div>
     </>
   );

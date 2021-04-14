@@ -278,14 +278,16 @@ export default function LivePreviewExample() {
                     {currentUser.role === 'candidate' && (
                       <small>Software Engineer</small>
                     )}
-                    {currentUser.role === 'agency' && <small>London</small>}
+                    {(currentUser.role === 'agency' ||
+                      currentUser.role === 'company') && <small>London</small>}
                   </div>
                   <hr></hr>
                   {currentUser.role === 'candidate' && (
                     <OnlineAndAvailability />
                   )}
 
-                  {currentUser.role === 'agency' && (
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
                     <div>
                       <NotListedLocationIcon />
                       <small>Live roles</small>
@@ -784,7 +786,8 @@ export default function LivePreviewExample() {
                   </div>
                 )}
 
-                {currentUser.role === 'agency' && (
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
                   <div>
                     <b>Teams</b>
                     <Grid container spacing={2} className="mt-1">
@@ -1107,7 +1110,8 @@ export default function LivePreviewExample() {
                 </div>
               )}
 
-              {currentUser.role === 'agency' && (
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && (
                 <Card className="card-box mt-3">
                   <div className="card-header py-3">
                     <div className="card-header--title font-size-lg">

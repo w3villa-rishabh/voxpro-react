@@ -65,8 +65,8 @@ const Routes = () => {
 
   if (!!isLoggedIn && user !== 'null') {
     if (
-      (!user.subscribed && user.role === 'agency') ||
-      user.role === 'company'
+      !user.subscribed &&
+      (user.role === 'agency' || user.role === 'company')
     ) {
       if (location.pathname !== '/subscription-plans') {
         if (location.pathname === '/success') {
