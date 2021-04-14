@@ -25,6 +25,7 @@ import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import people2 from '../../assets/images/stock-photos/people-3.jpg';
 import people1 from '../../assets/images/stock-photos/people-2.jpg';
 import AddsComponents from 'components/add_component';
+import Chart from 'react-apexcharts';
 
 const AgencyDashboard = (props) => {
   const [inputBg, setInputBg] = useState(false);
@@ -42,12 +43,29 @@ const AgencyDashboard = (props) => {
     setHeaderSearchHover(!headerSearchHover);
   };
 
+  const options = {
+    stroke: {
+      curve: 'smooth'
+    },
+    markers: {
+      size: 0
+    },
+    xaxis: {
+      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    }
+  };
+  const series = [
+    {
+      data: [30, 40, 25, 50, 49, 21, 70, 51]
+    }
+  ];
+
   return (
     <>
       <div className="mb-spacing-2">
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
+        <Grid container spacing={2} wrap="nowrap">
+          <Grid item xs={12} sm={3}>
+            {/* <Card className="card-box h-100">
               <div className="card-content-overlay text-center py-4">
                 <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
                   <FontAwesomeIcon icon={['fas', 'user-tag']} />
@@ -57,10 +75,27 @@ const AgencyDashboard = (props) => {
                 </div>
                 <div className="opacity-8">Live Roles</div>
               </div>
-            </Card>
+            </Card> */}
+            <div>
+              <Button
+                href="#/"
+                onClick={(e) => e.preventDefault()}
+                className="d-block btn-gradient bg-brand-facebook text-left px-4 py-3 w-100 rounded-lg shadow-none">
+                <div>
+                  {/* <AccountBalanceWalletOutlinedIcon className="h1 d-block my-2 text-warning"/> */}
+                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
+                  <div className="font-weight-bold font-size-md font-size-md">
+                    Reports
+                  </div>
+                  <div className="font-size-md mb-1 opacity-8">
+                    Monthly Stats
+                  </div>
+                </div>
+              </Button>
+            </div>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
+          <Grid item xs={12} sm={3}>
+            {/* <Card className="card-box h-100">
               <div className="card-content-overlay text-center py-4">
                 <div className="d-40 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
                   <FontAwesomeIcon icon={['fas', 'map-marker']} />
@@ -70,11 +105,28 @@ const AgencyDashboard = (props) => {
                 </div>
                 <div className="opacity-8">Placements</div>
               </div>
-            </Card>
+            </Card> */}
+            <div>
+              <Button
+                href="#/"
+                onClick={(e) => e.preventDefault()}
+                className="d-block btn-gradient bg-brand-facebook text-left px-4 py-3 w-100 rounded-lg shadow-none">
+                <div>
+                  {/* <AccountBalanceWalletOutlinedIcon className="h1 d-block my-2 text-warning"/> */}
+                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
+                  <div className="font-weight-bold font-size-md font-size-md">
+                    Reports
+                  </div>
+                  <div className="font-size-md mb-1 opacity-8">
+                    Monthly Stats
+                  </div>
+                </div>
+              </Button>
+            </div>
           </Grid>
 
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
+          <Grid item xs={12} sm={3}>
+            {/* <Card className="card-box h-100">
               <div className="card-content-overlay text-center py-4">
                 <div className="d-40 rounded-circle bg-primary text-white btn-icon mx-auto text-center shadow-primary">
                   <FontAwesomeIcon icon={['fas', 'signal']} />
@@ -84,10 +136,27 @@ const AgencyDashboard = (props) => {
                 </div>
                 <div className="opacity-8">IR35 Questions Status</div>
               </div>
-            </Card>
+            </Card> */}
+            <div>
+              <Button
+                href="#/"
+                onClick={(e) => e.preventDefault()}
+                className="d-block btn-gradient bg-brand-facebook text-left px-4 py-3 w-100 rounded-lg shadow-none">
+                <div>
+                  {/* <AccountBalanceWalletOutlinedIcon className="h1 d-block my-2 text-warning"/> */}
+                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
+                  <div className="font-weight-bold font-size-md font-size-md">
+                    Reports
+                  </div>
+                  <div className="font-size-md mb-1 opacity-8">
+                    Monthly Stats
+                  </div>
+                </div>
+              </Button>
+            </div>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
+          <Grid item xs={12} sm={3}>
+            {/* <Card className="card-box h-100">
               <div className="card-content-overlay text-center py-4">
                 <div className="d-40 rounded-circle bg-warning text-white btn-icon mx-auto text-center shadow-warning">
                   <FontAwesomeIcon icon={['fas', 'clock']} />
@@ -97,10 +166,27 @@ const AgencyDashboard = (props) => {
                 </div>
                 <div className="opacity-8">Pending Documents</div>
               </div>
-            </Card>
+            </Card> */}
+            <div>
+              <Button
+                href="#/"
+                onClick={(e) => e.preventDefault()}
+                className="d-block btn-gradient bg-brand-facebook text-left px-4 py-3 w-100 rounded-lg shadow-none">
+                <div>
+                  {/* <AccountBalanceWalletOutlinedIcon className="h1 d-block my-2 text-warning"/> */}
+                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
+                  <div className="font-weight-bold font-size-md font-size-md">
+                    Reports
+                  </div>
+                  <div className="font-size-md mb-1 opacity-8">
+                    Monthly Stats
+                  </div>
+                </div>
+              </Button>
+            </div>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="p-2 h-100">
+          <Grid item xs={12} sm={3}>
+            {/* <Card className="p-2 h-100">
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <div className="mx-auto text-center mt-3">
@@ -116,9 +202,26 @@ const AgencyDashboard = (props) => {
                   <div className="text-center">Scheduled Interviews</div>
                 </Grid>
               </Grid>
-            </Card>
+            </Card> */}
+            <div>
+              <Button
+                href="#/"
+                onClick={(e) => e.preventDefault()}
+                className="d-block btn-gradient bg-brand-facebook text-left px-4 py-3 w-100 rounded-lg shadow-none">
+                <div>
+                  {/* <AccountBalanceWalletOutlinedIcon className="h1 d-block my-2 text-warning"/> */}
+                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
+                  <div className="font-weight-bold font-size-md font-size-md">
+                    Reports
+                  </div>
+                  <div className="font-size-md mb-1 opacity-8">
+                    Monthly Stats
+                  </div>
+                </div>
+              </Button>
+            </div>
           </Grid>
-          <Grid item xs={12} sm={2}>
+          {/* <Grid item xs={12} sm={2}>
             <Card className="card-box h-100">
               <div className="card-content-overlay text-center py-4">
                 <div className="d-40 rounded-circle bg-success text-white btn-icon mx-auto text-center shadow-success">
@@ -130,26 +233,46 @@ const AgencyDashboard = (props) => {
                 <div className="opacity-8">Tasks</div>
               </div>
             </Card>
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={9}>
             <Card className="card-box shadow-success-sm p-3 h-100">
-              <div className="mx-auto text-center">
-                <CircularProgressbar
-                  value={56}
-                  text={56 + '%'}
-                  strokeWidth={8}
-                  className="circular-progress-warning"
-                />
-              </div>
-              <div className="font-size-lg opacity-8 pt-3 text-center">
-                Candidates registered
-              </div>
+              <Grid container spacing={0}>
+                <Grid item xs={12} sm={8}>
+                  <Chart options={options} series={series} type="line" />
+                  {/* </Card> */}
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  {/* <Card className="card-box shadow-success-sm p-3 h-100"> */}
+                  <div className="mx-auto text-center">
+                    <CircularProgressbar
+                      value={56}
+                      text={56 + '%'}
+                      strokeWidth={8}
+                      className="circular-progress-warning"
+                    />
+                  </div>
+                  <div className="font-size-lg opacity-8 pt-3 text-center">
+                    Candidates registered
+                  </div>
+                  <div className="mx-auto text-center">
+                    <CircularProgressbar
+                      value={56}
+                      text={56 + '%'}
+                      strokeWidth={8}
+                      className="circular-progress-warning"
+                    />
+                  </div>
+                  <div className="font-size-lg opacity-8 pt-3 text-center">
+                    Candidates registered
+                  </div>
+                </Grid>
+              </Grid>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={3}>
+          {/* <Grid item xs={12} sm={3}>
             <Card className="card-box shadow-success-sm p-3 h-100">
               <div className="mx-auto text-center">
                 <CircularProgressbar
@@ -180,7 +303,7 @@ const AgencyDashboard = (props) => {
                 <div className="font-size-lg opacity-8">New Connections</div>
               </div>
             </Card>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} sm={3}>
             <Card className="card-box h-100">
               <div className="card-content-overlay text-center">
@@ -202,7 +325,39 @@ const AgencyDashboard = (props) => {
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
+                  <FontAwesomeIcon
+                    icon={['far', 'bell']}
+                    className="display-4"
+                  />
+                </div>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  4,745
+                </div>
+                <div className="font-size-lg opacity-8">
+                  New Connections Requests
+                </div>
+              </div>
+            </Card>
+            <Card className="card-box mt-3">
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
+                  <FontAwesomeIcon
+                    icon={['far', 'bell']}
+                    className="display-4"
+                  />
+                </div>
+                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
+                  4,745
+                </div>
+                <div className="font-size-lg opacity-8">New Connections</div>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <Card className="h-100 border-0 shadow-danger-sm p-3">
               <div className="card-header--title">
                 <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
@@ -216,7 +371,7 @@ const AgencyDashboard = (props) => {
                   className="opacity-8 font-size-xs position-absolute ribbon-angle--top-right m-3"
                 />
               </div>
-              <div className="timeline-list ml-3">
+              <div className="timeline-list">
                 <div className="timeline-item timeline-item-icon">
                   <div className="timeline-item--content">
                     <div className="timeline-item--icon-wrapper bg-primary text-white">
@@ -264,7 +419,7 @@ const AgencyDashboard = (props) => {
               </div>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={5}>
             <Card>
               <div className="app-inner-content-layout">
                 <div className="app-drawer-content-message">
@@ -650,7 +805,7 @@ const AgencyDashboard = (props) => {
         </Grid>
 
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={9}>
             <Card className="card-box">
               <div className="card-header py-3">
                 <div className="card-header--title font-size-lg">
@@ -825,8 +980,36 @@ const AgencyDashboard = (props) => {
               </div>
             </Card>
           </Grid>
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box shadow-success-sm p-3">
+              <div className="mx-auto text-center">
+                <CircularProgressbar
+                  value={56}
+                  text={56 + '%'}
+                  strokeWidth={8}
+                  className="circular-progress-primary"
+                />
+              </div>
+              <div className="font-size-lg opacity-8 pt-3 text-center">
+                Companies connected
+              </div>
+            </Card>
+            <Card className="card-box shadow-success-sm p-3">
+              <div className="mx-auto text-center">
+                <CircularProgressbar
+                  value={56}
+                  text={56 + '%'}
+                  strokeWidth={8}
+                  className="circular-progress-primary"
+                />
+              </div>
+              <div className="font-size-lg opacity-8 pt-3 text-center">
+                Companies connected
+              </div>
+            </Card>
+          </Grid>
         </Grid>
-        <Grid container spacing={2}>
+        {/* <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <Card className="card-box">
               <div className="card-header py-3">
@@ -1163,7 +1346,7 @@ const AgencyDashboard = (props) => {
               </div>
             </Card>
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
       <AddsComponents />
     </>

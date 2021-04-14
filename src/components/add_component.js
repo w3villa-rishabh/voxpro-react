@@ -6,7 +6,7 @@ export default function AddsComponents() {
   const [currentUser] = useState(getCurrentUser());
   return (
     <>
-      <div className="ads-wrapper">
+      <div className="ads-wrapper mt-3">
         <iframe
           frameBorder="0"
           height="100"
