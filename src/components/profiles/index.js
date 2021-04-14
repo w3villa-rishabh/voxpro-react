@@ -206,7 +206,12 @@ export default function LivePreviewExample() {
       <div className="page-title">
         <PersonIcon />
         <div className="title pt-3">
-          <b className="heading">Candidate Profile</b>
+          {currentUser.role === 'candidate' && (
+            <b className="heading">Candidate Profile</b>
+          )}
+          {currentUser.role === 'agency' && (
+            <b className="heading">Agency Profile</b>
+          )}
         </div>
       </div>
       <div className="app-inner-content-layout">
