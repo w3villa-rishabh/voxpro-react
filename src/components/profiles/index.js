@@ -33,6 +33,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import stock1 from '../../assets/images/stock-photos/stock-1.jpg';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
+import agencybg from '../../assets/images/voxpro-images/agency-bg.jpg';
 
 import GoogleMapReact from 'google-map-react';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
@@ -226,7 +227,17 @@ export default function LivePreviewExample() {
                       className="edit"
                     />
                   </div> */}
-                  <img alt="..." className="img-fit-container" src={stock2} />
+                  {currentUser.role === 'candidate' && (
+                    <img alt="..." className="img-fit-container" src={stock2} />
+                  )}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <img
+                      alt="..."
+                      className="img-fit-container"
+                      src={agencybg}
+                    />
+                  )}
                 </div>
               </Card>
             </Grid>
@@ -234,7 +245,7 @@ export default function LivePreviewExample() {
           <Grid container spacing={2} className="mt-1">
             <Grid item xs={12} sm={4}>
               <div className="profile-view-section">
-                <Card className="card-box p-3 h-100">
+                <Card className="card-box p-3 h-100 side-bg">
                   <div className="icon-demo-box">
                     <div
                       {...getRootProps({
@@ -433,7 +444,34 @@ export default function LivePreviewExample() {
                       </div>
                     </div>
                   )}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <div>
+                      <hr></hr>
+                      <b>Description</b>
+                      <br />
+                      <small>
+                        We provides search marketing solutions for businesses
+                        worldwide, including website promotion, online
+                        advertising, and search engine optimization techniques
+                        to improve its clients' positioning in search engines.
+                        We cater to the higher education market, including
+                        colleges and universities.
+                      </small>
+                      <hr></hr>
+                      <b>Company Sector</b>
+                      <br />
 
+                      <hr></hr>
+                      <b>Company Size</b>
+                      <br />
+                      <h5>Medium (50-200)</h5>
+                      <hr></hr>
+                      <b>Establised</b>
+                      <br />
+                      <h5>1999</h5>
+                    </div>
+                  )}
                   <hr></hr>
                   <div className="w-100" style={{ height: '250px' }}>
                     <GoogleMapReact defaultCenter={center} defaultZoom={zoom}>
@@ -794,7 +832,7 @@ export default function LivePreviewExample() {
                 {(currentUser.role === 'agency' ||
                   currentUser.role === 'company') && (
                   <div>
-                    <b>Teams</b>
+                    <b>Team</b>
                     <Grid container spacing={2} className="mt-1">
                       <Grid item xs={12} sm={3}>
                         <div>
