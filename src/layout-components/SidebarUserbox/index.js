@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useEffect
-} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -19,19 +13,13 @@ import {
   Tooltip,
   Grid,
   CardContent,
-  List,
-  ButtonGroup,
-  MenuItem
+  List
 } from '@material-ui/core';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import { useHistory } from 'react-router-dom';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
+import 'date-fns';
+
+import { useHistory } from 'react-router-dom';
+import OnlineAndAvailability from '../../components/profiles/availability';
 import PropTypes from 'prop-types';
 
 import avatar1 from '../../assets/images/avatars/default.png';
@@ -60,201 +48,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired
 };
 
-const OnlineAndAvailability = forwardRef((props, ref) => {
-  useImperativeHandle(ref, () => ({
-    showAlert() {
-      alert('Child Function Called');
-    }
-  }));
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorEl1, setAnchorEl1] = useState(null);
-  const [onlineStatus, setOnlineStatus] = useState('Online');
-  const [availability, setAvailability] = useState('Immediate');
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (event) => {
-    setAnchorEl(null);
-    if (event.target.innerText) {
-      setOnlineStatus(event.target.innerText);
-    }
-  };
-
-  const handleClick1 = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-
-  const handleClose1 = (event) => {
-    setAnchorEl1(null);
-    if (event && event.target.innerText) {
-      setAvailability(event.target.innerText);
-      // childRef.current.showAlert();
-    }
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    if (date) {
-      setAvailability(date.toLocaleDateString());
-    }
-    handleClose1();
-  };
-
-  return (
-    <div className="profile-btn">
-      <ButtonGroup
-        variant="contained"
-        className="btn-second btn-profile mr-1"
-        size="small"
-        aria-label="button">
-        <Button
-          className="btn-transition-none p-1"
-          style={
-            onlineStatus === 'Offline'
-              ? { backgroundColor: 'red' }
-              : { backgroundColor: 'green' }
-          }>
-          {onlineStatus}
-        </Button>
-        <Button
-          className="btn-transition-none p-0"
-          style={
-            onlineStatus === 'Offline'
-              ? { backgroundColor: 'red' }
-              : { backgroundColor: 'green' }
-          }
-          size="small"
-          aria-haspopup="true"
-          onClick={handleClick}>
-          <ArrowDropDownIcon />
-        </Button>
-      </ButtonGroup>
-      <Menu
-        id="simple-menu2"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        classes={{ list: 'p-0' }}>
-        {onlineStatus === 'Offline' && (
-          <MenuItem
-            className="text-dark b-login-btn"
-            style={{ backgroundColor: 'green' }}
-            onClick={handleClose}>
-            Online
-          </MenuItem>
-        )}
-        {onlineStatus === 'Online' && (
-          <MenuItem
-            className="text-dark b-login-btn"
-            style={{ backgroundColor: 'red' }}
-            onClick={handleClose}>
-            Offline
-          </MenuItem>
-        )}
-      </Menu>
-
-      <ButtonGroup
-        variant="contained"
-        className="btn-second btn-profile"
-        color="dangler"
-        size="small"
-        aria-label="button">
-        <Button className="btn-transition-none nowrap p-2 light-blue">
-          Availability: {availability}
-        </Button>
-        <Button
-          className="btn-transition-none light-blue"
-          color="dangler"
-          size="small"
-          aria-haspopup="true"
-          onClick={handleClick1}>
-          <ArrowDropDownIcon />
-        </Button>
-      </ButtonGroup>
-      <Menu
-        id="simple-menu2"
-        anchorEl={anchorEl1}
-        keepMounted
-        open={Boolean(anchorEl1)}
-        onClose={handleClose1}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        PaperProps={{
-          style: {
-            width: 250
-          }
-        }}
-        classes={{ list: 'p-0' }}>
-        <div className="p-0">
-          <MenuItem
-            className="text-dark font-10 list-profile-available"
-            onClick={handleClose1}>
-            Immediately
-          </MenuItem>
-          <MenuItem
-            className="text-dark font-10 pt-0 list-profile-available"
-            onClick={handleClose1}>
-            Unavailable
-          </MenuItem>
-          <MenuItem className="text-dark font-10 pt-0 list-profile-available">
-            <Grid container spacing={0}>
-              <Grid item xs={12} sm={6}>
-                <span>Available from</span>
-              </Grid>
-              <Grid item xs={12} sm={6} className="date-picker">
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disablePast
-                    disableToolbar
-                    variant="inline"
-                    format="dd/MM/yyyy"
-                    // margin="normal"
-                    id="date-picker-inline"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    autoOk={true}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date'
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-              </Grid>
-            </Grid>
-          </MenuItem>
-        </div>
-      </Menu>
-    </div>
-  );
-});
-
 const SidebarUserbox = () => {
   const history = useHistory();
 
   const [currentUser] = useState(getCurrentUser());
 
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
-  const childRef = useRef();
   const [value, setValue] = useState(0);
   const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
 
@@ -268,8 +67,10 @@ const SidebarUserbox = () => {
   };
 
   const handleClickMenu1 = (event) => {
+    // if (currentUser.role !== 'company') {
     setAnchorElMenu1(event.currentTarget);
     setEditProfile(editValue);
+    // }
   };
 
   const handleCloseMenu1 = () => {
@@ -356,7 +157,7 @@ const SidebarUserbox = () => {
                           <p className="font-12 font-weight-bold mb-0">
                             Business Analyst | London, United Kingdom
                           </p>
-                          <OnlineAndAvailability ref={childRef} />
+                          <OnlineAndAvailability />
                           <TextField
                             fullWidth
                             variant="outlined"
@@ -883,7 +684,9 @@ const SidebarUserbox = () => {
               alt="..."
               src={avatar2}
               onClick={() => {
-                history.push('/view-profile');
+                if (currentUser.role !== 'company') {
+                  history.push('/view-profile');
+                }
               }}
             />
           </div>
@@ -895,7 +698,7 @@ const SidebarUserbox = () => {
           <small className="d-block font-12 text-white-50">
             Business Analyst | London, United Kingdom
           </small>
-          <OnlineAndAvailability ref={childRef} />
+          <OnlineAndAvailability />
 
           <small className="d-block font-12 text-white-50">
             Senior Business Analyst with 15 years experience in the retail

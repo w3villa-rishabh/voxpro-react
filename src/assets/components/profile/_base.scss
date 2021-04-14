@@ -348,8 +348,33 @@ ul {
   padding: 1px 7px 0px 12px !important;
 }
 
+
+
+
+
+
+
+.profile-view-section {
+  position: relative;
+  top: -120px;
+  left: 10px;
+  right: 0;
+  z-index: 9;
+}
+
+
+
+
 // For mobile
 @media (max-width: 767px) {
+  .profile-view-section {
+    left: 10px;
+    width: calc(100vw - 50px);
+  }
+
+  .mt-70px {
+    margin-top: -120px !important;
+  }
 
   .profile-menu-card {
     z-index: 1300 !important;
