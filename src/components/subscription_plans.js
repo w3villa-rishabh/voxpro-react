@@ -287,7 +287,9 @@ export default function LivePreviewExample() {
                   <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
                     <small></small>
                   </div>
-                  <h1 className="font-size-lg mt-3">Price on quote</h1>
+                  <h1 className="mt-3 mb-3" style={{ fontSize: '25px' }}>
+                    Price <br /> on quote
+                  </h1>
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second "
