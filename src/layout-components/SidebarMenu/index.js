@@ -80,7 +80,8 @@ const SidebarMenu = (props) => {
                     Onboarding Documents
                   </span>
                 )}
-                {currentUser.role === 'agency' && (
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
                   <span className="sidebar-item-label">Documents</span>
                 )}
                 <span className="sidebar-icon-indicator">
