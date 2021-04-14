@@ -53,6 +53,16 @@ export default function LivePreviewExample() {
       // using `result.error.message`.
     }
   }
+  function userLogout() {
+    // api.delete('/api/users/sign_out').then((response) => {
+    //   if(response.data.success){
+    localStorage.clear();
+    window.location.href = '/login';
+    // }else{
+    //   alert('Something went wrong..')
+    // }
+    // });
+  }
 
   return message ? (
     <Message message={message} />
@@ -349,6 +359,12 @@ export default function LivePreviewExample() {
             </Grid>
           </Grid>
         </Container>
+        <div className="text-center text-black-50 mt-3">
+          Go to{' '}
+          <a onClick={userLogout} className="text-first">
+            login
+          </a>
+        </div>
       </div>
     </>
   );
