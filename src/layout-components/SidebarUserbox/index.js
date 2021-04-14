@@ -67,8 +67,10 @@ const SidebarUserbox = () => {
   };
 
   const handleClickMenu1 = (event) => {
+    // if (currentUser.role !== 'company') {
     setAnchorElMenu1(event.currentTarget);
     setEditProfile(editValue);
+    // }
   };
 
   const handleCloseMenu1 = () => {
@@ -682,7 +684,9 @@ const SidebarUserbox = () => {
               alt="..."
               src={avatar2}
               onClick={() => {
-                history.push('/view-profile');
+                if (currentUser.role !== 'company') {
+                  history.push('/view-profile');
+                }
               }}
             />
           </div>

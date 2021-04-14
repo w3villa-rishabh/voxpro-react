@@ -214,13 +214,13 @@ export default function LivePreviewExample() {
           <Grid container spacing={2} className="main-card-section">
             <Grid item xs={12} sm={12}>
               <Card>
-                <div className="card-img-wrapper h-180px">
-                  <div className="card-badges text-white">
+                <div className="card-img-wrapper h-240px">
+                  {/* <div className="card-badges text-white">
                     <FontAwesomeIcon
                       icon={['fas', 'pencil-alt-alt']}
                       className="edit"
                     />
-                  </div>
+                  </div> */}
                   <img alt="..." className="img-fit-container" src={stock2} />
                 </div>
               </Card>
@@ -900,7 +900,7 @@ export default function LivePreviewExample() {
                       {/* <span>Education</span> */}
                       <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
-                        className="icon ml-2"
+                        className="icon ml-2 pointer"
                         // onClick={handleExperience}
                       />
                     </div>
@@ -987,7 +987,7 @@ export default function LivePreviewExample() {
                       {/* <span>Add Experience</span> */}
                       <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
-                        className="icon ml-2"
+                        className="icon ml-2 pointer"
                         // onClick={handleExperience}
                       />
                     </div>
@@ -1074,7 +1074,7 @@ export default function LivePreviewExample() {
                       {/* <span>Add Recommendation</span> */}
                       <FontAwesomeIcon
                         icon={['fas', 'pencil-alt']}
-                        className="icon ml-2"
+                        className="icon ml-2 pointer"
                         // onClick={handleExperience}
                       />
                     </div>
