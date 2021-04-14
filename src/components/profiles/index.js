@@ -12,7 +12,9 @@ import {
   DialogTitle,
   DialogActions,
   List,
-  ListItem
+  ListItem,
+  InputAdornment,
+  Table
 } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { getCurrentUser } from '../../helper';
@@ -26,9 +28,16 @@ import CheckIcon from '@material-ui/icons/Check';
 import { useDropzone } from 'react-dropzone';
 import CloseTwoToneIcon from '@material-ui/icons/CloseTwoTone';
 import OnlineAndAvailability from 'components/profiles/availability';
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import stock1 from '../../assets/images/stock-photos/stock-1.jpg';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
+
+import GoogleMapReact from 'google-map-react';
+import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
+
+const MapMarker = ({ text }) => <div>{text}</div>;
 
 export default function LivePreviewExample() {
   const [aboutText, setAboutText] = useState();
@@ -186,6 +195,12 @@ export default function LivePreviewExample() {
     setOpenExperience(false);
   };
 
+  const center = {
+    lat: 59.95,
+    lng: 30.33
+  };
+  const zoom = 11;
+
   return (
     <>
       <div className="page-title">
@@ -260,423 +275,455 @@ export default function LivePreviewExample() {
                     <h4 className="m-0">
                       {currentUser.first_name} {currentUser.last_name}
                     </h4>
-                    <small>Software Engineer</small>
+                    {currentUser.role === 'candidate' && (
+                      <small>Software Engineer</small>
+                    )}
+                    {currentUser.role === 'agency' && <small>London</small>}
                   </div>
                   <hr></hr>
-                  <OnlineAndAvailability />
-                  <hr></hr>
-                  <small>
-                    ConsultancyFounder & Director | Frank Belford a Consultancy
-                    Senior Business Analyst with 15 years experience in the
-                    retail industry and FMCG industry, with project spending
-                    5-10 million.
-                  </small>
-                  <hr></hr>
-                  <CardContent className="text-center p-0">
-                    <Grid container spacing={1}>
-                      <Grid item md={4}>
-                        <div className="bg-secondary p-2 text-center h-100 rounded">
-                          <div>
-                            <FontAwesomeIcon
-                              icon={['far', 'user']}
-                              className="font-size-xxl text-warning"
-                            />
-                          </div>
-                          <div className="mt-2 line-height-sm">
-                            <b className="font-12">Permanent</b>
-                            <span className="text-black-50 font-10 d-block">
-                              Desired Employment Type
-                            </span>
-                          </div>
-                        </div>
-                      </Grid>
-                      <Grid item md={4}>
-                        <div className="bg-secondary p-2 text-center h-100 rounded">
-                          <div>
-                            <FontAwesomeIcon
-                              icon={['fas', 'lemon']}
-                              className="font-size-xxl text-success"
-                            />
-                          </div>
-                          <div className="mt-2 line-height-sm">
-                            <b className="font-12">$3,586</b>
-                            <span className="text-black-50 font-10 d-block">
-                              Desired Annual Salary
-                            </span>
-                          </div>
-                        </div>
-                      </Grid>
-                      <Grid item md={4}>
-                        <div className="bg-secondary p-2 text-center h-100 rounded">
-                          <div>
-                            <FontAwesomeIcon
-                              icon={['far', 'chart-bar']}
-                              className="font-size-xxl text-info"
-                            />
-                          </div>
-                          <div className="mt-2 line-height-sm">
-                            <b className="font-12">City of London</b>
-                            <span className="text-black-50 font-10 d-block">
-                              Desired Location
-                            </span>
-                          </div>
-                        </div>
-                      </Grid>
-                      <Grid item md={4}>
-                        <div className="bg-secondary p-2 text-center h-100 rounded">
-                          <div>
-                            <FontAwesomeIcon
-                              icon={['far', 'user']}
-                              className="font-size-xxl text-warning"
-                            />
-                          </div>
-                          <div className="mt-2 line-height-sm">
-                            <b className="font-12">Permanent</b>
-                            <span className="text-black-50 font-10 d-block">
-                              Current Employment Type
-                            </span>
-                          </div>
-                        </div>
-                      </Grid>
-                      <Grid item md={4}>
-                        <div className="bg-secondary p-2 text-center h-100 rounded">
-                          <div>
-                            <FontAwesomeIcon
-                              icon={['fas', 'lemon']}
-                              className="font-size-xxl text-success"
-                            />
-                          </div>
-                          <div className="mt-2 line-height-sm">
-                            <b className="font-12">$57,500</b>
-                            <span className="text-black-50 font-10 d-block">
-                              Current Annual Salary
-                            </span>
-                          </div>
-                        </div>
-                      </Grid>
-                      <Grid item md={4}>
-                        <div className="bg-secondary p-2 text-center h-100 rounded">
-                          <div>
-                            <FontAwesomeIcon
-                              icon={['far', 'chart-bar']}
-                              className="font-size-xxl text-info"
-                            />
-                          </div>
-                          <div className="mt-2 line-height-sm">
-                            <b className="font-12">West London</b>
-                            <span className="text-black-50 font-10 d-block">
-                              Current Location
-                            </span>
-                          </div>
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                  <hr></hr>
-                  <div className="align-content-center d-flex justify-content-center">
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="btn-pill m-1 btn-primary">
-                      Connect
-                    </Button>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="btn-pill m-1">
-                      Message
-                    </Button>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="btn-pill m-1">
-                      More..
-                    </Button>
-                  </div>
-                </Card>
+                  {currentUser.role === 'candidate' && (
+                    <OnlineAndAvailability />
+                  )}
 
-                <Card className="card-box p-3 mt-2">
-                  <b>People also viewed</b>
+                  {currentUser.role === 'agency' && (
+                    <div>
+                      <NotListedLocationIcon />
+                      <small>Live roles</small>
+                      <h4 className="ml-4">23</h4>
+                    </div>
+                  )}
 
-                  <List component="div" className="list-group-flush">
-                    <ListItem className="px-0 border-0">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
+                  {currentUser.role === 'candidate' && (
+                    <div>
+                      <hr></hr>
+                      <small>
+                        ConsultancyFounder & Director | Frank Belford a
+                        Consultancy Senior Business Analyst with 15 years
+                        experience in the retail industry and FMCG industry,
+                        with project spending 5-10 million.
+                      </small>
+                      <hr></hr>
+                      <CardContent className="text-center p-0">
+                        <Grid container spacing={1}>
+                          <Grid item md={4}>
+                            <div className="bg-secondary p-2 text-center h-100 rounded">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['far', 'user']}
+                                  className="font-size-xxl text-warning"
+                                />
+                              </div>
+                              <div className="mt-2 line-height-sm">
+                                <b className="font-12">Permanent</b>
+                                <span className="text-black-50 font-10 d-block">
+                                  Desired Employment Type
+                                </span>
                               </div>
                             </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Shanelle Wynn
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Engineer, Apple Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="pt-2 pt-xl-0 d-flex align-items-center">
-                          <Button
-                            size="small"
-                            className="btn-pill ml-5 btn-outline-primary border-1"
-                            variant="outlined">
-                            Connect
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="px-0 border-0">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar5} />
+                          </Grid>
+                          <Grid item md={4}>
+                            <div className="bg-secondary p-2 text-center h-100 rounded">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['fas', 'lemon']}
+                                  className="font-size-xxl text-success"
+                                />
+                              </div>
+                              <div className="mt-2 line-height-sm">
+                                <b className="font-12">$3,586</b>
+                                <span className="text-black-50 font-10 d-block">
+                                  Desired Annual Salary
+                                </span>
                               </div>
                             </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Akeem Griffith
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Manager, Google Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="pt-2 pt-xl-0 d-flex align-items-center">
-                          <Button
-                            size="small"
-                            className="btn-pill ml-5 btn-outline-primary border-1"
-                            variant="outlined">
-                            Message
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="px-0 border-0">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
+                          </Grid>
+                          <Grid item md={4}>
+                            <div className="bg-secondary p-2 text-center h-100 rounded">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['far', 'chart-bar']}
+                                  className="font-size-xxl text-info"
+                                />
+                              </div>
+                              <div className="mt-2 line-height-sm">
+                                <b className="font-12">City of London</b>
+                                <span className="text-black-50 font-10 d-block">
+                                  Desired Location
+                                </span>
                               </div>
                             </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Abigayle Hicks
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Project Manager, Spotify
-                              </span>
+                          </Grid>
+                          <Grid item md={4}>
+                            <div className="bg-secondary p-2 text-center h-100 rounded">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['far', 'user']}
+                                  className="font-size-xxl text-warning"
+                                />
+                              </div>
+                              <div className="mt-2 line-height-sm">
+                                <b className="font-12">Permanent</b>
+                                <span className="text-black-50 font-10 d-block">
+                                  Current Employment Type
+                                </span>
+                              </div>
                             </div>
-                          </div>
+                          </Grid>
+                          <Grid item md={4}>
+                            <div className="bg-secondary p-2 text-center h-100 rounded">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['fas', 'lemon']}
+                                  className="font-size-xxl text-success"
+                                />
+                              </div>
+                              <div className="mt-2 line-height-sm">
+                                <b className="font-12">$57,500</b>
+                                <span className="text-black-50 font-10 d-block">
+                                  Current Annual Salary
+                                </span>
+                              </div>
+                            </div>
+                          </Grid>
+                          <Grid item md={4}>
+                            <div className="bg-secondary p-2 text-center h-100 rounded">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['far', 'chart-bar']}
+                                  className="font-size-xxl text-info"
+                                />
+                              </div>
+                              <div className="mt-2 line-height-sm">
+                                <b className="font-12">West London</b>
+                                <span className="text-black-50 font-10 d-block">
+                                  Current Location
+                                </span>
+                              </div>
+                            </div>
+                          </Grid>
                         </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="pt-2 pt-xl-0 d-flex align-items-center">
-                          <Button
-                            size="small"
-                            className="btn-pill ml-5 btn-outline-primary border-1"
-                            variant="outlined">
-                            Message
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                  </List>
-                  <div className="card-footer text-center">
-                    <Button
-                      size="small"
-                      className="btn-outline-second"
-                      variant="text">
-                      View More
-                    </Button>
+                      </CardContent>
+                      <hr></hr>
+                      <div className="align-content-center d-flex justify-content-center">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          className="btn-pill m-1 btn-primary">
+                          Connect
+                        </Button>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          className="btn-pill m-1">
+                          Message
+                        </Button>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          className="btn-pill m-1">
+                          More..
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  <hr></hr>
+                  <div className="w-100" style={{ height: '250px' }}>
+                    <GoogleMapReact defaultCenter={center} defaultZoom={zoom}>
+                      <MapMarker
+                        lat={59.955413}
+                        lng={30.337844}
+                        text="UiFort"
+                      />
+                    </GoogleMapReact>
                   </div>
                 </Card>
+                {currentUser.role === 'candidate' && (
+                  <div>
+                    <Card className="card-box p-3 mt-2">
+                      <b>People also viewed</b>
 
-                <Card className="card-box p-3 mt-2">
-                  <b>People you may know</b>
+                      <List component="div" className="list-group-flush">
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Shanelle Wynn
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    UI Engineer, Apple Inc.
+                                  </span>
+                                </div>
+                              </div>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                size="small"
+                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                variant="outlined">
+                                Connect
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar5} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Akeem Griffith
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    Manager, Google Inc.
+                                  </span>
+                                </div>
+                              </div>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                size="small"
+                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                variant="outlined">
+                                Message
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Abigayle Hicks
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    Project Manager, Spotify
+                                  </span>
+                                </div>
+                              </div>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                size="small"
+                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                variant="outlined">
+                                Message
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                      </List>
+                      <div className="card-footer text-center">
+                        <Button
+                          size="small"
+                          className="btn-outline-second"
+                          variant="text">
+                          View More
+                        </Button>
+                      </div>
+                    </Card>
 
-                  <List component="div" className="list-group-flush">
-                    <ListItem className="px-0 border-0">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
+                    <Card className="card-box p-3 mt-2">
+                      <b>People you may know</b>
+
+                      <List component="div" className="list-group-flush">
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Shanelle Wynn
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    UI Engineer, Apple Inc.
+                                  </span>
+                                </div>
                               </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Shanelle Wynn
-                              </a>
-                              <span className="text-black-50 d-block">
-                                UI Engineer, Apple Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="pt-2 pt-xl-0 d-flex align-items-center">
-                          <Button
-                            size="small"
-                            className="btn-pill ml-5 btn-outline-primary border-1"
-                            variant="outlined">
-                            Connect
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="px-0 border-0">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar5} />
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                size="small"
+                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                variant="outlined">
+                                Connect
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar5} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Akeem Griffith
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    Manager, Google Inc.
+                                  </span>
+                                </div>
                               </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Akeem Griffith
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Manager, Google Inc.
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="pt-2 pt-xl-0 d-flex align-items-center">
-                          <Button
-                            size="small"
-                            className="btn-pill ml-5 btn-outline-primary border-1"
-                            variant="outlined">
-                            Connect
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem className="px-0 border-0">
-                      <Grid container spacing={0}>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="d-flex align-items-center">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-2">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                size="small"
+                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                variant="outlined">
+                                Connect
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Abigayle Hicks
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    Project Manager, Spotify
+                                  </span>
+                                </div>
                               </div>
-                            </div>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="font-weight-bold text-black"
-                                title="...">
-                                Abigayle Hicks
-                              </a>
-                              <span className="text-black-50 d-block">
-                                Project Manager, Spotify
-                              </span>
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          xs={12}
-                          // md={6}
-                          className="pt-2 pt-xl-0 d-flex align-items-center">
-                          <Button
-                            size="small"
-                            className="btn-pill ml-5 btn-outline-primary border-1"
-                            variant="outlined">
-                            Connect
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                  </List>
-                  <div className="card-footer text-center">
-                    <Button
-                      size="small"
-                      className="btn-outline-second"
-                      variant="text">
-                      View More
-                    </Button>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                size="small"
+                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                variant="outlined">
+                                Connect
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                      </List>
+                      <div className="card-footer text-center">
+                        <Button
+                          size="small"
+                          className="btn-outline-second"
+                          variant="text">
+                          View More
+                        </Button>
+                      </div>
+                    </Card>
                   </div>
-                </Card>
+                )}
               </div>
             </Grid>
             <Grid item xs={12} sm={8} className="mt-70px">
               <Card className="card-box p-3">
-                <b>Skills</b>
                 {currentUser.role === 'candidate' && (
                   <div>
+                    <b>Skills</b>
                     <CardContent className="pb-0">
                       <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center">
@@ -738,268 +785,500 @@ export default function LivePreviewExample() {
                 )}
 
                 {currentUser.role === 'agency' && (
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={3}>
-                      <div>
-                        <a
-                          href="#/"
-                          onClick={(e) => e.preventDefault()}
-                          className="card bg-white shadow-sm-dark card-box-hover-rise">
-                          <img
-                            src={stock1}
-                            className="card-img-top"
-                            alt="..."
-                          />
-                          <div className="p-3 bg-secondary rounded-bottom p-xl-4">
-                            {/* <img src={logo1} alt="..." style={{ height: 25 }} /> */}
-                            <p className="text-second opacity-8 mt-4 mb-0">
-                              You can build unlimited layout styles using any of
-                              the 500+ included components and elements.
-                              Powerful, unique template built for React and
-                              Material-UI.
-                            </p>
-                          </div>
-                        </a>
-                      </div>
+                  <div>
+                    <b>Teams</b>
+                    <Grid container spacing={2} className="mt-1">
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock1}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>User name</b>
+                              <p className="text-second opacity-8 mb-0">CEO</p>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="a-blue">
+                                View
+                              </a>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock1}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>User name</b>
+                              <p className="text-second opacity-8 mb-0">CEO</p>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="a-blue">
+                                View
+                              </a>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock1}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>User name</b>
+                              <p className="text-second opacity-8 mb-0">CEO</p>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="a-blue">
+                                View
+                              </a>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock1}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>User name</b>
+                              <p className="text-second opacity-8 mb-0">CEO</p>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="a-blue">
+                                View
+                              </a>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
-                      <div>
-                        <a
-                          href="#/"
-                          onClick={(e) => e.preventDefault()}
-                          className="card bg-white shadow-sm-dark card-box-hover-rise">
-                          <img
-                            src={stock1}
-                            className="card-img-top"
-                            alt="..."
-                          />
-                          <div className="p-3 bg-secondary rounded-bottom p-xl-4">
-                            {/* <img src={logo1} alt="..." style={{ height: 25 }} /> */}
-                            <p className="text-second opacity-8 mt-4 mb-0">
-                              You can build unlimited layout styles using any of
-                              the 500+ included components and elements.
-                              Powerful, unique template built for React and
-                              Material-UI.
-                            </p>
-                          </div>
-                        </a>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                      <div>
-                        <a
-                          href="#/"
-                          onClick={(e) => e.preventDefault()}
-                          className="card bg-white shadow-sm-dark card-box-hover-rise">
-                          <img
-                            src={stock1}
-                            className="card-img-top"
-                            alt="..."
-                          />
-                          <div className="p-3 bg-secondary rounded-bottom p-xl-4">
-                            {/* <img src={logo1} alt="..." style={{ height: 25 }} /> */}
-                            <p className="text-second opacity-8 mt-4 mb-0">
-                              You can build unlimited layout styles using any of
-                              the 500+ included components and elements.
-                              Powerful, unique template built for React and
-                              Material-UI.
-                            </p>
-                          </div>
-                        </a>
-                      </div>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                      <div>
-                        <a
-                          href="#/"
-                          onClick={(e) => e.preventDefault()}
-                          className="card bg-white shadow-sm-dark card-box-hover-rise">
-                          <img
-                            src={stock1}
-                            className="card-img-top"
-                            alt="..."
-                          />
-                          <div className="p-3 bg-secondary rounded-bottom p-xl-4">
-                            {/* <img src={logo1} alt="..." style={{ height: 25 }} /> */}
-                            <p className="text-second opacity-8 mt-4 mb-0">
-                              You can build unlimited layout styles using any of
-                              the 500+ included components and elements.
-                              Powerful, unique template built for React and
-                              Material-UI.
-                            </p>
-                          </div>
-                        </a>
-                      </div>
-                    </Grid>
-                  </Grid>
+                  </div>
                 )}
               </Card>
-              <Card className="card-box p-3 mt-2">
-                <b>Education</b>
-                <div className="float-right text-first font-size-lg">
-                  {/* <span>Education</span> */}
-                  <FontAwesomeIcon
-                    icon={['fas', 'pencil-alt']}
-                    className="icon ml-2"
-                    // onClick={handleExperience}
-                  />
-                </div>
+
+              {currentUser.role === 'candidate' && (
                 <div>
-                  <CardContent className="pb-0">
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>Web developer</spam>
-                      </div>
+                  <Card className="card-box p-3 mt-2">
+                    <b>Education</b>
+                    <div className="float-right text-first font-size-lg">
+                      {/* <span>Education</span> */}
+                      <FontAwesomeIcon
+                        icon={['fas', 'pencil-alt']}
+                        className="icon ml-2"
+                        // onClick={handleExperience}
+                      />
                     </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>Javascript</spam>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>Angular</spam>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>React</spam>
-                      </div>
-                    </div>
-                  </CardContent>
-                </div>
-              </Card>
-
-              <Card className="card-box p-3 mt-2">
-                <b>Experience</b>
-                <div className="float-right text-first font-size-lg">
-                  {/* <span>Add Experience</span> */}
-                  <FontAwesomeIcon
-                    icon={['fas', 'pencil-alt']}
-                    className="icon ml-2"
-                    // onClick={handleExperience}
-                  />
-                </div>
-                <div>
-                  <CardContent className="pb-0">
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-3">
-                          <div className="avatar-icon rounded">
-                            <img alt="..." src={avatar2} />
+                    <div>
+                      <CardContent className="pb-0">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <div className="position-relative">
-                          <span>Inez Conley</span>
-                          <span className="text-black-50 d-block">
-                            Frank Belford is a leading professional services
-                            Consultancy for selesforce and bullhorn for
-                            selesforce product.
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-3">
-                          <div className="avatar-icon rounded">
-                            <img alt="..." src={avatar2} />
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <div className="position-relative">
-                          <span>Inez Conley</span>
-                          <span className="text-black-50 d-block">
-                            Frank Belford is a leading professional services
-                            Consultancy for selesforce and bullhorn for
-                            selesforce product.
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-3">
-                          <div className="avatar-icon rounded">
-                            <img alt="..." src={avatar2} />
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <div className="position-relative">
-                          <span>Inez Conley</span>
-                          <span className="text-black-50 d-block">
-                            Frank Belford is a leading professional services
-                            Consultancy for selesforce and bullhorn for
-                            selesforce product.
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-3">
-                          <div className="avatar-icon rounded">
-                            <img alt="..." src={avatar2} />
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <div className="position-relative">
-                          <span>Inez Conley</span>
-                          <span className="text-black-50 d-block">
-                            Frank Belford is a leading professional services
-                            Consultancy for selesforce and bullhorn for
-                            selesforce product.
-                          </span>
+                      </CardContent>
+                    </div>
+                  </Card>
+
+                  <Card className="card-box p-3 mt-2">
+                    <b>Experience</b>
+                    <div className="float-right text-first font-size-lg">
+                      {/* <span>Add Experience</span> */}
+                      <FontAwesomeIcon
+                        icon={['fas', 'pencil-alt']}
+                        className="icon ml-2"
+                        // onClick={handleExperience}
+                      />
+                    </div>
+                    <div>
+                      <CardContent className="pb-0">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-3">
+                              <div className="avatar-icon rounded">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div className="position-relative">
+                              <span>Inez Conley</span>
+                              <span className="text-black-50 d-block">
+                                Frank Belford is a leading professional services
+                                Consultancy for selesforce and bullhorn for
+                                selesforce product.
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
                     </div>
-                  </CardContent>
-                </div>
-              </Card>
+                  </Card>
 
-              <Card className="card-box p-3 mt-2">
-                <b>Recommendation and endorsements</b>
-                <div className="float-right text-first font-size-lg">
-                  {/* <span>Add Recommendation</span> */}
-                  <FontAwesomeIcon
-                    icon={['fas', 'pencil-alt']}
-                    className="icon ml-2"
-                    // onClick={handleExperience}
-                  />
-                </div>
+                  <Card className="card-box p-3 mt-2">
+                    <b>Recommendation and endorsements</b>
+                    <div className="float-right text-first font-size-lg">
+                      {/* <span>Add Recommendation</span> */}
+                      <FontAwesomeIcon
+                        icon={['fas', 'pencil-alt']}
+                        className="icon ml-2"
+                        // onClick={handleExperience}
+                      />
+                    </div>
 
-                <div>
-                  <CardContent className="pb-0">
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>Web developer</spam>
-                      </div>
+                    <div>
+                      <CardContent className="pb-0">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <spam>Web developer</spam>
+                          </div>
+                        </div>
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <spam>Javascript</spam>
+                          </div>
+                        </div>
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <spam>Angular</spam>
+                          </div>
+                        </div>
+                        <div className="divider my-3" />
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="d-flex align-items-center">
+                            <spam>React</spam>
+                          </div>
+                        </div>
+                      </CardContent>
                     </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>Javascript</spam>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>Angular</spam>
-                      </div>
-                    </div>
-                    <div className="divider my-3" />
-                    <div className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex align-items-center">
-                        <spam>React</spam>
-                      </div>
-                    </div>
-                  </CardContent>
+                  </Card>
                 </div>
-              </Card>
+              )}
 
+              {currentUser.role === 'agency' && (
+                <Card className="card-box mt-3">
+                  <div className="card-header py-3">
+                    <div className="card-header--title font-size-lg">
+                      <b>Live roles</b>
+                    </div>
+                    <div className="card-header--actions">
+                      <div className="search-wrapper">
+                        <TextField
+                          variant="outlined"
+                          size="small"
+                          id="input-search"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <SearchTwoToneIcon />
+                              </InputAdornment>
+                            )
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="table-responsive-md">
+                    <PerfectScrollbar>
+                      <Table className="table table-hover mb-0">
+                        <thead>
+                          <tr>
+                            <th className="bg-white text-left">ID</th>
+                            <th className="bg-white">Requester</th>
+                            <th className="bg-white text-left">Subject</th>
+                            <th className="bg-white text-center">Assignee</th>
+                            <th className="bg-white text-center">Priority</th>
+                            <th className="bg-white text-center">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="font-weight-bold">#453</td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>Shanelle Wynn</div>
+                              </div>
+                            </td>
+                            <td>When, while the lovely valley teems</td>
+                            <td className="text-center">
+                              <div
+                                className="avatar-icon-wrapper avatar-icon-sm"
+                                title="Lili Pemberton">
+                                <div className="avatar-icon">
+                                  <img alt="..." src={avatar2} />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-danger text-danger">
+                                High
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-dark text-dark">
+                                Closed
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="font-weight-bold">#584</td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>Brody Dixon</div>
+                              </div>
+                            </td>
+                            <td>I am so happy, my dear friend</td>
+                            <td className="text-center">
+                              <div className="avatar-icon-wrapper avatar-icon-sm">
+                                <div className="avatar-icon">
+                                  <img alt="..." src={avatar5} />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-warning text-warning">
+                                Low
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-success text-success">
+                                Open
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="font-weight-bold">#764</td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar5} />
+                                  </div>
+                                </div>
+                                <div>Milton Ayala</div>
+                              </div>
+                            </td>
+                            <td>His own image, and the breath</td>
+                            <td className="text-center">
+                              <div className="avatar-icon-wrapper avatar-icon-sm">
+                                <div className="avatar-icon">
+                                  <img alt="..." src={avatar5} />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-info text-info">
+                                Medium
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-dark text-dark">
+                                Closed
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="font-weight-bold">#453</td>
+                            <td>
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar5} />
+                                  </div>
+                                </div>
+                                <div>Kane Gentry</div>
+                              </div>
+                            </td>
+                            <td>When I hear the buzz</td>
+                            <td className="text-center">
+                              <div
+                                className="avatar-icon-wrapper avatar-icon-sm"
+                                title="Marion Devine">
+                                <div className="avatar-icon">
+                                  <img alt="..." src={avatar2} />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-warning text-warning">
+                                Low
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <div className="badge badge-neutral-success text-success">
+                                Open
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </PerfectScrollbar>
+                  </div>
+                </Card>
+              )}
               {/* Adds section */}
               <AddsComponents />
             </Grid>
