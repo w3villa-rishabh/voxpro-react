@@ -16,6 +16,7 @@ import {
   InputAdornment,
   Table
 } from '@material-ui/core';
+
 import PersonIcon from '@material-ui/icons/Person';
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
@@ -33,6 +34,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import stock1 from '../../assets/images/stock-photos/stock-1.jpg';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
+import agencybg from '../../assets/images/voxpro-images/agency-bg.jpg';
 
 import GoogleMapReact from 'google-map-react';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
@@ -226,7 +228,17 @@ export default function LivePreviewExample() {
                       className="edit"
                     />
                   </div> */}
-                  <img alt="..." className="img-fit-container" src={stock2} />
+                  {currentUser.role === 'candidate' && (
+                    <img alt="..." className="img-fit-container" src={stock2} />
+                  )}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <img
+                      alt="..."
+                      className="img-fit-container"
+                      src={agencybg}
+                    />
+                  )}
                 </div>
               </Card>
             </Grid>
@@ -234,7 +246,7 @@ export default function LivePreviewExample() {
           <Grid container spacing={2} className="mt-1">
             <Grid item xs={12} sm={4}>
               <div className="profile-view-section">
-                <Card className="card-box p-3 h-100">
+                <Card className="card-box p-3 h-100 side-bg">
                   <div className="icon-demo-box">
                     <div
                       {...getRootProps({
@@ -286,11 +298,35 @@ export default function LivePreviewExample() {
                     {(currentUser.role === 'agency' ||
                       currentUser.role === 'company') && <small>London</small>}
                   </div>
-                  <hr></hr>
+                  {currentUser.role === 'candidate' && (
+                    <hr></hr>
+                  )}
                   {currentUser.role === 'candidate' && (
                     <OnlineAndAvailability />
                   )}
-
+                  <hr></hr>
+                  {currentUser.role === 'candidate' && (
+                    <div className="align-content-center d-flex justify-content-center">
+                      <Button
+                        variant="contained"
+                        size="small"
+                        className="btn-pill m-1 btn-primary">
+                        Connect
+                      </Button>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        className="btn-pill m-1">
+                        Message
+                      </Button>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        className="btn-pill m-1">
+                        More..
+                      </Button>
+                    </div>
+                  )}
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') && (
                     <div>
@@ -321,7 +357,7 @@ export default function LivePreviewExample() {
                                 />
                               </div>
                               <div className="mt-2 line-height-sm">
-                                <b className="font-12">Permanent</b>
+                                <b className="font-12 cb">Permanent</b>
                                 <span className="text-black-50 font-10 d-block">
                                   Desired Employment Type
                                 </span>
@@ -337,7 +373,7 @@ export default function LivePreviewExample() {
                                 />
                               </div>
                               <div className="mt-2 line-height-sm">
-                                <b className="font-12">$3,586</b>
+                                <b className="font-12 cb">$3,586</b>
                                 <span className="text-black-50 font-10 d-block">
                                   Desired Annual Salary
                                 </span>
@@ -353,7 +389,7 @@ export default function LivePreviewExample() {
                                 />
                               </div>
                               <div className="mt-2 line-height-sm">
-                                <b className="font-12">City of London</b>
+                                <b className="font-12 cb">City of London</b>
                                 <span className="text-black-50 font-10 d-block">
                                   Desired Location
                                 </span>
@@ -369,7 +405,7 @@ export default function LivePreviewExample() {
                                 />
                               </div>
                               <div className="mt-2 line-height-sm">
-                                <b className="font-12">Permanent</b>
+                                <b className="font-12 cb">Permanent</b>
                                 <span className="text-black-50 font-10 d-block">
                                   Current Employment Type
                                 </span>
@@ -385,7 +421,7 @@ export default function LivePreviewExample() {
                                 />
                               </div>
                               <div className="mt-2 line-height-sm">
-                                <b className="font-12">$57,500</b>
+                                <b className="font-12 cb">$57,500</b>
                                 <span className="text-black-50 font-10 d-block">
                                   Current Annual Salary
                                 </span>
@@ -401,7 +437,7 @@ export default function LivePreviewExample() {
                                 />
                               </div>
                               <div className="mt-2 line-height-sm">
-                                <b className="font-12">West London</b>
+                                <b className="font-12 cb">West London</b>
                                 <span className="text-black-50 font-10 d-block">
                                   Current Location
                                 </span>
@@ -410,30 +446,46 @@ export default function LivePreviewExample() {
                           </Grid>
                         </Grid>
                       </CardContent>
-                      <hr></hr>
-                      <div className="align-content-center d-flex justify-content-center">
-                        <Button
-                          variant="contained"
-                          size="small"
-                          className="btn-pill m-1 btn-primary">
-                          Connect
-                        </Button>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          className="btn-pill m-1">
-                          Message
-                        </Button>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          className="btn-pill m-1">
-                          More..
-                        </Button>
-                      </div>
                     </div>
                   )}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <div>
+                      <hr></hr>
+                      <b>Description</b>
+                      <br />
+                      <small>
+                        We provides search marketing solutions for businesses
+                        worldwide, including website promotion, online
+                        advertising, and search engine optimization techniques
+                        to improve its clients' positioning in search engines.
+                        We cater to the higher education market, including
+                        colleges and universities.
+                      </small>
+                      <hr></hr>
+                      <b>Company Sector</b>
+                      <br />
+                      <div className="m-1 badge badge-dark">Advertising</div>
+                      <div className="m-1 badge badge-dark">Analytics</div>
+                      <div className="m-1 badge badge-dark">
+                        Enterprise Software
+                      </div>
+                      <div className="m-1 badge badge-dark">eCommerce</div>
+                      <div className="m-1 badge badge-dark">
+                        Information Technology
+                      </div>
+                      <br />
 
+                      <hr></hr>
+                      <b>Company Size</b>
+                      <br />
+                      <h5>Medium (50-200)</h5>
+                      <hr></hr>
+                      <b>Establised</b>
+                      <br />
+                      <h5>1999</h5>
+                    </div>
+                  )}
                   <hr></hr>
                   <div className="w-100" style={{ height: '250px' }}>
                     <GoogleMapReact defaultCenter={center} defaultZoom={zoom}>
@@ -794,7 +846,7 @@ export default function LivePreviewExample() {
                 {(currentUser.role === 'agency' ||
                   currentUser.role === 'company') && (
                   <div>
-                    <b>Teams</b>
+                    <b>Team</b>
                     <Grid container spacing={2} className="mt-1">
                       <Grid item xs={12} sm={3}>
                         <div>
@@ -893,6 +945,14 @@ export default function LivePreviewExample() {
                         </div>
                       </Grid>
                     </Grid>
+                    <div className="card-footer text-center">
+                      <Button
+                        size="small"
+                        className="btn-outline-second"
+                        variant="text">
+                        View More
+                      </Button>
+                    </div>
                   </div>
                 )}
               </Card>
@@ -982,6 +1042,14 @@ export default function LivePreviewExample() {
                             </div>
                           </div>
                         </div>
+                        <div className="card-footer text-center">
+                          <Button
+                            size="small"
+                            className="btn-outline-second"
+                            variant="text">
+                            View More
+                          </Button>
+                        </div>
                       </CardContent>
                     </div>
                   </Card>
@@ -1069,6 +1137,14 @@ export default function LivePreviewExample() {
                             </div>
                           </div>
                         </div>
+                        <div className="card-footer text-center">
+                          <Button
+                            size="small"
+                            className="btn-outline-second"
+                            variant="text">
+                            View More
+                          </Button>
+                        </div>
                       </CardContent>
                     </div>
                   </Card>
@@ -1120,23 +1196,40 @@ export default function LivePreviewExample() {
                 <Card className="card-box mt-3">
                   <div className="card-header py-3">
                     <div className="card-header--title font-size-lg">
-                      <b>Live roles</b>
+                      <b>Roles</b>
                     </div>
                     <div className="card-header--actions">
-                      <div className="search-wrapper">
-                        <TextField
-                          variant="outlined"
-                          size="small"
-                          id="input-search"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <SearchTwoToneIcon />
-                              </InputAdornment>
-                            )
-                          }}
-                        />
-                      </div>
+                      <Grid container spacing={6}>
+                        <Grid item md={5} className="mtb">
+                          <TextField
+                            variant="outlined"
+                            size="small"
+                            className="w-100 ht"
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <SearchTwoToneIcon />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </Grid>
+                        <Grid item md={5} className="mtb">
+                          <TextField
+                            variant="outlined"
+                            size="small"
+                            id="input-with-icon-textfield1"
+                            className="w-100 mb-4"
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <SearchTwoToneIcon />
+                                </InputAdornment>
+                              )
+                            }}
+                          />
+                        </Grid>
+                      </Grid>
                     </div>
                   </div>
 
@@ -1145,151 +1238,86 @@ export default function LivePreviewExample() {
                       <Table className="table table-hover mb-0">
                         <thead>
                           <tr>
-                            <th className="bg-white text-left">ID</th>
-                            <th className="bg-white">Requester</th>
-                            <th className="bg-white text-left">Subject</th>
-                            <th className="bg-white text-center">Assignee</th>
-                            <th className="bg-white text-center">Priority</th>
-                            <th className="bg-white text-center">Status</th>
+                            <th className="bg-white text-left">Date Posted</th>
+                            <th className="bg-white">Job Title</th>
+                            <th className="bg-white text-left">Location</th>
+                            <th className="bg-white text-center">Salary</th>
+                            <th className="bg-white text-center">Type</th>
+                            {/* <th className="bg-white text-center">Status</th> */}
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td className="font-weight-bold">#453</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>Shanelle Wynn</div>
-                              </div>
-                            </td>
-                            <td>When, while the lovely valley teems</td>
-                            <td className="text-center">
-                              <div
-                                className="avatar-icon-wrapper avatar-icon-sm"
-                                title="Lili Pemberton">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar2} />
-                                </div>
-                              </div>
-                            </td>
+                            <td>14th April</td>
+                            <td>Business Analyst</td>
+                            <td>UK</td>
+                            <td className="text-center">€2000</td>
                             <td className="text-center">
                               <div className="badge badge-neutral-danger text-danger">
                                 High
                               </div>
                             </td>
+                          </tr>
+                          <tr>
+                            <td>13th april</td>
+                            <td>Business Developer</td>
+                            <td>UK</td>
+                            <td className="text-center">€4500</td>
                             <td className="text-center">
-                              <div className="badge badge-neutral-dark text-dark">
-                                Closed
+                              <div className="badge badge-neutral-danger text-danger">
+                                High
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <td className="font-weight-bold">#584</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>Brody Dixon</div>
-                              </div>
-                            </td>
-                            <td>I am so happy, my dear friend</td>
+                            <td>12th april</td>
+                            <td>Software developer</td>
+                            <td>UK</td>
+                            <td className="text-center">€3000</td>
                             <td className="text-center">
-                              <div className="avatar-icon-wrapper avatar-icon-sm">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar5} />
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-warning text-warning">
-                                Low
-                              </div>
-                            </td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-success text-success">
-                                Open
+                              <div className="badge badge-neutral-danger text-danger">
+                                High
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <td className="font-weight-bold">#764</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar5} />
-                                  </div>
-                                </div>
-                                <div>Milton Ayala</div>
-                              </div>
-                            </td>
-                            <td>His own image, and the breath</td>
+                            <td>10th april</td>
+                            <td>IT Analyst</td>
+                            <td>UK</td>
+                            <td className="text-center">€3500</td>
                             <td className="text-center">
-                              <div className="avatar-icon-wrapper avatar-icon-sm">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar5} />
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-info text-info">
-                                Medium
-                              </div>
-                            </td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-dark text-dark">
-                                Closed
+                              <div className="badge badge-neutral-danger text-danger">
+                                High
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <td className="font-weight-bold">#453</td>
-                            <td>
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper avatar-icon-sm mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar5} />
-                                  </div>
-                                </div>
-                                <div>Kane Gentry</div>
-                              </div>
-                            </td>
-                            <td>When I hear the buzz</td>
+                            <td>8th april</td>
+                            <td>Devops Engineer</td>
+                            <td>UK</td>
+                            <td className="text-center">€2000</td>
                             <td className="text-center">
-                              <div
-                                className="avatar-icon-wrapper avatar-icon-sm"
-                                title="Marion Devine">
-                                <div className="avatar-icon">
-                                  <img alt="..." src={avatar2} />
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-warning text-warning">
-                                Low
-                              </div>
-                            </td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-success text-success">
-                                Open
+                              <div className="badge badge-neutral-danger text-danger">
+                                High
                               </div>
                             </td>
                           </tr>
                         </tbody>
                       </Table>
                     </PerfectScrollbar>
+                    <div className="card-footer text-center">
+                      <Button
+                        size="small"
+                        className="btn-outline-second"
+                        variant="text">
+                        View More
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               )}
               {/* Adds section */}
-              <AddsComponents />
+              {currentUser.role === 'candidate' && <AddsComponents />}
             </Grid>
           </Grid>
         </div>
