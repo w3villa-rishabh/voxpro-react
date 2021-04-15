@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -25,8 +25,11 @@ import avatar5 from '../../assets/images/avatars/default.png';
 
 import ChatBox from '../chat_component/chat';
 import Chart from 'react-apexcharts';
+import Calendar from 'react-calendar';
 
 const AgencyDashboard = () => {
+  const [value, onChange] = useState(new Date());
+
   const options = {
     chart: {
       toolbar: {
@@ -59,11 +62,11 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={3}>
             <CardContent className="bg-brand-facebook h-100">
               <div className="align-box-row align-items-start">
-                <div className="bg-white font-size-xl d-40 btn-icon">
+                <div className="bg-white font-size-xl d-40 btn-icon p-2">
                   <FontAwesomeIcon icon={['fas', 'user-tag']} />
                 </div>
                 <div className="font-weight-bold text-white ml-3">
-                  <small className="font-weight-bold d-block mb-1 text-uppercase">
+                  <small className="font-size-sm d-block mb-1 text-uppercase">
                     Live Placements
                   </small>
                   <span className="font-size-xxl mt-1">23,274</span>
@@ -74,11 +77,11 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={3}>
             <CardContent className="bg-brand-facebook h-100">
               <div className="align-box-row align-items-start">
-                <div className="bg-white font-size-xl d-40 btn-icon">
+                <div className="bg-white font-size-xl d-40 btn-icon p-2">
                   <FontAwesomeIcon icon={['fas', 'clock']} />
                 </div>
                 <div className="font-weight-bold text-white ml-3">
-                  <small className="font-weight-bold d-block mb-1 text-uppercase">
+                  <small className="font-size-sm d-block mb-1 text-uppercase">
                     Pending Placements
                   </small>
                   <span className="font-size-xxl mt-1">23,274</span>
@@ -90,11 +93,11 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={3}>
             <CardContent className="bg-brand-facebook h-100">
               <div className="align-box-row align-items-start">
-                <div className="bg-white font-size-xl d-40 btn-icon">
+                <div className="bg-white font-size-xl d-40 btn-icon p-2">
                   <FontAwesomeIcon icon={['fas', 'clock']} />
                 </div>
                 <div className="font-weight-bold text-white ml-3">
-                  <small className="font-weight-bold d-block mb-1 text-uppercase">
+                  <small className="font-size-sm d-block mb-1 text-uppercase">
                     Pending Documents
                   </small>
                   <span className="font-size-xxl mt-1">23,274</span>
@@ -105,11 +108,11 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={3}>
             <CardContent className="bg-brand-facebook h-100">
               <div className="align-box-row align-items-start">
-                <div className="bg-white font-size-xl d-40 btn-icon">
+                <div className="bg-white font-size-xl d-40 btn-icon p-2">
                   <FontAwesomeIcon icon={['fas', 'clock']} />
                 </div>
                 <div className="font-weight-bold text-white ml-3">
-                  <small className="font-weight-bold d-block mb-1 text-uppercase">
+                  <small className="font-size-sm d-block mb-1 text-uppercase">
                     Pending IR35
                   </small>
                   <span className="font-size-xxl mt-1">23,274</span>
@@ -120,11 +123,11 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={3}>
             <CardContent className="bg-brand-facebook">
               <div className="align-box-row align-items-start">
-                <div className="bg-white font-size-xl d-40 btn-icon">
+                <div className="bg-white font-size-xl d-40 btn-icon p-2">
                   <FontAwesomeIcon icon={['fas', 'user-tag']} />
                 </div>
                 <div className="font-weight-bold text-white ml-3">
-                  <small className="font-weight-bold d-block mb-1 text-uppercase">
+                  <small className="font-size-sm d-block mb-1 text-uppercase">
                     Scheduled Interviews
                   </small>
                   <span className="font-size-xxl mt-1">23,274</span>
@@ -137,14 +140,14 @@ const AgencyDashboard = () => {
         <Grid container spacing={1} className="mt-3">
           <Grid item xs={12} sm={8}>
             <Card className="card-box shadow-success-sm p-3 h-100">
-              <b>Monthly Placement</b>
-              <Grid container spacing={0}>
+              <b>Monthly Placements</b>
+              <Grid container spacing={0} className="mt-5">
                 <Grid item xs={12} sm={6}>
                   <Chart
                     options={options}
                     series={series}
                     type="line"
-                    height="270"
+                    height="310"
                   />
                   {/* </Card> */}
                 </Grid>
@@ -219,7 +222,7 @@ const AgencyDashboard = () => {
                         </Grid>
                       </Grid>
                     </div>
-                    <div className="text-center py-3">
+                    <div className="text-center mt-2">
                       <Button size="small" className="px-4 btn-neutral-danger">
                         23 View All
                       </Button>
@@ -228,12 +231,13 @@ const AgencyDashboard = () => {
                 </Card>
               </Grid>
               <Grid item xs={12}>
-                <Card className="card-box mt-1 h-100">
-                  <div className="card-content-overlay text-center p-3 h-100px">
-                    <div className="py-2">
-                      <b> Calender</b>
-                    </div>
-                  </div>
+                <Card className="card-box mt-1">
+                  <Calendar
+                    className="border-0 m-auto"
+                    defaultView="month"
+                    onChange={onChange}
+                    value={value}
+                  />
                 </Card>
               </Grid>
             </Grid>
