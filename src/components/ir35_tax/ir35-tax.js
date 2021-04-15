@@ -15,7 +15,8 @@ export default function IR35TaxComponent() {
     reject: 'a',
     substitute: 'a',
     originallyAgreed: 'a',
-    organisationDone: 'a',
+    organisationWorkDone: 'a',
+    payment: '',
     organisationHours: 'a',
     organisationWork: 'a',
     equipmentPay: 'a',
@@ -68,7 +69,7 @@ export default function IR35TaxComponent() {
 
       <div className="font-12 position-relative p-5">
         {activeTab > '0' && (
-          <div>
+          <div className="fh">
             <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
             <a
               href="javascript:void(0)"
@@ -80,7 +81,6 @@ export default function IR35TaxComponent() {
             </a>
           </div>
         )}
-
         {/* //Section 0 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -89,29 +89,30 @@ export default function IR35TaxComponent() {
           index={0}>
           <div className="text-center w-100">
             <img alt="..." className="ir35-logo" src={logo} />
-            <h5 className="font-weight-bold">
+            <h4 className="font-weight-bold mt-3">
               CHECK EMPLOYMENT STATUS FOR TAX
-            </h5>
-            <p className="mb-2">Please answer all question</p>
-            <p className="mb-2">Takes 7+ minutes</p>
+            </h4>
+            <p className="mb-2 fh">Please answer all question</p>
+            <p className="mb-2 fh">Takes 7+ minutes</p>
             <Button
+              size="medium"
               variant="contained"
               onClick={() => {
                 setActiveTab('1');
               }}
-              className="font-weight-bold btn-slack px-4 bg-color">
+              className="font-weight-bold btn-slack px-4 bg-color button-width">
               START
             </Button>
-            <p>Press enter</p>
-            <div className="pt-5 font-weight-bold font-size-xs">
-              <h6 className="font-weight-bold">DISCLAIMER</h6>
-              <p>
+            <p className="fh">Press enter</p>
+            <div className="mt-5 font-weight-bold font-size-xs">
+              <h6 className="font-weight-bold fhh">DISCLAIMER</h6>
+              <p className="fh">
                 Voxpro assumes no responsibility for the result of this test.
                 This result given is in accordance with HMRC starts by.
               </p>
-              <span className="font-italic">Warning</span>
+              <span className="font-italic fhh">Warning</span>
               <br></br>
-              <span className="line-height-md">
+              <span className="line-height-md fh">
                 This word not be the case if the information you have provided
                 was checked and found to be inaccurate.
                 <br></br>
@@ -170,7 +171,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid> */}
         </div>
-
         {/* //Section 1 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -179,9 +179,10 @@ export default function IR35TaxComponent() {
           index={1}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>About you and the work</h6>
               <h4>
-                Does the worker provide their services through a limited
-                company, partnership or unincorporated association?
+                Do you provide your services through a limited company,
+                partnership or unincorporated association?
               </h4>
               <div className="text-f">
                 <p>These are also known as intermediaries.</p>
@@ -203,7 +204,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fh">Yes</span>
                   </li>
                   <li>
                     <Radio
@@ -215,7 +216,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fh">No</span>
                   </li>
                 </ul>
               </div>
@@ -231,55 +232,101 @@ export default function IR35TaxComponent() {
           </Grid>
         </div>
         {/* //Section 2 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '2'
-          })}
-          index={2}>
-          <Grid container spacing={1} className="pt-3">
-            <Grid item xs={12}>
-              <h4>
-                Has the worker already started working for your organisation?
-              </h4>
-              <div>
-                <ul>
-                  <li>
-                    <Radio
-                      checked={policyObj.organization === 'a'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, organization: 'a' });
-                      }}
-                      value="a"
-                      name="radio-button-demo"
-                      aria-label="A"
-                    />
-                    <span>Yes</span>
-                  </li>
-                  <li>
-                    <Radio
-                      checked={policyObj.organization === 'b'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, organization: 'b' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span>No</span>
-                  </li>
-                </ul>
-              </div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  setActiveTab('3');
-                }}
-                className="font-weight-bold btn-slack px-4 my-3 bg-color">
-                Continue
-              </Button>
+        {policyObj.limitedCompany === 'a' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '2'
+            })}
+            index={2}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h4>
+                  Has the worker already started working for your organisation?
+                </h4>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.organization === 'a'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, organization: 'a' });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="fh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.organization === 'b'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, organization: 'b' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="fh">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setActiveTab('3');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
+          </div>
+        )}
+        {/* section 2A */}
+        {policyObj.limitedCompany === 'b' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '2'
+            })}
+            index={2}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h4>You need to start again</h4>
+                <div className="text-f">
+                  <p>
+                    The{' '}
+                    <a
+                      href="https://www.gov.uk/guidance/understanding-off-payroll-working-ir35"
+                      style={{ color: 'blue' }}
+                      target="_blank">
+                      {' '}
+                      off-payroll working rules (IR35) (opens in a new window){' '}
+                    </a>{' '}
+                    can only apply if you are providing your services through an
+                    intermediary.
+                  </p>
+                </div>
+                <div className="text-f">
+                  <p>
+                    As you told us there is no intermediary involved, you need
+                    to find out if this work is classed as employment or
+                    self-employment for tax purposes.
+                  </p>
+                </div>
+
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setActiveTab('0');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Start Again
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        )}
         {/* Section 3 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -335,7 +382,7 @@ export default function IR35TaxComponent() {
           </Grid>
         </div>
         {/* Section 4 */}
-        {policyObj.organization === 'a' && (
+        {policyObj.organization === 'a' && policyObj.director === 'b' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '4'
@@ -350,6 +397,50 @@ export default function IR35TaxComponent() {
                     do their role.
                   </span>
                 </div>
+                <div className="mt-3">
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.substitute === 'a'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, substitute: 'a' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">
+                        Yes, your client accepted them
+                      </span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.substitute === 'b'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, substitute: 'b' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">
+                        Yes, but your client did not accept them
+                      </span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.substitute === 'c'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, substitute: 'c' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">No, it has not happened</span>
+                    </li>
+                  </ul>
+                </div>
                 <Button
                   variant="contained"
                   onClick={() => {
@@ -362,8 +453,9 @@ export default function IR35TaxComponent() {
             </Grid>
           </div>
         )}
+
         {/* Section 4A */}
-        {policyObj.organization === 'b' && (
+        {policyObj.organization === 'b' && policyObj.director === 'b' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '4'
@@ -371,7 +463,8 @@ export default function IR35TaxComponent() {
             index={4}>
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
-                <h4>Do you have the right to reject a substitute?</h4>
+                <h6>Substitutes and helpers</h6>
+                <h4>Does your client have the right to reject a substitute?</h4>
                 <div className="text-f">
                   <span>
                     A substitute is someone the worker sends in their place to
@@ -423,125 +516,294 @@ export default function IR35TaxComponent() {
             </Grid>
           </div>
         )}
-
-        {/* Section 5 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '5'
-          })}
-          index={5}>
-          <Grid container spacing={1} className="pt-3">
-            <Grid item xs={12}>
-              <h4>Did the worker pay their substitute?</h4>
-              <div className="text-f">
-                <span>
-                  This includes payments made by the worker or their business.
-                </span>
-              </div>
-              <div>
-                <ul>
-                  <li>
-                    <Radio
-                      checked={policyObj.substitute === 'a'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, substitute: 'a' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span className="mt-3">Yes</span>
-                  </li>
-                  <li>
-                    <Radio
-                      checked={policyObj.substitute === 'b'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, substitute: 'b' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span className="mt-3">No</span>
-                  </li>
-                </ul>
-              </div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  setActiveTab('6');
-                }}
-                className="font-weight-bold btn-slack px-4 my-3 bg-color">
-                Continue
-              </Button>
-            </Grid>
-          </Grid>
-        </div>
-
-        {/* Section 6 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '6'
-          })}
-          index={6}>
-          <Grid container spacing={1} className="pt-3">
-            <Grid item xs={12}>
-              <h4>
-                Does your organisation have the right to move the worker from
-                the task they originally agreed to do?
+        {/* section 4b */}
+        {policyObj.director === 'a' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '4'
+            })}
+            index={4}>
+            <div className="text-center w-100">
+              <img alt="..." className="ir35-logo" src={logo} />
+              <h4 className="font-weight-bold mt-3">
+                CHECK EMPLOYMENT STATUS FOR TAX
               </h4>
-              <div className="text-f">
-                <span>
-                  A worker taken on for general tasks, rather than one specific
-                  task, might be moved as and when priorities change. The client
-                  may not need the worker’s permission to move them.
-                </span>
-                <br />
-                <a className="a-blue" href="javascript:void(0)">
-                  Read more examples about the client’s control over what the
-                  worker does (opens in a new window).
-                </a>
-              </div>
-              <div>
-                <ul>
-                  <li>
-                    <Radio
-                      checked={policyObj.originallyAgreed === 'a'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span className="mt-3">Yes</span>
-                  </li>
-                  <li>
-                    <Radio
-                      checked={policyObj.originallyAgreed === 'b'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span className="mt-3">No</span>
-                  </li>
-                </ul>
-              </div>
-              <Button
+              <p className="mb-2 fh mt-5">
+                Your Answers has been successfully submitted for review
+              </p>
+              <p className="mb-2 fh"></p>
+
+              {/* <Button
+                size="medium"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('7');
+                  setActiveTab('1');
                 }}
-                className="font-weight-bold btn-slack px-4 my-3 bg-color">
-                Continue
-              </Button>
+                className="font-weight-bold btn-slack px-4 bg-color button-width">
+                Go to dashboard
+              </Button> */}
+              {/* <p className="fh">Press enter</p> */}
+            </div>
+          </div>
+        )}
+        {/* Section 5 */}
+        {policyObj.reject === 'a' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '5'
+            })}
+            index={5}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Working arrangements</h6>
+                <h4>
+                  Does your client have the right to move you from the task you
+                  originally agreed to do?
+                </h4>
+                <div className="text-f">
+                  <span>
+                    A worker taken on for general tasks, rather than one
+                    specific task, might be moved as and when priorities change.
+                    The client may not need the worker’s permission to move
+                    them.
+                  </span>
+                </div>
+                <div className="text-f">
+                  <span>
+                    Read more examples about the client’s control over{' '}
+                    <a
+                      href="https://www.gov.uk/hmrc-internal-manuals/employment-status-manual/esm0521"
+                      style={{ color: 'blue' }}
+                      target="_blank">
+                      {' '}
+                      what the worker does (opens in a new window).{' '}
+                    </a>{' '}
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'a'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'b'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">
+                        No, you would have to agree
+                      </span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'c'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, originallyAgreed: 'c' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">
+                        No, that would require a new contract or formal working
+                        arrangement
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setActiveTab('6');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
-
+          </div>
+        )}
+        {/* section 5a */}
+        {policyObj.reject === 'b' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '5'
+            })}
+            index={5}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Substitutes and helpers</h6>
+                <h4>Would you have to pay your substitute?</h4>
+                <div className="text-f">
+                  <span>
+                    This includes payments made by the worker or their business.
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.payment === 'a'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, payment: 'a' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.payment === 'b'}
+                        onChange={() => {
+                          setPolicyObj({ ...policyObj, payment: 'b' });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setActiveTab('6');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+        {/* Section 6 */}
+        {(policyObj.originallyAgreed === 'a' ||
+          policyObj.originallyAgreed === 'b' ||
+          policyObj.originallyAgreed === 'c') && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '6'
+            })}
+            index={6}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Working arrangements</h6>
+                <h4>
+                  Does your client have the right to decide how the work is
+                  done?
+                </h4>
+                <div className="text-f">
+                  <span>
+                    This can include your client instructing, guiding or
+                    advising the way the task should be completed.
+                  </span>
+                  <br />
+                  <span>
+                    This is not relevant if it is highly skilled work. For
+                    example, an airline pilot.
+                  </span>
+                  <a className="a-blue" href="javascript:void(0)">
+                    Read more examples of how the work is done (opens in a new
+                    window).
+                  </a>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.organisationWorkDone === 'a'}
+                        onChange={() => {
+                          setPolicyObj({
+                            ...policyObj,
+                            organisationWorkDone: 'a'
+                          });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.organisationWorkDone === 'b'}
+                        onChange={() => {
+                          setPolicyObj({
+                            ...policyObj,
+                            organisationWorkDone: 'b'
+                          });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">No, you solely decide</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.organisationWorkDone === 'c'}
+                        onChange={() => {
+                          setPolicyObj({
+                            ...policyObj,
+                            organisationWorkDone: 'c'
+                          });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">
+                        No, you and your client agree together
+                      </span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.organisationWorkDone === 'd'}
+                        onChange={() => {
+                          setPolicyObj({
+                            ...policyObj,
+                            organisationWorkDone: 'd'
+                          });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fh">
+                        Not relevant, it is highly skilled work
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setActiveTab('7');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        )}
         {/* Section 7 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -608,7 +870,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 8 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -661,7 +922,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 9 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -714,7 +974,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 10 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -775,7 +1034,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 11 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -835,7 +1093,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 12 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -899,7 +1156,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 13 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -958,7 +1214,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 14 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1008,7 +1263,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 15 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1061,7 +1315,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 16 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1119,7 +1372,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 17 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1177,7 +1429,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 18 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1230,7 +1481,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 19 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1291,7 +1541,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 20 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1348,7 +1597,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 21 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1406,7 +1654,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 22 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1458,7 +1705,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 23 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1516,7 +1762,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 24 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -1580,7 +1825,6 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
-
         {/* Section 25 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
