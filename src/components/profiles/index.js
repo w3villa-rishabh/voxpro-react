@@ -298,9 +298,7 @@ export default function LivePreviewExample() {
                     {(currentUser.role === 'agency' ||
                       currentUser.role === 'company') && <small>London</small>}
                   </div>
-                  {currentUser.role === 'candidate' && (
-                    <hr></hr>
-                  )}
+                  {currentUser.role === 'candidate' && <hr></hr>}
                   {currentUser.role === 'candidate' && (
                     <OnlineAndAvailability />
                   )}
@@ -945,7 +943,7 @@ export default function LivePreviewExample() {
                         </div>
                       </Grid>
                     </Grid>
-                    <div className="card-footer text-center">
+                    <div className="mt-4  text-center">
                       <Button
                         size="small"
                         className="btn-outline-second"
@@ -1199,25 +1197,35 @@ export default function LivePreviewExample() {
                       <b>Roles</b>
                     </div>
                     <div className="card-header--actions">
-                      <Grid container spacing={6}>
+                      <Grid container spacing={3}>
+                        <Grid item md={2} className="mtb"></Grid>
                         <Grid item md={5} className="mtb">
-                          <TextField
-                            variant="outlined"
-                            size="small"
-                            className="w-100 ht"
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <SearchTwoToneIcon />
-                                </InputAdornment>
-                              )
-                            }}
-                          />
+                          <span>
+                            <TextField
+                              variant="outlined"
+                              size="small"
+                              label="what"
+                              placeholder="e.g. 'nurse'"
+                              className="w-100 ht"
+                              InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <SearchTwoToneIcon />
+                                  </InputAdornment>
+                                ),
+                                style: {
+                                  height: '37px'
+                                }
+                              }}
+                            />
+                          </span>
                         </Grid>
                         <Grid item md={5} className="mtb">
                           <TextField
                             variant="outlined"
                             size="small"
+                            label="where"
+                            placeholder="town or postcode"
                             id="input-with-icon-textfield1"
                             className="w-100 mb-4"
                             InputProps={{
@@ -1225,7 +1233,10 @@ export default function LivePreviewExample() {
                                 <InputAdornment position="start">
                                   <SearchTwoToneIcon />
                                 </InputAdornment>
-                              )
+                              ),
+                              style: {
+                                height: '37px'
+                              }
                             }}
                           />
                         </Grid>
