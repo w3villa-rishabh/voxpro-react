@@ -298,7 +298,9 @@ export default function LivePreviewExample() {
                     {(currentUser.role === 'agency' ||
                       currentUser.role === 'company') && <small>London</small>}
                   </div>
-                  <hr></hr>
+                  {currentUser.role === 'candidate' && (
+                    <hr></hr>
+                  )}
                   {currentUser.role === 'candidate' && (
                     <OnlineAndAvailability />
                   )}
