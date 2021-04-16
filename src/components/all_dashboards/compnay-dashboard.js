@@ -122,7 +122,7 @@ const CompanyDashboard = () => {
                           <div className="font-weight-bold text-left">
                             <span className="mt-2 weather">
                               <b>{weather.main.temp}</b>
-                              <span>o</span>
+                              <sup>o</sup>
                             </span>
                             <small className="text-black-50 d-block font-size-md">
                               {weather.weather[0].main}
