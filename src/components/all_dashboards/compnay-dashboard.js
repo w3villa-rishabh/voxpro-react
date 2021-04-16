@@ -28,19 +28,19 @@ import ChatBox from '../chat_component/chat';
 
 const CompanyDashboard = () => {
   const [value, onChange] = useState(new Date());
-  // const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
 
-  // useEffect(() => {
-  //   window.addEventListener('resize', handleWindowSizeChange);
-  //   return () => {
-  //     window.removeEventListener('resize', handleWindowSizeChange);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
 
-  // const handleWindowSizeChange = () => {
-  //   console.log('window.innerWidth', window.innerWidth);
-  //   setWidth(window.innerWidth);
-  // };
+  const handleWindowSizeChange = () => {
+    console.log('window.innerWidth', window.innerWidth);
+    setWidth(window.innerWidth);
+  };
 
   const [lat, setLat] = useState('28.5850');
   const [long, setLong] = useState('77.3116');
@@ -370,135 +370,242 @@ const CompanyDashboard = () => {
           <Grid item xs={12} sm={4}>
             <Card className="card-box p-3 h-100">
               <b>Suggested Connections</b>
-
-              <List component="div" className="list-group-flush">
-                <ListItem className="px-0 border-0 py-1">
-                  <Grid container spacing={0}>
-                    <Grid item xs={12} className="d-flex align-items-center">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
+              <div
+                className="scroll-area"
+                style={{
+                  height: 'calc(300px - 7px)',
+                  borderRadius: 'inherit'
+                }}>
+                <PerfectScrollbar>
+                  <List component="div" className="list-group-flush">
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Shanelle Wynn
+                              </a>
+                              <span className="text-black-50 d-block">
+                                UI Engineer, Apple Inc.
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Shanelle Wynn
-                          </a>
-                          <span className="text-black-50 d-block">
-                            UI Engineer, Apple Inc.
-                          </span>
-                        </div>
-                      </div>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      className="pt-2 pt-xl-0 d-flex align-items-center">
-                      <Button
-                        size="small"
-                        className="btn-pill ml-5 btn-outline-primary border-1"
-                        variant="outlined">
-                        Connect
-                      </Button>
-                      <Button
-                        size="small"
-                        className="btn-pill ml-2 bg-primary px-4 text-white border-1"
-                        variant="outlined">
-                        View
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem className="px-0 border-0 py-1">
-                  <Grid container spacing={0}>
-                    <Grid item xs={12} className="d-flex align-items-center">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Akeem Griffith
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Manager, Google Inc.
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Akeem Griffith
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Manager, Google Inc.
-                          </span>
-                        </div>
-                      </div>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      className="pt-2 pt-xl-0 d-flex align-items-center">
-                      <Button
-                        size="small"
-                        className="btn-pill ml-5 btn-outline-primary border-1"
-                        variant="outlined">
-                        Connect
-                      </Button>
-                      <Button
-                        size="small"
-                        className="btn-pill ml-2 bg-primary px-4 text-white border-1"
-                        variant="outlined">
-                        View
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem className="px-0 border-0 py-1">
-                  <Grid container spacing={0}>
-                    <Grid item xs={12} className="d-flex align-items-center">
-                      <div className="d-flex align-items-center">
-                        <div className="avatar-icon-wrapper mr-2">
-                          <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Abigayle Hicks
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Project Manager, Spotify
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black"
-                            title="...">
-                            Abigayle Hicks
-                          </a>
-                          <span className="text-black-50 d-block">
-                            Project Manager, Spotify
-                          </span>
-                        </div>
-                      </div>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      className="pt-2 pt-xl-0 d-flex align-items-center">
-                      <Button
-                        size="small"
-                        className="btn-pill ml-5 btn-outline-primary border-1"
-                        variant="outlined">
-                        Connect
-                      </Button>
-                      <Button
-                        size="small"
-                        className="btn-pill ml-2 bg-primary px-4 text-white border-1"
-                        variant="outlined">
-                        View
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-              </List>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Abigayle Hicks
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Project Manager, Spotify
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Abigayle Hicks
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Project Manager, Spotify
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                  </List>
+                </PerfectScrollbar>
+              </div>
               <div className="see-more text-center">
                 <Button
                   size="small"
