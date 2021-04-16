@@ -14,7 +14,8 @@ import {
   List,
   ListItem,
   InputAdornment,
-  Table
+  Table,
+  Tooltip
 } from '@material-ui/core';
 
 import PersonIcon from '@material-ui/icons/Person';
@@ -33,6 +34,9 @@ import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import stock1 from '../../assets/images/stock-photos/stock-1.jpg';
+import stock3 from '../../assets/images/stock-photos/stock-5.jpg';
+import stock4 from '../../assets/images/stock-photos/stock-6.jpg';
+
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import agencybg from '../../assets/images/voxpro-images/agency-bg.jpg';
 
@@ -209,11 +213,9 @@ export default function LivePreviewExample() {
         <PersonIcon />
         <div className="title pt-3">
           {currentUser.role === 'candidate' && (
-            <b className="heading">Candidate Profile</b>
+            <b className="heading">Profile</b>
           )}
-          {currentUser.role === 'agency' && (
-            <b className="heading">Agency Profile</b>
-          )}
+          {currentUser.role === 'agency' && <b className="heading">Profile</b>}
         </div>
       </div>
       <div className="app-inner-content-layout">
@@ -222,12 +224,12 @@ export default function LivePreviewExample() {
             <Grid item xs={12} sm={12}>
               <Card>
                 <div className="card-img-wrapper h-240px">
-                  {/* <div className="card-badges text-white">
+                  <div className="card-badges text-white">
                     <FontAwesomeIcon
-                      icon={['fas', 'pencil-alt-alt']}
+                      icon={['fas', 'pencil-alt']}
                       className="edit"
                     />
-                  </div> */}
+                  </div>
                   {currentUser.role === 'candidate' && (
                     <img alt="..." className="img-fit-container" src={stock2} />
                   )}
@@ -238,6 +240,41 @@ export default function LivePreviewExample() {
                       className="img-fit-container"
                       src={agencybg}
                     />
+                  )}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <div className="py-1 card-bagdes-down text-white">
+                      <Tooltip title="Github">
+                        <Button className="btn-github text-github btn-pill bg-white d-30 p-0">
+                          <span className="btn-wrapper--icon">
+                            <FontAwesomeIcon
+                              icon={['fab', 'github']}
+                              className="font-size-xl"
+                            />
+                          </span>
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Instagram" arrow>
+                        <Button className="btn-instagram text-instagram btn-pill bg-white d-30 p-0 mx-2">
+                          <span className="btn-wrapper--icon">
+                            <FontAwesomeIcon
+                              icon={['fab', 'instagram']}
+                              className="font-size-xl"
+                            />
+                          </span>
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Google" arrow>
+                        <Button className="btn-google text-google btn-pill bg-white d-30 p-0">
+                          <span className="btn-wrapper--icon">
+                            <FontAwesomeIcon
+                              icon={['fab', 'google']}
+                              className="font-size-xl"
+                            />
+                          </span>
+                        </Button>
+                      </Tooltip>
+                    </div>
                   )}
                 </div>
               </Card>
@@ -505,7 +542,7 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
@@ -530,14 +567,22 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="pt-2 pt-xl-0 d-flex align-items-center">
                               <Button
+                                style={{ padding: '4px' }}
                                 size="small"
-                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
                                 variant="outlined">
                                 Connect
+                              </Button>
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                &nbsp;&nbsp;View &nbsp;&nbsp;
                               </Button>
                             </Grid>
                           </Grid>
@@ -546,7 +591,7 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
@@ -571,14 +616,22 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="pt-2 pt-xl-0 d-flex align-items-center">
                               <Button
+                                style={{ padding: '4px' }}
                                 size="small"
-                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
                                 variant="outlined">
-                                Message
+                                Connect
+                              </Button>
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                &nbsp;&nbsp;View &nbsp;&nbsp;
                               </Button>
                             </Grid>
                           </Grid>
@@ -587,7 +640,7 @@ export default function LivePreviewExample() {
                           <Grid container spacing={0}>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
@@ -612,14 +665,22 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="pt-2 pt-xl-0 d-flex align-items-center">
                               <Button
+                                style={{ padding: '4px' }}
                                 size="small"
-                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
                                 variant="outlined">
-                                Message
+                                Connect
+                              </Button>
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 mr-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                &nbsp;&nbsp;View &nbsp;&nbsp;
                               </Button>
                             </Grid>
                           </Grid>
@@ -763,7 +824,7 @@ export default function LivePreviewExample() {
                           </Grid>
                         </ListItem>
                       </List>
-                      <div className="card-footer text-center">
+                      <div className="card-footer text-center mt-2">
                         <Button
                           size="small"
                           className="btn-outline-second"
@@ -834,7 +895,7 @@ export default function LivePreviewExample() {
                     <div className="text-center card-body-button-wrapper">
                       <Button
                         size="small"
-                        className="btn-success btn-pill text-nowrap px-5 shadow-none border-3 border-white">
+                        className="btn-primary btn-pill text-nowrap px-5 shadow-none border-3 border-white">
                         + Add Skills
                       </Button>
                     </div>
@@ -858,14 +919,15 @@ export default function LivePreviewExample() {
                               alt="..."
                             />
                             <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
-                              <b>User name</b>
-                              <p className="text-second opacity-8 mb-0">CEO</p>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="a-blue">
+                              <b>Akshay Sharma</b>
+                              <p className="text-second opacity-8 mb-0">
+                                Business Analyst
+                              </p>
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                variant="outlined">
                                 View
-                              </a>
+                              </Button>
                             </div>
                           </a>
                         </div>
@@ -877,19 +939,26 @@ export default function LivePreviewExample() {
                             onClick={(e) => e.preventDefault()}
                             className="card bg-white shadow-sm-dark card-box-hover-rise">
                             <img
-                              src={stock1}
+                              src={stock2}
                               className="card-img-top"
                               alt="..."
                             />
                             <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
-                              <b>User name</b>
-                              <p className="text-second opacity-8 mb-0">CEO</p>
-                              <a
+                              <b>Rishabh Pandey</b>
+                              <p className="text-second opacity-8 mb-0">
+                                Developer
+                              </p>
+                              {/* <a
                                 href="#/"
                                 onClick={(e) => e.preventDefault()}
                                 className="a-blue">
                                 View
-                              </a>
+                              </a> */}
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                variant="outlined">
+                                View
+                              </Button>
                             </div>
                           </a>
                         </div>
@@ -901,19 +970,20 @@ export default function LivePreviewExample() {
                             onClick={(e) => e.preventDefault()}
                             className="card bg-white shadow-sm-dark card-box-hover-rise">
                             <img
-                              src={stock1}
+                              src={stock3}
                               className="card-img-top"
                               alt="..."
                             />
                             <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
-                              <b>User name</b>
-                              <p className="text-second opacity-8 mb-0">CEO</p>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="a-blue">
+                              <b>Deepak Kumar</b>
+                              <p className="text-second opacity-8 mb-0">
+                                Developer
+                              </p>
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                variant="outlined">
                                 View
-                              </a>
+                              </Button>
                             </div>
                           </a>
                         </div>
@@ -925,19 +995,20 @@ export default function LivePreviewExample() {
                             onClick={(e) => e.preventDefault()}
                             className="card bg-white shadow-sm-dark card-box-hover-rise">
                             <img
-                              src={stock1}
+                              src={stock4}
                               className="card-img-top"
                               alt="..."
                             />
                             <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
-                              <b>User name</b>
-                              <p className="text-second opacity-8 mb-0">CEO</p>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="a-blue">
+                              <b>Rohit Wasan</b>
+                              <p className="text-second opacity-8 mb-0">
+                                HR executive
+                              </p>
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                variant="outlined">
                                 View
-                              </a>
+                              </Button>
                             </div>
                           </a>
                         </div>
@@ -1194,7 +1265,7 @@ export default function LivePreviewExample() {
                 <Card className="card-box mt-3">
                   <div className="card-header py-3">
                     <div className="card-header--title font-size-lg">
-                      <b>Roles</b>
+                      <b>Live Roles</b>
                     </div>
                     <div className="card-header--actions">
                       <Grid container spacing={3}>
@@ -1254,7 +1325,8 @@ export default function LivePreviewExample() {
                             <th className="bg-white text-left">Location</th>
                             <th className="bg-white text-center">Salary</th>
                             <th className="bg-white text-center">Type</th>
-                            {/* <th className="bg-white text-center">Status</th> */}
+                            <th className="bg-white text-center">View</th>
+                            <th className="bg-white text-center">More</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1268,6 +1340,8 @@ export default function LivePreviewExample() {
                                 High
                               </div>
                             </td>
+                            <td>View</td>
+                            <td>More</td>
                           </tr>
                           <tr>
                             <td>13th april</td>
@@ -1279,6 +1353,8 @@ export default function LivePreviewExample() {
                                 High
                               </div>
                             </td>
+                            <td>View</td>
+                            <td>More</td>
                           </tr>
                           <tr>
                             <td>12th april</td>
@@ -1290,6 +1366,8 @@ export default function LivePreviewExample() {
                                 High
                               </div>
                             </td>
+                            <td>View</td>
+                            <td>More</td>
                           </tr>
                           <tr>
                             <td>10th april</td>
@@ -1301,6 +1379,8 @@ export default function LivePreviewExample() {
                                 High
                               </div>
                             </td>
+                            <td>View</td>
+                            <td>More</td>
                           </tr>
                           <tr>
                             <td>8th april</td>
@@ -1312,6 +1392,8 @@ export default function LivePreviewExample() {
                                 High
                               </div>
                             </td>
+                            <td>View</td>
+                            <td>More</td>
                           </tr>
                         </tbody>
                       </Table>
@@ -1590,7 +1672,6 @@ export default function LivePreviewExample() {
           onClose={closeEducation}
           aria-labelledby="form-dialog-title2">
           <DialogTitle id="form-dialog-title">Add education</DialogTitle>
-
           <DialogContent className="p-0">
             <div>
               <div className="border-0">
