@@ -746,7 +746,7 @@ const CompanyDashboard = () => {
             <Card className="card-box">
               <div className="card-header py-3">
                 <div className="card-header--title font-size-lg">
-                  <b>List of Agencies Recently Added</b>
+                  <b>List of Agencies Recently Joined</b>
                 </div>
               </div>
 
