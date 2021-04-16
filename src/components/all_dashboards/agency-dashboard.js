@@ -614,7 +614,7 @@ const AgencyDashboard = () => {
             <Card className="card-box h-100">
               <div className="card-header py-3">
                 <div className="card-header--title font-size-lg">
-                  <b>List 0f Jobs</b>
+                  <b>List of Jobs</b>
                 </div>
                 {/* <div className="card-header--actions">
                   <Button size="small" className="btn-neutral-primary">
@@ -771,6 +771,251 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={5}>
             <Card>
               <ChatBox />
+            </Card>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <Card className="card-box">
+              <div className="card-header py-3">
+                <div className="card-header--title font-size-lg">
+                  <b>List of Agencies Recently Added</b>
+                </div>
+              </div>
+
+              <div className="divider" />
+              <div className="table-responsive-md">
+                <PerfectScrollbar>
+                  <Table className="table table-hover text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th className="bg-white text-left">Job ID</th>
+                        <th className="bg-white">Role</th>
+                        <th className="bg-white text-center">Agency</th>
+                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 1</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Lili Pemberton">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar2} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#584</td>
+                        <td>Role 2</td>
+                        <td className="text-center">
+                          <Tooltip title="Arvin Weston">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar4} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td className="text-center text-black-50">
+                          06/08/2022
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#764</td>
+                        <td>Role 3</td>
+                        <td className="text-center">
+                          <Tooltip title="Mali Rosario">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar7} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 4</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Marion Devine">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar7} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </PerfectScrollbar>
+              </div>
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View More
+                </Button>
+              </div>
+            </Card>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <Card className="card-box">
+              <div className="card-header py-3">
+                <div className="card-header--title font-size-lg">
+                  <b>List of Candidates Recently Joined</b>
+                </div>
+              </div>
+
+              <div className="divider" />
+              <div className="table-responsive-md">
+                <PerfectScrollbar>
+                  <Table className="table table-hover text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th className="bg-white text-left">Job ID</th>
+                        <th className="bg-white">Role</th>
+                        <th className="bg-white text-center">Agency</th>
+                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 1</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Lili Pemberton">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar2} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#584</td>
+                        <td>Role 2</td>
+                        <td className="text-center">
+                          <Tooltip title="Arvin Weston">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar4} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td className="text-center text-black-50">
+                          06/08/2022
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#764</td>
+                        <td>Role 3</td>
+                        <td className="text-center">
+                          <Tooltip title="Mali Rosario">
+                            <div className="avatar-icon-wrapper avatar-icon-sm">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar7} />
+                              </div>
+                            </div>
+                          </Tooltip>
+                        </td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Closed
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Role 4</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Marion Devine">
+                            <div className="avatar-icon">
+                              <img alt="..." src={avatar7} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-success text-success">
+                            Open
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </PerfectScrollbar>
+              </div>
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View More
+                </Button>
+              </div>
             </Card>
           </Grid>
         </Grid>
