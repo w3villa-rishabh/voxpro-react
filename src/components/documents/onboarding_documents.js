@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { Card, Button, Grid } from '@material-ui/core';
+import { Card, Button, Grid, CardContent } from '@material-ui/core';
 
-import api from '../../api';
 import { getCurrentUser } from '../../helper';
 
 import PostAddIcon from '@material-ui/icons/PostAdd';
@@ -12,22 +11,22 @@ export default function OnBoardDocument() {
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
 
-  useEffect(() => {
-    getDocuments();
-  }, [getDocuments]);
+  // useEffect(() => {
+  //   // getDocuments();
+  // }, [getDocuments]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  function getDocuments() {
-    api
-      .get(`/api/user/show_user_documents?id=${currentUser.id}`)
-      .then((response) => {
-        if (response.data) {
-          setDocuments(response.data);
-        } else {
-          alert('Something went wrong..');
-        }
-      });
-  }
+  // function getDocuments() {
+  //   api
+  //     .get(`/api/user/show_user_documents?id=${currentUser.id}`)
+  //     .then((response) => {
+  //       if (response.data) {
+  //         setDocuments(response.data);
+  //       } else {
+  //         alert('Something went wrong..');
+  //       }
+  //     });
+  // }
 
   return (
     <>
@@ -37,7 +36,7 @@ export default function OnBoardDocument() {
           <h5 className="heading">Document Management</h5>
           <p>Upload your document and manage yout request for informations</p>
         </div>
-        <Button className="btn-danger hover-scale-sm px-4 float-right">
+        <Button className="btn-neutral-info hover-scale-sm px-4 float-right">
           <span className="px-2">Select Doc Type</span>
         </Button>
       </div>
@@ -54,18 +53,23 @@ export default function OnBoardDocument() {
         </ul> */}
       <Grid container spacing={2}>
         <Grid item md={3} xs={12}>
-          <div className="text-center text-black mb-2 text-black-50">Personal Documents</div>
+          <div className="text-center text-black mb-2 text-black-50">
+            Personal Documents
+          </div>
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
-                <FontAwesomeIcon icon={['far', 'bell']} className="display-4" />
+              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-danger">
+                <FontAwesomeIcon
+                  icon={['fas', 'id-card-alt']}
+                  className="display-4"
+                />
               </div>
               <div className="text-black mt-4 mb-1">4 Documents Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center mb-2">
                 <a href="/view-document">
-                  <Button size="small" className="px-4 btn-neutral-danger">
+                  <Button size="small" className="px-4 btn-neutral-info">
                     View Documents
                   </Button>
                 </a>
@@ -86,9 +90,9 @@ export default function OnBoardDocument() {
           </div>
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-primary text-white btn-icon mx-auto text-center shadow-primary">
+              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-primary">
                 <FontAwesomeIcon
-                  icon={['far', 'lightbulb']}
+                  icon={['fas', 'file-word']}
                   className="display-4"
                 />
               </div>
@@ -96,7 +100,7 @@ export default function OnBoardDocument() {
               {/* <div className="font-size-lg opacity-8">Monthly Income</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center">
-                <Button size="small" className="px-4 btn-neutral-primary mb-2">
+                <Button size="small" className="px-4 btn-neutral-info mb-2">
                   View Documents
                 </Button>
               </div>
@@ -109,17 +113,19 @@ export default function OnBoardDocument() {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <div className="text-center text-black mb-2 text-black-50">General Documents</div>
+          <div className="text-center text-black mb-2 text-black-50">
+            General Documents
+          </div>
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
-                <FontAwesomeIcon icon={['far', 'user']} className="display-4" />
+                <FontAwesomeIcon icon={['fas', 'file']} className="display-4" />
               </div>
               <div className="text-black mt-4 mb-1">2 Documents Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Total 2Sales</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center mb-2">
-                <Button size="small" className="px-4 btn-neutral-warning">
+                <Button size="small" className="px-4 btn-neutral-info">
                   View Documents
                 </Button>
               </div>
@@ -139,7 +145,10 @@ export default function OnBoardDocument() {
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
-                <FontAwesomeIcon icon={['far', 'user']} className="display-4" />
+                <FontAwesomeIcon
+                  icon={['fas', 'file-powerpoint']}
+                  className="display-4"
+                />
               </div>
               <div className="text-black mt-4 mb-1">4 Document Uploaded</div>
               {/* <div className="font-size-lg opacity-8">Total Sales</div> */}
@@ -174,7 +183,7 @@ export default function OnBoardDocument() {
               <div className="ml-1">7</div>
             </div>
             <div className="text-center mt-3">
-              <Button size="small" className="px-4 btn-neutral-success">
+              <Button size="small" className="px-4 btn-neutral-info">
                 Respond
               </Button>
             </div>
@@ -216,30 +225,28 @@ export default function OnBoardDocument() {
               <div className="ml-1">2</div>
             </div>
             <div className="text-center mt-3">
-              <Button size="small" className="px-4 btn-neutral-danger">
+              <Button size="small" className="px-4 btn-neutral-info">
                 View Documents
               </Button>
             </div>
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card className="card-box p-3 h-100">
-            <div className="font-12 font-size-sm text-uppercase text-second mt-2">
+          <CardContent className="bg-brand-facebook h-100 text-white">
+            <div className="font-12 font-size-sm text-uppercase text-white mt-2">
               Tasks Overview
             </div>
-            <div className="d-flex py-2 align-items-center">
+            <div className="d-flex py-2 align-items-center text-white">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-success text-white btn-icon text-center shadow-success mr-3">
                 <FontAwesomeIcon
                   icon={['fas', 'tachometer-alt']}
                   className="display-4"
                 />
               </div>
-              <div className="ml-1">
+              <div className="ml-1 text-white">
                 2 tasks
                 <br />
-                <div className="text-black-50 mb-2 font-style">
-                  due today
-                </div>{' '}
+                <div className="mb-2 font-style text-white">due today</div>{' '}
               </div>
             </div>
 
@@ -252,7 +259,7 @@ export default function OnBoardDocument() {
               </a>{' '}
               that accepted your invitation to connect.
             </div> */}
-          </Card>
+          </CardContent>
         </Grid>
       </Grid>
 
