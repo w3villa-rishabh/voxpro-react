@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -22,6 +22,8 @@ import { setHeaderDrawerToggle } from '../../reducers/ThemeOptions';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import avatar4 from '../../assets/images/avatars/avatar4.jpg';
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
+import sun from '../../assets/images/sun.png';
+
 import ChatBox from '../chat_component/chat';
 
 const CompanyDashboard = () => {
@@ -39,6 +41,29 @@ const CompanyDashboard = () => {
   //   console.log('window.innerWidth', window.innerWidth);
   //   setWidth(window.innerWidth);
   // };
+
+  const [lat, setLat] = useState('28.5850');
+  const [long, setLong] = useState('77.3116');
+  const [weather, setWeather] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLat(position.coords.latitude);
+        setLong(position.coords.longitude);
+      });
+
+      await fetch(
+        `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setWeather(result);
+          console.log(result);
+        });
+    };
+    fetchData();
+  }, [lat, long]);
 
   const options = {
     chart: {
@@ -65,44 +90,75 @@ const CompanyDashboard = () => {
     <>
       <div className="mb-spacing-2">
         <Grid container spacing={1}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={8}>
             <Card className="card-box h-100">
               <div className="m-3">
                 <b>Monthly Recruitment and Placements</b>
               </div>
-              <Chart options={options} series={series} type="area" />
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={300}
+              />
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Grid container spacing={1}>
+          <Grid item xs={12} sm={4}>
+            <Card className="card-box">
+              <div className="card-content-overlay text-center">
+                <div className="font-weight-bold text-black display-4 h-125px">
+                  {weather.main && (
+                    <CardContent>
+                      <div className="align-box-row align-items-start pt-2">
+                        <div className="mr-2">
+                          <img
+                            alt="..."
+                            src={weather.weather[0].icon || sun}
+                            height={60}
+                            width={60}
+                          />
+                        </div>
+                        <div>
+                          <div className="font-weight-bold text-left">
+                            <span className="mt-2 weather">
+                              <b>{weather.main.temp}</b>
+                              <span>o</span>
+                            </span>
+                            <small className="text-black-50 d-block font-size-md">
+                              {weather.weather[0].main}
+                            </small>
+                            <small className="text-black-50 d-block">
+                              {weather.name}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  )}
+                </div>
+              </div>
+            </Card>
+            <Card className="card-box mt-2">
+              <Calendar
+                className="border-0 m-auto"
+                defaultView="month"
+                onChange={onChange}
+                value={value}
+              />
+            </Card>
+            {/* <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
-                <Card className="card-box h-100">
-                  <div className="card-content-overlay text-center py-4">
-                    <div className="d-40 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
-                      <FontAwesomeIcon icon={['fas', 'tag']} />
-                    </div>
-                    <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                      4,405
-                    </div>
-                    <div className="opacity-8">Pending Offers</div>
-                  </div>
-                </Card>
+                
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Card className="card-box h-100">
-                  <Calendar
-                    className="border-0 m-auto"
-                    defaultView="month"
-                    onChange={onChange}
-                    value={value}
-                  />
-                </Card>
+                  
               </Grid>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
 
-        <Grid container spacing={1}>
+        <Grid container spacing={1} className="mt-1">
           <Grid item xs={12} sm={3}>
             <Card className="card-box">
               <CardContent>
