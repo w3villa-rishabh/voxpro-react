@@ -23,12 +23,12 @@ export default function DashboardMonitoring() {
         )}
         {currentUser.role === 'company' && (
           <div className="title">
-            <h5 className="heading pt-3">Company Dashboard</h5>
+            <h5 className="heading pt-3">My Dashboard</h5>
           </div>
         )}
         {currentUser.role === 'agency' && (
           <div className="title">
-            <h5 className="heading pt-3">Agency Dashboard</h5>
+            <h5 className="heading pt-3">My Dashboard</h5>
           </div>
         )}
       </div>

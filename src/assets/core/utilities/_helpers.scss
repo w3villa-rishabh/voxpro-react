@@ -524,6 +524,14 @@ $num: 20;
   // height: 20px;
 }
 
+.react-calendar__tile--now {
+  background: #ccc !important;
+}
+
+.react-calendar__tile--active {
+  background: #1087ff !important;
+}
+
 .react-calendar__month-view__weekdays__weekday {
   font-size: 10px;
 }
