@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
 
+
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
 
@@ -67,7 +68,7 @@ export default function IR35TaxComponent() {
     <div className="ir35-background text-white">
       <div className="img-bg"></div>
 
-      <div className="font-12 position-relative p-5">
+      <div className="font-12 position-relative p-3">
         {activeTab > '0' && (
           <div className="fh">
             <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
@@ -89,13 +90,13 @@ export default function IR35TaxComponent() {
           index={0}>
           <div className="text-center w-100">
             <img alt="..." className="ir35-logo" src={logo} />
-            <h4 className="font-weight-bold mt-3">
+            <h4 className="font-weight-bold mt-3 fhhh">
               CHECK EMPLOYMENT STATUS FOR TAX
             </h4>
-            <p className="mb-2 fh">Please answer all question</p>
+            <p className="mb-2 fhh">Please answer all questions</p>
             <p className="mb-2 fh">Takes 7+ minutes</p>
             <Button
-              size="medium"
+              size="large"
               variant="contained"
               onClick={() => {
                 setActiveTab('1');
@@ -103,17 +104,21 @@ export default function IR35TaxComponent() {
               className="font-weight-bold btn-slack px-4 bg-color button-width">
               START
             </Button>
-            <p className="fh">Press enter</p>
-            <div className="mt-5 font-weight-bold font-size-xs">
+            <p className="fh">
+              Press enter{' '}
+              <FontAwesomeIcon icon={['fas', 'arrow-up']} className="angle" />
+            </p>
+            <div className="mt-10 font-weight-bold font-size-xs">
               <h6 className="font-weight-bold fhh">DISCLAIMER</h6>
               <p className="fh">
-                Voxpro assumes no responsibility for the result of this test.
-                This result given is in accordance with HMRC starts by.
+                Voxpro assumes no responsibility for the results of the test.
+                The result given is in accordance with HMRC tool which HMRC
+                stands by.
               </p>
               <span className="font-italic fhh">Warning</span>
               <br></br>
               <span className="line-height-md fh">
-                This word not be the case if the information you have provided
+                This would not be the case if the information you have provided
                 was checked and found to be inaccurate.
                 <br></br>
                 HMRC will also not stand by results achieved through contrived
