@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
 
-
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
 
@@ -209,7 +208,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3 fh">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
@@ -221,11 +220,12 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3 fh">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('2');
@@ -260,7 +260,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="A"
                       />
-                      <span className="fh">Yes</span>
+                      <span className="fhh">Yes</span>
                     </li>
                     <li>
                       <Radio
@@ -272,11 +272,12 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="fh">No</span>
+                      <span className="fhh">No</span>
                     </li>
                   </ul>
                 </div>
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('3');
@@ -321,6 +322,7 @@ export default function IR35TaxComponent() {
                 </div>
 
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('0');
@@ -359,7 +361,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="A"
                     />
-                    <span>Yes</span>
+                    <span className="fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
@@ -371,11 +373,12 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span>No</span>
+                    <span className="fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('4');
@@ -414,7 +417,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">
+                      <span className="mt-3 fhh">
                         Yes, your client accepted them
                       </span>
                     </li>
@@ -428,7 +431,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">
+                      <span className="mt-3 fhh">
                         Yes, but your client did not accept them
                       </span>
                     </li>
@@ -442,11 +445,12 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">No, it has not happened</span>
+                      <span className="mt-3 fhh">No, it has not happened</span>
                     </li>
                   </ul>
                 </div>
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('5');
@@ -493,7 +497,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3">Yes</span>
+                      <span className="mt-3 fhh">Yes</span>
                     </li>
                     <li>
                       <Radio
@@ -505,11 +509,12 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3">No</span>
+                      <span className="mt-3 fhh">No</span>
                     </li>
                   </ul>
                 </div>
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('5');
