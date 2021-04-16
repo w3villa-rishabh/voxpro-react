@@ -1,45 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Grid,
   Card,
   Button,
-  TextField,
   Tooltip,
-  Table
+  Table,
+  CardContent,
+  List,
+  ListItem
 } from '@material-ui/core';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import clsx from 'clsx';
+
+import Chart from 'react-apexcharts';
+import Calendar from 'react-calendar';
 
 import { connect } from 'react-redux';
 import { setHeaderDrawerToggle } from '../../reducers/ThemeOptions';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
-import avatar3 from '../../assets/images/avatars/avatar3.jpg';
 import avatar4 from '../../assets/images/avatars/avatar4.jpg';
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
+import sun from '../../assets/images/sun.png';
 
-import people2 from '../../assets/images/stock-photos/people-3.jpg';
-import people1 from '../../assets/images/stock-photos/people-2.jpg';
-import AddsComponents from 'components/add_component';
+import ChatBox from '../chat_component/chat';
 
-const CompanyDashboard = (props) => {
+const CompanyDashboard = () => {
+  const [value, onChange] = useState(new Date());
   const [width, setWidth] = useState(window.innerWidth);
-  const [inputBg, setInputBg] = useState(false);
-  const toggleInputBg = () => setInputBg(!inputBg);
-  const { headerDrawerToggle, setHeaderDrawerToggle } = props;
-
-  const toogleHeaderDrawer = () => {
-    setHeaderDrawerToggle(!headerDrawerToggle);
-  };
-
-  const { headerSearchHover, setHeaderSearchHover } = props;
-
-  const toggleHeaderSearchHover = () => {
-    setHeaderSearchHover(!headerSearchHover);
-  };
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
@@ -53,179 +42,581 @@ const CompanyDashboard = (props) => {
     setWidth(window.innerWidth);
   };
 
+  const [lat, setLat] = useState('28.5850');
+  const [long, setLong] = useState('77.3116');
+  const [weather, setWeather] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLat(position.coords.latitude);
+        setLong(position.coords.longitude);
+      });
+
+      await fetch(
+        `https://fcc-weather-api.glitch.me/api/current?lat=${lat}&lon=${long}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setWeather(result);
+          console.log(result);
+        });
+    };
+    fetchData();
+  }, [lat, long]);
+
+  const options = {
+    chart: {
+      toolbar: {
+        show: false
+      }
+    },
+    xaxis: {
+      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    }
+  };
+  const series = [
+    {
+      name: 'Monthly Recruitment',
+      data: [30, 40, 25, 50, 49, 21, 70, 51]
+    },
+    {
+      name: 'Monthly Placement',
+      data: [23, 12, 54, 61, 32, 56, 81, 19]
+    }
+  ];
+
   return (
     <>
       <div className="mb-spacing-2">
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={2}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={8}>
             <Card className="card-box h-100">
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-40 rounded-circle bg-danger text-white btn-icon mx-auto text-center shadow-danger">
-                  <FontAwesomeIcon icon={['fas', 'user-tag']} />
-                </div>
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  4,745
-                </div>
-                <div className="opacity-8">Live Roles</div>
+              <div className="m-3">
+                <b>Monthly Recruitment and Placements</b>
               </div>
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={300}
+              />
             </Card>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-40 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
-                  <FontAwesomeIcon icon={['fas', 'tag']} />
+          <Grid item xs={12} sm={4}>
+            <Card className="card-box">
+              <div className="card-content-overlay text-center">
+                <div className="font-weight-bold text-black display-4 h-125px">
+                  {weather.main && (
+                    <CardContent>
+                      <div className="align-box-row align-items-start pt-2">
+                        <div className="mr-2">
+                          <img
+                            alt="..."
+                            src={weather.weather[0].icon || sun}
+                            height={60}
+                            width={60}
+                          />
+                        </div>
+                        <div>
+                          <div className="font-weight-bold text-left">
+                            <span className="mt-2 weather">
+                              <b>{weather.main.temp}</b>
+                              <sup>o</sup>
+                            </span>
+                            <small className="text-black-50 d-block font-size-md">
+                              {weather.weather[0].main}
+                            </small>
+                            <small className="text-black-50 d-block">
+                              {weather.name}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  )}
                 </div>
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  4,405
-                </div>
-                <div className="opacity-8">Pending Offers</div>
               </div>
+            </Card>
+            <Card className="card-box mt-2">
+              <Calendar
+                className="border-0 m-auto"
+                defaultView="month"
+                onChange={onChange}
+                value={value}
+              />
+            </Card>
+            {/* <Grid container spacing={1}>
+              <Grid item xs={12} sm={6}>
+                
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Card className="card-box h-100">
+                  
+              </Grid>
+            </Grid> */}
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} className="mt-1">
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-brand-dribbble text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'clock']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Pending Placements
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-40 rounded-circle bg-primary text-white btn-icon mx-auto text-center shadow-primary">
-                  <FontAwesomeIcon icon={['fas', 'clock']} />
-                </div>
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  5,745
-                </div>
-                <div className="opacity-8">Pending Placements</div>
-              </div>
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-brand-discord text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'clock']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Pending Cocuments
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-40 rounded-circle bg-warning text-white btn-icon mx-auto text-center shadow-warning">
-                  <FontAwesomeIcon icon={['fas', 'clock']} />
-                </div>
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  745
-                </div>
-                <div className="opacity-8">Pending Documents</div>
-              </div>
+
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-arielle-smile text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'clock']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Pending IR35
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="p-2 h-100">
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-40 rounded-circle bg-warning text-white btn-icon mx-auto text-center shadow-warning">
-                  <FontAwesomeIcon icon={['fas', 'signal']} />
-                </div>
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  7.945
-                </div>
-                <div className="opacity-8">Pending IR35</div>
-              </div>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={2}>
-            <Card className="card-box h-100">
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-40 rounded-circle bg-success text-white btn-icon mx-auto text-center shadow-success">
-                  <FontAwesomeIcon icon={['fas', 'thumbtack']} />
-                </div>
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  74
-                </div>
-                <div className="opacity-8">Tasks</div>
-              </div>
+
+          <Grid item xs={12} sm={3}>
+            <Card className="card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-asteroid text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'user']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Interview Scheduled
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
             </Card>
           </Grid>
         </Grid>
 
-        <Grid container spacing={2} wrap={width <= 768 || 'nowrap'}>
+        <Grid container spacing={1} className="mt-1">
           <Grid item xs={12} sm={3}>
-            <Card className="card-box shadow-success-sm p-3 h-100">
-              <div className="mx-auto text-center">
-                <CircularProgressbar
-                  value={86}
-                  text={86 + '%'}
-                  strokeWidth={8}
-                  className="circular-progress-warning"
-                />
+            <Card className="card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-happy-fisher text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'bell']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          New Connections Requests
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="mt-2 card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-light-pure text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'clock']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Recent Connections
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="mt-2 card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-amy-crisp text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'building']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Agency Connected
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="mt-2 card-box">
+              <CardContent>
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-asteroid text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'user']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Candidates Connected
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Card className="card-box p-3 h-100">
+              <b>Suggested Connections</b>
+              <div
+                className="scroll-area"
+                style={{
+                  height: 'calc(300px - 7px)',
+                  borderRadius: 'inherit'
+                }}>
+                <PerfectScrollbar>
+                  <List component="div" className="list-group-flush">
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Shanelle Wynn
+                              </a>
+                              <span className="text-black-50 d-block">
+                                UI Engineer, Apple Inc.
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Akeem Griffith
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Manager, Google Inc.
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Abigayle Hicks
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Project Manager, Spotify
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Abigayle Hicks
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Project Manager, Spotify
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem className="px-0 border-0 py-1">
+                      <Grid container spacing={0}>
+                        <Grid
+                          item
+                          xs={12}
+                          className="d-flex align-items-center">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar-icon-wrapper mr-2">
+                              <div className="avatar-icon">
+                                <img alt="..." src={avatar2} />
+                              </div>
+                            </div>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="font-weight-bold text-black"
+                                title="...">
+                                Abigayle Hicks
+                              </a>
+                              <span className="text-black-50 d-block">
+                                Project Manager, Spotify
+                              </span>
+                            </div>
+                          </div>
+                        </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          className="pt-2 pt-xl-0 d-flex align-items-center">
+                          <Button
+                            size="small"
+                            className="btn-pill ml-5 btn-outline-primary border-1"
+                            variant="outlined">
+                            Connect
+                          </Button>
+                          <Button
+                            size="small"
+                            className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                            variant="outlined">
+                            View
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                  </List>
+                </PerfectScrollbar>
               </div>
-              <div className="font-size-lg opacity-8 pt-3 text-center">
-                Schedules Interviews
+              <div className="see-more text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View More
+                </Button>
               </div>
             </Card>
           </Grid>
-
-          <Grid item xs={12} sm={3}>
-            <Card className="card-box h-100">
-              <div className="card-content-overlay text-center">
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  7,405
-                </div>
-                <div className="font-size-lg opacity-8">
-                  Connections Requests
-                </div>
-                <div className="divider mx-3 my-3" />
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-danger">
-                    View
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={3}>
-            <Card className="card-box h-100">
-              <div className="card-content-overlay text-center">
-                <div className="font-weight-bold text-black display-4 mt-4 mb-1">
-                  745
-                </div>
-                <div className="font-size-lg opacity-8">New Connections</div>
-                <div className="divider mx-3 my-3" />
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-danger">
-                    View
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={3}>
-            <Card className="card-box shadow-success-sm p-3 h-100">
-              <div className="mx-auto text-center">
-                <CircularProgressbar
-                  value={56}
-                  text={56 + '%'}
-                  strokeWidth={8}
-                  className="circular-progress-primary"
-                />
-              </div>
-              <div className="font-size-lg opacity-8 pt-3 text-center">
-                Candidates connected
-              </div>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={3}>
-            <Card className="card-box shadow-success-sm p-3 h-100">
-              <div className="mx-auto text-center">
-                <CircularProgressbar
-                  value={56}
-                  text={56 + '%'}
-                  strokeWidth={8}
-                  className="circular-progress-warning"
-                />
-              </div>
-              <div className="font-size-lg opacity-8 pt-3 text-center">
-                Agencies connected
-              </div>
-            </Card>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={5}>
             <Card className="h-100 border-0 shadow-danger-sm p-3">
               <div className="card-header--title">
                 <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
@@ -239,45 +630,55 @@ const CompanyDashboard = (props) => {
                   className="opacity-8 font-size-xs position-absolute ribbon-angle--top-right m-3"
                 />
               </div>
-              <div className="timeline-list ml-3">
-                <div className="timeline-item timeline-item-icon">
+              <div className="timeline-list timeline-list--primary">
+                <div className="timeline-item">
                   <div className="timeline-item--content">
-                    <div className="timeline-item--icon-wrapper bg-primary text-white">
-                      <FontAwesomeIcon icon={['far', 'building']} />
-                    </div>
-                    <h4 className="timeline-item--label mb-2 font-weight-bold">
-                      Business meeting
+                    <div className="timeline-item--icon" />
+                    <h4 className="timeline-item--label">
+                      Business investor meeting
                     </h4>
-                    <p>The World Wide Web goes live with its first web page.</p>
+                    <small className="mt-2 d-block">
+                      <FontAwesomeIcon
+                        icon={['far', 'clock']}
+                        className="mr-1"
+                      />
+                      17<sup>th</sup> September
+                    </small>
                   </div>
                 </div>
-                <div className="timeline-item timeline-item-icon">
+                <div className="timeline-item">
                   <div className="timeline-item--content">
-                    <div className="timeline-item--icon-wrapper bg-danger text-white">
-                      <FontAwesomeIcon icon={['far', 'gem']} />
-                    </div>
-                    <h4 className="timeline-item--label mb-2 font-weight-bold">
-                      Reports generation date
+                    <div className="timeline-item--icon" />
+                    <h4 className="timeline-item--label font-weight-bold">
+                      Learning round table gathering
                     </h4>
-                    <p>Bill Clinton's presidential scandal makes it online.</p>
-                  </div>
-                </div>
-                <div className="timeline-item timeline-item-icon">
-                  <div className="timeline-item--content">
-                    <div className="timeline-item--icon-wrapper bg-warning text-white">
-                      <FontAwesomeIcon icon={['far', 'object-group']} />
-                    </div>
-                    <h4 className="timeline-item--label mb-2 font-weight-bold">
-                      Lunch with investors
-                    </h4>
-                    <p>
-                      Mosaic, the first graphical browser, is introduced to the
-                      average consumer.
+                    <small className="mt-2 d-block">
+                      <FontAwesomeIcon
+                        icon={['far', 'clock']}
+                        className="mr-1"
+                      />
+                      18<sup>th</sup> September
+                    </small>
+                    <p className="mt-3">
+                      The World Wide Web goes live with its first web page.
                     </p>
                   </div>
                 </div>
+                <div className="timeline-item">
+                  <div className="timeline-item--content">
+                    <div className="timeline-item--icon" />
+                    <h4 className="timeline-item--label">Java exam day</h4>
+                    <small className="mt-2 d-block">
+                      <FontAwesomeIcon
+                        icon={['far', 'clock']}
+                        className="mr-1"
+                      />
+                      19<sup>th</sup> September
+                    </small>
+                  </div>
+                </div>
               </div>
-              <div className="card-footer py-3 text-center see-more">
+              <div className="card-footer pb-0 text-center see-more">
                 <Button
                   size="small"
                   className="btn-outline-second"
@@ -287,416 +688,33 @@ const CompanyDashboard = (props) => {
               </div>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Card>
-              <div className="app-inner-content-layout">
-                <div className="app-drawer-content-message">
-                  <Tooltip arrow title="Close drawer" placement="left">
-                    <Button
-                      size="small"
-                      onClick={toogleHeaderDrawer}
-                      className="close-drawer-btn bg-white p-0 d-40"
-                      id="CloseDrawerTooltip">
-                      <div
-                        className={clsx(
-                          'navbar-toggler hamburger hamburger--elastic',
-                          {
-                            'is-active': headerDrawerToggle
-                          }
-                        )}>
-                        <span className="hamburger-box">
-                          <span className="hamburger-inner" />
-                        </span>
-                      </div>
-                    </Button>
-                  </Tooltip>
-
-                  <div className="shadow-overflow">
-                    <PerfectScrollbar>
-                      <div className="p-2 scroll-menu">
-                        <TextField
-                          onFocus={toggleHeaderSearchHover}
-                          onBlur={toggleHeaderSearchHover}
-                          id="header-search-input"
-                          name="header-search-input"
-                          type="search"
-                          placeholder="Search conversations.."
-                          variant="outlined"
-                          style={{
-                            background: 'white',
-                            'margin-bottom': '10px'
-                          }}
-                        />
-                        <div className="py-4">
-                          <FontAwesomeIcon
-                            icon={['far', 'clock']}
-                            className="font-size-sm text-warning"
-                          />
-                          <b className="text-warning ml-1">Pending</b>
-                        </div>
-                        <ul>
-                          <li className="pending-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="pending-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="pending-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="pending-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                        </ul>
-                        <div className="py-4">
-                          <FontAwesomeIcon
-                            icon={['far', 'comments']}
-                            className="font-size-sm text-info"
-                          />
-                          <b className="text-info ml-1">Active conversions</b>
-                        </div>
-                        <ul>
-                          <li className="active-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="active-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="active-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="active-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                        </ul>
-                        <div className="py-4">
-                          <FontAwesomeIcon
-                            icon={['far', 'comment-alt']}
-                            className="font-size-sm text-success"
-                          />
-                          <b className="text-success ml-1">
-                            Resolved conversations
-                          </b>
-                        </div>
-                        <ul>
-                          <li className="resolved-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="resolved-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="resolved-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                          <li className="resolved-card">
-                            <b>Jerome Macoy</b>
-                            <p className="mb-0 text-black-50">
-                              So I need new sheets and..
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </PerfectScrollbar>
-                  </div>
-                </div>
-                <div className="app-inner-content-layout--main order-3 order-lg-2 card-box remove-border-box bg-secondary">
-                  <PerfectScrollbar>
-                    <div className="card-header rounded-0 bg-white border-bottom">
-                      <div className="card-header--title">
-                        <div className="app-drawer-wrapper-message">
-                          <Button
-                            size="small"
-                            onClick={toogleHeaderDrawer}
-                            className={clsx(
-                              'btn-transition-none navbar-toggler bg-transparent p-0 hamburger hamburger--elastic',
-                              { 'is-active': headerDrawerToggle }
-                            )}
-                            disableRipple>
-                            <span className="hamburger-box">
-                              <span className="hamburger-inner" />
-                            </span>
-                          </Button>
-                          <div className="ml-3 mt-3">
-                            <b>Messenger</b>
-                            <p>Talking to Kate</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="chat-wrapper-message p-3">
-                      <div className="chat-item p-2 mb-2">
-                        <div className="align-box-row">
-                          <div className="avatar-icon-wrapper avatar-icon-lg align-self-start">
-                            <div className="avatar-icon rounded-circle shadow-none">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="chat-box bg-gray-400 text-second">
-                              <p>Hello, John.</p>
-                              <p>This is Kenny. How are you?</p>
-                            </div>
-                            <small className="mt-2 d-block text-black-50">
-                              <FontAwesomeIcon
-                                icon={['far', 'clock']}
-                                className="mr-1 opacity-5"
-                              />
-                              11:01 AM | Yesterday
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="chat-item chat-item-reverse p-2 mb-2">
-                        <div className="align-box-row flex-row-reverse">
-                          <div className="avatar-icon-wrapper avatar-icon-lg align-self-start">
-                            <div className="avatar-icon rounded-circle shadow-none">
-                              <img alt="..." src={avatar3} />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="chat-box bg-gray-400 text-second">
-                              <p>Hey, Kate.</p>
-                              <p>
-                                I'm attaching the pictures you requested below:
-                              </p>
-                              <Card className="mt-3 mb-2 pt-2 pb-2 text-center">
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}>
-                                    <img
-                                      alt="..."
-                                      className="img-fluid rounded m-1 shadow-sm"
-                                      src={people1}
-                                      width="54"
-                                    />
-                                  </a>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}>
-                                    <img
-                                      alt="..."
-                                      className="img-fluid rounded m-1 shadow-sm"
-                                      src={people2}
-                                      width="54"
-                                    />
-                                  </a>
-                                </div>
-                              </Card>
-                            </div>
-                            <small className="mt-2 d-block text-black-50">
-                              <FontAwesomeIcon
-                                icon={['far', 'clock']}
-                                className="mr-1 opacity-5"
-                              />
-                              11:01 AM | Yesterday
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="chat-item p-2 mb-2">
-                        <div className="align-box-row">
-                          <div className="avatar-icon-wrapper avatar-icon-lg align-self-start">
-                            <div className="avatar-icon rounded-circle shadow-none">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="chat-box bg-gray-400 text-second">
-                              <p>Thanks.</p>
-                              <p>Really appreciate it!</p>
-                            </div>
-                            <small className="mt-2 d-block text-black-50">
-                              <FontAwesomeIcon
-                                icon={['far', 'clock']}
-                                className="mr-1 opacity-5"
-                              />
-                              11:01 AM | Yesterday
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="chat-item p-2 mb-2">
-                        <div className="align-box-row">
-                          <div className="avatar-icon-wrapper avatar-icon-lg align-self-start">
-                            <div className="avatar-icon rounded-circle shadow-none">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="chat-box bg-gray-400 text-second">
-                              <p>Bye for now, talk to you later.</p>
-                            </div>
-                            <small className="mt-2 d-block text-black-50">
-                              <FontAwesomeIcon
-                                icon={['far', 'clock']}
-                                className="mr-1 opacity-5"
-                              />
-                              11:01 AM | Yesterday
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="chat-item chat-item-reverse p-2 mb-2">
-                        <div className="align-box-row flex-row-reverse">
-                          <div className="avatar-icon-wrapper avatar-icon-lg align-self-start">
-                            <div className="avatar-icon rounded-circle shadow-none">
-                              <img alt="..." src={avatar3} />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="chat-box bg-gray-400 text-second">
-                              <p>Almost forgot about your tasks.</p>
-                              <p>
-                                <b>Check the links below:</b>
-                              </p>
-                              <Card className="bg-second p-1 mt-3 mb-2">
-                                <div className="text-center py-2">
-                                  <Tooltip title="Menu example">
-                                    <Button
-                                      className="btn-link p-0 btn-icon bg-ripe-malin d-inline-block text-center text-white font-size-xl d-40 rounded-circle border-0 m-2"
-                                      id="MenuExampleTooltip111">
-                                      <FontAwesomeIcon
-                                        icon={['far', 'gem']}
-                                        className="font-size-sm"
-                                      />
-                                    </Button>
-                                  </Tooltip>
-                                  <Tooltip title="Menu example">
-                                    <Button
-                                      className="btn-link p-0 btn-icon bg-grow-early d-inline-block text-center text-white font-size-xl d-40 rounded-circle border-0 m-2"
-                                      id="MenuExampleTooltip118">
-                                      <FontAwesomeIcon
-                                        icon={['far', 'building']}
-                                        className="font-size-sm"
-                                      />
-                                    </Button>
-                                  </Tooltip>
-                                  <Tooltip title="Menu example">
-                                    <Button
-                                      className="btn-link p-0 btn-icon bg-arielle-smile d-inline-block text-center text-white font-size-xl d-40 rounded-circle border-0 m-2"
-                                      id="MenuExampleTooltip125">
-                                      <FontAwesomeIcon
-                                        icon={['far', 'chart-bar']}
-                                        className="font-size-sm"
-                                      />
-                                    </Button>
-                                  </Tooltip>
-                                </div>
-                              </Card>
-                            </div>
-                            <small className="mt-2 d-block text-black-50">
-                              <FontAwesomeIcon
-                                icon={['far', 'clock']}
-                                className="mr-1 opacity-5"
-                              />
-                              11:03 AM | Yesterday
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-white">
-                      <div className="card-footer p-0">
-                        <div
-                          className={clsx(
-                            'd-flex align-items-center transition-base px-4 py-2',
-                            { 'bg-secondary': inputBg }
-                          )}>
-                          <div className="avatar-icon-wrapper avatar-initials mr-3">
-                            <div className="avatar-icon bg-neutral-dark text-black">
-                              H
-                            </div>
-                            <div
-                              className="badge badge-success badge-position badge-position--bottom-center badge-circle"
-                              title="Badge bottom center">
-                              Online
-                            </div>
-                          </div>
-                          <TextField
-                            variant="outlined"
-                            size="small"
-                            className="bg-white w-100"
-                            classes={{ root: 'input-border-0' }}
-                            id="input-with-icon-textfield225-1"
-                            placeholder="Write your message here..."
-                            onFocus={toggleInputBg}
-                            onBlur={toggleInputBg}
-                          />
-                          <div className="avatar-icon-wrapper avatar-initials mr-3 send-btn">
-                            <FontAwesomeIcon
-                              icon={['fas', 'paper-plane']}
-                              className="font-size-sm"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </PerfectScrollbar>
-                </div>
-              </div>
-            </Card>
-          </Grid>
         </Grid>
 
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12}>
-            <Card className="card-box">
+        <Grid container spacing={1} className="mt-1">
+          <Grid item xs={12} sm={7}>
+            <Card className="card-box h-100">
               <div className="card-header py-3">
                 <div className="card-header--title font-size-lg">
-                  <b>LIve Roles</b>
+                  <b>List of Jobs</b>
                 </div>
               </div>
 
-              <div className="divider" />
+              {/* <div className="divider" /> */}
               <div className="table-responsive-md">
                 <PerfectScrollbar>
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Job ID</th>
                         <th className="bg-white">Role</th>
-                        <th className="bg-white text-center">Agency</th>
-                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-left">Company</th>
+                        <th className="bg-white text-center">Date added</th>
                         <th className="bg-white text-center">Status</th>
+                        <th className="bg-white text-center">Applications</th>
+                        <th className="bg-white text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="font-weight-bold">#453</td>
                         <td>Role 1</td>
                         <td className="text-center">
                           <div
@@ -707,6 +725,7 @@ const CompanyDashboard = (props) => {
                             </div>
                           </div>
                         </td>
+
                         <td className="text-center text-black-50">
                           12/12/2020
                         </td>
@@ -715,9 +734,16 @@ const CompanyDashboard = (props) => {
                             Closed
                           </div>
                         </td>
+                        <td className="text-center">File Manager</td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 bg-primary text-white">
+                            View
+                          </Button>
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">#584</td>
                         <td>Role 2</td>
                         <td className="text-center">
                           <Tooltip title="Arvin Weston">
@@ -736,9 +762,16 @@ const CompanyDashboard = (props) => {
                             Open
                           </div>
                         </td>
+                        <td className="text-center">Tickets App</td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 bg-primary text-white">
+                            View
+                          </Button>
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">#764</td>
                         <td>Role 3</td>
                         <td className="text-center">
                           <Tooltip title="Mali Rosario">
@@ -757,9 +790,16 @@ const CompanyDashboard = (props) => {
                             Closed
                           </div>
                         </td>
+                        <td className="text-center">Tasks Management</td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 bg-primary text-white">
+                            View
+                          </Button>
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">#453</td>
                         <td>Role 4</td>
                         <td className="text-center">
                           <div
@@ -778,6 +818,14 @@ const CompanyDashboard = (props) => {
                             Open
                           </div>
                         </td>
+                        <td className="text-center">Calendar App</td>
+                        <td className="text-center">
+                          <Button
+                            size="small"
+                            className="px-4 bg-primary text-white">
+                            View
+                          </Button>
+                        </td>
                       </tr>
                     </tbody>
                   </Table>
@@ -788,18 +836,24 @@ const CompanyDashboard = (props) => {
                   size="small"
                   className="btn-outline-second"
                   variant="text">
-                  View More
+                  View more
                 </Button>
               </div>
             </Card>
           </Grid>
+          <Grid item xs={12} sm={5}>
+            <Card>
+              <ChatBox />
+            </Card>
+          </Grid>
         </Grid>
+
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <Card className="card-box">
               <div className="card-header py-3">
                 <div className="card-header--title font-size-lg">
-                  <b>List of Agencies Recently Added</b>
+                  <b>List of Agencies Recently Joined</b>
                 </div>
               </div>
 
@@ -1039,7 +1093,6 @@ const CompanyDashboard = (props) => {
           </Grid>
         </Grid>
       </div>
-      <AddsComponents />
     </>
   );
 };

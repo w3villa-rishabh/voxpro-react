@@ -364,7 +364,12 @@ ul {
   height: 0.6em !important;
 }
 
-
+.card-bagdes-down {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 2;
+}
 
 
 .profile-view-section {

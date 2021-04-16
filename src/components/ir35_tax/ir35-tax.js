@@ -19,13 +19,21 @@ export default function IR35TaxComponent() {
     payment: '',
     organisationHours: 'a',
     organisationWork: 'a',
+    decideWorkingHours: 'a',
+    decideWhereWorkIsDone: 'a',
+    equipmentCosts: 'a',
     equipmentPay: 'a',
     vehicleCost: 'a',
-    stationery: 'a',
+    materialCost: 'a',
+    otherCost: 'a',
+    howWorkerIsPaid: 'a',
+    putWorkRight: 'a',
     beforePay: 'a',
     paidWork: 'a',
     workerRight: 'a',
     corporateBenefits: 'a',
+    managementResponsibilities: 'a',
+    introduceWorker: 'a',
     suppliers: 'a',
     similarOrganisations: 'a',
     ownership: 'a',
@@ -361,7 +369,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="A"
                     />
-                    <span className="fhh">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
@@ -373,7 +381,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="fhh">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
@@ -602,7 +610,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">Yes</span>
+                      <span className="mt-3 fhh">Yes</span>
                     </li>
                     <li>
                       <Radio
@@ -614,7 +622,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">
+                      <span className="mt-3 fhh">
                         No, you would have to agree
                       </span>
                     </li>
@@ -628,7 +636,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">
+                      <span className="mt-3 fhh">
                         No, that would require a new contract or formal working
                         arrangement
                       </span>
@@ -636,6 +644,7 @@ export default function IR35TaxComponent() {
                   </ul>
                 </div>
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('6');
@@ -675,7 +684,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3">Yes</span>
+                      <span className="mt-3 fhh">Yes</span>
                     </li>
                     <li>
                       <Radio
@@ -687,11 +696,12 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3">No</span>
+                      <span className="mt-3 fhh">No</span>
                     </li>
                   </ul>
                 </div>
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('6');
@@ -749,7 +759,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">Yes</span>
+                      <span className="mt-3 fhh">Yes</span>
                     </li>
                     <li>
                       <Radio
@@ -764,7 +774,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">No, you solely decide</span>
+                      <span className="mt-3 fhh">No, you solely decide</span>
                     </li>
                     <li>
                       <Radio
@@ -779,7 +789,7 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">
+                      <span className="mt-3 fhh">
                         No, you and your client agree together
                       </span>
                     </li>
@@ -796,13 +806,14 @@ export default function IR35TaxComponent() {
                         name="radio-button-demo"
                         aria-label="B"
                       />
-                      <span className="mt-3 fh">
+                      <span className="mt-3 fhh">
                         Not relevant, it is highly skilled work
                       </span>
                     </li>
                   </ul>
                 </div>
                 <Button
+                  size="large"
                   variant="contained"
                   onClick={() => {
                     setActiveTab('7');
@@ -822,54 +833,68 @@ export default function IR35TaxComponent() {
           index={7}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Working arrangements</h6>
               <h4>
-                Does your organisation have the right to decide how the work is
-                done?
+                Does your client have the right to decide your working hours?
               </h4>
-              <div className="text-f">
-                <span>
-                  This can include your organisation instructing, guiding or
-                  advising the way the task should be completed.
-                </span>
-                <span>
-                  This is not relevant if it is highly skilled work. For
-                  example, an airline pilot.
-                </span>
-                <br />
-                <a className="a-blue" href="javascript:void(0)">
-                  Read more examples of how the work is done (opens in a new
-                  window).
-                </a>
-              </div>
               <div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.organisationDone === 'a'}
+                      checked={policyObj.decideWorkingHours === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, organisationDone: 'a' });
+                        setPolicyObj({ ...policyObj, decideWorkingHours: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.organisationDone === 'b'}
+                      checked={policyObj.decideWorkingHours === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, organisationDone: 'b' });
+                        setPolicyObj({ ...policyObj, decideWorkingHours: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No, you solely decide</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.decideWorkingHours === 'c'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, decideWorkingHours: 'c' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      No, you and your client agree
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.decideWorkingHours === 'd'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, decideWorkingHours: 'd' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      No, the work is based on agreed deadlines
+                    </span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('8');
@@ -888,40 +913,82 @@ export default function IR35TaxComponent() {
           index={8}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Working arrangements</h6>
               <h4>
-                Does your organisation have the right to decide the worker’s
-                working hours?
+                Does your client have the right to decide where you do the work?
               </h4>
 
               <div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.organisationHours === 'a'}
+                      checked={policyObj.decideWhereWorkIsDone === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, organisationHours: 'a' });
+                        setPolicyObj({
+                          ...policyObj,
+                          decideWhereWorkIsDone: 'a'
+                        });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.organisationHours === 'b'}
+                      checked={policyObj.decideWhereWorkIsDone === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, organisationHours: 'b' });
+                        setPolicyObj({
+                          ...policyObj,
+                          decideWhereWorkIsDone: 'b'
+                        });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No, you solely decide</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.decideWhereWorkIsDone === 'c'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          decideWhereWorkIsDone: 'c'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      No, the task sets the location
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.decideWhereWorkIsDone === 'd'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          decideWhereWorkIsDone: 'd'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      No, some work has to be done in an agreed location and
+                      some can be your choice
+                    </span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('9');
@@ -940,40 +1007,51 @@ export default function IR35TaxComponent() {
           index={9}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Worker’s financial risk</h6>
               <h4>
-                Does your organisation have the right to decide where the worker
-                does the work?
+                Will you have to buy equipment
+                <br /> before your client pays you?
               </h4>
-
               <div>
+                <div className="text-f">
+                  <span>
+                    This can include heavy machinery or high-cost specialist
+                    equipment used <br /> for this work. This does not include
+                    laptops, tablets and phones.
+                  </span>
+                </div>
+                <div className="text-f">
+                  <span>Vehicle costs are covered in the next question.</span>
+                </div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.organisationWork === 'a'}
+                      checked={policyObj.equipmentCosts === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, organisationWork: 'a' });
+                        setPolicyObj({ ...policyObj, equipmentCosts: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.organisationWork === 'b'}
+                      checked={policyObj.equipmentCosts === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, organisationWork: 'b' });
+                        setPolicyObj({ ...policyObj, equipmentCosts: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('10');
@@ -992,48 +1070,49 @@ export default function IR35TaxComponent() {
           index={10}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Worker’s financial risk</h6>
               <h4>
-                Will the worker have to buy equipment before your organisation
-                pays them?
+                Will you have to fund any vehicle <br /> costs before your
+                client pays you?
               </h4>
               <div className="text-f">
                 <span>
-                  This can include heavy machinery or high-cost specialist
-                  equipment used for this work. This does not include laptops,
-                  tablets and phones.
+                  This can include purchasing, leasing, hiring, fuel and other
+                  running costs <br /> for this work. This does not include
+                  commuting or personal vehicle costs.
                 </span>
-                <span>Vehicle costs are covered in the next question.</span>
               </div>
 
               <div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.equipmentPay === 'a'}
+                      checked={policyObj.vehicleCost === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, equipmentPay: 'a' });
+                        setPolicyObj({ ...policyObj, vehicleCost: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.equipmentPay === 'b'}
+                      checked={policyObj.vehicleCost === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, equipmentPay: 'b' });
+                        setPolicyObj({ ...policyObj, vehicleCost: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('11');
@@ -1052,15 +1131,19 @@ export default function IR35TaxComponent() {
           index={11}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Worker’s financial risk</h6>
               <h4>
-                Will the worker have to fund any vehicle costs before your
-                organisation pays them?
+                Will you have to buy materials before your client pays you?
               </h4>
               <div className="text-f">
                 <span>
-                  This can include purchasing, leasing, hiring, fuel and other
-                  running costs for this work. This does not include commuting
-                  or personal vehicle costs.
+                  This can include items that form a lasting part of the work,
+                  or are left <br /> behind when you leave. This does not
+                  include items like stationery.
+                </span>
+                <span>
+                  This question is most likely to be relevant to the
+                  construction industry.
                 </span>
               </div>
 
@@ -1068,31 +1151,32 @@ export default function IR35TaxComponent() {
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.vehicleCost === 'a'}
+                      checked={policyObj.materialCost === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, vehicleCost: 'a' });
+                        setPolicyObj({ ...policyObj, materialCost: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.vehicleCost === 'b'}
+                      checked={policyObj.materialCost === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, vehicleCost: 'b' });
+                        setPolicyObj({ ...policyObj, materialCost: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('12');
@@ -1111,19 +1195,15 @@ export default function IR35TaxComponent() {
           index={12}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Worker’s financial risk</h6>
               <h4>
-                Will the worker have to buy materials before your organisation
-                pays them?
+                Will you have to fund any other costs <br /> before your client
+                pays you?
               </h4>
               <div className="text-f">
                 <span>
-                  This can include items that form a lasting part of the work,
-                  or are left behind when the worker leaves. This does not
-                  include items like stationery.
-                </span>
-                <span>
-                  This question is most likely to be relevant to the
-                  construction industry.
+                  This can include non-commuting travel or accommodation, or
+                  external <br /> business premises for this work only.
                 </span>
               </div>
 
@@ -1131,31 +1211,32 @@ export default function IR35TaxComponent() {
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.stationery === 'a'}
+                      checked={policyObj.otherCost === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, stationery: 'a' });
+                        setPolicyObj({ ...policyObj, otherCost: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.stationery === 'b'}
+                      checked={policyObj.otherCost === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, stationery: 'b' });
+                        setPolicyObj({ ...policyObj, otherCost: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('13');
@@ -1174,46 +1255,85 @@ export default function IR35TaxComponent() {
           index={13}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
-              <h4>
-                Will the worker have to fund any other costs before your
-                organisation pays them?
-              </h4>
-              <div className="text-f">
-                <span>
-                  This can include non-commuting travel or accommodation, or
-                  external business premises for this work only.
-                </span>
-              </div>
+              <h6>Worker’s financial risk</h6>
+              <h4>How will you be paid for this work?</h4>
 
               <div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.beforePay === 'a'}
+                      checked={policyObj.howWorkerIsPaid === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, beforePay: 'a' });
+                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">
+                      An hourly, daily or weekly rate
+                    </span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.beforePay === 'b'}
+                      checked={policyObj.howWorkerIsPaid === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, beforePay: 'b' });
+                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">
+                      A fixed price for the project
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.howWorkerIsPaid === 'c'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'c' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      A fixed amount for each piece of work completed
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.howWorkerIsPaid === 'd'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'd' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      A percentage of the sales you generate
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.howWorkerIsPaid === 'e'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'e' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      A percentage of your client’s profits or savings
+                    </span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('14');
@@ -1232,37 +1352,89 @@ export default function IR35TaxComponent() {
           index={14}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
-              <h4>How will the worker be paid for this work?</h4>
+              <h6>Worker’s financial risk</h6>
+              <h4>
+                If the client was not happy with your <br /> work, would you
+                have to put it right?
+              </h4>
 
               <div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.paidWork === 'a'}
+                      checked={policyObj.putWorkRight === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, paidWork: 'a' });
+                        setPolicyObj({ ...policyObj, putWorkRight: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">
+                      Yes, unpaid and you would have extra costs that your
+                      client <br /> would not pay for
+                    </span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.paidWork === 'b'}
+                      checked={policyObj.putWorkRight === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, paidWork: 'b' });
+                        setPolicyObj({ ...policyObj, putWorkRight: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">
+                      Yes, unpaid but your only cost would be losing the
+                      opportunity <br /> to do other work
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.putWorkRight === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      Yes, you would fix it in your usual hours at your usual
+                      rate or fee
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.putWorkRight === 'b'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      No, the work is time-specific or for a single event
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.putWorkRight === 'e'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, putWorkRight: 'e' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('15');
@@ -1281,58 +1453,7 @@ export default function IR35TaxComponent() {
           index={15}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
-              <h4>
-                If your organisation was not happy with the work, would the
-                worker have to put it right?{' '}
-              </h4>
-
-              <div>
-                <ul>
-                  <li>
-                    <Radio
-                      checked={policyObj.workerRight === 'a'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, workerRight: 'a' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span className="mt-3">Yes</span>
-                  </li>
-                  <li>
-                    <Radio
-                      checked={policyObj.workerRight === 'b'}
-                      onChange={() => {
-                        setPolicyObj({ ...policyObj, workerRight: 'b' });
-                      }}
-                      value="b"
-                      name="radio-button-demo"
-                      aria-label="B"
-                    />
-                    <span className="mt-3">No</span>
-                  </li>
-                </ul>
-              </div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  setActiveTab('16');
-                }}
-                className="font-weight-bold btn-slack px-4 my-3 bg-color">
-                Continue
-              </Button>
-            </Grid>
-          </Grid>
-        </div>
-        {/* Section 16 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '16'
-          })}
-          index={16}>
-          <Grid container spacing={1} className="pt-3">
-            <Grid item xs={12}>
+              <h6>Worker’s involvement</h6>
               <h4>
                 Will you provide the worker with paid-for corporate benefits?
               </h4>
@@ -1355,7 +1476,7 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">Yes</span>
                   </li>
                   <li>
                     <Radio
@@ -1367,11 +1488,77 @@ export default function IR35TaxComponent() {
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">No</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
+                variant="contained"
+                onClick={() => {
+                  setActiveTab('16');
+                }}
+                className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                Continue
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
+        {/* Section 16 */}
+        <div
+          className={clsx('tab-item-wrapper no-scroll', {
+            active: activeTab === '16'
+          })}
+          index={16}>
+          <Grid container spacing={1} className="pt-3">
+            <Grid item xs={12}>
+              <h6>Worker’s involvement</h6>
+              <h4>
+                Will the worker have any management responsibilities for your
+                organisation?
+              </h4>
+              <div className="text-f">
+                <span>
+                  This can include deciding how much to pay someone, hiring or
+                  dismissing workers, and delivering appraisals.
+                </span>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    <Radio
+                      checked={policyObj.managementResponsibilities === 'a'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          managementResponsibilities: 'a'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">Yes</span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.managementResponsibilities === 'b'}
+                      onChange={() => {
+                        setPolicyObj({
+                          ...policyObj,
+                          managementResponsibilities: 'b'
+                        });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">No</span>
+                  </li>
+                </ul>
+              </div>
+              <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('17');
@@ -1390,45 +1577,70 @@ export default function IR35TaxComponent() {
           index={17}>
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
+              <h6>Worker’s involvement</h6>
               <h4>
-                Will the worker have any management responsibilities for your
-                organisation?
+                How would you introduce yourself to your client’s consumers or
+                suppliers?
               </h4>
-              <div className="text-f">
-                <span>
-                  This can include deciding how much to pay someone, hiring or
-                  dismissing workers, and delivering appraisals.
-                </span>
-              </div>
               <div>
                 <ul>
                   <li>
                     <Radio
-                      checked={policyObj.corporateBenefits === 'a'}
+                      checked={policyObj.introduceWorker === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
+                        setPolicyObj({ ...policyObj, introduceWorker: 'a' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">Yes</span>
+                    <span className="mt-3 fhh">You work for your client</span>
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.corporateBenefits === 'b'}
+                      checked={policyObj.introduceWorker === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
+                        setPolicyObj({ ...policyObj, introduceWorker: 'b' });
                       }}
                       value="b"
                       name="radio-button-demo"
                       aria-label="B"
                     />
-                    <span className="mt-3">No</span>
+                    <span className="mt-3 fhh">
+                      You are an independent worker acting on your client’s
+                      behalf
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.introduceWorker === 'c'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, introduceWorker: 'c' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">
+                      You work for your own business
+                    </span>
+                  </li>
+                  <li>
+                    <Radio
+                      checked={policyObj.introduceWorker === 'd'}
+                      onChange={() => {
+                        setPolicyObj({ ...policyObj, introduceWorker: 'd' });
+                      }}
+                      value="b"
+                      name="radio-button-demo"
+                      aria-label="B"
+                    />
+                    <span className="mt-3 fhh">This would not happen</span>
                   </li>
                 </ul>
               </div>
               <Button
+                size="large"
                 variant="contained"
                 onClick={() => {
                   setActiveTab('18');
@@ -1439,6 +1651,8 @@ export default function IR35TaxComponent() {
             </Grid>
           </Grid>
         </div>
+        {/* worker's involvement done */}
+        {/* worker's contract started */}
         {/* Section 18 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
