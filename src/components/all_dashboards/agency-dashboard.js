@@ -26,7 +26,35 @@ import avatar5 from '../../assets/images/avatars/default.png';
 import ChatBox from '../chat_component/chat';
 import Chart from 'react-apexcharts';
 import Calendar from 'react-calendar';
+import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 
+function boxMullerRandom() {
+  let phase = false,
+    x1,
+    x2,
+    w;
+
+  return (function () {
+    if ((phase = !phase)) {
+      do {
+        x1 = 2.0 * Math.random() - 1.0;
+        x2 = 2.0 * Math.random() - 1.0;
+        w = x1 * x1 + x2 * x2;
+      } while (w >= 1.0);
+
+      w = Math.sqrt((-2.0 * Math.log(w)) / w);
+      return x1 * w;
+    } else {
+      return x2 * w;
+    }
+  })();
+}
+
+function randomData(n = 30) {
+  return Array.apply(0, Array(n)).map(boxMullerRandom);
+}
+
+const sampleData2 = randomData(32);
 const AgencyDashboard = () => {
   const [value, onChange] = useState(new Date());
 
@@ -67,7 +95,7 @@ const AgencyDashboard = () => {
                 </div>
                 <div className="font-weight-bold text-white ml-3">
                   <small className="font-size-sm d-block mb-1 text-uppercase">
-                    Live Placements
+                    Live Jobs
                   </small>
                   <span className="font-size-xxl mt-1">23,274</span>
                 </div>
@@ -140,50 +168,64 @@ const AgencyDashboard = () => {
         <Grid container spacing={1} className="mt-3">
           <Grid item xs={12} sm={8}>
             <Card className="card-box shadow-success-sm p-3 h-100">
-              <b>Monthly Placements</b>
-              <Grid container spacing={0} className="mt-5">
+              <Grid container spacing={0}>
                 <Grid item xs={12} sm={6}>
-                  <Chart
-                    options={options}
-                    series={series}
-                    type="line"
-                    height="310"
-                  />
-                  {/* </Card> */}
+                  <b>Monthly Placements</b>
+                  <div className="mt-4">
+                    <Chart
+                      options={options}
+                      series={series}
+                      type="line"
+                      height="330"
+                    />
+                  </div>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Grid container spacing={0}>
-                    <Grid item xs={12} sm={6} className="px-2">
-                      <div className="text-center text-capitalize mb-3">
-                        <h5 className="font-size-sm">Candidates registered</h5>
-                        <small className="text-black-50">
-                          Lorem Ipsum is simply dummy text of the printing.
-                        </small>
-                      </div>
-                      <div className="mx-auto text-center">
-                        <CircularProgressbar
-                          value={56}
-                          text={56 + '%'}
-                          strokeWidth={8}
-                          className="circular-progress-info"
-                        />
+                    <Grid item xs={12}>
+                      <b>Monthly Revenue</b>
+                      <div className="mt-4">
+                        <Sparklines data={sampleData2}>
+                          <SparklinesLine color="#56b45d" />
+                          <SparklinesSpots style={{ fill: '#56b45d' }} />
+                        </Sparklines>
                       </div>
                     </Grid>
-                    <Grid item xs={12} sm={6} className="px-2">
-                      <div className="text-center text-capitalize mb-3">
-                        <h5 className="font-size-sm">Candidates registered</h5>
-                        <small className="text-black-50">
-                          Lorem Ipsum is simply dummy text of the printing.
-                        </small>
-                      </div>
-                      <div className="mx-auto text-center">
-                        <CircularProgressbar
-                          value={56}
-                          text={56 + '%'}
-                          strokeWidth={8}
-                          className="circular-progress-info"
-                        />
-                      </div>
+                  </Grid>
+                  <Grid item xs={12} className="mt-3">
+                    <Grid container spacing={0}>
+                      <Grid item xs={12} sm={6} className="px-2">
+                        <b>Candidates registered</b>
+                        <div className="text-center text-capitalize mb-3">
+                          <small className="text-black-50">
+                            Lorem Ipsum is simply dummy text of the printing.
+                          </small>
+                        </div>
+                        <div className="mx-auto text-center">
+                          <CircularProgressbar
+                            value={56}
+                            text={56 + '%'}
+                            strokeWidth={8}
+                            className="circular-progress-info"
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={6} className="px-2">
+                        <b>Candidates registered</b>
+                        <div className="text-center text-capitalize mb-3">
+                          <small className="text-black-50">
+                            Lorem Ipsum is simply dummy text of the printing.
+                          </small>
+                        </div>
+                        <div className="mx-auto text-center">
+                          <CircularProgressbar
+                            value={56}
+                            text={56 + '%'}
+                            strokeWidth={8}
+                            className="circular-progress-info"
+                          />
+                        </div>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -196,7 +238,7 @@ const AgencyDashboard = () => {
                 <Card className="card-box h-100">
                   <div className="card-content-overlay text-center p-3">
                     <div className="py-2">
-                      <b> My Tasks</b>
+                      <b> My Tasks Today</b>
                     </div>
                     <div className="font-size-lg opacity-8">
                       <Grid container spacing={0}>
@@ -209,6 +251,9 @@ const AgencyDashboard = () => {
                               className="circular-progress-first"
                             />
                           </div>
+                          <div>
+                            <small>Completed</small>
+                          </div>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                           <div className="mx-auto text-center">
@@ -219,11 +264,16 @@ const AgencyDashboard = () => {
                               className="circular-progress-warning"
                             />
                           </div>
+                          <div>
+                            <small>Started</small>
+                          </div>
                         </Grid>
                       </Grid>
                     </div>
                     <div className="text-center mt-2">
-                      <Button size="small" className="px-4 btn-neutral-danger">
+                      <Button
+                        size="small"
+                        className="bg-primary px-4 text-white">
                         23 View All
                       </Button>
                     </div>
@@ -248,78 +298,98 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={3}>
             <Card className="card-box">
               <CardContent>
-                <div className="align-box-row align-items-start">
-                  <div className="mr-2">
-                    <div className="bg-happy-fisher text-center text-white font-size-xl d-50 rounded-circle btn-icon">
-                      <FontAwesomeIcon icon={['far', 'bell']} />
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-happy-fisher text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'bell']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          New Connections Requests
+                        </small>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-weight-bold">
-                      <span className="font-size-xxl mt-2">23,274</span>
-                      <small className="text-black-50 d-block mb-1 text-uppercase font-10">
-                        New Connections Requests
-                      </small>
-                    </div>
-                  </div>
-                </div>
+                </a>
               </CardContent>
             </Card>
             <Card className="mt-2 card-box">
               <CardContent>
-                <div className="align-box-row align-items-start">
-                  <div className="mr-2">
-                    <div className="bg-light-pure text-center text-white font-size-xl d-50 rounded-circle btn-icon">
-                      <FontAwesomeIcon icon={['far', 'clock']} />
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-light-pure text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'clock']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Recent Connections
+                        </small>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-weight-bold">
-                      <span className="font-size-xxl mt-2">23,274</span>
-                      <small className="text-black-50 d-block mb-1 text-uppercase font-10">
-                        Recent Connections
-                      </small>
-                    </div>
-                  </div>
-                </div>
+                </a>
               </CardContent>
             </Card>
             <Card className="mt-2 card-box">
               <CardContent>
-                <div className="align-box-row align-items-start">
-                  <div className="mr-2">
-                    <div className="bg-amy-crisp text-center text-white font-size-xl d-50 rounded-circle btn-icon">
-                      <FontAwesomeIcon icon={['far', 'building']} />
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-amy-crisp text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'building']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Companies Connected
+                        </small>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-weight-bold">
-                      <span className="font-size-xxl mt-2">23,274</span>
-                      <small className="text-black-50 d-block mb-1 text-uppercase font-10">
-                        Companies Connected
-                      </small>
-                    </div>
-                  </div>
-                </div>
+                </a>
               </CardContent>
             </Card>
             <Card className="mt-2 card-box">
               <CardContent>
-                <div className="align-box-row align-items-start">
-                  <div className="mr-2">
-                    <div className="bg-asteroid text-center text-white font-size-xl d-50 rounded-circle btn-icon">
-                      <FontAwesomeIcon icon={['far', 'user']} />
+                <a
+                  href="#/"
+                  onClick={(e) => e.preventDefault()}
+                  className="bg-white shadow-sm-dark card-box-hover-rise">
+                  <div className="align-box-row align-items-start">
+                    <div className="mr-2">
+                      <div className="bg-asteroid text-center text-white font-size-xl d-50 rounded-circle btn-icon">
+                        <FontAwesomeIcon icon={['far', 'user']} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-weight-bold">
+                        <span className="font-size-xxl mt-2">23,274</span>
+                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                          Candidates Connected
+                        </small>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-weight-bold">
-                      <span className="font-size-xxl mt-2">23,274</span>
-                      <small className="text-black-50 d-block mb-1 text-uppercase font-10">
-                        Candidates Connected
-                      </small>
-                    </div>
-                  </div>
-                </div>
+                </a>
               </CardContent>
             </Card>
           </Grid>
@@ -361,6 +431,12 @@ const AgencyDashboard = () => {
                         variant="outlined">
                         Connect
                       </Button>
+                      <Button
+                        size="small"
+                        className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                        variant="outlined">
+                        View
+                      </Button>
                     </Grid>
                   </Grid>
                 </ListItem>
@@ -396,6 +472,12 @@ const AgencyDashboard = () => {
                         className="btn-pill ml-5 btn-outline-primary border-1"
                         variant="outlined">
                         Connect
+                      </Button>
+                      <Button
+                        size="small"
+                        className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                        variant="outlined">
+                        View
                       </Button>
                     </Grid>
                   </Grid>
@@ -433,6 +515,12 @@ const AgencyDashboard = () => {
                         variant="outlined">
                         Connect
                       </Button>
+                      <Button
+                        size="small"
+                        className="btn-pill ml-2 bg-primary px-4 text-white border-1"
+                        variant="outlined">
+                        View
+                      </Button>
                     </Grid>
                   </Grid>
                 </ListItem>
@@ -451,7 +539,7 @@ const AgencyDashboard = () => {
             <Card className="h-100 border-0 shadow-danger-sm p-3">
               <div className="card-header--title">
                 <b className="font-size-lg font-weight-bold font-weight-bolder mb-0">
-                  Recent Activitie
+                  Recent Activities
                 </b>
                 <p className="text-black-50">Last activity was 2 days ago</p>
               </div>
@@ -461,7 +549,7 @@ const AgencyDashboard = () => {
                   className="opacity-8 font-size-xs position-absolute ribbon-angle--top-right m-3"
                 />
               </div>
-              <div className="timeline-list timeline-list--success">
+              <div className="timeline-list timeline-list--primary">
                 <div className="timeline-item">
                   <div className="timeline-item--content">
                     <div className="timeline-item--icon" />
@@ -544,17 +632,16 @@ const AgencyDashboard = () => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Job ID</th>
                         <th className="bg-white">Role</th>
-                        <th className="bg-white text-left">Consultant</th>
-                        <th className="bg-white text-center">Created date</th>
+                        <th className="bg-white text-left">Company</th>
+                        <th className="bg-white text-center">Date added</th>
                         <th className="bg-white text-center">Status</th>
                         <th className="bg-white text-center">Applications</th>
+                        <th className="bg-white text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="font-weight-bold">#453</td>
                         <td>Role 1</td>
                         <td className="text-center">
                           <div
@@ -574,16 +661,16 @@ const AgencyDashboard = () => {
                             Closed
                           </div>
                         </td>
+                        <td className="text-center">File Manager</td>
                         <td className="text-center">
                           <Button
                             size="small"
-                            className="px-4 btn-neutral-danger">
+                            className="px-4 bg-primary text-white">
                             View
                           </Button>
                         </td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">#584</td>
                         <td>Role 2</td>
                         <td className="text-center">
                           <Tooltip title="Arvin Weston">
@@ -602,16 +689,16 @@ const AgencyDashboard = () => {
                             Open
                           </div>
                         </td>
+                        <td className="text-center">Tickets App</td>
                         <td className="text-center">
                           <Button
                             size="small"
-                            className="px-4 btn-neutral-danger">
+                            className="px-4 bg-primary text-white">
                             View
                           </Button>
                         </td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">#764</td>
                         <td>Role 3</td>
                         <td className="text-center">
                           <Tooltip title="Mali Rosario">
@@ -630,16 +717,16 @@ const AgencyDashboard = () => {
                             Closed
                           </div>
                         </td>
+                        <td className="text-center">Tasks Management</td>
                         <td className="text-center">
                           <Button
                             size="small"
-                            className="px-4 btn-neutral-danger">
+                            className="px-4 bg-primary text-white">
                             View
                           </Button>
                         </td>
                       </tr>
                       <tr>
-                        <td className="font-weight-bold">#453</td>
                         <td>Role 4</td>
                         <td className="text-center">
                           <div
@@ -658,10 +745,11 @@ const AgencyDashboard = () => {
                             Open
                           </div>
                         </td>
+                        <td className="text-center">Calendar App</td>
                         <td className="text-center">
                           <Button
                             size="small"
-                            className="px-4 btn-neutral-danger">
+                            className="px-4 bg-primary text-white">
                             View
                           </Button>
                         </td>
