@@ -145,7 +145,7 @@ const SidebarMenu = (props) => {
                 )}
 
                 {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company') && (
+                  currentUser.role === 'company1') && (
                   <ul>
                     <li>
                       <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
