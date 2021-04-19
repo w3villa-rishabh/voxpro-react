@@ -684,9 +684,7 @@ const SidebarUserbox = () => {
               alt="..."
               src={avatar2}
               onClick={() => {
-                if (currentUser.role !== 'company') {
-                  history.push('/view-profile');
-                }
+                history.push('/view-profile');
               }}
             />
           </div>

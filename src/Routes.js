@@ -58,6 +58,16 @@ const NewRequestComponent = lazy(() =>
   import('./components/request_information/new-request')
 );
 
+//Candidate History request
+const CandidateHistory = lazy(() =>
+  import('./components/ir35_tax/candidate-history')
+);
+
+//Candidate query
+const CandidateQuery = lazy(() =>
+  import('./components/ir35_tax/candidate-query')
+);
+
 // candidate job applied
 const AppliedJobComponent = lazy(() =>
   import('./components/candidate_jobs/applied_job')
@@ -192,6 +202,9 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
+                '/request-info',
+                '/candidate-history',
+                '/candidate-enquiries',
                 '/new-request',
                 '/applied-jobs',
                 '/search-job'
@@ -204,7 +217,16 @@ const Routes = () => {
                   <Route path="/upload" component={UploadDocument} />
                   <Route path="/view-document" component={DocList} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
+                  <Route
+                    path="/candidate-history"
+                    component={CandidateHistory}
+                  />
+                  <Route
+                    path="/candidate-enquiries"
+                    component={CandidateQuery}
+                  />
                   <Route path="/view-profile" component={Profile} />
+                  <Route path="/request-info" component={NewRequestComponent} />
                   <Route path="/new-request" component={NewRequestComponent} />
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />

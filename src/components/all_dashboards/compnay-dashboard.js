@@ -23,7 +23,7 @@ import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 import avatar4 from '../../assets/images/avatars/avatar4.jpg';
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import sun from '../../assets/images/sun.png';
-
+import { CircularProgressbar } from 'react-circular-progressbar';
 import ChatBox from '../chat_component/chat';
 
 const CompanyDashboard = () => {
@@ -92,17 +92,66 @@ const CompanyDashboard = () => {
         <Grid container spacing={1}>
           <Grid item xs={12} sm={8}>
             <Card className="card-box h-100">
-              <div className="m-3">
-                <b>Monthly Recruitment and Placements</b>
-              </div>
-              <Chart
-                options={options}
-                series={series}
-                type="area"
-                height={300}
-              />
+              <Grid container spacing={0}>
+                <Grid item xs={12} sm={9}>
+                  <div className="m-3">
+                    <b>Monthly Recruitment and Placements</b>
+                  </div>
+                  <Chart
+                    options={options}
+                    series={series}
+                    type="area"
+                    height={300}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <div className="card-content-overlay text-center p-3">
+                    <div className="py-2">
+                      <b> My Tasks Today</b>
+                    </div>
+                    <div className="font-size-lg opacity-8">
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <div className="mx-auto text-center">
+                            <CircularProgressbar
+                              value={56}
+                              text={56 + '%'}
+                              strokeWidth={8}
+                              className="circular-progress-first"
+                            />
+                          </div>
+                          <div>
+                            <small>Completed</small>
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <div className="mx-auto text-center">
+                            <CircularProgressbar
+                              value={56}
+                              text={56 + '%'}
+                              strokeWidth={8}
+                              className="circular-progress-warning"
+                            />
+                          </div>
+                          <div>
+                            <small>Started</small>
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </div>
+                    <div className="text-center mt-2">
+                      <Button
+                        size="small"
+                        className="bg-primary px-4 text-white">
+                        23 View All
+                      </Button>
+                    </div>
+                  </div>
+                </Grid>
+              </Grid>
             </Card>
           </Grid>
+
           <Grid item xs={12} sm={4}>
             <Card className="card-box">
               <div className="card-content-overlay text-center">
@@ -140,7 +189,7 @@ const CompanyDashboard = () => {
             </Card>
             <Card className="card-box mt-2">
               <Calendar
-                className="border-0 m-auto"
+                className="border-0 m-auto p-1"
                 defaultView="month"
                 onChange={onChange}
                 value={value}

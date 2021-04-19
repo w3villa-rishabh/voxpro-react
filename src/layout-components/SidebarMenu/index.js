@@ -130,21 +130,22 @@ const SidebarMenu = (props) => {
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/candidate-history">
                         IR35 History
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/candidate-enquiries">
                         IR35 Enquiries
                       </NavLink>
                     </li>
                   </ul>
                 )}
 
-                {currentUser.role === 'agency' && (
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company1') && (
                   <ul>
                     <li>
                       <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
@@ -177,7 +178,12 @@ const SidebarMenu = (props) => {
                   setRequestInfo(!requestInfo);
                 }}
                 className="nav-link-simple"
-                to="/new-request">
+                to={
+                  currentUser.role === 'agency' ||
+                  currentUser.role === 'company'
+                    ? '/request-info'
+                    : '/request-information'
+                }>
                 <span className="sidebar-icon">
                   <TuneIcon />
                 </span>
