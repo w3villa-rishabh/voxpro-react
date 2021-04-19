@@ -194,7 +194,7 @@ const Routes = () => {
                 '/view-document',
                 '/request-info',
                 '/candidate-history',
-                '/candidate-query'
+                '/candidate-enquiries'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -208,7 +208,10 @@ const Routes = () => {
                     path="/candidate-history"
                     component={CandidateHistory}
                   />
-                  <Route path="/candidate-query" component={CandidateQuery} />
+                  <Route
+                    path="/candidate-enquiries"
+                    component={CandidateQuery}
+                  />
                   <Route path="/view-profile" component={Profile} />
                   <Route path="/request-info" component={NewRequestComponent} />
                 </Switch>

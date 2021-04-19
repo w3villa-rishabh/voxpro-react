@@ -137,7 +137,7 @@ const SidebarMenu = (props) => {
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/candidate-query">
+                        to="/candidate-enquiries">
                         IR35 Enquiries
                       </NavLink>
                     </li>
