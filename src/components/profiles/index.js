@@ -7,6 +7,7 @@ import {
   Button,
   CardContent,
   Dialog,
+  Typography,
   TextField,
   DialogContent,
   DialogTitle,
@@ -15,9 +16,14 @@ import {
   ListItem,
   InputAdornment,
   Table,
+  Box,
+  Menu,
   Tooltip
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
+import avatar1 from '../../assets/images/avatars/default.png';
+import { useHistory } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
@@ -43,6 +49,26 @@ import agencybg from '../../assets/images/voxpro-images/agency-bg.jpg';
 import GoogleMapReact from 'google-map-react';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      {...other}>
+      {value === index && <div>{children}</div>}
+    </Typography>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
+};
+
 const MapMarker = ({ text }) => <div>{text}</div>;
 
 export default function LivePreviewExample() {
@@ -51,6 +77,34 @@ export default function LivePreviewExample() {
   const [, setData] = useState({});
   const [modal1, seModal1] = useState(false);
   const [currentUser] = useState(getCurrentUser());
+
+  //  copy from sidebar
+  const history = useHistory();
+  const [anchorElMenu1, setAnchorElMenu1] = useState(null);
+  const [value, setValue] = useState(0);
+  const editValue = `Senior Business Analyst with 15 years experience in the retail industry and FMCG industry, with project spending 5-10 million`;
+
+  const [editSocialProfile, setEditProfile] = useState(editValue);
+
+  const handleClickMenu1 = (event) => {
+    // if (currentUser.role !== 'company') {
+    setAnchorElMenu1(event.currentTarget);
+    setEditProfile(editValue);
+    // }
+  };
+
+  const handleCloseMini = () => {
+    setAnchorElMenu1(null);
+  };
+  const handleCloseMenu1 = () => {
+    setAnchorElMenu1(null);
+  };
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('resize'));
+  });
+
+  //  till here
 
   const [description, setDescription] = useState({
     description: ''
@@ -910,8 +964,9 @@ export default function LivePreviewExample() {
                       <Grid item xs={12} sm={3}>
                         <div>
                           <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
+                            // href="#/"
+                            onClick={handleClickMenu1}
+                            // onClick={(e) => e.preventDefault()}
                             className="card bg-white shadow-sm-dark card-box-hover-rise">
                             <img
                               src={stock1}
@@ -925,9 +980,404 @@ export default function LivePreviewExample() {
                               </p>
                               <Button
                                 className="btn-outline-info border-1 m-2"
-                                variant="outlined">
+                                variant="outlined"
+                                onClick={handleClickMenu1}
+                                disableRipple>
                                 View
                               </Button>
+                              <Box className="card-tr-actions">
+                                <div className="mt-5">
+                                  <Menu
+                                    anchorEl={anchorElMenu1}
+                                    keepMounted
+                                    open={Boolean(anchorElMenu1)}
+                                    onClose={handleCloseMenu1}
+                                    classes={{ list: 'p-0' }}
+                                    getContentAnchorEl={null}
+                                    className="profile-menu-card"
+                                    anchorOrigin={{
+                                      vertical: 'bottom',
+                                      horizontal: 'left'
+                                    }}
+                                    transformOrigin={{
+                                      vertical: 'top',
+                                      horizontal: 'left'
+                                    }}>
+                                    <div className="dropdown-menu-xxl profile-menu">
+                                      <div className="mini-header">
+                                        <div className="card-badges card-badges-top">
+                                          <FontAwesomeIcon
+                                            icon={['fas', 'times']}
+                                            className="pointer mr-3"
+                                            onClick={handleCloseMini}
+                                          />
+                                        </div>
+                                        <span>Mini Profile</span>
+                                      </div>
+                                      <List
+                                        component="div"
+                                        className="text-left d-block pt-0 mini-profile-list">
+                                        {/* <PerfectScrollbar> */}
+                                        <Grid container spacing={2}>
+                                          <Grid item sm={5} className="p-0">
+                                            <Card className="card-profile">
+                                              <div className="card-img-wrapper h-100px">
+                                                <img
+                                                  alt="..."
+                                                  className="card-img-top img-fit-container"
+                                                  src={stock3}
+                                                />
+                                              </div>
+                                              <CardContent className="text-center card-body-avatar min-profile-body">
+                                                <a
+                                                  href="#/"
+                                                  onClick={(e) =>
+                                                    e.preventDefault()
+                                                  }
+                                                  className="avatar-icon-wrapper rounded-circle profile-icon d-100">
+                                                  <div className="avatar-icon rounded-circle">
+                                                    <img
+                                                      alt="..."
+                                                      className="img-fluid"
+                                                      src={avatar1}
+                                                    />
+                                                  </div>
+                                                </a>
+                                                <h3 className="font-weight-bold font-size-xxl mb-0">
+                                                  {currentUser.first_name}{' '}
+                                                  {currentUser.last_name}
+                                                </h3>
+
+                                                <p className="font-12 font-weight-bold mb-0">
+                                                  Business Analyst | London,
+                                                  United Kingdom
+                                                </p>
+                                                <TextField
+                                                  fullWidth
+                                                  variant="outlined"
+                                                  id="textfield-user"
+                                                  multiline
+                                                  rowsMax={4}
+                                                  inputProps={{
+                                                    style: { fontSize: 10 },
+                                                    maxlength: CHARACTER_LIMIT
+                                                  }}
+                                                  onChange={(event) => {
+                                                    setEditProfile(
+                                                      event.target.value
+                                                    );
+                                                  }}
+                                                  value={editSocialProfile}
+                                                  size="small"
+                                                  helperText={`${
+                                                    CHARACTER_LIMIT -
+                                                    editSocialProfile.length
+                                                  } ${
+                                                    'characters remaining' +
+                                                    ' (' +
+                                                    CHARACTER_LIMIT +
+                                                    ' Max)'
+                                                  }`}
+                                                />
+                                                <h4 className="font-size-sm font-weight-bold my-1 d-inline-block">
+                                                  SOCIAL MEDIA PROFILES
+                                                </h4>
+                                                <div>
+                                                  <Tooltip title="Github">
+                                                    <Button className="btn-github text-github btn-pill bg-white d-40 p-0">
+                                                      <span className="btn-wrapper--icon">
+                                                        <FontAwesomeIcon
+                                                          icon={[
+                                                            'fab',
+                                                            'github'
+                                                          ]}
+                                                          className="font-size-xl"
+                                                        />
+                                                      </span>
+                                                    </Button>
+                                                  </Tooltip>
+                                                  <Tooltip
+                                                    title="Instagram"
+                                                    arrow>
+                                                    <Button className="btn-instagram text-instagram btn-pill bg-white d-40 p-0 mx-2">
+                                                      <span className="btn-wrapper--icon">
+                                                        <FontAwesomeIcon
+                                                          icon={[
+                                                            'fab',
+                                                            'instagram'
+                                                          ]}
+                                                          className="font-size-xl"
+                                                        />
+                                                      </span>
+                                                    </Button>
+                                                  </Tooltip>
+                                                  <Tooltip title="Google" arrow>
+                                                    <Button className="btn-google text-google btn-pill bg-white d-40 p-0">
+                                                      <span className="btn-wrapper--icon">
+                                                        <FontAwesomeIcon
+                                                          icon={[
+                                                            'fab',
+                                                            'google'
+                                                          ]}
+                                                          className="font-size-xl"
+                                                        />
+                                                      </span>
+                                                    </Button>
+                                                  </Tooltip>
+                                                  <Tooltip title="Add">
+                                                    <Button className="btn-success btn-icon btn-transition-none btn-pill d-40 p-0 m-2">
+                                                      <span className="btn-wrapper--icon">
+                                                        <FontAwesomeIcon
+                                                          icon={['fas', 'plus']}
+                                                          className="font-size-lg"
+                                                        />
+                                                      </span>
+                                                    </Button>
+                                                  </Tooltip>
+                                                </div>
+
+                                                <div className="divider my-2" />
+                                                <div className="align-content-center d-flex justify-content-center">
+                                                  <Button
+                                                    variant="contained"
+                                                    size="small"
+                                                    className="btn-pill m-1 btn-primary">
+                                                    Connect
+                                                  </Button>
+                                                  <Button
+                                                    variant="contained"
+                                                    size="small"
+                                                    className="btn-pill m-1">
+                                                    Message
+                                                  </Button>
+                                                  <Button
+                                                    variant="contained"
+                                                    size="small"
+                                                    className="btn-pill m-1">
+                                                    More..
+                                                  </Button>
+                                                </div>
+                                              </CardContent>
+                                            </Card>
+                                          </Grid>
+                                          <Grid item sm={7}>
+                                            {/* <div className="card-header-profile">
+                                              <div className="card-header--title">
+                                              </div>
+                                            </div> */}
+
+                                            <div className="">
+                                              {/* <div className="card-img-wrapper">
+                                                  <div className="bg-composed-wrapper bg-plum-plate border-0">
+                                                    <div className="bg-composed-img-2 bg-composed-wrapper--image" />
+                                                    <div className="bg-composed-wrapper--content text-center text-white px-2 py-4">
+                                                      <h1 className="font-size-xxl font-weight-bold py-2 mb-0">
+                                                        Employment Information
+                                                      </h1>
+                                                      <p className="mb-2 font-size-lg opacity-7">
+                                                        Current and Desired
+                                                        Employment details
+                                                      </p>
+                                                    </div>
+                                                    <div className="card-body-button-wrapper connect-btn">
+                                                      <Button
+                                                        size="small"
+                                                        className="btn-success btn-pill text-nowrap shadow-none border-3 border-white">
+                                                        Connect
+                                                      </Button>
+                                                    </div>
+                                                  </div>
+                                                </div> */}
+
+                                              <Card className="card-box mt-3">
+                                                <div className="card-header py-3">
+                                                  <div className="card-header--title font-size-lg">
+                                                    <b>Live Roles</b>
+                                                  </div>
+                                                  <div className="card-header--actions">
+                                                    <Grid container spacing={3}>
+                                                      <Grid
+                                                        item
+                                                        md={1}
+                                                        className="mtb"></Grid>
+                                                      <Grid
+                                                        item
+                                                        md={5}
+                                                        className="mtb">
+                                                        <span>
+                                                          <TextField
+                                                            variant="outlined"
+                                                            size="small"
+                                                            label="what"
+                                                            placeholder="e.g. 'nurse'"
+                                                            className="w-100 ht"
+                                                            InputProps={{
+                                                              startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                  <SearchTwoToneIcon />
+                                                                </InputAdornment>
+                                                              ),
+                                                              style: {
+                                                                height: '37px'
+                                                              }
+                                                            }}
+                                                          />
+                                                        </span>
+                                                      </Grid>
+                                                      <Grid
+                                                        item
+                                                        md={5}
+                                                        className="mtb">
+                                                        <TextField
+                                                          variant="outlined"
+                                                          size="small"
+                                                          label="where"
+                                                          placeholder="town or postcode"
+                                                          id="input-with-icon-textfield1"
+                                                          className="w-100 mb-4"
+                                                          InputProps={{
+                                                            startAdornment: (
+                                                              <InputAdornment position="start">
+                                                                <SearchTwoToneIcon />
+                                                              </InputAdornment>
+                                                            ),
+                                                            style: {
+                                                              height: '37px'
+                                                            }
+                                                          }}
+                                                        />
+                                                      </Grid>
+                                                    </Grid>
+                                                  </div>
+                                                </div>
+
+                                                <div className="table-responsive-md">
+                                                  <PerfectScrollbar>
+                                                    <Table className="table table-hover mb-0">
+                                                      <thead>
+                                                        <tr>
+                                                          <th className="bg-white text-left">
+                                                            Date Posted
+                                                          </th>
+                                                          <th className="bg-white">
+                                                            Job Title
+                                                          </th>
+                                                          <th className="bg-white text-left">
+                                                            Location
+                                                          </th>
+                                                          <th className="bg-white text-center">
+                                                            Salary
+                                                          </th>
+                                                          <th className="bg-white text-center">
+                                                            Type
+                                                          </th>
+                                                          <th className="bg-white text-center">
+                                                            View
+                                                          </th>
+                                                          <th className="bg-white text-center">
+                                                            More
+                                                          </th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        <tr>
+                                                          <td>13th april</td>
+                                                          <td>
+                                                            Business Developer
+                                                          </td>
+                                                          <td>UK</td>
+                                                          <td className="text-center">
+                                                            €4500
+                                                          </td>
+                                                          <td className="text-center">
+                                                            <div className="badge badge-neutral-danger text-danger">
+                                                              High
+                                                            </div>
+                                                          </td>
+                                                          <td>View</td>
+                                                          <td>More</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>12th april</td>
+                                                          <td>
+                                                            Software developer
+                                                          </td>
+                                                          <td>UK</td>
+                                                          <td className="text-center">
+                                                            €3000
+                                                          </td>
+                                                          <td className="text-center">
+                                                            <div className="badge badge-neutral-danger text-danger">
+                                                              High
+                                                            </div>
+                                                          </td>
+                                                          <td>View</td>
+                                                          <td>More</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>10th april</td>
+                                                          <td>IT Analyst</td>
+                                                          <td>UK</td>
+                                                          <td className="text-center">
+                                                            €3500
+                                                          </td>
+                                                          <td className="text-center">
+                                                            <div className="badge badge-neutral-danger text-danger">
+                                                              High
+                                                            </div>
+                                                          </td>
+                                                          <td>View</td>
+                                                          <td>More</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>8th april</td>
+                                                          <td>
+                                                            Devops Engineer
+                                                          </td>
+                                                          <td>UK</td>
+                                                          <td className="text-center">
+                                                            €2000
+                                                          </td>
+                                                          <td className="text-center">
+                                                            <div className="badge badge-neutral-danger text-danger">
+                                                              High
+                                                            </div>
+                                                          </td>
+                                                          <td>View</td>
+                                                          <td>More</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>13th april</td>
+                                                          <td>
+                                                            Business Developer
+                                                          </td>
+                                                          <td>UK</td>
+                                                          <td className="text-center">
+                                                            €4500
+                                                          </td>
+                                                          <td className="text-center">
+                                                            <div className="badge badge-neutral-danger text-danger">
+                                                              High
+                                                            </div>
+                                                          </td>
+                                                          <td>View</td>
+                                                          <td>More</td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </Table>
+                                                  </PerfectScrollbar>
+                                                </div>
+                                              </Card>
+                                            </div>
+                                            {/* </Card> */}
+                                          </Grid>
+                                        </Grid>
+                                        {/* </PerfectScrollbar> */}
+                                      </List>
+                                    </div>
+                                  </Menu>
+                                </div>
+                              </Box>
                             </div>
                           </a>
                         </div>
@@ -956,6 +1406,7 @@ export default function LivePreviewExample() {
                               </a> */}
                               <Button
                                 className="btn-outline-info border-1 m-2"
+                                onClick={handleClickMenu1}
                                 variant="outlined">
                                 View
                               </Button>
@@ -981,6 +1432,7 @@ export default function LivePreviewExample() {
                               </p>
                               <Button
                                 className="btn-outline-info border-1 m-2"
+                                onClick={handleClickMenu1}
                                 variant="outlined">
                                 View
                               </Button>
@@ -1006,6 +1458,7 @@ export default function LivePreviewExample() {
                               </p>
                               <Button
                                 className="btn-outline-info border-1 m-2"
+                                onClick={handleClickMenu1}
                                 variant="outlined">
                                 View
                               </Button>
