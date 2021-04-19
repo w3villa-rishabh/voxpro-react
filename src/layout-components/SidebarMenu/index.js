@@ -144,7 +144,8 @@ const SidebarMenu = (props) => {
                   </ul>
                 )}
 
-                {currentUser.role === 'agency' && (
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
                   <ul>
                     <li>
                       <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
@@ -177,7 +178,12 @@ const SidebarMenu = (props) => {
                   setRequestInfo(!requestInfo);
                 }}
                 className="nav-link-simple"
-                to="/request-info">
+                to={
+                  currentUser.role === 'agency' ||
+                  currentUser.role === 'company'
+                    ? '/request-info'
+                    : '/request-information'
+                }>
                 <span className="sidebar-icon">
                   <TuneIcon />
                 </span>
