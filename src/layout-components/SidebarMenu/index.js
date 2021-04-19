@@ -367,9 +367,7 @@ const SidebarMenu = (props) => {
                 {currentUser.role === 'candidate' && (
                   <ul>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/request-information">
+                      <NavLink onClick={toggleSidebarMobile} to="/search-job">
                         Search Job
                       </NavLink>
                     </li>
@@ -381,9 +379,7 @@ const SidebarMenu = (props) => {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/applied-jobs">
+                      <NavLink onClick={toggleSidebarMobile} to="/applied-jobs">
                         Job Applications
                       </NavLink>
                     </li>

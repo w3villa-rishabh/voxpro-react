@@ -63,6 +63,11 @@ const AppliedJobComponent = lazy(() =>
   import('./components/candidate_jobs/applied_job')
 );
 
+// candidate job search
+const JobSearchComponent = lazy(() =>
+  import('./components/candidate_jobs/job_search')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -188,7 +193,8 @@ const Routes = () => {
                 '/view-profile',
                 '/view-document',
                 '/new-request',
-                '/applied-jobs'
+                '/applied-jobs',
+                '/search-job'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -201,6 +207,7 @@ const Routes = () => {
                   <Route path="/view-profile" component={Profile} />
                   <Route path="/new-request" component={NewRequestComponent} />
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
+                  <Route path="/search-job" component={JobSearchComponent} />
                 </Switch>
               </LeftSidebar>
             </Route>
