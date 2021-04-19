@@ -56,7 +56,7 @@ export default function OnBoardDocument() {
         </ul> */}
       <Grid container spacing={2}>
         <Grid item md={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               <b>Personal Documents</b>
             </div>
@@ -90,12 +90,12 @@ export default function OnBoardDocument() {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               <b>Limited Company Documents</b>
             </div>
             <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-primary">
+              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
                 <FontAwesomeIcon
                   icon={['fas', 'file-word']}
                   className="display-4"
@@ -120,12 +120,12 @@ export default function OnBoardDocument() {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               <b> General Documentss</b>
             </div>
             <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
+              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
                 <FontAwesomeIcon icon={['fas', 'file']} className="display-4" />
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
@@ -147,12 +147,12 @@ export default function OnBoardDocument() {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               <b>Onboarding Documents</b>
             </div>
             <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center shadow-info">
+              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
                 <FontAwesomeIcon
                   icon={['fas', 'file-powerpoint']}
                   className="display-4"
@@ -226,7 +226,7 @@ export default function OnBoardDocument() {
               Documents due to expire
             </div>
             <div className="d-flex py-2 align-items-center">
-              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center mr-3">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center mr-3 shadow-danger">
                 <FontAwesomeIcon
                   icon={['far', 'envelope']}
                   className="display-4"
