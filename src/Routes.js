@@ -68,6 +68,11 @@ const CandidateQuery = lazy(() =>
   import('./components/ir35_tax/candidate-query')
 );
 
+// candidate job applied
+const AppliedJobComponent = lazy(() =>
+  import('./components/candidate_jobs/applied_job')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -194,7 +199,9 @@ const Routes = () => {
                 '/view-document',
                 '/request-info',
                 '/candidate-history',
-                '/candidate-enquiries'
+                '/candidate-enquiries',
+                '/new-request',
+                '/applied-jobs'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -214,6 +221,8 @@ const Routes = () => {
                   />
                   <Route path="/view-profile" component={Profile} />
                   <Route path="/request-info" component={NewRequestComponent} />
+                  <Route path="/new-request" component={NewRequestComponent} />
+                  <Route path="/applied-jobs" component={AppliedJobComponent} />
                 </Switch>
               </LeftSidebar>
             </Route>
