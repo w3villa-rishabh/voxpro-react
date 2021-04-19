@@ -26,35 +26,7 @@ import avatar5 from '../../assets/images/avatars/default.png';
 import ChatBox from '../chat_component/chat';
 import Chart from 'react-apexcharts';
 import Calendar from 'react-calendar';
-import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 
-function boxMullerRandom() {
-  let phase = false,
-    x1,
-    x2,
-    w;
-
-  return (function () {
-    if ((phase = !phase)) {
-      do {
-        x1 = 2.0 * Math.random() - 1.0;
-        x2 = 2.0 * Math.random() - 1.0;
-        w = x1 * x1 + x2 * x2;
-      } while (w >= 1.0);
-
-      w = Math.sqrt((-2.0 * Math.log(w)) / w);
-      return x1 * w;
-    } else {
-      return x2 * w;
-    }
-  })();
-}
-
-function randomData(n = 30) {
-  return Array.apply(0, Array(n)).map(boxMullerRandom);
-}
-
-const sampleData2 = randomData(32);
 const AgencyDashboard = () => {
   const [value, onChange] = useState(new Date());
   const [width, setWidth] = useState(window.innerWidth);
@@ -92,7 +64,79 @@ const AgencyDashboard = () => {
   };
   const series = [
     {
+      name: 'Placements',
       data: [30, 40, 25, 50, 49, 21, 70, 51]
+    }
+  ];
+
+  const chartsLarge6Options = {
+    chart: {
+      toolbar: {
+        show: false
+      },
+      sparkline: {
+        enabled: false
+      },
+      dropShadow: {
+        enabled: true,
+        opacity: 0.07,
+        blur: 4,
+        left: 2,
+        top: 3
+      }
+    },
+    stroke: {
+      width: 7,
+      curve: 'smooth'
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      // axisTicks: {
+      //   color: 'rgba(255,255,255,.2)'
+      // },
+      // type: 'datetime',
+      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      axisBorder: {
+        color: 'rgba(255,255,255,.2)'
+      }
+    },
+    markers: {
+      size: 8,
+      opacity: 0.3,
+      colors: ['#0f8a2d'],
+      strokeColor: '#fff',
+      strokeWidth: 2,
+
+      hover: {
+        size: 12
+      }
+    },
+    grid: {
+      borderColor: 'rgba(255, 255, 255, 0.2)'
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        gradientToColors: ['#0f8a2d'],
+        shadeIntensity: 1,
+        type: 'horizontal',
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 60, 100]
+      }
+    },
+    colors: ['#56b45d'],
+    legend: {
+      show: false
+    }
+  };
+  const chartsLarge6Data = [
+    {
+      name: 'Revenue',
+      data: [4, 3, 10, 9, 29, 19, 22, 9]
     }
   ];
 
@@ -182,63 +226,29 @@ const AgencyDashboard = () => {
           <Grid item xs={12} sm={8}>
             <Card className="card-box shadow-success-sm p-3 h-100">
               <Grid container spacing={0}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <b>Monthly Placements</b>
-                  <div className="mt-4">
+                  <div className="">
                     <Chart
                       options={options}
                       series={series}
                       type="line"
-                      height="330"
+                      height="220"
                     />
                   </div>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <Grid container spacing={0}>
                     <Grid item xs={12}>
                       <b>Monthly Revenue</b>
-                      <div className="mt-4">
-                        <Sparklines data={sampleData2}>
-                          <SparklinesLine color="#56b45d" />
-                          <SparklinesSpots style={{ fill: '#56b45d' }} />
-                        </Sparklines>
+                      <div className="">
+                        <Chart
+                          options={chartsLarge6Options}
+                          series={chartsLarge6Data}
+                          type="line"
+                          height={150}
+                        />
                       </div>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12} className="mt-3">
-                    <Grid container spacing={0}>
-                      <Grid item xs={12} sm={6} className="px-2">
-                        <b>Candidates registered</b>
-                        <div className="text-center text-capitalize mb-3">
-                          <small className="text-black-50">
-                            Lorem Ipsum is simply dummy text of the printing.
-                          </small>
-                        </div>
-                        <div className="mx-auto text-center">
-                          <CircularProgressbar
-                            value={56}
-                            text={56 + '%'}
-                            strokeWidth={8}
-                            className="circular-progress-info"
-                          />
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} sm={6} className="px-2">
-                        <b>Candidates registered</b>
-                        <div className="text-center text-capitalize mb-3">
-                          <small className="text-black-50">
-                            Lorem Ipsum is simply dummy text of the printing.
-                          </small>
-                        </div>
-                        <div className="mx-auto text-center">
-                          <CircularProgressbar
-                            value={56}
-                            text={56 + '%'}
-                            strokeWidth={8}
-                            className="circular-progress-info"
-                          />
-                        </div>
-                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -296,7 +306,7 @@ const AgencyDashboard = () => {
               <Grid item xs={12}>
                 <Card className="card-box mt-1">
                   <Calendar
-                    className="border-0 m-auto"
+                    className="border-0 m-auto p-1"
                     defaultView="month"
                     onChange={onChange}
                     value={value}
