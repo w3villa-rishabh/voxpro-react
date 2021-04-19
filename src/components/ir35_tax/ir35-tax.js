@@ -9,6 +9,7 @@ export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
 
   const [policyObj, setPolicyObj] = useState({
+    noquestion: 'a',
     limitedCompany: 'a',
     organization: 'b',
     director: 'a',
@@ -89,53 +90,72 @@ export default function IR35TaxComponent() {
             </a>
           </div>
         )}
-        {/* //Section 0 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '0'
-          })}
-          index={0}>
-          <div className="text-center w-100">
-            <img alt="..." className="ir35-logo" src={logo} />
-            <h4 className="font-weight-bold mt-3 fhhh">
-              CHECK EMPLOYMENT STATUS FOR TAX
-            </h4>
-            <p className="mb-2 fhh">Please answer all questions</p>
-            <p className="mb-2 fh">Takes 7+ minutes</p>
-            <Button
-              size="large"
-              variant="contained"
-              onClick={() => {
-                setActiveTab('1');
-              }}
-              className="font-weight-bold btn-slack px-4 bg-color button-width">
-              START
-            </Button>
-            <p className="fh">
-              Press enter{' '}
-              <FontAwesomeIcon icon={['fas', 'arrow-up']} className="angle" />
-            </p>
-            <div className="mt-10 font-weight-bold font-size-xs">
-              <h6 className="font-weight-bold fhh">DISCLAIMER</h6>
-              <p className="fh">
-                Voxpro assumes no responsibility for the results of the test.
-                The result given is in accordance with HMRC tool which HMRC
-                stands by.
+        {/* when no ir-35 */}
+        {policyObj.noquestion === 'a' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '0'
+            })}
+            index={0}>
+            <div className="text-center w-100 mt-5">
+              <img alt="..." className="ir35-logo" src={logo} />
+              <h4 className="font-weight-bold mt-3 fhhh">
+                CHECK EMPLOYMENT STATUS FOR TAX
+              </h4>
+              <p className="mb-2 fhh">
+                You have no pending IR35 questionnaire to complete.
               </p>
-              <span className="font-italic fhh">Warning</span>
-              <br></br>
-              <span className="line-height-md fh">
-                This would not be the case if the information you have provided
-                was checked and found to be inaccurate.
-                <br></br>
-                HMRC will also not stand by results achieved through contrived
-                arrangements, designed to get a particular outcome from the
-                service. This would be treated as evidence of deliberate
-                non-compliance, which can attract higher associated penalties.
-              </span>
             </div>
           </div>
-          {/* <Grid container spacing={1} className="pt-3">
+        )}
+        {/* //Section 0 */}
+        {policyObj.noquestion != 'a' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '0'
+            })}
+            index={0}>
+            <div className="text-center w-100 mt-4">
+              <img alt="..." className="ir35-logo" src={logo} />
+              <h4 className="font-weight-bold mt-3 fhhh">
+                CHECK EMPLOYMENT STATUS FOR TAX
+              </h4>
+              <p className="mb-2 fhh">Please answer all questions</p>
+              <p className="mb-2 fh">Takes 7+ minutes</p>
+              <Button
+                size="large"
+                variant="contained"
+                onClick={() => {
+                  setActiveTab('1');
+                }}
+                className="font-weight-bold btn-slack px-4 bg-color button-width">
+                START
+              </Button>
+              <p className="fh">
+                Press enter{' '}
+                <FontAwesomeIcon icon={['fas', 'arrow-up']} className="angle" />
+              </p>
+              <div className="mt-10 font-weight-bold font-size-xs">
+                <h6 className="font-weight-bold fhh">DISCLAIMER</h6>
+                <p className="f">
+                  Voxpro assumes no responsibility for the results of the test.
+                  The result given is in accordance with HMRC tool which HMRC
+                  stands by.
+                </p>
+                <span className="font-italic fhh">Warning</span>
+                <br></br>
+                <span className="line-height-md f">
+                  This would not be the case if the information you have
+                  provided was checked and found to be inaccurate.
+                  <br></br>
+                  HMRC will also not stand by results achieved through contrived
+                  arrangements, designed to get a particular outcome from the
+                  service. This would be treated as evidence of deliberate
+                  non-compliance, which can attract higher associated penalties.
+                </span>
+              </div>
+            </div>
+            {/* <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
               <h4>
                 Does the worker provide their services through a limited
@@ -182,7 +202,8 @@ export default function IR35TaxComponent() {
               </Button>
             </Grid>
           </Grid> */}
-        </div>
+          </div>
+        )}
         {/* //Section 1 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
