@@ -215,7 +215,10 @@ export default function LivePreviewExample() {
           {currentUser.role === 'candidate' && (
             <b className="heading">Profile</b>
           )}
-          {currentUser.role === 'agency' && <b className="heading">Profile</b>}
+          {(currentUser.role === 'agency' ||
+            currentUser.role === 'company') && (
+            <b className="heading">Profile</b>
+          )}
         </div>
       </div>
       <div className="app-inner-content-layout">
@@ -918,7 +921,7 @@ export default function LivePreviewExample() {
                               className="card-img-top"
                               alt="..."
                             />
-                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
                               <b>Akshay Sharma</b>
                               <p className="text-second opacity-8 mb-0">
                                 Business Analyst
@@ -943,7 +946,7 @@ export default function LivePreviewExample() {
                               className="card-img-top"
                               alt="..."
                             />
-                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
                               <b>Rishabh Pandey</b>
                               <p className="text-second opacity-8 mb-0">
                                 Developer
@@ -974,7 +977,7 @@ export default function LivePreviewExample() {
                               className="card-img-top"
                               alt="..."
                             />
-                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
                               <b>Deepak Kumar</b>
                               <p className="text-second opacity-8 mb-0">
                                 Developer
@@ -999,7 +1002,7 @@ export default function LivePreviewExample() {
                               className="card-img-top"
                               alt="..."
                             />
-                            <div className="p-3 bg-secondary rounded-bottom p-xl-4 text-center">
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
                               <b>Rohit Wasan</b>
                               <p className="text-second opacity-8 mb-0">
                                 HR executive
