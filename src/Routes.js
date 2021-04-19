@@ -58,6 +58,16 @@ const NewRequestComponent = lazy(() =>
   import('./components/request_information/new-request')
 );
 
+//Candidate History request
+const CandidateHistory = lazy(() =>
+  import('./components/ir35_tax/candidate-history')
+);
+
+//Candidate query
+const CandidateQuery = lazy(() =>
+  import('./components/ir35_tax/candidate-query')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -182,7 +192,9 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
-                '/new-request'
+                '/request-info',
+                '/candidate-history',
+                '/candidate-query'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -192,8 +204,13 @@ const Routes = () => {
                   <Route path="/upload" component={UploadDocument} />
                   <Route path="/view-document" component={DocList} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
+                  <Route
+                    path="/candidate-history"
+                    component={CandidateHistory}
+                  />
+                  <Route path="/candidate-query" component={CandidateQuery} />
                   <Route path="/view-profile" component={Profile} />
-                  <Route path="/new-request" component={NewRequestComponent} />
+                  <Route path="/request-info" component={NewRequestComponent} />
                 </Switch>
               </LeftSidebar>
             </Route>

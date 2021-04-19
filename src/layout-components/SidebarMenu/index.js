@@ -130,14 +130,14 @@ const SidebarMenu = (props) => {
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/candidate-history">
                         IR35 History
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/candidate-query">
                         IR35 Enquiries
                       </NavLink>
                     </li>
@@ -177,7 +177,7 @@ const SidebarMenu = (props) => {
                   setRequestInfo(!requestInfo);
                 }}
                 className="nav-link-simple"
-                to="/new-request">
+                to="/request-info">
                 <span className="sidebar-icon">
                   <TuneIcon />
                 </span>
