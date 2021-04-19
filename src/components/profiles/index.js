@@ -2030,7 +2030,7 @@ export default function LivePreviewExample() {
               anchorEl={anchorElMenu1}
               keepMounted
               open={Boolean(anchorElMenu1)}
-              onClose={handleCloseMini}
+              // onClose={handleCloseMini}
               classes={{ list: 'p-0' }}
               getContentAnchorEl={null}
               className="profile-menu-card"
