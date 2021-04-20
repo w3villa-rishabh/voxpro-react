@@ -42,7 +42,7 @@ export default function CandidateHistory() {
                 <div className="display-3 font-weight-bold">31</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Total IR35 Questionnaires Submitted
+                  Total IR35 Submitted
                 </div>
               </Card>
             </Grid>
@@ -80,12 +80,12 @@ export default function CandidateHistory() {
                           <th className="bg-white text-center">
                             Date Submitted
                           </th>
-                          <th className="bg-white text-center">Stages</th>
+                          <th className="bg-white text-center">Stage</th>
                           <th className="bg-white text-center">Due Date</th>
                           <th className="bg-white text-center">
                             Status Certificate
                           </th>
-                          <th className="bg-white text-center">Action</th>
+                          <th className="bg-white text-center"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -96,19 +96,21 @@ export default function CandidateHistory() {
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          <td className="text-center w-25">
+                          <td className="w-25">
                             <LinearProgress
                               variant="determinate"
                               value={100}
                               className="progress-bar-rounded progress-sm progress-bar-success"
                             />
+                            <div className="font-size-sm text-black-50 pt-1">
+                              Completed
+                            </div>
                           </td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
-                              
                               <div className="badge badge-neutral-success text-success px-4">
                                 Available
                               </div>
@@ -160,12 +162,15 @@ export default function CandidateHistory() {
                           <td className="text-center text-black-50">
                             06/08/2022
                           </td>
-                          <td className="text-center w-25">
+                          <td className="w-25">
                             <LinearProgress
                               variant="determinate"
                               value={60}
                               className="progress-bar-rounded progress-sm progress-bar-primary"
                             />
+                            <div className="font-size-sm text-black-50 pt-1">
+                              Submitted to Company
+                            </div>
                           </td>
                           <td className="text-center text-black-50">
                             12/12/2020
@@ -223,12 +228,15 @@ export default function CandidateHistory() {
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          <td className="text-center w-25">
+                          <td className="w-25">
                             <LinearProgress
                               variant="determinate"
                               value={45}
                               className="progress-bar-rounded progress-sm progress-bar-danger"
                             />
+                            <div className="font-size-sm text-black-50 pt-1">
+                              Submitted to Agency{' '}
+                            </div>
                           </td>
                           <td className="text-center text-black-50">
                             12/12/2020

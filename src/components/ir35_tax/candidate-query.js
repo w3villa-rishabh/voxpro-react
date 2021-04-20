@@ -91,16 +91,19 @@ export default function CandidateQuery() {
                         <tr>
                           <td>#453</td>
                           <td>Request 1</td>
-                          <td>Admin</td>
+                          <td>Business Analyst</td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          <td className="text-center text-black-50 w-25">
+                          <td className="text-black-50 w-25">
                             <LinearProgress
                               variant="determinate"
                               value={100}
                               className="progress-bar-rounded progress-sm progress-bar-success"
                             />
+                            <div className="font-size-sm text-black-50 pt-1">
+                              Completed
+                            </div>
                           </td>
                           <td className="text-center">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
@@ -151,16 +154,19 @@ export default function CandidateQuery() {
                         <tr>
                           <td>#584</td>
                           <td>Request 2</td>
-                          <td>User</td>
+                          <td>Business Developer</td>
                           <td className="text-center text-black-50">
                             06/08/2022
                           </td>
-                          <td className="text-center w-25">
+                          <td className="w-25">
                             <LinearProgress
                               variant="determinate"
                               value={45}
                               className="progress-bar-rounded progress-sm progress-bar-warning"
                             />
+                            <div className="font-size-sm text-black-50 pt-1">
+                              Submitted to Company
+                            </div>
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
@@ -211,16 +217,19 @@ export default function CandidateQuery() {
                         <tr>
                           <td>#764</td>
                           <td>Request 3</td>
-                          <td>Admin</td>
+                          <td>IT Manager</td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          <td className="text-center w-25">
+                          <td className="w-25">
                             <LinearProgress
                               variant="determinate"
                               value={20}
                               className="progress-bar-rounded progress-sm progress-bar-danger"
                             />
+                            <div className="font-size-sm text-black-50 pt-1">
+                              Submitted to Agency
+                            </div>
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>

@@ -95,7 +95,7 @@ const CompanyDashboard = () => {
               <Grid container spacing={0}>
                 <Grid item xs={12} sm={9}>
                   <div className="m-3">
-                    <b>Monthly Recruitment and Placements</b>
+                    <b>Monthly Recruitment Spend and Placements</b>
                   </div>
                   <Chart
                     options={options}

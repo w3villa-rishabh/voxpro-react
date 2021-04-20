@@ -52,7 +52,7 @@ const jobposted = [
   }
 ];
 
-export default function OnBoardDocument() {
+export default function JobSearchComponent() {
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 
-export default function OnBoardDocument() {
+export default function AppliedJobComponent() {
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
 
@@ -90,7 +90,7 @@ export default function OnBoardDocument() {
                 value={22}
                 text={22}
                 strokeWidth={8}
-                className="circular-progress-success"
+                className="circular-progress-info"
               />
               <div className="text-black mt-4 mb-1"></div>
               <div className="font-size-lg opacity-8">Offers</div>
@@ -115,27 +115,6 @@ export default function OnBoardDocument() {
       </Grid>
       <div className="pt-3">
         <Card className="card-box mb-spacing-6-x2">
-          <div className="card-header">
-            <div className="card-header--title font-size-lg"></div>
-            {/* <div className="card-header--actions">
-            <Tooltip title="Add new">
-              <Button size="small" className="btn-link px-1">
-                <FontAwesomeIcon
-                  icon={['fas', 'plus']}
-                  className="text-success font-size-lg"
-                />
-              </Button>
-            </Tooltip>
-            <Tooltip title="Close">
-              <Button size="small" className="btn-link px-1">
-                <FontAwesomeIcon
-                  icon={['fas', 'times']}
-                  className="text-danger font-size-lg"
-                />
-              </Button>
-            </Tooltip>
-          </div> */}
-          </div>
           <div className="table-responsive-md">
             <Table className="table table-hover text-nowrap mb-0">
               <thead>
@@ -159,13 +138,13 @@ export default function OnBoardDocument() {
                   <td className="text-center">Uk</td>
                   <td className="text-center">14 Feb 2020</td>
                   <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">
+                  <td className="">
                     <LinearProgress
                       variant="determinate"
                       className="progress-sm progress-bar-success"
                       value={90}
                     />
-                    <div className="font-size-sm text-center text-black-50 pt-1">
+                    <div className="font-size-sm text-black-50 pt-1">
                       Completed
                     </div>
                   </td>
