@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card, Button, Grid, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Select from 'react-select';
+
+const jobposted = [
+  {
+    value: 'anytime',
+    label: 'Anytime'
+  },
+  {
+    value: 'last_3_days',
+    label: 'Last 3 Days'
+  },
+  {
+    value: 'last_week',
+    label: 'Last Week'
+  },
+  {
+    value: 'last_2-weeks',
+    label: 'Last 2 Weeks'
+  }
+];
 
 export default function SaveJobComponent() {
+  const [value2, setValue2] = useState('');
+
+  const changeHandler2 = (value2) => {
+    setValue2(value2);
+  };
+
   return (
     <>
       <div className="page-title">
@@ -19,8 +45,18 @@ export default function SaveJobComponent() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Card className="px-3 pt-3">
-            <div className="text-danger">
-              <b>5 Shortlisted Jobs list</b>
+            <div className="card-header-alt d-flex align-items-center justify-content-between p-2">
+              <div>
+                <b className="text-danger">5 Shortlisted Jobs list</b>
+              </div>
+              <div className="w-25">
+                <Select
+                  options={jobposted}
+                  value={value2}
+                  onChange={changeHandler2}
+                  placeholder="Date Posted"
+                />
+              </div>
             </div>
             <div className="table-responsive-md">
               <PerfectScrollbar>
@@ -35,7 +71,7 @@ export default function SaveJobComponent() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="text-left d-flex">
+                      <td className="text-left d-flex border-0">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
@@ -75,7 +111,7 @@ export default function SaveJobComponent() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="text-left d-flex">
+                      <td className="text-left d-flex border-0">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
@@ -115,7 +151,7 @@ export default function SaveJobComponent() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="text-left d-flex">
+                      <td className="text-left d-flex border-0">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
@@ -155,7 +191,7 @@ export default function SaveJobComponent() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="text-left d-flex">
+                      <td className="text-left d-flex border-0">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
