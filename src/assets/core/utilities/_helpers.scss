@@ -541,6 +541,26 @@ $num: 20;
   font-size: 10px;
 }
 
+.task-calender {
+  background: #253053 !important;
+
+  .react-calendar,
+  .react-calendar__navigation__label,
+  .react-calendar__navigation__arrow,
+  .react-calendar__tile {
+    background: #253053 !important;
+    color: white !important;
+  }
+
+  .react-calendar__tile--now {
+    background: #ccc !important;
+  }
+
+  .react-calendar__tile--active {
+    background: #907ff1 !important;
+  }
+}
+
 
 .color-white {
   color: white
@@ -553,4 +573,17 @@ $num: 20;
   right: 0;
   margin: auto;
   background: white;
+}
+
+.create-task-btn {
+  padding: 5px 5px 5px 18px;
+  cursor: pointer;
+
+  svg {
+    width: 40px !important;
+    height: 40px !important;
+    box-shadow: none !important;
+    color: #907ff1 !important;
+    margin-left: 10px;
+  }
 }

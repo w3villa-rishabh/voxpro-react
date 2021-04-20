@@ -25,7 +25,7 @@ export default function CandidateQuery() {
                 <div className="display-3 font-weight-bold">31</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Total IR35 Questions Submitted
+                  Total IR35 Submitted
                 </div>
               </Card>
             </Grid>
@@ -34,7 +34,7 @@ export default function CandidateQuery() {
                 <div className="display-3 font-weight-bold">68</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Total IR35 Questions Resolved
+                  Total IR35 Resolved
                 </div>
               </Card>
             </Grid>

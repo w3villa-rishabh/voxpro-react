@@ -484,6 +484,11 @@ const SidebarMenu = (props) => {
                         Availability Calender
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink onClick={toggleSidebarMobile} to="/tasks">
+                        My Tasks
+                      </NavLink>
+                    </li>
                   </ul>
                 </Collapse>
               </li>

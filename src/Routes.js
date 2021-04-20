@@ -73,6 +73,11 @@ const AppliedJobComponent = lazy(() =>
   import('./components/candidate_jobs/applied_job')
 );
 
+//my task
+const MyTasksComponent = lazy(() =>
+  import('./components/availability/my-task')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -201,7 +206,8 @@ const Routes = () => {
                 '/candidate-history',
                 '/candidate-enquiries',
                 '/new-request',
-                '/applied-jobs'
+                '/applied-jobs',
+                '/tasks'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -223,6 +229,7 @@ const Routes = () => {
                   <Route path="/request-info" component={NewRequestComponent} />
                   <Route path="/new-request" component={NewRequestComponent} />
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
+                  <Route path="/tasks" component={MyTasksComponent} />
                 </Switch>
               </LeftSidebar>
             </Route>
