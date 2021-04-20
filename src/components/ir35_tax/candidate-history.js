@@ -74,18 +74,14 @@ export default function CandidateHistory() {
                     <Table className="table table-hover text-nowrap mb-0">
                       <thead>
                         <tr>
-                          <th className="bg-white text-left">Placement ID</th>
-                          <th className="bg-white">Requester</th>
-                          <th className="bg-white text-left">Role</th>
-                          <th className="bg-white text-center">
-                            Date Submitted
-                          </th>
-                          <th className="bg-white text-center">Stages</th>
-                          <th className="bg-white text-center">Due Date</th>
-                          <th className="bg-white text-center">
-                            Status Certificate
-                          </th>
-                          <th className="bg-white text-center">Action</th>
+                          <th className="text-left">Placement ID</th>
+                          <th>Requester</th>
+                          <th className="text-left">Role</th>
+                          <th className="text-center">Date Submitted</th>
+                          <th className="text-center">Stages</th>
+                          <th className="text-center">Due Date</th>
+                          <th className="text-center">Status Certificate</th>
+                          <th className="text-center">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -108,7 +104,6 @@ export default function CandidateHistory() {
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
-                              
                               <div className="badge badge-neutral-success text-success px-4">
                                 Available
                               </div>

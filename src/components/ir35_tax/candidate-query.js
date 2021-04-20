@@ -74,17 +74,13 @@ export default function CandidateQuery() {
                     <Table className="table table-hover text-nowrap mb-0">
                       <thead>
                         <tr>
-                          <th className="bg-white text-left">Placement ID</th>
-                          <th className="bg-white">Requester</th>
-                          <th className="bg-white text-left">Role</th>
-                          <th className="bg-white text-center">
-                            Date of Query
-                          </th>
-                          <th className="bg-white text-center">
-                            Stage of Query
-                          </th>
-                          <th className="bg-white text-center">Response</th>
-                          <th className="bg-white text-center"></th>
+                          <th className="text-left">Placement ID</th>
+                          <th className="">Requester</th>
+                          <th className="text-left">Role</th>
+                          <th className="text-center">Date of Query</th>
+                          <th className="text-center">Stage of Query</th>
+                          <th className="text-center">Response</th>
+                          <th className="text-center"></th>
                         </tr>
                       </thead>
                       <tbody>
