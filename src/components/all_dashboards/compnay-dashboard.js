@@ -105,6 +105,7 @@ const CompanyDashboard = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={3}>
+                  <div className="divider-task" />
                   <div className="card-content-overlay text-center p-3">
                     <div className="py-2">
                       <b> My Tasks Today</b>
