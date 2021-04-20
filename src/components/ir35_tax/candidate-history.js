@@ -74,18 +74,14 @@ export default function CandidateHistory() {
                     <Table className="table table-hover text-nowrap mb-0">
                       <thead>
                         <tr>
-                          <th className="bg-white text-left">Placement ID</th>
-                          <th className="bg-white">Requester</th>
-                          <th className="bg-white text-left">Role</th>
-                          <th className="bg-white text-center">
-                            Date Submitted
-                          </th>
-                          <th className="bg-white text-center">Stage</th>
-                          <th className="bg-white text-center">Due Date</th>
-                          <th className="bg-white text-center">
-                            Status Certificate
-                          </th>
-                          <th className="bg-white text-center"></th>
+                          <th className="text-left">Placement ID</th>
+                          <th className="">Requester</th>
+                          <th className="text-left">Role</th>
+                          <th className="text-center">Date Submitted</th>
+                          <th className="text-center">Stage</th>
+                          <th className="text-center">Due Date</th>
+                          <th className="text-center">Status Certificate</th>
+                          <th className="text-center"></th>
                         </tr>
                       </thead>
                       <tbody>
