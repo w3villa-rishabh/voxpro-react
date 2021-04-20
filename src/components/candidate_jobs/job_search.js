@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import {
   Grid,
@@ -11,25 +11,10 @@ import Select from 'react-select';
 
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import logo1 from '../../assets/images/stock-photos/c-logo.webp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import countryList from 'react-select-country-list';
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$'
-  },
-  {
-    value: 'EUR',
-    label: '€'
-  },
-  {
-    value: 'BTC',
-    label: '฿'
-  },
-  {
-    value: 'JPY',
-    label: '¥'
-  }
-];
 const jobtype = [
   {
     value: 'permanent',
@@ -69,12 +54,14 @@ const jobposted = [
 
 export default function OnBoardDocument() {
   const [value, setValue] = useState('');
-  const [value1, setValue1] = useState('');
-  const [value2, setValue2] = useState('');
+  const options = useMemo(() => countryList().getData(), []);
 
   const changeHandler = (value) => {
     setValue(value);
   };
+  const [value1, setValue1] = useState('');
+  const [value2, setValue2] = useState('');
+
   const changeHandler1 = (value1) => {
     setValue1(value1);
   };
@@ -98,7 +85,7 @@ export default function OnBoardDocument() {
               <TextField
                 variant="outlined"
                 size="small"
-                label="what"
+                label="search a job"
                 placeholder="e.g. 'nurse'"
                 className="w-100"
                 InputProps={{
@@ -117,7 +104,7 @@ export default function OnBoardDocument() {
           <Grid item md={2} xs={4}>
             <div className="mb-3 mt-3">
               <Select
-                options={currencies}
+                options={options}
                 value={value}
                 onChange={changeHandler}
                 placeholder="Location"
@@ -140,7 +127,7 @@ export default function OnBoardDocument() {
                 options={jobposted}
                 value={value2}
                 onChange={changeHandler2}
-                placeholder="Salary Range"
+                placeholder="Date Posted"
               />
             </div>
           </Grid>
@@ -153,6 +140,194 @@ export default function OnBoardDocument() {
           </Grid>
         </Grid>
       </Card>
+
+      <div className="title mt-3 pl-2"> 
+        <h6 className="fh">Based on your profile and career interests</h6>
+      </div>
+
+      <div className="mt-3">
+        <Grid container spacing={2}>
+          <Grid item xl={3}>
+            <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
+              <div className="d-flex flex-column justify-content-between">
+                <Grid container spacing={4}>
+                  <Grid item xl={6}>
+                    <img
+                      style={{ height: '50px', width: '130px' }}
+                      className=""
+                      alt="..."
+                      src={logo1}
+                    />
+                  </Grid>
+                  <Grid item xl={6}>
+                    <div className="symbol symbol-lg-75 symbol-primary text-right">
+                      <span className="text-muted f">
+                        10-shotlisted <br />
+                        2-Selected
+                      </span>
+                    </div>
+                  </Grid>
+                </Grid>
+                <div className="d-flex flex-column"></div>
+              </div>
+              <div className="mt-5">
+                <h6 className="mb-7 fh">UX Lead and Researcher</h6>
+                <h6 className="mb-7 f">HexLab Corporation Pvt. ltd</h6>
+                <span className="f text-muted">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'map-marker-alt']} /> Los
+                  Angeles, California, USA
+                </span>
+                <p className="mt-1 f mt-0 text-muted">
+                  Compentation: €8k - €10k
+                </p>
+              </div>
+              <Button className="btn-neutral-info hover-scale-sm mt-2">
+                <span className="px-2">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'heart']} />
+                </span>
+                <span> Save</span>
+              </Button>
+            </div>
+          </Grid>
+
+          <Grid item xl={3}>
+            <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
+              <div className="d-flex flex-column justify-content-between">
+                <Grid container spacing={4}>
+                  <Grid item xl={6}>
+                    <img
+                      style={{ height: '50px', width: '130px' }}
+                      className=""
+                      alt="..."
+                      src={logo1}
+                    />
+                  </Grid>
+                  <Grid item xl={6}>
+                    <div className="symbol symbol-lg-75 symbol-primary text-right">
+                      <span className="text-muted f">
+                        10-shotlisted <br />
+                        2-Selected
+                      </span>
+                    </div>
+                  </Grid>
+                </Grid>
+                <div className="d-flex flex-column"></div>
+              </div>
+              <div className="mt-5">
+                <h6 className="mb-7 fh">UX Lead and Researcher</h6>
+                <h6 className="mb-7 f">HexLab Corporation Pvt. ltd</h6>
+                <span className="f text-muted">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'map-marker-alt']} /> Los
+                  Angeles, California, USA
+                </span>
+                <p className="mt-1 f mt-0 text-muted">
+                  Compentation: €8k - €10k
+                </p>
+              </div>
+              <Button className="btn-neutral-info hover-scale-sm mt-2">
+                <span className="px-2">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'heart']} />
+                </span>
+                <span> Save</span>
+              </Button>
+            </div>
+          </Grid>
+
+          <Grid item xl={3}>
+            <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
+              <div className="d-flex flex-column justify-content-between">
+                <Grid container spacing={4}>
+                  <Grid item xl={6}>
+                    <img
+                      style={{ height: '50px', width: '130px' }}
+                      className=""
+                      alt="..."
+                      src={logo1}
+                    />
+                  </Grid>
+                  <Grid item xl={6}>
+                    <div className="symbol symbol-lg-75 symbol-primary text-right">
+                      <span className="text-muted f">
+                        10-shotlisted <br />
+                        2-Selected
+                      </span>
+                    </div>
+                  </Grid>
+                </Grid>
+                <div className="d-flex flex-column"></div>
+              </div>
+              <div className="mt-5">
+                <h6 className="mb-7 fh">UX Lead and Researcher</h6>
+                <h6 className="mb-7 f">HexLab Corporation Pvt. ltd</h6>
+                <span className="f text-muted">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'map-marker-alt']} /> Los
+                  Angeles, California, USA
+                </span>
+                <p className="mt-1 f mt-0 text-muted">
+                  Compentation: €8k - €10k
+                </p>
+              </div>
+              <Button className="btn-neutral-info hover-scale-sm mt-2">
+                <span className="px-2">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'heart']} />
+                </span>
+                <span> Save</span>
+              </Button>
+            </div>
+          </Grid>
+
+          <Grid item xl={3}>
+            <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
+              <div className="d-flex flex-column justify-content-between">
+                <Grid container spacing={4}>
+                  <Grid item xl={6}>
+                    <img
+                      style={{ height: '50px', width: '130px' }}
+                      className=""
+                      alt="..."
+                      src={logo1}
+                    />
+                  </Grid>
+                  <Grid item xl={6}>
+                    <div className="symbol symbol-lg-75 symbol-primary text-right">
+                      <span className="text-muted f">
+                        10-shotlisted <br />
+                        2-Selected
+                      </span>
+                    </div>
+                  </Grid>
+                </Grid>
+                <div className="d-flex flex-column"></div>
+              </div>
+              <div className="mt-5">
+                <h6 className="mb-7 fh">UX Lead and Researcher</h6>
+                <h6 className="mb-7 f">HexLab Corporation Pvt. ltd</h6>
+                <span className="f text-muted">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'map-marker-alt']} /> Los
+                  Angeles, California, USA
+                </span>
+                <p className="mt-1 f mt-0 text-muted">
+                  Compentation: €8k - €10k
+                </p>
+              </div>
+              <Button className="btn-neutral-info hover-scale-sm mt-2">
+                <span className="px-2">
+                  {' '}
+                  <FontAwesomeIcon icon={['fas', 'heart']} />
+                </span>
+                <span> Save</span>
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
 
       <div className="ads-wrapper mt-4">
         <iframe
