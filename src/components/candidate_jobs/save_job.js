@@ -63,10 +63,10 @@ export default function SaveJobComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="bg-white text-left">Job Details</th>
-                      <th className="bg-white text-center">Status</th>
-                      <th className="bg-white text-center"></th>
-                      <th className="bg-white text-center"></th>
+                      <th className="text-left">Job Details</th>
+                      <th className="text-center">Status</th>
+                      <th className="text-center"></th>
+                      <th className="text-center"></th>
                     </tr>
                   </thead>
                   <tbody>
