@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import {
   Grid,
@@ -53,6 +53,20 @@ const jobposted = [
 ];
 
 export default function OnBoardDocument() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
+
+  const handleWindowSizeChange = () => {
+    console.log('window.innerWidth', window.innerWidth);
+    setWidth(window.innerWidth);
+  };
+
   const [value, setValue] = useState('');
   const options = useMemo(() => countryList().getData(), []);
 
@@ -146,8 +160,8 @@ export default function OnBoardDocument() {
       </div>
 
       <div className="mt-3">
-        <Grid container spacing={2}>
-          <Grid item xl={3}>
+        <Grid container spacing={2} wrap={width <= 768 || 'nowrap'}>
+          <Grid item xs={12} sm={3}>
             <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
               <div className="d-flex flex-column justify-content-between">
                 <Grid container spacing={4}>
@@ -192,7 +206,7 @@ export default function OnBoardDocument() {
             </div>
           </Grid>
 
-          <Grid item xl={3}>
+          <Grid item xs={12} sm={3}>
             <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
               <div className="d-flex flex-column justify-content-between">
                 <Grid container spacing={4}>
@@ -237,7 +251,7 @@ export default function OnBoardDocument() {
             </div>
           </Grid>
 
-          <Grid item xl={3}>
+          <Grid item xs={12} sm={3}>
             <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
               <div className="d-flex flex-column justify-content-between">
                 <Grid container spacing={4}>
@@ -282,7 +296,7 @@ export default function OnBoardDocument() {
             </div>
           </Grid>
 
-          <Grid item xl={3}>
+          <Grid item xs={12} sm={3}>
             <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
               <div className="d-flex flex-column justify-content-between">
                 <Grid container spacing={4}>

@@ -29,10 +29,25 @@ export default function OnBoardDocument() {
                 value={56}
                 text={56}
                 strokeWidth={8}
-                className="circular-progress-first"
+                className="circular-progress-primary"
               />
               <div className="text-black mt-4 mb-1"></div>
               <div className="font-size-lg opacity-8">Job Applied</div>
+            </div>
+          </Card>
+        </Grid>
+
+        <Grid item md={2} xs={4}>
+          <Card className="card-box">
+            <div className="card-content-overlay text-center py-4">
+              <CircularProgressbar
+                value={35}
+                text={35}
+                strokeWidth={8}
+                className="circular-progress-danger"
+              />
+              <div className="text-black mt-4 mb-1"></div>
+              <div className="font-size-lg opacity-8">Unsuccessful</div>
             </div>
           </Card>
         </Grid>
@@ -59,7 +74,7 @@ export default function OnBoardDocument() {
                 value={30}
                 text={30}
                 strokeWidth={8}
-                className="circular-progress-first"
+                className="circular-progress-warning"
               />
               <div className="text-black mt-4 mb-1"></div>
               <div className="font-size-lg opacity-8">Interviews </div>
@@ -74,7 +89,7 @@ export default function OnBoardDocument() {
                 value={22}
                 text={22}
                 strokeWidth={8}
-                className="circular-progress-first"
+                className="circular-progress-success"
               />
               <div className="text-black mt-4 mb-1"></div>
               <div className="font-size-lg opacity-8">Offers</div>
@@ -89,25 +104,10 @@ export default function OnBoardDocument() {
                 value={25}
                 text={25}
                 strokeWidth={8}
-                className="circular-progress-first"
+                className="circular-progress-success"
               />
               <div className="text-black mt-4 mb-1"></div>
               <div className="font-size-lg opacity-8">Placements</div>
-            </div>
-          </Card>
-        </Grid>
-
-        <Grid item md={2} xs={4}>
-          <Card className="card-box">
-            <div className="card-content-overlay text-center py-4">
-              <CircularProgressbar
-                value={35}
-                text={35}
-                strokeWidth={8}
-                className="circular-progress-first"
-              />
-              <div className="text-black mt-4 mb-1"></div>
-              <div className="font-size-lg opacity-8">Unsuccessful</div>
             </div>
           </Card>
         </Grid>
@@ -140,12 +140,12 @@ export default function OnBoardDocument() {
               <thead>
                 <tr>
                   <th className="text-center">Job ID</th>
-                  <th className="text-center">Hirer</th>
+                  <th className="text-center">Requester</th>
                   <th className="text-left" style={{ width: 80 }}>
                     Job Title
                   </th>
                   <th className="text-center">Location</th>
-                  <th className="text-center">Date Applied</th>
+                  <th className="text-center">Applied On</th>
                   <th className="text-center">Job status</th>
                   <th className="text-center">Stage of application</th>
                 </tr>

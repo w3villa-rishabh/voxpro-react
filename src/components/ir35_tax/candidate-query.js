@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import { Grid, Card, Button, Table, LinearProgress } from '@material-ui/core';
+import {
+  Grid,
+  Card,
+  Button,
+  Table,
+  LinearProgress,
+  MenuItem,
+  Menu
+} from '@material-ui/core';
 
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -8,6 +16,15 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { getCurrentUser } from 'helper';
 
 export default function CandidateQuery() {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const [currentUser] = useState(getCurrentUser());
   return (
     <>
@@ -25,7 +42,7 @@ export default function CandidateQuery() {
                 <div className="display-3 font-weight-bold">31</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Total IR35 Questions Submitted
+                  Total IR35 Queries Submitted
                 </div>
               </Card>
             </Grid>
@@ -34,7 +51,7 @@ export default function CandidateQuery() {
                 <div className="display-3 font-weight-bold">68</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Total IR35 Questions Resolved
+                  Total IR35 Queries Resolved
                 </div>
               </Card>
             </Grid>
@@ -58,12 +75,12 @@ export default function CandidateQuery() {
                       <thead>
                         <tr>
                           <th className="bg-white text-left">Placement ID</th>
-                          <th className="bg-white">Hirer</th>
+                          <th className="bg-white">Requester</th>
                           <th className="bg-white text-left">Role</th>
-                          <th className="bg-white text-center">Date Query</th>
-                          <th className="bg-white text-center">Stages</th>
+                          <th className="bg-white text-center">Date of Query</th>
+                          <th className="bg-white text-center">Stage of Query</th>
                           <th className="bg-white text-center">Response</th>
-                          <th className="bg-white text-center">Action</th>
+                          <th className="bg-white text-center"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -77,8 +94,8 @@ export default function CandidateQuery() {
                           <td className="text-center text-black-50 w-25">
                             <LinearProgress
                               variant="determinate"
-                              value={45}
-                              className="progress-bar-rounded progress-sm progress-bar-danger"
+                              value={100}
+                              className="progress-bar-rounded progress-sm progress-bar-success"
                             />
                           </td>
                           <td className="text-center">
@@ -88,13 +105,43 @@ export default function CandidateQuery() {
                               </div>
                             </a>
                           </td>
-
                           <td className="text-center">
-                            <Button
-                              size="small"
-                              className="px-4 btn-neutral-danger">
-                              Follow
-                            </Button>
+                            <div className="d-flex align-items-center justify-content-center flex-wrap">
+                              <Button
+                                aria-controls="simple-menu"
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained"
+                                aria-haspopup="true"
+                                onClick={handleClick}>
+                                Action
+                              </Button>
+                              <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                classes={{ list: 'p-0' }}
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}>
+                                <div className="p-3">
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Follow
+                                  </MenuItem>
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Query
+                                  </MenuItem>
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Accept
+                                  </MenuItem>
+                                </div>
+                              </Menu>
+                            </div>
                           </td>
                         </tr>
                         <tr>
@@ -118,14 +165,45 @@ export default function CandidateQuery() {
                               </div>
                             </a>
                           </td>
-
                           <td className="text-center">
-                            <Button
-                              size="small"
-                              className="px-4 btn-neutral-primary">
-                              Query
-                            </Button>
+                            <div className="d-flex align-items-center justify-content-center flex-wrap">
+                              <Button
+                                aria-controls="simple-menu"
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained"
+                                aria-haspopup="true"
+                                onClick={handleClick}>
+                                Action
+                              </Button>
+                              <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                classes={{ list: 'p-0' }}
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}>
+                                <div className="p-3">
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Follow
+                                  </MenuItem>
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Query
+                                  </MenuItem>
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Accept
+                                  </MenuItem>
+                                </div>
+                              </Menu>
+                            </div>
                           </td>
+
                         </tr>
                         <tr>
                           <td>#764</td>
@@ -137,24 +215,55 @@ export default function CandidateQuery() {
                           <td className="text-center w-25">
                             <LinearProgress
                               variant="determinate"
-                              value={45}
-                              className="progress-bar-rounded progress-sm progress-bar-success"
+                              value={20}
+                              className="progress-bar-rounded progress-sm progress-bar-danger"
                             />
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
-                              <div className="badge badge-neutral-success text-success px-4">
-                                Available
+                              <div className="badge badge-neutral-warning text-warning px-4">
+                                Pending
                               </div>
                             </a>
                           </td>
 
                           <td className="text-center">
-                            <Button
-                              size="small"
-                              className="px-4 btn-neutral-success">
-                              Accept
-                            </Button>
+                            <div className="d-flex align-items-center justify-content-center flex-wrap">
+                              <Button
+                                aria-controls="simple-menu"
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained"
+                                aria-haspopup="true"
+                                onClick={handleClick}>
+                                Action
+                              </Button>
+                              <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                classes={{ list: 'p-0' }}
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}>
+                                <div className="p-3">
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Follow
+                                  </MenuItem>
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Query
+                                  </MenuItem>
+                                  <MenuItem
+                                    className="pr-5 px-3 text-primary"
+                                    onClick={handleClose}>
+                                    Accept
+                                  </MenuItem>
+                                </div>
+                              </Menu>
+                            </div>
                           </td>
                         </tr>
                       </tbody>
