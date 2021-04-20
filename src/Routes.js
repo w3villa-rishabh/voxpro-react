@@ -73,6 +73,16 @@ const AppliedJobComponent = lazy(() =>
   import('./components/candidate_jobs/applied_job')
 );
 
+//my task
+const MyTasksComponent = lazy(() =>
+  import('./components/availability/my-task')
+);
+
+//Save Jobs
+const SaveJobComponent = lazy(() =>
+  import('./components/candidate_jobs/save_job')
+);
+
 // candidate job search
 const JobSearchComponent = lazy(() =>
   import('./components/candidate_jobs/job_search')
@@ -207,6 +217,8 @@ const Routes = () => {
                 '/candidate-enquiries',
                 '/new-request',
                 '/applied-jobs',
+                '/tasks',
+                '/save-jobs',
                 '/search-job'
               ]}>
               <LeftSidebar>
@@ -229,6 +241,8 @@ const Routes = () => {
                   <Route path="/request-info" component={NewRequestComponent} />
                   <Route path="/new-request" component={NewRequestComponent} />
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
+                  <Route path="/tasks" component={MyTasksComponent} />
+                  <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />
                 </Switch>
               </LeftSidebar>

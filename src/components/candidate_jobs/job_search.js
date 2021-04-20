@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import Select from 'react-select';
 
-import PostAddIcon from '@material-ui/icons/PostAdd';
+import WorkIcon from '@material-ui/icons/Work';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import logo1 from '../../assets/images/stock-photos/c-logo.webp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -86,7 +86,7 @@ export default function OnBoardDocument() {
   return (
     <>
       <div className="page-title">
-        <PostAddIcon />
+        <WorkIcon />
         <div className="title">
           <h5 className="heading">Job Search</h5>
           <p>List of all the applied jobs</p>

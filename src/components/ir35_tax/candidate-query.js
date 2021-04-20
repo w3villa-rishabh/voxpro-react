@@ -77,8 +77,12 @@ export default function CandidateQuery() {
                           <th className="bg-white text-left">Placement ID</th>
                           <th className="bg-white">Requester</th>
                           <th className="bg-white text-left">Role</th>
-                          <th className="bg-white text-center">Date of Query</th>
-                          <th className="bg-white text-center">Stage of Query</th>
+                          <th className="bg-white text-center">
+                            Date of Query
+                          </th>
+                          <th className="bg-white text-center">
+                            Stage of Query
+                          </th>
                           <th className="bg-white text-center">Response</th>
                           <th className="bg-white text-center"></th>
                         </tr>
@@ -203,7 +207,6 @@ export default function CandidateQuery() {
                               </Menu>
                             </div>
                           </td>
-
                         </tr>
                         <tr>
                           <td>#764</td>
