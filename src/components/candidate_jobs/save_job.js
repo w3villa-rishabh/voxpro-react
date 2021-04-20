@@ -111,7 +111,7 @@ export default function SaveJobComponent() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="text-left d-flex border-0">
+                      <td className="text-left d-flex">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
@@ -151,7 +151,7 @@ export default function SaveJobComponent() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="text-left d-flex border-0">
+                      <td className="text-left d-flex">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
@@ -191,7 +191,7 @@ export default function SaveJobComponent() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="text-left d-flex border-0">
+                      <td className="text-left d-flex">
                         <div>
                           <FontAwesomeIcon
                             icon={['fas', 'heart']}
