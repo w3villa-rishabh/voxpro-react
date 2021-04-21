@@ -9,7 +9,7 @@ export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
 
   const [policyObj, setPolicyObj] = useState({
-    noquestion: 'a',
+    noquestion: 'b',
     limitedCompany: 'a',
     organization: 'b',
     director: 'a',
