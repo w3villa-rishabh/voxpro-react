@@ -46,7 +46,7 @@ const LivePreviewExample = (props) => {
   return (
     <>
       <div className="mb-spacing-2">
-        <Grid container spacing={2} className="mb-3">
+        <Grid container spacing={2} className="mb-2">
           <Grid item xs={12} sm={3}>
             <Card className="card-box border-0 shadow-first-sm p-3 h-100">
               <div className="d-flex align-items-center">
@@ -78,7 +78,7 @@ const LivePreviewExample = (props) => {
                   value={56}
                   text={56 + '%'}
                   strokeWidth={8}
-                  className="circular-progress-first w-50"
+                  className="circular-progress-first"
                 />
               </div>
               {/* <div className="align-box-row progress-bar--label text-muted mt-3">
@@ -99,7 +99,7 @@ const LivePreviewExample = (props) => {
                 <div className="d-40 btn-icon rounded-circle bg-danger text-white text-center font-size-lg mr-3">
                   <FontAwesomeIcon icon={['fas', 'walking']} />
                 </div>
-                <div className="text-black-50">New jobs added</div>
+                <div className="text-black-50">Total Connections</div>
               </div>
               <div className="display-4 text-center line-height-sm text-second text-center d-flex align-items-center pt-2 justify-content-center">
                 <FontAwesomeIcon
@@ -119,9 +119,9 @@ const LivePreviewExample = (props) => {
                 <div className="d-40 btn-icon rounded-circle bg-primary text-white text-center font-size-lg mr-3">
                   <FontAwesomeIcon icon={['far', 'list-alt']} />
                 </div>
-                <div className="text-black-50">Tasks outstanding</div>
+                <div className="text-black-50">Agencies</div>
               </div>
-              <div className="display-4 text-center line-height-sm text-second text-center d-flex align-items-center pt-2 justify-content-center">
+              {/* <div className="display-4 text-center line-height-sm text-second text-center d-flex align-items-center pt-2 justify-content-center">
                 <FontAwesomeIcon
                   icon={['fas', 'arrow-down']}
                   className="font-size-sm text-first mr-2"
@@ -130,6 +130,14 @@ const LivePreviewExample = (props) => {
               </div>
               <div className="text-black-50 text-center pt-3">
                 <b>+32%</b> from last month
+              </div> */}
+              <div className="mx-auto text-center">
+                <CircularProgressbar
+                  value={86}
+                  text={86 + '%'}
+                  strokeWidth={8}
+                  className="circular-progress-warning"
+                />
               </div>
             </Card>
           </Grid>
@@ -214,12 +222,17 @@ const LivePreviewExample = (props) => {
                                 <div className="d-flex flex-column flex-grow-1"></div>
                                 <Button
                                   size="small"
-                                  className="btn btn-primary ml-4">
+                                  className="btn btn-dark ml-2">
+                                  View
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2">
                                   Accept
                                 </Button>
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-4">
+                                  className="btn btn-danger ml-2">
                                   Reject
                                 </Button>
                               </div>
@@ -262,12 +275,17 @@ const LivePreviewExample = (props) => {
                                 <div className="d-flex flex-column flex-grow-1"></div>
                                 <Button
                                   size="small"
-                                  className="btn btn-primary ml-4">
+                                  className="btn btn-dark ml-2">
+                                  View
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2">
                                   Accept
                                 </Button>
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-4">
+                                  className="btn btn-danger ml-2">
                                   Reject
                                 </Button>
                               </div>
@@ -310,12 +328,17 @@ const LivePreviewExample = (props) => {
                                 <div className="d-flex flex-column flex-grow-1"></div>
                                 <Button
                                   size="small"
-                                  className="btn btn-primary ml-4">
+                                  className="btn btn-dark ml-2">
+                                  View
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2">
                                   Accept
                                 </Button>
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-4">
+                                  className="btn btn-danger ml-2">
                                   Reject
                                 </Button>
                               </div>
@@ -358,12 +381,17 @@ const LivePreviewExample = (props) => {
                                 <div className="d-flex flex-column flex-grow-1"></div>
                                 <Button
                                   size="small"
-                                  className="btn btn-primary ml-4">
+                                  className="btn btn-dark ml-2">
+                                  View
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2">
                                   Accept
                                 </Button>
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-4">
+                                  className="btn btn-danger ml-2">
                                   Reject
                                 </Button>
                               </div>
@@ -406,12 +434,17 @@ const LivePreviewExample = (props) => {
                                 <div className="d-flex flex-column flex-grow-1"></div>
                                 <Button
                                   size="small"
-                                  className="btn btn-primary ml-4">
+                                  className="btn btn-dark ml-2">
+                                  View
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2">
                                   Accept
                                 </Button>
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-4">
+                                  className="btn btn-danger ml-2">
                                   Reject
                                 </Button>
                               </div>
@@ -454,12 +487,17 @@ const LivePreviewExample = (props) => {
                                 <div className="d-flex flex-column flex-grow-1"></div>
                                 <Button
                                   size="small"
-                                  className="btn btn-primary ml-4">
+                                  className="btn btn-dark ml-2">
+                                  View
+                                </Button>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2">
                                   Accept
                                 </Button>
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-4">
+                                  className="btn btn-danger ml-2">
                                   Reject
                                 </Button>
                               </div>

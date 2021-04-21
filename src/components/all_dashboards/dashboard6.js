@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid,Table, Card, CardContent, Button, Tooltip } from '@material-ui/core';
+import {
+  Grid,
+  Table,
+  Card,
+  CardContent,
+  Button,
+  Tooltip
+} from '@material-ui/core';
 
 export default function LivePreviewExample() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -58,9 +65,9 @@ export default function LivePreviewExample() {
                       <th>Job ID</th>
                       <th className="text-left">Name</th>
                       <th className="text-center">Type</th>
-                      <th className="text-center">Start Date</th>
+                      <th className="text-center">Company</th>
                       <th className="text-center">Salary</th>
-                      <th className="text-center">Status</th>
+                      <th className="text-center">View</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -85,13 +92,18 @@ export default function LivePreviewExample() {
                         </div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">12/05/2021</div>
+                        <div className="px-4">Company 1</div>
                       </td>
                       <td className="text-center">
                         <div className="px-4">€400</div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">Cu Sent</div>
+                        <a
+                          className="a-blue"
+                          href="!#"
+                          onClick={(e) => e.preventDefault()}>
+                          CV Sent
+                        </a>
                       </td>
                     </tr>
                     <tr>
@@ -115,13 +127,18 @@ export default function LivePreviewExample() {
                         </div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">10/02/2021</div>
+                        <div className="px-4">Company 2</div>
                       </td>
                       <td className="text-center">
                         <div className="px-4">€ 4002</div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">Cu Sent</div>
+                        <a
+                          className="a-blue"
+                          href="!#"
+                          onClick={(e) => e.preventDefault()}>
+                          Shortlisted
+                        </a>
                       </td>
                     </tr>
                     <tr>
@@ -145,13 +162,18 @@ export default function LivePreviewExample() {
                         </div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">12/05/2021</div>
+                        <div className="px-4">Company 3</div>
                       </td>
                       <td className="text-center">
                         <div className="px-4">€4000</div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">Cu Sent</div>
+                        <a
+                          className="a-blue"
+                          href="!#"
+                          onClick={(e) => e.preventDefault()}>
+                          Interview
+                        </a>
                       </td>
                     </tr>
                   </tbody>

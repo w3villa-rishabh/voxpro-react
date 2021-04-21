@@ -30,7 +30,7 @@ export default function LivePreviewExample() {
                 style={{ height: '412px', borderRadius: 'inherit' }}>
                 <PerfectScrollbar>
                   <List component="div" className="list-group-flush">
-                    <ListItem className="py-4 d-block">
+                    <ListItem className="d-flex justify-content-between align-items-center py-3">
                       <div className="d-flex align-items-center flex-column flex-sm-row">
                         <div>
                           <div className="bg-premium-dark text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
@@ -46,16 +46,30 @@ export default function LivePreviewExample() {
                               New
                             </div>
                           </div>
+                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
                           <p className="text-black-50 mb-0">
-                            Administration Careers.
+                            <FontAwesomeIcon
+                              icon={['fas', 'map-marker-alt']}
+                              className="font-size-lg mr-2"
+                            />
+                            Los Agencies, California, USA
                           </p>
                           <p className="text-black-50 mb-0">
-                            53 Lairg Road, Newbold On Avon, UK
+                            Compensation: £8k - £10k
                           </p>
                         </div>
                       </div>
+                      <div>
+                        <Button size="small" className="btn-dark ml-4 mr-4">
+                          View
+                        </Button>
+                        <FontAwesomeIcon
+                          icon={['fas', 'heart']}
+                          className="font-size-lg mr-2 mt-1 text-danger"
+                        />
+                      </div>
                     </ListItem>
-                    <ListItem className="py-4 d-block">
+                    <ListItem className="d-flex justify-content-between align-items-center py-3">
                       <div className="d-flex align-items-center flex-column flex-sm-row">
                         <div>
                           <div className="bg-warning text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
@@ -65,19 +79,36 @@ export default function LivePreviewExample() {
                         <div className="pl-0 pl-sm-3">
                           <div className="d-block text-center d-sm-flex align-items-center">
                             <span className="font-size-lg">
-                              Bussiness Developer
+                              Business Analyst
                             </span>
+                            <div className="badge badge-neutral-info text-info ml-2">
+                              New
+                            </div>
                           </div>
+                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
                           <p className="text-black-50 mb-0">
-                            Administration Careers.
+                            <FontAwesomeIcon
+                              icon={['fas', 'map-marker-alt']}
+                              className="font-size-lg mr-2"
+                            />
+                            Los Agencies, California, USA
                           </p>
                           <p className="text-black-50 mb-0">
-                            53 Lairg Road, Newbold On Avon, UK
+                            Compensation: £8k - £10k
                           </p>
                         </div>
                       </div>
+                      <div>
+                        <Button size="small" className="btn-dark ml-4 mr-4">
+                          View
+                        </Button>
+                        <FontAwesomeIcon
+                          icon={['fas', 'heart']}
+                          className="font-size-lg mr-2 mt-1 text-danger"
+                        />
+                      </div>
                     </ListItem>
-                    <ListItem className="py-4 d-block">
+                    <ListItem className="d-flex justify-content-between align-items-center py-3">
                       <div className="d-flex align-items-center flex-column flex-sm-row">
                         <div>
                           <div className="bg-white border-primary border-2 text-center text-primary font-size-xl d-50 rounded-circle mb-3 mb-sm-0">
@@ -87,22 +118,39 @@ export default function LivePreviewExample() {
                         <div className="pl-0 pl-sm-3">
                           <div className="d-block text-center d-sm-flex align-items-center">
                             <span className="font-size-lg">
-                              Bussiness Analyst
+                              Business Analyst
                             </span>
+                            <div className="badge badge-neutral-info text-info ml-2">
+                              New
+                            </div>
                           </div>
+                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
                           <p className="text-black-50 mb-0">
-                            Administration Careers.
+                            <FontAwesomeIcon
+                              icon={['fas', 'map-marker-alt']}
+                              className="font-size-lg mr-2"
+                            />
+                            Los Agencies, California, USA
                           </p>
                           <p className="text-black-50 mb-0">
-                            53 Lairg Road, Newbold On Avon, UK
+                            Compensation: £8k - £10k
                           </p>
                         </div>
                       </div>
+                      <div>
+                        <Button size="small" className="btn-dark ml-4 mr-4">
+                          View
+                        </Button>
+                        <FontAwesomeIcon
+                          icon={['fas', 'heart']}
+                          className="font-size-lg mr-2 mt-1 text-danger"
+                        />
+                      </div>
                     </ListItem>
-                    <ListItem className="py-4 d-block">
+                    <ListItem className="d-flex justify-content-between align-items-center py-3">
                       <div className="d-flex align-items-center flex-column flex-sm-row">
                         <div>
-                          <div className="bg-premium-dark text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
+                          <div className="bg-white border-primary border-2 text-center text-primary font-size-xl d-50 rounded-circle mb-3 mb-sm-0">
                             <FontAwesomeIcon icon={['fas', 'suitcase']} />
                           </div>
                         </div>
@@ -115,35 +163,66 @@ export default function LivePreviewExample() {
                               New
                             </div>
                           </div>
+                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
                           <p className="text-black-50 mb-0">
-                            Administration Careers.
+                            <FontAwesomeIcon
+                              icon={['fas', 'map-marker-alt']}
+                              className="font-size-lg mr-2"
+                            />
+                            Los Agencies, California, USA
                           </p>
                           <p className="text-black-50 mb-0">
-                            53 Lairg Road, Newbold On Avon, UK
+                            Compensation: £8k - £10k
                           </p>
                         </div>
                       </div>
+                      <div>
+                        <Button size="small" className="btn-dark ml-4 mr-4">
+                          View
+                        </Button>
+                        <FontAwesomeIcon
+                          icon={['fas', 'heart']}
+                          className="font-size-lg mr-2 mt-1 text-danger"
+                        />
+                      </div>
                     </ListItem>
-                    <ListItem className="py-4 d-block">
+                    <ListItem className="d-flex justify-content-between align-items-center py-3">
                       <div className="d-flex align-items-center flex-column flex-sm-row">
                         <div>
-                          <div className="bg-warning text-center text-white font-size-xl btn-icon d-50 rounded-circle mb-3 mb-sm-0">
+                          <div className="bg-white border-primary border-2 text-center text-primary font-size-xl d-50 rounded-circle mb-3 mb-sm-0">
                             <FontAwesomeIcon icon={['fas', 'suitcase']} />
                           </div>
                         </div>
                         <div className="pl-0 pl-sm-3">
                           <div className="d-block text-center d-sm-flex align-items-center">
                             <span className="font-size-lg">
-                              Bussiness Executive
+                              Business Analyst
                             </span>
+                            <div className="badge badge-neutral-info text-info ml-2">
+                              New
+                            </div>
                           </div>
+                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
                           <p className="text-black-50 mb-0">
-                            Administration Careers.
+                            <FontAwesomeIcon
+                              icon={['fas', 'map-marker-alt']}
+                              className="font-size-lg mr-2"
+                            />
+                            Los Agencies, California, USA
                           </p>
                           <p className="text-black-50 mb-0">
-                            53 Lairg Road, Newbold On Avon, UK
+                            Compensation: £8k - £10k
                           </p>
                         </div>
+                      </div>
+                      <div>
+                        <Button size="small" className="btn-dark ml-4 mr-4">
+                          View
+                        </Button>
+                        <FontAwesomeIcon
+                          icon={['fas', 'heart']}
+                          className="font-size-lg mr-2 mt-1 text-danger"
+                        />
                       </div>
                     </ListItem>
                   </List>
@@ -151,7 +230,7 @@ export default function LivePreviewExample() {
               </div>
               <div className="card-footer p-3 text-center">
                 <Button size="small" className="py-2 px-4 btn-primary">
-                  <span className="btn-wrapper--label text-uppercase font-weight-bold">
+                  <span className="btn-wrapper--label font-weight-bold">
                     View more items
                   </span>
                 </Button>
@@ -164,7 +243,7 @@ export default function LivePreviewExample() {
                 <Card className="shadow-xxl">
                   <div className="card-header-alt px-4 pt-4 pb-2">
                     <h6 className="font-weight-bold font-size-lg mb-1 text-black">
-                      New Agencies
+                      Agencies Recently Added
                     </h6>
                     {/* <p className="text-black-50 mb-0">Reports for what we sold this week.</p> */}
                   </div>
@@ -193,9 +272,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
@@ -220,9 +297,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
@@ -246,9 +321,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
@@ -272,9 +345,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
@@ -300,9 +371,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
@@ -326,9 +395,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
@@ -352,9 +419,7 @@ export default function LivePreviewExample() {
                               </span>
                             </div>
                           </div>
-                          <Button
-                            size="small"
-                            className="btn-neutral-dark ml-4">
+                          <Button size="small" className="btn-dark ml-4">
                             View
                           </Button>
                         </ListItem>
