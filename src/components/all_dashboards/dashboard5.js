@@ -428,12 +428,12 @@ export default function LivePreviewExample() {
                   </div>
                   <div className="card-footer p-3 text-center">
                     <Button size="small" color="primary" variant="contained">
-                      <span className="btn-wrapper--label">
+                      <span className="btn-wrapper--label font-weight-bold">
                         View all Agencies
                       </span>
-                      <span className="btn-wrapper--icon">
+                      {/* <span className="btn-wrapper--icon">
                         <FontAwesomeIcon icon={['fas', 'arrow-right']} />
-                      </span>
+                      </span> */}
                     </Button>
                   </div>
                 </Card>
