@@ -142,26 +142,28 @@ export default function LivePreviewExample() {
                               </div>
                             </form>
                           )}
-                          <div className="text-center mb-4">
-                            <div className="text-center text-black-50 mt-3">
-                              Already have account?{' '}
-                              <a
-                                href="/login"
-                                // onClick={(e) => e.preventDefault()}
-                                className="text-first">
-                                Login
-                              </a>
+                          {showMessage.notification === 'hide' && (
+                            <div className="text-center mb-4">
+                              <div className="text-center text-black-50 mt-3">
+                                Already have account?{' '}
+                                <a
+                                  href="/login"
+                                  // onClick={(e) => e.preventDefault()}
+                                  className="text-first">
+                                  Login
+                                </a>
+                              </div>
+                              <div className="text-center text-black-50 mt-3">
+                                Don't have an account?{' '}
+                                <a
+                                  href="/register-as"
+                                  // onClick={(e) => e.preventDefault()}
+                                  className="text-first">
+                                  Sign up
+                                </a>
+                              </div>
                             </div>
-                            <div className="text-center text-black-50 mt-3">
-                              Don't have an account?{' '}
-                              <a
-                                href="/register-as"
-                                // onClick={(e) => e.preventDefault()}
-                                className="text-first">
-                                Sign up
-                              </a>
-                            </div>
-                          </div>
+                          )}
                         </div>
                       </Grid>
                     </Grid>

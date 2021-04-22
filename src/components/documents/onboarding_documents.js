@@ -36,7 +36,7 @@ export default function OnBoardDocument() {
           <h5 className="heading">Document Management</h5>
           <p>
             Upload, Store, Update and Manage your information and document
-            request.
+            requests.
           </p>
         </div>
         <Button className="btn-neutral-info hover-scale-sm px-4 float-right">
@@ -122,7 +122,7 @@ export default function OnBoardDocument() {
         <Grid item md={3} xs={12}>
           <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
-              <b> General Documentss</b>
+              <b> General Documents</b>
             </div>
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
@@ -181,7 +181,7 @@ export default function OnBoardDocument() {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              Requests
+              Requests for information
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
@@ -202,7 +202,7 @@ export default function OnBoardDocument() {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              Documents
+              Remaining Documents to upload
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-warning mr-3">

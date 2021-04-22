@@ -17,12 +17,12 @@ import WorkIcon from '@material-ui/icons/Work';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import SecurityIcon from '@material-ui/icons/Security';
 import ChatIcon from '@material-ui/icons/Chat';
-import TuneIcon from '@material-ui/icons/Tune';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SearchIcon from '@material-ui/icons/Search';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile, sidebarUserbox } = props;
@@ -39,6 +39,7 @@ const SidebarMenu = (props) => {
   const [GDRP, setGDRP] = useState(false);
   const [placementM, setPlacementM] = useState(false);
   const [placement, setPlacement] = useState(false);
+  const [setting, setSetting] = useState(false);
 
   return (
     <>
@@ -172,27 +173,26 @@ const SidebarMenu = (props) => {
             </li>
 
             <li>
-              <NavLink
-                activeClassName="active"
+              <a
+                href="javascript:void(0)"
                 onClick={() => {
                   setRequestInfo(!requestInfo);
                 }}
-                className="nav-link-simple"
-                to="/request-info">
+                className={clsx({ active: IR35 })}>
                 <span className="sidebar-icon">
-                  <TuneIcon />
+                  <BallotTwoToneIcon />
                 </span>
-                Request for Information
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                <span className="sidebar-item-label">
+                  Request for Information
+                </span>
+                <span className="sidebar-icon-indicator">
                   <ChevronRightTwoToneIcon />
                 </span>
-              </NavLink>
+              </a>
               <Collapse in={requestInfo}>
                 <ul>
                   <li>
-                    <NavLink
-                      onClick={toggleSidebarMobile}
-                      to="/request-information">
+                    <NavLink onClick={toggleSidebarMobile} to="/new-request">
                       New Request
                     </NavLink>
                   </li>
@@ -201,15 +201,8 @@ const SidebarMenu = (props) => {
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/request-information">
+                          to="/request-history">
                           Request History
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-information">
-                          Request Setting
                         </NavLink>
                       </li>
                     </div>
@@ -383,9 +376,7 @@ const SidebarMenu = (props) => {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/request-information">
+                      <NavLink onClick={toggleSidebarMobile} to="/placements">
                         Placements
                       </NavLink>
                     </li>
@@ -461,7 +452,7 @@ const SidebarMenu = (props) => {
                   <span className="sidebar-icon">
                     <SecurityIcon />
                   </span>
-                  <span className="sidebar-item-label">Availability</span>
+                  <span className="sidebar-item-label">Calendar and Tasks</span>
                   <span className="sidebar-icon-indicator">
                     <ChevronRightTwoToneIcon />
                   </span>
@@ -562,6 +553,43 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
+            {currentUser.role === 'candidate' && (
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  onClick={() => {
+                    setSetting(!setting);
+                  }}
+                  className={clsx({ active: setting })}>
+                  <span className="sidebar-icon">
+                    <FontAwesomeIcon icon={['fas', 'cog']} />
+                  </span>
+                  <span className="sidebar-item-label">Settings</span>
+                  <span className="sidebar-icon-indicator">
+                    <ChevronRightTwoToneIcon />
+                  </span>
+                </a>
+                <Collapse in={setting}>
+                  <ul>
+                    <li>
+                      <NavLink onClick={toggleSidebarMobile} to="#">
+                        Account
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink onClick={toggleSidebarMobile} to="#">
+                        Notifications
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink onClick={toggleSidebarMobile} to="#">
+                        Information
+                      </NavLink>
+                    </li>
+                  </ul>
+                </Collapse>
+              </li>
+            )}
           </ul>
         </div>
       </PerfectScrollbar>

@@ -9,6 +9,8 @@ import avatar3 from '../../assets/images/avatars/avatar3.jpg';
 import avatar4 from '../../assets/images/avatars/avatar4.jpg';
 import avatar5 from '../../assets/images/avatars/avatar5.jpg';
 import avatar2 from '../../assets/images/avatars/avatar6.jpg';
+import clogo from '../../assets/images/stock-photos/c-logo.webp';
+import clogo1 from '../../assets/images/stock-photos/company.png';
 
 export default function LivePreviewExample() {
   return (
@@ -52,10 +54,11 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            Los Agencies, California, USA
+                            Flat 10, Lingwood Close, Southampton, UK
                           </p>
+                          <p className="mb-0">Permanent</p>
                           <p className="text-black-50 mb-0">
-                            Compensation: £8k - £10k
+                            Salary: £8k - £10k
                           </p>
                         </div>
                       </div>
@@ -91,49 +94,11 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            Los Agencies, California, USA
+                            Gowan Brae, Union Rd, Fort William, UK
                           </p>
+                          <p className="mb-0">Contract</p>
                           <p className="text-black-50 mb-0">
-                            Compensation: £8k - £10k
-                          </p>
-                        </div>
-                      </div>
-                      <div>
-                        <Button size="small" className="btn-dark ml-4 mr-4">
-                          View
-                        </Button>
-                        <FontAwesomeIcon
-                          icon={['fas', 'heart']}
-                          className="font-size-lg mr-2 mt-1 text-danger"
-                        />
-                      </div>
-                    </ListItem>
-                    <ListItem className="d-flex justify-content-between align-items-center py-3">
-                      <div className="d-flex align-items-center flex-column flex-sm-row">
-                        <div>
-                          <div className="bg-white border-primary border-2 text-center text-primary font-size-xl d-50 rounded-circle mb-3 mb-sm-0">
-                            <FontAwesomeIcon icon={['fas', 'suitcase']} />
-                          </div>
-                        </div>
-                        <div className="pl-0 pl-sm-3">
-                          <div className="d-block text-center d-sm-flex align-items-center">
-                            <span className="font-size-lg">
-                              Business Analyst
-                            </span>
-                            <div className="badge badge-neutral-info text-info ml-2">
-                              New
-                            </div>
-                          </div>
-                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
-                          <p className="text-black-50 mb-0">
-                            <FontAwesomeIcon
-                              icon={['fas', 'map-marker-alt']}
-                              className="font-size-lg mr-2"
-                            />
-                            Los Agencies, California, USA
-                          </p>
-                          <p className="text-black-50 mb-0">
-                            Compensation: £8k - £10k
+                            Salary: £8k - £10k
                           </p>
                         </div>
                       </div>
@@ -169,10 +134,11 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            Los Agencies, California, USA
+                            88 St. Benedicts St, Norwich, UK
                           </p>
+                          <p className="mb-0">Temporary</p>
                           <p className="text-black-50 mb-0">
-                            Compensation: £8k - £10k
+                            Salary: £8k - £10k
                           </p>
                         </div>
                       </div>
@@ -208,10 +174,51 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            Los Agencies, California, USA
+                            11 Bury New Rd, Manchester, UK
                           </p>
+                          <p className="mb-0">Permanent</p>
                           <p className="text-black-50 mb-0">
-                            Compensation: £8k - £10k
+                            Salary: £8k - £10k
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <Button size="small" className="btn-dark ml-4 mr-4">
+                          View
+                        </Button>
+                        <FontAwesomeIcon
+                          icon={['fas', 'heart']}
+                          className="font-size-lg mr-2 mt-1 text-danger"
+                        />
+                      </div>
+                    </ListItem>
+                    <ListItem className="d-flex justify-content-between align-items-center py-3">
+                      <div className="d-flex align-items-center flex-column flex-sm-row">
+                        <div>
+                          <div className="bg-white border-primary border-2 text-center text-primary font-size-xl d-50 rounded-circle mb-3 mb-sm-0">
+                            <FontAwesomeIcon icon={['fas', 'suitcase']} />
+                          </div>
+                        </div>
+                        <div className="pl-0 pl-sm-3">
+                          <div className="d-block text-center d-sm-flex align-items-center">
+                            <span className="font-size-lg">
+                              Business Analyst
+                            </span>
+                            <div className="badge badge-neutral-info text-info ml-2">
+                              New
+                            </div>
+                          </div>
+                          <p className="mb-0">HexLab Corporation Pvt Ltd.</p>
+                          <p className="text-black-50 mb-0">
+                            <FontAwesomeIcon
+                              icon={['fas', 'map-marker-alt']}
+                              className="font-size-lg mr-2"
+                            />
+                            56 Theobalds Road, London, UK
+                          </p>
+                          <p className="mb-0">Contract</p>
+                          <p className="text-black-50 mb-0">
+                            Salary: £8k - £10k
                           </p>
                         </div>
                       </div>
@@ -256,7 +263,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
+                                <img alt="..." src={clogo} />
                               </div>
                             </div>
                             <div>
@@ -280,7 +287,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar3} />
+                                <img alt="..." src={clogo1} />
                               </div>
                             </div>
                             <div>
@@ -305,7 +312,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
+                                <img alt="..." src={clogo} />
                               </div>
                             </div>
                             <div>
@@ -329,7 +336,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar5} />
+                                <img alt="..." src={clogo} />
                               </div>
                             </div>
                             <div>
@@ -353,7 +360,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar2} />
+                                <img alt="..." src={clogo1} />
                               </div>
                             </div>
                             <div>
@@ -379,7 +386,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar3} />
+                                <img alt="..." src={clogo} />
                               </div>
                             </div>
                             <div>
@@ -403,7 +410,7 @@ export default function LivePreviewExample() {
                           <div className="d-flex align-items-center">
                             <div className="avatar-icon-wrapper mr-2">
                               <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
+                                <img alt="..." src={clogo1} />
                               </div>
                             </div>
                             <div>

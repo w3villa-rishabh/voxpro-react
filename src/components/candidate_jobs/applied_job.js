@@ -17,8 +17,7 @@ export default function AppliedJobComponent() {
       <div className="page-title">
         <WorkIcon />
         <div className="title">
-          <h5 className="heading">Jobs Applied</h5>
-          <p>List of all the applied jobs</p>
+          <h5 className="heading">Job Applications</h5>
         </div>
       </div>
 
@@ -33,7 +32,7 @@ export default function AppliedJobComponent() {
                 className="circular-progress-primary"
               />
               <div className="text-black mt-4 mb-1"></div>
-              <div className="font-size-lg opacity-8">Job Applied</div>
+              <div className="font-size-lg opacity-8">Applied</div>
             </div>
           </Card>
         </Grid>
@@ -135,17 +134,17 @@ export default function AppliedJobComponent() {
                   <td className="font-weight-bold text-center">#0001</td>
                   <td className="text-center">Headhunters</td>
                   <td>Software Developer</td>
-                  <td className="text-center">Uk</td>
+                  <td className="text-center">34 York Road, London</td>
                   <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">14 Feb 2020</td>
+                  <td className="text-center">Active</td>
                   <td className="">
                     <LinearProgress
                       variant="determinate"
                       className="progress-sm progress-bar-success"
-                      value={90}
+                      value={100}
                     />
                     <div className="font-size-sm text-black-50 pt-1">
-                      Completed
+                      Placement
                     </div>
                   </td>
                 </tr>
@@ -153,35 +152,33 @@ export default function AppliedJobComponent() {
                   <td className="font-weight-bold text-center">#0002</td>
                   <td className="text-center">Career Appear</td>
                   <td>Software Developer</td>
-                  <td className="text-center">Uk</td>
+                  <td className="text-center">131 Grove Road, London</td>
                   <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">14 Feb 2020</td>
+                  <td className="text-center">Active</td>
                   <td>
                     <LinearProgress
                       variant="determinate"
-                      value={55}
-                      className="progress-bar-animated progress-bar-striped progress-sm progress-bar-danger"
+                      value={85}
+                      className="progress-bar-animated progress-bar-striped progress-sm progress-bar-info"
                     />
-                    <div className="font-size-sm text-black-50 pt-1">
-                      Overdue
-                    </div>
+                    <div className="font-size-sm text-black-50 pt-1">Offer</div>
                   </td>
                 </tr>
                 <tr>
                   <td className="font-weight-bold text-center">#0003</td>
                   <td className="text-center">Starting Stars</td>
                   <td>Software Developer</td>
-                  <td className="text-center">Uk</td>
+                  <td className="text-center">32 The Drive, London</td>
                   <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">14 Feb 2020</td>
+                  <td className="text-center">Closed</td>
                   <td>
                     <LinearProgress
                       variant="determinate"
-                      value={51}
+                      value={60}
                       className="progress-sm progress-bar-warning"
                     />
                     <div className="font-size-sm text-black-50 pt-1">
-                      Pending
+                      Interview
                     </div>
                   </td>
                 </tr>
@@ -189,17 +186,17 @@ export default function AppliedJobComponent() {
                   <td className="font-weight-bold text-center">#0004</td>
                   <td className="text-center">Humble Hunters</td>
                   <td>Software Developer</td>
-                  <td className="text-center">Uk</td>
+                  <td className="text-center">66 Victoria Street, London</td>
                   <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">14 Feb 2020</td>
+                  <td className="text-center">Expired</td>
                   <td>
                     <LinearProgress
                       variant="determinate"
-                      className="progress-sm progress-bar-first"
-                      value={76}
+                      className="progress-sm progress-bar-danger"
+                      value={30}
                     />
                     <div className="font-size-sm text-black-50 pt-1">
-                      In progress
+                      Unsuccessful
                     </div>
                   </td>
                 </tr>
