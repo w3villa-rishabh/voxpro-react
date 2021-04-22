@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
 import Select from 'react-select';
 
-import { Calendar, dateFnsLocalizer, Views } from 'react-big-calendar';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 
 import format from 'date-fns/format';
@@ -24,7 +24,7 @@ import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 
-let allViews = Object.keys(Views).map((k) => Views[k]);
+// let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const ColoredDateCellWrapper = ({ children }) =>
   React.cloneElement(React.Children.only(children), {
@@ -153,6 +153,11 @@ export default function TasksCalendarComponent() {
     setOpen1(true);
   }
 
+  const selectEvent = (event) => {
+    console.log('selected event', event);
+    setOpen1(true);
+  };
+
   let editInfo = (e) => {
     e.preventDefault();
   };
@@ -160,17 +165,17 @@ export default function TasksCalendarComponent() {
   const createAvailability = (e) => {
     e.preventDefault();
     console.log('availability', availability);
-    const events = [];
     availability.map((value, index) => {
       var newEvent = {
         id: index,
-        start: 'Wed Apr 22 2020 00:00:00 GMT+0530 (India Standard Time)',
-        end: 'Wed Apr 24 2020 01:00:00 GMT+0530 (India Standard Time)',
-        title: value.type
+        start: new Date(2021, 3, 11),
+        end: new Date(2021, 3, 13),
+        title: value.type,
+        desc: 'Big conference for important people',
+        duration: '02:00'
       };
-      events.push(newEvent);
+      setEventsList([...eventsList, newEvent]);
     });
-    setEventsList(...eventsList, events);
     setOpen1(false);
     let newArr = [availabilityObj];
     setAvailability(newArr);
@@ -189,18 +194,20 @@ export default function TasksCalendarComponent() {
           <Calendar
             defaultView="month"
             selectable
+            onSelectEvent={selectEvent}
             onSelectSlot={handleSelect}
             localizer={localizer}
-            views={allViews}
+            // views={allViews}
             step={60}
             showMultiDayTimes
-            defaultDate={new Date(2020, 3, 1)}
+            defaultDate={new Date()}
             components={{
               timeSlotWrapper: ColoredDateCellWrapper
             }}
             events={eventsList}
             startAccessor="start"
             endAccessor="end"
+            titleAccessor="title"
             style={{ minHeight: 650 }}
           />
           <AddsComponents />
