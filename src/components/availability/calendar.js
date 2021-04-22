@@ -165,6 +165,7 @@ export default function TasksCalendarComponent() {
   const createAvailability = (e) => {
     e.preventDefault();
     console.log('availability', availability);
+    const events = [];
     availability.map((value, index) => {
       var newEvent = {
         id: index,
@@ -174,8 +175,9 @@ export default function TasksCalendarComponent() {
         desc: 'Big conference for important people',
         duration: '02:00'
       };
-      setEventsList([...eventsList, newEvent]);
+      events.push(newEvent);
     });
+    setEventsList([...eventsList, ...events]);
     setOpen1(false);
     let newArr = [availabilityObj];
     setAvailability(newArr);
