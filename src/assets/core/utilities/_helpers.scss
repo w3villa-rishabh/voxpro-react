@@ -575,7 +575,11 @@ $num: 20;
 }
 
 .user-drop {
-  width: 145px;
+  width: 125px !important;
+
+  .MuiFormControl-fullWidth {
+    width: 125px !important;
+  }
 }
 
 .week-remove-m {

@@ -5,13 +5,13 @@ import {
   Dialog,
   Grid,
   Checkbox,
+  TextField,
   DialogTitle,
   DialogActions,
   DialogContent,
   FormControlLabel
 } from '@material-ui/core';
 
-import { getCurrentUser } from '../../helper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
 import Select from 'react-select';
@@ -94,23 +94,17 @@ const availabilityObj = {
   shift: '',
   startTime: '',
   endTime: '',
-  mon: '',
-  tue: '',
-  wed: '',
-  thu: '',
-  fri: '',
-  sat: '',
-  sun: ''
+  mon: false,
+  tue: false,
+  wed: false,
+  thu: false,
+  fri: false,
+  sat: false,
+  sun: false
 };
 export default function TasksCalendarComponent() {
-  const [currentUser] = useState(getCurrentUser());
   const [eventsList, setEventsList] = useState([]);
   const [availability, setAvailability] = useState([availabilityObj]);
-  const [value, setValue] = useState('');
-
-  const changeHandler = (value) => {
-    setValue(value);
-  };
 
   const addMoreRow = () => {
     availability.push(availabilityObj);
@@ -132,17 +126,6 @@ export default function TasksCalendarComponent() {
 
   //Example 2
   const [open1, setOpen1] = useState(false);
-
-  const handleClickOpen1 = (start, end) => {
-    setOpen1(true);
-    // const title = window.prompt('New Event name');
-    var newEvent = {
-      start: start,
-      end: end
-      //   title: 'title'
-    };
-    setEventsList([...eventsList, newEvent]);
-  };
 
   const handleClose1 = () => {
     setOpen1(false);
@@ -196,7 +179,7 @@ export default function TasksCalendarComponent() {
           <Calendar
             defaultView="month"
             selectable
-            onSelectEvent={selectEvent}
+            // onSelectEvent={selectEvent}
             onSelectSlot={handleSelect}
             localizer={localizer}
             // views={allViews}
@@ -234,7 +217,7 @@ export default function TasksCalendarComponent() {
                   <div className="mb-3">
                     {availability.map((value, index) => (
                       <Grid container spacing={0} wrap={'nowrap'} key={index}>
-                        {/* <Grid item xs={12} sm={3} className="text-center">
+                        <Grid item xs={12} sm={3} className="text-center">
                           {index === 0 && (
                             <label className="font-weight-bold mb-1">
                               Start Date
@@ -242,13 +225,12 @@ export default function TasksCalendarComponent() {
                           )}
                           <TextField
                             fullWidth
+                            className="user-drop"
+                            placeholder="Start Date"
                             variant="outlined"
                             size="small"
                             id="textfield-email"
                             name="description"
-                            inputProps={{ maxLength: 255 }}
-                            multiline
-                            rowsMax={4}
                           />
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
@@ -259,15 +241,14 @@ export default function TasksCalendarComponent() {
                           )}
                           <TextField
                             fullWidth
+                            className="user-drop"
+                            placeholder="End Date"
                             variant="outlined"
                             size="small"
                             id="textfield-email"
                             name="description"
-                            inputProps={{ maxLength: 255 }}
-                            multiline
-                            rowsMax={4}
                           />
-                        </Grid> */}
+                        </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
                           {index === 0 && (
                             <label className="font-weight-bold mb-1">
@@ -351,6 +332,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Mon' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.mon = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           <FormControlLabel
@@ -358,6 +346,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Tue' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.tue = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           <FormControlLabel
@@ -365,6 +360,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Wed' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.web = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           <FormControlLabel
@@ -372,6 +374,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Thu' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.thu = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           <FormControlLabel
@@ -379,6 +388,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Fri' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.fri = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           <FormControlLabel
@@ -386,6 +402,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Sat' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.sat = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           <FormControlLabel
@@ -393,6 +416,13 @@ export default function TasksCalendarComponent() {
                             control={<Checkbox color="primary" />}
                             label={index === 0 ? 'Sun' : ''}
                             labelPlacement="top"
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.sun = e.target.checked;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
 
                           {index > 0 && (
@@ -434,7 +464,7 @@ export default function TasksCalendarComponent() {
                         className="font-weight-bold btn-second px-4 my-1">
                         Create
                       </Button>
-                      <Button
+                      {/* <Button
                         variant="contained"
                         onClick={handleClose1}
                         className="font-weight-bold btn-second px-4 my-1">
@@ -446,7 +476,7 @@ export default function TasksCalendarComponent() {
                         onClick={handleClose1}
                         className="font-weight-bold btn-second px-4 my-1">
                         Delete
-                      </Button>
+                      </Button> */}
 
                       <Button
                         variant="contained"
