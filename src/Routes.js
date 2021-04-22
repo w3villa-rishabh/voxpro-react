@@ -57,7 +57,10 @@ const PageRecoverCover = lazy(() => import('./components/recover_password.js'));
 const NewRequestComponent = lazy(() =>
   import('./components/request_information/new-request')
 );
-
+// request history
+const RequestHistoryComponent = lazy(() =>
+  import('./components/request_information/request-history')
+);
 //Candidate History request
 const CandidateHistory = lazy(() =>
   import('./components/ir35_tax/candidate-history')
@@ -71,6 +74,11 @@ const CandidateQuery = lazy(() =>
 // candidate job applied
 const AppliedJobComponent = lazy(() =>
   import('./components/candidate_jobs/applied_job')
+);
+
+// candidate job applied
+const CandidatePlacements = lazy(() =>
+  import('./components/candidate_jobs/candidate_placements')
 );
 
 //my task
@@ -226,7 +234,9 @@ const Routes = () => {
                 '/candidate-history',
                 '/candidate-enquiries',
                 '/new-request',
+                '/request-history',
                 '/applied-jobs',
+                '/placements',
                 '/tasks',
                 '/save-jobs',
                 '/search-job',
@@ -252,7 +262,12 @@ const Routes = () => {
                   <Route path="/view-profile" component={Profile} />
                   <Route path="/request-info" component={NewRequestComponent} />
                   <Route path="/new-request" component={NewRequestComponent} />
+                  <Route
+                    path="/request-history"
+                    component={RequestHistoryComponent}
+                  />
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
+                  <Route path="/placements" component={CandidatePlacements} />
                   <Route path="/tasks" component={MyTasksComponent} />
                   <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />

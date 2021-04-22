@@ -106,7 +106,7 @@ const LivePreviewExample = (props) => {
                   icon={['fas', 'arrow-up']}
                   className="font-size-sm text-success mr-2"
                 />
-                <div>4867</div>
+                <div>568</div>
               </div>
               <div className="text-black-50 text-center pt-3">
                 <b>+22%</b> from last month
@@ -114,30 +114,46 @@ const LivePreviewExample = (props) => {
             </Card>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Card className="card-box border-0 shadow-primary-sm p-3 h-100">
-              <div className="d-flex align-items-center">
-                <div className="d-40 btn-icon rounded-circle bg-primary text-white text-center font-size-lg mr-3">
-                  <FontAwesomeIcon icon={['far', 'list-alt']} />
+            <Card className="card-box h-100">
+              <div className="card-content-overlay text-center p-2">
+                <div className="pb-2">
+                  <b> My Tasks Today</b>
                 </div>
-                <div className="text-black-50">Agencies</div>
-              </div>
-              {/* <div className="display-4 text-center line-height-sm text-second text-center d-flex align-items-center pt-2 justify-content-center">
-                <FontAwesomeIcon
-                  icon={['fas', 'arrow-down']}
-                  className="font-size-sm text-first mr-2"
-                />
-                <div>433</div>
-              </div>
-              <div className="text-black-50 text-center pt-3">
-                <b>+32%</b> from last month
-              </div> */}
-              <div className="mx-auto text-center">
-                <CircularProgressbar
-                  value={86}
-                  text={86 + '%'}
-                  strokeWidth={8}
-                  className="circular-progress-warning"
-                />
+                <div className="font-size-lg opacity-8">
+                  <Grid container spacing={0}>
+                    <Grid item xs={12} sm={6}>
+                      <div className="mx-auto text-center">
+                        <CircularProgressbar
+                          value={56}
+                          text={56 + '%'}
+                          strokeWidth={8}
+                          className="circular-progress-sm  circular-progress-first"
+                        />
+                      </div>
+                      <div>
+                        <small>Completed</small>
+                      </div>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <div className="mx-auto text-center">
+                        <CircularProgressbar
+                          value={56}
+                          text={56 + '%'}
+                          strokeWidth={8}
+                          className="circular-progress-sm circular-progress-warning"
+                        />
+                      </div>
+                      <div>
+                        <small>Started</small>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </div>
+                <div className="text-center mt-2">
+                  <Button size="small" className="bg-primary px-4 text-white">
+                    23 View All
+                  </Button>
+                </div>
               </div>
             </Card>
           </Grid>

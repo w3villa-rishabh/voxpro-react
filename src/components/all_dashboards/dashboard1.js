@@ -17,12 +17,9 @@ import NotificationsActiveTwoToneIcon from '@material-ui/icons/NotificationsActi
 import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
 import Rating from '@material-ui/lab/Rating';
 
-
-
 export default function LivePreviewExample() {
   const [value, setValue] = useState(2);
-  var userData = null
-
+  var userData = null;
 
   const SuspenseLoading = () => {
     const [show, setShow] = useState(false);
@@ -32,20 +29,20 @@ export default function LivePreviewExample() {
         clearTimeout(timeout);
       };
     }, []);
+  };
+
+  function handleUser() {
+    userData = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))
+      : null;
+    // const [user, setUser] = useState(userData);
+    console.log('user data ===>>>>', userData);
+    return userData;
   }
 
-    function handleUser() {
-      userData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
-      // const [user, setUser] = useState(userData);
-      console.log("user data ===>>>>", userData)
-      return userData
-      
-    }
-
-    useEffect(() => {
-      handleUser()
-    }, []);
-
+  useEffect(() => {
+    handleUser();
+  }, [handleUser]);
 
   return (
     <>
