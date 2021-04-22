@@ -16,7 +16,7 @@ export default function AppliedJobComponent() {
     <>
       <div className="page-title">
         <WorkIcon />
-        <div className="title">
+        <div className="title pt-3">
           <h5 className="heading">Job Applications</h5>
         </div>
       </div>
