@@ -178,12 +178,7 @@ const SidebarMenu = (props) => {
                   setRequestInfo(!requestInfo);
                 }}
                 className="nav-link-simple"
-                to={
-                  currentUser.role === 'agency' ||
-                  currentUser.role === 'company'
-                    ? '/request-info'
-                    : '/request-information'
-                }>
+                to="/request-info">
                 <span className="sidebar-icon">
                   <TuneIcon />
                 </span>
