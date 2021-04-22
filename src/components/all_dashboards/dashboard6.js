@@ -72,7 +72,7 @@ export default function LivePreviewExample() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>1111</td>
+                      <td>#0001</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <div>
@@ -92,10 +92,10 @@ export default function LivePreviewExample() {
                         </div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">Company 1</div>
+                        <div className="px-4">Darktrace</div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">€400</div>
+                        <div className="px-4">£4000</div>
                       </td>
                       <td className="text-center">
                         <a
@@ -107,7 +107,7 @@ export default function LivePreviewExample() {
                       </td>
                     </tr>
                     <tr>
-                      <td>1112</td>
+                      <td>#0002</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <div>
@@ -127,10 +127,10 @@ export default function LivePreviewExample() {
                         </div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">Company 2</div>
+                        <div className="px-4">Deliveroo</div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">€ 4002</div>
+                        <div className="px-4">£4000</div>
                       </td>
                       <td className="text-center">
                         <a
@@ -142,7 +142,7 @@ export default function LivePreviewExample() {
                       </td>
                     </tr>
                     <tr>
-                      <td>1113</td>
+                      <td>#0003</td>
                       <td>
                         <div className="d-flex align-items-center">
                           <div>
@@ -162,10 +162,10 @@ export default function LivePreviewExample() {
                         </div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">Company 3</div>
+                        <div className="px-4">Improbable</div>
                       </td>
                       <td className="text-center">
-                        <div className="px-4">€4000</div>
+                        <div className="px-4">£4000</div>
                       </td>
                       <td className="text-center">
                         <a
