@@ -303,7 +303,7 @@ export default function MyTasksComponent() {
               </Card>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Card className="h-100 task-calender">
+              <Card className="h-100 task-calendar">
                 <div className="p-3">
                   <Calendar
                     className="border-0 m-auto p-1"
