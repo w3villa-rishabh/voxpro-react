@@ -53,7 +53,7 @@ const LivePreviewExample = (props) => {
                 <div className="d-40 btn-icon rounded-circle bg-first text-white text-center font-size-lg mr-3">
                   <FontAwesomeIcon icon={['far', 'user']} />
                 </div>
-                <div className="text-black-50">Profile Views</div>
+                <b>Profile Views</b>
               </div>
               <GaugeChart
                 hideText
@@ -71,7 +71,7 @@ const LivePreviewExample = (props) => {
                 <div className="d-40 btn-icon rounded-circle bg-success text-white text-center font-size-lg mr-3">
                   <FontAwesomeIcon icon={['fas', 'address-card']} />
                 </div>
-                <div className="text-black-50">Profile Completion</div>
+                <b>Profile Completion</b>
               </div>
               <div className="mx-auto text-center">
                 <CircularProgressbar
@@ -99,7 +99,7 @@ const LivePreviewExample = (props) => {
                 <div className="d-40 btn-icon rounded-circle bg-danger text-white text-center font-size-lg mr-3">
                   <FontAwesomeIcon icon={['fas', 'walking']} />
                 </div>
-                <div className="text-black-50">Total Connections</div>
+                <b>Total Connections </b>
               </div>
               <div className="display-4 text-center line-height-sm text-second text-center d-flex align-items-center pt-2 justify-content-center">
                 <FontAwesomeIcon
