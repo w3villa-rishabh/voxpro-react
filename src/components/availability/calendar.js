@@ -5,7 +5,6 @@ import {
   Dialog,
   Grid,
   Checkbox,
-  TextField,
   DialogTitle,
   DialogActions,
   DialogContent,
@@ -14,7 +13,8 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
-import Select from 'react-select';
+
+import { toast } from 'react-toastify';
 
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
@@ -23,6 +23,9 @@ import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 // let allViews = Object.keys(Views).map((k) => Views[k]);
 
@@ -74,26 +77,38 @@ const shift = [
   }
 ];
 
-const time = [
-  {
-    value: '07:00 AM',
-    label: '07:00 AM'
-  },
-  {
-    value: '08:00 AM',
-    label: '08:00 AM'
-  },
-  {
-    value: '09:00 AM',
-    label: '09:00 AM'
+function generateTimeIncrement(minIncrementProp = '30') {
+  // Create an array of all possible times that can be selected
+  const minuteIncrement = 60 / minIncrementProp;
+  let timeArray = [];
+  for (let i = 0; i < 24; i++) {
+    for (let j = 0; j < minuteIncrement; j++) {
+      let time = {
+        value: ('0' + i).slice(-2) + ('0' + j * minIncrementProp).slice(-2),
+        HH: ('0' + i).slice(-2),
+        MM: ('0' + j * minIncrementProp).slice(-2),
+        hh:
+          i === 0
+            ? '12'
+            : (i === 12 ? '12' : i > 12 ? '0' + (i - 12) : '0' + i).slice(-2),
+        mm: ('0' + j * minIncrementProp).slice(-2),
+        active: true,
+        period: i >= 12 ? 'PM' : 'AM'
+      };
+      time.label = time.hh + ':' + time.mm + ' ' + time.period;
+      timeArray.push(time);
+    }
   }
-];
+  return timeArray;
+}
 
 const availabilityObj = {
-  type: '',
-  shift: '',
-  startTime: '',
-  endTime: '',
+  startDate: new Date(),
+  endDate: '',
+  type: 0,
+  shift: 0,
+  startTime: 0,
+  endTime: 0,
   mon: false,
   tue: false,
   wed: false,
@@ -105,8 +120,11 @@ const availabilityObj = {
 export default function TasksCalendarComponent() {
   const [eventsList, setEventsList] = useState([]);
   const [availability, setAvailability] = useState([availabilityObj]);
+  const [time] = useState(generateTimeIncrement());
+  const [picDate, setPicDate] = useState('');
 
   const addMoreRow = () => {
+    availabilityObj.startDate = picDate;
     availability.push(availabilityObj);
     setAvailability([...availability]);
   };
@@ -134,6 +152,12 @@ export default function TasksCalendarComponent() {
   function handleSelect({ start, end }) {
     console.log('start, end', start, end);
     setOpen1(true);
+    setPicDate(start);
+    const newClicks = [...availability];
+    let newVote = { ...newClicks[0] };
+    newVote.startDate = start;
+    newClicks[0] = newVote;
+    setAvailability(newClicks);
   }
 
   const selectEvent = (event) => {
@@ -150,20 +174,72 @@ export default function TasksCalendarComponent() {
     console.log('availability', availability);
     const events = [];
     availability.map((value, index) => {
-      var newEvent = {
-        id: index,
-        start: new Date(2021, 3, 11),
-        end: new Date(2021, 3, 13),
-        title: value.type,
-        desc: 'Big conference for important people',
-        duration: '02:00'
-      };
-      events.push(newEvent);
+      if (value.type && value.endDate) {
+        var newEvent = {
+          id: index,
+          start: new Date(
+            value.startDate.getFullYear(),
+            value.startDate.getMonth(),
+            value.startDate.getDate(),
+            17,
+            0,
+            0,
+            0
+          ),
+          end: new Date(
+            value.endDate.getFullYear(),
+            value.endDate.getMonth(),
+            value.endDate.getDate(),
+            17,
+            30,
+            0,
+            0
+          ),
+          title: value.type,
+          desc: 'Big conference for important people',
+          duration: '02:00',
+          borderColor: 'white',
+          backgroundColor: 'pink',
+          display: 'background'
+        };
+        // YearView, month, date, hh, mm, ss,ss,z
+        // start: new Date(2015, 3, 12, 17, 0, 0, 0),
+        // end: new Date(2015, 3, 12, 17, 30, 0, 0),
+        events.push(newEvent);
+      } else {
+        toast.dismiss();
+        toast.error('Date and type required, Please select required..');
+      }
     });
     setEventsList([...eventsList, ...events]);
     setOpen1(false);
     let newArr = [availabilityObj];
     setAvailability(newArr);
+  };
+
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    console.log(event);
+    var backgroundColor;
+
+    if (event.title === 'Unavailable') {
+      backgroundColor = 'red';
+    } else if (event.title === 'Available') {
+      backgroundColor = 'green';
+    } else {
+      backgroundColor = '#' + event.hexColor;
+    }
+
+    var style = {
+      backgroundColor: backgroundColor,
+      borderRadius: '0px',
+      opacity: 0.8,
+      color: 'black',
+      border: '0px',
+      display: 'block'
+    };
+    return {
+      style: style
+    };
   };
 
   return (
@@ -194,6 +270,7 @@ export default function TasksCalendarComponent() {
             endAccessor="end"
             titleAccessor="title"
             style={{ minHeight: 650 }}
+            eventPropGetter={eventStyleGetter}
           />
           <AddsComponents />
         </div>
@@ -212,25 +289,34 @@ export default function TasksCalendarComponent() {
         <DialogContent className="p-0">
           <div>
             <div className="border-0">
-              <div className="card-body">
+              <div className="card-body mb-0">
                 <form method="post" onSubmit={editInfo}>
-                  <div className="mb-3">
+                  <div className="mb-2">
                     {availability.map((value, index) => (
-                      <Grid container spacing={0} wrap={'nowrap'} key={index}>
+                      <Grid container spacing={1} wrap={'nowrap'} key={index}>
                         <Grid item xs={12} sm={3} className="text-center">
                           {index === 0 && (
                             <label className="font-weight-bold mb-1">
                               Start Date
                             </label>
                           )}
-                          <TextField
-                            fullWidth
-                            className="user-drop"
-                            placeholder="Start Date"
-                            variant="outlined"
-                            size="small"
-                            id="textfield-email"
-                            name="description"
+                          <DatePicker
+                            // value={availability[index].startDate}
+                            minDate={new Date()}
+                            dateFormat="dd-MM-yyyy"
+                            placeholderText="Start Date"
+                            selected={availability[index].startDate}
+                            selectsStart
+                            startDate={availability[index].startDate}
+                            endDate={availability[index].endDate}
+                            onChange={(date) => {
+                              // setStartDate(date);
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.startDate = date;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
@@ -239,14 +325,23 @@ export default function TasksCalendarComponent() {
                               End Date
                             </label>
                           )}
-                          <TextField
-                            fullWidth
-                            className="user-drop"
-                            placeholder="End Date"
-                            variant="outlined"
-                            size="small"
-                            id="textfield-email"
-                            name="description"
+                          <DatePicker
+                            // value={availability[index].endDate}
+                            dateFormat="dd-MM-yyyy"
+                            placeholderText="End Date"
+                            selected={availability[index].endDate}
+                            selectsEnd
+                            startDate={availability[index].startDate}
+                            endDate={availability[index].endDate}
+                            minDate={availability[index].startDate}
+                            onChange={(date) => {
+                              // setEndDate(date);
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.endDate = date;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}
                           />
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
@@ -255,7 +350,7 @@ export default function TasksCalendarComponent() {
                               Type
                             </label>
                           )}
-                          <Select
+                          {/* <Select
                             key={index}
                             className="user-drop"
                             options={availabilityType}
@@ -267,7 +362,23 @@ export default function TasksCalendarComponent() {
                               setAvailability(newClicks);
                             }}
                             placeholder="Type"
-                          />
+                          /> */}
+                          <select
+                            value={availability[index].type}
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.type = e.target.value;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}>
+                            <option value={0} disabled>
+                              Select type
+                            </option>
+                            {availabilityType.map((value, index) => (
+                              <option value={value.value}>{value.label}</option>
+                            ))}
+                          </select>
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
                           {index === 0 && (
@@ -275,7 +386,7 @@ export default function TasksCalendarComponent() {
                               Shift
                             </label>
                           )}
-                          <Select
+                          {/* <Select
                             className="user-drop"
                             options={shift}
                             onChange={(e) => {
@@ -286,7 +397,23 @@ export default function TasksCalendarComponent() {
                               setAvailability(newClicks);
                             }}
                             placeholder="Shift"
-                          />
+                          /> */}
+                          <select
+                            value={availability[index].shift}
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.shift = e.target.value;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}>
+                            <option value={0} disabled>
+                              Select shift
+                            </option>
+                            {shift.map((value, index) => (
+                              <option value={value.value}>{value.label}</option>
+                            ))}
+                          </select>
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
                           {index === 0 && (
@@ -294,9 +421,10 @@ export default function TasksCalendarComponent() {
                               Start Time
                             </label>
                           )}
-                          <Select
+                          {/* <Select
                             className="user-drop"
                             options={time}
+                            maxMenuHeight={150}
                             onChange={(e) => {
                               const newClicks = [...availability];
                               let newVote = { ...newClicks[index] };
@@ -305,7 +433,30 @@ export default function TasksCalendarComponent() {
                               setAvailability(newClicks);
                             }}
                             placeholder="Start time"
-                          />
+                          /> */}
+                          <select
+                            disabled={availability[index].shift === 'Full Day'}
+                            value={availability[index].startTime}
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              newVote.startTime = e.target.value;
+                              newClicks[index] = newVote;
+                              setAvailability(newClicks);
+                            }}>
+                            <option value={0} disabled>
+                              Start Time
+                            </option>
+                            {time
+                              .filter(
+                                (f) => f.period === availability[index].shift
+                              )
+                              .map((value, index) => (
+                                <option value={value.value}>
+                                  {value.label}
+                                </option>
+                              ))}
+                          </select>
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
                           {index === 0 && (
@@ -313,19 +464,67 @@ export default function TasksCalendarComponent() {
                               End Time
                             </label>
                           )}
-                          <Select
+                          {/* <Select
                             className="user-drop"
                             options={time}
+                            maxMenuHeight={150}
+                            value={endTime}
                             onChange={(e) => {
                               const newClicks = [...availability];
                               let newVote = { ...newClicks[index] };
-                              newVote.endTime = e.value;
-                              newClicks[index] = newVote;
-                              setAvailability(newClicks);
+                              if (
+                                !!newVote.startTime &&
+                                e.value > newVote.startTime
+                              ) {
+                                newVote.endTime = e.value;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                                setEndTime(e.label);
+                              } else {
+                                toast.dismiss();
+                                toast.error(
+                                  'End time should be greater then Start time'
+                                );
+                              }
                             }}
                             placeholder="End time"
-                          />
+                          /> */}
+                          <select
+                            disabled={availability[index].shift === 'Full Day'}
+                            value={availability[index].endTime}
+                            onChange={(e) => {
+                              const newClicks = [...availability];
+                              let newVote = { ...newClicks[index] };
+                              if (
+                                !!newVote.startTime &&
+                                e.target.value > newVote.startTime
+                              ) {
+                                newVote.endTime = e.target.value;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                                // setEndTime(e.label);
+                              } else {
+                                toast.dismiss();
+                                toast.error(
+                                  'End time should be greater then Start time'
+                                );
+                              }
+                            }}>
+                            <option value={0} disabled>
+                              End Time
+                            </option>
+                            {time
+                              .filter(
+                                (f) => f.period === availability[index].shift
+                              )
+                              .map((value, index) => (
+                                <option value={value.value}>
+                                  {value.label}
+                                </option>
+                              ))}
+                          </select>
                         </Grid>
+
                         <Grid item className="d-flex week-remove-m">
                           <FormControlLabel
                             value="top"
