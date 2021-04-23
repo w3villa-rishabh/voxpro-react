@@ -178,7 +178,7 @@ export default function TasksCalendarComponent() {
           id: index,
           start: new Date(
             value.startDate.getFullYear(),
-            value.startDate.getMonth() + 1,
+            value.startDate.getMonth(),
             value.startDate.getDate(),
             17,
             0,
@@ -187,7 +187,7 @@ export default function TasksCalendarComponent() {
           ),
           end: new Date(
             value.endDate.getFullYear(),
-            value.endDate.getMonth() + 1,
+            value.endDate.getMonth(),
             value.endDate.getDate(),
             17,
             30,
@@ -405,6 +405,7 @@ export default function TasksCalendarComponent() {
                             placeholder="Start time"
                           /> */}
                           <select
+                            disabled={availability[index].shift === 'Full Day'}
                             value={availability[index].startTime}
                             onChange={(e) => {
                               const newClicks = [...availability];
@@ -416,9 +417,15 @@ export default function TasksCalendarComponent() {
                             <option value={0} disabled>
                               Start Time
                             </option>
-                            {time.map((value, index) => (
-                              <option value={value.value}>{value.label}</option>
-                            ))}
+                            {time
+                              .filter(
+                                (f) => f.period === availability[index].shift
+                              )
+                              .map((value, index) => (
+                                <option value={value.value}>
+                                  {value.label}
+                                </option>
+                              ))}
                           </select>
                         </Grid>
                         <Grid item xs={12} sm={3} className="text-center">
@@ -453,6 +460,7 @@ export default function TasksCalendarComponent() {
                             placeholder="End time"
                           /> */}
                           <select
+                            disabled={availability[index].shift === 'Full Day'}
                             value={availability[index].endTime}
                             onChange={(e) => {
                               const newClicks = [...availability];
@@ -475,9 +483,15 @@ export default function TasksCalendarComponent() {
                             <option value={0} disabled>
                               End Time
                             </option>
-                            {time.map((value, index) => (
-                              <option value={value.value}>{value.label}</option>
-                            ))}
+                            {time
+                              .filter(
+                                (f) => f.period === availability[index].shift
+                              )
+                              .map((value, index) => (
+                                <option value={value.value}>
+                                  {value.label}
+                                </option>
+                              ))}
                           </select>
                         </Grid>
 
