@@ -431,11 +431,20 @@ export default function LivePreviewExample() {
                   {currentUser.role === 'candidate' && (
                     <div>
                       <hr></hr>
+                      <b>About</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                          // onClick={handleExperience}
+                        />
+                      </div>
+                      <br />
                       <small>
-                        ConsultancyFounder & Director | Frank Belford a
-                        Consultancy Senior Business Analyst with 15 years
-                        experience in the retail industry and FMCG industry,
-                        with project spending 5-10 million.
+                        Founder & Director | Frank Belford a Consultancy Senior
+                        Business Analyst with 15 years experience in the retail
+                        industry and FMCG industry, with project spending 5-10
+                        million.
                       </small>
                       <hr></hr>
                       <CardContent className="text-center p-0">
@@ -759,9 +768,58 @@ export default function LivePreviewExample() {
                       <List component="div" className="list-group-flush">
                         <ListItem className="px-0 border-0">
                           <Grid container spacing={0}>
+                          <Grid
+                              item
+                              xs={6}
+                              // md={6}
+                              className="d-flex align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div className="avatar-icon-wrapper mr-2">
+                                  <div className="avatar-icon">
+                                    <img alt="..." src={avatar2} />
+                                  </div>
+                                </div>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold text-black"
+                                    title="...">
+                                    Manas Singh
+                                  </a>
+                                  <span className="text-black-50 d-block">
+                                    System Engineer, Apple Inc.
+                                  </span>
+                                </div>
+                              </div>
+                            </Grid>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
+                              // md={6}
+                              className="pt-2 pt-xl-0 d-flex align-items-center">
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                Connect
+                              </Button>
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                &nbsp;&nbsp;View &nbsp;&nbsp;
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </ListItem>
+                        <ListItem className="px-0 border-0">
+                          <Grid container spacing={0}>
+                          <Grid
+                              item
+                              xs={6}
                               // md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
@@ -786,64 +844,31 @@ export default function LivePreviewExample() {
                             </Grid>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="pt-2 pt-xl-0 d-flex align-items-center">
                               <Button
+                                style={{ padding: '4px' }}
                                 size="small"
-                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
                                 variant="outlined">
                                 Connect
+                              </Button>
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                &nbsp;&nbsp;View &nbsp;&nbsp;
                               </Button>
                             </Grid>
                           </Grid>
                         </ListItem>
                         <ListItem className="px-0 border-0">
                           <Grid container spacing={0}>
-                            <Grid
+                          <Grid
                               item
-                              xs={12}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar5} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Akeem Griffith
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    Manager, Google Inc.
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={12}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                size="small"
-                                className="btn-pill ml-5 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="d-flex align-items-center">
                               <div className="d-flex align-items-center">
@@ -858,24 +883,32 @@ export default function LivePreviewExample() {
                                     onClick={(e) => e.preventDefault()}
                                     className="font-weight-bold text-black"
                                     title="...">
-                                    Abigayle Hicks
+                                    Inez Conley
                                   </a>
                                   <span className="text-black-50 d-block">
-                                    Project Manager, Spotify
+                                    UX Engineer, Apple Inc.
                                   </span>
                                 </div>
                               </div>
                             </Grid>
                             <Grid
                               item
-                              xs={12}
+                              xs={6}
                               // md={6}
                               className="pt-2 pt-xl-0 d-flex align-items-center">
                               <Button
+                                style={{ padding: '4px' }}
                                 size="small"
-                                className="btn-pill ml-5 btn-outline-primary border-1"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
                                 variant="outlined">
                                 Connect
+                              </Button>
+                              <Button
+                                style={{ padding: '4px' }}
+                                size="small"
+                                className="btn-pill ml-3 btn-outline-primary border-1"
+                                variant="outlined">
+                                &nbsp;&nbsp;View &nbsp;&nbsp;
                               </Button>
                             </Grid>
                           </Grid>

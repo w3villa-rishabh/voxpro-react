@@ -88,8 +88,8 @@ export default function JobSearchComponent() {
       <div className="page-title">
         <WorkIcon />
         <div className="title">
-          <h5 className="heading">Job Search</h5>
-          <p>List of all the applied jobs</p>
+          <h5 className="heading pt-3">Job Search</h5>
+          {/* <p>List of all the applied jobs</p> */}
         </div>
       </div>
       <Card className="card-box">
