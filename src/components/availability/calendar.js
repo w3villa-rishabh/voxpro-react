@@ -124,6 +124,7 @@ export default function TasksCalendarComponent() {
   const [picDate, setPicDate] = useState('');
 
   const addMoreRow = () => {
+    availabilityObj.startDate = picDate;
     availability.push(availabilityObj);
     setAvailability([...availability]);
   };
