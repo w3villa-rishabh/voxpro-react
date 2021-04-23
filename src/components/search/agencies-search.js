@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  Card,
-  Grid,
-  Button,
-  TextField,
-  Table,
-  Tooltip
-} from '@material-ui/core';
+import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
-import avatar2 from '../../assets/images/avatars/avatar2.jpg';
-
-import avatar4 from '../../assets/images/avatars/avatar4.jpg';
-import avatar7 from '../../assets/images/avatars/avatar7.jpg';
+import clogo from '../../assets/images/stock-photos/c-logo.webp';
+import clogo1 from '../../assets/images/stock-photos/company.png';
 
 // function valuetext(value) {
 //   return `${value}°C`;
@@ -85,7 +76,7 @@ export default function AgenciesSearchComponent() {
       <Card className="px-3 pt-3">
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
-            <b>Category</b>
+            <b>Name</b>
             <div className="mb-3 mt-2">
               <TextField
                 variant="outlined"
@@ -101,7 +92,7 @@ export default function AgenciesSearchComponent() {
             </div>
           </Grid>
           <Grid item md={3} xs={12}>
-            <b>Manufacture</b>
+            <b>Industry</b>
             <div className="mb-3 mt-2">
               <TextField
                 variant="outlined"
@@ -117,7 +108,7 @@ export default function AgenciesSearchComponent() {
             </div>
           </Grid>
           <Grid item md={3} xs={12}>
-            <b>Country</b>
+            <b>Location</b>
             <div className="mb-3 mt-2">
               <TextField
                 variant="outlined"
@@ -138,7 +129,7 @@ export default function AgenciesSearchComponent() {
               <TextField
                 variant="outlined"
                 size="small"
-                placeholder="Search by name of jobs active"
+                placeholder="Search by number of jobs active"
                 className="w-100"
                 InputProps={{
                   style: {
@@ -170,7 +161,7 @@ export default function AgenciesSearchComponent() {
           <Card className="px-3 pt-3">
             <div className="card-header py-3">
               <div className="card-header--title font-size-lg">
-                <b>Recent added jobs</b>
+                <b>Agencies recently added</b>
               </div>
             </div>
 
@@ -179,99 +170,115 @@ export default function AgenciesSearchComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="bg-white text-left">Job ID</th>
-                      <th className="bg-white">Role</th>
-                      <th className="bg-white text-center">Agency</th>
-                      <th className="bg-white text-center">Created date</th>
-                      <th className="bg-white text-center">View no of Jobs</th>
+                      <th className="bg-white text-left">Added On</th>
+                      <th className="bg-white">Agency Name</th>
+                      <th className="bg-white text-center">Logo</th>
+                      <th className="bg-white text-center">Location</th>
+                      <th className="bg-white text-center">Industry</th>
+                      <th className="bg-white text-center">
+                        No of jobs active
+                      </th>
+                      <th className="bg-white text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 1</td>
+                      <td className="font-weight-bold">12/12/2020</td>
+                      <td>Helpful Headhunt</td>
                       <td className="text-center">
                         <div
                           className="avatar-icon-wrapper avatar-icon-sm"
                           title="Lili Pemberton">
                           <div className="avatar-icon">
-                            <img alt="..." src={avatar2} />
+                            <img alt="..." src={clogo1} />
                           </div>
                         </div>
                       </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center text-black-50">
+                        Manchester, UK
+                      </td>
+                      <td className="text-center">IT Industry</td>
+                      <td className="text-center">20</td>
                       <td className="text-center">
                         <a
                           className="a-blue"
                           href="!#"
                           onClick={(e) => e.preventDefault()}>
-                          View
+                          View Profile
                         </a>
                       </td>
                     </tr>
                     <tr>
-                      <td className="font-weight-bold">#584</td>
-                      <td>Role 2</td>
-                      <td className="text-center">
-                        <Tooltip title="Arvin Weston">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar4} />
-                            </div>
-                          </div>
-                        </Tooltip>
-                      </td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#764</td>
-                      <td>Role 3</td>
-                      <td className="text-center">
-                        <Tooltip title="Mali Rosario">
-                          <div className="avatar-icon-wrapper avatar-icon-sm">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                        </Tooltip>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">#453</td>
-                      <td>Role 4</td>
+                      <td className="font-weight-bold">10/12/2020</td>
+                      <td>Accurafind</td>
                       <td className="text-center">
                         <div
                           className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Marion Devine">
+                          title="Lili Pemberton">
                           <div className="avatar-icon">
-                            <img alt="..." src={avatar7} />
+                            <img alt="..." src={clogo} />
                           </div>
                         </div>
                       </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
+                      <td className="text-center text-black-50">London, UK</td>
+                      <td className="text-center">Biotechnology</td>
+                      <td className="text-center">15</td>
                       <td className="text-center">
                         <a
                           className="a-blue"
                           href="!#"
                           onClick={(e) => e.preventDefault()}>
-                          View
+                          View Profile
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">05/12/2020</td>
+                      <td>Right Recruiting</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Lili Pemberton">
+                          <div className="avatar-icon">
+                            <img alt="..." src={clogo1} />
+                          </div>
+                        </div>
+                      </td>
+                      <td className="text-center text-black-50">
+                        Billingham, UK
+                      </td>
+                      <td className="text-center">E-commerce</td>
+                      <td className="text-center">12</td>
+                      <td className="text-center">
+                        <a
+                          className="a-blue"
+                          href="!#"
+                          onClick={(e) => e.preventDefault()}>
+                          View Profile
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-weight-bold">21/11/2020</td>
+                      <td>Career Co.</td>
+                      <td className="text-center">
+                        <div
+                          className="avatar-icon-wrapper avatar-icon-sm"
+                          title="Lili Pemberton">
+                          <div className="avatar-icon">
+                            <img alt="..." src={clogo} />
+                          </div>
+                        </div>
+                      </td>
+                      <td className="text-center text-black-50">London, UK</td>
+                      <td className="text-center">Media and Entertainment</td>
+                      <td className="text-center">10</td>
+                      <td className="text-center">
+                        <a
+                          className="a-blue"
+                          href="!#"
+                          onClick={(e) => e.preventDefault()}>
+                          View Profile
                         </a>
                       </td>
                     </tr>

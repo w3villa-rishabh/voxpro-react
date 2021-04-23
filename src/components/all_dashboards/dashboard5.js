@@ -54,7 +54,7 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            Flat 10, Lingwood Close, Southampton, UK
+                            Southampton, UK
                           </p>
                           <p className="mb-0">Permanent</p>
                           <p className="text-black-50 mb-0">
@@ -94,7 +94,7 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            Gowan Brae, Union Rd, Fort William, UK
+                            London, UK
                           </p>
                           <p className="mb-0">Contract</p>
                           <p className="text-black-50 mb-0">
@@ -134,7 +134,7 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            88 St. Benedicts St, Norwich, UK
+                            Norwich, UK
                           </p>
                           <p className="mb-0">Temporary</p>
                           <p className="text-black-50 mb-0">
@@ -174,7 +174,7 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            11 Bury New Rd, Manchester, UK
+                            Manchester, UK
                           </p>
                           <p className="mb-0">Permanent</p>
                           <p className="text-black-50 mb-0">
@@ -214,7 +214,7 @@ export default function LivePreviewExample() {
                               icon={['fas', 'map-marker-alt']}
                               className="font-size-lg mr-2"
                             />
-                            56 Theobalds Road, London, UK
+                            London, UK
                           </p>
                           <p className="mb-0">Contract</p>
                           <p className="text-black-50 mb-0">

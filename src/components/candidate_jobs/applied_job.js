@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 
-import { Button, Grid, Card, LinearProgress, Table } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  MenuItem,
+  Menu,
+  Card,
+  LinearProgress,
+  Table
+} from '@material-ui/core';
 
 import { getCurrentUser } from '../../helper';
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -11,12 +19,20 @@ import AddsComponents from 'components/add_component';
 export default function AppliedJobComponent() {
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
+  const [anchorEl, setAnchorEl] = useState(null);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <div className="page-title">
         <WorkIcon />
-        <div className="title">
+        <div className="title pt-3">
           <h5 className="heading">Job Applications</h5>
         </div>
       </div>
@@ -119,22 +135,21 @@ export default function AppliedJobComponent() {
               <thead>
                 <tr>
                   <th className="text-center">Job ID</th>
-                  <th className="text-center">Requester</th>
-                  <th className="text-left" style={{ width: 80 }}>
-                    Job Title
-                  </th>
+                  <th className="text-center">Company</th>
+                  <th className="text-center">Job Title</th>
                   <th className="text-center">Location</th>
                   <th className="text-center">Applied On</th>
                   <th className="text-center">Job status</th>
                   <th className="text-center">Stage of application</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="font-weight-bold text-center">#0001</td>
                   <td className="text-center">Headhunters</td>
-                  <td>Software Developer</td>
-                  <td className="text-center">34 York Road, London</td>
+                  <td className="text-center">Software Developer</td>
+                  <td className="text-center">London, UK</td>
                   <td className="text-center">14 Feb 2020</td>
                   <td className="text-center">Active</td>
                   <td className="">
@@ -147,12 +162,45 @@ export default function AppliedJobComponent() {
                       Placement
                     </div>
                   </td>
+                  <td className="text-center">
+                    <div className="d-flex align-items-center justify-content-center flex-wrap">
+                      <Button
+                        aria-controls="simple-menu"
+                        size="small"
+                        className="px-4 btn-neutral-primary"
+                        variant="contained"
+                        aria-haspopup="true"
+                        onClick={handleClick}>
+                        Action
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        classes={{ list: 'p-0' }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}>
+                        <div className="p-3">
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Follow Up
+                          </MenuItem>
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Withdraw application
+                          </MenuItem>
+                        </div>
+                      </Menu>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td className="font-weight-bold text-center">#0002</td>
                   <td className="text-center">Career Appear</td>
-                  <td>Software Developer</td>
-                  <td className="text-center">131 Grove Road, London</td>
+                  <td className="text-center">Software Developer</td>
+                  <td className="text-center">London, UK</td>
                   <td className="text-center">14 Feb 2020</td>
                   <td className="text-center">Active</td>
                   <td>
@@ -163,12 +211,45 @@ export default function AppliedJobComponent() {
                     />
                     <div className="font-size-sm text-black-50 pt-1">Offer</div>
                   </td>
+                  <td className="text-center">
+                    <div className="d-flex align-items-center justify-content-center flex-wrap">
+                      <Button
+                        aria-controls="simple-menu"
+                        size="small"
+                        className="px-4 btn-neutral-primary"
+                        variant="contained"
+                        aria-haspopup="true"
+                        onClick={handleClick}>
+                        Action
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        classes={{ list: 'p-0' }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}>
+                        <div className="p-3">
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Follow Up
+                          </MenuItem>
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Withdraw application
+                          </MenuItem>
+                        </div>
+                      </Menu>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td className="font-weight-bold text-center">#0003</td>
                   <td className="text-center">Starting Stars</td>
-                  <td>Software Developer</td>
-                  <td className="text-center">32 The Drive, London</td>
+                  <td className="text-center">Software Developer</td>
+                  <td className="text-center">London, UK</td>
                   <td className="text-center">14 Feb 2020</td>
                   <td className="text-center">Closed</td>
                   <td>
@@ -181,12 +262,45 @@ export default function AppliedJobComponent() {
                       Interview
                     </div>
                   </td>
+                  <td className="text-center">
+                    <div className="d-flex align-items-center justify-content-center flex-wrap">
+                      <Button
+                        aria-controls="simple-menu"
+                        size="small"
+                        className="px-4 btn-neutral-primary"
+                        variant="contained"
+                        aria-haspopup="true"
+                        onClick={handleClick}>
+                        Action
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        classes={{ list: 'p-0' }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}>
+                        <div className="p-3">
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Follow Up
+                          </MenuItem>
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Withdraw application
+                          </MenuItem>
+                        </div>
+                      </Menu>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td className="font-weight-bold text-center">#0004</td>
                   <td className="text-center">Humble Hunters</td>
-                  <td>Software Developer</td>
-                  <td className="text-center">66 Victoria Street, London</td>
+                  <td className="text-center">Software Developer</td>
+                  <td className="text-center">London, UK</td>
                   <td className="text-center">14 Feb 2020</td>
                   <td className="text-center">Expired</td>
                   <td>
@@ -197,6 +311,39 @@ export default function AppliedJobComponent() {
                     />
                     <div className="font-size-sm text-black-50 pt-1">
                       Unsuccessful
+                    </div>
+                  </td>
+                  <td className="text-center">
+                    <div className="d-flex align-items-center justify-content-center flex-wrap">
+                      <Button
+                        aria-controls="simple-menu"
+                        size="small"
+                        className="px-4 btn-neutral-primary"
+                        variant="contained"
+                        aria-haspopup="true"
+                        onClick={handleClick}>
+                        Action
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        classes={{ list: 'p-0' }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}>
+                        <div className="p-3">
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Follow Up
+                          </MenuItem>
+                          <MenuItem
+                            className="pr-5 px-3 text-primary"
+                            onClick={handleClose}>
+                            Withdraw application
+                          </MenuItem>
+                        </div>
+                      </Menu>
                     </div>
                   </td>
                 </tr>

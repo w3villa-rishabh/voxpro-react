@@ -63,11 +63,11 @@ export default function LivePreviewExample() {
                   <thead>
                     <tr>
                       <th>Job ID</th>
-                      <th className="text-left">Name</th>
+                      <th className="text-left">Job Title</th>
                       <th className="text-center">Type</th>
                       <th className="text-center">Company</th>
                       <th className="text-center">Salary</th>
-                      <th className="text-center">View</th>
+                      <th className="text-center">Status</th>
                     </tr>
                   </thead>
                   <tbody>
