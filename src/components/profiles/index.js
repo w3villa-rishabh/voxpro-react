@@ -44,7 +44,6 @@ import stock3 from '../../assets/images/stock-photos/stock-5.jpg';
 import stock4 from '../../assets/images/stock-photos/stock-6.jpg';
 
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
-import agencybg from '../../assets/images/voxpro-images/agency-bg.jpg';
 
 import GoogleMapReact from 'google-map-react';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
@@ -287,17 +286,8 @@ export default function LivePreviewExample() {
                       className="edit"
                     />
                   </div>
-                  {currentUser.role === 'candidate' && (
-                    <img alt="..." className="img-fit-container" src={stock2} />
-                  )}
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') && (
-                    <img
-                      alt="..."
-                      className="img-fit-container"
-                      src={agencybg}
-                    />
-                  )}
+                  <img alt="..." className="img-fit-container" src={stock2} />
+
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') && (
                     <div className="py-1 card-bagdes-down text-white">
@@ -327,6 +317,16 @@ export default function LivePreviewExample() {
                             <FontAwesomeIcon
                               icon={['fab', 'google']}
                               className="font-size-xl"
+                            />
+                          </span>
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Add More">
+                        <Button className="btn-success btn-icon btn-transition-none btn-pill d-30 p-0 m-2">
+                          <span className="btn-wrapper--icon">
+                            <FontAwesomeIcon
+                              icon={['fas', 'plus']}
+                              className="font-size-md"
                             />
                           </span>
                         </Button>
@@ -554,6 +554,12 @@ export default function LivePreviewExample() {
                     <div>
                       <hr></hr>
                       <b>Description</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
                       <br />
                       <small>
                         We provides search marketing solutions for businesses
@@ -565,6 +571,12 @@ export default function LivePreviewExample() {
                       </small>
                       <hr></hr>
                       <b>Company Sector</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
                       <br />
                       <div className="m-1 badge badge-dark">Advertising</div>
                       <div className="m-1 badge badge-dark">Analytics</div>
@@ -579,16 +591,36 @@ export default function LivePreviewExample() {
 
                       <hr></hr>
                       <b>Company Size</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
                       <br />
                       <h5>Medium (50-200)</h5>
                       <hr></hr>
                       <b>Establised</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
                       <br />
                       <h5>1999</h5>
                     </div>
                   )}
                   <hr></hr>
-                  <div className="w-100" style={{ height: '250px' }}>
+                  <b>Location</b>
+                  <div className="float-right text-first font-size-sm">
+                    <FontAwesomeIcon
+                      icon={['fas', 'pencil-alt']}
+                      className="icon ml-1 pointer"
+                    />
+                  </div>
+                  <br />
+                  <div className="w-100 mt-3" style={{ height: '250px' }}>
                     <GoogleMapReact defaultCenter={center} defaultZoom={zoom}>
                       <MapMarker
                         lat={59.955413}
@@ -768,7 +800,7 @@ export default function LivePreviewExample() {
                       <List component="div" className="list-group-flush">
                         <ListItem className="px-0 border-0">
                           <Grid container spacing={0}>
-                          <Grid
+                            <Grid
                               item
                               xs={6}
                               // md={6}
@@ -817,7 +849,7 @@ export default function LivePreviewExample() {
                         </ListItem>
                         <ListItem className="px-0 border-0">
                           <Grid container spacing={0}>
-                          <Grid
+                            <Grid
                               item
                               xs={6}
                               // md={6}
@@ -866,7 +898,7 @@ export default function LivePreviewExample() {
                         </ListItem>
                         <ListItem className="px-0 border-0">
                           <Grid container spacing={0}>
-                          <Grid
+                            <Grid
                               item
                               xs={6}
                               // md={6}
@@ -1427,69 +1459,112 @@ export default function LivePreviewExample() {
                         </thead>
                         <tbody>
                           <tr>
-                            <td>14th April</td>
-                            <td>Business Analyst</td>
-                            <td>UK</td>
-                            <td className="text-center">€2000</td>
-                            <td className="text-center">
-                              <div className="badge badge-neutral-danger text-danger">
-                                High
-                              </div>
-                            </td>
-                            <td>View</td>
-                            <td>More</td>
-                          </tr>
-                          <tr>
-                            <td>13th april</td>
+                            <td>13/02/2021</td>
                             <td>Business Developer</td>
-                            <td>UK</td>
-                            <td className="text-center">€4500</td>
+                            <td>Birmingham, UK</td>
+                            <td className="text-center">£4500</td>
                             <td className="text-center">
                               <div className="badge badge-neutral-danger text-danger">
-                                High
+                                Temporary
                               </div>
                             </td>
-                            <td>View</td>
-                            <td>More</td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                View
+                              </Button>
+                            </td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                More
+                              </Button>
+                            </td>
                           </tr>
                           <tr>
-                            <td>12th april</td>
+                            <td>12/02/2021</td>
                             <td>Software developer</td>
-                            <td>UK</td>
-                            <td className="text-center">€3000</td>
+                            <td>Glasgow, UK</td>
+                            <td className="text-center">£3000</td>
                             <td className="text-center">
                               <div className="badge badge-neutral-danger text-danger">
-                                High
+                                Permanent
                               </div>
                             </td>
-                            <td>View</td>
-                            <td>More</td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                View
+                              </Button>
+                            </td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                More
+                              </Button>
+                            </td>
                           </tr>
                           <tr>
-                            <td>10th april</td>
-                            <td>IT Analyst</td>
-                            <td>UK</td>
-                            <td className="text-center">€3500</td>
+                            <td>05/02/2021</td>
+                            <td>Business Developer</td>
+                            <td>London, UK</td>
+                            <td className="text-center">£4500</td>
                             <td className="text-center">
                               <div className="badge badge-neutral-danger text-danger">
-                                High
+                                Contract
                               </div>
                             </td>
-                            <td>View</td>
-                            <td>More</td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                View
+                              </Button>
+                            </td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                More
+                              </Button>
+                            </td>
                           </tr>
                           <tr>
-                            <td>8th april</td>
+                            <td>05/02/2021</td>
                             <td>Devops Engineer</td>
-                            <td>UK</td>
-                            <td className="text-center">€2000</td>
+                            <td>Liverpool, UK</td>
+                            <td className="text-center">£2000</td>
                             <td className="text-center">
                               <div className="badge badge-neutral-danger text-danger">
-                                High
+                                Permanent
                               </div>
                             </td>
-                            <td>View</td>
-                            <td>More</td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                View
+                              </Button>
+                            </td>
+                            <td>
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary"
+                                variant="contained">
+                                More
+                              </Button>
+                            </td>
                           </tr>
                         </tbody>
                       </Table>
@@ -2324,69 +2399,85 @@ export default function LivePreviewExample() {
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td>13th april</td>
+                                    <td>13/02/2021</td>
                                     <td>Business Developer</td>
-                                    <td>UK</td>
-                                    <td className="text-center">€4500</td>
+                                    <td>Birmingham, UK</td>
+                                    <td className="text-center">£4500</td>
                                     <td className="text-center">
                                       <div className="badge badge-neutral-danger text-danger">
-                                        High
+                                        Temporary
                                       </div>
                                     </td>
-                                    <td>View</td>
-                                    <td>More</td>
+                                    <td>
+                                      <Button
+                                        size="small"
+                                        className="px-4 btn-neutral-primary"
+                                        variant="contained">
+                                        View
+                                      </Button>
+                                    </td>
+                                    <td>
+                                      <Button
+                                        size="small"
+                                        className="px-4 btn-neutral-primary"
+                                        variant="contained">
+                                        More
+                                      </Button>
+                                    </td>
                                   </tr>
                                   <tr>
-                                    <td>12th april</td>
+                                    <td>12/02/2021</td>
                                     <td>Software developer</td>
-                                    <td>UK</td>
-                                    <td className="text-center">€3000</td>
+                                    <td>Glasgow, UK</td>
+                                    <td className="text-center">£3000</td>
                                     <td className="text-center">
                                       <div className="badge badge-neutral-danger text-danger">
-                                        High
+                                        Permanent
                                       </div>
                                     </td>
-                                    <td>View</td>
-                                    <td>More</td>
-                                  </tr>
-                                  <tr>
-                                    <td>10th april</td>
-                                    <td>IT Analyst</td>
-                                    <td>UK</td>
-                                    <td className="text-center">€3500</td>
-                                    <td className="text-center">
-                                      <div className="badge badge-neutral-danger text-danger">
-                                        High
-                                      </div>
+                                    <td>
+                                      <Button
+                                        size="small"
+                                        className="px-4 btn-neutral-primary"
+                                        variant="contained">
+                                        View
+                                      </Button>
                                     </td>
-                                    <td>View</td>
-                                    <td>More</td>
-                                  </tr>
-                                  <tr>
-                                    <td>8th april</td>
-                                    <td>Devops Engineer</td>
-                                    <td>UK</td>
-                                    <td className="text-center">€2000</td>
-                                    <td className="text-center">
-                                      <div className="badge badge-neutral-danger text-danger">
-                                        High
-                                      </div>
+                                    <td>
+                                      <Button
+                                        size="small"
+                                        className="px-4 btn-neutral-primary"
+                                        variant="contained">
+                                        More
+                                      </Button>
                                     </td>
-                                    <td>View</td>
-                                    <td>More</td>
                                   </tr>
                                   <tr>
-                                    <td>13th april</td>
+                                    <td>05/02/2021</td>
                                     <td>Business Developer</td>
-                                    <td>UK</td>
-                                    <td className="text-center">€4500</td>
+                                    <td>London, UK</td>
+                                    <td className="text-center">£4500</td>
                                     <td className="text-center">
                                       <div className="badge badge-neutral-danger text-danger">
-                                        High
+                                        Contract
                                       </div>
                                     </td>
-                                    <td>View</td>
-                                    <td>More</td>
+                                    <td>
+                                      <Button
+                                        size="small"
+                                        className="px-4 btn-neutral-primary"
+                                        variant="contained">
+                                        View
+                                      </Button>
+                                    </td>
+                                    <td>
+                                      <Button
+                                        size="small"
+                                        className="px-4 btn-neutral-primary"
+                                        variant="contained">
+                                        More
+                                      </Button>
+                                    </td>
                                   </tr>
                                 </tbody>
                               </Table>
