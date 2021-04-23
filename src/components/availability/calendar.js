@@ -196,7 +196,10 @@ export default function TasksCalendarComponent() {
           ),
           title: value.type,
           desc: 'Big conference for important people',
-          duration: '02:00'
+          duration: '02:00',
+          borderColor: 'white',
+          backgroundColor: 'pink',
+          display: 'background'
         };
         // YearView, month, date, hh, mm, ss,ss,z
         // start: new Date(2015, 3, 12, 17, 0, 0, 0),
@@ -211,6 +214,31 @@ export default function TasksCalendarComponent() {
     setOpen1(false);
     let newArr = [availabilityObj];
     setAvailability(newArr);
+  };
+
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    console.log(event);
+    var backgroundColor;
+
+    if (event.title === 'Unavailable') {
+      backgroundColor = 'red';
+    } else if (event.title === 'Available') {
+      backgroundColor = 'green';
+    } else {
+      backgroundColor = '#' + event.hexColor;
+    }
+
+    var style = {
+      backgroundColor: backgroundColor,
+      borderRadius: '0px',
+      opacity: 0.8,
+      color: 'black',
+      border: '0px',
+      display: 'block'
+    };
+    return {
+      style: style
+    };
   };
 
   return (
@@ -241,6 +269,7 @@ export default function TasksCalendarComponent() {
             endAccessor="end"
             titleAccessor="title"
             style={{ minHeight: 650 }}
+            eventPropGetter={eventStyleGetter}
           />
           <AddsComponents />
         </div>
