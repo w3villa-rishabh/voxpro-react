@@ -235,7 +235,8 @@ export default function TasksCalendarComponent() {
       opacity: 0.8,
       color: 'black',
       border: '0px',
-      display: 'block'
+      display: 'block',
+      width: '100%'
     };
     return {
       style: style
