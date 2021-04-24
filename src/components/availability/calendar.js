@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native */
 import React, { useState } from 'react';
 
 import {
@@ -111,12 +112,69 @@ const availabilityObj = {
   endTime: 0,
   mon: false,
   tue: false,
-  wed: false,
+  wedn: false,
   thu: false,
   fri: false,
   sat: false,
   sun: false
 };
+
+function getDates(startDate, stopDate, value) {
+  let days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
+  const dateArray = [];
+  var currentDate = startDate;
+  while (currentDate <= stopDate) {
+    let day = days[currentDate.getDay()];
+    if (value.mon && day === days[1]) {
+      currentDate = currentDate.addDays(1);
+      continue;
+    }
+    var newEvent = {
+      start: new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate(),
+        17,
+        0,
+        0,
+        0
+      ),
+      end: new Date(
+        value.endDate.getFullYear(),
+        value.endDate.getMonth(),
+        value.endDate.getDate(),
+        17,
+        30,
+        0,
+        0
+      ),
+      title: value.type,
+      desc: 'Big conference for important people',
+      duration: '02:00',
+      borderColor: 'white',
+      backgroundColor: 'pink',
+      display: 'background'
+    };
+    dateArray.push(newEvent);
+    currentDate = currentDate.addDays(1);
+  }
+  return dateArray;
+}
+
+Date.prototype.addDays = function (days) {
+  var dat = new Date(this.valueOf());
+  dat.setDate(dat.getDate() + days);
+  return dat;
+};
+
 export default function TasksCalendarComponent() {
   const [eventsList, setEventsList] = useState([]);
   const [availability, setAvailability] = useState([availabilityObj]);
@@ -172,46 +230,125 @@ export default function TasksCalendarComponent() {
   const createAvailability = (e) => {
     e.preventDefault();
     console.log('availability', availability);
-    const events = [];
+    const dateArray = [];
     availability.map((value, index) => {
       if (value.type && value.endDate) {
-        var newEvent = {
-          id: index,
-          start: new Date(
-            value.startDate.getFullYear(),
-            value.startDate.getMonth(),
-            value.startDate.getDate(),
-            17,
-            0,
-            0,
-            0
-          ),
-          end: new Date(
-            value.endDate.getFullYear(),
-            value.endDate.getMonth(),
-            value.endDate.getDate(),
-            17,
-            30,
-            0,
-            0
-          ),
-          title: value.type,
-          desc: 'Big conference for important people',
-          duration: '02:00',
-          borderColor: 'white',
-          backgroundColor: 'pink',
-          display: 'background'
-        };
-        // YearView, month, date, hh, mm, ss,ss,z
-        // start: new Date(2015, 3, 12, 17, 0, 0, 0),
-        // end: new Date(2015, 3, 12, 17, 30, 0, 0),
-        events.push(newEvent);
+        let startdate = new Date(
+          value.startDate.toLocaleString('en-US', {
+            timeZone: 'Asia/Kolkata'
+          })
+        );
+
+        let enddate = new Date(
+          value.endDate.toLocaleString('en-US', {
+            timeZone: 'Asia/Kolkata'
+          })
+        );
+
+        let days = [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday'
+        ];
+
+        var currentDate = new Date(startdate);
+        while (currentDate <= new Date(enddate)) {
+          let day = days[currentDate.getDay()];
+
+          let startTimeH = 0;
+          let endTimeM = 0;
+          let startEndH = 0;
+          let endM = 0;
+          let allDay = false;
+          if (!!value.startTime && !!value.endTime) {
+            let findTime = time.find((a) => a.value === value.startTime);
+            startTimeH = findTime.hh;
+            endTimeM = findTime.mm;
+
+            findTime = time.find((a) => a.value === value.endTime);
+            startEndH = findTime.hh;
+            endM = findTime.mm;
+          }
+
+          if (value.shift === 'Full Day') {
+            allDay = true;
+          }
+
+          var newEvent = {
+            allDay,
+            start: new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              currentDate.getDate(),
+              startTimeH,
+              endTimeM,
+              0,
+              0
+            ),
+            end: new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              currentDate.getDate(),
+              startEndH,
+              endM,
+              0,
+              0
+            ),
+            title: value.type,
+            desc: 'Big conference for important people',
+            duration: '02:00',
+            borderColor: 'white',
+            backgroundColor: 'pink',
+            display: 'background'
+          };
+          if (value.sun && day === days[0]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+          if (value.mon && day === days[1]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+          if (value.tue && day === days[2]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+          if (value.wedn && day === days[3]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+          if (value.thu && day === days[4]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+          if (value.fri && day === days[5]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+          if (value.sat && day === days[6]) {
+            dateArray.push(newEvent);
+            currentDate = currentDate.addDays(1);
+            continue;
+          }
+
+          currentDate = currentDate.addDays(1);
+        }
       } else {
         toast.dismiss();
         toast.error('Date and type required, Please select required..');
       }
     });
-    setEventsList([...eventsList, ...events]);
+    setEventsList([...eventsList, ...dateArray]);
     setOpen1(false);
     let newArr = [availabilityObj];
     setAvailability(newArr);
@@ -222,9 +359,9 @@ export default function TasksCalendarComponent() {
     var backgroundColor;
 
     if (event.title === 'Unavailable') {
-      backgroundColor = 'red';
+      backgroundColor = '#ff1d32';
     } else if (event.title === 'Available') {
-      backgroundColor = 'green';
+      backgroundColor = '#1bc943';
     } else {
       backgroundColor = '#' + event.hexColor;
     }
@@ -302,7 +439,6 @@ export default function TasksCalendarComponent() {
                             </label>
                           )}
                           <DatePicker
-                            // value={availability[index].startDate}
                             minDate={new Date()}
                             dateFormat="dd-MM-yyyy"
                             placeholderText="Start Date"
@@ -311,7 +447,6 @@ export default function TasksCalendarComponent() {
                             startDate={availability[index].startDate}
                             endDate={availability[index].endDate}
                             onChange={(date) => {
-                              // setStartDate(date);
                               const newClicks = [...availability];
                               let newVote = { ...newClicks[index] };
                               newVote.startDate = date;
@@ -327,7 +462,6 @@ export default function TasksCalendarComponent() {
                             </label>
                           )}
                           <DatePicker
-                            // value={availability[index].endDate}
                             dateFormat="dd-MM-yyyy"
                             placeholderText="End Date"
                             selected={availability[index].endDate}
@@ -336,7 +470,6 @@ export default function TasksCalendarComponent() {
                             endDate={availability[index].endDate}
                             minDate={availability[index].startDate}
                             onChange={(date) => {
-                              // setEndDate(date);
                               const newClicks = [...availability];
                               let newVote = { ...newClicks[index] };
                               newVote.endDate = date;
@@ -351,19 +484,6 @@ export default function TasksCalendarComponent() {
                               Type
                             </label>
                           )}
-                          {/* <Select
-                            key={index}
-                            className="user-drop"
-                            options={availabilityType}
-                            onChange={(e) => {
-                              const newClicks = [...availability];
-                              let newVote = { ...newClicks[index] };
-                              newVote.type = e.value;
-                              newClicks[index] = newVote;
-                              setAvailability(newClicks);
-                            }}
-                            placeholder="Type"
-                          /> */}
                           <select
                             value={availability[index].type}
                             onChange={(e) => {
@@ -387,18 +507,6 @@ export default function TasksCalendarComponent() {
                               Shift
                             </label>
                           )}
-                          {/* <Select
-                            className="user-drop"
-                            options={shift}
-                            onChange={(e) => {
-                              const newClicks = [...availability];
-                              let newVote = { ...newClicks[index] };
-                              newVote.shift = e.value;
-                              newClicks[index] = newVote;
-                              setAvailability(newClicks);
-                            }}
-                            placeholder="Shift"
-                          /> */}
                           <select
                             value={availability[index].shift}
                             onChange={(e) => {
@@ -422,19 +530,6 @@ export default function TasksCalendarComponent() {
                               Start Time
                             </label>
                           )}
-                          {/* <Select
-                            className="user-drop"
-                            options={time}
-                            maxMenuHeight={150}
-                            onChange={(e) => {
-                              const newClicks = [...availability];
-                              let newVote = { ...newClicks[index] };
-                              newVote.startTime = e.value;
-                              newClicks[index] = newVote;
-                              setAvailability(newClicks);
-                            }}
-                            placeholder="Start time"
-                          /> */}
                           <select
                             disabled={availability[index].shift === 'Full Day'}
                             value={availability[index].startTime}
@@ -465,31 +560,6 @@ export default function TasksCalendarComponent() {
                               End Time
                             </label>
                           )}
-                          {/* <Select
-                            className="user-drop"
-                            options={time}
-                            maxMenuHeight={150}
-                            value={endTime}
-                            onChange={(e) => {
-                              const newClicks = [...availability];
-                              let newVote = { ...newClicks[index] };
-                              if (
-                                !!newVote.startTime &&
-                                e.value > newVote.startTime
-                              ) {
-                                newVote.endTime = e.value;
-                                newClicks[index] = newVote;
-                                setAvailability(newClicks);
-                                setEndTime(e.label);
-                              } else {
-                                toast.dismiss();
-                                toast.error(
-                                  'End time should be greater then Start time'
-                                );
-                              }
-                            }}
-                            placeholder="End time"
-                          /> */}
                           <select
                             disabled={availability[index].shift === 'Full Day'}
                             value={availability[index].endTime}
@@ -563,7 +633,7 @@ export default function TasksCalendarComponent() {
                             onChange={(e) => {
                               const newClicks = [...availability];
                               let newVote = { ...newClicks[index] };
-                              newVote.web = e.target.checked;
+                              newVote.wedn = e.target.checked;
                               newClicks[index] = newVote;
                               setAvailability(newClicks);
                             }}
