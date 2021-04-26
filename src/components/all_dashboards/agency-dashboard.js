@@ -74,6 +74,17 @@ const AgencyDashboard = () => {
     chart: {
       toolbar: {
         show: false
+      },
+      events: {
+        selection: function (chart, e) {
+          console.log(new Date(e.xaxis.min));
+        },
+        markerClick: function (a, b, c) {
+          console.log(
+            c.w.globals.seriesNames[c.seriesIndex] +
+              c.w.config.series[c.seriesIndex].data[c.dataPointIndex]
+          );
+        }
       }
     },
     dataLabels: {
@@ -82,8 +93,19 @@ const AgencyDashboard = () => {
     stroke: {
       curve: 'smooth'
     },
+    tooltip: {
+      x: {
+        show: false
+      }
+    },
     markers: {
-      size: 0
+      size: 8,
+      opacity: 0.3,
+      strokeWidth: 2,
+
+      hover: {
+        size: 12
+      }
     },
     xaxis: {
       categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -101,6 +123,17 @@ const AgencyDashboard = () => {
       toolbar: {
         show: false
       },
+      events: {
+        selection: function (chart, e) {
+          console.log(new Date(e.xaxis.min));
+        },
+        markerClick: function (a, b, c) {
+          console.log(
+            c.w.globals.seriesNames[c.seriesIndex] +
+              c.w.config.series[c.seriesIndex].data[c.dataPointIndex]
+          );
+        }
+      },
       sparkline: {
         enabled: false
       },
@@ -110,6 +143,11 @@ const AgencyDashboard = () => {
         blur: 4,
         left: 2,
         top: 3
+      }
+    },
+    tooltip: {
+      x: {
+        show: false
       }
     },
     stroke: {
