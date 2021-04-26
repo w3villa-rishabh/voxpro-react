@@ -1396,8 +1396,8 @@ export default function LivePreviewExample() {
                       <b>Live Roles</b>
                     </div>
                     <div className="card-header--actions">
-                      <Grid container spacing={3}>
-                        <Grid item md={2} className="mtb"></Grid>
+                      <Grid container spacing={2}>
+                        <Grid item md={1} className="mtb"></Grid>
                         <Grid item md={5} className="mtb">
                           <span>
                             <TextField
@@ -1419,7 +1419,7 @@ export default function LivePreviewExample() {
                             />
                           </span>
                         </Grid>
-                        <Grid item md={5} className="mtb">
+                        <Grid item md={4} className="mtb">
                           <TextField
                             variant="outlined"
                             size="small"
@@ -1438,6 +1438,14 @@ export default function LivePreviewExample() {
                               }
                             }}
                           />
+                        </Grid>
+                        <Grid item md={1} className="mtb">
+                          <Button
+                            size="small"
+                            className="px-4 btn-primary mr-2"
+                            variant="contained">
+                            Search
+                          </Button>
                         </Grid>
                       </Grid>
                     </div>
@@ -2325,8 +2333,8 @@ export default function LivePreviewExample() {
                             </div>
                             <div className="card-header--actions">
                               <Grid container spacing={3}>
-                                <Grid item md={1} className="mtb"></Grid>
-                                <Grid item md={5} className="mtb">
+                                {/* <Grid item md={1} className="mtb"></Grid> */}
+                                <Grid item md={4} className="mtb">
                                   <span>
                                     <TextField
                                       variant="outlined"
@@ -2366,6 +2374,14 @@ export default function LivePreviewExample() {
                                       }
                                     }}
                                   />
+                                </Grid>
+                                <Grid item md={1} className="mtb">
+                                  <Button
+                                    size="small"
+                                    className="px-4 btn-primary mr-2"
+                                    variant="contained">
+                                    Search
+                                  </Button>
                                 </Grid>
                               </Grid>
                             </div>
