@@ -548,7 +548,7 @@ $num: 20;
   font-size: 10px;
 }
 
-.task-calender {
+.task-calendar {
   background: #253053 !important;
 
   .react-calendar,
@@ -571,6 +571,32 @@ $num: 20;
 
 .color-white {
   color: white
+}
+
+.mt-12 {
+  margin-top: 12px;
+}
+
+.ml-14 {
+  margin-left: 14px;
+}
+
+.user-drop {
+  width: 125px !important;
+
+  .MuiFormControl-fullWidth {
+    width: 125px !important;
+  }
+}
+
+.week-remove-m {
+  .MuiFormControlLabel-labelPlacementTop {
+    margin: 0 !important;
+  }
+
+  .MuiFormControlLabel-label {
+    font-weight: 700 !important;
+  }
 }
 
 .see-more {
@@ -615,4 +641,69 @@ $num: 20;
   .MuiSlider-thumb {
     background: #3d45b1 !important;
   }
+}
+
+.react-datepicker__input-container {
+  input {
+    height: 38px;
+    border-radius: 5px;
+    border-top: 0;
+    border-left: 0;
+    border: 1px solid #ccc;
+    width: 125px !important;
+    text-align: center;
+  }
+}
+
+#react-time-range {
+  padding: 0 !important;
+
+  // #end-component {
+  //   position: absolute;
+  //   top: 27px;
+  // }
+
+
+  .component {
+    padding-top: 0px !important;
+    // margin-top: -4px;
+
+    .label {
+      font-weight: 700 !important;
+      white-space: nowrap;
+    }
+  }
+
+  .component>#select-start:first-of-type,
+  #select-end:first-of-type {
+    // margin-top: 4px;
+    margin-bottom: 0;
+    background-color: white !important;
+  }
+
+  .error {
+    position: absolute;
+    top: 65px;
+    text-align: left;
+  }
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker-popper {
+  transform: unset !important;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] {
+  margin-top: 0 !important;
+}
+
+select {
+  height: 38px;
+  border-radius: 5px;
+  border-top: 0;
+  border-left: 0;
+  border: 1px solid #ccc;
 }
