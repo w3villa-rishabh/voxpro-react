@@ -407,6 +407,7 @@ export default function TasksCalendarComponent() {
             startAccessor="start"
             endAccessor="end"
             titleAccessor="title"
+            popup={true}
             style={{ minHeight: 650 }}
             eventPropGetter={eventStyleGetter}
           />
