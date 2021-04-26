@@ -25,10 +25,6 @@ import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import people1 from '../../assets/images/stock-photos/people-1.jpg';
 import people3 from '../../assets/images/stock-photos/people-3.jpg';
 
-import NotificationsActiveTwoToneIcon from '@material-ui/icons/NotificationsActiveTwoTone';
-import PollTwoToneIcon from '@material-ui/icons/PollTwoTone';
-import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
-
 import Chart from 'react-apexcharts';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
@@ -175,27 +171,26 @@ const HeaderDots = () => {
   return (
     <>
       <div className="d-flex align-items-center popover-header-wrapper">
-        <span className="pr-2">
+        <span className="pr-2 mr-4 mt-3 mb-0">
           <Badge
             variant="dot"
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'left'
+              horizontal: 'right'
             }}
             badgeContent=" "
-            classes={{ badge: 'bg-info badge-circle' }}>
-            <Button
-              onClick={handleClickChat}
-              className="btn-transition-none bg-neutral-info text-info font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded position-relative">
+            classes={{ badge: 'bg-danger badge-circle' }}>
+            <Button onClick={handleClickChat} className="padd">
               <span>
                 <FontAwesomeIcon
-                  icon={['far', 'comment']}
-                  className="font-size-xl"
+                  icon={['fas', 'home']}
+                  className="font-size-xl text-black-50 ml-1"
                 />
               </span>
             </Button>
-          </Badge>
-
+          </Badge>{' '}
+          <br />
+          <div className="font-size-sm text-black-50">Home</div>
           <Popover
             open={openChat}
             anchorEl={anchorElChat}
@@ -402,23 +397,26 @@ const HeaderDots = () => {
           </Popover>
         </span>
 
-        <span className="pr-2">
+        <span className="pr-2 mr-4 mt-3 mb-0">
           <Badge
             variant="dot"
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'left'
+              horizontal: 'right'
             }}
             badgeContent=" "
             classes={{ badge: 'bg-success badge-circle' }}>
-            <Button
-              onClick={handleClick1}
-              className="btn-transition-none bg-neutral-success text-success font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded position-relative">
+            <Button onClick={handleClick1} className="padd">
               <span>
-                <NotificationsActiveTwoToneIcon />
+                <FontAwesomeIcon
+                  icon={['fas', 'users']}
+                  className="font-size-xl text-black-50 ml-2"
+                />
               </span>
             </Button>
           </Badge>
+          <br />
+          <div className="font-size-sm text-black-50">Network</div>
 
           <Popover
             open={open1}
@@ -625,7 +623,7 @@ const HeaderDots = () => {
             </div>
           </Popover>
         </span>
-        <span className="pr-2">
+        <span className="pr-2 mr-4 mt-3 mb-0">
           <Badge
             variant="dot"
             overlap="circle"
@@ -635,14 +633,17 @@ const HeaderDots = () => {
             }}
             badgeContent=" "
             classes={{ badge: 'bg-danger badge-circle-sm' }}>
-            <Button
-              onClick={handleClick2}
-              className="btn-transition-none bg-neutral-danger text-danger font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded position-relative">
+            <Button onClick={handleClick2} className="padd">
               <span>
-                <PollTwoToneIcon />
+                <FontAwesomeIcon
+                  icon={['fas', 'suitcase']}
+                  className="font-size-xl text-black-50 ml-0"
+                />
               </span>
             </Button>
           </Badge>
+          <br />
+          <div className="font-size-sm text-black-50">Jobs</div>
           <Popover
             open={open2}
             anchorEl={anchorEl2}
@@ -710,14 +711,40 @@ const HeaderDots = () => {
             </List>
           </Popover>
         </span>
-        <span className="pr-2">
-          <Button
-            onClick={handleClick3}
-            className="bg-neutral-first text-first font-size-lg p-0 d-inline-block shadow-none border-0 text-center d-44 mobile-view-btn rounded btn-transition-none">
+        <span className="pr-2 mr-2 mt-3 mb-0">
+          <Badge
+            variant="dot"
+            overlap="circle"
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            badgeContent=" "
+            classes={{ badge: 'bg-danger badge-circle-sm' }}>
+            <Button onClick={handleClick2} className="padd">
+              <span>
+                <FontAwesomeIcon
+                  icon={['far', 'comments']}
+                  className="font-size-xl text-black-50 ml-3"
+                />
+              </span>
+            </Button>
+          </Badge>
+          <br />
+          <div className="font-size-sm text-black-50">Messaging</div>
+        </span>
+
+        <span className="pr-2 mr-2 mt-3 mb-0">
+          <Button onClick={handleClick2} className="padd">
             <span>
-              <PeopleAltTwoToneIcon />
+              <FontAwesomeIcon
+                icon={['fas', 'bell']}
+                className="font-size-xl text-black-50 ml-4"
+              />
             </span>
           </Button>
+          <br />
+          <div className="font-size-sm text-black-50">Notifications</div>
           <Popover
             open={open3}
             anchorEl={anchorEl3}
