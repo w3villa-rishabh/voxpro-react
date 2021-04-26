@@ -5,11 +5,13 @@ import {
   Grid,
   Card,
   Button,
-  Tooltip,
   Table,
   CardContent,
+  Menu,
+  MenuItem,
   List,
-  ListItem
+  ListItem,
+  LinearProgress
 } from '@material-ui/core';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -20,11 +22,103 @@ import Calendar from 'react-calendar';
 import { connect } from 'react-redux';
 import { setHeaderDrawerToggle } from '../../reducers/ThemeOptions';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
-import avatar4 from '../../assets/images/avatars/avatar4.jpg';
-import avatar7 from '../../assets/images/avatars/avatar7.jpg';
+
 import sun from '../../assets/images/sun.png';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import ChatBox from '../chat_component/chat';
+
+const ActionsCandidate = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Button
+        aria-controls="simple-menu"
+        size="small"
+        className="px-4 btn-neutral-primary"
+        variant="contained"
+        aria-haspopup="true"
+        onClick={handleClick}>
+        Action
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        classes={{ list: 'p-0' }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}>
+        <div className="p-3">
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            View Profile
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Connect
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Message
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Share
+          </MenuItem>
+        </div>
+      </Menu>
+    </>
+  );
+};
+
+const ActionsCompanies = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Button
+        aria-controls="simple-menu"
+        size="small"
+        className="px-4 btn-neutral-primary"
+        variant="contained"
+        aria-haspopup="true"
+        onClick={handleClick}>
+        Action
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        classes={{ list: 'p-0' }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}>
+        <div className="p-3">
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            View Profile
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            View Employees
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Share
+          </MenuItem>
+        </div>
+      </Menu>
+    </>
+  );
+};
 
 const CompanyDashboard = () => {
   const [value, onChange] = useState(new Date());
@@ -71,17 +165,22 @@ const CompanyDashboard = () => {
         show: false
       }
     },
+    tooltip: {
+      x: {
+        show: false
+      }
+    },
     xaxis: {
       categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     }
   };
   const series = [
     {
-      name: 'Monthly Recruitment',
+      name: 'Monthly Recruitment Fees',
       data: [30, 40, 25, 50, 49, 21, 70, 51]
     },
     {
-      name: 'Monthly Placement',
+      name: 'Placements',
       data: [23, 12, 54, 61, 32, 56, 81, 19]
     }
   ];
@@ -95,7 +194,7 @@ const CompanyDashboard = () => {
               <Grid container spacing={0}>
                 <Grid item xs={12} sm={9}>
                   <div className="m-3">
-                    <b>Monthly Recruitment Spend and Placements</b>
+                    <b>Monthly Recruitment fees and Placements</b>
                   </div>
                   <Chart
                     options={options}
@@ -224,8 +323,8 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                        <span className="font-size-xxl mt-2">5</span>
+                        <small className="d-block font-weight-bold mb-1 text-uppercase">
                           Pending Placements
                         </small>
                       </div>
@@ -251,9 +350,9 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
-                          Pending Cocuments
+                        <span className="font-size-xxl mt-2">10</span>
+                        <small className="d-block font-weight-bold mb-1 text-uppercase">
+                          Pending Documents
                         </small>
                       </div>
                     </div>
@@ -278,8 +377,8 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                        <span className="font-size-xxl mt-2">30</span>
+                        <small className="d-block font-weight-bold mb-1 text-uppercase">
                           Pending IR35
                         </small>
                       </div>
@@ -305,9 +404,9 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
-                          Interview Scheduled
+                        <span className="font-size-xxl mt-2">20</span>
+                        <small className="d-block font-weight-bold mb-1 text-uppercase nowrap">
+                          Interviews Scheduled
                         </small>
                       </div>
                     </div>
@@ -334,7 +433,7 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
+                        <span className="font-size-xxl mt-2">20</span>
                         <small className="text-black-50 d-block mb-1 text-uppercase font-10">
                           New Connections Requests
                         </small>
@@ -358,7 +457,7 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
+                        <span className="font-size-xxl mt-2">10</span>
                         <small className="text-black-50 d-block mb-1 text-uppercase font-10">
                           Recent Connections
                         </small>
@@ -382,7 +481,7 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
+                        <span className="font-size-xxl mt-2">23</span>
                         <small className="text-black-50 d-block mb-1 text-uppercase font-10">
                           Agency Connected
                         </small>
@@ -406,7 +505,7 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                       <div className="font-weight-bold">
-                        <span className="font-size-xxl mt-2">23,274</span>
+                        <span className="font-size-xxl mt-2">15</span>
                         <small className="text-black-50 d-block mb-1 text-uppercase font-10">
                           Candidates Connected
                         </small>
@@ -759,22 +858,16 @@ const CompanyDashboard = () => {
                         <th className="bg-white text-left">Company</th>
                         <th className="bg-white text-center">Date added</th>
                         <th className="bg-white text-center">Status</th>
-                        <th className="bg-white text-center">Applications</th>
+                        <th className="bg-white text-center">
+                          Stages of Applications
+                        </th>
                         <th className="bg-white text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Role 1</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Lili Pemberton">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                        </td>
+                        <td>Nolan Recruitment</td>
 
                         <td className="text-center text-black-50">
                           12/12/2020
@@ -784,7 +877,16 @@ const CompanyDashboard = () => {
                             Closed
                           </div>
                         </td>
-                        <td className="text-center">File Manager</td>
+                        <td className="text-center">
+                          <LinearProgress
+                            variant="determinate"
+                            className="progress-sm progress-bar-info"
+                            value={44}
+                          />
+                          <div className="font-size-sm text-black-50 pt-1">
+                            In-progress
+                          </div>
+                        </td>
                         <td className="text-center">
                           <Button
                             size="small"
@@ -795,15 +897,7 @@ const CompanyDashboard = () => {
                       </tr>
                       <tr>
                         <td>Role 2</td>
-                        <td className="text-center">
-                          <Tooltip title="Arvin Weston">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
+                        <td>Adecco</td>
                         <td className="text-center text-black-50">
                           06/08/2022
                         </td>
@@ -812,7 +906,16 @@ const CompanyDashboard = () => {
                             Open
                           </div>
                         </td>
-                        <td className="text-center">Tickets App</td>
+                        <td className="text-center">
+                          <LinearProgress
+                            variant="determinate"
+                            className="progress-sm progress-bar-success"
+                            value={100}
+                          />
+                          <div className="font-size-sm text-black-50 pt-1">
+                            Completed
+                          </div>
+                        </td>
                         <td className="text-center">
                           <Button
                             size="small"
@@ -823,15 +926,7 @@ const CompanyDashboard = () => {
                       </tr>
                       <tr>
                         <td>Role 3</td>
-                        <td className="text-center">
-                          <Tooltip title="Mali Rosario">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar7} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
+                        <td>Nolan Recruitment</td>
                         <td className="text-center text-black-50">
                           12/12/2020
                         </td>
@@ -840,7 +935,16 @@ const CompanyDashboard = () => {
                             Closed
                           </div>
                         </td>
-                        <td className="text-center">Tasks Management</td>
+                        <td className="text-center">
+                          <LinearProgress
+                            variant="determinate"
+                            className="progress-sm progress-bar-warning"
+                            value={50}
+                          />
+                          <div className="font-size-sm text-black-50 pt-1">
+                            Pending
+                          </div>
+                        </td>
                         <td className="text-center">
                           <Button
                             size="small"
@@ -851,15 +955,7 @@ const CompanyDashboard = () => {
                       </tr>
                       <tr>
                         <td>Role 4</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Marion Devine">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                        </td>
+                        <td>Adecco</td>
                         <td className="text-center text-black-50">
                           12/12/2020
                         </td>
@@ -868,7 +964,16 @@ const CompanyDashboard = () => {
                             Open
                           </div>
                         </td>
-                        <td className="text-center">Calendar App</td>
+                        <td className="text-center">
+                          <LinearProgress
+                            variant="determinate"
+                            className="progress-sm progress-bar-success"
+                            value={100}
+                          />
+                          <div className="font-size-sm text-black-50 pt-1">
+                            Completed
+                          </div>
+                        </td>
                         <td className="text-center">
                           <Button
                             size="small"
@@ -907,102 +1012,66 @@ const CompanyDashboard = () => {
                 </div>
               </div>
 
-              <div className="divider" />
               <div className="table-responsive-md">
                 <PerfectScrollbar>
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Job ID</th>
-                        <th className="bg-white">Role</th>
-                        <th className="bg-white text-center">Agency</th>
-                        <th className="bg-white text-center">Created date</th>
-                        <th className="bg-white text-center">Status</th>
+                        <th className=" text-left">Agencies ID</th>
+                        <th>Agencies Name</th>
+                        <th>Location</th>
+                        <th>Industry</th>
+                        <th className=" text-center">Date Joined</th>
+                        <th className=" text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td className="font-weight-bold">#453</td>
-                        <td>Role 1</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Lili Pemberton">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                        </td>
+                        <td>Nolan Recruitment</td>
+                        <td>Southampton, UK</td>
+                        <td>Automotive</td>
                         <td className="text-center text-black-50">
                           12/12/2020
                         </td>
                         <td className="text-center">
-                          <div className="badge badge-neutral-dark text-dark">
-                            Closed
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-bold">#584</td>
-                        <td>Role 2</td>
-                        <td className="text-center">
-                          <Tooltip title="Arvin Weston">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
-                        <td className="text-center text-black-50">
-                          06/08/2022
-                        </td>
-                        <td className="text-center">
-                          <div className="badge badge-neutral-success text-success">
-                            Open
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-bold">#764</td>
-                        <td>Role 3</td>
-                        <td className="text-center">
-                          <Tooltip title="Mali Rosario">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar7} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
-                        <td className="text-center text-black-50">
-                          12/12/2020
-                        </td>
-                        <td className="text-center">
-                          <div className="badge badge-neutral-dark text-dark">
-                            Closed
-                          </div>
+                          <ActionsCompanies />
                         </td>
                       </tr>
                       <tr>
                         <td className="font-weight-bold">#453</td>
-                        <td>Role 4</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Marion Devine">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                        </td>
+                        <td>Adecco</td>
+                        <td>London, UK</td>
+                        <td>Chemical</td>
                         <td className="text-center text-black-50">
                           12/12/2020
                         </td>
                         <td className="text-center">
-                          <div className="badge badge-neutral-success text-success">
-                            Open
-                          </div>
+                          <ActionsCompanies />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Nolan Recruitment</td>
+                        <td>Southampton, UK</td>
+                        <td>Automotive</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <ActionsCompanies />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#453</td>
+                        <td>Adecco</td>
+                        <td>London, UK</td>
+                        <td>Chemical</td>
+                        <td className="text-center text-black-50">
+                          12/12/2020
+                        </td>
+                        <td className="text-center">
+                          <ActionsCompanies />
                         </td>
                       </tr>
                     </tbody>
@@ -1029,102 +1098,74 @@ const CompanyDashboard = () => {
                 </div>
               </div>
 
-              <div className="divider" />
               <div className="table-responsive-md">
                 <PerfectScrollbar>
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white text-left">Job ID</th>
-                        <th className="bg-white">Role</th>
-                        <th className="bg-white text-center">Agency</th>
-                        <th className="bg-white text-center">Created date</th>
-                        <th className="bg-white text-center">Status</th>
+                        <th className=" text-left">Candidate ID</th>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Location</th>
+                        <th className="text-center">Availability</th>
+                        <th className="text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td className="font-weight-bold">#453</td>
-                        <td>Role 1</td>
+                        <td>Deepak Kumar</td>
+                        <td>Software Engineer</td>
+                        <td>Southampton, UK</td>
                         <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Lili Pemberton">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar2} />
-                            </div>
+                          <div className="badge badge-neutral-success text-success">
+                            Immediate
                           </div>
                         </td>
-                        <td className="text-center text-black-50">
-                          12/12/2020
-                        </td>
                         <td className="text-center">
-                          <div className="badge badge-neutral-dark text-dark">
-                            Closed
-                          </div>
+                          <ActionsCandidate />
                         </td>
                       </tr>
                       <tr>
                         <td className="font-weight-bold">#584</td>
-                        <td>Role 2</td>
-                        <td className="text-center">
-                          <Tooltip title="Arvin Weston">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
-                        <td className="text-center text-black-50">
-                          06/08/2022
-                        </td>
-                        <td className="text-center">
-                          <div className="badge badge-neutral-success text-success">
-                            Open
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="font-weight-bold">#764</td>
-                        <td>Role 3</td>
-                        <td className="text-center">
-                          <Tooltip title="Mali Rosario">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar7} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
-                        <td className="text-center text-black-50">
-                          12/12/2020
-                        </td>
+                        <td>Rishabh</td>
+                        <td>Software Engineer</td>
+                        <td>London, UK</td>
                         <td className="text-center">
                           <div className="badge badge-neutral-dark text-dark">
-                            Closed
+                            Unavailable
                           </div>
+                        </td>
+                        <td className="text-center">
+                          <ActionsCandidate />
                         </td>
                       </tr>
                       <tr>
                         <td className="font-weight-bold">#453</td>
-                        <td>Role 4</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Marion Devine">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center text-black-50">
-                          12/12/2020
-                        </td>
+                        <td>Deepak Kumar</td>
+                        <td>Software Engineer</td>
+                        <td>Southampton, UK</td>
                         <td className="text-center">
                           <div className="badge badge-neutral-success text-success">
-                            Open
+                            Available from (12/12/2020)
                           </div>
+                        </td>
+                        <td className="text-center">
+                          <ActionsCandidate />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold">#584</td>
+                        <td>Rishabh</td>
+                        <td>Software Engineer</td>
+                        <td>London, UK</td>
+                        <td className="text-center">
+                          <div className="badge badge-neutral-dark text-dark">
+                            Unavailable
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <ActionsCandidate />
                         </td>
                       </tr>
                     </tbody>
