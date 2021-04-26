@@ -12,7 +12,7 @@ import {
   FormControlLabel,
   Checkbox,
   Dialog,
-  DialogTitle,
+  DialogTitle
 } from '@material-ui/core';
 
 import api from '../api';
@@ -26,6 +26,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Select from 'react-select';
 import countryList from 'react-select-country-list';
+// import 'react-phone-number-input/style.css';
+// import PhoneInput from 'react-phone-number-input'
 
 export default function LivePreviewExample() {
   const [value, setValue] = useState('');
@@ -65,6 +67,9 @@ export default function LivePreviewExample() {
     first_name: '',
     last_name: '',
     contact_number: '',
+    company_name: '',
+    country: '',
+    address: '',
     role: type,
     subscribed: false
   });
@@ -77,6 +82,9 @@ export default function LivePreviewExample() {
     confirm_password: '',
     role: '',
     contact_number: '',
+    company_name: '',
+    country: '',
+    address: '',
     policyCheckbox: ''
   });
 
@@ -130,6 +138,32 @@ export default function LivePreviewExample() {
             account.password === value ? '' : 'Passwords does not match!'
         });
         break;
+      case 'company_name':
+        setErrors({
+          ...errors,
+          company_name:
+            value.length > 1 ? '' : 'Minimum two character is required!'
+        });
+        break;
+      case 'contact_number':
+        setErrors({
+          ...errors,
+          contact_number:
+            value.length > 10 ? '' : 'Minimum 10 digits is required!'
+        });
+        break;
+      case 'address':
+        setErrors({
+          ...errors,
+          address: value.length > 1 ? '' : 'Minimum two character is required!'
+        });
+        break;
+      // case 'country':
+      //   setErrors({
+      //     ...errors,
+      //     country: value.length > 0 ? '' : 'Please select country!'
+      //   });
+      //   break;
       case 'role':
         setErrors({
           ...errors,
@@ -183,6 +217,12 @@ export default function LivePreviewExample() {
       first_name:
         account.first_name.length === 0 ? 'First name is required!' : '',
       last_name: account.last_name.length === 0 ? 'Last name is required!' : '',
+      contact_number:
+        account.contact_number.length === 0 ? 'Contact number required!' : '',
+      company_name:
+        account.company_name.length === 0 ? 'Company name is required!' : '',
+      address: account.address.length === 0 ? 'Address is required!' : '',
+      // country: account.country.length === 0 ? 'Country is required!' : '',
       email: account.email.length === 0 ? 'Email is required' : '',
       password: account.password.length === 0 ? 'Password is required!' : '',
       role: account.role.length === 0 ? 'Role is required!' : '',
@@ -207,6 +247,9 @@ export default function LivePreviewExample() {
       validateForm(errors) &&
       account.first_name &&
       account.last_name &&
+      account.company_name &&
+      account.contact_number &&
+      account.address &&
       account.email &&
       passwordVerified &&
       policyCheckbox &&
@@ -412,15 +455,26 @@ export default function LivePreviewExample() {
                                         variant="outlined"
                                         size="small"
                                         fullWidth
+                                        type="Number"
                                         name="contact_number"
                                         onChange={handleChange}
                                         placeholder="Enter your Contact number"
                                       />
-                                      {/* {errors.last_name.length > 0 && (
-                                <span className="error">
-                                  {errors.last_name}
-                                </span>
-                              )} */}
+                                      {/* <PhoneInput
+                                        variant="outlined"
+                                        size="small"
+                                        fullWidth
+                                        name="contact_number"
+                                        placeholder="Enter phone number"
+                                        value={value}
+                                        onChange={setValue}
+                                        // onChange={handleValue}
+                                      /> */}
+                                      {errors.contact_number.length > 0 && (
+                                        <span className="error">
+                                          {errors.contact_number}
+                                        </span>
+                                      )}
                                     </Grid>
                                     <Grid item lg={6} xl={6}>
                                       <label className="font-weight-bold mb-2">
@@ -435,11 +489,11 @@ export default function LivePreviewExample() {
                                         onChange={handleChange}
                                         placeholder="Enter your Company Name"
                                       />
-                                      {/* {errors.last_name.length > 0 && (
-                                <span className="error">
-                                  {errors.last_name}
-                                </span>
-                              )} */}
+                                      {errors.company_name.length > 0 && (
+                                        <span className="error">
+                                          {errors.company_name}
+                                        </span>
+                                      )}
                                     </Grid>
                                   </Grid>
                                 </div>
@@ -456,11 +510,11 @@ export default function LivePreviewExample() {
                                     onChange={handleChange}
                                     placeholder="Enter your Address"
                                   />
-                                  {/* {errors.last_name.length > 0 && (
-                                <span className="error">
-                                  {errors.last_name}
-                                </span>
-                              )} */}
+                                  {errors.address.length > 0 && (
+                                    <span className="error">
+                                      {errors.address}
+                                    </span>
+                                  )}
                                 </div>
                                 <div className="mb-3">
                                   <label className="font-weight-bold mb-2">
@@ -468,15 +522,17 @@ export default function LivePreviewExample() {
                                     <span className="text-danger">*</span>
                                   </label>
                                   <Select
+                                    // name="country"
                                     options={options}
                                     value={value}
                                     onChange={changeHandler}
+                                    required="true"
                                   />
-                                  {/* {errors.last_name.length > 0 && (
-                                <span className="error">
-                                  {errors.last_name}
-                                </span>
-                              )} */}
+                                  {/* {errors.country.length > 0 && (
+                                    <span className="error">
+                                      {errors.country}
+                                    </span>
+                                  )} */}
                                 </div>
                               </div>
                             )}
