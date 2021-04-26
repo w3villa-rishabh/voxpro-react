@@ -64,8 +64,8 @@ export default function NewRequestComponent() {
                       <thead>
                         <tr>
                           <th className="bg-white text-left">Job ID</th>
-                          <th className="bg-white">Request</th>
-                          <th className="bg-white text-left">Role Applied</th>
+                          <th className="bg-white">Company</th>
+                          <th className="bg-white text-left">Job Title</th>
                           <th className="bg-white text-center">Date Applied</th>
                           <th className="bg-white text-center">
                             Doc requested
@@ -77,12 +77,19 @@ export default function NewRequestComponent() {
                       <tbody>
                         <tr>
                           <td>#453</td>
-                          <td>Request 1</td>
-                          <td>Contact</td>
+                          <td>Adecco</td>
+                          <td>Data Analyst</td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          <td className="text-center">400</td>
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="btn btn-info"
+                              variant="text">
+                              4
+                            </Button>
+                          </td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
@@ -96,12 +103,19 @@ export default function NewRequestComponent() {
                         </tr>
                         <tr>
                           <td>#584</td>
-                          <td>Request 2</td>
-                          <td>Permanent</td>
+                          <td>Huntress Group</td>
+                          <td>Ops Analyst</td>
                           <td className="text-center text-black-50">
                             06/08/2022
                           </td>
-                          <td className="text-center">300</td>
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="btn btn-info"
+                              variant="text">
+                              3
+                            </Button>
+                          </td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
@@ -115,12 +129,19 @@ export default function NewRequestComponent() {
                         </tr>
                         <tr>
                           <td>#764</td>
-                          <td>Request 3</td>
-                          <td>Permanent</td>
+                          <td>Satigo</td>
+                          <td>Bussiness Analyst</td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          <td className="text-center">2030</td>
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="btn btn-info"
+                              variant="text">
+                              4
+                            </Button>
+                          </td>
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
