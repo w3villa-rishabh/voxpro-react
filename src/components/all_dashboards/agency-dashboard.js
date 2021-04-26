@@ -995,8 +995,8 @@ const AgencyDashboard = () => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className=" text-left">Agencies ID</th>
-                        <th>Agencies Name</th>
+                        <th className=" text-left">Company ID</th>
+                        <th>Company Name</th>
                         <th>Location</th>
                         <th>Industry</th>
                         <th className=" text-center">Date Joined</th>
