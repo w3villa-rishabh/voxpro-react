@@ -319,7 +319,7 @@ const CompanyDashboard = () => {
                     <div>
                       <div className="font-weight-bold">
                         <span className="font-size-xxl mt-2">5</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                        <small className="d-block font-weight-bold mb-1 text-uppercase">
                           Pending Placements
                         </small>
                       </div>
@@ -346,7 +346,7 @@ const CompanyDashboard = () => {
                     <div>
                       <div className="font-weight-bold">
                         <span className="font-size-xxl mt-2">10</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                        <small className="d-block font-weight-bold mb-1 text-uppercase">
                           Pending Documents
                         </small>
                       </div>
@@ -373,7 +373,7 @@ const CompanyDashboard = () => {
                     <div>
                       <div className="font-weight-bold">
                         <span className="font-size-xxl mt-2">30</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                        <small className="d-block font-weight-bold mb-1 text-uppercase">
                           Pending IR35
                         </small>
                       </div>
@@ -400,7 +400,7 @@ const CompanyDashboard = () => {
                     <div>
                       <div className="font-weight-bold">
                         <span className="font-size-xxl mt-2">20</span>
-                        <small className="text-black-50 d-block mb-1 text-uppercase font-10">
+                        <small className="d-block font-weight-bold mb-1 text-uppercase nowrap">
                           Interviews Scheduled
                         </small>
                       </div>
