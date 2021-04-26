@@ -124,7 +124,7 @@ export default function JobSearchComponent() {
       <Card className="card-box">
         <Grid container spacing={2}>
           <Grid item md={3} xs={4}>
-            <div className="mb-3 mt-3 ml-3">
+            <div className="mb-0 mt-3 ml-3">
               <TextField
                 variant="outlined"
                 size="small"
@@ -145,7 +145,7 @@ export default function JobSearchComponent() {
             </div>
           </Grid>
           <Grid item md={3} xs={4}>
-            <div className="mb-3 mt-3">
+            <div className="mb-0 mt-3">
               <Select
                 options={options}
                 value={value}
@@ -155,7 +155,7 @@ export default function JobSearchComponent() {
             </div>
           </Grid>
           <Grid item md={2} xs={4}>
-            <div className="mb-3 mt-3">
+            <div className="mb-0 mt-3">
               <Select
                 options={jobtype}
                 value={value1}
@@ -165,7 +165,7 @@ export default function JobSearchComponent() {
             </div>
           </Grid>
           <Grid item md={2} xs={4}>
-            <div className="mb-3 mt-3 mr-3">
+            <div className="mb-0 mt-3 mr-3">
               <Select
                 options={jobposted}
                 value={value2}
@@ -175,7 +175,7 @@ export default function JobSearchComponent() {
             </div>
           </Grid>
           <Grid item md={2} xs={3}>
-            <div className="mb-3 mt-3 mr-3">
+            <div className="mb-0 mt-3 ml-2">
               <Button className="btn-neutral-info hover-scale-sm">
                 <span className="px-2">Search</span>
               </Button>
