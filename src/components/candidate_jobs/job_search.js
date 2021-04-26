@@ -5,8 +5,7 @@ import {
   Card,
   InputAdornment,
   TextField,
-  Button,
-  Switch
+  Button
 } from '@material-ui/core';
 import Select from 'react-select';
 
@@ -103,15 +102,15 @@ export default function JobSearchComponent() {
               <h5 className="heading pt-3">Job Search</h5>
             </div>
           </Grid>
-          <Grid item md={4} xs={4}>
-            <div className="mb-3 mt-3 ml-5">
+          <Grid item md={5} xs={5}>
+            {/* <div className="mb-3 mt-3 ml-5">
               <Button className="btn-neutral-info hover-scale-sm">
                 <FontAwesomeIcon icon={['fas', 'bell']} className="svg-none" />
                 <span className="px-2">Get Job Alert</span>
               </Button>
-            </div>
+            </div> */}
           </Grid>
-          <Grid item md={4} xs={4}>
+          <Grid item md={3} xs={3}>
             <div className="mb-3 mt-3 ml-5">
               <Button className="btn-neutral-info hover-scale-sm">
                 <FontAwesomeIcon icon={['fas', 'heart']} className="svg-none" />
@@ -125,7 +124,7 @@ export default function JobSearchComponent() {
       <Card className="card-box">
         <Grid container spacing={2}>
           <Grid item md={3} xs={4}>
-            <div className="mb-3 mt-3 ml-3">
+            <div className="mb-0 mt-3 ml-3">
               <TextField
                 variant="outlined"
                 size="small"
@@ -146,7 +145,7 @@ export default function JobSearchComponent() {
             </div>
           </Grid>
           <Grid item md={3} xs={4}>
-            <div className="mb-3 mt-3">
+            <div className="mb-0 mt-3">
               <Select
                 options={options}
                 value={value}
@@ -155,8 +154,8 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-          <Grid item md={3} xs={4}>
-            <div className="mb-3 mt-3">
+          <Grid item md={2} xs={4}>
+            <div className="mb-0 mt-3">
               <Select
                 options={jobtype}
                 value={value1}
@@ -165,8 +164,8 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-          <Grid item md={3} xs={4}>
-            <div className="mb-3 mt-3 mr-3">
+          <Grid item md={2} xs={4}>
+            <div className="mb-0 mt-3 mr-3">
               <Select
                 options={jobposted}
                 value={value2}
@@ -175,25 +174,32 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item md={3} xs={4}></Grid>
-          <Grid item md={2} xs={4}>
-            <div className="float-right mb-3">
-              <Button className="btn-neutral-info hover-scale-sm">
-                <span className="px-2">Advance Search</span>
-              </Button>
-            </div>
-          </Grid>
-          <Grid item md={2} xs={4}>
-            <div className="float-right mb-3">
+          <Grid item md={2} xs={3}>
+            <div className="mb-0 mt-3 ml-2">
               <Button className="btn-neutral-info hover-scale-sm">
                 <span className="px-2">Search</span>
               </Button>
             </div>
           </Grid>
-          <Grid item md={3} xs={4}>
-            <div className="mt-2 mb-3 float-right">
+        </Grid>
+        <Grid container spacing={1}>
+          {/* <Grid item md={3} xs={4}></Grid> */}
+          {/* <Grid item md={2} xs={4}> */}
+          {/* <div className="float-right mb-3">
+              <Button className="btn-neutral-info hover-scale-sm">
+                <span className="px-2">Advance Search</span>
+              </Button>
+            </div> */}
+          {/* </Grid> */}
+          {/* <Grid item md={2} xs={4}> */}
+          {/* <div className="float-right mb-3">
+              <Button className="btn-neutral-info hover-scale-sm">
+                <span className="px-2">Search</span>
+              </Button>
+            </div> */}
+          {/* </Grid> */}
+          {/* <Grid item md={3} xs={4}> */}
+          {/* <div className="mt-2 mb-3 float-right">
               <span className="ml-3">Relevent</span>
               <Switch
                 onChange={handleChange}
@@ -203,10 +209,10 @@ export default function JobSearchComponent() {
                 className="switch-medium ml-1 mr-1"
               />
               Recent
-            </div>
-          </Grid>
-          <Grid item md={2} xs={4}>
-            <div className="float-right mb-3">
+            </div> */}
+          {/* </Grid> */}
+          <Grid item md={12} xs={12} className="mr-4">
+            <div className="mb-2 ml-0 float-right">
               <Button className="m-1 btn-transparent btn-link btn-link-primary">
                 <span>Browse Jobs </span>{' '}
                 <FontAwesomeIcon

@@ -72,7 +72,7 @@ const HeaderUserbox = () => {
       <Button
         variant="text"
         onClick={handleClick}
-        className="ml-2 btn-transition-none text-left ml-2 p-0 bg-transparent d-flex align-items-center"
+        className="padd"
         disableRipple>
         <div className="d-block p-0 avatar-icon-wrapper">
           <StyledBadge
@@ -90,7 +90,7 @@ const HeaderUserbox = () => {
           </StyledBadge>
         </div>
 
-        <div className="d-none d-md-block pl-2">
+        <div className="d-none d-md-block pl-0">
           <div className="font-weight-bold pt-2 line-height-1">
             {currentUser.first_name}
           </div>
@@ -132,7 +132,7 @@ const HeaderUserbox = () => {
           </div>
           <List
             component="div"
-            className="nav-neutral-primary text-left d-flex align-items-center flex-column">
+            className="nav-neutral-primary text-left d-flex flex-column p-3">
             {/* <ListItem>
                 <div className="align-box-row">
                   <Badge
@@ -154,15 +154,26 @@ const HeaderUserbox = () => {
                   </div>
                 </div>
               </ListItem> */}
-
-            <ListItem button className="d-block text-left">
-              View Profile
+            <h5 className="text-left">Accounts</h5>
+            <ListItem button className="d-block text-center">
+              Profile (80% Completed)
             </ListItem>
-            <ListItem button className="d-block text-left">
-              settings
+            <ListItem button className="d-block text-center">
+              Settings & Privacy
             </ListItem>
-            <ListItem button className="d-block text-left">
+            <Divider className="w-100" />
+            <h5 className="text-left mt-2">Manage</h5>
+            <ListItem button className="d-block text-center">
               Requests
+            </ListItem>
+            <ListItem button className="d-block text-center">
+              Notifications
+            </ListItem>
+            <ListItem button className="d-block text-center">
+              Job Applications
+            </ListItem>
+            <ListItem button className="d-block text-center">
+              Placements
             </ListItem>
             <Divider className="w-100" />
             <ListItem className="d-block text-center p-3">

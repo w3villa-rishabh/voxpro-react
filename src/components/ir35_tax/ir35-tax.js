@@ -278,9 +278,7 @@ export default function IR35TaxComponent() {
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>About you and the work</h6>
-                <h4>
-                  Has the worker already started working for your organisation?
-                </h4>
+                <h4>Have you already started working for this client?</h4>
                 <div>
                   <ul>
                     <li>
@@ -376,7 +374,7 @@ export default function IR35TaxComponent() {
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
               <h6>Worker’s duties</h6>
-              <h4>Will the worker be an ‘Office Holder’?</h4>
+              <h4>Will you be an ‘Office Holder’?</h4>
               <div className="text-f">
                 <span>
                   This can include being a board member, treasurer, trustee,
@@ -432,7 +430,8 @@ export default function IR35TaxComponent() {
             index={4}>
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
-                <h4>Has the worker ever sent a substitute to do this work?</h4>
+                <h6>Substitutes and helpers</h6>
+                <h4>Have you ever sent a substitute to do this work?</h4>
                 <div className="text-f">
                   <span>
                     A substitute is someone the worker sends in their place to
