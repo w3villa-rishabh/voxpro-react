@@ -165,6 +165,11 @@ const CompanyDashboard = () => {
         show: false
       }
     },
+    tooltip: {
+      x: {
+        show: false
+      }
+    },
     xaxis: {
       categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     }
