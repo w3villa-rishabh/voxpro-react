@@ -5,12 +5,13 @@ import {
   Grid,
   Card,
   Button,
-  Tooltip,
   Table,
   CardContent,
   LinearProgress,
   List,
-  ListItem
+  ListItem,
+  Menu,
+  MenuItem
 } from '@material-ui/core';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -20,8 +21,6 @@ import { connect } from 'react-redux';
 import { setHeaderDrawerToggle } from '../../reducers/ThemeOptions';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 
-import avatar4 from '../../assets/images/avatars/avatar4.jpg';
-import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import avatar5 from '../../assets/images/avatars/default.png';
 
 import ChatBox from '../chat_component/chat';
@@ -47,6 +46,100 @@ const jobFiltersOptions = [
     label: 'Last 2 Weeks'
   }
 ];
+
+const ActionsCandidate = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Button
+        aria-controls="simple-menu"
+        size="small"
+        className="px-4 btn-neutral-primary"
+        variant="contained"
+        aria-haspopup="true"
+        onClick={handleClick}>
+        Action
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        classes={{ list: 'p-0' }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}>
+        <div className="p-3">
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            View Profile
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Connect
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Message
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Share
+          </MenuItem>
+        </div>
+      </Menu>
+    </>
+  );
+};
+
+const ActionsCompanies = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Button
+        aria-controls="simple-menu"
+        size="small"
+        className="px-4 btn-neutral-primary"
+        variant="contained"
+        aria-haspopup="true"
+        onClick={handleClick}>
+        Action
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        classes={{ list: 'p-0' }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}>
+        <div className="p-3">
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            View Profile
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            View Employees
+          </MenuItem>
+          <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+            Share
+          </MenuItem>
+        </div>
+      </Menu>
+    </>
+  );
+};
+
 const AgencyDashboard = () => {
   const [value, onChange] = useState(new Date());
   const [width, setWidth] = useState(window.innerWidth);
@@ -755,7 +848,7 @@ const AgencyDashboard = () => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className="bg-white">Role Id</th>
+                        <th className="bg-white">Job Id</th>
                         <th className="bg-white text-left">Job Title</th>
                         <th className="bg-white text-center">Company</th>
                         <th className="bg-white text-center">Date Added</th>
@@ -767,16 +860,8 @@ const AgencyDashboard = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Role 1</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Lili Pemberton">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar2} />
-                            </div>
-                          </div>
-                        </td>
+                        <td>#453</td>
+                        <td>Software Engineer</td>
 
                         <td className="text-center">Darktrace</td>
                         <td className="text-center text-black-50">
@@ -801,16 +886,8 @@ const AgencyDashboard = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td>Role 2</td>
-                        <td className="text-center">
-                          <Tooltip title="Arvin Weston">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar4} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
+                        <td>#453</td>
+                        <td>Developer</td>
                         <td className="text-center">Deliveroo</td>
                         <td className="text-center text-black-50">
                           06/08/2022
@@ -834,16 +911,8 @@ const AgencyDashboard = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td>Role 3</td>
-                        <td className="text-center">
-                          <Tooltip title="Mali Rosario">
-                            <div className="avatar-icon-wrapper avatar-icon-sm">
-                              <div className="avatar-icon">
-                                <img alt="..." src={avatar7} />
-                              </div>
-                            </div>
-                          </Tooltip>
-                        </td>
+                        <td>#453</td>
+                        <td>Software Engineer</td>
                         <td className="text-center">Darktrace</td>
                         <td className="text-center text-black-50">
                           12/12/2020
@@ -867,16 +936,8 @@ const AgencyDashboard = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td>Role 4</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Marion Devine">
-                            <div className="avatar-icon">
-                              <img alt="..." src={avatar7} />
-                            </div>
-                          </div>
-                        </td>
+                        <td>#453</td>
+                        <td>Developer</td>
                         <td className="text-center">Deliveroo</td>
                         <td className="text-center text-black-50">
                           12/12/2020
@@ -925,7 +986,7 @@ const AgencyDashboard = () => {
             <Card className="card-box">
               <div className="card-header py-3">
                 <div className="card-header--title font-size-lg">
-                  <b>List of Agencies Recently Joined</b>
+                  <b>List of Companies Recently Joined</b>
                 </div>
               </div>
 
@@ -934,8 +995,8 @@ const AgencyDashboard = () => {
                   <Table className="table table-hover text-nowrap mb-0">
                     <thead>
                       <tr>
-                        <th className=" text-left">Agencies ID</th>
-                        <th>Agencies Name</th>
+                        <th className=" text-left">Company ID</th>
+                        <th>Company Name</th>
                         <th>Location</th>
                         <th>Industry</th>
                         <th className=" text-center">Date Joined</th>
@@ -952,12 +1013,7 @@ const AgencyDashboard = () => {
                           12/12/2020
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            View Profile
-                          </a>
+                          <ActionsCompanies />
                         </td>
                       </tr>
                       <tr>
@@ -969,12 +1025,7 @@ const AgencyDashboard = () => {
                           12/12/2020
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            View Employees
-                          </a>
+                          <ActionsCompanies />
                         </td>
                       </tr>
                       <tr>
@@ -986,12 +1037,7 @@ const AgencyDashboard = () => {
                           12/12/2020
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            View Profile
-                          </a>
+                          <ActionsCompanies />
                         </td>
                       </tr>
                       <tr>
@@ -1003,12 +1049,7 @@ const AgencyDashboard = () => {
                           12/12/2020
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            Share
-                          </a>
+                          <ActionsCompanies />
                         </td>
                       </tr>
                     </tbody>
@@ -1056,16 +1097,11 @@ const AgencyDashboard = () => {
                         <td>Southampton, UK</td>
                         <td className="text-center">
                           <div className="badge badge-neutral-success text-success">
-                            Yes
+                            Immediate
                           </div>
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            View Profile
-                          </a>
+                          <ActionsCandidate />
                         </td>
                       </tr>
                       <tr>
@@ -1075,16 +1111,11 @@ const AgencyDashboard = () => {
                         <td>London, UK</td>
                         <td className="text-center">
                           <div className="badge badge-neutral-dark text-dark">
-                            No
+                            Unavailable
                           </div>
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            Connect
-                          </a>
+                          <ActionsCandidate />
                         </td>
                       </tr>
                       <tr>
@@ -1094,16 +1125,11 @@ const AgencyDashboard = () => {
                         <td>Southampton, UK</td>
                         <td className="text-center">
                           <div className="badge badge-neutral-success text-success">
-                            Yes
+                            Available from (12/12/2020)
                           </div>
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            Message
-                          </a>
+                          <ActionsCandidate />
                         </td>
                       </tr>
                       <tr>
@@ -1113,16 +1139,11 @@ const AgencyDashboard = () => {
                         <td>London, UK</td>
                         <td className="text-center">
                           <div className="badge badge-neutral-dark text-dark">
-                            No
+                            Unavailable
                           </div>
                         </td>
                         <td className="text-center">
-                          <a
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}
-                            className="a-blue">
-                            Share
-                          </a>
+                          <ActionsCandidate />
                         </td>
                       </tr>
                     </tbody>
