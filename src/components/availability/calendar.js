@@ -670,7 +670,6 @@ export default function TasksCalendarComponent() {
                         className="font-weight-bold btn-second px-4 my-1">
                         Update
                       </Button>
-
                       <Button
                         variant="contained"
                         onClick={handleClose1}
