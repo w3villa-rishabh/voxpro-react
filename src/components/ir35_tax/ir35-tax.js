@@ -1480,7 +1480,7 @@ export default function IR35TaxComponent() {
             <Grid item xs={12}>
               <h6>Worker’s involvement</h6>
               <h4>
-                Will you provide the worker with paid-for corporate benefits?
+                Will your client provide you with paid-for corporate benefits?
               </h4>
               <div className="text-f">
                 <span>
@@ -1539,8 +1539,7 @@ export default function IR35TaxComponent() {
             <Grid item xs={12}>
               <h6>Worker’s involvement</h6>
               <h4>
-                Will the worker have any management responsibilities for your
-                organisation?
+                Will you have any management responsibilities for your client?
               </h4>
               <div className="text-f">
                 <span>
@@ -2163,8 +2162,8 @@ export default function IR35TaxComponent() {
             <Grid item xs={12}>
               <h6>Worker’s Contract</h6>
               <h4>
-                Will this work take up the majority of the worker’s available
-                working time?
+                Will this work take up the majority of your available working
+                time?
               </h4>
               <div className="text-f">
                 <span>
@@ -2228,8 +2227,8 @@ export default function IR35TaxComponent() {
             <Grid item xs={12}>
               <h6>Worker’s Contract</h6>
               <h4>
-                Has the worker done any self-employed work of a similar nature
-                for other clients in the last 12 months?
+                Have you done any self-employed work of a similar nature for
+                other clients in the last 12 months?
               </h4>
               <div className="text-f">
                 <span>
@@ -2237,9 +2236,9 @@ export default function IR35TaxComponent() {
                   responsibilities, knowledge, or ability.
                 </span>
                 <span>
-                  Self-employed work is when it is the worker’s responsibility
-                  to pay Income Tax and National Insurance contributions on
-                  their earnings.
+                  Self-employed work is when it is your responsibility to pay
+                  Income Tax and National Insurance contributions on your
+                  earnings.
                 </span>
               </div>
               <div>
