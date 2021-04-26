@@ -143,6 +143,13 @@ export default function LivePreviewExample() {
                             </form>
                           )}
                           {showMessage.notification === 'hide' && (
+                            <div className="text-center text-black-50 mb-4">
+                              <a href="/login" className="text-first">
+                                Return to homepage
+                              </a>
+                            </div>
+                          )}
+                          {/* {showMessage.notification === 'hide' && (
                             <div className="text-center mb-4">
                               <div className="text-center text-black-50 mt-3">
                                 Already have account?{' '}
@@ -163,7 +170,7 @@ export default function LivePreviewExample() {
                                 </a>
                               </div>
                             </div>
-                          )}
+                          )} */}
                         </div>
                       </Grid>
                     </Grid>

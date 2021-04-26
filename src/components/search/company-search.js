@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-import {
-  Card,
-  Grid,
-  Button,
-  TextField,
-  Table,
-  Tooltip
-} from '@material-ui/core';
+import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import clogo from '../../assets/images/stock-photos/c-logo.webp';
 import clogo1 from '../../assets/images/stock-photos/company.png';
+import { getCurrentUser } from '../../helper';
 
 // function valuetext(value) {
 //   return `${value}°C`;
 // }
 
 export default function CompaniesSearchComponent() {
+  const [currentUser] = useState(getCurrentUser());
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -304,7 +299,7 @@ export default function CompaniesSearchComponent() {
           </Card>
         </Grid>
       </Grid>
-      <AddsComponents />
+      {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
 }
