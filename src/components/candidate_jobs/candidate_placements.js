@@ -33,7 +33,7 @@ export default function CandidatePlacements() {
       </div>
 
       <div className="app-inner-content-layout">
-        <div className="app-inner-content-layout--main p-0">
+        <div className="app-inner-content-layout--main p-0 overflow-x hid">
           <Grid container spacing={2}>
             <Grid item md={2} xs={6}>
               <Card className="card-box" style={{ minHeight: '200px' }}>

@@ -118,6 +118,14 @@
   }
 }
 
+.overflow-x {
+  overflow-x: auto;
+}
+
+.hid::-webkit-scrollbar {
+  display: none;
+}
+
 .sidebar-inner-layout-overlay {
   opacity: 0;
   visibility: hidden;
