@@ -73,3 +73,23 @@
 .rounded-0 {
   border-radius: 0 !important;
 }
+
+.bg-col {
+  background-color: #907ff1 !important;
+}
+.bg-col2 {
+    background: #3c44b1 !important;
+    opacity: 0.2 !important;
+}
+.pos {
+  position: absolute !important;
+}
+
+.size_a {
+  font-size: .7rem !important;
+  font-weight: bold !important;
+  width: 16px !important;
+  height: 16px !important;
+  line-height: 16px !important;
+  transition: transform .2s !important;
+}

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import { Grid, Card, LinearProgress } from '@material-ui/core';
+import { Grid, Card, LinearProgress, Button } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
 import Calendar from 'react-calendar';
 import Chart from 'react-apexcharts';
+import GaugeChart from 'react-gauge-chart';
 
 import { getCurrentUser } from 'helper';
-import avatar1 from '../../assets/images/avatars/avatar1.jpg';
-import avatar2 from '../../assets/images/avatars/avatar2.jpg';
-import avatar3 from '../../assets/images/avatars/avatar3.jpg';
 
 export default function MyTasksComponent() {
   const [currentUser] = useState(getCurrentUser());
@@ -105,58 +103,73 @@ export default function MyTasksComponent() {
         <div className="app-inner-content-layout--main p-0">
           <Grid container spacing={2}>
             <Grid item md={4}>
-              <Card className="p-3">
+              <Card className="p-3" style={{ minHeight: '410px' }}>
                 <div>
                   <b className="font-size-xxl">To Do</b>
                   <div className="mt-3">
-                    <div className="font-weight-bold font-size-lg">
-                      Research
-                    </div>
-                    <p>I need 5 examples of the logo</p>
-                    <div className="opacity-6">Progress</div>
+                    <Grid container spacing={0}>
+                      <Grid item md={7}>
+                        <div className="font-weight-bold font-size-lg">
+                          Request for information
+                        </div>
+                      </Grid>
+                      <Grid item md={5}>
+                        <Button
+                          size="small"
+                          className="btn-outline-second ml-5"
+                          variant="text">
+                          View
+                        </Button>
+                      </Grid>
+                    </Grid>
+                    <div className="opacity-6">Pending IR35 questionnaire</div>
                     <div className="align-box-row">
                       <div className="flex-grow-1">
                         <LinearProgress
                           variant="determinate"
                           className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-dark"
-                          value={0}
+                          value={10}
                         />
                       </div>
-                      <div className="pl-3">0%</div>
-                    </div>
-                    <div>
-                      <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="avatar-icon rounded-sm">
-                          <img alt="..." src={avatar1} />
-                        </div>
-                      </div>
-                      <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="avatar-icon rounded-sm">
-                          <img alt="..." src={avatar2} />
-                        </div>
-                        {/* <div className="badge badge-warning badge-circle">
-                            Idle
-                          </div> */}
-                      </div>
-                      <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="avatar-icon rounded-sm">
-                          <img alt="..." src={avatar3} />
-                        </div>
-                      </div>
+                      <div className="pl-3">10</div>
                     </div>
                   </div>
                 </div>
                 <div className="divider opacity-8 my-1 mx-2" />
                 <div className="mt-3">
-                  <div className="font-weight-bold font-size-lg">
-                    Work on Design System
-                  </div>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
-                  <div className="opacity-6">Progress</div>
-                  <div className="align-box-row">
+                  <Grid container spacing={0}>
+                    <Grid item md={7}>
+                      <div className="font-weight-bold font-size-lg">
+                        Interview Requests
+                      </div>
+                    </Grid>
+                    <Grid item md={5}>
+                      <Button
+                        size="small"
+                        className="btn-outline-second ml-5"
+                        variant="text">
+                        View
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <p>There are total 4 Interviews requests pending for you.</p>
+                  <div className="divider opacity-8 my-1 mx-2 mb-2" />
+                  <Grid container spacing={0}>
+                    <Grid item md={7}>
+                      <div className="font-weight-bold font-size-lg">
+                        Connection Requests{' '}
+                      </div>
+                    </Grid>
+                    <Grid item md={5}>
+                      <Button
+                        size="small"
+                        className="btn-outline-second ml-5"
+                        variant="text">
+                        View
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  {/* <div className="align-box-row">
                     <div className="flex-grow-1">
                       <LinearProgress
                         variant="determinate"
@@ -165,123 +178,132 @@ export default function MyTasksComponent() {
                       />
                     </div>
                     <div className="pl-3">0%</div>
-                  </div>
-                  <div>
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="avatar-icon rounded-sm">
-                        <img alt="..." src={avatar1} />
-                      </div>
-                    </div>
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="avatar-icon rounded-sm">
-                        <img alt="..." src={avatar2} />
-                      </div>
-                    </div>
+                  </div> */}
+                  <div className="card-footer text-center">
+                    <Button
+                      size="small"
+                      className="btn-outline-second"
+                      variant="text">
+                      View more
+                    </Button>
                   </div>
                 </div>
               </Card>
             </Grid>
             <Grid item md={4}>
-              <Card className="p-3">
+              <Card className="p-3" style={{ minHeight: '410px' }}>
                 <div>
-                  <b className="font-size-xxl">In Progress</b>
+                  <b className="font-size-xxl">Follow up</b>
                   <div className="mt-3">
-                    <div className="font-weight-bold font-size-lg">
-                      Create page header component
-                    </div>
-                    <p>I need 5 examples of the logo</p>
-                    <div className="opacity-6">Progress</div>
+                    <Grid container spacing={0}>
+                      <Grid item md={7}>
+                        <div className="font-weight-bold font-size-lg">
+                          IR35 Queries
+                        </div>
+                      </Grid>
+                      <Grid item md={5}>
+                        <Button
+                          size="small"
+                          className="btn-outline-second ml-5"
+                          variant="text">
+                          View
+                        </Button>
+                      </Grid>
+                    </Grid>
+                    {/* <p>5 IR35 queries are pending</p> */}
+                    <div className="opacity-6">IR35 Submitted</div>
                     <div className="align-box-row">
                       <div className="flex-grow-1">
                         <LinearProgress
                           variant="determinate"
                           className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-info"
-                          value={55}
+                          value={50}
                         />
                       </div>
-                      <div className="pl-3">55%</div>
-                    </div>
-                    <div>
-                      <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="avatar-icon rounded-sm">
-                          <img alt="..." src={avatar1} />
-                        </div>
-                      </div>
-                      <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="avatar-icon rounded-sm">
-                          <img alt="..." src={avatar2} />
-                        </div>
-                      </div>
+                      <div className="pl-3">10</div>
                     </div>
                   </div>
                 </div>
                 <div className="divider opacity-8 my-1 mx-2" />
                 <div className="mt-3">
-                  <div className="font-weight-bold font-size-lg">
-                    Company Rebranding
-                  </div>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
-                  <div className="opacity-6">Progress</div>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-info"
-                        value={20}
-                      />
-                    </div>
-                    <div className="pl-3">20%</div>
-                  </div>
-                  <div>
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="avatar-icon rounded-sm">
-                        <img alt="..." src={avatar1} />
+                  <Grid container spacing={0}>
+                    <Grid item md={7}>
+                      <div className="font-weight-bold font-size-lg">
+                        Pending Placements follow up
                       </div>
-                    </div>
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="avatar-icon rounded-sm">
-                        <img alt="..." src={avatar2} />
+                    </Grid>
+                    <Grid item md={5}>
+                      <Button
+                        size="small"
+                        className="btn-outline-second ml-5"
+                        variant="text">
+                        View
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <p>There are total 4 pending placements follow up.</p>
+                  <div className="divider opacity-8 my-1 mx-2 mb-2" />
+                  <Grid container spacing={0}>
+                    <Grid item md={7}>
+                      <div className="font-weight-bold font-size-lg">
+                        Saved jobs due to expire{' '}
                       </div>
-                    </div>
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="avatar-icon rounded-sm">
-                        <img alt="..." src={avatar3} />
-                      </div>
-                    </div>
+                    </Grid>
+                    <Grid item md={5}>
+                      <Button
+                        size="small"
+                        className="btn-outline-second ml-5"
+                        variant="text">
+                        View
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <div className="card-footer py-3 text-center">
+                    <Button
+                      size="small"
+                      className="btn-outline-second"
+                      variant="text">
+                      View more
+                    </Button>
                   </div>
                 </div>
               </Card>
             </Grid>
             <Grid item md={4}>
-              <Card className="p-3 h-100">
+              <Card className="p-3 h-100" style={{ minHeight: '410px' }}>
                 <div>
-                  <b className="font-size-xxl">Done</b>
+                  <b className="font-size-xxl">Task Progress</b>
                   <div className="mt-3">
-                    <div className="font-weight-bold font-size-lg">
-                      Team integration workshops
-                    </div>
-                    <div className="bg-composed-img-5 h-180px mb-2 mt-2 rounded"></div>
-                    <div className="opacity-6">Progress</div>
-                    <div className="align-box-row">
-                      <div className="flex-grow-1">
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-success"
-                          value={100}
-                        />
+                    {/* <div className="d-flex align-items-center">
+                      <div className="d-40 btn-icon rounded-circle bg-first text-white text-center font-size-lg mr-3">
+                        <FontAwesomeIcon icon={['far', 'user']} />
                       </div>
-                      <div className="pl-3">100%</div>
-                    </div>
-                    <div>
-                      <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="avatar-icon rounded-sm">
-                          <img alt="..." src={avatar1} />
-                        </div>
+                      <b>Profile Views</b>
+                    </div> */}
+                    <GaugeChart
+                      hideText
+                      id="chartsGauges2A"
+                      nrOfLevels={6}
+                      colors={['#1bc943', '#f4772e', '#f83245']}
+                      arcWidth={0.3}
+                      percent={0.27}
+                    />
+                  </div>
+                  <div className="divider"></div>
+                  <div className="text-center mt-3">
+                    <a
+                      href="#/"
+                      onClick={(e) => e.preventDefault()}
+                      className="active m-3 btn-input-select">
+                      {/* <div className="selected-icon">
+                        <FontAwesomeIcon icon={['fas', 'check']} />
+                      </div> */}
+                      <div className="d-30 text-white d-flex align-items-center justify-content-center rounded-pill bg-warning">
+                        <FontAwesomeIcon icon={['fas', 'comments']} />
                       </div>
-                    </div>
+                      <div className="font-weight-bold mt-2">Messages</div>
+                      <div className="opacity-6">10 new</div>
+                    </a>
                   </div>
                 </div>
               </Card>
@@ -299,6 +321,20 @@ export default function MyTasksComponent() {
                     type="bar"
                     height={240}
                   />
+                  <div className="text-center p-3">
+                    <Grid container spacing={0} className="mt-2">
+                      <Grid item md={6}>
+                        <div className="badge bg-col">&nbsp;</div>
+                        <span className="pos ml-2">Outstanding Tasks</span>
+                      </Grid>
+                      <Grid item md={5} className="ml-5 text-left">
+                        <div>
+                          <div className="badge bg-col2 ml-2">&nbsp;</div>
+                          <span className="pos ml-2">Completed Tasks</span>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </div>
                 </div>
               </Card>
             </Grid>
