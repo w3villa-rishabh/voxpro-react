@@ -8,6 +8,7 @@ export const SET_SIDEBAR_FOOTER = 'THEME_OPTIONS/SET_SIDEBAR_FOOTER';
 export const SET_SIDEBAR_TOGGLE = 'THEME_OPTIONS/SET_SIDEBAR_TOGGLE';
 export const SET_SIDEBAR_FIXED = 'THEME_OPTIONS/SET_SIDEBAR_FIXED';
 export const SET_SIDEBAR_USERBOX = 'THEME_OPTIONS/SET_SIDEBAR_USERBOX';
+export const MINI_PROFILE = 'MINI_PROFILE';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -36,6 +37,11 @@ export const setSidebarToggle = (sidebarToggle) => ({
 export const setSidebarUserbox = (sidebarUserbox) => ({
   type: SET_SIDEBAR_USERBOX,
   sidebarUserbox
+});
+
+export const closeMiniProfile = (miniProfile) => ({
+  type: MINI_PROFILE,
+  miniProfile
 });
 
 // Header
@@ -173,7 +179,9 @@ export default function reducer(
     pageTitleBackground: '',
     pageTitleShadow: false,
     pageTitleIconBox: true,
-    pageTitleDescription: true
+    pageTitleDescription: true,
+
+    miniProfile: false
   },
   action
 ) {
@@ -301,6 +309,12 @@ export default function reducer(
       return {
         ...state,
         pageTitleDescription: action.pageTitleDescription
+      };
+
+    case MINI_PROFILE:
+      return {
+        ...state,
+        miniProfile: action.miniProfile
       };
     default:
       break;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +16,8 @@ import {
   CardContent,
   List
 } from '@material-ui/core';
-
+import { connect } from 'react-redux';
+import { closeMiniProfile } from '../../reducers/ThemeOptions';
 import 'date-fns';
 
 import { useHistory } from 'react-router-dom';
@@ -48,10 +50,11 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired
 };
 
-const SidebarUserbox = () => {
+const SidebarUserbox = (props) => {
   const history = useHistory();
 
   const [currentUser] = useState(getCurrentUser());
+  const { setCloseMiniProfile, miniProfile } = props;
 
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
   const [value, setValue] = useState(0);
@@ -75,11 +78,20 @@ const SidebarUserbox = () => {
 
   const handleCloseMenu1 = () => {
     setAnchorElMenu1(null);
+    setCloseMiniProfile(false);
   };
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent('resize'));
   });
+
+  useEffect(() => {
+    console.log('anchorElMenu1', anchorElMenu1);
+    if (miniProfile) {
+      handleCloseMenu1();
+    }
+    console.log('miniProfile', miniProfile);
+  }, [anchorElMenu1, miniProfile]);
 
   return (
     <>
@@ -740,4 +752,12 @@ const SidebarUserbox = () => {
   );
 };
 
-export default SidebarUserbox;
+const mapStateToProps = (state) => ({
+  miniProfile: state.ThemeOptions.miniProfile
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCloseMiniProfile: (enable) => dispatch(closeMiniProfile(enable))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarUserbox);

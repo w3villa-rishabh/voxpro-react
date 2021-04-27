@@ -8,7 +8,10 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { connect } from 'react-redux';
 
 import { NavLink } from 'react-router-dom';
-import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
+import {
+  closeMiniProfile,
+  setSidebarToggleMobile
+} from '../../reducers/ThemeOptions';
 
 import SidebarUserbox from '../SidebarUserbox';
 import { getCurrentUser } from 'helper';
@@ -26,9 +29,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile, sidebarUserbox } = props;
+  const { setCloseMiniProfile } = props;
   const [currentUser] = useState(getCurrentUser());
 
-  const toggleSidebarMobile = () => setSidebarToggleMobile(false);
+  const toggleSidebarMobile = () => {
+    setSidebarToggleMobile(false);
+    setCloseMiniProfile(true);
+  };
 
   const [dashboardOpen, setDashboardOpen] = useState(false);
   const [IR35, setIR35] = useState(false);
@@ -149,21 +156,23 @@ const SidebarMenu = (props) => {
                   currentUser.role === 'company1') && (
                   <ul>
                     <li>
-                      <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
+                      <NavLink
+                        onClick={toggleSidebarMobile}
+                        to="/agency-pending">
                         Pending
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/agency-history">
                         History
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/agency-enquiries">
                         Query
                       </NavLink>
                     </li>
@@ -604,7 +613,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setSidebarToggleMobile: (enable) => dispatch(setSidebarToggleMobile(enable))
+  setSidebarToggleMobile: (enable) => dispatch(setSidebarToggleMobile(enable)),
+
+  setCloseMiniProfile: (enable) => dispatch(closeMiniProfile(enable))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarMenu);

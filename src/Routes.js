@@ -111,6 +111,19 @@ const SearchCompaniesComponent = lazy(() =>
   import('./components/search/company-search')
 );
 
+//Agency Pending request
+const AgencyPending = lazy(() =>
+  import('./components/ir35_tax/agency-pending')
+);
+
+//Agency History request
+const AgencyHistory = lazy(() =>
+  import('./components/ir35_tax/agency-history')
+);
+
+//Agency enquiry request
+const AgencyEnquiry = lazy(() => import('./components/ir35_tax/agency-query'));
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -238,6 +251,9 @@ const Routes = () => {
                 '/request-info',
                 '/candidate-history',
                 '/candidate-enquiries',
+                '/agency-pending',
+                '/agency-history',
+                '/agency-enquiries',
                 '/new-request',
                 '/request-history',
                 '/applied-jobs',
@@ -265,6 +281,10 @@ const Routes = () => {
                     path="/candidate-enquiries"
                     component={CandidateQuery}
                   />
+                  <Route path="/agency-pending" component={AgencyPending} />
+                  <Route path="/agency-history" component={AgencyHistory} />
+                  <Route path="/agency-enquiries" component={AgencyEnquiry} />
+
                   <Route path="/view-profile" component={Profile} />
                   <Route path="/request-info" component={NewRequestComponent} />
                   <Route path="/new-request" component={NewRequestComponent} />
