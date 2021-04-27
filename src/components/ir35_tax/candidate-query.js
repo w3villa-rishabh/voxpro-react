@@ -36,8 +36,8 @@ export default function CandidateQuery() {
       </div>
       <div className="app-inner-content-layout">
         <div className="app-inner-content-layout--main p-0">
-          <Grid container spacing={6}>
-            <Grid item md={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4}>
               <Card className="p-3">
                 <div className="display-3 font-weight-bold">31</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
@@ -46,7 +46,7 @@ export default function CandidateQuery() {
                 </div>
               </Card>
             </Grid>
-            <Grid item md={4}>
+            <Grid item xs={12} sm={4}>
               <Card className="p-3">
                 <div className="display-3 font-weight-bold">68</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
@@ -55,7 +55,7 @@ export default function CandidateQuery() {
                 </div>
               </Card>
             </Grid>
-            <Grid item md={4}>
+            <Grid item xs={12} sm={4}>
               <Card className="p-3">
                 <div className="display-3 font-weight-bold">57</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />

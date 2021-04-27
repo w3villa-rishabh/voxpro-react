@@ -149,21 +149,23 @@ const SidebarMenu = (props) => {
                   currentUser.role === 'company1') && (
                   <ul>
                     <li>
-                      <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
+                      <NavLink
+                        onClick={toggleSidebarMobile}
+                        to="/agency-pending">
                         Pending
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/agency-history">
                         History
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/agency-enquiries">
                         Query
                       </NavLink>
                     </li>
