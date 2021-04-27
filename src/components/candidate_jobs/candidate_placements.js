@@ -7,6 +7,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export default function CandidatePlacements() {
   const [documents, setDocuments] = useState([]);
@@ -32,7 +33,7 @@ export default function CandidatePlacements() {
       </div>
 
       <div className="app-inner-content-layout">
-        <div className="app-inner-content-layout--main p-0">
+        <div className="app-inner-content-layout--main p-0 overflow-x hid">
           <Grid container spacing={2}>
             <Grid item md={2} xs={6}>
               <Card className="card-box" style={{ minHeight: '200px' }}>
@@ -77,7 +78,7 @@ export default function CandidatePlacements() {
                   />
                   <div className="text-black mt-4 mb-1"></div>
                   <div className="font-size-md opacity-8">
-                    Active Placement due to end
+                    Active placements due to end
                   </div>
                 </div>
               </Card>
@@ -137,263 +138,270 @@ export default function CandidatePlacements() {
           <div className="pt-3">
             <Card className="card-box mb-spacing-6-x2">
               <div className="table-responsive-md">
-                <Table className="table table-hover text-nowrap mb-0">
-                  <thead>
-                    <tr>
-                      <th className="text-center">Placement ID</th>
-                      <th className="text-center">Job Title</th>
-                      <th className="text-center">Company</th>
-                      <th className="text-center">Salary</th>
-                      <th className="text-center">Start Date</th>
-                      <th className="text-center">End Date</th>
-                      <th className="text-center">IR 35 Status</th>
-                      <th className="text-center">Onboarding Documents</th>
-                      <th className="text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="font-weight-bold text-center">#0001</td>
-                      <td className="text-center">Business Analyst</td>
-                      <td className="text-center">Headhunters</td>
-                      <td className="text-center">£4000</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">Inside IR-35</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-primary"
-                          variant="contained">
-                          View
-                        </Button>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
+                <PerfectScrollbar>
+                  <Table className="table table-hover text-nowrap mb-0">
+                    <thead>
+                      <tr>
+                        <th className="text-center">Placement ID</th>
+                        <th className="text-center">Placement Status</th>
+                        <th className="text-center">Job Title</th>
+                        <th className="text-center">Company</th>
+                        <th className="text-center">Salary</th>
+                        <th className="text-center">Start Date</th>
+                        <th className="text-center">End Date</th>
+                        <th className="text-center">IR 35 Status</th>
+                        <th className="text-center">Onboarding Documents</th>
+                        <th className="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="font-weight-bold text-center">#0001</td>
+                        <td className="text-center">Ended</td>
+                        <td className="text-center">Business Analyst</td>
+                        <td className="text-center">Headhunters</td>
+                        <td className="text-center">£4000</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">Inside IR-35</td>
+                        <td className="text-center">
                           <Button
-                            aria-controls="simple-menu"
                             size="small"
                             className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
+                            variant="contained">
+                            View
                           </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow Up
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Withdraw
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Delete
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                More
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold text-center">#0002</td>
-                      <td className="text-center">Software Developer</td>
-                      <td className="text-center">Career Appear</td>
-                      <td className="text-center">£2000</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">Outside IR-35</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-primary"
-                          variant="contained">
-                          View
-                        </Button>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center justify-content-center flex-wrap">
+                            <Button
+                              aria-controls="simple-menu"
+                              size="small"
+                              className="px-4 btn-neutral-primary"
+                              variant="contained"
+                              aria-haspopup="true"
+                              onClick={handleClick}>
+                              Action
+                            </Button>
+                            <Menu
+                              id="simple-menu"
+                              anchorEl={anchorEl}
+                              keepMounted
+                              classes={{ list: 'p-0' }}
+                              open={Boolean(anchorEl)}
+                              onClose={handleClose}>
+                              <div className="p-3">
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Follow Up
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Withdraw
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Delete
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  More
+                                </MenuItem>
+                              </div>
+                            </Menu>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold text-center">#0002</td>
+                        <td className="text-center">Due To End</td>
+                        <td className="text-center">Software Developer</td>
+                        <td className="text-center">Career Appear</td>
+                        <td className="text-center">£2000</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">Outside IR-35</td>
+                        <td className="text-center">
                           <Button
-                            aria-controls="simple-menu"
                             size="small"
                             className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
+                            variant="contained">
+                            Pending
                           </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow Up
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Withdraw
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Delete
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                More
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold text-center">#0003</td>
-                      <td className="text-center"> IT Architect</td>
-                      <td className="text-center">Starting Stars</td>
-                      <td className="text-center">£3000</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">N/A</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-primary"
-                          variant="contained">
-                          View
-                        </Button>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center justify-content-center flex-wrap">
+                            <Button
+                              aria-controls="simple-menu"
+                              size="small"
+                              className="px-4 btn-neutral-primary"
+                              variant="contained"
+                              aria-haspopup="true"
+                              onClick={handleClick}>
+                              Action
+                            </Button>
+                            <Menu
+                              id="simple-menu"
+                              anchorEl={anchorEl}
+                              keepMounted
+                              classes={{ list: 'p-0' }}
+                              open={Boolean(anchorEl)}
+                              onClose={handleClose}>
+                              <div className="p-3">
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Follow Up
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Withdraw
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Delete
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  More
+                                </MenuItem>
+                              </div>
+                            </Menu>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold text-center">#0003</td>
+                        <td className="text-center">Active</td>
+                        <td className="text-center"> IT Architect</td>
+                        <td className="text-center">Starting Stars</td>
+                        <td className="text-center">£3000</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">N/A</td>
+                        <td className="text-center">
                           <Button
-                            aria-controls="simple-menu"
                             size="small"
                             className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
+                            variant="contained">
+                            View
                           </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow Up
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Withdraw
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Delete
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                More
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold text-center">#0004</td>
-                      <td className="text-center">Business Developer</td>
-                      <td className="text-center">Humble Hunters</td>
-                      <td className="text-center">£2500</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">14 Feb 2020</td>
-                      <td className="text-center">Inside IR-35</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-primary"
-                          variant="contained">
-                          View
-                        </Button>
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center justify-content-center flex-wrap">
+                            <Button
+                              aria-controls="simple-menu"
+                              size="small"
+                              className="px-4 btn-neutral-primary"
+                              variant="contained"
+                              aria-haspopup="true"
+                              onClick={handleClick}>
+                              Action
+                            </Button>
+                            <Menu
+                              id="simple-menu"
+                              anchorEl={anchorEl}
+                              keepMounted
+                              classes={{ list: 'p-0' }}
+                              open={Boolean(anchorEl)}
+                              onClose={handleClose}>
+                              <div className="p-3">
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Follow Up
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Withdraw
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Delete
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  More
+                                </MenuItem>
+                              </div>
+                            </Menu>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-weight-bold text-center">#0004</td>
+                        <td className="text-center">Pending</td>
+                        <td className="text-center">Business Developer</td>
+                        <td className="text-center">Humble Hunters</td>
+                        <td className="text-center">£2500</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">14 Feb 2020</td>
+                        <td className="text-center">Pending</td>
+                        <td className="text-center">
                           <Button
-                            aria-controls="simple-menu"
                             size="small"
                             className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
+                            variant="contained">
+                            Pending
                           </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow Up
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Withdraw
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Delete
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                More
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                        </td>
+                        <td>
+                          <div className="d-flex align-items-center justify-content-center flex-wrap">
+                            <Button
+                              aria-controls="simple-menu"
+                              size="small"
+                              className="px-4 btn-neutral-primary"
+                              variant="contained"
+                              aria-haspopup="true"
+                              onClick={handleClick}>
+                              Action
+                            </Button>
+                            <Menu
+                              id="simple-menu"
+                              anchorEl={anchorEl}
+                              keepMounted
+                              classes={{ list: 'p-0' }}
+                              open={Boolean(anchorEl)}
+                              onClose={handleClose}>
+                              <div className="p-3">
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Follow Up
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Withdraw
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  Delete
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={handleClose}>
+                                  More
+                                </MenuItem>
+                              </div>
+                            </Menu>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </PerfectScrollbar>
               </div>
               <div className="card-footer py-3 text-center">
                 <Button
