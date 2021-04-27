@@ -85,8 +85,9 @@ export default function OnBoardDocument() {
                 />
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
-                4 Documents {currentUser.role === 'candidate' && 'Uploaded'}{' '}
+                4 Documents {currentUser.role === 'candidate' && 'Uploaded'}
                 {currentUser.role === 'agency' && 'Added'}
+                {currentUser.role === 'company' && 'Added'}
               </div>
               {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
               <div className="divider mx-4 my-2" />
@@ -104,7 +105,8 @@ export default function OnBoardDocument() {
                   </Button>
                 </div>
               )}
-              {currentUser.role === 'agency' && (
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && (
                 <div className="text-center">
                   <Button size="small" className="px-4 btn-neutral-info">
                     Pending Documents
@@ -131,8 +133,9 @@ export default function OnBoardDocument() {
                 />
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
-                3 Documents {currentUser.role === 'candidate' && 'Uploaded'}{' '}
+                3 Documents {currentUser.role === 'candidate' && 'Uploaded'}
                 {currentUser.role === 'agency' && 'Downloaded'}
+                {currentUser.role === 'company' && 'Downloaded'}
               </div>
               {/* <div className="font-size-lg opacity-8">Monthly Income</div> */}
               <div className="divider mx-4 my-2" />
@@ -148,7 +151,8 @@ export default function OnBoardDocument() {
                   </Button>
                 </div>
               )}
-              {currentUser.role === 'agency' && (
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && (
                 <div className="text-center">
                   <Button size="small" className="px-4 btn-neutral-info">
                     Pending Documents
@@ -170,8 +174,9 @@ export default function OnBoardDocument() {
                 <FontAwesomeIcon icon={['fas', 'file']} className="display-4" />
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
-                2 Documents {currentUser.role === 'candidate' && 'Uploaded'}{' '}
+                2 Documents {currentUser.role === 'candidate' && 'Uploaded'}
                 {currentUser.role === 'agency' && 'Pending Viewing'}
+                {currentUser.role === 'company' && 'Pending Viewing'}
               </div>
               {/* <div className="font-size-lg opacity-8">Total 2Sales</div> */}
               <div className="divider mx-4 my-2" />
@@ -187,7 +192,8 @@ export default function OnBoardDocument() {
                   </Button>
                 </div>
               )}
-              {currentUser.role === 'agency' && (
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && (
                 <div className="text-center">
                   <Button size="small" className="px-4 btn-neutral-info">
                     Pending Documents
@@ -235,7 +241,8 @@ export default function OnBoardDocument() {
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               {currentUser.role === 'candidate' && 'Requests for information'}
-              {currentUser.role === 'agency' &&
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') &&
                 'Candidate documents due to expire'}
             </div>
             <div className="d-flex py-2 align-items-center">
@@ -259,7 +266,8 @@ export default function OnBoardDocument() {
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               {currentUser.role === 'candidate' &&
                 'Remaining Documents to upload'}
-              {currentUser.role === 'agency' &&
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') &&
                 'Placements documents due to expire'}
             </div>
             <div className="d-flex py-2 align-items-center">
@@ -282,7 +290,8 @@ export default function OnBoardDocument() {
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               {currentUser.role === 'candidate' && 'Requests for information'}
-              {currentUser.role === 'agency' &&
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') &&
                 'Client documents due to expire'}
             </div>
             <div className="d-flex py-2 align-items-center">
