@@ -325,7 +325,7 @@ export default function UploadDocument() {
               label="Send me a copy"
             />
           </div>
-         <AddsComponents />
+          {currentUser.role === 'candidate' && <AddsComponents />}
         </div>
       </Card>
     </>

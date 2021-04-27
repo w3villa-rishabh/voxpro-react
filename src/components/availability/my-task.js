@@ -315,7 +315,7 @@ export default function MyTasksComponent() {
               </Card>
             </Grid>
           </Grid>
-          <AddsComponents />
+          {currentUser.role === 'candidate' && <AddsComponents />}
         </div>
       </div>
     </>

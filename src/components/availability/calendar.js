@@ -13,6 +13,7 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
+import { getCurrentUser } from '../../helper';
 
 import { toast } from 'react-toastify';
 
@@ -122,6 +123,7 @@ export default function TasksCalendarComponent() {
   const [availability, setAvailability] = useState([availabilityObj]);
   const [time] = useState(generateTimeIncrement());
   const [picDate, setPicDate] = useState('');
+  const [currentUser] = useState(getCurrentUser());
 
   const addMoreRow = () => {
     availabilityObj.startDate = picDate;
@@ -273,7 +275,7 @@ export default function TasksCalendarComponent() {
             style={{ minHeight: 650 }}
             eventPropGetter={eventStyleGetter}
           />
-          <AddsComponents />
+          {currentUser.role === 'candidate' && <AddsComponents />}
         </div>
       </div>
 
