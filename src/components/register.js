@@ -247,9 +247,9 @@ export default function LivePreviewExample() {
       validateForm(errors) &&
       account.first_name &&
       account.last_name &&
-      account.company_name &&
-      account.contact_number &&
-      account.address &&
+      // account.company_name &&
+      // account.contact_number &&
+      // account.address &&
       account.email &&
       passwordVerified &&
       policyCheckbox &&
@@ -270,7 +270,10 @@ export default function LivePreviewExample() {
             }, 7000);
           } else {
             toast.error(response.data.message);
-            setDoLogin(false);
+            setTimeout(() => {
+              window.location.href = '/recover-password';
+              setDoLogin(false);
+            }, 5000);
           }
         })
         .catch(() => {
