@@ -33,10 +33,6 @@ export default function LivePreviewExample() {
   const [value, setValue] = useState('');
   const options = useMemo(() => countryList().getData(), []);
 
-  const changeHandler = (value) => {
-    setValue(value);
-  };
-
   let search = window.location.search;
   let params = new URLSearchParams(search);
   let type = params.get('as');
@@ -181,6 +177,15 @@ export default function LivePreviewExample() {
     setAccount(account);
   };
 
+  const changeHandler = (value) => {
+    setErrors({
+      ...errors,
+      country:
+        value.label.length > 1 ? '' : 'Country is required!'
+    });
+    setAccount({ ...account, country: value });
+  };
+
   const validEmailRegex = RegExp(
     // eslint-disable-next-line no-useless-escape
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -232,7 +237,8 @@ export default function LivePreviewExample() {
           : account.password === account.confirm_password
           ? ''
           : 'Confirm password not match!',
-      policyCheckbox: policyCheckbox === false ? 'Please read policy!' : ''
+      policyCheckbox: policyCheckbox === false ? 'Please read policy!' : '',
+      country: account.country.length === 0 ? 'Country is required!' : ''
     });
     return valid;
   };
@@ -525,17 +531,17 @@ export default function LivePreviewExample() {
                                     <span className="text-danger">*</span>
                                   </label>
                                   <Select
-                                    // name="country"
+                                    name="country"
                                     options={options}
-                                    value={value}
+                                    // value={value}
                                     onChange={changeHandler}
                                     required="true"
                                   />
-                                  {/* {errors.country.length > 0 && (
+                                  {errors.country.length > 0 && (
                                     <span className="error">
                                       {errors.country}
                                     </span>
-                                  )} */}
+                                  )}
                                 </div>
                               </div>
                             )}
