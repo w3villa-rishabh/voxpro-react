@@ -144,11 +144,6 @@ const AgencyRequestHistory = lazy(() =>
   import('./components/request_information/agency-request-history')
 );
 
-//AgencyNewRequest
-const AgencyNewRequest = lazy(() =>
-  import('./components/request_information/agency-new-request')
-);
-
 //AgencyJobsHistory
 const AgencyJobsHistory = lazy(() =>
   import('./components/agency_jobs/history')
@@ -331,10 +326,6 @@ const Routes = () => {
                   />
 
                   <Route path="/agency">
-                    <Route
-                      path="/agency/request"
-                      component={AgencyNewRequest}
-                    />
                     <Route
                       path="/agency/pending"
                       component={AgencyRequestPending}

@@ -7,7 +7,6 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { useHistory } from 'react-router-dom';
 
 const jobFiltersOptions = [
   {
@@ -66,8 +65,6 @@ const reasonCompanyOptions = [
 ];
 
 export default function AddNewRequestComponent() {
-  const history = useHistory();
-
   const [requestFilter, setRequestFilter] = useState({
     value: 'candidate',
     label: 'Candidate'
@@ -87,10 +84,7 @@ export default function AddNewRequestComponent() {
   };
   const filterJobs = (filter) => {
     setRequestFilter(filter);
-    setRequestObj({ ...requestObj, name: '', id: '', jobId: '', jobTitle: '' });
-    setReason('');
-    setDocuments('');
-    setSelectedDate(new Date('2020-08-18'));
+    cancelRequest();
   };
 
   const handleChanges = (e) => {
@@ -98,11 +92,15 @@ export default function AddNewRequestComponent() {
   };
 
   const sendRequest = () => {
-    history.push('/agency/request');
+    console.log(requestObj, requestObj);
+    cancelRequest();
   };
 
   const cancelRequest = () => {
-    history.push('/agency/request');
+    setRequestObj({ ...requestObj, name: '', id: '', jobId: '', jobTitle: '' });
+    setReason('');
+    setDocuments('');
+    setSelectedDate(new Date('2020-08-18'));
   };
 
   return (
