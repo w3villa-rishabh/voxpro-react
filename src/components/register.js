@@ -180,8 +180,7 @@ export default function LivePreviewExample() {
   const changeHandler = (value) => {
     setErrors({
       ...errors,
-      country:
-        value.label.length > 1 ? '' : 'Country is required!'
+      country: value.label.length > 1 ? '' : 'Country is required!'
     });
     setAccount({ ...account, country: value });
   };
