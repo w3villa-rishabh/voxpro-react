@@ -85,11 +85,11 @@ export default function AddNewRequestComponent() {
   };
 
   const sendRequest = () => {
-    history.push('/agency-new-request');
+    history.push('/agency/request');
   };
 
   const cancelRequest = () => {
-    history.push('/agency-new-request');
+    history.push('/agency/request');
   };
 
   return (

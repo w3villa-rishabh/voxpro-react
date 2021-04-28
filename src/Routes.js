@@ -284,10 +284,7 @@ const Routes = () => {
                 '/agency-enquiries',
                 '/new-request',
                 '/request-history',
-                '/new-request-information',
-                '/agency-new-request',
-                '/agency-pending-request',
-                '/agency-history-request',
+                '/agency',
                 '/applied-jobs',
                 '/live',
                 '/history',
@@ -326,22 +323,25 @@ const Routes = () => {
                     path="/request-history"
                     component={RequestHistoryComponent}
                   />
-                  <Route
-                    path="/new-request-information"
-                    component={AgencyNewRequestForInformation}
-                  />
-                  <Route
-                    path="/agency-new-request"
-                    component={AgencyNewRequest}
-                  />
-                  <Route
-                    path="/agency-pending-request"
-                    component={AgencyRequestPending}
-                  />
-                  <Route
-                    path="/agency-history-request"
-                    component={AgencyRequestHistory}
-                  />
+
+                  <Route path="/agency">
+                    <Route
+                      path="/agency/request"
+                      component={AgencyNewRequest}
+                    />
+                    <Route
+                      path="/agency/pending"
+                      component={AgencyRequestPending}
+                    />
+                    <Route
+                      path="/agency/history"
+                      component={AgencyRequestHistory}
+                    />
+                    <Route
+                      path="/agency/new-request"
+                      component={AgencyNewRequestForInformation}
+                    />
+                  </Route>
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
                   <Route path="/placements" component={CandidatePlacements} />
                   <Route path="/tasks" component={MyTasksComponent} />

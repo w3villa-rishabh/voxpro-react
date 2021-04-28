@@ -9,7 +9,7 @@ export default function AgencyRequestComponent() {
   const history = useHistory();
 
   const addNewRequest = () => {
-    history.push('/new-request-information');
+    history.push('/agency/new-request');
   };
 
   return (
