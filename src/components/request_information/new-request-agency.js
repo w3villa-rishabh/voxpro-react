@@ -74,7 +74,12 @@ export default function AddNewRequestComponent() {
   });
   const [reason, setReason] = useState('');
   const [documents, setDocuments] = useState('');
-
+  const [requestObj, setRequestObj] = useState({
+    name: '',
+    id: '',
+    jobId: '',
+    jobTitle: ''
+  });
   const [selectedDate, setSelectedDate] = useState(new Date('2020-08-18'));
 
   const handleDateChange = (date) => {
@@ -82,6 +87,14 @@ export default function AddNewRequestComponent() {
   };
   const filterJobs = (filter) => {
     setRequestFilter(filter);
+    setRequestObj({ ...requestObj, name: '', id: '', jobId: '', jobTitle: '' });
+    setReason('');
+    setDocuments('');
+    setSelectedDate(new Date('2020-08-18'));
+  };
+
+  const handleChanges = (e) => {
+    setRequestObj({ ...requestObj, [e.target.name]: e.target.value });
   };
 
   const sendRequest = () => {
@@ -123,6 +136,8 @@ export default function AddNewRequestComponent() {
                   variant="outlined"
                   size="small"
                   name="name"
+                  value={requestObj.name}
+                  onChange={handleChanges}
                   label={
                     requestFilter.value === 'candidate'
                       ? 'Candidate Name'
@@ -137,7 +152,9 @@ export default function AddNewRequestComponent() {
                     <TextField
                       variant="outlined"
                       size="small"
-                      name="name"
+                      name="id"
+                      value={requestObj.id}
+                      onChange={handleChanges}
                       label={
                         requestFilter.value === 'candidate'
                           ? 'Candidate ID'
@@ -150,7 +167,9 @@ export default function AddNewRequestComponent() {
                     <TextField
                       variant="outlined"
                       size="small"
-                      name="name"
+                      name="jobId"
+                      onChange={handleChanges}
+                      value={requestObj.jobId}
                       label="Job or (Placement) ID"
                       fullWidth
                     />
@@ -159,7 +178,9 @@ export default function AddNewRequestComponent() {
                     <TextField
                       variant="outlined"
                       size="small"
-                      name="name"
+                      name="jobTitle"
+                      onChange={handleChanges}
+                      value={requestObj.jobTitle}
                       label="Job Title"
                       fullWidth
                     />
