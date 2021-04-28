@@ -86,8 +86,15 @@ export default function OnBoardDocument() {
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
                 4 Documents {currentUser.role === 'candidate' && 'Uploaded'}
-                {currentUser.role === 'agency' && 'Added'}
-                {currentUser.role === 'company' && 'Added'}
+                {currentUser.role === 'agency' && 'added'}
+                {currentUser.role === 'company' && 'added'}
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
+                  <div>
+                    <div>3 Documents downloaded</div>
+                    <div>2 Documents Pending Viewing</div>
+                  </div>
+                )}
               </div>
               {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
               <div className="divider mx-4 my-2" />
@@ -134,8 +141,15 @@ export default function OnBoardDocument() {
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
                 3 Documents {currentUser.role === 'candidate' && 'Uploaded'}
-                {currentUser.role === 'agency' && 'Downloaded'}
-                {currentUser.role === 'company' && 'Downloaded'}
+                {currentUser.role === 'agency' && 'added'}
+                {currentUser.role === 'company' && 'added'}
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
+                  <div>
+                    <div>2 Documents downloaded</div>
+                    <div>2 Documents Pending Viewing</div>
+                  </div>
+                )}
               </div>
               {/* <div className="font-size-lg opacity-8">Monthly Income</div> */}
               <div className="divider mx-4 my-2" />
@@ -175,8 +189,15 @@ export default function OnBoardDocument() {
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
                 2 Documents {currentUser.role === 'candidate' && 'Uploaded'}
-                {currentUser.role === 'agency' && 'Pending Viewing'}
-                {currentUser.role === 'company' && 'Pending Viewing'}
+                {currentUser.role === 'agency' && 'added'}
+                {currentUser.role === 'company' && 'added'}
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
+                  <div>
+                    <div>1 Document downloaded</div>
+                    <div>2 Documents Pending Viewing</div>
+                  </div>
+                )}
               </div>
               {/* <div className="font-size-lg opacity-8">Total 2Sales</div> */}
               <div className="divider mx-4 my-2" />
@@ -207,7 +228,7 @@ export default function OnBoardDocument() {
           <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               {currentUser.role === 'candidate' && <b>Onboarding Documents</b>}
-              {currentUser.role === 'agency' && <b>My Templates Documents</b>}
+              {currentUser.role === 'agency' && <b>My Templates</b>}
               {currentUser.role === 'company' && <b>Personal Documents</b>}
             </div>
             <div className="card-content-overlay text-center py-4">
@@ -218,7 +239,7 @@ export default function OnBoardDocument() {
                 />
               </div>
               <div className="mb-1 mt-2 text-black text-black-50">
-                4 Document Uploaded
+                4 Template Uploaded
               </div>
               {/* <div className="font-size-lg opacity-8">Total Sales</div> */}
               <div className="divider mx-4 my-2" />

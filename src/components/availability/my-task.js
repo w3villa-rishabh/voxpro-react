@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import { Grid, Card, LinearProgress, Button } from '@material-ui/core';
+import { Grid, Card, Button } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
 import Calendar from 'react-calendar';
@@ -103,87 +103,90 @@ export default function MyTasksComponent() {
         <div className="app-inner-content-layout--main p-0">
           <Grid container spacing={2}>
             <Grid item md={4}>
-              <Card className="p-3" style={{ minHeight: '410px' }}>
+              <Card className="p-3 h-100" style={{ minHeight: '440px' }}>
                 <div>
                   <b className="font-size-xxl">To Do</b>
                   <div className="mt-3">
                     <Grid container spacing={0}>
-                      <Grid item md={7}>
+                      <Grid item md={9}>
                         <div className="font-weight-bold font-size-lg">
                           Request for information
                         </div>
                       </Grid>
-                      <Grid item md={5}>
+                      <Grid item md={3}>
                         <Button
                           size="small"
-                          className="btn-outline-second ml-5"
+                          className="btn-primary ml-3"
                           variant="text">
                           View
                         </Button>
                       </Grid>
                     </Grid>
-                    <div className="opacity-6">Pending IR35 questionnaire</div>
-                    <div className="align-box-row">
-                      <div className="flex-grow-1">
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-dark"
-                          value={10}
-                        />
-                      </div>
-                      <div className="pl-3">10</div>
+                    <div className="mb-1 text-black text-black-50">
+                      4 new requests pending
+                    </div>
+                    <div className="divider opacity-8 my-1 mx-2" />
+                    <Grid container spacing={0}>
+                      <Grid item md={9}>
+                        <div className="font-weight-bold font-size-lg">
+                          Pending IR35 questionnaire
+                        </div>
+                      </Grid>
+                      <Grid item md={3}>
+                        <Button
+                          size="small"
+                          className="btn-primary ml-3"
+                          variant="text">
+                          View
+                        </Button>
+                      </Grid>
+                    </Grid>
+                    <div className="mb-1 text-black text-black-50">
+                      3 new questionnaires pending
                     </div>
                   </div>
                 </div>
                 <div className="divider opacity-8 my-1 mx-2" />
                 <div className="mt-3">
                   <Grid container spacing={0}>
-                    <Grid item md={7}>
+                    <Grid item md={9}>
                       <div className="font-weight-bold font-size-lg">
                         Interview Requests
                       </div>
                     </Grid>
-                    <Grid item md={5}>
+                    <Grid item md={3}>
                       <Button
                         size="small"
-                        className="btn-outline-second ml-5"
+                        className="btn-primary ml-3"
                         variant="text">
                         View
                       </Button>
                     </Grid>
                   </Grid>
-                  <p>There are total 4 Interviews requests pending for you.</p>
+                  <div className="mb-1 text-black text-black-50">
+                    2 new requests pending
+                  </div>
                   <div className="divider opacity-8 my-1 mx-2 mb-2" />
                   <Grid container spacing={0}>
-                    <Grid item md={7}>
+                    <Grid item md={9}>
                       <div className="font-weight-bold font-size-lg">
                         Connection Requests{' '}
                       </div>
                     </Grid>
-                    <Grid item md={5}>
+                    <Grid item md={3}>
                       <Button
                         size="small"
-                        className="btn-outline-second ml-5"
+                        className="btn-primary ml-3"
                         variant="text">
                         View
                       </Button>
                     </Grid>
                   </Grid>
-                  {/* <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-dark"
-                        value={0}
-                      />
-                    </div>
-                    <div className="pl-3">0%</div>
-                  </div> */}
-                  <div className="card-footer text-center">
-                    <Button
-                      size="small"
-                      className="btn-outline-second"
-                      variant="text">
+                  <div className="mb-1 text-black text-black-50">
+                    10 new requests
+                  </div>
+                  <div className="card-footer text-center mt-3">
+                    <Button size="small" className="btn-primary" variant="text">
                       View more
                     </Button>
                   </div>
@@ -191,78 +194,87 @@ export default function MyTasksComponent() {
               </Card>
             </Grid>
             <Grid item md={4}>
-              <Card className="p-3" style={{ minHeight: '410px' }}>
-                <div>
-                  <b className="font-size-xxl">Follow up</b>
-                  <div className="mt-3">
-                    <Grid container spacing={0}>
-                      <Grid item md={7}>
-                        <div className="font-weight-bold font-size-lg">
-                          IR35 Queries
-                        </div>
-                      </Grid>
-                      <Grid item md={5}>
-                        <Button
-                          size="small"
-                          className="btn-outline-second ml-5"
-                          variant="text">
-                          View
-                        </Button>
-                      </Grid>
-                    </Grid>
-                    {/* <p>5 IR35 queries are pending</p> */}
-                    <div className="opacity-6">IR35 Submitted</div>
-                    <div className="align-box-row">
-                      <div className="flex-grow-1">
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-info"
-                          value={50}
-                        />
-                      </div>
-                      <div className="pl-3">10</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="divider opacity-8 my-1 mx-2" />
+              <Card className="p-3 h-100" style={{ minHeight: '440px' }}>
+                <b className="font-size-xxl">Follow up</b>
                 <div className="mt-3">
                   <Grid container spacing={0}>
                     <Grid item md={7}>
-                      <div className="font-weight-bold font-size-lg">
-                        Pending Placements follow up
+                      <div className="font-weight-bold font-size-md">
+                        IR35 questionnaire submitted
                       </div>
                     </Grid>
                     <Grid item md={5}>
                       <Button
                         size="small"
-                        className="btn-outline-second ml-5"
+                        className="btn-primary ml-3"
                         variant="text">
-                        View
+                        Follow up
                       </Button>
                     </Grid>
                   </Grid>
-                  <p>There are total 4 pending placements follow up.</p>
+                  <div className="mb-1 text-black text-black-50">
+                    2 questionnaire submitted
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2 mb-2" />
+                  {/* <p>5 IR35 queries are pending</p> */}
+                  <Grid container spacing={0}>
+                    <Grid item md={7}>
+                      <div className="font-weight-bold font-size-lg">
+                        IR35 queries
+                      </div>
+                    </Grid>
+                    <Grid item md={5}>
+                      <Button
+                        size="small"
+                        className="btn-primary ml-3"
+                        variant="text">
+                        Follow up
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <div className="mb-1 text-black text-black-50">
+                    1 pending query
+                  </div>
                   <div className="divider opacity-8 my-1 mx-2 mb-2" />
                   <Grid container spacing={0}>
                     <Grid item md={7}>
                       <div className="font-weight-bold font-size-lg">
-                        Saved jobs due to expire{' '}
+                        Pending Placements
                       </div>
                     </Grid>
                     <Grid item md={5}>
                       <Button
                         size="small"
-                        className="btn-outline-second ml-5"
+                        className="btn-primary ml-3"
                         variant="text">
-                        View
+                        Follow up
                       </Button>
                     </Grid>
                   </Grid>
+                  <div className="mb-1 text-black text-black-50">
+                    2 pending placements
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2 mb-2" />
+                  <Grid container spacing={0}>
+                    <Grid item md={7}>
+                      <div className="font-weight-bold font-size-lg">
+                        Job applications
+                      </div>
+                    </Grid>
+                    <Grid item md={5}>
+                      <Button
+                        size="small"
+                        className="btn-primary ml-3"
+                        variant="text">
+                        Follow up
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <div className="mb-1 text-black text-black-50">
+                    5 applications
+                  </div>
                   <div className="card-footer py-3 text-center">
-                    <Button
-                      size="small"
-                      className="btn-outline-second"
-                      variant="text">
+                    <Button size="small" className="btn-primary" variant="text">
                       View more
                     </Button>
                   </div>
@@ -270,16 +282,10 @@ export default function MyTasksComponent() {
               </Card>
             </Grid>
             <Grid item md={4}>
-              <Card className="p-3 h-100" style={{ minHeight: '410px' }}>
+              <Card className="p-3 h-100" style={{ minHeight: '440px' }}>
                 <div>
-                  <b className="font-size-xxl">Task Progress</b>
-                  <div className="mt-3">
-                    {/* <div className="d-flex align-items-center">
-                      <div className="d-40 btn-icon rounded-circle bg-first text-white text-center font-size-lg mr-3">
-                        <FontAwesomeIcon icon={['far', 'user']} />
-                      </div>
-                      <b>Profile Views</b>
-                    </div> */}
+                  <b className="font-size-xxl">Today's Task Progress</b>
+                  <div className="">
                     <GaugeChart
                       hideText
                       id="chartsGauges2A"
@@ -289,8 +295,14 @@ export default function MyTasksComponent() {
                       percent={0.27}
                     />
                   </div>
+                  <div className="card-content-overlay text-center">
+                    <div className="mb-1 text-black text-black-50">
+                      2 Tasks Completed <br />
+                      10 Tasks Started <br />5 Tasks Pending
+                    </div>
+                  </div>
                   <div className="divider"></div>
-                  <div className="text-center mt-3">
+                  <div className="text-center">
                     <a
                       href="#/"
                       onClick={(e) => e.preventDefault()}
