@@ -155,24 +155,24 @@ const HeaderUserbox = () => {
                 </div>
               </ListItem> */}
             <h5 className="text-left">Accounts</h5>
-            <ListItem button className="d-block text-center">
+            <ListItem button className="d-block">
               Profile (80% Completed)
             </ListItem>
-            <ListItem button className="d-block text-center">
+            <ListItem button className="d-block">
               Settings & Privacy
             </ListItem>
             <Divider className="w-100" />
             <h5 className="text-left mt-2">Manage</h5>
-            <ListItem button className="d-block text-center">
+            <ListItem button className="d-block">
               Requests
             </ListItem>
-            <ListItem button className="d-block text-center">
+            <ListItem button className="d-block">
               Notifications
             </ListItem>
-            <ListItem button className="d-block text-center">
+            <ListItem button className="d-block">
               Job Applications
             </ListItem>
-            <ListItem button className="d-block text-center">
+            <ListItem button className="d-block">
               Placements
             </ListItem>
             <Divider className="w-100" />

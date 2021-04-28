@@ -124,6 +124,34 @@ const AgencyHistory = lazy(() =>
 //Agency enquiry request
 const AgencyEnquiry = lazy(() => import('./components/ir35_tax/agency-query'));
 
+//AgencyNewRequestForInformation
+const AgencyNewRequestForInformation = lazy(() =>
+  import('./components/request_information/new-request-agency')
+);
+
+//Agency request
+const AgencyRequestPending = lazy(() =>
+  import('./components/request_information/agency-request-pending')
+);
+
+//AgencyRequestHistory
+const AgencyRequestHistory = lazy(() =>
+  import('./components/request_information/agency-request-history')
+);
+
+//AgencyNewRequest
+const AgencyNewRequest = lazy(() =>
+  import('./components/request_information/agency-new-request')
+);
+
+//AgencyJobsHistory
+const AgencyJobsHistory = lazy(() =>
+  import('./components/agency_jobs/history')
+);
+
+//AgencyJobsHistory
+const AgencyJobsLive = lazy(() => import('./components/agency_jobs/live'));
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -256,7 +284,13 @@ const Routes = () => {
                 '/agency-enquiries',
                 '/new-request',
                 '/request-history',
+                '/new-request-information',
+                '/agency-new-request',
+                '/agency-pending-request',
+                '/agency-history-request',
                 '/applied-jobs',
+                '/live',
+                '/history',
                 '/placements',
                 '/tasks',
                 '/task-calendar',
@@ -292,6 +326,22 @@ const Routes = () => {
                     path="/request-history"
                     component={RequestHistoryComponent}
                   />
+                  <Route
+                    path="/new-request-information"
+                    component={AgencyNewRequestForInformation}
+                  />
+                  <Route
+                    path="/agency-new-request"
+                    component={AgencyNewRequest}
+                  />
+                  <Route
+                    path="/agency-pending-request"
+                    component={AgencyRequestPending}
+                  />
+                  <Route
+                    path="/agency-history-request"
+                    component={AgencyRequestHistory}
+                  />
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
                   <Route path="/placements" component={CandidatePlacements} />
                   <Route path="/tasks" component={MyTasksComponent} />
@@ -301,6 +351,8 @@ const Routes = () => {
                   />
                   <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />
+                  <Route path="/live" component={AgencyJobsLive} />
+                  <Route path="/history" component={AgencyJobsHistory} />
                   <Route
                     path="/search-agencies"
                     component={SearchAgenciesComponent}

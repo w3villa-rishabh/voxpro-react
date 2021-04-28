@@ -200,13 +200,15 @@ const SidebarMenu = (props) => {
               </a>
               <Collapse in={requestInfo}>
                 <ul>
-                  <li>
-                    <NavLink onClick={toggleSidebarMobile} to="/new-request">
-                      New Request
-                    </NavLink>
-                  </li>
                   {currentUser.role === 'candidate' && (
                     <div>
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/new-request">
+                          New Request
+                        </NavLink>
+                      </li>
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
@@ -222,14 +224,21 @@ const SidebarMenu = (props) => {
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/request-information">
+                          to="/agency-new-request">
+                          New Request
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/agency-pending-request">
                           Pending
                         </NavLink>
                       </li>
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/request-information">
+                          to="/agency-history-request">
                           History
                         </NavLink>
                       </li>
