@@ -16,7 +16,7 @@ export default function AgencyRequestPendingComponent() {
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={3}>
-          <Card className="p-3">
+          <Card className="p-3 h-100">
             <div className="display-3 font-weight-bold">31</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
             <div className="font-weight-bold font-size-sm text-uppercase">
@@ -25,7 +25,7 @@ export default function AgencyRequestPendingComponent() {
           </Card>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Card className="p-3">
+          <Card className="p-3 h-100">
             <div className="display-3 font-weight-bold">68</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
             <div className="font-weight-bold font-size-sm text-uppercase">
@@ -34,7 +34,7 @@ export default function AgencyRequestPendingComponent() {
           </Card>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Card className="p-3">
+          <Card className="p-3 h-100">
             <div className="display-3 font-weight-bold">57</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
             <div className="font-weight-bold font-size-sm text-uppercase">
@@ -43,7 +43,7 @@ export default function AgencyRequestPendingComponent() {
           </Card>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Card className="p-3">
+          <Card className="p-3 h-100">
             <div className="display-3 font-weight-bold">20</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-info rounded border-info" />
             <div className="font-weight-bold font-size-sm text-uppercase">
