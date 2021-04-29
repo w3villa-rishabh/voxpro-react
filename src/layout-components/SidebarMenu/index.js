@@ -187,7 +187,7 @@ const SidebarMenu = (props) => {
                 onClick={() => {
                   setRequestInfo(!requestInfo);
                 }}
-                className={clsx({ active: IR35 })}>
+                className={clsx({ active: requestInfo })}>
                 <span className="sidebar-icon">
                   <BallotTwoToneIcon />
                 </span>
@@ -307,14 +307,14 @@ const SidebarMenu = (props) => {
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/agency-placements/pending">
                         Pending
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/agency-placements/history">
                         History
                       </NavLink>
                     </li>

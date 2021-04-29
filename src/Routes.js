@@ -152,6 +152,16 @@ const AgencyJobsHistory = lazy(() =>
 //AgencyJobsHistory
 const AgencyJobsLive = lazy(() => import('./components/agency_jobs/live'));
 
+//AgencyPlacementsHistory
+const AgencyPlacementsHistory = lazy(() =>
+  import('./components/agency_placement/history')
+);
+
+//AgencyPlacementsHistory
+const AgencyPlacementsPending = lazy(() =>
+  import('./components/agency_placement/pending')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -285,6 +295,7 @@ const Routes = () => {
                 '/new-request',
                 '/request-history',
                 '/agency',
+                '/agency-placements',
                 '/applied-jobs',
                 '/live',
                 '/history',
@@ -339,6 +350,18 @@ const Routes = () => {
                       component={AgencyNewRequestForInformation}
                     />
                   </Route>
+
+                  <Route path="/agency-placements">
+                    <Route
+                      path="/agency-placements/pending"
+                      component={AgencyPlacementsPending}
+                    />
+                    <Route
+                      path="/agency-placements/history"
+                      component={AgencyPlacementsHistory}
+                    />
+                  </Route>
+
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
                   <Route path="/placements" component={CandidatePlacements} />
                   <Route path="/tasks" component={MyTasksComponent} />
