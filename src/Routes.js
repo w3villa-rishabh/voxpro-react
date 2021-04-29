@@ -154,6 +154,15 @@ const AgencyJobsLive = lazy(() => import('./components/agency_jobs/live'));
 
 //chat
 const ChatComponents = lazy(() => import('./components/chat_component/chat'));
+//AgencyPlacementsHistory
+const AgencyPlacementsHistory = lazy(() =>
+  import('./components/agency_placement/history')
+);
+
+//AgencyPlacementsHistory
+const AgencyPlacementsPending = lazy(() =>
+  import('./components/agency_placement/pending')
+);
 
 const Routes = () => {
   const location = useLocation();
@@ -288,9 +297,10 @@ const Routes = () => {
                 '/new-request',
                 '/request-history',
                 '/agency',
+                '/agency-placements',
                 '/applied-jobs',
-                '/live',
-                '/history',
+                '/agency-jobs-live',
+                '/agency-jobs-history',
                 '/placements',
                 '/tasks',
                 '/task-calendar',
@@ -343,6 +353,18 @@ const Routes = () => {
                       component={AgencyNewRequestForInformation}
                     />
                   </Route>
+
+                  <Route path="/agency-placements">
+                    <Route
+                      path="/agency-placements/pending"
+                      component={AgencyPlacementsPending}
+                    />
+                    <Route
+                      path="/agency-placements/history"
+                      component={AgencyPlacementsHistory}
+                    />
+                  </Route>
+
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
                   <Route path="/placements" component={CandidatePlacements} />
                   <Route path="/tasks" component={MyTasksComponent} />
@@ -352,8 +374,11 @@ const Routes = () => {
                   />
                   <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />
-                  <Route path="/live" component={AgencyJobsLive} />
-                  <Route path="/history" component={AgencyJobsHistory} />
+                  <Route path="/agency-jobs-live" component={AgencyJobsLive} />
+                  <Route
+                    path="/agency-jobs-history"
+                    component={AgencyJobsHistory}
+                  />
                   <Route
                     path="/search-agencies"
                     component={SearchAgenciesComponent}

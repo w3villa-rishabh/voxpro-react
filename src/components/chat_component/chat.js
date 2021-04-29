@@ -25,7 +25,10 @@ import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import people2 from '../../assets/images/stock-photos/people-3.jpg';
 import people1 from '../../assets/images/stock-photos/people-2.jpg';
 
+import { getCurrentUser } from 'helper';
+
 export default function ChatComponents() {
+  const [currentUser] = useState(getCurrentUser());
   const [isSidebarMenuOpen, setIsSidebarMenuOpen] = useState(false);
   const [isSidebarMenuOpen2, setIsSidebarMenuOpen2] = useState(false);
 
@@ -44,8 +47,8 @@ export default function ChatComponents() {
   return (
     <>
       <div
-        className="app-inner-content-layout"
-       >
+        className="app-inner-content-layout app-inner-content-layout-fixed"
+        style={{ position: 'absolute', left: '293px' }}>
         <div className="btn-md-pane d-lg-none px-4 order-0">
           <Button
             onClick={toggleSidebarMenu}
@@ -72,7 +75,7 @@ export default function ChatComponents() {
                 className="nav-pills nav-neutral-primary flex-column">
                 <ListItem className="d-flex px-0 pt-1 pb-3 justify-content-between">
                   <div className="text-uppercase font-size-sm text-primary font-weight-bold">
-                    Channels tags
+                    Channels
                   </div>
                   <div className="ml-auto font-size-xs">
                     <Tooltip title="Add new channel">
@@ -89,21 +92,21 @@ export default function ChatComponents() {
                   href="#/"
                   onClick={(e) => e.preventDefault()}
                   selected>
-                  # development
+                  Development
                 </ListItem>
                 <ListItem
                   component="a"
                   button
                   href="#/"
                   onClick={(e) => e.preventDefault()}>
-                  # angular_themes
+                  Angular_themes
                 </ListItem>
                 <ListItem
                   component="a"
                   button
                   href="#/"
                   onClick={(e) => e.preventDefault()}>
-                  <span># react_templates</span>
+                  <span>React_templates</span>
                   <div className="badge badge-first ml-auto">23</div>
                 </ListItem>
                 <ListItem
@@ -111,7 +114,7 @@ export default function ChatComponents() {
                   button
                   href="#/"
                   onClick={(e) => e.preventDefault()}>
-                  # vue_dashboards
+                  Vue_dashboards
                 </ListItem>
               </List>
               <div className="divider my-3" />
@@ -120,7 +123,7 @@ export default function ChatComponents() {
                 className="nav-pills nav-transparent-alt flex-column">
                 <ListItem className="pt-1 px-0 pb-3">
                   <div className="text-uppercase font-size-sm text-primary font-weight-bold">
-                    Members list
+                    Connections list
                   </div>
                 </ListItem>
 
@@ -249,6 +252,144 @@ export default function ChatComponents() {
                   </div>
                 </ListItem>
               </List>
+
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && (
+                <List
+                  component="div"
+                  className="nav-pills nav-transparent-alt flex-column">
+                  <ListItem className="pt-1 px-0 pb-3">
+                    <div className="text-uppercase font-size-sm text-primary font-weight-bold">
+                      Teammates
+                    </div>
+                  </ListItem>
+
+                  <ListItem
+                    component="a"
+                    button
+                    href="#/"
+                    onClick={(e) => e.preventDefault()}
+                    className="px-0 text-black">
+                    <div className="align-box-row w-100">
+                      <div className="avatar-icon-wrapper avatar-icon-sm">
+                        <div className="badge badge-success badge-circle">
+                          Online
+                        </div>
+                        <div className="avatar-icon rounded-circle">
+                          <img alt="..." src={avatar1} />
+                        </div>
+                      </div>
+                      <div className="pl-2">
+                        <span className="d-block font-size-sm font-weight-bold">
+                          Adella Galen
+                          <span className="d-block font-weight-normal font-size-xs text-black-50">
+                            (Galen@example.com)
+                          </span>
+                        </span>
+                      </div>
+                      <div className="ml-auto">
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="text-right d-block font-size-sm"
+                        />
+                      </div>
+                    </div>
+                  </ListItem>
+                  <ListItem
+                    component="a"
+                    button
+                    href="#/"
+                    onClick={(e) => e.preventDefault()}
+                    className="px-0 text-black">
+                    <div className="align-box-row w-100">
+                      <div className="avatar-icon-wrapper avatar-icon-sm">
+                        <div className="badge badge-danger badge-circle">
+                          Offline
+                        </div>
+                        <div className="avatar-icon rounded-circle">
+                          <img alt="..." src={avatar2} />
+                        </div>
+                      </div>
+                      <div className="pl-2">
+                        <span className="d-block font-size-sm font-weight-bold">
+                          Mandy Erle
+                          <span className="d-block font-weight-normal font-size-xs text-black-50">
+                            (Mandyrle@gma.com)
+                          </span>
+                        </span>
+                      </div>
+                      <div className="ml-auto">
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="text-right d-block font-size-sm"
+                        />
+                      </div>
+                    </div>
+                  </ListItem>
+                  <ListItem
+                    component="a"
+                    button
+                    href="#/"
+                    onClick={(e) => e.preventDefault()}
+                    className="px-0 text-black">
+                    <div className="align-box-row w-100">
+                      <div className="avatar-icon-wrapper avatar-icon-sm">
+                        <div className="badge badge-success badge-circle">
+                          Online
+                        </div>
+                        <div className="avatar-icon rounded-circle">
+                          <img alt="..." src={avatar3} />
+                        </div>
+                      </div>
+                      <div className="pl-2">
+                        <span className="d-block font-size-sm font-weight-bold">
+                          Oliver Battle
+                          <span className="d-block font-weight-normal font-size-xs text-black-50">
+                            (Galen@example.com)
+                          </span>
+                        </span>
+                      </div>
+                      <div className="ml-auto">
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="text-right d-block font-size-sm"
+                        />
+                      </div>
+                    </div>
+                  </ListItem>
+                  <ListItem
+                    component="a"
+                    button
+                    href="#/"
+                    onClick={(e) => e.preventDefault()}
+                    className="px-0 text-black">
+                    <div className="align-box-row w-100">
+                      <div className="avatar-icon-wrapper avatar-icon-sm">
+                        <div className="badge badge-warning badge-circle">
+                          Idle
+                        </div>
+                        <div className="avatar-icon rounded-circle">
+                          <img alt="..." src={avatar4} />
+                        </div>
+                      </div>
+                      <div className="pl-2">
+                        <span className="d-block font-size-sm font-weight-bold">
+                          Napoleon Stacey
+                          <span className="d-block font-weight-normal font-size-xs text-black-50">
+                            (Napoleon@test.com)
+                          </span>
+                        </span>
+                      </div>
+                      <div className="ml-auto">
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-right']}
+                          className="text-right d-block font-size-sm"
+                        />
+                      </div>
+                    </div>
+                  </ListItem>
+                </List>
+              )}
               <div className="divider my-3" />
               <List
                 component="div"

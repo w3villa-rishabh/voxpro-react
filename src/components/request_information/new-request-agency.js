@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TuneIcon from '@material-ui/icons/Tune';
+import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import { Grid, Card, TextField, Button } from '@material-ui/core';
 import Select from 'react-select';
 import {
@@ -106,7 +106,7 @@ export default function AddNewRequestComponent() {
   return (
     <>
       <div className="page-title">
-        <TuneIcon />
+        <BallotTwoToneIcon />
         <div className="title pt-3">
           <b className="heading nowrap">Add New Requests for Information</b>
         </div>
