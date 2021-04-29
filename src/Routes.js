@@ -152,6 +152,9 @@ const AgencyJobsHistory = lazy(() =>
 //AgencyJobsHistory
 const AgencyJobsLive = lazy(() => import('./components/agency_jobs/live'));
 
+//chat
+const ChatComponents = lazy(() => import('./components/chat_component/chat'));
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -295,7 +298,8 @@ const Routes = () => {
                 '/search-job',
                 '/search-agencies',
                 '/search-companies',
-                '/search-candidates'
+                '/search-candidates',
+                '/chat'
               ]}>
               <LeftSidebar>
                 <Switch>
@@ -362,6 +366,7 @@ const Routes = () => {
                     path="/search-candidates"
                     component={CandidateSearchComponent}
                   />
+                  <Route path="/chat" component={ChatComponents} />
                 </Switch>
               </LeftSidebar>
             </Route>
