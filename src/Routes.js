@@ -297,8 +297,8 @@ const Routes = () => {
                 '/agency',
                 '/agency-placements',
                 '/applied-jobs',
-                '/live',
-                '/history',
+                '/agency-jobs-live',
+                '/agency-jobs-history',
                 '/placements',
                 '/tasks',
                 '/task-calendar',
@@ -371,8 +371,11 @@ const Routes = () => {
                   />
                   <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />
-                  <Route path="/live" component={AgencyJobsLive} />
-                  <Route path="/history" component={AgencyJobsHistory} />
+                  <Route path="/agency-jobs-live" component={AgencyJobsLive} />
+                  <Route
+                    path="/agency-jobs-history"
+                    component={AgencyJobsHistory}
+                  />
                   <Route
                     path="/search-agencies"
                     component={SearchAgenciesComponent}

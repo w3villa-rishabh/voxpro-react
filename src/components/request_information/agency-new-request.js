@@ -1,5 +1,5 @@
 import React from 'react';
-import TuneIcon from '@material-ui/icons/Tune';
+import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import { Grid, Card, Button, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +17,7 @@ export default function AgencyRequestComponent() {
       <Grid container spacing={0}>
         <Grid item xs={12} sm={8}>
           <div className="page-title">
-            <TuneIcon />
+            <BallotTwoToneIcon />
             <div className="title pt-3">
               <b className="heading nowrap">Requests for Information</b>
             </div>

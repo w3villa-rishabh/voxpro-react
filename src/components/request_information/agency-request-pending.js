@@ -1,5 +1,5 @@
 import React from 'react';
-import TuneIcon from '@material-ui/icons/Tune';
+import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import { Grid, Card, Button, Table } from '@material-ui/core';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -8,7 +8,7 @@ export default function AgencyRequestPendingComponent() {
   return (
     <>
       <div className="page-title">
-        <TuneIcon />
+        <BallotTwoToneIcon />
         <div className="title pt-3">
           <b className="heading">Pending Requests for Information</b>
         </div>

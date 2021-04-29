@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Grid, Card } from '@material-ui/core';
-import WorkIcon from '@material-ui/icons/Work';
+import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import TableComponent from './table_component';
@@ -24,7 +24,7 @@ export default function PendingComponent() {
   return (
     <>
       <div className="page-title">
-        <WorkIcon />
+        <TransferWithinAStationIcon />
         <div className="title pt-3">
           <h5 className="heading">Pending Placement</h5>
         </div>

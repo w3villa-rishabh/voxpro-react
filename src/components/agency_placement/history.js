@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Grid, Card, TextField, Button } from '@material-ui/core';
-import WorkIcon from '@material-ui/icons/Work';
+import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 
@@ -25,7 +25,7 @@ export default function HistoryComponent() {
   return (
     <>
       <div className="page-title">
-        <WorkIcon />
+        <TransferWithinAStationIcon />
         <div className="title pt-3">
           <h5 className="heading">Placement History</h5>
         </div>
@@ -82,7 +82,7 @@ export default function HistoryComponent() {
             </div>
           </Grid>
           <Grid item md={3} xs={12}>
-            <div className="mt-4">
+            <div className="mt-4 mb-4">
               <Button className="btn-primary">Search now</Button>
             </div>
           </Grid>
