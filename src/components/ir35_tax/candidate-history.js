@@ -80,6 +80,7 @@ export default function CandidateHistory() {
                           <th className="text-center">Date Submitted</th>
                           <th className="text-center">Stage</th>
                           <th className="text-center">Due Date</th>
+                          <th className="text-center">Documents</th>
                           <th className="text-center">Status Certificate</th>
                           <th className="text-center"></th>
                         </tr>
@@ -104,6 +105,14 @@ export default function CandidateHistory() {
                           </td>
                           <td className="text-center text-black-50">
                             12/12/2020
+                          </td>
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="btn btn-info"
+                              variant="text">
+                              2
+                            </Button>
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
@@ -171,6 +180,14 @@ export default function CandidateHistory() {
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="btn btn-info"
+                              variant="text">
+                              4
+                            </Button>
+                          </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>
                               <div className="badge badge-neutral-warning text-warning px-4">
@@ -236,6 +253,14 @@ export default function CandidateHistory() {
                           </td>
                           <td className="text-center text-black-50">
                             12/12/2020
+                          </td>
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="btn btn-info"
+                              variant="text">
+                              3
+                            </Button>
                           </td>
                           <td className="text-center text-black-50">
                             <a href="!#" onClick={(e) => e.preventDefault()}>

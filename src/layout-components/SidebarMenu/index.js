@@ -561,7 +561,7 @@ const SidebarMenu = (props) => {
                 activeClassName="active"
                 onClick={toggleSidebarMobile}
                 className="nav-link-simple"
-                to="/request-information">
+                to="/chat">
                 <span className="sidebar-icon">
                   <ChatIcon />
                 </span>
