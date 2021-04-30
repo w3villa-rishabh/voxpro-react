@@ -33,7 +33,7 @@ export default function HistoryComponent() {
 
       <Grid container spacing={1} wrap={width <= 768 || 'nowrap'}>
         <Grid item sm={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="card-content-overlay text-center py-4">
               <CircularProgressbar
                 value={56}
@@ -48,7 +48,7 @@ export default function HistoryComponent() {
         </Grid>
 
         <Grid item sm={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="card-content-overlay text-center py-4">
               <CircularProgressbar
                 value={35}
@@ -63,7 +63,7 @@ export default function HistoryComponent() {
         </Grid>
 
         <Grid item sm={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="card-content-overlay text-center py-4">
               <CircularProgressbar
                 value={20}
@@ -78,7 +78,7 @@ export default function HistoryComponent() {
         </Grid>
 
         <Grid item sm={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="card-content-overlay text-center py-4">
               <CircularProgressbar
                 value={30}
@@ -93,7 +93,7 @@ export default function HistoryComponent() {
         </Grid>
 
         <Grid item sm={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="card-content-overlay text-center py-4">
               <CircularProgressbar
                 value={22}
@@ -108,7 +108,7 @@ export default function HistoryComponent() {
         </Grid>
 
         <Grid item sm={3} xs={12}>
-          <Card className="card-box">
+          <Card className="card-box h-100">
             <div className="card-content-overlay text-center py-4">
               <CircularProgressbar
                 value={25}

@@ -164,6 +164,11 @@ const AgencyPlacementsPending = lazy(() =>
   import('./components/agency_placement/pending')
 );
 
+//AgencyManagementCompany
+const AgencyManagementCompany = lazy(() =>
+  import('./components/agency-management/company')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -309,6 +314,7 @@ const Routes = () => {
                 '/search-agencies',
                 '/search-companies',
                 '/search-candidates',
+                '/management-company',
                 '/chat'
               ]}>
               <LeftSidebar>
@@ -390,6 +396,10 @@ const Routes = () => {
                   <Route
                     path="/search-candidates"
                     component={CandidateSearchComponent}
+                  />
+                  <Route
+                    path="/management-company"
+                    component={AgencyManagementCompany}
                   />
                   <Route path="/chat" component={ChatComponents} />
                 </Switch>
