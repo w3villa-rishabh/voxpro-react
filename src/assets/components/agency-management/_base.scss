@@ -26,3 +26,18 @@
 .scroll-h {
     height: calc(100vh - 392px);
 }
+
+.left-arrow {
+    position: absolute;
+    z-index: 99;
+    bottom: 0;
+    top: 0;
+    display: block;
+    left: -20px;
+    margin: auto;
+    background: white;
+    border-radius: 50%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

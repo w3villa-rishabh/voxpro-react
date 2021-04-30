@@ -240,6 +240,15 @@ const HeaderDrawer = (props) => {
             </div>
           </Button>
         </Tooltip>
+        {/* <Tooltip arrow title="Close drawer" placement="left">
+          <div>
+            <FontAwesomeIcon
+              icon={['fas', 'arrow-circle-left']}
+              className="align-self-center font-size-md left-arrow d-40"
+            />
+          </div>
+        </Tooltip> */}
+
         <div className="vh-100 shadow-overflow">
           <PerfectScrollbar>
             <div className="mb-5">
