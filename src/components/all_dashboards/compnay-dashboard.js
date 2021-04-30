@@ -25,7 +25,7 @@ import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 
 import sun from '../../assets/images/sun.png';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import ChatBox from '../chat_component/chat';
+import ChatBox from '../chat_component/mini-chat';
 
 const ActionsCandidate = () => {
   const [anchorEl, setAnchorEl] = useState(null);

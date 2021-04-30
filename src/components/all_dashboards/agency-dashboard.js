@@ -23,7 +23,7 @@ import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 
 import avatar5 from '../../assets/images/avatars/default.png';
 
-import ChatBox from '../chat_component/chat';
+import ChatBox from '../chat_component/mini-chat';
 import Chart from 'react-apexcharts';
 import Calendar from 'react-calendar';
 import Select from 'react-select';

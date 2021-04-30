@@ -27,7 +27,7 @@ import people1 from '../../assets/images/stock-photos/people-2.jpg';
 
 import { getCurrentUser } from 'helper';
 
-export default function ChatComponents() {
+export default function ChatPageComponents() {
   const [currentUser] = useState(getCurrentUser());
   const [isSidebarMenuOpen, setIsSidebarMenuOpen] = useState(false);
   const [isSidebarMenuOpen2, setIsSidebarMenuOpen2] = useState(false);
