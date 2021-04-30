@@ -1,0 +1,28 @@
+.nav-management {
+    background: #27416f !important;
+
+    .MuiList-root.nav-line.nav-line-alt::after {
+        background: transparent !important;
+    }
+
+    .MuiList-root.nav-line .MuiListItem-root.MuiListItem-button:hover {
+        color: white !important;
+    }
+
+    .Mui-selected {
+        color: white !important;
+
+        .divider {
+            background: white !important;
+        }
+    }
+}
+
+.media-icon {
+    position: absolute;
+    top: 50px;
+}
+
+.scroll-h {
+    height: calc(100vh - 392px);
+}
