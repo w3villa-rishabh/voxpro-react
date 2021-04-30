@@ -81,17 +81,23 @@ export default function LivePreviewExample() {
             </h1>
             {/* <p className="font-size-lg text-black-50">View Our Plans!</p> */}
           </div>
-          <Grid container spacing={4}>
-            <Grid item lg={3}>
+          <Grid container spacing={6}>
+            <Grid item lg={4}>
               <Card className="shadow-xxl mb-5 mb-lg-0">
                 <div className="card-header text-center d-block py-4 bg-secondary">
                   <div className="my-4 bg-first text-white d-inline-block shadow-xxl text-uppercase font-weight-bold d-40 w-auto px-4 font-size-xs rounded-pill">
                     Basic
                   </div>
-                  <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
-                    <small>£</small>350
+                  <div
+                    className="font-weight-bold line-height-1 text-second display-2"
+                    style={{ fontSize: '25px' }}>
+                    <small>£</small>49.99 user/month
+                    <br />
+                    or
+                    <br />
+                    <small>£</small>549.99 yearly
                   </div>
-                  <div className="font-size-md text-black-50">monthly fee</div>
+                  {/* <div className="font-size-md text-black-50">monthly fee</div> */}
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
@@ -112,17 +118,9 @@ export default function LivePreviewExample() {
                         className="font-size-xs"
                       />
                     </div>
-                    <div className="text-second opacity-7">3 Users </div>
-                  </div>
-                  <div className="divider opacity-8 my-1 mx-2" />
-                  <div className="d-flex align-items-center py-2">
-                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
-                      <FontAwesomeIcon
-                        icon={['fas', 'check']}
-                        className="font-size-xs"
-                      />
+                    <div className="text-second opacity-7">
+                      Max 50 candidates registration/month{' '}
                     </div>
-                    <div className="text-second opacity-7">200 contractor</div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
                   <div className="d-flex align-items-center py-2">
@@ -133,7 +131,56 @@ export default function LivePreviewExample() {
                       />
                     </div>
                     <div className="text-second opacity-7">
-                      All Integrations
+                      Max 10 placements per month <br /> per user/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 10 IR35 status determinations/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 10 direct messages/month <br /> for non-connections
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      All integrations
+                    </div>
+                  </div>
+
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-danger text-danger mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-danger">
+                      No option to search companies <br /> not on Voxpro (CH)
                     </div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
@@ -146,19 +193,37 @@ export default function LivePreviewExample() {
                     </div>
                     <div className="text-danger">Premium support</div>
                   </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Can upgrade anytime
+                    </div>
+                  </div>
                 </div>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item lg={4}>
               <Card className="shadow-xxl mb-5 mb-lg-0">
                 <div className="card-header text-center d-block py-4 bg-secondary">
                   <div className="my-4 bg-success text-white d-inline-block shadow-xxl text-uppercase font-weight-bold d-40 w-auto px-4 font-size-xs rounded-pill">
                     Intermediary
                   </div>
-                  <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
-                    <small>£</small>600
+                  <div
+                    className="font-weight-bold line-height-1 text-second display-2"
+                    style={{ fontSize: '25px' }}>
+                    <small>£</small>69.99 user/month
+                    <br />
+                    or
+                    <br />
+                    <small>£</small>799.99 yearly
                   </div>
-                  <div className="font-size-md text-black-50">monthly fee</div>
+                  {/* <div className="font-size-md text-black-50">monthly fee</div> */}
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
@@ -179,7 +244,45 @@ export default function LivePreviewExample() {
                         className="font-size-xs"
                       />
                     </div>
-                    <div className="text-second opacity-7">5 Users</div>
+                    <div className="text-second opacity-7">
+                      Max 80 candidates registration/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 15 placements per month <br /> per user/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 15 IR35 status determinations/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 15 direct messages/month <br /> for non-connections
+                    </div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
                   <div className="d-flex align-items-center py-2">
@@ -191,19 +294,19 @@ export default function LivePreviewExample() {
                     </div>
                     <div className="text-second opacity-7">
                       {' '}
-                      500 contractors
+                      All integrations
                     </div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
                   <div className="d-flex align-items-center py-2">
-                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-danger text-danger mr-3">
                       <FontAwesomeIcon
-                        icon={['fas', 'check']}
+                        icon={['fas', 'times']}
                         className="font-size-xs"
                       />
                     </div>
-                    <div className="text-second opacity-7">
-                      All Integrations
+                    <div className="text-danger">
+                      No option to search companies <br /> not on Voxpro (CH)
                     </div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
@@ -216,19 +319,37 @@ export default function LivePreviewExample() {
                     </div>
                     <div className="text-danger">Premium support</div>
                   </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Can upgrade anytime
+                    </div>
+                  </div>
                 </div>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item lg={4}>
               <Card className="shadow-xxl mb-5 mb-lg-0">
                 <div className="card-header text-center d-block py-4 bg-secondary">
                   <div className="my-4 bg-danger text-white d-inline-block shadow-xxl text-uppercase font-weight-bold d-40 w-auto px-4 font-size-xs rounded-pill">
                     Advanced
                   </div>
-                  <div className="font-weight-bold line-height-1 text-second text-uppercase display-2">
-                    <small>£</small>800
+                  <div
+                    className="font-weight-bold line-height-1 text-second display-2"
+                    style={{ fontSize: '25px' }}>
+                    <small>£</small>89.99 user/month
+                    <br />
+                    or
+                    <br />
+                    <small>£</small>1029.99
                   </div>
-                  <div className="font-size-md text-black-50">monthly fee</div>
+                  {/* <div className="font-size-md text-black-50">monthly fee</div> */}
                   <div className="mt-4 pb-4">
                     <Button
                       className="rounded-sm font-weight-bold px-4 btn-outline-second"
@@ -249,7 +370,9 @@ export default function LivePreviewExample() {
                         className="font-size-xs"
                       />
                     </div>
-                    <div className="text-second opacity-7">10 Users</div>
+                    <div className="text-second opacity-7">
+                      Max 100 candidates registration/month
+                    </div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
                   <div className="d-flex align-items-center py-2">
@@ -260,7 +383,31 @@ export default function LivePreviewExample() {
                       />
                     </div>
                     <div className="text-second opacity-7">
-                      1000 contractors{' '}
+                      Max 25 placements per month <br /> per user/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 25 IR35 status determinations/month
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Max 20 direct messages/month <br /> for non-connections
                     </div>
                   </div>
                   <div className="divider opacity-8 my-1 mx-2" />
@@ -283,12 +430,36 @@ export default function LivePreviewExample() {
                         className="font-size-xs"
                       />
                     </div>
+                    <div className="text-second opacity-7">
+                      Option to search companies <br /> not on Voxpro (CH)
+                    </div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
                     <div className="text-second opacity-7">Premium support</div>
+                  </div>
+                  <div className="divider opacity-8 my-1 mx-2" />
+                  <div className="d-flex align-items-center py-2">
+                    <div className="d-30 rounded-circle btn-icon bg-neutral-success text-success mr-3">
+                      <FontAwesomeIcon
+                        icon={['fas', 'check']}
+                        className="font-size-xs"
+                      />
+                    </div>
+                    <div className="text-second opacity-7">
+                      Can upgrade anytime
+                    </div>
                   </div>
                 </div>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            {/* <Grid item lg={3}>
               <Card className="shadow-xxl mb-5 mb-lg-0">
                 <div className="card-header text-center d-block py-4 bg-secondary">
                   <div className="my-4 bg-primary text-white d-inline-block shadow-xxl text-uppercase font-weight-bold d-40 w-auto px-4 font-size-xs rounded-pill">
@@ -356,7 +527,7 @@ export default function LivePreviewExample() {
                   </div>
                 </div>
               </Card>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Container>
         <div className="text-center text-black-50 mt-3">

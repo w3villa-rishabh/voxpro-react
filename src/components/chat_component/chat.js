@@ -123,7 +123,7 @@ export default function ChatComponents() {
                 className="nav-pills nav-transparent-alt flex-column">
                 <ListItem className="pt-1 px-0 pb-3">
                   <div className="text-uppercase font-size-sm text-primary font-weight-bold">
-                    Connections list
+                    Recent Chats
                   </div>
                 </ListItem>
 
@@ -727,7 +727,7 @@ export default function ChatComponents() {
             { 'layout-sidebar-open': isSidebarMenuOpen2 }
           )}>
           <div className="text-uppercase font-size-sm text-primary font-weight-bold my-3 px-3">
-            Friends list
+            Active Connections
           </div>
           <PerfectScrollbar>
             <List component="div" className="nav-neutral-first flex-column">
@@ -738,8 +738,8 @@ export default function ChatComponents() {
                 onClick={(e) => e.preventDefault()}>
                 <div className="align-box-row">
                   <div className="avatar-icon-wrapper avatar-icon-sm">
-                    <div className="badge badge-danger badge-circle">
-                      Offline
+                    <div className="badge badge-success badge-circle">
+                      Online
                     </div>
                     <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar2} />
@@ -786,7 +786,9 @@ export default function ChatComponents() {
                 onClick={(e) => e.preventDefault()}>
                 <div className="align-box-row">
                   <div className="avatar-icon-wrapper avatar-icon-sm">
-                    <div className="badge badge-warning badge-circle">Idle</div>
+                    <div className="badge badge-success badge-circle">
+                      Online
+                    </div>
                     <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar4} />
                     </div>
@@ -808,8 +810,8 @@ export default function ChatComponents() {
                 onClick={(e) => e.preventDefault()}>
                 <div className="align-box-row">
                   <div className="avatar-icon-wrapper avatar-icon-sm">
-                    <div className="badge badge-danger badge-circle">
-                      Offline
+                    <div className="badge badge-success badge-circle">
+                      Online
                     </div>
                     <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar6} />
@@ -856,8 +858,8 @@ export default function ChatComponents() {
                 onClick={(e) => e.preventDefault()}>
                 <div className="align-box-row">
                   <div className="avatar-icon-wrapper avatar-icon-sm">
-                    <div className="badge badge-danger badge-circle">
-                      Offline
+                    <div className="badge badge-success badge-circle">
+                      Online
                     </div>
                     <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar2} />
@@ -904,7 +906,9 @@ export default function ChatComponents() {
                 onClick={(e) => e.preventDefault()}>
                 <div className="align-box-row">
                   <div className="avatar-icon-wrapper avatar-icon-sm">
-                    <div className="badge badge-warning badge-circle">Idle</div>
+                    <div className="badge badge-success badge-circle">
+                      Online
+                    </div>
                     <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar4} />
                     </div>
@@ -926,8 +930,8 @@ export default function ChatComponents() {
                 onClick={(e) => e.preventDefault()}>
                 <div className="align-box-row">
                   <div className="avatar-icon-wrapper avatar-icon-sm">
-                    <div className="badge badge-danger badge-circle">
-                      Offline
+                    <div className="badge badge-success badge-circle">
+                      Online
                     </div>
                     <div className="avatar-icon rounded-circle">
                       <img alt="..." src={avatar6} />
