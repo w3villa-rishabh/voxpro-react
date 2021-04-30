@@ -24,7 +24,6 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import { setHeaderDrawerToggle } from '../../reducers/ThemeOptions';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
-
 const actionOptions = [
   {
     value: 'candidate',
@@ -102,7 +101,7 @@ const HeaderDrawer = (props) => {
                     <th>Logo</th>
                     <th className="text-center">Job Location</th>
                     <th className="text-center">Status</th>
-                    <th className="text-center">Action</th>
+                    <th className="text-center"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -119,12 +118,11 @@ const HeaderDrawer = (props) => {
                     <td className="text-center">London, UK</td>
                     <td className="text-center">Client</td>
                     <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white"
-                        onClick={toogleHeaderDrawer}>
-                        View
-                      </Button>
+                      <FontAwesomeIcon
+                        onClick={toogleHeaderDrawer}
+                        icon={['fas', 'arrow-circle-left']}
+                        className="align-self-center font-size-lg d-30"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -140,12 +138,11 @@ const HeaderDrawer = (props) => {
                     <td className="text-center">London, UK</td>
                     <td className="text-center">Lead</td>
                     <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white"
-                        onClick={toogleHeaderDrawer}>
-                        View
-                      </Button>
+                      <FontAwesomeIcon
+                        onClick={toogleHeaderDrawer}
+                        icon={['fas', 'arrow-circle-left']}
+                        className="align-self-center font-size-lg d-30"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -161,12 +158,11 @@ const HeaderDrawer = (props) => {
                     <td className="text-center">London, UK</td>
                     <td className="text-center">In Discussion</td>
                     <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white"
-                        onClick={toogleHeaderDrawer}>
-                        View
-                      </Button>
+                      <FontAwesomeIcon
+                        onClick={toogleHeaderDrawer}
+                        icon={['fas', 'arrow-circle-left']}
+                        className="align-self-center font-size-lg d-30"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -182,12 +178,11 @@ const HeaderDrawer = (props) => {
                     <td className="text-center">London, UK</td>
                     <td className="text-center">Lead</td>
                     <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white"
-                        onClick={toogleHeaderDrawer}>
-                        View
-                      </Button>
+                      <FontAwesomeIcon
+                        onClick={toogleHeaderDrawer}
+                        icon={['fas', 'arrow-circle-left']}
+                        className="align-self-center font-size-lg d-30"
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -203,12 +198,11 @@ const HeaderDrawer = (props) => {
                     <td className="text-center">London, UK</td>
                     <td className="text-center">Client</td>
                     <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white"
-                        onClick={toogleHeaderDrawer}>
-                        View
-                      </Button>
+                      <FontAwesomeIcon
+                        onClick={toogleHeaderDrawer}
+                        icon={['fas', 'arrow-circle-left']}
+                        className="align-self-center font-size-lg d-30"
+                      />
                     </td>
                   </tr>
                 </tbody>
