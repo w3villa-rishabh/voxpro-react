@@ -150,9 +150,17 @@ export default function MyTasksComponent() {
                 <div className="mt-3">
                   <Grid container spacing={0}>
                     <Grid item md={9}>
-                      <div className="font-weight-bold font-size-lg">
-                        Interview Requests
-                      </div>
+                      {currentUser.role === 'candidate' && (
+                        <div className="font-weight-bold font-size-lg">
+                          Interview Requests
+                        </div>
+                      )}
+                      {(currentUser.role === 'agency' ||
+                        currentUser.role === 'company') && (
+                        <div className="font-weight-bold font-size-lg">
+                          Pending Placements
+                        </div>
+                      )}
                     </Grid>
                     <Grid item md={3}>
                       <Button
@@ -238,9 +246,17 @@ export default function MyTasksComponent() {
                   <div className="divider opacity-8 my-1 mx-2 mb-2" />
                   <Grid container spacing={0}>
                     <Grid item md={7}>
-                      <div className="font-weight-bold font-size-lg">
-                        Pending Placements
-                      </div>
+                      {currentUser.role === 'candidate' && (
+                        <div className="font-weight-bold font-size-lg">
+                          Pending Placements
+                        </div>
+                      )}
+                      {(currentUser.role === 'agency' ||
+                        currentUser.role === 'company') && (
+                        <div className="font-weight-bold font-size-lg">
+                          Interview request sent
+                        </div>
+                      )}
                     </Grid>
                     <Grid item md={5}>
                       <Button
@@ -257,9 +273,17 @@ export default function MyTasksComponent() {
                   <div className="divider opacity-8 my-1 mx-2 mb-2" />
                   <Grid container spacing={0}>
                     <Grid item md={7}>
-                      <div className="font-weight-bold font-size-lg">
-                        Job applications
-                      </div>
+                      {currentUser.role === 'candidate' && (
+                        <div className="font-weight-bold font-size-lg">
+                          Job Applications
+                        </div>
+                      )}
+                      {(currentUser.role === 'agency' ||
+                        currentUser.role === 'company') && (
+                        <div className="font-weight-bold font-size-lg">
+                          CV submitted
+                        </div>
+                      )}
                     </Grid>
                     <Grid item md={5}>
                       <Button

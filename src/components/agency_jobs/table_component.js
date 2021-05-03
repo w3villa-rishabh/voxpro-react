@@ -59,6 +59,9 @@ const CandidateActionsApplied = () => {
             <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
               Forward
             </MenuItem>
+            <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+              View
+            </MenuItem>
           </div>
         </Menu>
       </div>
@@ -105,16 +108,19 @@ const CandidateActionsCandider = () => {
           onClose={handleClose}>
           <div className="p-3">
             <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Placement
+              Shotlist Stage
             </MenuItem>
             <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Offer
+              Interview Stage
             </MenuItem>
             <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Interview
+              Offer Stage
             </MenuItem>
             <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Successful
+              Placement Stage
+            </MenuItem>
+            <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
+              View
             </MenuItem>
           </div>
         </Menu>
@@ -130,7 +136,8 @@ export default function TableComponent() {
       <div className="pt-3">
         <Card className="card-box mb-spacing-6-x2">
           <div className="table-responsive-md">
-            <PerfectScrollbar>
+            {/* <PerfectScrollbar> */}
+            <div className="table-scrollbar">
               <Table className="table table-hover text-nowrap mb-0">
                 <thead>
                   <tr>
@@ -329,7 +336,8 @@ export default function TableComponent() {
                   </tr>
                 </tbody>
               </Table>
-            </PerfectScrollbar>
+              </div>
+            {/* </PerfectScrollbar> */}
           </div>
           <div className="card-footer py-3 text-center">
             <Button size="small" className="btn-outline-second" variant="text">

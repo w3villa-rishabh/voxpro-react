@@ -459,40 +459,38 @@ const SidebarMenu = (props) => {
               </li>
             )}
 
-            {currentUser.role === 'candidate' && (
-              <li>
-                <a
-                  href="javascript:void(0)"
-                  onClick={() => {
-                    setAvailability(!availability);
-                  }}
-                  className={clsx({ active: availability })}>
-                  <span className="sidebar-icon">
-                    <SecurityIcon />
-                  </span>
-                  <span className="sidebar-item-label">Calendar and Tasks</span>
-                  <span className="sidebar-icon-indicator">
-                    <ChevronRightTwoToneIcon />
-                  </span>
-                </a>
-                <Collapse in={availability}>
-                  <ul>
-                    <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/task-calendar">
-                        Availability Calendar
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink onClick={toggleSidebarMobile} to="/tasks">
-                        My Tasks
-                      </NavLink>
-                    </li>
-                  </ul>
-                </Collapse>
-              </li>
-            )}
+            {/* {currentUser.role === 'candidate' && ( */}
+            <li>
+              <a
+                href="javascript:void(0)"
+                onClick={() => {
+                  setAvailability(!availability);
+                }}
+                className={clsx({ active: availability })}>
+                <span className="sidebar-icon">
+                  <SecurityIcon />
+                </span>
+                <span className="sidebar-item-label">Calendar and Tasks</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={availability}>
+                <ul>
+                  <li>
+                    <NavLink onClick={toggleSidebarMobile} to="/task-calendar">
+                      Availability Calendar
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink onClick={toggleSidebarMobile} to="/tasks">
+                      My Tasks
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+            {/* )} */}
 
             {currentUser.role === 'candidate' && (
               <li>

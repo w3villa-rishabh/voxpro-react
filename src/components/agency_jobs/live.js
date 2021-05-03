@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Grid, Card } from '@material-ui/core';
+import { Grid, Card, Menu, MenuItem } from '@material-ui/core';
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import TableComponent from './table_component';
@@ -10,6 +10,15 @@ import WorkIcon from '@material-ui/icons/Work';
 
 export default function LiveComponent() {
   const [width, setWidth] = useState(window.innerWidth);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
@@ -29,6 +38,45 @@ export default function LiveComponent() {
         <WorkIcon />
         <div className="title pt-3">
           <h5 className="heading">Live Jobs</h5>
+        </div>
+        <div className="float-right bg-white rounded-lg">
+          <div
+            className="create-task-btn btn-icon"
+            aria-haspopup="true"
+            onClick={handleClick}>
+            <span className="p-2">Add Job</span>
+            <div className="d-flex align-items-center justify-content-center flex-wrap">
+              <FontAwesomeIcon icon={['fas', 'plus-circle']} />
+            </div>
+          </div>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            classes={{ list: 'p-0' }}
+            open={Boolean(anchorEl)}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left'
+            }}
+            onClose={handleClose}>
+            <div className="p-3">
+              <MenuItem
+                className="pr-5 px-3 text-primary"
+                onClick={handleClose}>
+                Import
+              </MenuItem>
+              <MenuItem
+                className="pr-5 px-3 text-primary"
+                onClick={handleClose}>
+                Add Manually
+              </MenuItem>
+            </div>
+          </Menu>
         </div>
       </div>
 
