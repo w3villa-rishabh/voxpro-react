@@ -18,12 +18,16 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
-
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import { useLocation } from 'react-router-dom';
 
-import { setHeaderDrawerToggle } from '../../reducers/ThemeOptions';
+import {
+  setHeaderDrawerToggle,
+  setCloseModal
+} from '../../reducers/ThemeOptions';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
+
 const actionOptions = [
   {
     value: 'candidate',
@@ -36,8 +40,15 @@ const actionOptions = [
 ];
 
 const HeaderDrawer = (props) => {
+  const location = useLocation();
   const [width, setWidth] = useState(window.innerWidth);
-  const { headerDrawerToggle, setHeaderDrawerToggle } = props;
+  const {
+    headerDrawerToggle,
+    setHeaderDrawerToggle,
+    closeModal,
+    setCloseModal
+  } = props;
+
   const [activeTab, setActiveTab] = useState('0');
   const [actionFilter, setActionFilter] = useState();
   const [currentDate] = useState(new Date().toDateString());
@@ -49,13 +60,19 @@ const HeaderDrawer = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!closeModal) {
+      setHeaderDrawerToggle(false);
+    }
+  }, [closeModal, setHeaderDrawerToggle]);
+
   const handleWindowSizeChange = () => {
-    console.log('window.innerWidth', window.innerWidth);
     setWidth(window.innerWidth);
   };
 
   const toogleHeaderDrawer = () => {
     setHeaderDrawerToggle(!headerDrawerToggle);
+    setCloseModal(!headerDrawerToggle);
   };
 
   const toggle = (tab) => {
@@ -71,7 +88,11 @@ const HeaderDrawer = (props) => {
       <div className="page-title">
         <EmojiPeopleIcon />
         <div className="title pt-3">
-          <h5 className="heading">Company</h5>
+          <h5 className="heading">
+            {location.pathname === '/management-company'
+              ? 'Companies'
+              : 'Candidates'}
+          </h5>
         </div>
       </div>
 
@@ -96,10 +117,25 @@ const HeaderDrawer = (props) => {
               <Table className="table table-hover text-nowrap mb-0">
                 <thead>
                   <tr>
-                    <th className="text-center">Company ID</th>
-                    <th>Name</th>
-                    <th>Logo</th>
-                    <th className="text-center">Job Location</th>
+                    {location.pathname === '/management-company' && (
+                      <>
+                        <th className="text-center">Company ID</th>
+                        <th>Name</th>
+                        <th>Logo</th>
+                        <th className="text-center">Job Location</th>
+                      </>
+                    )}
+
+                    {location.pathname === '/management-candidate' && (
+                      <>
+                        <th className="text-center">Candidate ID</th>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th className="text-center">Location</th>
+                        <th className="text-center">Availability</th>
+                      </>
+                    )}
+
                     <th className="text-center">Status</th>
                     <th className="text-center"></th>
                   </tr>
@@ -108,100 +144,170 @@ const HeaderDrawer = (props) => {
                   <tr>
                     <td className="font-weight-bold text-center">#0001</td>
                     <td>Headhunters</td>
-                    <td>
-                      <div className="avatar-icon-wrapper mr-2">
-                        <div className="avatar-icon">
-                          <img alt="..." src={projectLogo} />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Client</td>
+                    {location.pathname === '/management-company' && (
+                      <>
+                        <td>
+                          <div className="avatar-icon-wrapper mr-2">
+                            <div className="avatar-icon">
+                              <img alt="..." src={projectLogo} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Client</td>
+                      </>
+                    )}
+
+                    {location.pathname === '/management-candidate' && (
+                      <>
+                        <td>IT Analyst</td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Immediately</td>
+                        <td className="text-center">Active</td>
+                      </>
+                    )}
+
                     <td className="text-center">
                       <FontAwesomeIcon
                         onClick={toogleHeaderDrawer}
                         icon={['fas', 'arrow-circle-left']}
-                        className="align-self-center font-size-lg d-30"
+                        className="align-self-center font-size-lg d-30 pointer"
                       />
                     </td>
                   </tr>
                   <tr>
                     <td className="font-weight-bold text-center">#0002</td>
                     <td>Software Developer</td>
-                    <td>
-                      <div className="avatar-icon-wrapper mr-2">
-                        <div className="avatar-icon">
-                          <img alt="..." src={projectLogo} />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Lead</td>
+                    {location.pathname === '/management-company' && (
+                      <>
+                        <td>
+                          <div className="avatar-icon-wrapper mr-2">
+                            <div className="avatar-icon">
+                              <img alt="..." src={projectLogo} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Lead</td>
+                      </>
+                    )}
+
+                    {location.pathname === '/management-candidate' && (
+                      <>
+                        <td>Software Developer</td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Unavailable</td>
+                        <td className="text-center">Placed</td>
+                      </>
+                    )}
                     <td className="text-center">
                       <FontAwesomeIcon
                         onClick={toogleHeaderDrawer}
                         icon={['fas', 'arrow-circle-left']}
-                        className="align-self-center font-size-lg d-30"
+                        className="align-self-center font-size-lg d-30 pointer"
                       />
                     </td>
                   </tr>
                   <tr>
                     <td className="font-weight-bold text-center">#0003</td>
                     <td>Headhunters</td>
-                    <td>
-                      <div className="avatar-icon-wrapper mr-2">
-                        <div className="avatar-icon">
-                          <img alt="..." src={projectLogo} />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">In Discussion</td>
+                    {location.pathname === '/management-company' && (
+                      <>
+                        <td>
+                          <div className="avatar-icon-wrapper mr-2">
+                            <div className="avatar-icon">
+                              <img alt="..." src={projectLogo} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">In Discussion</td>
+                      </>
+                    )}
+
+                    {location.pathname === '/management-candidate' && (
+                      <>
+                        <td>Business Developer</td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">
+                          Availabile from 20/01/2021
+                        </td>
+                        <td className="text-center">Placed</td>
+                      </>
+                    )}
+
                     <td className="text-center">
                       <FontAwesomeIcon
                         onClick={toogleHeaderDrawer}
                         icon={['fas', 'arrow-circle-left']}
-                        className="align-self-center font-size-lg d-30"
+                        className="align-self-center font-size-lg d-30 pointer"
                       />
                     </td>
                   </tr>
                   <tr>
                     <td className="font-weight-bold text-center">#0004</td>
                     <td>Software Developer</td>
-                    <td>
-                      <div className="avatar-icon-wrapper mr-2">
-                        <div className="avatar-icon">
-                          <img alt="..." src={projectLogo} />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Lead</td>
+                    {location.pathname === '/management-company' && (
+                      <>
+                        <td>
+                          <div className="avatar-icon-wrapper mr-2">
+                            <div className="avatar-icon">
+                              <img alt="..." src={projectLogo} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Lead</td>
+                      </>
+                    )}
+
+                    {location.pathname === '/management-candidate' && (
+                      <>
+                        <td>IT Analyst</td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Immediately</td>
+                        <td className="text-center">Active</td>
+                      </>
+                    )}
+
                     <td className="text-center">
                       <FontAwesomeIcon
                         onClick={toogleHeaderDrawer}
                         icon={['fas', 'arrow-circle-left']}
-                        className="align-self-center font-size-lg d-30"
+                        className="align-self-center font-size-lg d-30 pointer"
                       />
                     </td>
                   </tr>
                   <tr>
                     <td className="font-weight-bold text-center">#0005</td>
                     <td>Headhunters</td>
-                    <td>
-                      <div className="avatar-icon-wrapper mr-2">
-                        <div className="avatar-icon">
-                          <img alt="..." src={projectLogo} />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Client</td>
+                    {location.pathname === '/management-company' && (
+                      <>
+                        <td>
+                          <div className="avatar-icon-wrapper mr-2">
+                            <div className="avatar-icon">
+                              <img alt="..." src={projectLogo} />
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Client</td>
+                      </>
+                    )}
+
+                    {location.pathname === '/management-candidate' && (
+                      <>
+                        <td>Software Developer</td>
+                        <td className="text-center">London, UK</td>
+                        <td className="text-center">Unavailable</td>
+                        <td className="text-center">Active</td>
+                      </>
+                    )}
                     <td className="text-center">
                       <FontAwesomeIcon
                         onClick={toogleHeaderDrawer}
                         icon={['fas', 'arrow-circle-left']}
-                        className="align-self-center font-size-lg d-30"
+                        className="align-self-center font-size-lg d-30 pointer"
                       />
                     </td>
                   </tr>
@@ -218,7 +324,7 @@ const HeaderDrawer = (props) => {
       </div>
 
       <div className="app-drawer-content-management">
-        <Tooltip arrow title="Close drawer" placement="left">
+        <Tooltip arrow title="Close" placement="left">
           <Button
             size="small"
             onClick={toogleHeaderDrawer}
@@ -324,7 +430,11 @@ const HeaderDrawer = (props) => {
                           onClick={() => {
                             toggle('2');
                           }}>
-                          <span className="font-size-md">Profile</span>
+                          <span className="font-size-md">
+                            {location.pathname === '/management-company'
+                              ? 'Profile'
+                              : 'Resume'}
+                          </span>
                           <div className="divider" />
                         </ListItem>
                         <ListItem
@@ -336,7 +446,9 @@ const HeaderDrawer = (props) => {
                             toggle('3');
                           }}>
                           <span className="font-size-md">
-                            Company Connections
+                            {location.pathname === '/management-company'
+                              ? 'Company Connections'
+                              : 'Experience'}
                           </span>
                           <div className="divider" />
                         </ListItem>
@@ -442,23 +554,49 @@ const HeaderDrawer = (props) => {
                     </Card>
                   </Grid>
 
-                  <Grid item sm={3} xs={12}>
-                    <Card className="p-3 h-100 text-center">
-                      <div className="display-4 font-weight-bold">19</div>
-                      <div className="font-weight-bold font-size-sm text-uppercase">
-                        Live Jobs
-                      </div>
-                    </Card>
-                  </Grid>
+                  {location.pathname === '/management-company' && (
+                    <>
+                      <Grid item sm={3} xs={12}>
+                        <Card className="p-3 h-100 text-center">
+                          <div className="display-4 font-weight-bold">19</div>
+                          <div className="font-weight-bold font-size-sm text-uppercase">
+                            Live Jobs
+                          </div>
+                        </Card>
+                      </Grid>
 
-                  <Grid item sm={3} xs={12}>
-                    <Card className="p-3 h-100 text-center">
-                      <div className="display-4 font-weight-bold">6</div>
-                      <div className="font-weight-bold font-size-sm text-uppercase">
-                        Submission
-                      </div>
-                    </Card>
-                  </Grid>
+                      <Grid item sm={3} xs={12}>
+                        <Card className="p-3 h-100 text-center">
+                          <div className="display-4 font-weight-bold">6</div>
+                          <div className="font-weight-bold font-size-sm text-uppercase">
+                            Submission
+                          </div>
+                        </Card>
+                      </Grid>
+                    </>
+                  )}
+
+                  {location.pathname === '/management-candidate' && (
+                    <>
+                      <Grid item sm={3} xs={12}>
+                        <Card className="p-3 h-100 text-center">
+                          <div className="display-4 font-weight-bold">19</div>
+                          <div className="font-weight-bold font-size-sm text-uppercase">
+                            Internal Submission
+                          </div>
+                        </Card>
+                      </Grid>
+
+                      <Grid item sm={3} xs={12}>
+                        <Card className="p-3 h-100 text-center">
+                          <div className="display-4 font-weight-bold">6</div>
+                          <div className="font-weight-bold font-size-sm text-uppercase">
+                            Client Submission
+                          </div>
+                        </Card>
+                      </Grid>
+                    </>
+                  )}
 
                   <Grid item sm={3} xs={12}>
                     <Card className="p-3 h-100 text-center">
@@ -811,11 +949,14 @@ const HeaderDrawer = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  headerDrawerToggle: state.ThemeOptions.headerDrawerToggle
+  headerDrawerToggle: state.ThemeOptions.headerDrawerToggle,
+  closeModal: state.ThemeOptions.closeModal
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setHeaderDrawerToggle: (enable) => dispatch(setHeaderDrawerToggle(enable))
+  setHeaderDrawerToggle: (enable) => dispatch(setHeaderDrawerToggle(enable)),
+
+  setCloseModal: (enable) => dispatch(setCloseModal(enable))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderDrawer);
