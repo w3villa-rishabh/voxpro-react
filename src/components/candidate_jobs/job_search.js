@@ -67,7 +67,6 @@ export default function JobSearchComponent() {
   }, []);
 
   const handleWindowSizeChange = () => {
-    console.log('window.innerWidth', window.innerWidth);
     setWidth(window.innerWidth);
   };
 

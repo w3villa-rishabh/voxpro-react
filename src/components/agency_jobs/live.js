@@ -19,7 +19,6 @@ export default function LiveComponent() {
   }, []);
 
   const handleWindowSizeChange = () => {
-    console.log('window.innerWidth', window.innerWidth);
     setWidth(window.innerWidth);
   };
 

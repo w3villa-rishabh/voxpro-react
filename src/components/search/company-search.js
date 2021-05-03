@@ -25,7 +25,6 @@ export default function CompaniesSearchComponent() {
   }, []);
 
   const handleWindowSizeChange = () => {
-    console.log('window.innerWidth', window.innerWidth);
     setWidth(window.innerWidth);
   };
 

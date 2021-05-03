@@ -18,7 +18,6 @@ export default function HistoryComponent() {
   }, []);
 
   const handleWindowSizeChange = () => {
-    console.log('window.innerWidth', window.innerWidth);
     setWidth(window.innerWidth);
   };
 

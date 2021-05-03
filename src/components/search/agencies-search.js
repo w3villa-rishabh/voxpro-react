@@ -23,7 +23,6 @@ export default function AgenciesSearchComponent() {
   }, []);
 
   const handleWindowSizeChange = () => {
-    console.log('window.innerWidth', window.innerWidth);
     setWidth(window.innerWidth);
   };
 

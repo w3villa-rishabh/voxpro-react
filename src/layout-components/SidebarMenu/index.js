@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 import { NavLink } from 'react-router-dom';
 import {
+  setCloseModal,
   closeMiniProfile,
   setSidebarToggleMobile
 } from '../../reducers/ThemeOptions';
@@ -28,13 +29,19 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SidebarMenu = (props) => {
-  const { setSidebarToggleMobile, sidebarUserbox } = props;
-  const { setCloseMiniProfile } = props;
+  const {
+    setSidebarToggleMobile,
+    sidebarUserbox,
+    setCloseMiniProfile,
+    setCloseModal
+  } = props;
+
   const [currentUser] = useState(getCurrentUser());
 
   const toggleSidebarMobile = () => {
     setSidebarToggleMobile(false);
     setCloseMiniProfile(true);
+    setCloseModal(false);
   };
 
   const [dashboardOpen, setDashboardOpen] = useState(false);
@@ -351,7 +358,7 @@ const SidebarMenu = (props) => {
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/request-information">
+                        to="/management-candidate">
                         Candidates
                       </NavLink>
                     </li>
@@ -624,7 +631,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setSidebarToggleMobile: (enable) => dispatch(setSidebarToggleMobile(enable)),
 
-  setCloseMiniProfile: (enable) => dispatch(closeMiniProfile(enable))
+  setCloseMiniProfile: (enable) => dispatch(closeMiniProfile(enable)),
+
+  setCloseModal: (enable) => dispatch(setCloseModal(enable))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarMenu);

@@ -709,3 +709,8 @@ select {
   border-left: 0;
   border: 1px solid #ccc;
 }
+
+tbody.scroll {
+  overflow: scroll !important;
+  display: block !important;
+}
