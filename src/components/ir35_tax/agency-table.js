@@ -33,7 +33,7 @@ export default function AgencyTable() {
         <Grid item xs={12} sm={12}>
           <Card className="mt-3">
             <div className="table-responsive-md">
-              <PerfectScrollbar>
+              <div className="table-scrollbar">
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
@@ -324,7 +324,7 @@ export default function AgencyTable() {
                     </tr>
                   </tbody>
                 </Table>
-              </PerfectScrollbar>
+              </div>
             </div>
             <div className="card-footer py-3 text-center">
               <Button
