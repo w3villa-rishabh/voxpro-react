@@ -718,12 +718,12 @@ tbody.scroll {
 .chat-menu {
   position: absolute;
   left: 293px !important;
+  z-index: 0;
 }
 
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {
-    position: absolute;
     left: 0 !important;
   }
 }
@@ -731,7 +731,6 @@ tbody.scroll {
 // For desktop
 @media (min-width: 767px) {
   .chat-menu {
-    position: absolute;
     left: 293px !important;
   }
 }

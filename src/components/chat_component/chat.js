@@ -50,7 +50,7 @@ export default function ChatPageComponents() {
       <div className="app-inner-content-layout app-inner-content-layout-fixed chat-menu">
         <div
           className={clsx(
-            'app-inner-content-layout--sidebar bg-white app-inner-content-layout--sidebar__lg order-1',
+            'app-inner-content-layout--sidebar bg-white app-inner-content-layout--sidebar__md order-1',
             { 'layout-sidebar-open': isSidebarMenuOpen }
           )}>
           <TextField
@@ -398,8 +398,7 @@ export default function ChatPageComponents() {
                       <div className="mt-2 line-height-sm">
                         <b className="font-size-lg">345</b>
                         <span className="text-black-50 d-block">
-                          Total <br />
-                          Connection
+                          Total Connection
                         </span>
                       </div>
                     </Card>
@@ -433,7 +432,7 @@ export default function ChatPageComponents() {
                       <div className="mt-2 line-height-sm">
                         <b className="font-size-lg">20</b>
                         <span className="text-black-50 d-block">
-                          Pending <br /> Connection{' '}
+                          Pending Connection
                         </span>
                       </div>
                     </Card>
