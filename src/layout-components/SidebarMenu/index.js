@@ -160,26 +160,22 @@ const SidebarMenu = (props) => {
                 )}
 
                 {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company1') && (
+                  currentUser.role === 'company') && (
                   <ul>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/agency-pending">
+                      <NavLink onClick={toggleSidebarMobile} to="/ir35-pending">
                         Pending
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/agency-history">
+                      <NavLink onClick={toggleSidebarMobile} to="/ir35-history">
                         History
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/agency-enquiries">
+                        to="/ir35-enquiries">
                         Query
                       </NavLink>
                     </li>
@@ -212,40 +208,41 @@ const SidebarMenu = (props) => {
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/new-request">
+                          to="/request-info/candidate-new-request">
                           New Request
                         </NavLink>
                       </li>
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/request-history">
+                          to="/request-info/request-history">
                           Request History
                         </NavLink>
                       </li>
                     </div>
                   )}
 
-                  {currentUser.role === 'agency' && (
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
                     <div>
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/agency/new-request">
+                          to="/request-info/new-request">
                           New Request
                         </NavLink>
                       </li>
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/agency/pending">
+                          to="/request-info/pending">
                           Pending
                         </NavLink>
                       </li>
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
-                          to="/agency/history">
+                          to="/request-info/history">
                           History
                         </NavLink>
                       </li>

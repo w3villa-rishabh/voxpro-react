@@ -39,24 +39,26 @@ export default function AgencyTable() {
                     <tr>
                       <th className="text-left">Placement ID</th>
                       <th className="">Job Title</th>
-                      <th className="text-left">Company</th>
+                      <th className="text-left">
+                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                      </th>
                       <th className="text-center">Start Date</th>
                       <th className="text-center">Candidate</th>
-                      {location.pathname === '/agency-enquiries' && (
+                      {location.pathname === '/ir35-enquiries' && (
                         <>
                           <th className="text-center">Date of Query</th>
                           <th className="text-center">Stage of Query</th>
                         </>
                       )}
 
-                      {location.pathname === '/agency-enquiries' && (
+                      {location.pathname === '/ir35-enquiries' && (
                         <>
                           <th className="text-center">Due Date</th>
                           <th className="text-center">Response</th>
                         </>
                       )}
 
-                      {location.pathname === '/agency-pending' && (
+                      {location.pathname === '/ir35-pending' && (
                         <>
                           <th className="text-center">
                             Date Submitted by Candidate
@@ -64,7 +66,7 @@ export default function AgencyTable() {
                         </>
                       )}
 
-                      {location.pathname === '/agency-history' && (
+                      {location.pathname === '/ir35-history' && (
                         <>
                           <th className="text-center">
                             Date Submitted by Candidate
@@ -86,8 +88,8 @@ export default function AgencyTable() {
                       <td className="text-center text-black-50">12/12/2020</td>
                       <td>Deepak</td>
                       <td className="text-center text-black-50">12/12/2020</td>
-                      {(location.pathname === '/agency-history' ||
-                        location.pathname === '/agency-enquiries') && (
+                      {(location.pathname === '/ir35-history' ||
+                        location.pathname === '/ir35-enquiries') && (
                         <>
                           <td className="w-25">
                             <LinearProgress
@@ -102,7 +104,7 @@ export default function AgencyTable() {
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          {location.pathname === '/agency-history' && (
+                          {location.pathname === '/ir35-history' && (
                             <td className="text-center">
                               <Button
                                 size="small"
@@ -167,8 +169,8 @@ export default function AgencyTable() {
                       <td className="text-center text-black-50">06/08/2022</td>
                       <td>Tarun</td>
                       <td className="text-center text-black-50">12/12/2020</td>
-                      {(location.pathname === '/agency-history' ||
-                        location.pathname === '/agency-enquiries') && (
+                      {(location.pathname === '/ir35-history' ||
+                        location.pathname === '/ir35-enquiries') && (
                         <>
                           <td className="w-25">
                             <LinearProgress
@@ -183,7 +185,7 @@ export default function AgencyTable() {
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          {location.pathname === '/agency-history' && (
+                          {location.pathname === '/ir35-history' && (
                             <td className="text-center">
                               <Button
                                 size="small"
@@ -248,8 +250,8 @@ export default function AgencyTable() {
                       <td className="text-center text-black-50">12/12/2020</td>
                       <td>Rishab</td>
                       <td className="text-center text-black-50">12/12/2020</td>
-                      {(location.pathname === '/agency-history' ||
-                        location.pathname === '/agency-enquiries') && (
+                      {(location.pathname === '/ir35-history' ||
+                        location.pathname === '/ir35-enquiries') && (
                         <>
                           <td className="w-25">
                             <LinearProgress
@@ -264,7 +266,7 @@ export default function AgencyTable() {
                           <td className="text-center text-black-50">
                             12/12/2020
                           </td>
-                          {location.pathname === '/agency-history' && (
+                          {location.pathname === '/ir35-history' && (
                             <td className="text-center">
                               <Button
                                 size="small"
