@@ -47,9 +47,7 @@ export default function ChatPageComponents() {
 
   return (
     <>
-      <div
-        className="app-inner-content-layout app-inner-content-layout-fixed"
-        style={{ position: 'absolute', left: '293px' }}>
+      <div className="app-inner-content-layout app-inner-content-layout-fixed chat-menu">
         <div
           className={clsx(
             'app-inner-content-layout--sidebar bg-white app-inner-content-layout--sidebar__lg order-1',
@@ -69,182 +67,48 @@ export default function ChatPageComponents() {
               )
             }}
           />
-          <div className="divider my-3" />
-          <PerfectScrollbar>
-            <div className="px-4 pt-2">
-              <List
-                component="div"
-                className="nav-pills nav-transparent-alt flex-column">
-                <ListItem className="pt-1 px-0 pb-3">
-                  <div className="text-uppercase font-size-sm text-primary font-weight-bold">
-                    Recent Chats
-                  </div>
-                </ListItem>
-                <ListItem
-                  component="a"
-                  button
-                  href="#/"
-                  onClick={(e) => e.preventDefault()}
-                  className="px-0 text-black">
-                  <div className="align-box-row w-100">
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="badge badge-danger badge-circle">
-                        Offline
-                      </div>
-                      <div className="avatar-icon rounded-circle">
-                        <img alt="..." src={avatar2} />
-                      </div>
-                    </div>
-                    <div className="pl-2">
-                      <span className="d-block font-size-sm font-weight-bold">
-                        Mandy Erle
-                        <span className="d-block font-weight-normal font-size-xs text-black-50">
-                          (Mandyrle@gma.com)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </ListItem>
-                <ListItem
-                  component="a"
-                  button
-                  href="#/"
-                  onClick={(e) => e.preventDefault()}
-                  className="px-0 text-black">
-                  <div className="align-box-row w-100">
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="badge badge-success badge-circle">
-                        Online
-                      </div>
-                      <div className="avatar-icon rounded-circle">
-                        <img alt="..." src={avatar1} />
-                      </div>
-                    </div>
-                    <div className="pl-2">
-                      <span className="d-block font-size-sm font-weight-bold">
-                        Adella Galen
-                        <span className="d-block font-weight-normal font-size-xs text-black-50">
-                          (Galen@example.com)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </ListItem>
-                <ListItem
-                  component="a"
-                  button
-                  href="#/"
-                  onClick={(e) => e.preventDefault()}
-                  className="px-0 text-black">
-                  <div className="align-box-row w-100">
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="badge badge-danger badge-circle">
-                        Offline
-                      </div>
-                      <div className="avatar-icon rounded-circle">
-                        <img alt="..." src={avatar2} />
-                      </div>
-                    </div>
-                    <div className="pl-2">
-                      <span className="d-block font-size-sm font-weight-bold">
-                        Mandy Erle
-                        <span className="d-block font-weight-normal font-size-xs text-black-50">
-                          (Mandyrle@gma.com)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </ListItem>
-                <ListItem
-                  component="a"
-                  button
-                  href="#/"
-                  onClick={(e) => e.preventDefault()}
-                  className="px-0 text-black">
-                  <div className="align-box-row w-100">
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="badge badge-success badge-circle">
-                        Online
-                      </div>
-                      <div className="avatar-icon rounded-circle">
-                        <img alt="..." src={avatar3} />
-                      </div>
-                    </div>
-                    <div className="pl-2">
-                      <span className="d-block font-size-sm font-weight-bold">
-                        Oliver Battle
-                        <span className="d-block font-weight-normal font-size-xs text-black-50">
-                          (Galen@example.com)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </ListItem>
-                <ListItem
-                  component="a"
-                  button
-                  href="#/"
-                  onClick={(e) => e.preventDefault()}
-                  className="px-0 text-black">
-                  <div className="align-box-row w-100">
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="badge badge-warning badge-circle">
-                        Idle
-                      </div>
-                      <div className="avatar-icon rounded-circle">
-                        <img alt="..." src={avatar4} />
-                      </div>
-                    </div>
-                    <div className="pl-2">
-                      <span className="d-block font-size-sm font-weight-bold">
-                        Napoleon Stacey
-                        <span className="d-block font-weight-normal font-size-xs text-black-50">
-                          (Napoleon@test.com)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </ListItem>
-                <ListItem
-                  component="a"
-                  button
-                  href="#/"
-                  onClick={(e) => e.preventDefault()}
-                  className="px-0 text-black">
-                  <div className="align-box-row w-100">
-                    <div className="avatar-icon-wrapper avatar-icon-sm">
-                      <div className="badge badge-warning badge-circle">
-                        Idle
-                      </div>
-                      <div className="avatar-icon rounded-circle">
-                        <img alt="..." src={avatar4} />
-                      </div>
-                    </div>
-                    <div className="pl-2">
-                      <span className="d-block font-size-sm font-weight-bold">
-                        Neancy Stacey
-                        <span className="d-block font-weight-normal font-size-xs text-black-50">
-                          (Neancy@test.com)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </ListItem>
-              </List>
-              {(currentUser.role === 'company' ||
-                currentUser.role === 'agency') && (
+          <div className="divider my-2" />
+          <div
+            className="scroll-area"
+            style={{
+              height: 'calc(100vh - 160px)',
+              borderRadius: 'inherit'
+            }}>
+            <PerfectScrollbar>
+              <div className="px-3 pt-2">
                 <List
                   component="div"
                   className="nav-pills nav-transparent-alt flex-column">
                   <ListItem className="pt-1 px-0 pb-3">
                     <div className="text-uppercase font-size-sm text-primary font-weight-bold">
-                      {currentUser.role === 'company' ||
-                      currentUser.role === 'agency'
-                        ? 'Teammates'
-                        : 'Connections'}
+                      Recent Chats
                     </div>
                   </ListItem>
-
+                  <ListItem
+                    component="a"
+                    button
+                    href="#/"
+                    onClick={(e) => e.preventDefault()}
+                    className="px-0 text-black">
+                    <div className="align-box-row w-100">
+                      <div className="avatar-icon-wrapper avatar-icon-sm">
+                        <div className="badge badge-danger badge-circle">
+                          Offline
+                        </div>
+                        <div className="avatar-icon rounded-circle">
+                          <img alt="..." src={avatar2} />
+                        </div>
+                      </div>
+                      <div className="pl-2">
+                        <span className="d-block font-size-sm font-weight-bold">
+                          Mandy Erle
+                          <span className="d-block font-weight-normal font-size-xs text-black-50">
+                            (Mandyrle@gma.com)
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </ListItem>
                   <ListItem
                     component="a"
                     button
@@ -353,106 +217,247 @@ export default function ChatPageComponents() {
                     className="px-0 text-black">
                     <div className="align-box-row w-100">
                       <div className="avatar-icon-wrapper avatar-icon-sm">
-                        <div className="badge badge-danger badge-circle">
-                          Offline
+                        <div className="badge badge-warning badge-circle">
+                          Idle
                         </div>
                         <div className="avatar-icon rounded-circle">
-                          <img alt="..." src={avatar2} />
+                          <img alt="..." src={avatar4} />
                         </div>
                       </div>
                       <div className="pl-2">
                         <span className="d-block font-size-sm font-weight-bold">
-                          Mandy Erle
+                          Neancy Stacey
                           <span className="d-block font-weight-normal font-size-xs text-black-50">
-                            (Mandyrle@gma.com)
+                            (Neancy@test.com)
                           </span>
                         </span>
                       </div>
                     </div>
                   </ListItem>
                 </List>
-              )}
-              <div className="divider my-3" />
-              <List
-                component="div"
-                className="nav-pills nav-neutral-primary flex-column">
-                <ListItem className="pt-1 px-0 pb-3">
-                  <div className="text-uppercase font-size-sm text-primary font-weight-bold">
-                    Statistics
-                  </div>
-                </ListItem>
-              </List>
-              <Grid container spacing={4} className="font-size-xs">
-                <Grid item lg={6}>
-                  <Card className="shadow-success-sm card-box text-center mb-2 p-3">
-                    <div>
-                      <FontAwesomeIcon
-                        icon={['far', 'user']}
-                        className="font-size-xxl text-success"
-                      />
+                {(currentUser.role === 'company' ||
+                  currentUser.role === 'agency') && (
+                  <List
+                    component="div"
+                    className="nav-pills nav-transparent-alt flex-column">
+                    <ListItem className="pt-1 px-0 pb-3">
+                      <div className="text-uppercase font-size-sm text-primary font-weight-bold">
+                        {currentUser.role === 'company' ||
+                        currentUser.role === 'agency'
+                          ? 'Teammates'
+                          : 'Connections'}
+                      </div>
+                    </ListItem>
+
+                    <ListItem
+                      component="a"
+                      button
+                      href="#/"
+                      onClick={(e) => e.preventDefault()}
+                      className="px-0 text-black">
+                      <div className="align-box-row w-100">
+                        <div className="avatar-icon-wrapper avatar-icon-sm">
+                          <div className="badge badge-success badge-circle">
+                            Online
+                          </div>
+                          <div className="avatar-icon rounded-circle">
+                            <img alt="..." src={avatar1} />
+                          </div>
+                        </div>
+                        <div className="pl-2">
+                          <span className="d-block font-size-sm font-weight-bold">
+                            Adella Galen
+                            <span className="d-block font-weight-normal font-size-xs text-black-50">
+                              (Galen@example.com)
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </ListItem>
+                    <ListItem
+                      component="a"
+                      button
+                      href="#/"
+                      onClick={(e) => e.preventDefault()}
+                      className="px-0 text-black">
+                      <div className="align-box-row w-100">
+                        <div className="avatar-icon-wrapper avatar-icon-sm">
+                          <div className="badge badge-danger badge-circle">
+                            Offline
+                          </div>
+                          <div className="avatar-icon rounded-circle">
+                            <img alt="..." src={avatar2} />
+                          </div>
+                        </div>
+                        <div className="pl-2">
+                          <span className="d-block font-size-sm font-weight-bold">
+                            Mandy Erle
+                            <span className="d-block font-weight-normal font-size-xs text-black-50">
+                              (Mandyrle@gma.com)
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </ListItem>
+                    <ListItem
+                      component="a"
+                      button
+                      href="#/"
+                      onClick={(e) => e.preventDefault()}
+                      className="px-0 text-black">
+                      <div className="align-box-row w-100">
+                        <div className="avatar-icon-wrapper avatar-icon-sm">
+                          <div className="badge badge-success badge-circle">
+                            Online
+                          </div>
+                          <div className="avatar-icon rounded-circle">
+                            <img alt="..." src={avatar3} />
+                          </div>
+                        </div>
+                        <div className="pl-2">
+                          <span className="d-block font-size-sm font-weight-bold">
+                            Oliver Battle
+                            <span className="d-block font-weight-normal font-size-xs text-black-50">
+                              (Galen@example.com)
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </ListItem>
+                    <ListItem
+                      component="a"
+                      button
+                      href="#/"
+                      onClick={(e) => e.preventDefault()}
+                      className="px-0 text-black">
+                      <div className="align-box-row w-100">
+                        <div className="avatar-icon-wrapper avatar-icon-sm">
+                          <div className="badge badge-warning badge-circle">
+                            Idle
+                          </div>
+                          <div className="avatar-icon rounded-circle">
+                            <img alt="..." src={avatar4} />
+                          </div>
+                        </div>
+                        <div className="pl-2">
+                          <span className="d-block font-size-sm font-weight-bold">
+                            Napoleon Stacey
+                            <span className="d-block font-weight-normal font-size-xs text-black-50">
+                              (Napoleon@test.com)
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </ListItem>
+                    <ListItem
+                      component="a"
+                      button
+                      href="#/"
+                      onClick={(e) => e.preventDefault()}
+                      className="px-0 text-black">
+                      <div className="align-box-row w-100">
+                        <div className="avatar-icon-wrapper avatar-icon-sm">
+                          <div className="badge badge-danger badge-circle">
+                            Offline
+                          </div>
+                          <div className="avatar-icon rounded-circle">
+                            <img alt="..." src={avatar2} />
+                          </div>
+                        </div>
+                        <div className="pl-2">
+                          <span className="d-block font-size-sm font-weight-bold">
+                            Mandy Erle
+                            <span className="d-block font-weight-normal font-size-xs text-black-50">
+                              (Mandyrle@gma.com)
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </ListItem>
+                  </List>
+                )}
+                <div className="divider my-3" />
+                <List
+                  component="div"
+                  className="nav-pills nav-neutral-primary flex-column">
+                  <ListItem className="pt-1 px-0 pb-3">
+                    <div className="text-uppercase font-size-sm text-primary font-weight-bold">
+                      Statistics
                     </div>
-                    <div className="mt-2 line-height-sm">
-                      <b className="font-size-lg">345</b>
-                      <span className="text-black-50 d-block">
-                        Total <br />
-                        Connection
-                      </span>
-                    </div>
-                  </Card>
+                  </ListItem>
+                </List>
+                <Grid container spacing={2} className="font-size-xs">
+                  <Grid item lg={6}>
+                    <Card className="shadow-success-sm card-box text-center p-3">
+                      <div>
+                        <FontAwesomeIcon
+                          icon={['far', 'user']}
+                          className="font-size-xxl text-success"
+                        />
+                      </div>
+                      <div className="mt-2 line-height-sm">
+                        <b className="font-size-lg">345</b>
+                        <span className="text-black-50 d-block">
+                          Total <br />
+                          Connection
+                        </span>
+                      </div>
+                    </Card>
+                  </Grid>
+                  <Grid item lg={6}>
+                    <Card className="shadow-danger-sm card-box text-center p-3">
+                      <div>
+                        <FontAwesomeIcon
+                          icon={['far', 'chart-bar']}
+                          className="font-size-xxl text-danger"
+                        />
+                      </div>
+                      <div className="mt-2 line-height-sm">
+                        <b className="font-size-lg">70</b>
+                        <span className="text-black-50 d-block">
+                          Teammates Connection
+                        </span>
+                      </div>
+                    </Card>
+                  </Grid>
                 </Grid>
-                <Grid item lg={6}>
-                  <Card className="shadow-danger-sm card-box text-center mb-2 p-3">
-                    <div>
-                      <FontAwesomeIcon
-                        icon={['far', 'chart-bar']}
-                        className="font-size-xxl text-danger"
-                      />
-                    </div>
-                    <div className="mt-2 line-height-sm">
-                      <b className="font-size-lg">70</b>
-                      <span className="text-black-50 d-block">
-                        Teammates Connection
-                      </span>
-                    </div>
-                  </Card>
+                <Grid container spacing={2} className="font-size-xs">
+                  <Grid item lg={6}>
+                    <Card className="shadow-success-sm card-box text-center p-3">
+                      <div>
+                        <FontAwesomeIcon
+                          icon={['far', 'user']}
+                          className="font-size-xxl text-success"
+                        />
+                      </div>
+                      <div className="mt-2 line-height-sm">
+                        <b className="font-size-lg">20</b>
+                        <span className="text-black-50 d-block">
+                          Pending <br /> Connection{' '}
+                        </span>
+                      </div>
+                    </Card>
+                  </Grid>
+                  <Grid item lg={6}>
+                    <Card className="shadow-danger-sm card-box text-center p-3">
+                      <div>
+                        <FontAwesomeIcon
+                          icon={['far', 'chart-bar']}
+                          className="font-size-xxl text-danger"
+                        />
+                      </div>
+                      <div className="mt-2 line-height-sm">
+                        <b className="font-size-lg">12</b>
+                        <span className="text-black-50 d-block">
+                          Suggested Connections
+                        </span>
+                      </div>
+                    </Card>
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid container spacing={4} className="font-size-xs">
-                <Grid item lg={6}>
-                  <Card className="shadow-success-sm card-box text-center mb-4 p-3">
-                    <div>
-                      <FontAwesomeIcon
-                        icon={['far', 'user']}
-                        className="font-size-xxl text-success"
-                      />
-                    </div>
-                    <div className="mt-2 line-height-sm">
-                      <b className="font-size-lg">20</b>
-                      <span className="text-black-50 d-block">
-                        Pending <br /> Connection{' '}
-                      </span>
-                    </div>
-                  </Card>
-                </Grid>
-                <Grid item lg={6}>
-                  <Card className="shadow-danger-sm card-box text-center mb-4 p-3">
-                    <div>
-                      <FontAwesomeIcon
-                        icon={['far', 'chart-bar']}
-                        className="font-size-xxl text-danger"
-                      />
-                    </div>
-                    <div className="mt-2 line-height-sm">
-                      <b className="font-size-lg">12</b>
-                      <span className="text-black-50 d-block">
-                        Suggested Connections
-                      </span>
-                    </div>
-                  </Card>
-                </Grid>
-              </Grid>
-            </div>
-          </PerfectScrollbar>
+              </div>
+            </PerfectScrollbar>
+          </div>
         </div>
         <div className="app-inner-content-layout--main order-3 order-lg-2 card-box bg-secondary">
           <div className="card-header rounded-0 bg-white p-3 border-bottom">
@@ -658,20 +663,14 @@ export default function ChatPageComponents() {
             <div className="card-footer p-0">
               <div
                 className={clsx(
-                  'd-flex align-items-center transition-base px-4 py-3',
+                  'd-flex align-items-center transition-base px-4 py-2 position-relative',
                   { 'bg-secondary': inputBg }
                 )}>
-                <div className="avatar-icon-wrapper avatar-initials avatar-icon-lg mr-3">
+                <div className="avatar-icon-wrapper avatar-initials mr-3">
                   <div className="avatar-icon bg-neutral-dark text-black">
                     H
                   </div>
                 </div>
-                {/* <div
-                    className="badge badge-success badge-position badge-position--bottom-center badge-circle"
-                    title="Badge bottom center">
-                    Online
-                  </div>
-                </div> */}
                 <TextField
                   variant="outlined"
                   size="small"

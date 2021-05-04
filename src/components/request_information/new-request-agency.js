@@ -7,8 +7,9 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { getCurrentUser } from 'helper';
 
-const jobFiltersOptions = [
+const agencyFiltersOptions = [
   {
     value: 'candidate',
     label: 'Candidate'
@@ -16,6 +17,17 @@ const jobFiltersOptions = [
   {
     value: 'company',
     label: 'Company'
+  }
+];
+
+const companyFiltersOptions = [
+  {
+    value: 'candidate',
+    label: 'Candidate'
+  },
+  {
+    value: 'agency',
+    label: 'Agency'
   }
 ];
 
@@ -65,6 +77,7 @@ const reasonCompanyOptions = [
 ];
 
 export default function AddNewRequestComponent() {
+  const [currentUser] = useState(getCurrentUser());
   const [requestFilter, setRequestFilter] = useState({
     value: 'candidate',
     label: 'Candidate'
@@ -120,7 +133,11 @@ export default function AddNewRequestComponent() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12}>
                 <Select
-                  options={jobFiltersOptions}
+                  options={
+                    currentUser.role === 'Agency'
+                      ? agencyFiltersOptions
+                      : companyFiltersOptions
+                  }
                   value={requestFilter}
                   onChange={filterJobs}
                   placeholder="Add New Request Select"
@@ -139,7 +156,9 @@ export default function AddNewRequestComponent() {
                   label={
                     requestFilter.value === 'candidate'
                       ? 'Candidate Name'
-                      : 'Company Name'
+                      : requestFilter.value === 'company'
+                      ? 'Company Name'
+                      : 'Agency Name'
                   }
                   fullWidth
                 />
@@ -156,7 +175,9 @@ export default function AddNewRequestComponent() {
                       label={
                         requestFilter.value === 'candidate'
                           ? 'Candidate ID'
-                          : 'Company ID'
+                          : requestFilter.value === 'company'
+                          ? 'Company ID'
+                          : 'Agency ID'
                       }
                       fullWidth
                     />
@@ -204,7 +225,11 @@ export default function AddNewRequestComponent() {
                   options={documentOptions}
                   value={documents}
                   onChange={setDocuments}
-                  placeholder="Document for Request"
+                  placeholder={
+                    currentUser.role === 'agency'
+                      ? 'Documents for Request'
+                      : 'Documents Requested'
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={12}>

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import { Grid, Card, Button, Table } from '@material-ui/core';
+import { getCurrentUser } from 'helper';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export default function AgencyRequestPendingComponent() {
+  const [currentUser] = useState(getCurrentUser());
+
   return (
     <>
       <div className="page-title">
@@ -29,7 +32,9 @@ export default function AgencyRequestPendingComponent() {
             <div className="display-3 font-weight-bold">68</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
             <div className="font-weight-bold font-size-sm text-uppercase">
-              Pending Company Requests
+              {currentUser.role === 'agency'
+                ? 'Pending Company Requests'
+                : 'Pending Agency Requests'}
             </div>
           </Card>
         </Grid>
@@ -47,7 +52,9 @@ export default function AgencyRequestPendingComponent() {
             <div className="display-3 font-weight-bold">20</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-info rounded border-info" />
             <div className="font-weight-bold font-size-sm text-uppercase">
-              Company Request Due today!
+              {currentUser.role === 'agency'
+                ? 'Company Request Due today!'
+                : 'Agency Request Due today!'}
             </div>
           </Card>
         </Grid>
@@ -70,7 +77,9 @@ export default function AgencyRequestPendingComponent() {
                       <th className="text-left">Job ID</th>
                       <th>Candidate</th>
                       <th className="text-left">Job Title</th>
-                      <th>Company</th>
+                      <th>
+                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                      </th>
                       <th className="text-center">Date of Request</th>
                       <th className="text-center">Doc requested</th>
                       <th className="text-center">Due Date</th>
@@ -168,7 +177,10 @@ export default function AgencyRequestPendingComponent() {
           <Card className="mt-3">
             <div className="card-header py-3">
               <div className="card-header--title font-size-lg">
-                <b>Company Pending Requests</b>
+                <b>
+                  {currentUser.role === 'agency' ? 'Company' : 'Agency'} Pending
+                  Requests
+                </b>
               </div>
             </div>
 
@@ -178,7 +190,9 @@ export default function AgencyRequestPendingComponent() {
                   <thead>
                     <tr>
                       <th className="text-left">Job ID</th>
-                      <th>Company</th>
+                      <th>
+                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                      </th>
                       <th className="text-left">Job Title</th>
                       <th className="text-center">Date of Request</th>
                       <th className="text-center">Doc requested</th>

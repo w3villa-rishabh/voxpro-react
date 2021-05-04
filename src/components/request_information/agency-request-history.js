@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import { Grid, Card, Button, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { getCurrentUser } from 'helper';
 
 export default function AgencyRequestHistoryComponent() {
+  const [currentUser] = useState(getCurrentUser());
+
   return (
     <>
       <div className="page-title">
@@ -28,7 +31,8 @@ export default function AgencyRequestHistoryComponent() {
             <div className="display-3 font-weight-bold">68</div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
             <div className="font-weight-bold font-size-sm text-uppercase">
-              Company Requests History
+              {currentUser.role === 'agency' ? 'Company' : 'Agency'} Requests
+              History
             </div>
           </Card>
         </Grid>
@@ -51,7 +55,9 @@ export default function AgencyRequestHistoryComponent() {
                       <th className="text-left">Job ID</th>
                       <th>Candidate</th>
                       <th className="text-left">Job Title</th>
-                      <th>Company</th>
+                      <th>
+                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                      </th>
                       <th className="text-center">Date of Request</th>
                       <th className="text-center">Doc requested</th>
                       <th className="text-center">Date of Response</th>
@@ -165,7 +171,10 @@ export default function AgencyRequestHistoryComponent() {
           <Card className="mt-3">
             <div className="card-header py-3">
               <div className="card-header--title font-size-lg">
-                <b>Company Requests History</b>
+                <b>
+                  {currentUser.role === 'agency' ? 'Company' : 'Agency'}{' '}
+                  Requests History
+                </b>
               </div>
             </div>
 
@@ -175,7 +184,9 @@ export default function AgencyRequestHistoryComponent() {
                   <thead>
                     <tr>
                       <th className="text-left">Job ID</th>
-                      <th>Company</th>
+                      <th>
+                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                      </th>
                       <th className="text-left">Job Title</th>
                       <th className="text-center">Date of Request</th>
                       <th className="text-center">Doc requested</th>

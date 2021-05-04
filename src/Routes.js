@@ -296,15 +296,12 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
-                '/request-info',
                 '/candidate-history',
                 '/candidate-enquiries',
-                '/agency-pending',
-                '/agency-history',
-                '/agency-enquiries',
-                '/new-request',
-                '/request-history',
-                '/agency',
+                '/ir35-pending',
+                '/ir35-history',
+                '/ir35-enquiries',
+                '/request-info',
                 '/agency-placements',
                 '/applied-jobs',
                 '/agency-jobs-live',
@@ -337,29 +334,31 @@ const Routes = () => {
                     path="/candidate-enquiries"
                     component={CandidateQuery}
                   />
-                  <Route path="/agency-pending" component={AgencyPending} />
-                  <Route path="/agency-history" component={AgencyHistory} />
-                  <Route path="/agency-enquiries" component={AgencyEnquiry} />
+                  <Route path="/ir35-pending" component={AgencyPending} />
+                  <Route path="/ir35-history" component={AgencyHistory} />
+                  <Route path="/ir35-enquiries" component={AgencyEnquiry} />
 
                   <Route path="/view-profile" component={Profile} />
-                  <Route path="/request-info" component={NewRequestComponent} />
-                  <Route path="/new-request" component={NewRequestComponent} />
-                  <Route
-                    path="/request-history"
-                    component={RequestHistoryComponent}
-                  />
 
-                  <Route path="/agency">
+                  <Route path="/request-info">
                     <Route
-                      path="/agency/pending"
+                      path="/request-info/candidate-new-request"
+                      component={NewRequestComponent}
+                    />
+                    <Route
+                      path="/request-info/request-history"
+                      component={RequestHistoryComponent}
+                    />
+                    <Route
+                      path="/request-info/pending"
                       component={AgencyRequestPending}
                     />
                     <Route
-                      path="/agency/history"
+                      path="/request-info/history"
                       component={AgencyRequestHistory}
                     />
                     <Route
-                      path="/agency/new-request"
+                      path="/request-info/new-request"
                       component={AgencyNewRequestForInformation}
                     />
                   </Route>

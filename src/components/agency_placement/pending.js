@@ -25,7 +25,7 @@ export default function PendingComponent() {
       <div className="page-title">
         <TransferWithinAStationIcon />
         <div className="title pt-3">
-          <h5 className="heading">Pending Placement</h5>
+          <h5 className="heading">Pending Placements</h5>
         </div>
       </div>
 

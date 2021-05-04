@@ -74,8 +74,8 @@ export default function OnBoardDocument() {
           <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               {currentUser.role === 'candidate' && <b>Personal Documents</b>}
-              {currentUser.role === 'agency' && <b>Candidates Documents</b>}
-              {currentUser.role === 'company' && <b>Personal Documents</b>}
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && <b>Candidates Documents</b>}
             </div>
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
@@ -129,8 +129,8 @@ export default function OnBoardDocument() {
               {currentUser.role === 'candidate' && (
                 <b>Limited Company Documents</b>
               )}
-              {currentUser.role === 'agency' && <b>Placements Documents</b>}
-              {currentUser.role === 'company' && <b>Personal Documents</b>}
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && <b>Placements Documents</b>}
             </div>
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
@@ -181,7 +181,7 @@ export default function OnBoardDocument() {
             <div className="m-2 text-capitalize font-size-lg text-center">
               {currentUser.role === 'candidate' && <b>General Documents</b>}
               {currentUser.role === 'agency' && <b>Client Documents</b>}
-              {currentUser.role === 'company' && <b>Personal Documents</b>}
+              {currentUser.role === 'company' && <b>Agency Documents</b>}
             </div>
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
@@ -228,8 +228,8 @@ export default function OnBoardDocument() {
           <Card className="card-box h-100">
             <div className="m-2 text-capitalize font-size-lg text-center">
               {currentUser.role === 'candidate' && <b>Onboarding Documents</b>}
-              {currentUser.role === 'agency' && <b>My Templates</b>}
-              {currentUser.role === 'company' && <b>Personal Documents</b>}
+              {(currentUser.role === 'agency' ||
+                currentUser.role === 'company') && <b>My Templates</b>}
             </div>
             <div className="card-content-overlay text-center py-4">
               <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
@@ -311,9 +311,10 @@ export default function OnBoardDocument() {
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
               {currentUser.role === 'candidate' && 'Requests for information'}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') &&
+              {currentUser.role === 'agency' &&
                 'Client documents due to expire'}
+              {currentUser.role === 'company' &&
+                'Agency documents due to expire'}
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center mr-3 shadow-danger">
