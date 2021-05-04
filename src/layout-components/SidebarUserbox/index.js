@@ -14,12 +14,14 @@ import {
   Tooltip,
   Grid,
   CardContent,
-  List
+  List,
+  Table,
+  InputAdornment
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { closeMiniProfile } from '../../reducers/ThemeOptions';
 import 'date-fns';
-
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import { useHistory } from 'react-router-dom';
 import OnlineAndAvailability from '../../components/profiles/availability';
 import PropTypes from 'prop-types';
@@ -169,7 +171,11 @@ const SidebarUserbox = (props) => {
                           <p className="font-12 font-weight-bold mb-0">
                             Business Analyst | London, United Kingdom
                           </p>
-                          <OnlineAndAvailability />
+                          {currentUser.role === 'candidate' && (
+                            <div>
+                              <OnlineAndAvailability />
+                            </div>
+                          )}
                           <TextField
                             fullWidth
                             variant="outlined"
@@ -241,446 +247,658 @@ const SidebarUserbox = (props) => {
                           </div>
 
                           <div className="divider my-1" />
-                          <h4 className="font-size-sm font-weight-bold my-1">
-                            SKILLS
-                          </h4>
+                          {currentUser.role === 'candidate' && (
+                            <div>
+                              <h4 className="font-size-sm font-weight-bold my-1">
+                                SKILLS
+                              </h4>
 
-                          <div className="text-center my-1">
-                            <div className="badge badge-pill badge-neutral-first text-first mx-1">
-                              Web developer
-                            </div>
-                            <div className="badge badge-pill badge-neutral-warning text-warning mx-1">
-                              Javascript
-                            </div>
-                            <div className="badge badge-pill badge-neutral-danger text-danger mx-1">
-                              Angular
-                            </div>
-                          </div>
+                              <div className="text-center my-1">
+                                <div className="badge badge-pill badge-neutral-first text-first mx-1">
+                                  Web developer
+                                </div>
+                                <div className="badge badge-pill badge-neutral-warning text-warning mx-1">
+                                  Javascript
+                                </div>
+                                <div className="badge badge-pill badge-neutral-danger text-danger mx-1">
+                                  Angular
+                                </div>
+                              </div>
 
-                          <div className="card-body-button-wrapper">
-                            <Button
-                              size="small"
-                              className="btn-success btn-pill text-nowrap px-5 shadow-none border-3 border-white">
-                              + Add Skills
-                            </Button>
-                          </div>
-
+                              <div className="card-body-button-wrapper">
+                                <Button
+                                  size="small"
+                                  className="btn-success btn-pill text-nowrap px-5 shadow-none border-3 border-white">
+                                  + Add Skills
+                                </Button>
+                              </div>
+                            </div>
+                          )}
                           <div className="divider my-2" />
-                          <Button
-                            onClick={() => {
-                              history.push('/view-profile');
-                              handleCloseMenu1();
-                            }}
-                            variant="text"
-                            className="btn-outline-first mt-2">
-                            View complete profile
-                          </Button>
+                          {(currentUser.role === 'agency' ||
+                            currentUser.role === 'company') && (
+                            <div className="align-content-center d-flex justify-content-center">
+                              <Button
+                                variant="contained"
+                                size="small"
+                                className="btn-pill m-1 btn-primary">
+                                Connect
+                              </Button>
+                              <Button
+                                variant="contained"
+                                size="small"
+                                className="btn-pill m-1">
+                                Message
+                              </Button>
+                              <Button
+                                variant="contained"
+                                size="small"
+                                className="btn-pill m-1">
+                                More..
+                              </Button>
+                            </div>
+                          )}
+                          {currentUser.role === 'candidate' && (
+                            <Button
+                              onClick={() => {
+                                history.push('/view-profile');
+                                handleCloseMenu1();
+                              }}
+                              variant="text"
+                              className="btn-outline-first mt-2">
+                              View complete profile
+                            </Button>
+                          )}
                         </CardContent>
                       </Card>
                     </Grid>
-                    <Grid item sm={7}>
-                      <div className="card-header-profile">
-                        <div className="card-header--title">
-                          <Tabs
-                            className="nav-tabs-primary"
-                            value={value}
-                            variant="fullWidth"
-                            onChange={handleChange}>
-                            <Tab label="Overview" />
-                            <Tab label="Experience" />
-                            <Tab label="Education" />
-                          </Tabs>
+                    {currentUser.role === 'candidate' && (
+                      <Grid item sm={7}>
+                        <div className="card-header-profile">
+                          <div className="card-header--title">
+                            <Tabs
+                              className="nav-tabs-primary"
+                              value={value}
+                              variant="fullWidth"
+                              onChange={handleChange}>
+                              <Tab label="Overview" />
+                              <Tab label="Experience" />
+                              <Tab label="Education" />
+                            </Tabs>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="pt-2">
-                        <TabPanel value={value} index={0}>
-                          <Card>
-                            <div className="mb-2">
-                              <Grid container spacing={1} className="p-2">
-                                <Grid item md={4}>
-                                  <Card className="card-box text-black-50 p-2">
-                                    <div className="display-4 text-black font-weight-bold">
-                                      31
-                                    </div>
-                                    <div className="divider mt-2 border-1 mb-2 w-25 bg-first rounded border-first" />
-                                    <div className="font-weight-bold font-12 text-uppercase">
-                                      YEARS OF
-                                      <br />
-                                      EXPERIENCE
-                                    </div>
-                                  </Card>
+                        <div className="pt-2">
+                          <TabPanel value={value} index={0}>
+                            <Card>
+                              <div className="mb-2">
+                                <Grid container spacing={1} className="p-2">
+                                  <Grid item md={4}>
+                                    <Card className="card-box text-black-50 p-2">
+                                      <div className="display-4 text-black font-weight-bold">
+                                        31
+                                      </div>
+                                      <div className="divider mt-2 border-1 mb-2 w-25 bg-first rounded border-first" />
+                                      <div className="font-weight-bold font-12 text-uppercase">
+                                        YEARS OF
+                                        <br />
+                                        EXPERIENCE
+                                      </div>
+                                    </Card>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <Card className="card-box text-black-50 p-2">
+                                      <div className="display-4 text-black font-weight-bold">
+                                        68
+                                      </div>
+                                      <div className="divider mt-2 border-1 mb-2 w-25 bg-success rounded border-success" />
+                                      <div className="font-weight-bold font-12 text-uppercase">
+                                        QUALIFICATIONS &
+                                        <br />
+                                        CERTIFICATIONS
+                                      </div>
+                                    </Card>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <Card className="card-box text-black-50 p-2">
+                                      <div className="display-4 text-black font-weight-bold">
+                                        57
+                                      </div>
+                                      <div className="divider mt-2 border-1 mb-2 w-25 bg-warning rounded border-warning" />
+                                      <div className="font-weight-bold font-12 text-uppercase nowrap">
+                                        PROJECTS COMPLETED
+                                        <br />
+                                        YEAR TO DATE
+                                      </div>
+                                    </Card>
+                                  </Grid>
                                 </Grid>
-                                <Grid item md={4}>
-                                  <Card className="card-box text-black-50 p-2">
-                                    <div className="display-4 text-black font-weight-bold">
-                                      68
-                                    </div>
-                                    <div className="divider mt-2 border-1 mb-2 w-25 bg-success rounded border-success" />
-                                    <div className="font-weight-bold font-12 text-uppercase">
-                                      QUALIFICATIONS &
-                                      <br />
-                                      CERTIFICATIONS
-                                    </div>
-                                  </Card>
-                                </Grid>
-                                <Grid item md={4}>
-                                  <Card className="card-box text-black-50 p-2">
-                                    <div className="display-4 text-black font-weight-bold">
-                                      57
-                                    </div>
-                                    <div className="divider mt-2 border-1 mb-2 w-25 bg-warning rounded border-warning" />
-                                    <div className="font-weight-bold font-12 text-uppercase nowrap">
-                                      PROJECTS COMPLETED
-                                      <br />
-                                      YEAR TO DATE
-                                    </div>
-                                  </Card>
-                                </Grid>
-                              </Grid>
-                            </div>
+                              </div>
 
-                            <div className="card-img-wrapper">
-                              <div className="bg-composed-wrapper bg-plum-plate border-0">
-                                <div className="bg-composed-img-2 bg-composed-wrapper--image" />
-                                <div className="bg-composed-wrapper--content text-center text-white px-2 py-4">
-                                  <h1 className="font-size-xxl font-weight-bold py-2 mb-0">
-                                    Employment Information
-                                  </h1>
-                                  <p className="mb-2 font-size-lg opacity-7">
-                                    Current and Desired Employment details
+                              <div className="card-img-wrapper">
+                                <div className="bg-composed-wrapper bg-plum-plate border-0">
+                                  <div className="bg-composed-img-2 bg-composed-wrapper--image" />
+                                  <div className="bg-composed-wrapper--content text-center text-white px-2 py-4">
+                                    <h1 className="font-size-xxl font-weight-bold py-2 mb-0">
+                                      Employment Information
+                                    </h1>
+                                    <p className="mb-2 font-size-lg opacity-7">
+                                      Current and Desired Employment details
+                                    </p>
+                                  </div>
+                                  <div className="card-body-button-wrapper connect-btn">
+                                    <Button
+                                      size="small"
+                                      className="btn-success btn-pill text-nowrap shadow-none border-3 border-white">
+                                      Connect
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                              <CardContent className="text-center">
+                                <Grid container spacing={1}>
+                                  <Grid item md={4}>
+                                    <div className="bg-secondary p-2 text-center rounded">
+                                      <div>
+                                        <FontAwesomeIcon
+                                          icon={['far', 'user']}
+                                          className="font-size-xxl text-warning"
+                                        />
+                                      </div>
+                                      <div className="mt-2 line-height-sm">
+                                        <b className="font-12">Permanent</b>
+                                        <span className="text-black-50 font-10 d-block">
+                                          Desired Employment Type
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <div className="bg-secondary p-2 text-center rounded">
+                                      <div>
+                                        <FontAwesomeIcon
+                                          icon={['fas', 'lemon']}
+                                          className="font-size-xxl text-success"
+                                        />
+                                      </div>
+                                      <div className="mt-2 line-height-sm">
+                                        <b className="font-12">$3,586</b>
+                                        <span className="text-black-50 font-10 d-block">
+                                          Desired Annual Salary
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <div className="bg-secondary p-2 text-center rounded">
+                                      <div>
+                                        <FontAwesomeIcon
+                                          icon={['far', 'chart-bar']}
+                                          className="font-size-xxl text-info"
+                                        />
+                                      </div>
+                                      <div className="mt-2 line-height-sm">
+                                        <b className="font-12">
+                                          City of London
+                                        </b>
+                                        <span className="text-black-50 font-10 d-block">
+                                          Desired Location
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <div className="bg-secondary p-2 text-center rounded">
+                                      <div>
+                                        <FontAwesomeIcon
+                                          icon={['far', 'user']}
+                                          className="font-size-xxl text-warning"
+                                        />
+                                      </div>
+                                      <div className="mt-2 line-height-sm">
+                                        <b className="font-12">Permanent</b>
+                                        <span className="text-black-50 font-10 d-block">
+                                          Current Employment Type
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <div className="bg-secondary p-2 text-center rounded">
+                                      <div>
+                                        <FontAwesomeIcon
+                                          icon={['fas', 'lemon']}
+                                          className="font-size-xxl text-success"
+                                        />
+                                      </div>
+                                      <div className="mt-2 line-height-sm">
+                                        <b className="font-12">$57,500</b>
+                                        <span className="text-black-50 font-10 d-block">
+                                          Current Annual Salary
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </Grid>
+                                  <Grid item md={4}>
+                                    <div className="bg-secondary p-2 text-center rounded">
+                                      <div>
+                                        <FontAwesomeIcon
+                                          icon={['far', 'chart-bar']}
+                                          className="font-size-xxl text-info"
+                                        />
+                                      </div>
+                                      <div className="mt-2 line-height-sm">
+                                        <b className="font-12">West London</b>
+                                        <span className="text-black-50 font-10 d-block">
+                                          Current Location
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </Grid>
+                                </Grid>
+                              </CardContent>
+                            </Card>
+                          </TabPanel>
+                          <TabPanel value={value} index={1}>
+                            <Card className="mb-2 p-3">
+                              <div className="d-flex">
+                                <div className="card-badges card-badges-top">
+                                  <FontAwesomeIcon icon={['fas', 'building']} />
+                                </div>
+                                <div className="avatar-icon-wrapper mr-3">
+                                  <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                    <div className="overflow-hidden">
+                                      <img
+                                        alt="..."
+                                        className="img-fluid"
+                                        src={avatar2}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="w-100">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold font-size-lg"
+                                    title="...">
+                                    Senior business analyst
+                                  </a>
+                                  <span className="d-block">
+                                    Freelance Designer, Mutual Inc.
+                                  </span>
+                                  <p className="text-black-50 font-12">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. In eget pharetra dolor, ac
+                                    sollicitudin sem. Nulla facilisi.
                                   </p>
                                 </div>
-                                <div className="card-body-button-wrapper connect-btn">
-                                  <Button
-                                    size="small"
-                                    className="btn-success btn-pill text-nowrap shadow-none border-3 border-white">
-                                    Connect
-                                  </Button>
+                              </div>
+                            </Card>
+                            <Card className="mb-2 p-3">
+                              <div className="d-flex">
+                                <div className="card-badges card-badges-top">
+                                  <FontAwesomeIcon icon={['fas', 'building']} />
                                 </div>
-                              </div>
-                            </div>
-                            <CardContent className="text-center">
-                              <Grid container spacing={1}>
-                                <Grid item md={4}>
-                                  <div className="bg-secondary p-2 text-center rounded">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={['far', 'user']}
-                                        className="font-size-xxl text-warning"
+                                <div className="avatar-icon-wrapper mr-3">
+                                  <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                    <div className="overflow-hidden">
+                                      <img
+                                        alt="..."
+                                        className="img-fluid"
+                                        src={avatar2}
                                       />
                                     </div>
-                                    <div className="mt-2 line-height-sm">
-                                      <b className="font-12">Permanent</b>
-                                      <span className="text-black-50 font-10 d-block">
-                                        Desired Employment Type
-                                      </span>
-                                    </div>
-                                  </div>
-                                </Grid>
-                                <Grid item md={4}>
-                                  <div className="bg-secondary p-2 text-center rounded">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={['fas', 'lemon']}
-                                        className="font-size-xxl text-success"
-                                      />
-                                    </div>
-                                    <div className="mt-2 line-height-sm">
-                                      <b className="font-12">$3,586</b>
-                                      <span className="text-black-50 font-10 d-block">
-                                        Desired Annual Salary
-                                      </span>
-                                    </div>
-                                  </div>
-                                </Grid>
-                                <Grid item md={4}>
-                                  <div className="bg-secondary p-2 text-center rounded">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={['far', 'chart-bar']}
-                                        className="font-size-xxl text-info"
-                                      />
-                                    </div>
-                                    <div className="mt-2 line-height-sm">
-                                      <b className="font-12">City of London</b>
-                                      <span className="text-black-50 font-10 d-block">
-                                        Desired Location
-                                      </span>
-                                    </div>
-                                  </div>
-                                </Grid>
-                                <Grid item md={4}>
-                                  <div className="bg-secondary p-2 text-center rounded">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={['far', 'user']}
-                                        className="font-size-xxl text-warning"
-                                      />
-                                    </div>
-                                    <div className="mt-2 line-height-sm">
-                                      <b className="font-12">Permanent</b>
-                                      <span className="text-black-50 font-10 d-block">
-                                        Current Employment Type
-                                      </span>
-                                    </div>
-                                  </div>
-                                </Grid>
-                                <Grid item md={4}>
-                                  <div className="bg-secondary p-2 text-center rounded">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={['fas', 'lemon']}
-                                        className="font-size-xxl text-success"
-                                      />
-                                    </div>
-                                    <div className="mt-2 line-height-sm">
-                                      <b className="font-12">$57,500</b>
-                                      <span className="text-black-50 font-10 d-block">
-                                        Current Annual Salary
-                                      </span>
-                                    </div>
-                                  </div>
-                                </Grid>
-                                <Grid item md={4}>
-                                  <div className="bg-secondary p-2 text-center rounded">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={['far', 'chart-bar']}
-                                        className="font-size-xxl text-info"
-                                      />
-                                    </div>
-                                    <div className="mt-2 line-height-sm">
-                                      <b className="font-12">West London</b>
-                                      <span className="text-black-50 font-10 d-block">
-                                        Current Location
-                                      </span>
-                                    </div>
-                                  </div>
-                                </Grid>
-                              </Grid>
-                            </CardContent>
-                          </Card>
-                        </TabPanel>
-                        <TabPanel value={value} index={1}>
-                          <Card className="mb-2 p-3">
-                            <div className="d-flex">
-                              <div className="card-badges card-badges-top">
-                                <FontAwesomeIcon icon={['fas', 'building']} />
-                              </div>
-                              <div className="avatar-icon-wrapper mr-3">
-                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                                  <div className="overflow-hidden">
-                                    <img
-                                      alt="..."
-                                      className="img-fluid"
-                                      src={avatar2}
-                                    />
                                   </div>
                                 </div>
+                                <div className="w-100">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold font-size-lg"
+                                    title="...">
+                                    Business analyst
+                                  </a>
+                                  <span className="d-block">
+                                    Freelance Designer, Mutual Inc.
+                                  </span>
+                                  <p className="text-black-50 font-12">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. In eget pharetra dolor, ac
+                                    sollicitudin sem. Nulla facilisi.
+                                  </p>
+                                </div>
                               </div>
+                            </Card>
+                            <Card className="mb-2 p-3">
+                              <div className="d-flex">
+                                <div className="card-badges card-badges-top">
+                                  <FontAwesomeIcon icon={['fas', 'building']} />
+                                </div>
+                                <div className="avatar-icon-wrapper mr-3">
+                                  <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                    <div className="overflow-hidden">
+                                      <img
+                                        alt="..."
+                                        className="img-fluid"
+                                        src={avatar2}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="w-100">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold font-size-lg"
+                                    title="...">
+                                    Business analyst
+                                  </a>
+                                  <span className="d-block">
+                                    Freelance Designer, Mutual Inc.
+                                  </span>
+                                  <p className="text-black-50 font-12">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. In eget pharetra dolor, ac
+                                    sollicitudin sem. Nulla facilisi.
+                                  </p>
+                                </div>
+                              </div>
+                            </Card>
+                          </TabPanel>
 
-                              <div className="w-100">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold font-size-lg"
-                                  title="...">
-                                  Senior business analyst
-                                </a>
-                                <span className="d-block">
-                                  Freelance Designer, Mutual Inc.
-                                </span>
-                                <p className="text-black-50 font-12">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. In eget pharetra dolor, ac
-                                  sollicitudin sem. Nulla facilisi.
-                                </p>
-                              </div>
-                            </div>
-                          </Card>
-                          <Card className="mb-2 p-3">
-                            <div className="d-flex">
-                              <div className="card-badges card-badges-top">
-                                <FontAwesomeIcon icon={['fas', 'building']} />
-                              </div>
-                              <div className="avatar-icon-wrapper mr-3">
-                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                                  <div className="overflow-hidden">
-                                    <img
-                                      alt="..."
-                                      className="img-fluid"
-                                      src={avatar2}
-                                    />
+                          <TabPanel value={value} index={2}>
+                            <Card className="mb-2 p-3">
+                              <div className="d-flex">
+                                <div className="card-badges card-badges-top">
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+                                </div>
+                                <div className="avatar-icon-wrapper mr-3">
+                                  <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                    <div className="overflow-hidden">
+                                      <img
+                                        alt="..."
+                                        className="img-fluid"
+                                        src={avatar1}
+                                      />
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className="w-100">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold font-size-lg"
-                                  title="...">
-                                  Business analyst
-                                </a>
-                                <span className="d-block">
-                                  Freelance Designer, Mutual Inc.
-                                </span>
-                                <p className="text-black-50 font-12">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. In eget pharetra dolor, ac
-                                  sollicitudin sem. Nulla facilisi.
-                                </p>
-                              </div>
-                            </div>
-                          </Card>
-                          <Card className="mb-2 p-3">
-                            <div className="d-flex">
-                              <div className="card-badges card-badges-top">
-                                <FontAwesomeIcon icon={['fas', 'building']} />
-                              </div>
-                              <div className="avatar-icon-wrapper mr-3">
-                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                                  <div className="overflow-hidden">
-                                    <img
-                                      alt="..."
-                                      className="img-fluid"
-                                      src={avatar2}
-                                    />
-                                  </div>
+                                <div className="w-100">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold font-size-lg"
+                                    title="...">
+                                    BSc Business & Economics
+                                  </a>
+                                  <span className="d-block">
+                                    Freelance Designer, Mutual Inc.
+                                  </span>
+                                  <p className="text-black-50 font-12">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. In eget pharetra dolor, ac
+                                    sollicitudin sem. Nulla facilisi.
+                                  </p>
                                 </div>
                               </div>
-                              <div className="w-100">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold font-size-lg"
-                                  title="...">
-                                  Business analyst
-                                </a>
-                                <span className="d-block">
-                                  Freelance Designer, Mutual Inc.
-                                </span>
-                                <p className="text-black-50 font-12">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. In eget pharetra dolor, ac
-                                  sollicitudin sem. Nulla facilisi.
-                                </p>
+                            </Card>
+                            <Card className="mb-2 p-3">
+                              <div className="d-flex">
+                                <div className="card-badges card-badges-top">
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+                                </div>
+                                <div className="avatar-icon-wrapper mr-3">
+                                  <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                    <div className="overflow-hidden">
+                                      <img
+                                        alt="..."
+                                        className="img-fluid"
+                                        src={avatar1}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="w-100">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold font-size-lg"
+                                    title="...">
+                                    English Literature
+                                  </a>
+                                  <span className="d-block">
+                                    Freelance Designer, Mutual Inc.
+                                  </span>
+                                  <p className="text-black-50 font-12">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. In eget pharetra dolor, ac
+                                    sollicitudin sem. Nulla facilisi.
+                                  </p>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card className="mb-2 p-3">
+                              <div className="d-flex">
+                                <div className="card-badges card-badges-top">
+                                  <FontAwesomeIcon icon={['fas', 'user']} />
+                                </div>
+                                <div className="avatar-icon-wrapper mr-3">
+                                  <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
+                                    <div className="overflow-hidden">
+                                      <img
+                                        alt="..."
+                                        className="img-fluid"
+                                        src={avatar1}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="w-100">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="font-weight-bold font-size-lg"
+                                    title="...">
+                                    Secondary GCSE's
+                                  </a>
+                                  <span className="d-block">
+                                    Freelance Designer, Mutual Inc.
+                                  </span>
+                                  <p className="text-black-50 font-12">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. In eget pharetra dolor, ac
+                                    sollicitudin sem. Nulla facilisi.
+                                  </p>
+                                </div>
+                              </div>
+                            </Card>
+                          </TabPanel>
+                        </div>
+                        {/* </Card> */}
+                      </Grid>
+                    )}
+                    {(currentUser.role === 'agency' ||
+                      currentUser.role == 'company') && (
+                      <Grid item sm={7}>
+                        <div className="">
+                          <Card className="card-box mt-3">
+                            <div className="card-header py-3">
+                              <div className="card-header--title font-size-lg">
+                                <b>Live Roles</b>
+                              </div>
+                              <div className="card-header--actions">
+                                <Grid container spacing={3}>
+                                  <Grid item md={4} className="mtb">
+                                    <span>
+                                      <TextField
+                                        variant="outlined"
+                                        size="small"
+                                        label="what"
+                                        placeholder="e.g. 'nurse'"
+                                        className="w-100 ht"
+                                        InputProps={{
+                                          startAdornment: (
+                                            <InputAdornment position="start">
+                                              <SearchTwoToneIcon />
+                                            </InputAdornment>
+                                          ),
+                                          style: {
+                                            height: '37px'
+                                          }
+                                        }}
+                                      />
+                                    </span>
+                                  </Grid>
+                                  <Grid item md={5} className="mtb">
+                                    <TextField
+                                      variant="outlined"
+                                      size="small"
+                                      label="where"
+                                      placeholder="town or postcode"
+                                      id="input-with-icon-textfield1"
+                                      className="w-100 mb-4"
+                                      InputProps={{
+                                        startAdornment: (
+                                          <InputAdornment position="start">
+                                            <SearchTwoToneIcon />
+                                          </InputAdornment>
+                                        ),
+                                        style: {
+                                          height: '37px'
+                                        }
+                                      }}
+                                    />
+                                  </Grid>
+                                  <Grid item md={1} className="mtb">
+                                    <Button
+                                      size="small"
+                                      className="px-4 btn-primary mr-2"
+                                      variant="contained">
+                                      Search
+                                    </Button>
+                                  </Grid>
+                                </Grid>
                               </div>
                             </div>
-                          </Card>
-                        </TabPanel>
 
-                        <TabPanel value={value} index={2}>
-                          <Card className="mb-2 p-3">
-                            <div className="d-flex">
-                              <div className="card-badges card-badges-top">
-                                <FontAwesomeIcon icon={['fas', 'user']} />
-                              </div>
-                              <div className="avatar-icon-wrapper mr-3">
-                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                                  <div className="overflow-hidden">
-                                    <img
-                                      alt="..."
-                                      className="img-fluid"
-                                      src={avatar1}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="w-100">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold font-size-lg"
-                                  title="...">
-                                  BSc Business & Economics
-                                </a>
-                                <span className="d-block">
-                                  Freelance Designer, Mutual Inc.
-                                </span>
-                                <p className="text-black-50 font-12">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. In eget pharetra dolor, ac
-                                  sollicitudin sem. Nulla facilisi.
-                                </p>
+                            <div className="table-responsive-md">
+                              <div className="table-scrollbar">
+                                <Table className="table table-hover mb-0">
+                                  <thead>
+                                    <tr>
+                                      <th className="bg-white text-left">
+                                        Date Posted
+                                      </th>
+                                      <th className="bg-white">Job Title</th>
+                                      <th className="bg-white text-left">
+                                        Location
+                                      </th>
+                                      <th className="bg-white text-center">
+                                        Salary
+                                      </th>
+                                      <th className="bg-white text-center">
+                                        Type
+                                      </th>
+                                      <th className="bg-white text-center">
+                                        View
+                                      </th>
+                                      <th className="bg-white text-center">
+                                        More
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>13/02/2021</td>
+                                      <td>Business Developer</td>
+                                      <td>Birmingham, UK</td>
+                                      <td className="text-center">£4500</td>
+                                      <td className="text-center">
+                                        <div className="badge badge-neutral-danger text-danger">
+                                          Temporary
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <Button
+                                          size="small"
+                                          className="px-4 btn-neutral-primary"
+                                          variant="contained">
+                                          View
+                                        </Button>
+                                      </td>
+                                      <td>
+                                        <Button
+                                          size="small"
+                                          className="px-4 btn-neutral-primary"
+                                          variant="contained">
+                                          More
+                                        </Button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>12/02/2021</td>
+                                      <td>Software developer</td>
+                                      <td>Glasgow, UK</td>
+                                      <td className="text-center">£3000</td>
+                                      <td className="text-center">
+                                        <div className="badge badge-neutral-danger text-danger">
+                                          Permanent
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <Button
+                                          size="small"
+                                          className="px-4 btn-neutral-primary"
+                                          variant="contained">
+                                          View
+                                        </Button>
+                                      </td>
+                                      <td>
+                                        <Button
+                                          size="small"
+                                          className="px-4 btn-neutral-primary"
+                                          variant="contained">
+                                          More
+                                        </Button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>05/02/2021</td>
+                                      <td>Business Developer</td>
+                                      <td>London, UK</td>
+                                      <td className="text-center">£4500</td>
+                                      <td className="text-center">
+                                        <div className="badge badge-neutral-danger text-danger">
+                                          Contract
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <Button
+                                          size="small"
+                                          className="px-4 btn-neutral-primary"
+                                          variant="contained">
+                                          View
+                                        </Button>
+                                      </td>
+                                      <td>
+                                        <Button
+                                          size="small"
+                                          className="px-4 btn-neutral-primary"
+                                          variant="contained">
+                                          More
+                                        </Button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </Table>
                               </div>
                             </div>
                           </Card>
-                          <Card className="mb-2 p-3">
-                            <div className="d-flex">
-                              <div className="card-badges card-badges-top">
-                                <FontAwesomeIcon icon={['fas', 'user']} />
-                              </div>
-                              <div className="avatar-icon-wrapper mr-3">
-                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                                  <div className="overflow-hidden">
-                                    <img
-                                      alt="..."
-                                      className="img-fluid"
-                                      src={avatar1}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="w-100">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold font-size-lg"
-                                  title="...">
-                                  English Literature
-                                </a>
-                                <span className="d-block">
-                                  Freelance Designer, Mutual Inc.
-                                </span>
-                                <p className="text-black-50 font-12">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. In eget pharetra dolor, ac
-                                  sollicitudin sem. Nulla facilisi.
-                                </p>
-                              </div>
-                            </div>
-                          </Card>
-                          <Card className="mb-2 p-3">
-                            <div className="d-flex">
-                              <div className="card-badges card-badges-top">
-                                <FontAwesomeIcon icon={['fas', 'user']} />
-                              </div>
-                              <div className="avatar-icon-wrapper mr-3">
-                                <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                                  <div className="overflow-hidden">
-                                    <img
-                                      alt="..."
-                                      className="img-fluid"
-                                      src={avatar1}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="w-100">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold font-size-lg"
-                                  title="...">
-                                  Secondary GCSE's
-                                </a>
-                                <span className="d-block">
-                                  Freelance Designer, Mutual Inc.
-                                </span>
-                                <p className="text-black-50 font-12">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. In eget pharetra dolor, ac
-                                  sollicitudin sem. Nulla facilisi.
-                                </p>
-                              </div>
-                            </div>
-                          </Card>
-                        </TabPanel>
-                      </div>
-                      {/* </Card> */}
-                    </Grid>
+                        </div>
+                      </Grid>
+                    )}
                   </Grid>
                   {/* </PerfectScrollbar> */}
                 </List>
@@ -709,7 +927,6 @@ const SidebarUserbox = (props) => {
             Business Analyst | London, United Kingdom
           </small>
           <OnlineAndAvailability />
-
           <small className="d-block font-12 text-white-50">
             Senior Business Analyst with 15 years experience in the retail
             industry and FMCG industry, with project spending 5-10 million.
