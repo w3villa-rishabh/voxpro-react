@@ -714,3 +714,24 @@ tbody.scroll {
   overflow: scroll !important;
   display: block !important;
 }
+
+.chat-menu {
+  position: absolute;
+  left: 293px !important;
+}
+
+// For mobile
+@media (max-width: 767px) {
+  .chat-menu {
+    position: absolute;
+    left: 0 !important;
+  }
+}
+
+// For desktop
+@media (min-width: 767px) {
+  .chat-menu {
+    position: absolute;
+    left: 293px !important;
+  }
+}
