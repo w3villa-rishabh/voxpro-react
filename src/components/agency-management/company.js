@@ -25,6 +25,7 @@ import {
   setCloseModal
 } from '../../reducers/ThemeOptions';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import projectLogo0 from '../../assets/images/voxpro-images/logo_small.png';
 import projectLogo from '../../assets/images/stock-photos/company2.PNG';
 import projectLogo1 from '../../assets/images/stock-photos/company3.png';
 import projectLogo2 from '../../assets/images/stock-photos/company4.png';
@@ -480,7 +481,7 @@ const HeaderDrawer = (props) => {
                       <div className="app-nav-logo--icon rounded-sm">
                         <img
                           alt="Bamburgh React Admin Dashboard with Material-UI PRO"
-                          src={projectLogo}
+                          src={projectLogo0}
                         />
                       </div>
                       <div className="app-nav-logo--text">

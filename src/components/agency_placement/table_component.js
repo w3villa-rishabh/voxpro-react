@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import { Button, MenuItem, Menu, Card, Table } from '@material-ui/core';
 
-import PerfectScrollbar from 'react-perfect-scrollbar';
-
 const Actions = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -88,9 +86,12 @@ export default function TableComponent() {
                     <td className="text-center">14 Feb 2020</td>
                     <td className="text-center">Inside IR-35</td>
                     <td className="text-center">
-                      <div className="badge badge-neutral-success text-success">
-                        Active
-                      </div>
+                      <Button
+                        size="small"
+                        className="btn btn-info"
+                        variant="text">
+                        View
+                      </Button>
                     </td>
                     <td>
                       <Actions />
@@ -107,9 +108,12 @@ export default function TableComponent() {
                     <td className="text-center">14 Feb 2020</td>
                     <td className="text-center">Outside IR-35</td>
                     <td className="text-center">
-                      <div className="badge badge-neutral-info text-info">
-                        Due to End
-                      </div>
+                      <Button
+                        size="small"
+                        className="btn btn-info"
+                        variant="text">
+                        View
+                      </Button>
                     </td>
                     <td>
                       <Actions />
@@ -126,9 +130,12 @@ export default function TableComponent() {
                     <td className="text-center">14 Feb 2020</td>
                     <td className="text-center">Inside IR-35</td>
                     <td className="text-center">
-                      <div className="badge badge-neutral-danger text-danger">
-                        Ended
-                      </div>
+                      <Button
+                        size="small"
+                        className="btn btn-info"
+                        variant="text">
+                        View
+                      </Button>
                     </td>
                     <td>
                       <Actions />
@@ -145,9 +152,12 @@ export default function TableComponent() {
                     <td className="text-center">14 Feb 2020</td>
                     <td className="text-center">Outside IR-35</td>
                     <td className="text-center">
-                      <div className="badge badge-neutral-success text-success">
-                        Extension
-                      </div>
+                      <Button
+                        size="small"
+                        className="btn btn-info"
+                        variant="text">
+                        View
+                      </Button>
                     </td>
                     <td>
                       <Actions />
@@ -164,9 +174,12 @@ export default function TableComponent() {
                     <td className="text-center">14 Feb 2020</td>
                     <td className="text-center">N/A</td>
                     <td className="text-center">
-                      <div className="badge badge-neutral-danger text-danger">
-                        Canceled
-                      </div>
+                      <Button
+                        size="small"
+                        className="btn btn-info"
+                        variant="text">
+                        View
+                      </Button>
                     </td>
                     <td>
                       <Actions />
