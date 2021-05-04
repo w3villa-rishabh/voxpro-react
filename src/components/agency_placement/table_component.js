@@ -59,7 +59,7 @@ export default function TableComponent() {
       <div className="pt-3">
         <Card className="card-box mb-spacing-6-x2">
           <div className="table-responsive-md">
-            <PerfectScrollbar>
+            <div className="table-scrollbar">
               <Table className="table table-hover text-nowrap mb-0">
                 <thead>
                   <tr>
@@ -174,7 +174,7 @@ export default function TableComponent() {
                   </tr>
                 </tbody>
               </Table>
-            </PerfectScrollbar>
+            </div>
           </div>
           <div className="card-footer py-3 text-center">
             <Button size="small" className="btn-outline-second" variant="text">
