@@ -1,28 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
-// function valuetext(value) {
-//   return `${value}°C`;
-// }
-
 export default function CandidateSearchComponent() {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    };
-  }, []);
-
-  const handleWindowSizeChange = () => {
-    setWidth(window.innerWidth);
-  };
-
   // const [value, setValue] = useState('');
   // const options = useMemo(() => countryList().getData(), []);
 
@@ -154,8 +137,8 @@ export default function CandidateSearchComponent() {
 
       <Grid container spacing={2} className="mt-2">
         <Grid item xs={12} sm={12}>
-          <Card className="px-3 pt-3">
-            <div className="card-header py-3">
+          <Card className="">
+            <div className="card-header">
               <div className="card-header--title font-size-lg">
                 <b>Candidates recently added</b>
               </div>
@@ -166,12 +149,12 @@ export default function CandidateSearchComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="bg-white text-left">Added On</th>
-                      <th className="bg-white text-center">Name</th>
-                      <th className="bg-white text-center">Location</th>
-                      <th className="bg-white text-center">Job Title</th>
-                      <th className="bg-white text-center">Availability</th>
-                      <th className="bg-white text-center">Action</th>
+                      <th className="text-left">Added On</th>
+                      <th className="text-center">Name</th>
+                      <th className="text-center">Location</th>
+                      <th className="text-center">Job Title</th>
+                      <th className="text-center">Availability</th>
+                      <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>

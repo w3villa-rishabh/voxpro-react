@@ -9,8 +9,7 @@ import {
   LinearProgress
 } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
-
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import { getCurrentUser } from 'helper';
 
 const CandidateActionsApplied = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -131,6 +130,8 @@ const CandidateActionsCandider = () => {
 
 export default function TableComponent() {
   const location = useLocation();
+  const [currentUser] = useState(getCurrentUser());
+
   return (
     <>
       <div className="pt-3">
@@ -142,7 +143,9 @@ export default function TableComponent() {
                 <thead>
                   <tr>
                     <th className="text-center">Job ID</th>
-                    <th>Company</th>
+                    <th>
+                      {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                    </th>
                     <th>Job Title</th>
                     <th className="text-center">Salary</th>
                     <th className="text-center">Job Location</th>
@@ -336,7 +339,7 @@ export default function TableComponent() {
                   </tr>
                 </tbody>
               </Table>
-              </div>
+            </div>
             {/* </PerfectScrollbar> */}
           </div>
           <div className="card-footer py-3 text-center">

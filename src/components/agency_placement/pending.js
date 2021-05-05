@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { Grid, Card } from '@material-ui/core';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
-
 import { CircularProgressbar } from 'react-circular-progressbar';
 import TableComponent from './table_component';
 

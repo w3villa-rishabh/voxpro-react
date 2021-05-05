@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getCurrentUser } from 'helper';
 
 import { Button, MenuItem, Menu, Card, Table } from '@material-ui/core';
 
@@ -52,6 +53,8 @@ const Actions = () => {
 };
 
 export default function TableComponent() {
+  const [currentUser] = useState(getCurrentUser());
+
   return (
     <>
       <div className="pt-3">
@@ -63,14 +66,20 @@ export default function TableComponent() {
                   <tr>
                     <th className="text-center">Placement ID</th>
                     <th>Candidate</th>
-                    <th>Company</th>
+                    <th>
+                      {currentUser.role === 'agency' ? 'Company' : 'Agency'}
+                    </th>
                     <th>Job Title</th>
                     <th className="text-center">Salary</th>
                     <th className="text-center">Job Location</th>
                     <th className="text-center">Start Date</th>
                     <th className="text-center">End Date</th>
                     <th className="text-center">IR35 Status</th>
-                    <th className="text-center">Onboarding Documents</th>
+                    <th className="text-center">
+                      {currentUser.role === 'agency'
+                        ? 'Onboarding Documents'
+                        : 'Placement Status'}
+                    </th>
                     <th className="text-center">Action</th>
                   </tr>
                 </thead>

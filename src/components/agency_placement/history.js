@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import { Grid, Card, TextField, Button } from '@material-ui/core';
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
-
+import { getCurrentUser } from 'helper';
 import { CircularProgressbar } from 'react-circular-progressbar';
 
 import TableComponent from './table_component';
 
 export default function HistoryComponent() {
   const [width, setWidth] = useState(window.innerWidth);
+  const [currentUser] = useState(getCurrentUser());
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
@@ -33,12 +34,16 @@ export default function HistoryComponent() {
       <Card className="px-3 pt-3 mb-3">
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
-            <b>Client</b>
+            <b>{currentUser.role === 'agency' ? 'Client' : 'Agency'}</b>
             <div className="mb-3 mt-2">
               <TextField
                 variant="outlined"
                 size="small"
-                placeholder="Search by client"
+                placeholder={
+                  currentUser.role === 'agency'
+                    ? 'Search by client'
+                    : 'Search by agency'
+                }
                 className="w-100"
                 InputProps={{
                   style: {
