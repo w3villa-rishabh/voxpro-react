@@ -125,6 +125,15 @@
 }
 
 
+// For desktop
+@media (min-width: 767px) {
+  .app-header--pane {
+    .mobile-view-btn {
+      padding-bottom: 0 !important;
+    }
+  }
+}
+
 // For mobile
 @media (max-width: 767px) {
   .app-header--pane {
