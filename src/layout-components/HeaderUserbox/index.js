@@ -84,7 +84,7 @@ const HeaderUserbox = () => {
             badgeContent=" "
             classes={{ badge: 'bg-success badge-circle border-0' }}
             variant="dot">
-            <div className="avatar-icon rounded mobile-view-btn">
+            <div className="avatar-icon rounded">
               <img src={avatar7} alt="..." />
             </div>
           </StyledBadge>

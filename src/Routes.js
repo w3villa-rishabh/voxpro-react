@@ -108,7 +108,7 @@ const SearchAgenciesComponent = lazy(() =>
 
 //SearchCompaniesComponent
 const SearchCompaniesComponent = lazy(() =>
-  import('./components/search/agencies-search')
+  import('./components/search/company-search')
 );
 
 //CandidateSearchComponent
