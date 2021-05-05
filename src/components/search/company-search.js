@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
@@ -9,24 +9,8 @@ import clogo from '../../assets/images/stock-photos/c-logo.webp';
 import clogo1 from '../../assets/images/stock-photos/company.png';
 import { getCurrentUser } from '../../helper';
 
-// function valuetext(value) {
-//   return `${value}°C`;
-// }
-
 export default function CompaniesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    };
-  }, []);
-
-  const handleWindowSizeChange = () => {
-    setWidth(window.innerWidth);
-  };
 
   // const [value, setValue] = useState('');
   // const options = useMemo(() => countryList().getData(), []);
@@ -159,8 +143,8 @@ export default function CompaniesSearchComponent() {
 
       <Grid container spacing={2} className="mt-2">
         <Grid item xs={12} sm={12}>
-          <Card className="px-3 pt-3">
-            <div className="card-header py-3">
+          <Card className="">
+            <div className="card-header">
               <div className="card-header--title font-size-lg">
                 <b>Companies recently added</b>
               </div>
@@ -171,15 +155,13 @@ export default function CompaniesSearchComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="bg-white text-left">Added On</th>
-                      <th className="bg-white">Company Name</th>
-                      <th className="bg-white text-center">Logo</th>
-                      <th className="bg-white text-center">Location</th>
-                      <th className="bg-white text-center">Industry</th>
-                      <th className="bg-white text-center">
-                        No of jobs active
-                      </th>
-                      <th className="bg-white text-center">Action</th>
+                      <th className="text-left">Added On</th>
+                      <th>Company Name</th>
+                      <th className="text-center">Logo</th>
+                      <th className="text-center">Location</th>
+                      <th className="text-center">Industry</th>
+                      <th className="text-center">No of jobs active</th>
+                      <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>

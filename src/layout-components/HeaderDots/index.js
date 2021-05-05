@@ -171,7 +171,7 @@ const HeaderDots = () => {
   return (
     <>
       <div className="d-flex align-items-center popover-header-wrapper">
-        <span className="pr-2 mr-4 mt-3 mb-0">
+        <span className="pr-1">
           <Badge
             variant="dot"
             anchorOrigin={{
@@ -180,17 +180,19 @@ const HeaderDots = () => {
             }}
             badgeContent=" "
             classes={{ badge: 'bg-danger badge-circle' }}>
-            <Button onClick={handleClickChat} className="padd">
+            <Button onClick={handleClickChat} className="mobile-view-btn">
               <span>
                 <FontAwesomeIcon
                   icon={['fas', 'home']}
-                  className="font-size-xl text-black-50 ml-1"
+                  className="font-size-xl text-black-50"
                 />
               </span>
             </Button>
           </Badge>{' '}
           <br />
-          <div className="font-size-sm text-black-50">Home</div>
+          <div className="font-size-sm text-black-50 mobile-view-text">
+            Home
+          </div>
           <Popover
             open={openChat}
             anchorEl={anchorElChat}
@@ -397,7 +399,7 @@ const HeaderDots = () => {
           </Popover>
         </span>
 
-        <span className="pr-2 mr-4 mt-3 mb-0">
+        <span className="pr-1">
           <Badge
             variant="dot"
             anchorOrigin={{
@@ -406,17 +408,19 @@ const HeaderDots = () => {
             }}
             badgeContent=" "
             classes={{ badge: 'bg-success badge-circle' }}>
-            <Button onClick={handleClick1} className="padd">
+            <Button onClick={handleClick1} className="mobile-view-btn">
               <span>
                 <FontAwesomeIcon
                   icon={['fas', 'users']}
-                  className="font-size-xl text-black-50 ml-2"
+                  className="font-size-xl text-black-50"
                 />
               </span>
             </Button>
           </Badge>
           <br />
-          <div className="font-size-sm text-black-50">Network</div>
+          <div className="font-size-sm text-black-50 mobile-view-text">
+            Network
+          </div>
 
           <Popover
             open={open1}
@@ -623,7 +627,7 @@ const HeaderDots = () => {
             </div>
           </Popover>
         </span>
-        <span className="pr-2 mr-4 mt-3 mb-0">
+        <span className="pr-1">
           <Badge
             variant="dot"
             overlap="circle"
@@ -633,17 +637,19 @@ const HeaderDots = () => {
             }}
             badgeContent=" "
             classes={{ badge: 'bg-danger badge-circle-sm' }}>
-            <Button onClick={handleClick2} className="padd">
+            <Button onClick={handleClick2} className="mobile-view-btn">
               <span>
                 <FontAwesomeIcon
                   icon={['fas', 'suitcase']}
-                  className="font-size-xl text-black-50 ml-0"
+                  className="font-size-xl text-black-50"
                 />
               </span>
             </Button>
           </Badge>
           <br />
-          <div className="font-size-sm text-black-50">Jobs</div>
+          <div className="font-size-sm text-black-50 mobile-view-text">
+            Jobs
+          </div>
           <Popover
             open={open2}
             anchorEl={anchorEl2}
@@ -711,7 +717,7 @@ const HeaderDots = () => {
             </List>
           </Popover>
         </span>
-        <span className="pr-2 mr-2 mt-3 mb-0">
+        <span className="pr-1">
           <Badge
             variant="dot"
             overlap="circle"
@@ -721,30 +727,34 @@ const HeaderDots = () => {
             }}
             badgeContent=" "
             classes={{ badge: 'bg-danger badge-circle-sm' }}>
-            <Button onClick={handleClick2} className="padd">
+            <Button onClick={handleClick2} className="mobile-view-btn">
               <span>
                 <FontAwesomeIcon
                   icon={['far', 'comments']}
-                  className="font-size-xl text-black-50 ml-3"
+                  className="font-size-xl text-black-50"
                 />
               </span>
             </Button>
           </Badge>
           <br />
-          <div className="font-size-sm text-black-50">Messaging</div>
+          <div className="font-size-sm text-black-50 mobile-view-text">
+            Messaging
+          </div>
         </span>
 
-        <span className="pr-2 mr-2 mt-3 mb-0">
-          <Button onClick={handleClick2} className="padd">
+        <span className="pr-1">
+          <Button onClick={handleClick2} className="mobile-view-btn">
             <span>
               <FontAwesomeIcon
                 icon={['fas', 'bell']}
-                className="font-size-xl text-black-50 ml-4"
+                className="font-size-xl text-black-50"
               />
             </span>
           </Button>
           <br />
-          <div className="font-size-sm text-black-50">Notifications</div>
+          <div className="font-size-sm text-black-50 mobile-view-text">
+            Notifications
+          </div>
           <Popover
             open={open3}
             anchorEl={anchorEl3}

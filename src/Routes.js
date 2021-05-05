@@ -172,6 +172,11 @@ const AgencyManagementCompany = lazy(() =>
   import('./components/agency-management/company')
 );
 
+//AgencyManagementAgency
+const AgencyManagementAgency = lazy(() =>
+  import('./components/agency-management/agency')
+);
+
 const Routes = () => {
   const location = useLocation();
   const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
@@ -302,10 +307,10 @@ const Routes = () => {
                 '/ir35-history',
                 '/ir35-enquiries',
                 '/request-info',
-                '/agency-placements',
+                '/candidate-placements',
                 '/applied-jobs',
-                '/agency-jobs-live',
-                '/agency-jobs-history',
+                '/jobs-live',
+                '/jobs-history',
                 '/placements',
                 '/tasks',
                 '/task-calendar',
@@ -315,6 +320,7 @@ const Routes = () => {
                 '/search-companies',
                 '/search-candidates',
                 '/management-company',
+                '/management-agency',
                 '/management-candidate',
                 '/chat'
               ]}>
@@ -363,19 +369,22 @@ const Routes = () => {
                     />
                   </Route>
 
-                  <Route path="/agency-placements">
+                  <Route path="/placements">
                     <Route
-                      path="/agency-placements/pending"
+                      path="/placements/pending"
                       component={AgencyPlacementsPending}
                     />
                     <Route
-                      path="/agency-placements/history"
+                      path="/placements/history"
                       component={AgencyPlacementsHistory}
                     />
                   </Route>
 
                   <Route path="/applied-jobs" component={AppliedJobComponent} />
-                  <Route path="/placements" component={CandidatePlacements} />
+                  <Route
+                    path="/candidate-placements"
+                    component={CandidatePlacements}
+                  />
                   <Route path="/tasks" component={MyTasksComponent} />
                   <Route
                     path="/task-calendar"
@@ -383,11 +392,8 @@ const Routes = () => {
                   />
                   <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />
-                  <Route path="/agency-jobs-live" component={AgencyJobsLive} />
-                  <Route
-                    path="/agency-jobs-history"
-                    component={AgencyJobsHistory}
-                  />
+                  <Route path="/jobs-live" component={AgencyJobsLive} />
+                  <Route path="/jobs-history" component={AgencyJobsHistory} />
                   <Route
                     path="/search-agencies"
                     component={SearchAgenciesComponent}
@@ -403,6 +409,10 @@ const Routes = () => {
                   <Route
                     path="/management-company"
                     component={AgencyManagementCompany}
+                  />
+                  <Route
+                    path="/management-agency"
+                    component={AgencyManagementAgency}
                   />
                   <Route
                     path="/management-candidate"

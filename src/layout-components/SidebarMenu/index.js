@@ -288,7 +288,8 @@ const SidebarMenu = (props) => {
               </li>
             )}
 
-            {currentUser.role === 'agency' && (
+            {(currentUser.role === 'agency' ||
+              currentUser.role === 'company') && (
               <li>
                 <a
                   href="javascript:void(0)"
@@ -311,14 +312,14 @@ const SidebarMenu = (props) => {
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/agency-placements/pending">
+                        to="/placements/pending">
                         Pending
                       </NavLink>
                     </li>
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
-                        to="/agency-placements/history">
+                        to="/placements/history">
                         History
                       </NavLink>
                     </li>
@@ -327,7 +328,8 @@ const SidebarMenu = (props) => {
               </li>
             )}
 
-            {currentUser.role === 'agency' && (
+            {(currentUser.role === 'agency' ||
+              currentUser.role === 'company') && (
               <li>
                 <a
                   href="javascript:void(0)"
@@ -345,13 +347,24 @@ const SidebarMenu = (props) => {
                 </a>
                 <Collapse in={placement}>
                   <ul>
-                    <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/management-company">
-                        Companies
-                      </NavLink>
-                    </li>
+                    {currentUser.role === 'agency' && (
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/management-company">
+                          Companies
+                        </NavLink>
+                      </li>
+                    )}
+                    {currentUser.role === 'company' && (
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/management-agency">
+                          Agency
+                        </NavLink>
+                      </li>
+                    )}
                     <li>
                       <NavLink
                         onClick={toggleSidebarMobile}
@@ -398,26 +411,25 @@ const SidebarMenu = (props) => {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink onClick={toggleSidebarMobile} to="/placements">
+                      <NavLink
+                        onClick={toggleSidebarMobile}
+                        to="/candidate-placements">
                         Placements
                       </NavLink>
                     </li>
                   </ul>
                 )}
 
-                {currentUser.role === 'agency' && (
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
                   <ul>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/agency-jobs-live">
+                      <NavLink onClick={toggleSidebarMobile} to="/jobs-live">
                         Live
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/agency-jobs-history">
+                      <NavLink onClick={toggleSidebarMobile} to="/jobs-history">
                         History
                       </NavLink>
                     </li>
@@ -426,7 +438,8 @@ const SidebarMenu = (props) => {
               </Collapse>
             </li>
 
-            {currentUser.role === 'agency' && (
+            {(currentUser.role === 'agency' ||
+              currentUser.role === 'company') && (
               <li>
                 <a
                   href="javascript:void(0)"
@@ -451,13 +464,24 @@ const SidebarMenu = (props) => {
                         Candidates
                       </NavLink>
                     </li>
-                    <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        to="/search-companies">
-                        Companies
-                      </NavLink>
-                    </li>
+                    {currentUser.role === 'agency' && (
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/search-companies">
+                          Companies
+                        </NavLink>
+                      </li>
+                    )}
+                    {currentUser.role === 'company' && (
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/search-agencies">
+                          Agency
+                        </NavLink>
+                      </li>
+                    )}
                   </ul>
                 </Collapse>
               </li>
