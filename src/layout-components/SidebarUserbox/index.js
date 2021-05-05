@@ -719,8 +719,7 @@ const SidebarUserbox = (props) => {
                         {/* </Card> */}
                       </Grid>
                     )}
-                    {(currentUser.role === 'agency' ||
-                      currentUser.role == 'company') && (
+                    {currentUser.role === 'agency' && (
                       <Grid item sm={7}>
                         <div className="">
                           <Card className="card-box mt-3">
@@ -893,6 +892,19 @@ const SidebarUserbox = (props) => {
                                     </tr>
                                   </tbody>
                                 </Table>
+                              </div>
+                            </div>
+                          </Card>
+                        </div>
+                      </Grid>
+                    )}
+                    {currentUser.role === 'company' && (
+                      <Grid item sm={7}>
+                        <div className="">
+                          <Card className="card-box mt-3">
+                            <div className="card-header py-3">
+                              <div className="card-header--title font-size-lg">
+                                <b>Responsibility</b>
                               </div>
                             </div>
                           </Card>
