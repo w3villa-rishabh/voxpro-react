@@ -11,6 +11,7 @@ export default function IR35TaxComponent() {
   const [policyObj, setPolicyObj] = useState({
     noquestion: 'b',
     limitedCompany: 'a',
+    limitedCompanyObj: {},
     organization: 'b',
     director: 'a',
     reject: 'a',
@@ -234,7 +235,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.limitedCompany === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, limitedCompany: 'a' });
+                        let obj = policyObj;
+                        obj.limitedCompany = 'a';
+                        obj.limitedCompanyObj = {
+                          activeTab: activeTab,
+                          questions: `Do you provide your services through a limited company,
+                        partnership or unincorporated association?`,
+                          answer: 'Yes'
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -246,7 +255,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.limitedCompany === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, limitedCompany: 'b' });
+                        let obj = policyObj;
+                        obj.limitedCompany = 'b';
+                        obj.limitedCompanyObj = {
+                          activeTab: activeTab,
+                          questions: `Do you provide your services through a limited company,
+                        partnership or unincorporated association?`,
+                          answer: 'No'
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"

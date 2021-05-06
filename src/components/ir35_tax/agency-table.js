@@ -60,21 +60,37 @@ const ActionsApplied = () => {
           }}
           onClose={handleClose}>
           <div className="p-3">
-            <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Shortlist
-            </MenuItem>
-            <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Contact
-            </MenuItem>
-            <MenuItem className="pr-5 px-3 text-primary" onClick={handleClose}>
-              Forward
-            </MenuItem>
+            {location.pathname !== '/ir35-pending' && (
+              <>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Shortlist
+                </MenuItem>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Contact
+                </MenuItem>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Forward
+                </MenuItem>
+              </>
+            )}
+
             {location.pathname === '/ir35-pending' && (
               <>
                 <MenuItem
                   className="pr-5 px-3 text-primary"
                   onClick={viewQuery}>
                   Review
+                </MenuItem>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Internal Chat
                 </MenuItem>
               </>
             )}
