@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
 import ir35Question from './ir35Questions';
+import api from '../../api';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
@@ -79,6 +80,17 @@ export default function IR35TaxComponent() {
 
   const submitQuestions = () => {
     console.log('submitQuestions', policyObj.ir35Question);
+    api
+      .post('/api/v1/ir_answers', {
+        ir_answer: JSON.stringify(policyObj.ir35Question)
+      })
+      .then((response) => {
+        if (response.data.success) {
+          console.log('abc');
+        } else {
+          console.log('abc');
+        }
+      });
   };
 
   return (
