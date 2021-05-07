@@ -80,13 +80,12 @@ export default [
       {
         activeTab: '9',
         question:
-          "Will you have to buy equipment's <br /> before your client pays you?",
+          "Will you have to buy equipment's before your client pays you?",
         candidateAnswer: 'Yes'
       },
       {
         activeTab: '10',
-        question:
-          'Will you have to buy equipment <br /> before your client pays you?',
+        question: 'Will you have to buy equipment before your client pays you?',
         candidateAnswer: 'Yes'
       },
       {
@@ -97,21 +96,21 @@ export default [
       {
         activeTab: '12',
         question:
-          'Will you have to fund any other costs <br /> before your client pays you?',
+          'Will you have to fund any other costs before your client pays you?',
         candidateAnswer: 'Yes'
       },
       {
         activeTab: '13',
         question:
-          'Will you have to fund any other costs <br /> before your client pays you?',
+          'Will you have to fund any other costs before your client pays you?',
         candidateAnswer: 'An hourly, daily or weekly rat'
       },
       {
         activeTab: '14',
         question:
-          'If the client was not happy with your <br /> work, would you have to put it right?',
+          'If the client was not happy with your work, would you have to put it right?',
         candidateAnswer:
-          'Yes, unpaid and you would have extra costs that yor client <br /> would not pay for'
+          'Yes, unpaid and you would have extra costs that yor client would not pay for'
       }
     ]
   },
