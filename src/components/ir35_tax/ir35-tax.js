@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
+import ir35Question from './ir35Questions';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
@@ -11,85 +12,8 @@ export default function IR35TaxComponent() {
   const [policyObj, setPolicyObj] = useState({
     noquestion: 'b',
     limitedCompany: 'a',
-    ir35Question: [
-      {
-        heading: 'About you and the work',
-        questions: [
-          {
-            activeTab: '0',
-            question: `Do you provide your services through a limited company,
-                      partnership or unincorporated association?`,
-            candidateAnswer: 'Yes'
-          }
-        ]
-      },
-      {
-        heading: 'Worker’s duties',
-        questions: [
-          {
-            questionNo: 1,
-            candidateQuestion: '',
-            tabNo: ''
-          }
-        ]
-      },
-      {
-        heading: 'Substitutes and helpers',
-        questions: [
-          {
-            questionNo: 1,
-            candidateQuestion:
-              'Have you ever sent a substitute to do this work?',
-            tabNo: ''
-          }
-        ]
-      },
-      {
-        heading: 'Working arrangements',
-        questions: [
-          {
-            questionNo: 1,
-            candidateQuestion:
-              'Have you ever sent a substitute to do this work?',
-            tabNo: ''
-          }
-        ]
-      },
-      {
-        heading: 'Worker’s financial risk',
-        questions: [
-          {
-            questionNo: 1,
-            candidateQuestion:
-              'Have you ever sent a substitute to do this work?',
-            tabNo: ''
-          }
-        ]
-      },
-      {
-        heading: 'Worker’s involvement',
-        questions: [
-          {
-            questionNo: 1,
-            candidateQuestion:
-              'Have you ever sent a substitute to do this work?',
-            tabNo: ''
-          }
-        ]
-      },
-      {
-        heading: 'Worker’s contracts',
-        questions: [
-          {
-            questionNo: 1,
-            candidateQuestion:
-              'Have you ever sent a substitute to do this work?',
-            tabNo: ''
-          }
-        ]
-      }
-    ],
-    organization: 'b',
+    ir35Question: ir35Question,
+    organization: 'a',
     director: 'a',
     reject: 'a',
     substitute: 'a',
