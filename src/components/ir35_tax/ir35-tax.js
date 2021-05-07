@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
+import { toast } from 'react-toastify';
 import ir35Question from './ir35Questions';
 import api from '../../api';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
+  const [doSubmit, setDoSubmit] = useState(false);
 
   const [policyObj, setPolicyObj] = useState({
     noquestion: 'b',
@@ -80,16 +82,26 @@ export default function IR35TaxComponent() {
 
   const submitQuestions = () => {
     console.log('submitQuestions', policyObj.ir35Question);
+    toast.dismiss();
+    setDoSubmit(true);
     api
       .post('/api/v1/ir_answers', {
         ir_answer: JSON.stringify(policyObj.ir35Question)
       })
       .then((response) => {
+        setDoSubmit(false);
         if (response.data.success) {
-          console.log('abc');
+          setActiveTab('0');
+          toast.success(response.data.message);
+          console.log('success');
         } else {
-          console.log('abc');
+          toast.error(response.data.message);
+          console.log('not success');
         }
+      })
+      .catch(() => {
+        setDoSubmit(false);
+        toast.error('Something went wrong');
       });
   };
 
@@ -2977,6 +2989,7 @@ export default function IR35TaxComponent() {
             <Button
               size="medium"
               variant="contained"
+              disabled={doSubmit}
               onClick={submitQuestions}
               className="font-weight-bold btn-slack px-4 bg-color button-width">
               Submit
