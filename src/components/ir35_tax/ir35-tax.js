@@ -921,7 +921,16 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.payment === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, payment: 'a' });
+                          // setPolicyObj({ ...policyObj, payment: 'a' });
+                          let obj = policyObj;
+                          obj.payment = 'a';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: `Would you have to pay your substitute?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -933,7 +942,16 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.payment === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, payment: 'b' });
+                          // setPolicyObj({ ...policyObj, payment: 'b' });
+                          let obj = policyObj;
+                          obj.payment = 'b';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: `Would you have to pay your substitute?`,
+                            candidateAnswer: 'No'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
