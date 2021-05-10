@@ -25,12 +25,12 @@ const IR35TaxComponent = (props) => {
 
   const [policyObj, setPolicyObj] = useState({
     limitedCompany: '',
-    hasContractStarted: true,
+    hasContractStarted: '',
     director: '',
     reject: '',
     substitute: '',
     payYourSubstitute: '',
-    signinficantAmountWork: 'a',
+    signinficantAmountWork: '',
     originallyAgreed: 'a',
     organisationWorkDone: 'a',
     payment: 'a',
@@ -549,12 +549,10 @@ const IR35TaxComponent = (props) => {
           </Grid>
         )}
         {/* Section 4 */}
-        {policyObj.hasContractStarted === true && policyObj.director === 'b' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '4'
-            })}
-            index={4}>
+        {activeTab === '4' &&
+          updateQuestion('substitute') &&
+          policyObj.hasContractStarted === true &&
+          policyObj.director === 'b' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Substitutes and helpers</h6>
@@ -650,16 +648,12 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
-
+          )}
         {/* Section 4A */}
-        {policyObj.hasContractStarted === false && policyObj.director === 'b' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '4'
-            })}
-            index={4}>
+        {activeTab === '4' &&
+          updateQuestion('reject') &&
+          policyObj.hasContractStarted === false &&
+          policyObj.director === 'b' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Substitutes and helpers</h6>
@@ -731,26 +725,20 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* section 4b */}
-        {policyObj.director === 'a' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '4'
-            })}
-            index={4}>
-            <div className="text-center w-100">
-              <img alt="..." className="ir35-logo" src={logo} />
-              <h4 className="font-weight-bold mt-3">
-                CHECK EMPLOYMENT STATUS FOR TAX
-              </h4>
-              <p className="mb-2 fh mt-5">
-                Your Answers has been successfully submitted for review
-              </p>
-              <p className="mb-2 fh"></p>
+        {activeTab === '4' && policyObj.director === 'a' && (
+          <div className="text-center w-100">
+            <img alt="..." className="ir35-logo" src={logo} />
+            <h4 className="font-weight-bold mt-3">
+              CHECK EMPLOYMENT STATUS FOR TAX
+            </h4>
+            <p className="mb-2 fh mt-5">
+              Your Answers has been successfully submitted for review
+            </p>
+            <p className="mb-2 fh"></p>
 
-              {/* <Button
+            {/* <Button
                 size="medium"
                 variant="contained"
                 onClick={() => {
@@ -759,17 +747,14 @@ const IR35TaxComponent = (props) => {
                 className="font-weight-bold btn-slack px-4 bg-color button-width">
                 Go to dashboard
               </Button> */}
-              {/* <p className="fh">Press enter</p> */}
-            </div>
+            {/* <p className="fh">Press enter</p> */}
           </div>
         )}
         {/* section 5 */}
-        {policyObj.substitute === 'a' && policyObj.reject === '' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '5'
-            })}
-            index={5}>
+        {activeTab === '5' &&
+          updateQuestion('payYourSubstitute') &&
+          policyObj.substitute === 'a' &&
+          policyObj.reject === '' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Substitutes and helpers</h6>
@@ -813,6 +798,7 @@ const IR35TaxComponent = (props) => {
                             question: `Did you pay your substitute?`,
                             candidateAnswer: 'No'
                           };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -833,15 +819,12 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* section 5b*/}
-        {policyObj.substitute === 'b' && policyObj.reject === '' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '5'
-            })}
-            index={5}>
+        {activeTab === '5' &&
+          updateQuestion('signinficantAmountWork') &&
+          policyObj.substitute === 'b' &&
+          policyObj.reject === '' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Substitutes and helpers</h6>
@@ -908,15 +891,11 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* section 5c*/}
-        {policyObj.substitute === 'b' && policyObj.reject === '' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '5'
-            })}
-            index={5}>
+        {activeTab === '5' &&
+          updateQuestion('reject') &&
+          policyObj.substitute === 'c' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Substitutes and helpers</h6>
@@ -988,15 +967,12 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* Section 5d */}
-        {policyObj.reject === 'a' && policyObj.substitute === '' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '5'
-            })}
-            index={5}>
+        {activeTab === '5' &&
+          updateQuestion('originallyAgreed') &&
+          policyObj.reject === 'a' &&
+          policyObj.substitute === '' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Working arrangements</h6>
@@ -1106,15 +1082,12 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
-        {/* section 5b */}
-        {policyObj.reject === 'b' && policyObj.substitute === '' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '5'
-            })}
-            index={5}>
+          )}
+        {/* section 5e */}
+        {activeTab === '5' &&
+          updateQuestion('payment') &&
+          policyObj.reject === 'b' &&
+          policyObj.substitute === '' && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Substitutes and helpers</h6>
@@ -1181,18 +1154,388 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
+        {/* section 6a */}
+        {policyObj.payYourSubstitute === 'a' &&
+          policyObj.signinficantAmountWork === '' &&
+          activeTab === '6' &&
+          updateQuestion('payYourSubstitute') && (
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Working arrangements</h6>
+                <h4>
+                  Does your client have the right to move you from the task you
+                  originally agreed to do?
+                </h4>
+                <div className="text-f">
+                  <span>
+                    A worker taken on for general tasks, rather than one
+                    specific task, might be moved as and when priorities change.
+                    The client may not need the worker’s permission to move
+                    them.
+                  </span>
+                </div>
+                <div className="text-f">
+                  <span>
+                    Read more examples about the client’s control over
+                    <a
+                      href="https://www.gov.uk/hmrc-internal-manuals/employment-status-manual/esm0521"
+                      style={{ color: 'blue' }}
+                      target="_blank">
+                      what the worker does (opens in a new window).
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'a';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: 'Yes'
+                          };
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'b';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: 'No, you would have to agree'
+                          };
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">
+                        No, you would have to agree
+                      </span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'c'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'c' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'c';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: `No, that would require a new contract or formal working
+                              arrangement`
+                          };
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="c"
+                        name="radio-button-demo"
+                        aria-label="C"
+                      />
+                      <span className="mt-3 fhh">
+                        No, that would require a new contract or formal working
+                        arrangement
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('7');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        {/* section 6b */}
+        {policyObj.payYourSubstitute === 'b' &&
+          policyObj.signinficantAmountWork === '' &&
+          activeTab === '6' &&
+          updateQuestion('signinficantAmountWork') && (
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Substitutes and helpers</h6>
+                <h4>
+                  Have you paid another person to do a significant amount of
+                  work?
+                </h4>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.signinficantAmountWork === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payment: 'a' });
+                          let obj = policyObj;
+                          obj.signinficantAmountWork = 'a';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: ` Have you paid another person to do a significant amount of
+                            work?`,
+                            candidateAnswer: 'Yes'
+                          };
 
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.signinficantAmountWork === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payment: 'b' });
+                          let obj = policyObj;
+                          obj.signinficantAmountWork = 'b';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: ` Have you paid another person to do a significant amount of
+                            work?`,
+                            candidateAnswer: 'No'
+                          };
+
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('7');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        {/* section 6c */}
+        {(policyObj.signinficantAmountWork === 'a' ||
+          policyObj.signinficantAmountWork === 'b') &&
+          activeTab === '6' &&
+          updateQuestion('originallyAgreed') && (
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Working arrangements</h6>
+                <h4>
+                  Does your client have the right to move you from the task you
+                  originally agreed to do?
+                </h4>
+                <div className="text-f">
+                  <span>
+                    A worker taken on for general tasks, rather than one
+                    specific task, might be moved as and when priorities change.
+                    The client may not need the worker’s permission to move
+                    them.
+                  </span>
+                </div>
+                <div className="text-f">
+                  <span>
+                    Read more examples about the client’s control over
+                    <a
+                      href="https://www.gov.uk/hmrc-internal-manuals/employment-status-manual/esm0521"
+                      style={{ color: 'blue' }}
+                      target="_blank">
+                      what the worker does (opens in a new window).
+                    </a>
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'a';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: 'Yes'
+                          };
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'b';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: 'No, you would have to agree'
+                          };
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">
+                        No, you would have to agree
+                      </span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.originallyAgreed === 'c'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'c' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'c';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: `No, that would require a new contract or formal working
+                              arrangement`
+                          };
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="c"
+                        name="radio-button-demo"
+                        aria-label="C"
+                      />
+                      <span className="mt-3 fhh">
+                        No, that would require a new contract or formal working
+                        arrangement
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('7');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        {/* section 6d */}
+        {activeTab === '6' &&
+          updateQuestion('signinficantAmountWork') &&
+          policyObj.reject === 'a' && (
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Substitutes and helpers</h6>
+                <h4>
+                  Have you paid another person to do a significant amount of
+                  work?
+                </h4>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.signinficantAmountWork === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payment: 'a' });
+                          let obj = policyObj;
+                          obj.signinficantAmountWork = 'a';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: ` Have you paid another person to do a significant amount of
+                            work?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.signinficantAmountWork === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payment: 'b' });
+                          let obj = policyObj;
+                          obj.signinficantAmountWork = 'b';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: ` Have you paid another person to do a significant amount of
+                            work?`,
+                            candidateAnswer: 'No'
+                          };
+
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('7');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          )}
         {/* Section 6 */}
         {(policyObj.originallyAgreed === 'a' ||
           policyObj.originallyAgreed === 'b' ||
-          policyObj.originallyAgreed === 'c') && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '6'
-            })}
-            index={6}>
+          policyObj.originallyAgreed === 'c') &&
+          policyObj.payYourSubstitute === '' &&
+          policyObj.signinficantAmountWork === '' &&
+          activeTab === '6' &&
+          updateQuestion('organisationWorkDone') && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>Working arrangements</h6>
@@ -1330,8 +1673,7 @@ const IR35TaxComponent = (props) => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* Section 7 */}
         <div
           className={clsx('tab-item-wrapper no-scroll', {
@@ -2769,7 +3111,6 @@ const IR35TaxComponent = (props) => {
               </Grid>
             </div>
           )}
-
         {/* Section 20a */}
         {policyObj.ownership === 'a' && (
           <div
@@ -3227,7 +3568,6 @@ const IR35TaxComponent = (props) => {
           </Grid>
         </div>
         {/* Section 25 */}
-
         <div
           className={clsx('tab-item-wrapper no-scroll', {
             active: activeTab === '25'
