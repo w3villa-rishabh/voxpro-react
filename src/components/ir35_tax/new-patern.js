@@ -7,26 +7,27 @@ export default [
     p1: 'These are also known as intermediarie',
     p2:
       'An unincorporated association’ is an organisation set up by a group of people for a reason other than to make a profit. For example, a voluntary group or a sports club.',
-    provious: '0',
+    provious: 0,
     status: true,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '3'
+        next: 3
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '2'
+        next: 2
       }
     ]
   },
   {
     index: 2,
-    heading: 'edhar restart krne ka code likhna'
+    heading: 'edhar restart krne ka code likhna',
+    options: []
   },
   {
     index: 3,
@@ -34,20 +35,20 @@ export default [
     question: 'Have you already started working for this client?',
     p1: '',
     p2: '',
-    provious: '1',
+    provious: 1,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '4'
+        next: 4
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '5'
+        next: '5'
       }
     ]
   },
@@ -65,13 +66,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '6'
+        next: '6'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '7'
+        next: '7'
       }
     ]
   },
@@ -89,19 +90,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '6'
+        next: '6'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '8'
+        next: '8'
       }
     ]
   },
   {
     index: 6,
-    message: 'your answer has been submitted'
+    message: 'your answer has been submitted',
+    options: []
   },
   {
     index: 7,
@@ -116,19 +118,19 @@ export default [
         name: 'Yes, your client accepted them',
         value: 'a',
         aria_label: 'A',
-        Next: '9'
+        next: '9'
       },
       {
         name: 'Yes, but your client did not accept them',
         value: 'b',
         aria_label: 'B',
-        Next: '10'
+        next: '10'
       },
       {
         name: 'Yes, but your client did not accept them',
         value: 'c',
         aria_label: 'C',
-        Next: '11'
+        next: '11'
       }
     ]
   },
@@ -146,13 +148,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '12'
+        next: '12'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '13'
+        next: '13'
       }
     ]
   },
@@ -169,13 +171,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '14'
+        next: '14'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '15'
+        next: '15'
       }
     ]
   },
@@ -193,13 +195,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '16'
+        next: '16'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '16'
+        next: '16'
       }
     ]
   },
@@ -217,13 +219,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '17'
+        next: '17'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '18'
+        next: '18'
       }
     ]
   },
@@ -242,20 +244,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '19'
+        next: '19'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '19'
+        next: '19'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '19'
+        next: '19'
       }
     ]
   },
@@ -272,13 +274,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '20'
+        next: '20'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '20'
+        next: '20'
       }
     ]
   },
@@ -297,20 +299,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '21'
+        next: '21'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '21'
+        next: '21'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '21'
+        next: '21'
       }
     ]
   },
@@ -328,13 +330,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '22'
+        next: '22'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '22'
+        next: '22'
       }
     ]
   },
@@ -353,20 +355,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '23'
+        next: '23'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '23'
+        next: '23'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '23'
+        next: '23'
       }
     ]
   },
@@ -384,13 +386,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '24'
+        next: '24'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '24'
+        next: '24'
       }
     ]
   },
@@ -407,13 +409,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '25'
+        next: '25'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '26'
+        next: '26'
       }
     ]
   },
@@ -432,25 +434,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '27'
+        next: '27'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '27'
+        next: '27'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '27'
+        next: '27'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '27'
+        next: '27'
       }
     ]
   },
@@ -469,20 +471,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '28'
+        next: '28'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '28'
+        next: '28'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '28'
+        next: '28'
       }
     ]
   },
@@ -501,25 +503,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '29'
+        next: '29'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '29'
+        next: '29'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '29'
+        next: '29'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '29'
+        next: '29'
       }
     ]
   },
@@ -538,20 +540,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '30'
+        next: '30'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '30'
+        next: '30'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '30'
+        next: '30'
       }
     ]
   },
@@ -570,25 +572,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '31'
+        next: '31'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '31'
+        next: '31'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '31'
+        next: '31'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '31'
+        next: '31'
       }
     ]
   },
@@ -607,20 +609,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '32'
+        next: '32'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '32'
+        next: '32'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '32'
+        next: '32'
       }
     ]
   },
@@ -639,20 +641,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '33'
+        next: '33'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '33'
+        next: '33'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '33'
+        next: '33'
       }
     ]
   },
@@ -670,13 +672,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '34'
+        next: '34'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '34'
+        next: '34'
       }
     ]
   },
@@ -693,25 +695,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '35'
+        next: '35'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '35'
+        next: '35'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '35'
+        next: '35'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '35'
+        next: '35'
       }
     ]
   },
@@ -730,25 +732,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '36'
+        next: '36'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '36'
+        next: '36'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '36'
+        next: '36'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '36'
+        next: '36'
       }
     ]
   },
@@ -765,25 +767,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '37'
+        next: '37'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '37'
+        next: '37'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '37'
+        next: '37'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '37'
+        next: '37'
       }
     ]
   },
@@ -802,25 +804,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '38'
+        next: '38'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '38'
+        next: '38'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '38'
+        next: '38'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '38'
+        next: '38'
       }
     ]
   },
@@ -837,25 +839,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '39'
+        next: '39'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '39'
+        next: '39'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '39'
+        next: '39'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '39'
+        next: '39'
       }
     ]
   },
@@ -874,25 +876,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '40'
+        next: '40'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '40'
+        next: '40'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '40'
+        next: '40'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '40'
+        next: '40'
       }
     ]
   },
@@ -911,25 +913,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '41'
+        next: '41'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '41'
+        next: '41'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '41'
+        next: '41'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '41'
+        next: '41'
       }
     ]
   },
@@ -948,20 +950,20 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '42'
+        next: '42'
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        Next: '42'
+        next: '42'
       },
       {
         name:
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        Next: '42'
+        next: '42'
       }
     ]
   },
@@ -979,26 +981,26 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '43'
+        next: '43'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '43'
+        next: '43'
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        Next: '43'
+        next: '43'
       },
       {
         name:
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        Next: '43'
+        next: '43'
       }
     ]
   },
@@ -1015,25 +1017,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '44'
+        next: '44'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '44'
+        next: '44'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '44'
+        next: '44'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '44'
+        next: '44'
       }
     ]
   },
@@ -1051,26 +1053,26 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '45'
+        next: '45'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '45'
+        next: '45'
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        Next: '45'
+        next: '45'
       },
       {
         name:
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        Next: '45'
+        next: '45'
       }
     ]
   },
@@ -1087,25 +1089,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '46'
+        next: '46'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '46'
+        next: '46'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '46'
+        next: '46'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '46'
+        next: '46'
       }
     ]
   },
@@ -1123,26 +1125,26 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '47'
+        next: '47'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '47'
+        next: '47'
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        Next: '47'
+        next: '47'
       },
       {
         name:
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        Next: '47'
+        next: '47'
       }
     ]
   },
@@ -1159,25 +1161,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '48'
+        next: '48'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '48'
+        next: '48'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '48'
+        next: '48'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '48'
+        next: '48'
       }
     ]
   },
@@ -1194,25 +1196,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '49'
+        next: '49'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '49'
+        next: '49'
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        Next: '49'
+        next: '49'
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        Next: '49'
+        next: '49'
       }
     ]
   },
@@ -1231,25 +1233,25 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '50'
+        next: '50'
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        Next: '50'
+        next: '50'
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        Next: '50'
+        next: '50'
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        Next: '50'
+        next: '50'
       }
     ]
   },
@@ -1267,13 +1269,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '51'
+        next: '51'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '51'
+        next: '51'
       }
     ]
   },
@@ -1291,26 +1293,26 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '52'
+        next: '52'
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        Next: '52'
+        next: '52'
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        Next: '52'
+        next: '52'
       },
       {
         name:
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        Next: '52'
+        next: '52'
       }
     ]
   },
@@ -1328,13 +1330,13 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        Next: '53'
+        next: '53'
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        Next: '53'
+        next: '53'
       }
     ]
   }

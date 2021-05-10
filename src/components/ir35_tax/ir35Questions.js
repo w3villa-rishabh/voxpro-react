@@ -85,7 +85,8 @@ export default [
       },
       {
         activeTab: '10',
-        question: 'Will you have to buy equipment before your client pays you?',
+        question:
+          'Will you have to fund any vehicle costs before your client pays you?',
         candidateAnswer: 'Yes'
       },
       {
