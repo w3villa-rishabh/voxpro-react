@@ -17,14 +17,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 3
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 2
       }
     ]
@@ -49,14 +53,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 4
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 5
       }
     ]
@@ -78,14 +86,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 6
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 7
       }
     ]
@@ -107,14 +119,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 6
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 8
       }
     ]
@@ -140,21 +156,27 @@ export default [
         name: 'Yes, your client accepted them',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 9
       },
       {
         name: 'Yes, but your client did not accept them',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 10
       },
       {
         name: 'Yes, but your client did not accept them',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 11
       }
     ]
@@ -176,14 +198,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 12
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 13
       }
     ]
@@ -204,14 +230,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 14
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 15
       }
     ]
@@ -233,14 +263,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 16
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 16
       }
     ]
@@ -262,14 +296,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 17
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 18
       }
     ]
@@ -292,14 +330,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 19
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 19
       },
       {
@@ -307,7 +349,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 19
       }
     ]
@@ -328,14 +372,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 20
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 20
       }
     ]
@@ -358,14 +406,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 21
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 21
       },
       {
@@ -373,7 +425,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 21
       }
     ]
@@ -395,14 +449,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 22
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 22
       }
     ]
@@ -425,14 +483,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 23
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 23
       },
       {
@@ -440,7 +502,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 23
       }
     ]
@@ -462,14 +526,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 24
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 24
       }
     ]
@@ -490,14 +558,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 25
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 26
       }
     ]
@@ -520,28 +592,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 27
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 27
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 27
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 27
       }
     ]
@@ -564,14 +644,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 28
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 28
       },
       {
@@ -579,7 +663,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 28
       }
     ]
@@ -602,28 +688,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 29
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 29
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 29
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 29
       }
     ]
@@ -646,14 +740,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 30
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 30
       },
       {
@@ -661,7 +759,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 30
       }
     ]
@@ -684,28 +784,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 31
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 31
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 31
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 31
       }
     ]
@@ -728,14 +836,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 32
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 32
       },
       {
@@ -743,7 +855,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 32
       }
     ]
@@ -766,14 +880,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 33
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 33
       },
       {
@@ -781,7 +899,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 33
       }
     ]
@@ -803,14 +923,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 34
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 34
       }
     ]
@@ -831,28 +955,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 35
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 35
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 35
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 35
       }
     ]
@@ -875,28 +1007,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 36
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 36
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 36
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 36
       }
     ]
@@ -917,28 +1057,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 37
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 37
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 37
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 37
       }
     ]
@@ -961,28 +1109,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 38
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 38
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 38
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 38
       }
     ]
@@ -1003,28 +1159,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 39
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 39
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 39
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 39
       }
     ]
@@ -1047,28 +1211,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 40
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 40
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 40
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 40
       }
     ]
@@ -1091,28 +1263,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 41
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 41
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 41
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 41
       }
     ]
@@ -1135,14 +1315,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 42
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 42
       },
       {
@@ -1150,7 +1334,9 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 42
       }
     ]
@@ -1172,21 +1358,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 43
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 43
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 43
       },
       {
@@ -1194,7 +1386,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 43
       }
     ]
@@ -1215,28 +1409,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 44
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 44
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 44
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 44
       }
     ]
@@ -1258,21 +1460,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 45
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 45
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 45
       },
       {
@@ -1280,7 +1488,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 45
       }
     ]
@@ -1301,28 +1511,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 46
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 46
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 46
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 46
       }
     ]
@@ -1344,21 +1562,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 47
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 47
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 47
       },
       {
@@ -1366,7 +1590,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 47
       }
     ]
@@ -1387,28 +1613,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 48
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 48
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 48
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 48
       }
     ]
@@ -1429,28 +1663,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 49
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 49
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 49
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 49
       }
     ]
@@ -1473,28 +1715,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 50
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 50
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 50
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 50
       }
     ]
@@ -1516,14 +1766,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 51
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 51
       }
     ]
@@ -1545,21 +1799,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 52
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 52
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 52
       },
       {
@@ -1567,7 +1827,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 52
       }
     ]
@@ -1589,14 +1851,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 53
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 53
       }
     ]
@@ -1608,7 +1874,7 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 38,
+    previous: 38,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1618,21 +1884,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 54
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 54
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 54
       },
       {
@@ -1640,7 +1912,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 54
       }
     ]
@@ -1652,7 +1926,7 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 39,
+    previous: 39,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1662,14 +1936,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 55
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 55
       }
     ]
@@ -1681,7 +1959,7 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 40,
+    previous: 40,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1691,21 +1969,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 56
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 56
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 56
       },
       {
@@ -1713,7 +1997,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 56
       }
     ]
@@ -1725,7 +2011,7 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 41,
+    previous: 41,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1735,21 +2021,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 57
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 57
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 57
       },
       {
@@ -1757,7 +2049,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 57
       }
     ]
@@ -1768,7 +2062,7 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 42,
+    previous: 42,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1778,28 +2072,36 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 58
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 58
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 58
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 58
       }
     ]
@@ -1812,7 +2114,7 @@ export default [
     p1:
       'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
     p2: '',
-    provious: 43,
+    previous: 43,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1822,14 +2124,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 59
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 59
       }
     ]
@@ -1841,7 +2147,7 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 44,
+    previous: 44,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1851,14 +2157,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 60
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 60
       }
     ]
@@ -1871,7 +2181,7 @@ export default [
     p1:
       'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
     p2: '',
-    provious: 45,
+    previous: 45,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1881,14 +2191,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 61
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 61
       }
     ]
@@ -1900,7 +2214,7 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 46,
+    previous: 46,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1910,14 +2224,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 62
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 62
       }
     ]
@@ -1930,7 +2248,7 @@ export default [
     p1:
       'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
     p2: '',
-    provious: 47,
+    previous: 47,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1940,14 +2258,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 63
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 63
       }
     ]
@@ -1959,7 +2281,7 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 48,
+    previous: 48,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1969,14 +2291,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 64
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 64
       }
     ]
@@ -1988,7 +2314,7 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 49,
+    previous: 49,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -1998,14 +2324,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 65
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 65
       }
     ]
@@ -2017,7 +2347,7 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 50,
+    previous: 50,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -2027,21 +2357,27 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 66
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 66
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 66
       },
       {
@@ -2049,7 +2385,9 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 66
       }
     ]
@@ -2072,14 +2410,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 67
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        angencySelect: false,
+        companySelect: false,
         next: 67
       }
     ]
