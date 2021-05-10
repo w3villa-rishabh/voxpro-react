@@ -1513,10 +1513,11 @@ export default [
   {
     index: 51,
     heading: 'Worker’s financial risk',
-    question: 'Will you have to buy equipment before your client pays you?',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
     p1:
-      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
-    p2: 'Vehicle costs are covered in the next question',
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
     provious: 43,
     status: false,
     options: [
@@ -1531,6 +1532,214 @@ export default [
         value: 'b',
         aria_label: 'B',
         next: 59
+      }
+    ]
+  },
+  {
+    index: 52,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 44,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 60
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 60
+      }
+    ]
+  },
+  {
+    index: 53,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 45,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 61
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 61
+      }
+    ]
+  },
+  {
+    index: 54,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 46,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 62
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 62
+      }
+    ]
+  },
+  {
+    index: 55,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 47,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 63
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 63
+      }
+    ]
+  },
+  {
+    index: 56,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 48,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 64
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 64
+      }
+    ]
+  },
+  {
+    index: 57,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 49,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 65
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 65
+      }
+    ]
+  },
+  {
+    index: 58,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 50,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 66
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        next: 66
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        next: 66
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        next: 66
+      }
+    ]
+  },
+  {
+    index: 59,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 43,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 67
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 67
       }
     ]
   }
