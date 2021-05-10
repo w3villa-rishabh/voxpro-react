@@ -7,26 +7,30 @@ export default [
     p1: 'These are also known as intermediarie',
     p2:
       'An unincorporated association’ is an organisation set up by a group of people for a reason other than to make a profit. For example, a voluntary group or a sports club.',
-    provious: 0,
+    previous: 0,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: true,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 3
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 2
       }
     ]
   },
   {
     index: 2,
-    heading: 'edhar restart krne ka code likhna',
     options: []
   },
   {
@@ -35,19 +39,24 @@ export default [
     question: 'Have you already started working for this client?',
     p1: '',
     p2: '',
-    provious: 1,
+    previous: 1,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 4
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 5
       }
     ]
@@ -55,23 +64,28 @@ export default [
   {
     index: 4,
     heading: 'Worker’s duties',
-    question: 'Will you be an ‘Office Holder’?',
+    question: 'Will you be an ‘Office Holder?',
     p1:
       'This can include being a board member, treasurer, trustee, company secretary or company director.',
     p2: 'Read more about Office Holders (opens in a new window).',
-    provious: 3,
+    previous: 3,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 6
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 7
       }
     ]
@@ -83,19 +97,24 @@ export default [
     p1:
       'This can include being a board member, treasurer, trustee, company secretary or company director.',
     p2: 'Read more about Office Holders (opens in a new window).',
-    provious: 3,
+    previous: 3,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 6
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 8
       }
     ]
@@ -111,25 +130,31 @@ export default [
     question: 'Have you ever sent a substitute to do this work?',
     p1: 'A substitute is someone you send in your place to do your role.',
     p2: '',
-    provious: 4,
+    previous: 4,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes, your client accepted them',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 9
       },
       {
         name: 'Yes, but your client did not accept them',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 10
       },
       {
         name: 'Yes, but your client did not accept them',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 11
       }
     ]
@@ -141,19 +166,24 @@ export default [
     p1: 'A substitute is someone you send in your place to do your role.',
     p2:
       'This can include rejecting a substitute even if they are equally qualified, and meet your client’s interviewing, vetting and security clearance procedures',
-    provious: 5,
+    previous: 5,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 12
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 13
       }
     ]
@@ -164,19 +194,24 @@ export default [
     question: 'Did you pay your substitute?',
     p1: 'This includes payments made by you or your business.',
     p2: '',
-    provious: 7,
+    previous: 7,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 14
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 15
       }
     ]
@@ -188,19 +223,24 @@ export default [
       'Have you paid another person to do a significant amount of this work?',
     p1: '',
     p2: '',
-    provious: 7,
+    previous: 7,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 16
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 16
       }
     ]
@@ -212,19 +252,24 @@ export default [
     p1: 'A substitute is someone you send in your place to do your role.',
     p2:
       'This can include rejecting a substitute even if they are equally qualified, and meet your client’s interviewing, vetting and security clearance procedures.',
-    provious: 7,
+    previous: 7,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 17
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 18
       }
     ]
@@ -237,19 +282,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 8,
+    previous: 8,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 19
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 19
       },
       {
@@ -257,6 +307,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 19
       }
     ]
@@ -267,19 +318,24 @@ export default [
     question: 'Would you have to pay your substitute?',
     p1: 'This would include payments made by you or your business.',
     p2: '',
-    provious: 8,
+    previous: 8,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 20
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 20
       }
     ]
@@ -292,19 +348,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 9,
+    previous: 9,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 21
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 21
       },
       {
@@ -312,6 +373,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 21
       }
     ]
@@ -323,19 +385,24 @@ export default [
       'Have you paid another person to do a significant amount of this work?',
     p1: '',
     p2: '',
-    provious: 9,
+    previous: 9,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 22
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 22
       }
     ]
@@ -348,19 +415,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 10,
+    previous: 10,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 23
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 23
       },
       {
@@ -368,6 +440,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 23
       }
     ]
@@ -379,19 +452,24 @@ export default [
       'Have you paid another person to do a significant amount of this work?',
     p1: '',
     p2: '',
-    provious: 11,
+    previous: 11,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 24
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 24
       }
     ]
@@ -402,19 +480,24 @@ export default [
     question: 'Would you have to pay your substitute?',
     p1: 'This would include payments made by you or your business.',
     p2: '',
-    provious: 11,
+    previous: 11,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 25
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 26
       }
     ]
@@ -427,31 +510,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 12,
+    previous: 12,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 27
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 27
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 27
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 27
       }
     ]
@@ -464,19 +554,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 13,
+    previous: 13,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 28
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 28
       },
       {
@@ -484,6 +579,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 28
       }
     ]
@@ -496,31 +592,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 14,
+    previous: 14,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 29
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 29
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 29
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 29
       }
     ]
@@ -533,19 +636,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 15,
+    previous: 15,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 30
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 30
       },
       {
@@ -553,6 +661,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 30
       }
     ]
@@ -565,31 +674,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 16,
+    previous: 16,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 31
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 31
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 31
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 31
       }
     ]
@@ -602,19 +718,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 17,
+    previous: 17,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 32
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 32
       },
       {
@@ -622,6 +743,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 32
       }
     ]
@@ -634,19 +756,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 18,
+    previous: 18,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 33
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 33
       },
       {
@@ -654,6 +781,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 33
       }
     ]
@@ -665,19 +793,24 @@ export default [
       'Have you paid another person to do a significant amount of this work?',
     p1: '',
     p2: '',
-    provious: 18,
+    previous: 18,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 34
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 34
       }
     ]
@@ -688,31 +821,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 19,
+    previous: 19,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 35
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 35
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 35
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 35
       }
     ]
@@ -725,31 +865,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 20,
+    previous: 20,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 36
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 36
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 36
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 36
       }
     ]
@@ -760,31 +907,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 21,
+    previous: 21,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 37
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 37
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 37
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 37
       }
     ]
@@ -797,31 +951,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 22,
+    previous: 22,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 38
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 38
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 38
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 38
       }
     ]
@@ -832,31 +993,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 23,
+    previous: 23,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 39
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 39
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 39
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 39
       }
     ]
@@ -869,31 +1037,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 24,
+    previous: 24,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 40
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 40
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 40
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 40
       }
     ]
@@ -906,31 +1081,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 25,
+    previous: 25,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 41
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 41
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 41
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 41
       }
     ]
@@ -943,19 +1125,24 @@ export default [
     p1:
       'A worker taken on for general tasks, rather than one specific task, might be moved as and when priorities change. The client may not need the worker’s permission to move them.',
     p2: '',
-    provious: 26,
+    previous: 26,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 42
       },
       {
         name: 'No, you would have to agree',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 42
       },
       {
@@ -963,6 +1150,7 @@ export default [
           'No, that would require a new contract or formal working arrangement',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 42
       }
     ]
@@ -974,25 +1162,31 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 27,
+    previous: 27,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 43
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 43
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 43
       },
       {
@@ -1000,6 +1194,7 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 43
       }
     ]
@@ -1010,31 +1205,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 28,
+    previous: 28,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 44
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 44
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 44
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 44
       }
     ]
@@ -1046,25 +1248,31 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 29,
+    previous: 29,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 45
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 45
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 45
       },
       {
@@ -1072,6 +1280,7 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 45
       }
     ]
@@ -1082,31 +1291,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 30,
+    previous: 30,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 46
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 46
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 46
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 46
       }
     ]
@@ -1118,25 +1334,31 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 31,
+    previous: 31,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 47
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 47
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 47
       },
       {
@@ -1144,6 +1366,7 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 47
       }
     ]
@@ -1154,31 +1377,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 32,
+    previous: 32,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 48
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 48
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 48
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 48
       }
     ]
@@ -1189,31 +1419,38 @@ export default [
     question: 'Does your client have the right to decide your working hours?',
     p1: '',
     p2: '',
-    provious: 33,
+    previous: 33,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 49
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 49
       },
       {
         name: 'No, you and your client agree',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 49
       },
       {
         name: 'No, the work is based on agreed deadlines',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 49
       }
     ]
@@ -1226,31 +1463,38 @@ export default [
       'This can include your client instructing, guiding or advising the way the task should be completed.',
     p2:
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
-    provious: 34,
+    previous: 34,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 50
       },
       {
         name: 'No, you solely decideo',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 50
       },
       {
         name: 'No, you and your client agree together',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 50
       },
       {
         name: 'Not relevant, it is highly skilled work',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 50
       }
     ]
@@ -1262,19 +1506,24 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 35,
+    previous: 35,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 51
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 51
       }
     ]
@@ -1286,25 +1535,31 @@ export default [
       'Does your client have the right to decide where you do the work?',
     p1: '',
     p2: '',
-    provious: 36,
+    previous: 36,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 52
       },
       {
         name: 'No, you solely decide',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 52
       },
       {
         name: 'No, the task sets the location',
         value: 'c',
         aria_label: 'C',
+        checked: false,
         next: 52
       },
       {
@@ -1312,6 +1567,7 @@ export default [
           'No, some work has to be done in an agreed location and some can be your choice',
         value: 'd',
         aria_label: 'D',
+        checked: false,
         next: 52
       }
     ]
@@ -1323,19 +1579,24 @@ export default [
     p1:
       'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
     p2: 'Vehicle costs are covered in the next question',
-    provious: 37,
+    previous: 37,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
     status: false,
     options: [
       {
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
+        checked: false,
         next: 53
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
+        checked: false,
         next: 53
       }
     ]

@@ -18,7 +18,9 @@ import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
 const IR35TaxComponent = (props) => {
   const history = useHistory();
 
-  const [activeTab, setActiveTab] = useState('0');
+  const [activeTab, setActiveTab] = useState(0);
+  const [nextQuestion, setNextQuestion] = useState(0);
+
   const [doSubmit, setDoSubmit] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const location = useLocation();
@@ -32,37 +34,37 @@ const IR35TaxComponent = (props) => {
     substitute: '',
     payYourSubstitute: '',
     signinficantAmountWork: '',
-    originallyAgreed: 'a',
-    organisationWorkDone: 'a',
-    payment: 'a',
-    organisationHours: 'a',
-    organisationWork: 'a',
-    decideWorkingHours: 'a',
-    decideWhereWorkIsDone: 'a',
-    equipmentCosts: 'a',
-    equipmentPay: 'a',
-    vehicleCost: 'a',
-    materialCost: 'a',
-    otherCost: 'a',
-    howWorkerIsPaid: 'a',
-    putWorkRight: 'a',
-    beforePay: 'a',
-    paidWork: 'a',
-    workerRight: 'a',
-    corporateBenefits: 'a',
-    managementResponsibilities: 'a',
-    introduceWorker: 'a',
-    noSimilarWork: 'a',
-    suppliers: 'a',
-    similarOrganisations: 'a',
-    ownership: 'a',
-    needPermission: 'a',
-    clientOwnsRights: 'a',
-    previousContract: 'a',
-    belongOrganisation: 'a',
-    immediately: 'a',
-    availableWorking: 'a',
-    months: 'a',
+    originallyAgreed: '',
+    organisationWorkDone: '',
+    payment: '',
+    organisationHours: '',
+    organisationWork: '',
+    decideWorkingHours: '',
+    decideWhereWorkIsDone: '',
+    equipmentCosts: '',
+    equipmentPay: '',
+    vehicleCost: '',
+    materialCost: '',
+    otherCost: '',
+    howWorkerIsPaid: '',
+    putWorkRight: '',
+    beforePay: '',
+    paidWork: '',
+    workerRight: '',
+    corporateBenefits: '',
+    managementResponsibilities: '',
+    introduceWorker: '',
+    noSimilarWork: '',
+    suppliers: '',
+    similarOrganisations: '',
+    ownership: '',
+    needPermission: '',
+    clientOwnsRights: '',
+    previousContract: '',
+    belongOrganisation: '',
+    immediately: '',
+    availableWorking: '',
+    months: '',
     ir35Question: ir35Question,
     noquestion: 'b'
   });
@@ -97,6 +99,21 @@ const IR35TaxComponent = (props) => {
     };
   }, []);
 
+  // Accepts the array and key
+  const groupBy = (array, key) => {
+    // Return the end result
+    return array.reduce((result, currentValue) => {
+      // If an array already present for key, push it to the array. Else create an array and push the object
+      if (currentValue.select) {
+        (result[currentValue[key]] = result[currentValue[key]] || []).push(
+          currentValue
+        );
+      }
+      // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+      return result;
+    }, {}); // empty object is the initial value for result object
+  };
+
   const toggle = (tab) => {
     if (parseInt(tab) >= parseInt(activeTab)) {
       console.log('next tab', tab);
@@ -108,15 +125,9 @@ const IR35TaxComponent = (props) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  const updateQuestion = (question) => {
-    console.log('updateQuestion', question);
-    selectQuestion = question;
-    return true;
-  };
-
   document.addEventListener('keydown', function (event) {
-    if (event.code === 'Enter' && activeTab === '0') {
-      setActiveTab('1');
+    if (event.code === 'Enter' && activeTab === 0) {
+      setActiveTab(1);
     }
   });
 
@@ -124,7 +135,9 @@ const IR35TaxComponent = (props) => {
     console.log('submitQuestions', policyObj.ir35Question);
     toast.dismiss();
     setDoSubmit(true);
-    props.onLoadIr35QuestionsComplete(policyObj);
+    // Group by color as key to the person array
+    let updateArray = groupBy(questions, 'heading');
+    props.onLoadIr35QuestionsComplete(updateArray);
     if (editMode) {
       return history.goBack();
     }
@@ -154,19 +167,6 @@ const IR35TaxComponent = (props) => {
       <div className="img-bg"></div>
 
       <div className="font-12 position-relative p-3">
-        {activeTab > '0' && (
-          <div className="fh">
-            <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
-            <a
-              href="javascript:void(0)"
-              onClick={() => {
-                const tabNo = parseInt(activeTab) - 1;
-                toggle(tabNo.toString());
-              }}>
-              Back
-            </a>
-          </div>
-        )}
         {/* when no ir-35 */}
         {policyObj.noquestion === 'a' && (
           <div
@@ -189,7 +189,7 @@ const IR35TaxComponent = (props) => {
         {policyObj.noquestion !== 'a' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '0'
+              active: activeTab === 0
             })}
             index={0}>
             <div className="text-center w-100 mt-4">
@@ -203,7 +203,7 @@ const IR35TaxComponent = (props) => {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  toggle('1');
+                  toggle(1);
                 }}
                 className="font-weight-bold btn-slack px-4 bg-color button-width">
                 START
@@ -238,54 +238,66 @@ const IR35TaxComponent = (props) => {
 
         {questions.map((question, index) => (
           <>
-            {index + 1 === 1 && (
-              <Grid container spacing={1} className="pt-3">
-                <Grid item xs={12}>
-                  <h6>{question.heading}</h6>
-                  <h4>{question.question}</h4>
-                  <div className="text-f">
-                    <p>{question.p1}</p>
-                    <p>{question.p2}</p>
-                  </div>
-                  <div>
-                    <ul>
-                      {question.options.map((option, i) => (
-                        <li>
-                          <Radio
-                            // checked={policyObj.limitedCompany === 'a'}
-                            // onChange={() => {
-                            //   let obj = policyObj;
-                            //   obj.limitedCompany = 'a';
-                            //   obj.ir35Question[0].questions[0] = {
-                            //     limitedCompany: 'a',
-                            //     activeTab: activeTab,
-                            //     question: `Do you provide your services through a limited company,
-                            // partnership or unincorporated association?`,
-                            //     candidateAnswer: 'Yes'
-                            //   };
-
-                            //   setPolicyObj({ ...obj });
-                            // }}
-                            value="a"
-                            name="radio-button-demo"
-                            aria-label="A"
-                          />
-                          <span className="mt-3 fhh">{option.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button
-                    size="large"
-                    variant="contained"
+            {index + 1 === activeTab && (
+              <>
+                <div className="fh">
+                  <FontAwesomeIcon
+                    icon={['fas', 'angle-left']}
+                    className="mr-2"
+                  />
+                  <a
+                    href="javascript:void(0)"
                     onClick={() => {
-                      toggle('2');
-                    }}
-                    className="font-weight-bold btn-slack px-4 my-3 bg-color">
-                    Continue
-                  </Button>
+                      question.candidateSelect = false;
+                      question.options.map((x) => (x.checked = false));
+                      toggle(question.previous);
+                    }}>
+                    Back
+                  </a>
+                </div>
+                <Grid container spacing={1} className="pt-3">
+                  <Grid item xs={12}>
+                    <h6>{question.heading}</h6>
+                    <h4>{question.question}</h4>
+                    <div className="text-f">
+                      <p>{question.p1}</p>
+                      <p>{question.p2}</p>
+                    </div>
+                    <div>
+                      <ul>
+                        {question.options.map((option, i) => (
+                          <li>
+                            <Radio
+                              checked={option.checked}
+                              onChange={() => {
+                                question.options.map(
+                                  (x) => (x.checked = false)
+                                );
+                                option.checked = true;
+                                setNextQuestion(option.next);
+                              }}
+                              value={option.value}
+                              name="radio-button-demo"
+                              aria-label="A"
+                            />
+                            <span className="mt-3 fhh">{option.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <Button
+                      size="large"
+                      variant="contained"
+                      onClick={() => {
+                        question.candidateSelect = true;
+                        toggle(parseInt(nextQuestion));
+                      }}
+                      className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                      Continue
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </>
             )}
           </>
         ))}
