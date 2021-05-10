@@ -10,6 +10,7 @@ export const SET_SIDEBAR_FIXED = 'THEME_OPTIONS/SET_SIDEBAR_FIXED';
 export const SET_SIDEBAR_USERBOX = 'THEME_OPTIONS/SET_SIDEBAR_USERBOX';
 export const MINI_PROFILE = 'MINI_PROFILE';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const GET_IR35_QUESTIONS_SUCCESS = 'GET_IR35_QUESTIONS_SUCCESS';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -48,6 +49,11 @@ export const closeMiniProfile = (miniProfile) => ({
 export const setCloseModal = (closeModal) => ({
   type: CLOSE_MODAL,
   closeModal
+});
+
+export const getIr35QuestionsSuccess = (ir35Questions) => ({
+  type: GET_IR35_QUESTIONS_SUCCESS,
+  ir35Questions
 });
 
 // Header
@@ -188,7 +194,9 @@ export default function reducer(
     pageTitleDescription: true,
 
     miniProfile: false,
-    closeModal: false
+    closeModal: false,
+    ir35Questions: {},
+    ir35answers: []
   },
   action
 ) {
@@ -328,6 +336,13 @@ export default function reducer(
       return {
         ...state,
         closeModal: action.closeModal
+      };
+
+    case GET_IR35_QUESTIONS_SUCCESS:
+      return {
+        ...state,
+        ir35Questions: action.ir35Questions,
+        ir35answers: action.ir35Questions.ir35Question
       };
     default:
       break;

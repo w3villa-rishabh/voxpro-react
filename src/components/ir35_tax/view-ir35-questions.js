@@ -9,15 +9,17 @@ import {
   Collapse
 } from '@material-ui/core';
 import clsx from 'clsx';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
 import { useHistory } from 'react-router-dom';
+import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
 
-export default function AgencyTable() {
-  const [answer, setAnswer] = useState([]);
+const AgencyTable = (props) => {
+  // const [answer, setAnswer] = useState([]);
   const [accordion, setAccordion] = useState([
     true,
     false,
@@ -31,22 +33,19 @@ export default function AgencyTable() {
   const history = useHistory();
 
   useEffect(() => {
-    getAnswer();
+    if (
+      (history.action === 'PUSH' || history.action === 'POP') &&
+      !props.answer.length
+    ) {
+      getAnswer();
+    }
   }, []);
 
   function getAnswer() {
     api.get(`/api/v1/ir_answers?id=${currentUser.id}`).then((response) => {
-      if (response.data.success) {
-        // alert('Something okay..');
-        setAnswer(...answer, JSON.parse(response.data.ir_answers.answer_json));
-        console.log(
-          'reponse',
-          JSON.parse(response.data.ir_answers.answer_json)
-        );
-        console.log('answer', answer);
-        // setDocuments(response.data);
-      } else {
-        alert('Something went wrong..');
+      if (response.data.success && !!response.data.ir_answers) {
+        const data = JSON.parse(response.data.ir_answers.answer_json);
+        props.onLoadIr35QuestionsComplete(data);
       }
     });
   }
@@ -69,6 +68,7 @@ export default function AgencyTable() {
         update: true
       }
     });
+    localStorage.setItem('editQuestion', JSON.stringify(ques));
   };
 
   return (
@@ -79,73 +79,89 @@ export default function AgencyTable() {
           <b className="heading">Review IR35 Questionnaires</b>
         </div>
       </div>
-      <div className="accordion mb-2">
-        {answer.map((ans, index) => (
-          <Card
-            className={clsx('card-box', {
-              'panel-open': accordion[index]
-            })}>
-            <Card>
-              <div className="card-header">
-                <div className="panel-title">
-                  <div className="accordion-toggle">
-                    <Button
-                      variant="text"
-                      size="large"
-                      className="btn-link d-flex align-items-center justify-content-between btn-transition-none"
-                      onClick={() => toggleAccordion(index)}
-                      aria-expanded={accordion[index]}>
-                      <span className="font-weight-bold">{ans.heading}</span>
-                      <FontAwesomeIcon
-                        icon={['fas', 'angle-up']}
-                        className="font-size-xl accordion-icon"
-                      />
-                    </Button>
+      {props.answer && (
+        <div className="accordion mb-2">
+          {props.answer.map((ans, index) => (
+            <Card
+              className={clsx('card-box', {
+                'panel-open': accordion[index]
+              })}>
+              <Card>
+                <div className="card-header">
+                  <div className="panel-title">
+                    <div className="accordion-toggle">
+                      <Button
+                        variant="text"
+                        size="large"
+                        className="btn-link d-flex align-items-center justify-content-between btn-transition-none"
+                        onClick={() => toggleAccordion(index)}
+                        aria-expanded={accordion[index]}>
+                        <span className="font-weight-bold">{ans.heading}</span>
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-up']}
+                          className="font-size-xl accordion-icon"
+                        />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <Collapse in={accordion[index]}>
-                <List component="div" className="list-group-flush">
-                  {ans.questions.map((ques, i) => (
-                    <>
-                      {ques !== null && (
-                        <ListItem className="py-2 d-block" key={i}>
-                          <Grid container spacing={0}>
-                            <Grid item xs={12} sm={1}>
-                              <span className="float-right font-weight-bold">
-                                {i + 1}
-                              </span>
+                <Collapse in={accordion[index]}>
+                  <List component="div" className="list-group-flush">
+                    {ans.questions.map((ques, i) => (
+                      <>
+                        {ques !== null && (
+                          <ListItem className="py-2 d-block" key={i}>
+                            <Grid container spacing={0}>
+                              <Grid item xs={12} sm={1}>
+                                <span className="float-right font-weight-bold">
+                                  {i + 1}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={4}>
+                                <span className="font-size-md font-weight-bold">
+                                  {ques.question}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={4} className="pl-5">
+                                <span className="font-size-lg">
+                                  {ques.candidateAnswer}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={3}>
+                                <a
+                                  href="#/"
+                                  onClick={(e) => editQuestion(e, ques)}
+                                  className="float-right"
+                                  title="Edit Question">
+                                  Edit
+                                </a>
+                              </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={4}>
-                              <span className="font-size-md font-weight-bold">
-                                {ques.question}
-                              </span>
-                            </Grid>
-                            <Grid item xs={12} sm={4} className="pl-5">
-                              <span className="font-size-lg">
-                                {ques.candidateAnswer}
-                              </span>
-                            </Grid>
-                            <Grid item xs={12} sm={3}>
-                              <a
-                                href="#/"
-                                onClick={(e) => editQuestion(e, ques)}
-                                className="float-right"
-                                title="Edit Question">
-                                Edit
-                              </a>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                      )}
-                    </>
-                  ))}
-                </List>
-              </Collapse>
+                          </ListItem>
+                        )}
+                      </>
+                    ))}
+                  </List>
+                </Collapse>
+              </Card>
             </Card>
-          </Card>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  answer: state.ThemeOptions.ir35answers
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoadIr35QuestionsComplete: (question) => {
+      dispatch(getIr35QuestionsSuccess(question));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AgencyTable);
