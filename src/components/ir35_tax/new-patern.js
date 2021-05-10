@@ -1001,5 +1001,341 @@ export default [
         Next: '43'
       }
     ]
+  },
+  {
+    index: 36,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide your working hours?',
+    p1: '',
+    p2: '',
+    provious: '28',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '44'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '44'
+      },
+      {
+        name: 'No, you and your client agree',
+        value: 'c',
+        aria_label: 'C',
+        Next: '44'
+      },
+      {
+        name: 'No, the work is based on agreed deadlines',
+        value: 'd',
+        aria_label: 'D',
+        Next: '44'
+      }
+    ]
+  },
+  {
+    index: 37,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: '29',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '45'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '45'
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        Next: '45'
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        Next: '45'
+      }
+    ]
+  },
+  {
+    index: 38,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide your working hours?',
+    p1: '',
+    p2: '',
+    provious: '30',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '46'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '46'
+      },
+      {
+        name: 'No, you and your client agree',
+        value: 'c',
+        aria_label: 'C',
+        Next: '46'
+      },
+      {
+        name: 'No, the work is based on agreed deadlines',
+        value: 'd',
+        aria_label: 'D',
+        Next: '46'
+      }
+    ]
+  },
+  {
+    index: 39,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: '31',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '47'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '47'
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        Next: '47'
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        Next: '47'
+      }
+    ]
+  },
+  {
+    index: 40,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide your working hours?',
+    p1: '',
+    p2: '',
+    provious: '32',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '48'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '48'
+      },
+      {
+        name: 'No, you and your client agree',
+        value: 'c',
+        aria_label: 'C',
+        Next: '48'
+      },
+      {
+        name: 'No, the work is based on agreed deadlines',
+        value: 'd',
+        aria_label: 'D',
+        Next: '48'
+      }
+    ]
+  },
+  {
+    index: 41,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide your working hours?',
+    p1: '',
+    p2: '',
+    provious: '33',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '49'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '49'
+      },
+      {
+        name: 'No, you and your client agree',
+        value: 'c',
+        aria_label: 'C',
+        Next: '49'
+      },
+      {
+        name: 'No, the work is based on agreed deadlines',
+        value: 'd',
+        aria_label: 'D',
+        Next: '49'
+      }
+    ]
+  },
+  {
+    index: 42,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide how the work is done?',
+    p1:
+      'This can include your client instructing, guiding or advising the way the task should be completed.',
+    p2:
+      'This is not relevant if it is highly skilled work. For example, an airline pilot.',
+    provious: '34',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '50'
+      },
+      {
+        name: 'No, you solely decideo',
+        value: 'b',
+        aria_label: 'B',
+        Next: '50'
+      },
+      {
+        name: 'No, you and your client agree together',
+        value: 'c',
+        aria_label: 'C',
+        Next: '50'
+      },
+      {
+        name: 'Not relevant, it is highly skilled work',
+        value: 'd',
+        aria_label: 'D',
+        Next: '50'
+      }
+    ]
+  },
+  {
+    index: 43,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: '35',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '51'
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        Next: '51'
+      }
+    ]
+  },
+  {
+    index: 44,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: '36',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '52'
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        Next: '52'
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        Next: '52'
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        Next: '52'
+      }
+    ]
+  },
+  {
+    index: 45,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: '37',
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        Next: '53'
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        Next: '53'
+      }
+    ]
   }
 ];
