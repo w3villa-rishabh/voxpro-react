@@ -1339,5 +1339,199 @@ export default [
         next: 53
       }
     ]
+  },
+  {
+    index: 46,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 38,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 54
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        next: 54
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        next: 54
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        next: 54
+      }
+    ]
+  },
+  {
+    index: 47,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 39,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 55
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 55
+      }
+    ]
+  },
+  {
+    index: 48,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 40,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 56
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        next: 56
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        next: 56
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        next: 56
+      }
+    ]
+  },
+  {
+    index: 49,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 41,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 57
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        next: 57
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        next: 57
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        next: 57
+      }
+    ]
+  },
+  {
+    index: 50,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide your working hours?',
+    p1: '',
+    p2: '',
+    provious: 42,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 58
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        next: 58
+      },
+      {
+        name: 'No, you and your client agree',
+        value: 'c',
+        aria_label: 'C',
+        next: 58
+      },
+      {
+        name: 'No, the work is based on agreed deadlines',
+        value: 'd',
+        aria_label: 'D',
+        next: 58
+      }
+    ]
+  },
+  {
+    index: 51,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 43,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        next: 59
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        next: 59
+      }
+    ]
   }
 ];
