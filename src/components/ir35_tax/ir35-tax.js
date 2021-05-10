@@ -1,17 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Grid, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
+import { connect } from 'react-redux';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
 import { toast } from 'react-toastify';
 import ir35Question from './ir35Questions';
 import api from '../../api';
 import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-export default function IR35TaxComponent() {
+import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
+
+const IR35TaxComponent = (props) => {
+  const history = useHistory();
+
   const [activeTab, setActiveTab] = useState('0');
   const [doSubmit, setDoSubmit] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const location = useLocation();
   let selectQuestion = '';
 
@@ -63,8 +71,20 @@ export default function IR35TaxComponent() {
       $('.app-content--inner').addClass('remove-p');
       $('.app-footer').css('display', 'none');
     }, 0);
-    // console.log(location.state.update);
   });
+
+  useEffect(() => {
+    const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
+    console.log(location.state);
+    if (!!editQuestion && !!location.state) {
+      const ir35Questions = props.ir35Questions;
+      setPolicyObj({ ...ir35Questions });
+      toggle(editQuestion.activeTab);
+      setEditMode(true);
+    } else {
+      localStorage.removeItem('editQuestion');
+    }
+  }, [props.ir35Questions]);
 
   useEffect(() => {
     // componentWillUnmount
@@ -103,9 +123,13 @@ export default function IR35TaxComponent() {
     console.log('submitQuestions', policyObj.ir35Question);
     toast.dismiss();
     setDoSubmit(true);
+    props.onLoadIr35QuestionsComplete(policyObj);
+    if (editMode) {
+      return history.goBack();
+    }
     api
       .post('/api/v1/ir_answers', {
-        ir_answer: JSON.stringify(policyObj.ir35Question)
+        ir_answer: JSON.stringify(policyObj)
       })
       .then((response) => {
         setDoSubmit(false);
@@ -282,6 +306,7 @@ export default function IR35TaxComponent() {
                         let obj = policyObj;
                         obj.limitedCompany = 'a';
                         obj.ir35Question[0].questions[0] = {
+                          limitedCompany: 'a',
                           activeTab: activeTab,
                           question: `Do you provide your services through a limited company,
                           partnership or unincorporated association?`,
@@ -304,6 +329,7 @@ export default function IR35TaxComponent() {
                         obj.limitedCompany = 'b';
                         obj.ir35Question[0].questions[0] = {
                           activeTab: activeTab,
+                          limitedCompany: 'b',
                           question: `Do you provide your services through a limited company,
                           partnership or unincorporated association?`,
                           candidateAnswer: 'No'
@@ -350,6 +376,7 @@ export default function IR35TaxComponent() {
                           obj.hasContractStarted = true;
                           obj.ir35Question[0].questions[1] = {
                             activeTab: activeTab,
+                            hasContractStarted: true,
                             question: `Have you already started working for this client?`,
                             candidateAnswer: 'Yes'
                           };
@@ -371,6 +398,7 @@ export default function IR35TaxComponent() {
                           obj.hasContractStarted = false;
                           obj.ir35Question[0].questions[1] = {
                             activeTab: activeTab,
+                            hasContractStarted: false,
                             question: `Have you already started working for this client?`,
                             candidateAnswer: 'No'
                           };
@@ -434,6 +462,7 @@ export default function IR35TaxComponent() {
                     obj.ir35Question[0].questions = [];
                     obj.ir35Question[0].questions[0] = {
                       activeTab: '0',
+                      limitedCompany: 'a',
                       question: `Do you provide your services through a limited company,
                       partnership or unincorporated association?`,
                       candidateAnswer: 'Yes'
@@ -471,7 +500,8 @@ export default function IR35TaxComponent() {
                         obj.ir35Question[1].questions[0] = {
                           activeTab: activeTab,
                           question: `Will you be an ‘Office Holder’?`,
-                          candidateAnswer: 'Yes'
+                          candidateAnswer: 'Yes',
+                          director: 'a'
                         };
 
                         setPolicyObj({ ...obj });
@@ -492,7 +522,8 @@ export default function IR35TaxComponent() {
                         obj.ir35Question[1].questions[0] = {
                           activeTab: activeTab,
                           question: `Will you be an ‘Office Holder’?`,
-                          candidateAnswer: 'No'
+                          candidateAnswer: 'No',
+                          director: 'b'
                         };
 
                         setPolicyObj({ ...obj });
@@ -545,6 +576,7 @@ export default function IR35TaxComponent() {
                           obj.substitute = 'a';
                           obj.ir35Question[2].questions[0] = {
                             activeTab: activeTab,
+                            substitute: 'a',
                             question: `Have you ever sent a substitute to do this work?`,
                             candidateAnswer: 'Yes, your client accepted them'
                           };
@@ -568,6 +600,7 @@ export default function IR35TaxComponent() {
                           obj.substitute = 'b';
                           obj.ir35Question[2].questions[0] = {
                             activeTab: activeTab,
+                            substitute: 'b',
                             question: `Have you ever sent a substitute to do this work?`,
                             candidateAnswer:
                               'Yes, but your client did not accept them'
@@ -3234,4 +3267,18 @@ export default function IR35TaxComponent() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  ir35Questions: state.ThemeOptions.ir35Questions
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoadIr35QuestionsComplete: (question) => {
+      dispatch(getIr35QuestionsSuccess(question));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(IR35TaxComponent);
