@@ -7,10 +7,12 @@ import $ from 'jquery';
 import { toast } from 'react-toastify';
 import ir35Question from './ir35Questions';
 import api from '../../api';
+import { useLocation } from 'react-router-dom';
 
 export default function IR35TaxComponent() {
   const [activeTab, setActiveTab] = useState('0');
   const [doSubmit, setDoSubmit] = useState(false);
+  const location = useLocation();
 
   const [policyObj, setPolicyObj] = useState({
     noquestion: 'b',
@@ -58,6 +60,7 @@ export default function IR35TaxComponent() {
       $('.app-content--inner').addClass('remove-p');
       $('.app-footer').css('display', 'none');
     }, 0);
+    console.log(location.state.update)
   });
 
   useEffect(() => {
