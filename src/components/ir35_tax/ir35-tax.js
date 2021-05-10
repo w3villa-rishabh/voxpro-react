@@ -18,7 +18,7 @@ import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
 const IR35TaxComponent = (props) => {
   const history = useHistory();
 
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
   const [nextQuestion, setNextQuestion] = useState(0);
 
   const [doSubmit, setDoSubmit] = useState(false);
@@ -104,18 +104,23 @@ const IR35TaxComponent = (props) => {
     // Return the end result
     return array.reduce((result, currentValue) => {
       // If an array already present for key, push it to the array. Else create an array and push the object
-      if (currentValue.select) {
-        (result[currentValue[key]] = result[currentValue[key]] || []).push(
-          currentValue
-        );
-      }
+      (result[currentValue[key]] = result[currentValue[key]] || []).push(
+        currentValue
+      );
       // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
       return result;
     }, {}); // empty object is the initial value for result object
   };
 
+  const goBack = () => {
+    return history.goBack();
+  };
+
   const toggle = (tab) => {
-    if (parseInt(tab) >= parseInt(activeTab)) {
+    if (tab === 1) {
+      goBack();
+    }
+    if (tab >= activeTab) {
       console.log('next tab', tab);
     } else {
       policyObj[selectQuestion] = '';
@@ -167,74 +172,7 @@ const IR35TaxComponent = (props) => {
       <div className="img-bg"></div>
 
       <div className="font-12 position-relative p-3">
-        {/* when no ir-35 */}
-        {policyObj.noquestion === 'a' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '0'
-            })}
-            index={0}>
-            <div className="text-center w-100 mt-5">
-              <img alt="..." className="ir35-logo" src={logo} />
-              <h4 className="font-weight-bold mt-3 fhhh">
-                CHECK EMPLOYMENT STATUS FOR TAX
-              </h4>
-              <p className="mb-2 fhh">
-                You have no pending IR35 questionnaire to complete.
-              </p>
-            </div>
-          </div>
-        )}
-        {/* //Section 0 */}
-        {policyObj.noquestion !== 'a' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === 0
-            })}
-            index={0}>
-            <div className="text-center w-100 mt-4">
-              <img alt="..." className="ir35-logo" src={logo} />
-              <h4 className="font-weight-bold mt-3 fhhh">
-                CHECK EMPLOYMENT STATUS FOR TAX
-              </h4>
-              <p className="mb-2 fhh">Please answer all questions</p>
-              <p className="mb-2 fh">Takes 7+ minutes</p>
-              <Button
-                size="large"
-                variant="contained"
-                onClick={() => {
-                  toggle(1);
-                }}
-                className="font-weight-bold btn-slack px-4 bg-color button-width">
-                START
-              </Button>
-              <p className="fh">
-                Press enter
-                <FontAwesomeIcon icon={['fas', 'arrow-up']} className="angle" />
-              </p>
-              <div className="mt-10 font-weight-bold font-size-xs">
-                <h6 className="font-weight-bold fhh">DISCLAIMER</h6>
-                <p className="f">
-                  Voxpro assumes no responsibility for the results of the test.
-                  The result given is in accordance with HMRC tool which HMRC
-                  stands by.
-                </p>
-                <span className="font-italic fhh">Warning</span>
-                <br></br>
-                <span className="line-height-md f">
-                  This would not be the case if the information you have
-                  provided was checked and found to be inaccurate.
-                  <br></br>
-                  HMRC will also not stand by results achieved through contrived
-                  arrangements, designed to get a particular outcome from the
-                  service. This would be treated as evidence of deliberate
-                  non-compliance, which can attract higher associated penalties.
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-        {/* //Section 1 */}
+        {/* //Question Section*/}
 
         {questions.map((question, index) => (
           <>
@@ -249,7 +187,7 @@ const IR35TaxComponent = (props) => {
                     href="javascript:void(0)"
                     onClick={() => {
                       question.candidateSelect = false;
-                      question.options.map((x) => (x.checked = false));
+                      question.options.map((x) => (x.candidateSelect = false));
                       toggle(question.previous);
                     }}>
                     Back
@@ -268,12 +206,12 @@ const IR35TaxComponent = (props) => {
                         {question.options.map((option, i) => (
                           <li>
                             <Radio
-                              checked={option.checked}
+                              checked={option.candidateSelect}
                               onChange={() => {
                                 question.options.map(
-                                  (x) => (x.checked = false)
+                                  (x) => (x.candidateSelect = false)
                                 );
-                                option.checked = true;
+                                option.candidateSelect = true;
                                 setNextQuestion(option.next);
                               }}
                               value={option.value}
@@ -290,6 +228,9 @@ const IR35TaxComponent = (props) => {
                       variant="contained"
                       onClick={() => {
                         question.candidateSelect = true;
+                        if (nextQuestion === 2 || nextQuestion === 6) {
+                          goBack();
+                        }
                         toggle(parseInt(nextQuestion));
                       }}
                       className="font-weight-bold btn-slack px-4 my-3 bg-color">

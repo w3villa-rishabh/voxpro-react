@@ -138,7 +138,7 @@ const SidebarMenu = (props) => {
                 {currentUser.role === 'candidate' && (
                   <ul>
                     <li>
-                      <NavLink onClick={toggleSidebarMobile} to="/ir35-verify">
+                      <NavLink onClick={toggleSidebarMobile} to="/start-ir35">
                         New IR35 Submission
                       </NavLink>
                     </li>

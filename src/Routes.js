@@ -11,6 +11,8 @@ import MuiTheme from './theme';
 import { LeftSidebar, MinimalLayout } from './components/all_sidebars';
 
 // Example Pages
+//StartIR35TaxComponent
+import StartIR35TaxComponent from 'components/ir35_tax/ir35-tax-start';
 
 import IR35TaxComponent from 'components/ir35_tax/ir35-tax';
 // routes for Register as
@@ -302,6 +304,7 @@ const Routes = () => {
                 '/profile-edit',
                 '/documents',
                 '/upload',
+                '/start-ir35',
                 '/ir35-verify',
                 '/request-information',
                 '/view-profile',
@@ -337,6 +340,7 @@ const Routes = () => {
                   <Route path="/documents" component={Onboarding} />
                   <Route path="/upload" component={UploadDocument} />
                   <Route path="/view-document" component={DocList} />
+                  <Route path="/start-ir35" component={StartIR35TaxComponent} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route
                     path="/candidate-history"
