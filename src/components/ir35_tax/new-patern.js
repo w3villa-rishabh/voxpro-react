@@ -1600,5 +1600,488 @@ export default [
         next: 53
       }
     ]
+  },
+  {
+    index: 46,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 38,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 54
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 54
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 54
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 54
+      }
+    ]
+  },
+  {
+    index: 47,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 39,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 55
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 55
+      }
+    ]
+  },
+  {
+    index: 48,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 40,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 56
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 56
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 56
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 56
+      }
+    ]
+  },
+  {
+    index: 49,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 41,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 57
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 57
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 57
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 57
+      }
+    ]
+  },
+  {
+    index: 50,
+    heading: 'Working arrangements',
+    question: 'Does your client have the right to decide your working hours?',
+    p1: '',
+    p2: '',
+    provious: 42,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 58
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 58
+      },
+      {
+        name: 'No, you and your client agree',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 58
+      },
+      {
+        name: 'No, the work is based on agreed deadlines',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 58
+      }
+    ]
+  },
+  {
+    index: 51,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 43,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 59
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 59
+      }
+    ]
+  },
+  {
+    index: 52,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 44,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 60
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 60
+      }
+    ]
+  },
+  {
+    index: 53,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 45,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 61
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 61
+      }
+    ]
+  },
+  {
+    index: 54,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 46,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 62
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 62
+      }
+    ]
+  },
+  {
+    index: 55,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 47,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 63
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 63
+      }
+    ]
+  },
+  {
+    index: 56,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 48,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 64
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 64
+      }
+    ]
+  },
+  {
+    index: 57,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 49,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 65
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 65
+      }
+    ]
+  },
+  {
+    index: 58,
+    heading: 'Working arrangements',
+    question:
+      'Does your client have the right to decide where you do the work?',
+    p1: '',
+    p2: '',
+    provious: 50,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 66
+      },
+      {
+        name: 'No, you solely decide',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 66
+      },
+      {
+        name: 'No, the task sets the location',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 66
+      },
+      {
+        name:
+          'No, some work has to be done in an agreed location and some can be your choice',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 66
+      }
+    ]
+  },
+  {
+    index: 59,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 43,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 67
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 67
+      }
+    ]
   }
 ];
