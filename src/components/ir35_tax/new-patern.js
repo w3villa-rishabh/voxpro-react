@@ -4444,5 +4444,408 @@ export default [
         next: 114
       }
     ]
+  },
+  {
+    index: 107,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 99,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 115
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 115
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 115
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 115
+      }
+    ]
+  },
+  {
+    index: 108,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 100,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 116
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 116
+      }
+    ]
+  },
+  {
+    index: 109,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 101,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 117
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 117
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 117
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 117
+      }
+    ]
+  },
+  {
+    index: 110,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 102,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 118
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 118
+      }
+    ]
+  },
+  {
+    index: 111,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 103,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 119
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 119
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 119
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 119
+      }
+    ]
+  },
+  {
+    index: 112,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 104,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 120
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 120
+      }
+    ]
+  },
+  {
+    index: 113,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 105,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 121
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 121
+      }
+    ]
+  },
+  {
+    index: 114,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 106,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 122
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 122
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 115,
+    heading: 'Worker’s contracts',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 107,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 123
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 124
+      }
+    ]
+  },
+
+  {
+    index: 116,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 108,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 125
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 125
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 125
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 125
+      }
+    ]
   }
 ];
