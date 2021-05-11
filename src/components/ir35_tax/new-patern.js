@@ -9,7 +9,7 @@ export default [
       'An unincorporated association’ is an organisation set up by a group of people for a reason other than to make a profit. For example, a voluntary group or a sports club.',
     previous: 0,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: true,
     options: [
@@ -18,7 +18,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 3
       },
@@ -27,7 +27,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 2
       }
@@ -45,7 +45,7 @@ export default [
     p2: '',
     previous: 1,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -54,7 +54,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 4
       },
@@ -63,7 +63,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 5
       }
@@ -78,7 +78,7 @@ export default [
     p2: 'Read more about Office Holders (opens in a new window).',
     previous: 3,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -87,7 +87,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 6
       },
@@ -96,7 +96,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 7
       }
@@ -111,7 +111,7 @@ export default [
     p2: 'Read more about Office Holders (opens in a new window).',
     previous: 3,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -120,7 +120,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 6
       },
@@ -129,7 +129,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 8
       }
@@ -148,7 +148,7 @@ export default [
     p2: '',
     previous: 4,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -157,7 +157,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 9
       },
@@ -166,7 +166,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 10
       },
@@ -175,7 +175,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 11
       }
@@ -190,7 +190,7 @@ export default [
       'This can include rejecting a substitute even if they are equally qualified, and meet your client’s interviewing, vetting and security clearance procedures',
     previous: 5,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -199,7 +199,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 12
       },
@@ -208,7 +208,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 13
       }
@@ -222,7 +222,7 @@ export default [
     p2: '',
     previous: 7,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -231,7 +231,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 14
       },
@@ -240,7 +240,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 15
       }
@@ -255,7 +255,7 @@ export default [
     p2: '',
     previous: 7,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -264,7 +264,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 16
       },
@@ -273,7 +273,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 16
       }
@@ -288,7 +288,7 @@ export default [
       'This can include rejecting a substitute even if they are equally qualified, and meet your client’s interviewing, vetting and security clearance procedures.',
     previous: 7,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -297,7 +297,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 17
       },
@@ -306,7 +306,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 18
       }
@@ -322,7 +322,7 @@ export default [
     p2: '',
     previous: 8,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -331,7 +331,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 19
       },
@@ -340,7 +340,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 19
       },
@@ -350,7 +350,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 19
       }
@@ -364,7 +364,7 @@ export default [
     p2: '',
     previous: 8,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -373,7 +373,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 20
       },
@@ -382,7 +382,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 20
       }
@@ -398,7 +398,7 @@ export default [
     p2: '',
     previous: 9,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -407,7 +407,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 21
       },
@@ -416,7 +416,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 21
       },
@@ -426,7 +426,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 21
       }
@@ -441,7 +441,7 @@ export default [
     p2: '',
     previous: 9,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -450,7 +450,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 22
       },
@@ -459,7 +459,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 22
       }
@@ -475,7 +475,7 @@ export default [
     p2: '',
     previous: 10,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -484,7 +484,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 23
       },
@@ -493,7 +493,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 23
       },
@@ -503,7 +503,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 23
       }
@@ -518,7 +518,7 @@ export default [
     p2: '',
     previous: 11,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -527,7 +527,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 24
       },
@@ -536,7 +536,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 24
       }
@@ -550,7 +550,7 @@ export default [
     p2: '',
     previous: 11,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -559,7 +559,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 25
       },
@@ -568,7 +568,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 26
       }
@@ -584,7 +584,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 12,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -593,7 +593,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 27
       },
@@ -602,7 +602,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 27
       },
@@ -611,7 +611,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 27
       },
@@ -620,7 +620,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 27
       }
@@ -636,7 +636,7 @@ export default [
     p2: '',
     previous: 13,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -645,7 +645,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 28
       },
@@ -654,7 +654,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 28
       },
@@ -664,7 +664,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 28
       }
@@ -680,7 +680,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 14,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -689,7 +689,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 29
       },
@@ -698,7 +698,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 29
       },
@@ -707,7 +707,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 29
       },
@@ -716,7 +716,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 29
       }
@@ -732,7 +732,7 @@ export default [
     p2: '',
     previous: 15,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -741,7 +741,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 30
       },
@@ -750,7 +750,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 30
       },
@@ -760,7 +760,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 30
       }
@@ -776,7 +776,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 16,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -785,7 +785,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 31
       },
@@ -794,7 +794,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 31
       },
@@ -803,7 +803,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 31
       },
@@ -812,7 +812,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 31
       }
@@ -828,7 +828,7 @@ export default [
     p2: '',
     previous: 17,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -837,7 +837,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 32
       },
@@ -846,7 +846,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 32
       },
@@ -856,7 +856,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 32
       }
@@ -872,7 +872,7 @@ export default [
     p2: '',
     previous: 18,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -881,7 +881,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 33
       },
@@ -890,7 +890,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 33
       },
@@ -900,7 +900,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 33
       }
@@ -915,7 +915,7 @@ export default [
     p2: '',
     previous: 18,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -924,7 +924,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 34
       },
@@ -933,7 +933,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 34
       }
@@ -947,7 +947,7 @@ export default [
     p2: '',
     previous: 19,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -956,7 +956,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 35
       },
@@ -965,7 +965,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 35
       },
@@ -974,7 +974,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 35
       },
@@ -983,7 +983,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 35
       }
@@ -999,7 +999,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 20,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1008,7 +1008,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 36
       },
@@ -1017,7 +1017,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 36
       },
@@ -1026,7 +1026,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 36
       },
@@ -1035,7 +1035,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 36
       }
@@ -1049,7 +1049,7 @@ export default [
     p2: '',
     previous: 21,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1058,7 +1058,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 37
       },
@@ -1067,7 +1067,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 37
       },
@@ -1076,7 +1076,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 37
       },
@@ -1085,7 +1085,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 37
       }
@@ -1101,7 +1101,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 22,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1110,7 +1110,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 38
       },
@@ -1119,7 +1119,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 38
       },
@@ -1128,7 +1128,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 38
       },
@@ -1137,7 +1137,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 38
       }
@@ -1151,7 +1151,7 @@ export default [
     p2: '',
     previous: 23,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1160,7 +1160,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 39
       },
@@ -1169,7 +1169,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 39
       },
@@ -1178,7 +1178,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 39
       },
@@ -1187,7 +1187,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 39
       }
@@ -1203,7 +1203,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 24,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1212,7 +1212,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 40
       },
@@ -1221,7 +1221,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 40
       },
@@ -1230,7 +1230,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 40
       },
@@ -1239,7 +1239,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 40
       }
@@ -1255,7 +1255,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 25,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1264,7 +1264,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 41
       },
@@ -1273,7 +1273,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 41
       },
@@ -1282,7 +1282,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 41
       },
@@ -1291,7 +1291,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 41
       }
@@ -1307,7 +1307,7 @@ export default [
     p2: '',
     previous: 26,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1316,7 +1316,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 42
       },
@@ -1325,7 +1325,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 42
       },
@@ -1335,7 +1335,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 42
       }
@@ -1350,7 +1350,7 @@ export default [
     p2: '',
     previous: 27,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1359,7 +1359,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 43
       },
@@ -1368,7 +1368,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 43
       },
@@ -1377,7 +1377,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 43
       },
@@ -1387,7 +1387,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 43
       }
@@ -1401,7 +1401,7 @@ export default [
     p2: '',
     previous: 28,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1410,7 +1410,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 44
       },
@@ -1419,7 +1419,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 44
       },
@@ -1428,7 +1428,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 44
       },
@@ -1437,7 +1437,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 44
       }
@@ -1452,7 +1452,7 @@ export default [
     p2: '',
     previous: 29,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1461,7 +1461,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 45
       },
@@ -1470,7 +1470,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 45
       },
@@ -1479,7 +1479,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 45
       },
@@ -1489,7 +1489,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 45
       }
@@ -1503,7 +1503,7 @@ export default [
     p2: '',
     previous: 30,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1512,7 +1512,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 46
       },
@@ -1521,7 +1521,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 46
       },
@@ -1530,7 +1530,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 46
       },
@@ -1539,7 +1539,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 46
       }
@@ -1554,7 +1554,7 @@ export default [
     p2: '',
     previous: 31,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1563,7 +1563,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 47
       },
@@ -1572,7 +1572,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 47
       },
@@ -1581,7 +1581,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 47
       },
@@ -1591,7 +1591,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 47
       }
@@ -1605,7 +1605,7 @@ export default [
     p2: '',
     previous: 32,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1614,7 +1614,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 48
       },
@@ -1623,7 +1623,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 48
       },
@@ -1632,7 +1632,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 48
       },
@@ -1641,7 +1641,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 48
       }
@@ -1655,7 +1655,7 @@ export default [
     p2: '',
     previous: 33,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1664,7 +1664,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 49
       },
@@ -1673,7 +1673,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 49
       },
@@ -1682,7 +1682,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 49
       },
@@ -1691,7 +1691,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 49
       }
@@ -1707,7 +1707,7 @@ export default [
       'This is not relevant if it is highly skilled work. For example, an airline pilot.',
     previous: 34,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1716,7 +1716,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 50
       },
@@ -1725,7 +1725,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 50
       },
@@ -1734,7 +1734,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 50
       },
@@ -1743,7 +1743,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 50
       }
@@ -1758,7 +1758,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 35,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1767,7 +1767,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 51
       },
@@ -1776,7 +1776,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 51
       }
@@ -1791,7 +1791,7 @@ export default [
     p2: '',
     previous: 36,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1800,7 +1800,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 52
       },
@@ -1809,7 +1809,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 52
       },
@@ -1818,7 +1818,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 52
       },
@@ -1828,7 +1828,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 52
       }
@@ -1843,7 +1843,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 37,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1852,7 +1852,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 53
       },
@@ -1861,7 +1861,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 53
       }
@@ -1876,7 +1876,7 @@ export default [
     p2: '',
     previous: 38,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1885,7 +1885,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 54
       },
@@ -1894,7 +1894,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 54
       },
@@ -1903,7 +1903,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 54
       },
@@ -1913,7 +1913,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 54
       }
@@ -1928,7 +1928,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 39,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1937,7 +1937,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 55
       },
@@ -1946,7 +1946,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 55
       }
@@ -1961,7 +1961,7 @@ export default [
     p2: '',
     previous: 40,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -1970,7 +1970,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 56
       },
@@ -1979,7 +1979,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 56
       },
@@ -1988,7 +1988,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 56
       },
@@ -1998,7 +1998,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 56
       }
@@ -2013,7 +2013,7 @@ export default [
     p2: '',
     previous: 41,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2022,7 +2022,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 57
       },
@@ -2031,7 +2031,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 57
       },
@@ -2040,7 +2040,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 57
       },
@@ -2050,7 +2050,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 57
       }
@@ -2064,7 +2064,7 @@ export default [
     p2: '',
     previous: 42,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2073,7 +2073,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 58
       },
@@ -2082,7 +2082,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 58
       },
@@ -2091,7 +2091,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 58
       },
@@ -2100,7 +2100,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 58
       }
@@ -2116,7 +2116,7 @@ export default [
     p2: '',
     previous: 43,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2125,7 +2125,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 59
       },
@@ -2134,7 +2134,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 59
       }
@@ -2149,7 +2149,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 44,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2158,7 +2158,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 60
       },
@@ -2167,7 +2167,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 60
       }
@@ -2183,7 +2183,7 @@ export default [
     p2: '',
     previous: 45,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2192,7 +2192,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 61
       },
@@ -2201,7 +2201,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 61
       }
@@ -2216,7 +2216,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 46,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2225,7 +2225,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 62
       },
@@ -2234,7 +2234,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 62
       }
@@ -2250,7 +2250,7 @@ export default [
     p2: '',
     previous: 47,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2259,7 +2259,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 63
       },
@@ -2268,7 +2268,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 63
       }
@@ -2283,7 +2283,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 48,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2292,7 +2292,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 64
       },
@@ -2301,7 +2301,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 64
       }
@@ -2316,7 +2316,7 @@ export default [
     p2: 'Vehicle costs are covered in the next question',
     previous: 49,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2325,7 +2325,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 65
       },
@@ -2334,7 +2334,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 65
       }
@@ -2349,7 +2349,7 @@ export default [
     p2: '',
     previous: 50,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2358,7 +2358,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 66
       },
@@ -2367,7 +2367,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 66
       },
@@ -2376,7 +2376,7 @@ export default [
         value: 'c',
         aria_label: 'C',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 66
       },
@@ -2386,7 +2386,7 @@ export default [
         value: 'd',
         aria_label: 'D',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 66
       }
@@ -2402,7 +2402,7 @@ export default [
       'This question is most likely to be relevant to the construction industry.',
     previous: 43,
     candidateSelect: false,
-    angencySelect: false,
+    agencySelect: false,
     companySelect: false,
     status: false,
     options: [
@@ -2411,7 +2411,7 @@ export default [
         value: 'a',
         aria_label: 'A',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 67
       },
@@ -2420,7 +2420,7 @@ export default [
         value: 'b',
         aria_label: 'B',
         candidateSelect: false,
-        angencySelect: false,
+        agencySelect: false,
         companySelect: false,
         next: 67
       }

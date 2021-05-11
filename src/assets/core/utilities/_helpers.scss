@@ -721,6 +721,11 @@ tbody.scroll {
   z-index: 0;
 }
 
+.left-border {
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {

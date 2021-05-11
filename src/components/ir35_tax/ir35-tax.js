@@ -1,73 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Grid, Button, Radio } from '@material-ui/core';
+import {
+  Grid,
+  Button,
+  Radio,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions
+} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import clsx from 'clsx';
+
 import { connect } from 'react-redux';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
+import _ from 'lodash';
 import { toast } from 'react-toastify';
-import ir35Question from './ir35Questions';
 import api from '../../api';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import questions from './new-patern';
-
-import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
+import {
+  getIr35QuestionsSuccess,
+  setNextQuestion,
+  onIr35Questions
+} from '../../reducers/ThemeOptions';
 
 const IR35TaxComponent = (props) => {
   const history = useHistory();
-
   const [activeTab, setActiveTab] = useState(1);
-  const [nextQuestion, setNextQuestion] = useState(0);
+  const [finalSubmit, setFinalSubmit] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const [doSubmit, setDoSubmit] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const location = useLocation();
-  let selectQuestion = '';
-
-  const [policyObj, setPolicyObj] = useState({
-    limitedCompany: '',
-    hasContractStarted: '',
-    director: '',
-    reject: '',
-    substitute: '',
-    payYourSubstitute: '',
-    signinficantAmountWork: '',
-    originallyAgreed: '',
-    organisationWorkDone: '',
-    payment: '',
-    organisationHours: '',
-    organisationWork: '',
-    decideWorkingHours: '',
-    decideWhereWorkIsDone: '',
-    equipmentCosts: '',
-    equipmentPay: '',
-    vehicleCost: '',
-    materialCost: '',
-    otherCost: '',
-    howWorkerIsPaid: '',
-    putWorkRight: '',
-    beforePay: '',
-    paidWork: '',
-    workerRight: '',
-    corporateBenefits: '',
-    managementResponsibilities: '',
-    introduceWorker: '',
-    noSimilarWork: '',
-    suppliers: '',
-    similarOrganisations: '',
-    ownership: '',
-    needPermission: '',
-    clientOwnsRights: '',
-    previousContract: '',
-    belongOrganisation: '',
-    immediately: '',
-    availableWorking: '',
-    months: '',
-    ir35Question: ir35Question,
-    noquestion: 'b'
-  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -80,9 +46,10 @@ const IR35TaxComponent = (props) => {
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
     console.log(location.state);
     if (!!editQuestion && !!location.state) {
-      const ir35Questions = props.ir35Questions;
-      setPolicyObj({ ...ir35Questions });
-      toggle(editQuestion.activeTab);
+      // const ir35Questions = props.ir35Questions;
+      // setPolicyObj({ ...ir35Questions });
+      toggle(editQuestion.index);
+      // questions[editQuestion.index].options = editQuestion.options;
       setEditMode(true);
     } else {
       localStorage.removeItem('editQuestion');
@@ -99,32 +66,19 @@ const IR35TaxComponent = (props) => {
     };
   }, []);
 
-  // Accepts the array and key
-  const groupBy = (array, key) => {
-    // Return the end result
-    return array.reduce((result, currentValue) => {
-      // If an array already present for key, push it to the array. Else create an array and push the object
-      (result[currentValue[key]] = result[currentValue[key]] || []).push(
-        currentValue
-      );
-      // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
-      return result;
-    }, {}); // empty object is the initial value for result object
-  };
-
   const goBack = () => {
     return history.goBack();
   };
 
   const toggle = (tab) => {
-    if (tab === 1) {
+    if (tab < 1) {
       goBack();
     }
     if (tab >= activeTab) {
       console.log('next tab', tab);
     } else {
-      policyObj[selectQuestion] = '';
-      setPolicyObj({ ...policyObj });
+      // policyObj[selectQuestion] = '';
+      // setPolicyObj({ ...policyObj });
       console.log('previous tab', tab);
     }
     if (activeTab !== tab) setActiveTab(tab);
@@ -136,35 +90,58 @@ const IR35TaxComponent = (props) => {
     }
   });
 
+  // Accepts the array and key
+  const groupBy = (array) => {
+    // Return the end result
+    return (
+      _.chain(array)
+        .filter((a) => a.options.length !== 0)
+        // Group the elements of Array based on `heading` property
+        .groupBy('heading')
+        // `key` is group's name (heading), `value` is the array of objects
+        .map((value, key) => ({ heading: key, questions: value }))
+        .value()
+    );
+  };
+
   const submitQuestions = () => {
-    console.log('submitQuestions', policyObj.ir35Question);
     toast.dismiss();
     setDoSubmit(true);
-    // Group by color as key to the person array
-    let updateArray = groupBy(questions, 'heading');
-    props.onLoadIr35QuestionsComplete(updateArray);
+    // Group by heading as key to the person array
+    // let updateArray = groupBy(props.questions);
+    // props.onLoadIr35QuestionsComplete(props.questions);
     if (editMode) {
-      return history.goBack();
+      let updateArray = groupBy(props.questions);
+      props.onIr35Questions(props.questions);
+      props.onLoadIr35QuestionsComplete(updateArray);
+      goBack();
+    } else {
+      api
+        .post('/api/v1/ir_answers', {
+          ir_answer: JSON.stringify(props.questions)
+        })
+        .then((response) => {
+          setDoSubmit(false);
+          if (response.data.success) {
+            setActiveTab('0');
+            toast.success(response.data.message);
+            console.log('success');
+            goBack();
+          } else {
+            toast.error(response.data.message);
+            console.log('not success');
+          }
+        })
+        .catch(() => {
+          setDoSubmit(false);
+          toast.error('Something went wrong');
+        });
     }
-    api
-      .post('/api/v1/ir_answers', {
-        ir_answer: JSON.stringify(policyObj)
-      })
-      .then((response) => {
-        setDoSubmit(false);
-        if (response.data.success) {
-          setActiveTab('0');
-          toast.success(response.data.message);
-          console.log('success');
-        } else {
-          toast.error(response.data.message);
-          console.log('not success');
-        }
-      })
-      .catch(() => {
-        setDoSubmit(false);
-        toast.error('Something went wrong');
-      });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    goBack();
   };
 
   return (
@@ -173,82 +150,140 @@ const IR35TaxComponent = (props) => {
 
       <div className="font-12 position-relative p-3">
         {/* //Question Section*/}
-
-        {questions.map((question, index) => (
+        {!finalSubmit && (
           <>
-            {index + 1 === activeTab && (
+            {props.questions.map((question, index) => (
               <>
-                <div className="fh">
-                  <FontAwesomeIcon
-                    icon={['fas', 'angle-left']}
-                    className="mr-2"
-                  />
-                  <a
-                    href="javascript:void(0)"
-                    onClick={() => {
-                      question.candidateSelect = false;
-                      question.options.map((x) => (x.candidateSelect = false));
-                      toggle(question.previous);
-                    }}>
-                    Back
-                  </a>
-                </div>
-                <Grid container spacing={1} className="pt-3">
-                  <Grid item xs={12}>
-                    <h6>{question.heading}</h6>
-                    <h4>{question.question}</h4>
-                    <div className="text-f">
-                      <p>{question.p1}</p>
-                      <p>{question.p2}</p>
-                    </div>
-                    <div>
-                      <ul>
-                        {question.options.map((option, i) => (
-                          <li>
-                            <Radio
-                              checked={option.candidateSelect}
-                              onChange={() => {
-                                question.options.map(
-                                  (x) => (x.candidateSelect = false)
-                                );
-                                option.candidateSelect = true;
-                                setNextQuestion(option.next);
-                              }}
-                              value={option.value}
-                              name="radio-button-demo"
-                              aria-label="A"
-                            />
-                            <span className="mt-3 fhh">{option.name}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <Button
-                      size="large"
-                      variant="contained"
-                      onClick={() => {
-                        question.candidateSelect = true;
-                        if (nextQuestion === 2 || nextQuestion === 6) {
-                          goBack();
-                        }
-                        toggle(parseInt(nextQuestion));
-                      }}
-                      className="font-weight-bold btn-slack px-4 my-3 bg-color">
-                      Continue
-                    </Button>
-                  </Grid>
-                </Grid>
+                {index + 1 === activeTab && (
+                  <div key={index}>
+                    {!editMode && (
+                      <div className="fh">
+                        <FontAwesomeIcon
+                          icon={['fas', 'angle-left']}
+                          className="mr-2"
+                        />
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            if (editMode) {
+                              question.agencySelect = false;
+                              question.options.map(
+                                (x) => (x.agencySelect = false)
+                              );
+                            } else {
+                              question.candidateSelect = false;
+                              question.options.map(
+                                (x) => (x.candidateSelect = false)
+                              );
+                            }
+                            toggle(question.previous);
+                          }}>
+                          Back
+                        </a>
+                      </div>
+                    )}
+                    <Grid container spacing={1} className="pt-3">
+                      <Grid item xs={12}>
+                        <h6>{question.heading}</h6>
+                        <h4>{question.question}</h4>
+                        <div className="text-f">
+                          <p>{question.p1}</p>
+                          <p>{question.p2}</p>
+                        </div>
+                        <div>
+                          <ul>
+                            {question.options.map((option, i) => (
+                              <li key={i}>
+                                {!editMode && (
+                                  <Radio
+                                    checked={option.candidateSelect}
+                                    onChange={() => {
+                                      question.options.map(
+                                        (x) => (x.candidateSelect = false)
+                                      );
+                                      option.candidateSelect = true;
+                                      props.setNextQuestion(option.next);
+                                    }}
+                                    value={option.value}
+                                    name="radio-button-demo"
+                                    aria-label="A"
+                                  />
+                                )}
+
+                                {editMode && (
+                                  <Radio
+                                    checked={option.agencySelect}
+                                    onChange={() => {
+                                      let checkQuestion = props.questions.find(
+                                        (q) =>
+                                          q.index === option.next &&
+                                          q.candidateSelect === true
+                                      );
+
+                                      if (!checkQuestion) {
+                                        // setOpen(true);
+                                        alert('Need to change questions');
+                                      }
+
+                                      question.options.map(
+                                        (x) => (x.agencySelect = false)
+                                      );
+
+                                      option.agencySelect = true;
+
+                                      props.setNextQuestion(option.next);
+                                    }}
+                                    value={option.value}
+                                    name="radio-button-demo"
+                                    aria-label="A"
+                                  />
+                                )}
+                                <span className="mt-3 fhh">{option.name}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Button
+                          size="large"
+                          variant="contained"
+                          onClick={() => {
+                            if (!editMode) {
+                              question.candidateSelect = true;
+                              if (
+                                props.nextQuestion === 2 ||
+                                props.nextQuestion === 6
+                              ) {
+                                goBack();
+                              }
+                              if (
+                                props.nextQuestion === 60 ||
+                                props.nextQuestion === 61 ||
+                                props.nextQuestion === 63 ||
+                                props.nextQuestion === 64 ||
+                                props.nextQuestion === 67
+                              ) {
+                                setFinalSubmit(true);
+                              }
+                              toggle(props.nextQuestion);
+                            } else {
+                              goBack();
+                            }
+                          }}
+                          className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                          Continue
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </div>
+                )}
               </>
-            )}
+            ))}
           </>
-        ))}
+        )}
 
         {/* Section 25 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '25'
-          })}
-          index={25}>
+        {finalSubmit && (
           <div className="text-center w-100">
             <img alt="..." className="ir35-logo" src={logo} />
             <h4 className="font-weight-bold mt-3">
@@ -267,32 +302,63 @@ const IR35TaxComponent = (props) => {
               className="font-weight-bold btn-slack px-4 bg-color button-width">
               Submit
             </Button>
-
-            {/* <Button
-                size="medium"
-                variant="contained"
-                onClick={() => {
-                  toggle('1');
-                }}
-                className="font-weight-bold btn-slack px-4 bg-color button-width">
-                Go to dashboard
-              </Button> */}
-            {/* <p className="fh">Press enter</p> */}
           </div>
-        </div>
+        )}
       </div>
+      <Dialog
+        classes={{ paper: 'modal-content' }}
+        fullWidth
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title2">
+        <DialogTitle id="form-dialog-title">Change questions</DialogTitle>
+
+        <DialogContent className="p-0">
+          <div>
+            <div className="border-0">
+              <div className="card-body">
+                <div className="text-right">
+                  <DialogActions className="border-0">
+                    <Button
+                      variant="contained"
+                      onClick={handleClose}
+                      className="font-weight-bold btn-second px-4 my-3">
+                      Cancel
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      className="font-weight-bold btn-second px-4 my-3">
+                      Ok
+                    </Button>
+                  </DialogActions>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  ir35Questions: state.ThemeOptions.ir35Questions
+  ir35Questions: state.ThemeOptions.ir35Questions,
+  questions: state.ThemeOptions.irQuestions,
+  nextQuestion: state.ThemeOptions.nextQuestion
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoadIr35QuestionsComplete: (question) => {
       dispatch(getIr35QuestionsSuccess(question));
+    },
+    onIr35Questions: (question) => {
+      dispatch(onIr35Questions(question));
+    },
+    setNextQuestion: (next) => {
+      dispatch(setNextQuestion(next));
     }
   };
 };

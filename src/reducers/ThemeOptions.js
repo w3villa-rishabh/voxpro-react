@@ -1,3 +1,5 @@
+import ir35questions from '../components/ir35_tax/new-patern';
+
 // Sidebar
 export const SET_SIDEBAR_TOGGLE_MOBILE =
   'THEME_OPTIONS/SET_SIDEBAR_TOGGLE_MOBILE';
@@ -11,6 +13,8 @@ export const SET_SIDEBAR_USERBOX = 'THEME_OPTIONS/SET_SIDEBAR_USERBOX';
 export const MINI_PROFILE = 'MINI_PROFILE';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const GET_IR35_QUESTIONS_SUCCESS = 'GET_IR35_QUESTIONS_SUCCESS';
+export const GET_IR35_QUESTIONS = 'GET_IR35_QUESTIONS';
+export const SET_NEXT_QUESTIONS = 'SET_NEXT_QUESTIONS';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -51,9 +55,19 @@ export const setCloseModal = (closeModal) => ({
   closeModal
 });
 
-export const getIr35QuestionsSuccess = (ir35Questions) => ({
+export const getIr35QuestionsSuccess = (ir35answers) => ({
   type: GET_IR35_QUESTIONS_SUCCESS,
-  ir35Questions
+  ir35answers
+});
+
+export const onIr35Questions = (irQuestions) => ({
+  type: GET_IR35_QUESTIONS,
+  irQuestions
+});
+
+export const setNextQuestion = (nextQuestion) => ({
+  type: SET_NEXT_QUESTIONS,
+  nextQuestion
 });
 
 // Header
@@ -195,7 +209,8 @@ export default function reducer(
 
     miniProfile: false,
     closeModal: false,
-    ir35Questions: {},
+    nextQuestion: 0,
+    irQuestions: ir35questions,
     ir35answers: []
   },
   action
@@ -341,8 +356,19 @@ export default function reducer(
     case GET_IR35_QUESTIONS_SUCCESS:
       return {
         ...state,
-        ir35Questions: action.ir35Questions,
-        ir35answers: action.ir35Questions.ir35Question
+        ir35answers: action.ir35answers
+      };
+
+    case GET_IR35_QUESTIONS:
+      return {
+        ...state,
+        irQuestions: action.irQuestions
+      };
+
+    case SET_NEXT_QUESTIONS:
+      return {
+        ...state,
+        nextQuestion: action.nextQuestion
       };
     default:
       break;

@@ -9,6 +9,7 @@ import {
   Collapse
 } from '@material-ui/core';
 import clsx from 'clsx';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,10 +17,13 @@ import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
 import { useHistory } from 'react-router-dom';
-import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
+import {
+  getIr35QuestionsSuccess,
+  onIr35Questions,
+  setNextQuestion
+} from '../../reducers/ThemeOptions';
 
 const AgencyTable = (props) => {
-  // const [answer, setAnswer] = useState([]);
   const [accordion, setAccordion] = useState([
     true,
     false,
@@ -45,10 +49,27 @@ const AgencyTable = (props) => {
     api.get(`/api/v1/ir_answers?id=${currentUser.id}`).then((response) => {
       if (response.data.success && !!response.data.ir_answers) {
         const data = JSON.parse(response.data.ir_answers.answer_json);
-        props.onLoadIr35QuestionsComplete(data);
+        console.log('data', data);
+        let updateArray = groupBy(data);
+        props.onIr35Questions(data);
+        props.onLoadIr35QuestionsComplete(updateArray);
       }
     });
   }
+
+  // Accepts the array and key
+  const groupBy = (array) => {
+    // Return the end result
+    return (
+      _.chain(array)
+        .filter((a) => a.options.length !== 0)
+        // Group the elements of Array based on `heading` property
+        .groupBy('heading')
+        // `key` is group's name (heading), `value` is the array of objects
+        .map((value, key) => ({ heading: key, questions: value }))
+        .value()
+    );
+  };
 
   const toggleAccordion = (tab) => {
     const prevState = accordion;
@@ -60,11 +81,14 @@ const AgencyTable = (props) => {
   const editQuestion = (e, ques) => {
     e.preventDefault();
     console.log('editQuestion', ques);
+    let updateQuestion = props.questions;
+    updateQuestion[ques.index - 1].options = ques.options;
+    let findObj = ques.options.find((a) => a.candidateSelect === true);
+    props.setNextQuestion(findObj.next);
     history.push({
       pathname: '/ir35-verify',
       search: '?update=true',
       state: {
-        // location state
         update: true
       }
     });
@@ -109,7 +133,7 @@ const AgencyTable = (props) => {
                   <List component="div" className="list-group-flush">
                     {ans.questions.map((ques, i) => (
                       <>
-                        {ques !== null && (
+                        {ques !== null && ques.candidateSelect && (
                           <ListItem className="py-2 d-block" key={i}>
                             <Grid container spacing={0}>
                               <Grid item xs={12} sm={1}>
@@ -123,9 +147,34 @@ const AgencyTable = (props) => {
                                 </span>
                               </Grid>
                               <Grid item xs={12} sm={4} className="pl-5">
-                                <span className="font-size-lg">
-                                  {ques.candidateAnswer}
-                                </span>
+                                <div className="d-flex">
+                                  <div>
+                                    {ques.options.map((op) => (
+                                      <>
+                                        {op.candidateSelect && (
+                                          <div>
+                                            <span className="font-size-lg">
+                                              {op.name}
+                                            </span>
+                                          </div>
+                                        )}
+                                      </>
+                                    ))}
+                                  </div>
+                                  <div>
+                                    {ques.options.map((op) => (
+                                      <>
+                                        {op.agencySelect && (
+                                          <div className="pl-5">
+                                            <span className="font-size-lg left-border">
+                                              {op.name}
+                                            </span>
+                                          </div>
+                                        )}
+                                      </>
+                                    ))}
+                                  </div>
+                                </div>
                               </Grid>
                               <Grid item xs={12} sm={3}>
                                 <a
@@ -153,13 +202,20 @@ const AgencyTable = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  answer: state.ThemeOptions.ir35answers
+  answer: state.ThemeOptions.ir35answers,
+  questions: state.ThemeOptions.irQuestions
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoadIr35QuestionsComplete: (question) => {
       dispatch(getIr35QuestionsSuccess(question));
+    },
+    onIr35Questions: (question) => {
+      dispatch(onIr35Questions(question));
+    },
+    setNextQuestion: (next) => {
+      dispatch(setNextQuestion(next));
     }
   };
 };
