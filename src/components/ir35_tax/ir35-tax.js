@@ -1,14 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import {
-  Grid,
-  Button,
-  Radio,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogActions
-} from '@material-ui/core';
+import { Grid, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { connect } from 'react-redux';
@@ -21,11 +13,15 @@ import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { getCurrentUser } from 'helper';
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 import {
   getIr35QuestionsSuccess,
   setNextQuestion,
   onIr35Questions,
-  setChecked
+  setChecked,
+  setEditMode
 } from '../../reducers/ThemeOptions';
 
 const IR35TaxComponent = (props) => {
@@ -33,10 +29,8 @@ const IR35TaxComponent = (props) => {
   const [currentUser] = useState(getCurrentUser());
   const [activeTab, setActiveTab] = useState(1);
   const [finalSubmit, setFinalSubmit] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const [doSubmit, setDoSubmit] = useState(false);
-  const [editMode, setEditMode] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -48,8 +42,8 @@ const IR35TaxComponent = (props) => {
 
   useEffect(() => {
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
-    console.log(location.state);
     if (!!editQuestion && !!location.state) {
+      console.log(location.state);
       // const ir35Questions = props.ir35Questions;
       // setPolicyObj({ ...ir35Questions });
       // setCheck(editQuestion.value);
@@ -71,6 +65,10 @@ const IR35TaxComponent = (props) => {
 
   const goBack = () => {
     return history.goBack();
+  };
+
+  const goBackView = () => {
+    return history.push('/view-ir35-query');
   };
 
   const toggle = (tab) => {
@@ -138,11 +136,6 @@ const IR35TaxComponent = (props) => {
           toast.error('Something went wrong');
         });
     }
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    goBack();
   };
 
   return (
@@ -214,24 +207,55 @@ const IR35TaxComponent = (props) => {
                                 {currentUser.role === 'agency' && (
                                   <Radio
                                     checked={option.value == props.checked}
-                                    onChange={(e) => {
-                                      props.setChecked(e.target.value);
+                                    onChange={async (e) => {
                                       let checkQuestion = props.questions.find(
                                         (q) =>
                                           q.index === option.next &&
                                           q.candidateSelect === true
                                       );
+
                                       if (!checkQuestion) {
-                                        // setOpen(true);
-                                        setEditMode(true);
+                                        confirmAlert({
+                                          title: 'Confirm to change question',
+                                          message:
+                                            'To change an answer in this section. This will delete your question',
+                                          buttons: [
+                                            {
+                                              label: 'Start',
+                                              onClick: () => {
+                                                props.setEditMode(true);
+                                                props.setChecked(
+                                                  e.target.value
+                                                );
+                                                question.options.map(
+                                                  (x) =>
+                                                    (x.agencySelect = false)
+                                                );
+
+                                                option.agencySelect = true;
+                                                props.setNextQuestion(
+                                                  option.next
+                                                );
+                                              }
+                                            },
+                                            {
+                                              label: 'Take me back',
+                                              onClick: () => {
+                                                console.log('not change');
+                                                return;
+                                              }
+                                            }
+                                          ]
+                                        });
+                                      } else {
+                                        props.setChecked(e.target.value);
+                                        question.options.map(
+                                          (x) => (x.agencySelect = false)
+                                        );
+
+                                        option.agencySelect = true;
+                                        props.setNextQuestion(option.next);
                                       }
-
-                                      question.options.map(
-                                        (x) => (x.agencySelect = false)
-                                      );
-
-                                      option.agencySelect = true;
-                                      props.setNextQuestion(option.next);
                                     }}
                                     value={option.value}
                                     name="radio-button-demo"
@@ -252,7 +276,7 @@ const IR35TaxComponent = (props) => {
                                       if (!checkQuestion) {
                                         // setOpen(true);
                                         // alert('Need to change questions');
-                                        setEditMode(true);
+                                        props.setEditMode(true);
                                       }
 
                                       question.options.map(
@@ -295,11 +319,17 @@ const IR35TaxComponent = (props) => {
                                 setFinalSubmit(true);
                               }
                               toggle(props.nextQuestion);
-                            } else if (editMode) {
+                            } else if (props.editMode) {
                               if (currentUser.role === 'agency') {
                                 question.agencySelect = true;
                               } else if (currentUser.role === 'company') {
                                 question.companySelect = true;
+                              }
+                              if (
+                                props.nextQuestion === 2 ||
+                                props.nextQuestion === 6
+                              ) {
+                                history.push('/start-ir35');
                               }
                               toggle(props.nextQuestion);
                               props.setChecked('');
@@ -310,7 +340,7 @@ const IR35TaxComponent = (props) => {
                                 props.nextQuestion === 64 ||
                                 props.nextQuestion === 67
                               ) {
-                                goBack();
+                                goBackView();
                               }
                             } else {
                               goBack();
@@ -351,40 +381,6 @@ const IR35TaxComponent = (props) => {
           </div>
         )}
       </div>
-      <Dialog
-        classes={{ paper: 'modal-content' }}
-        fullWidth
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title2">
-        <DialogTitle id="form-dialog-title">Change questions</DialogTitle>
-
-        <DialogContent className="p-0">
-          <div>
-            <div className="border-0">
-              <div className="card-body">
-                <div className="text-right">
-                  <DialogActions className="border-0">
-                    <Button
-                      variant="contained"
-                      onClick={handleClose}
-                      className="font-weight-bold btn-second px-4 my-3">
-                      Cancel
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      className="font-weight-bold btn-second px-4 my-3">
-                      Ok
-                    </Button>
-                  </DialogActions>
-                </div>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
@@ -393,7 +389,8 @@ const mapStateToProps = (state) => ({
   ir35Questions: state.ThemeOptions.ir35Questions,
   questions: state.ThemeOptions.irQuestions,
   nextQuestion: state.ThemeOptions.nextQuestion,
-  checked: state.ThemeOptions.checked
+  checked: state.ThemeOptions.checked,
+  editMode: state.ThemeOptions.editMode
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -409,6 +406,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setChecked: (next) => {
       dispatch(setChecked(next));
+    },
+    setEditMode: (mode) => {
+      dispatch(setEditMode(mode));
     }
   };
 };
