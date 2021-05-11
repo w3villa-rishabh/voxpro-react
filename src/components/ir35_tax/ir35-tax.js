@@ -200,7 +200,6 @@ const IR35TaxComponent = (props) => {
                                     }}
                                     value={option.value}
                                     name="radio-button-demo"
-                                    aria-label="A"
                                   />
                                 )}
 
@@ -230,7 +229,11 @@ const IR35TaxComponent = (props) => {
                                                   (x) =>
                                                     (x.agencySelect = false)
                                                 );
-
+                                                question.candidateSelect = false;
+                                                question.options.map(
+                                                  (x) =>
+                                                    (x.candidateSelect = false)
+                                                );
                                                 option.agencySelect = true;
                                                 props.setNextQuestion(
                                                   option.next
@@ -258,7 +261,6 @@ const IR35TaxComponent = (props) => {
                                     }}
                                     value={option.value}
                                     name="radio-button-demo"
-                                    aria-label="A"
                                   />
                                 )}
 
@@ -317,7 +319,14 @@ const IR35TaxComponent = (props) => {
                               ) {
                                 setFinalSubmit(true);
                               }
-                              toggle(props.nextQuestion);
+                              let findBack = question.options.find(
+                                (a) => a.candidateSelect === true
+                              );
+                              if (findBack) {
+                                toggle(findBack.next);
+                              } else {
+                                toggle(props.nextQuestion);
+                              }
                             } else if (props.editMode) {
                               if (currentUser.role === 'agency') {
                                 question.agencySelect = true;
