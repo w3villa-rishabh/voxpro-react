@@ -1,14 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import {
-  Grid,
-  Button,
-  Radio,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogActions
-} from '@material-ui/core';
+import { Grid, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { connect } from 'react-redux';
@@ -20,6 +12,9 @@ import api from '../../api';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { getCurrentUser } from 'helper';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import {
   getIr35QuestionsSuccess,
@@ -34,7 +29,6 @@ const IR35TaxComponent = (props) => {
   const [currentUser] = useState(getCurrentUser());
   const [activeTab, setActiveTab] = useState(1);
   const [finalSubmit, setFinalSubmit] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const [doSubmit, setDoSubmit] = useState(false);
   const location = useLocation();
@@ -144,11 +138,6 @@ const IR35TaxComponent = (props) => {
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    goBack();
-  };
-
   return (
     <div className="ir35-background text-white">
       <div className="img-bg"></div>
@@ -218,25 +207,55 @@ const IR35TaxComponent = (props) => {
                                 {currentUser.role === 'agency' && (
                                   <Radio
                                     checked={option.value == props.checked}
-                                    onChange={(e) => {
-                                      props.setChecked(e.target.value);
+                                    onChange={async (e) => {
                                       let checkQuestion = props.questions.find(
                                         (q) =>
                                           q.index === option.next &&
                                           q.candidateSelect === true
                                       );
-                                      debugger
+
                                       if (!checkQuestion) {
-                                        // setOpen(true);
-                                        props.setEditMode(true);
+                                        confirmAlert({
+                                          title: 'Confirm to change question',
+                                          message:
+                                            'To change an answer in this section. This will delete your question',
+                                          buttons: [
+                                            {
+                                              label: 'Start',
+                                              onClick: () => {
+                                                props.setEditMode(true);
+                                                props.setChecked(
+                                                  e.target.value
+                                                );
+                                                question.options.map(
+                                                  (x) =>
+                                                    (x.agencySelect = false)
+                                                );
+
+                                                option.agencySelect = true;
+                                                props.setNextQuestion(
+                                                  option.next
+                                                );
+                                              }
+                                            },
+                                            {
+                                              label: 'Take me back',
+                                              onClick: () => {
+                                                console.log('not change');
+                                                return;
+                                              }
+                                            }
+                                          ]
+                                        });
+                                      } else {
+                                        props.setChecked(e.target.value);
+                                        question.options.map(
+                                          (x) => (x.agencySelect = false)
+                                        );
+
+                                        option.agencySelect = true;
+                                        props.setNextQuestion(option.next);
                                       }
-
-                                      question.options.map(
-                                        (x) => (x.agencySelect = false)
-                                      );
-
-                                      option.agencySelect = true;
-                                      props.setNextQuestion(option.next);
                                     }}
                                     value={option.value}
                                     name="radio-button-demo"
@@ -362,40 +381,6 @@ const IR35TaxComponent = (props) => {
           </div>
         )}
       </div>
-      <Dialog
-        classes={{ paper: 'modal-content' }}
-        fullWidth
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title2">
-        <DialogTitle id="form-dialog-title">Change questions</DialogTitle>
-
-        <DialogContent className="p-0">
-          <div>
-            <div className="border-0">
-              <div className="card-body">
-                <div className="text-right">
-                  <DialogActions className="border-0">
-                    <Button
-                      variant="contained"
-                      onClick={handleClose}
-                      className="font-weight-bold btn-second px-4 my-3">
-                      Cancel
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      className="font-weight-bold btn-second px-4 my-3">
-                      Ok
-                    </Button>
-                  </DialogActions>
-                </div>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
