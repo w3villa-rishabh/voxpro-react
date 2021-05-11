@@ -229,7 +229,7 @@ const IR35TaxComponent = (props) => {
                                                   (x) =>
                                                     (x.agencySelect = false)
                                                 );
-                                                question.candidateSelect = false;
+                                                // question.candidateSelect = false;
                                                 question.options.map(
                                                   (x) =>
                                                     (x.candidateSelect = false)
@@ -247,7 +247,10 @@ const IR35TaxComponent = (props) => {
                                                 return;
                                               }
                                             }
-                                          ]
+                                          ],
+                                          closeOnClickOutside: false,
+                                          overlayClassName:
+                                            'alert-overlay-custom'
                                         });
                                       } else {
                                         props.setChecked(e.target.value);
