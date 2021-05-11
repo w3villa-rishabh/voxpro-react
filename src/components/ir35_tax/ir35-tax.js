@@ -25,7 +25,8 @@ import {
   getIr35QuestionsSuccess,
   setNextQuestion,
   onIr35Questions,
-  setChecked
+  setChecked,
+  setEditMode
 } from '../../reducers/ThemeOptions';
 
 const IR35TaxComponent = (props) => {
@@ -36,7 +37,6 @@ const IR35TaxComponent = (props) => {
   const [open, setOpen] = useState(false);
 
   const [doSubmit, setDoSubmit] = useState(false);
-  const [editMode, setEditMode] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -48,8 +48,8 @@ const IR35TaxComponent = (props) => {
 
   useEffect(() => {
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
-    console.log(location.state);
     if (!!editQuestion && !!location.state) {
+      console.log(location.state);
       // const ir35Questions = props.ir35Questions;
       // setPolicyObj({ ...ir35Questions });
       // setCheck(editQuestion.value);
@@ -71,6 +71,10 @@ const IR35TaxComponent = (props) => {
 
   const goBack = () => {
     return history.goBack();
+  };
+
+  const goBackView = () => {
+    return history.push('/view-ir35-query');
   };
 
   const toggle = (tab) => {
@@ -221,9 +225,10 @@ const IR35TaxComponent = (props) => {
                                           q.index === option.next &&
                                           q.candidateSelect === true
                                       );
+                                      debugger
                                       if (!checkQuestion) {
                                         // setOpen(true);
-                                        setEditMode(true);
+                                        props.setEditMode(true);
                                       }
 
                                       question.options.map(
@@ -252,7 +257,7 @@ const IR35TaxComponent = (props) => {
                                       if (!checkQuestion) {
                                         // setOpen(true);
                                         // alert('Need to change questions');
-                                        setEditMode(true);
+                                        props.setEditMode(true);
                                       }
 
                                       question.options.map(
@@ -295,11 +300,17 @@ const IR35TaxComponent = (props) => {
                                 setFinalSubmit(true);
                               }
                               toggle(props.nextQuestion);
-                            } else if (editMode) {
+                            } else if (props.editMode) {
                               if (currentUser.role === 'agency') {
                                 question.agencySelect = true;
                               } else if (currentUser.role === 'company') {
                                 question.companySelect = true;
+                              }
+                              if (
+                                props.nextQuestion === 2 ||
+                                props.nextQuestion === 6
+                              ) {
+                                history.push('/start-ir35');
                               }
                               toggle(props.nextQuestion);
                               props.setChecked('');
@@ -310,7 +321,7 @@ const IR35TaxComponent = (props) => {
                                 props.nextQuestion === 64 ||
                                 props.nextQuestion === 67
                               ) {
-                                goBack();
+                                goBackView();
                               }
                             } else {
                               goBack();
@@ -393,7 +404,8 @@ const mapStateToProps = (state) => ({
   ir35Questions: state.ThemeOptions.ir35Questions,
   questions: state.ThemeOptions.irQuestions,
   nextQuestion: state.ThemeOptions.nextQuestion,
-  checked: state.ThemeOptions.checked
+  checked: state.ThemeOptions.checked,
+  editMode: state.ThemeOptions.editMode
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -409,6 +421,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setChecked: (next) => {
       dispatch(setChecked(next));
+    },
+    setEditMode: (mode) => {
+      dispatch(setEditMode(mode));
     }
   };
 };

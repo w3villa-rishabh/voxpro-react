@@ -112,9 +112,9 @@ const AgencyTable = (props) => {
     updateQuestion[ques.index - 1].options = ques.options;
     let findObj = ques.options.find(
       (a) =>
-        a.candidateSelect === true ||
         a.agencySelect === true ||
-        a.companySelect === true
+        a.companySelect === true ||
+        a.candidateSelect === true
     );
     props.setNextQuestion(findObj.next);
     props.setChecked(findObj.value);
