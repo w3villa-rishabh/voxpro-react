@@ -215,6 +215,7 @@ const IR35TaxComponent = (props) => {
                                       );
 
                                       if (!checkQuestion) {
+                                        let value = e.target.value;
                                         confirmAlert({
                                           title: 'Confirm to change question',
                                           message:
@@ -224,9 +225,7 @@ const IR35TaxComponent = (props) => {
                                               label: 'Start',
                                               onClick: () => {
                                                 props.setEditMode(true);
-                                                props.setChecked(
-                                                  e.target.value
-                                                );
+                                                props.setChecked(value);
                                                 question.options.map(
                                                   (x) =>
                                                     (x.agencySelect = false)
