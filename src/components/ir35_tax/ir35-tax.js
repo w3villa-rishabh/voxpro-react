@@ -19,14 +19,18 @@ import { toast } from 'react-toastify';
 import api from '../../api';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { getCurrentUser } from 'helper';
+
 import {
   getIr35QuestionsSuccess,
   setNextQuestion,
-  onIr35Questions
+  onIr35Questions,
+  setChecked
 } from '../../reducers/ThemeOptions';
 
 const IR35TaxComponent = (props) => {
   const history = useHistory();
+  const [currentUser] = useState(getCurrentUser());
   const [activeTab, setActiveTab] = useState(1);
   const [finalSubmit, setFinalSubmit] = useState(false);
   const [open, setOpen] = useState(false);
@@ -48,9 +52,8 @@ const IR35TaxComponent = (props) => {
     if (!!editQuestion && !!location.state) {
       // const ir35Questions = props.ir35Questions;
       // setPolicyObj({ ...ir35Questions });
+      // setCheck(editQuestion.value);
       toggle(editQuestion.index);
-      // questions[editQuestion.index].options = editQuestion.options;
-      setEditMode(true);
     } else {
       localStorage.removeItem('editQuestion');
     }
@@ -77,8 +80,6 @@ const IR35TaxComponent = (props) => {
     if (tab >= activeTab) {
       console.log('next tab', tab);
     } else {
-      // policyObj[selectQuestion] = '';
-      // setPolicyObj({ ...policyObj });
       console.log('previous tab', tab);
     }
     if (activeTab !== tab) setActiveTab(tab);
@@ -110,7 +111,7 @@ const IR35TaxComponent = (props) => {
     // Group by heading as key to the person array
     // let updateArray = groupBy(props.questions);
     // props.onLoadIr35QuestionsComplete(props.questions);
-    if (editMode) {
+    if (currentUser.role === 'agency') {
       let updateArray = groupBy(props.questions);
       props.onIr35Questions(props.questions);
       props.onLoadIr35QuestionsComplete(updateArray);
@@ -156,7 +157,7 @@ const IR35TaxComponent = (props) => {
               <>
                 {index + 1 === activeTab && (
                   <div key={index}>
-                    {!editMode && (
+                    {currentUser.role === 'candidate' && (
                       <div className="fh">
                         <FontAwesomeIcon
                           icon={['fas', 'angle-left']}
@@ -165,7 +166,7 @@ const IR35TaxComponent = (props) => {
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
-                            if (editMode) {
+                            if (currentUser.role === 'agency') {
                               question.agencySelect = false;
                               question.options.map(
                                 (x) => (x.agencySelect = false)
@@ -194,7 +195,7 @@ const IR35TaxComponent = (props) => {
                           <ul>
                             {question.options.map((option, i) => (
                               <li key={i}>
-                                {!editMode && (
+                                {currentUser.role === 'candidate' && (
                                   <Radio
                                     checked={option.candidateSelect}
                                     onChange={() => {
@@ -210,19 +211,19 @@ const IR35TaxComponent = (props) => {
                                   />
                                 )}
 
-                                {editMode && (
+                                {currentUser.role === 'agency' && (
                                   <Radio
-                                    checked={option.agencySelect}
-                                    onChange={() => {
+                                    checked={option.value == props.checked}
+                                    onChange={(e) => {
+                                      props.setChecked(e.target.value);
                                       let checkQuestion = props.questions.find(
                                         (q) =>
                                           q.index === option.next &&
                                           q.candidateSelect === true
                                       );
-
                                       if (!checkQuestion) {
                                         // setOpen(true);
-                                        alert('Need to change questions');
+                                        setEditMode(true);
                                       }
 
                                       question.options.map(
@@ -230,7 +231,35 @@ const IR35TaxComponent = (props) => {
                                       );
 
                                       option.agencySelect = true;
+                                      props.setNextQuestion(option.next);
+                                    }}
+                                    value={option.value}
+                                    name="radio-button-demo"
+                                    aria-label="A"
+                                  />
+                                )}
 
+                                {currentUser.role === 'company' && (
+                                  <Radio
+                                    checked={option.value == props.checked}
+                                    onChange={(e) => {
+                                      props.setChecked(e.target.value);
+                                      let checkQuestion = props.questions.find(
+                                        (q) =>
+                                          q.index === option.next &&
+                                          q.candidateSelect === true
+                                      );
+                                      if (!checkQuestion) {
+                                        // setOpen(true);
+                                        // alert('Need to change questions');
+                                        setEditMode(true);
+                                      }
+
+                                      question.options.map(
+                                        (x) => (x.companySelect = false)
+                                      );
+
+                                      option.companySelect = true;
                                       props.setNextQuestion(option.next);
                                     }}
                                     value={option.value}
@@ -248,7 +277,7 @@ const IR35TaxComponent = (props) => {
                           size="large"
                           variant="contained"
                           onClick={() => {
-                            if (!editMode) {
+                            if (currentUser.role === 'candidate') {
                               question.candidateSelect = true;
                               if (
                                 props.nextQuestion === 2 ||
@@ -266,6 +295,23 @@ const IR35TaxComponent = (props) => {
                                 setFinalSubmit(true);
                               }
                               toggle(props.nextQuestion);
+                            } else if (editMode) {
+                              if (currentUser.role === 'agency') {
+                                question.agencySelect = true;
+                              } else if (currentUser.role === 'company') {
+                                question.companySelect = true;
+                              }
+                              toggle(props.nextQuestion);
+                              props.setChecked('');
+                              if (
+                                props.nextQuestion === 60 ||
+                                props.nextQuestion === 61 ||
+                                props.nextQuestion === 63 ||
+                                props.nextQuestion === 64 ||
+                                props.nextQuestion === 67
+                              ) {
+                                goBack();
+                              }
                             } else {
                               goBack();
                             }
@@ -346,7 +392,8 @@ const IR35TaxComponent = (props) => {
 const mapStateToProps = (state) => ({
   ir35Questions: state.ThemeOptions.ir35Questions,
   questions: state.ThemeOptions.irQuestions,
-  nextQuestion: state.ThemeOptions.nextQuestion
+  nextQuestion: state.ThemeOptions.nextQuestion,
+  checked: state.ThemeOptions.checked
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -359,6 +406,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setNextQuestion: (next) => {
       dispatch(setNextQuestion(next));
+    },
+    setChecked: (next) => {
+      dispatch(setChecked(next));
     }
   };
 };

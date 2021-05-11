@@ -20,7 +20,8 @@ import { useHistory } from 'react-router-dom';
 import {
   getIr35QuestionsSuccess,
   onIr35Questions,
-  setNextQuestion
+  setNextQuestion,
+  setChecked
 } from '../../reducers/ThemeOptions';
 
 const AgencyTable = (props) => {
@@ -83,8 +84,14 @@ const AgencyTable = (props) => {
     console.log('editQuestion', ques);
     let updateQuestion = props.questions;
     updateQuestion[ques.index - 1].options = ques.options;
-    let findObj = ques.options.find((a) => a.candidateSelect === true);
+    let findObj = ques.options.find(
+      (a) =>
+        a.candidateSelect === true ||
+        a.agencySelect === true ||
+        a.companySelect === true
+    );
     props.setNextQuestion(findObj.next);
+    props.setChecked(findObj.value);
     history.push({
       pathname: '/ir35-verify',
       search: '?update=true',
@@ -133,61 +140,77 @@ const AgencyTable = (props) => {
                   <List component="div" className="list-group-flush">
                     {ans.questions.map((ques, i) => (
                       <>
-                        {ques !== null && ques.candidateSelect && (
-                          <ListItem className="py-2 d-block" key={i}>
-                            <Grid container spacing={0}>
-                              <Grid item xs={12} sm={1}>
-                                <span className="float-right font-weight-bold">
-                                  {i + 1}
-                                </span>
-                              </Grid>
-                              <Grid item xs={12} sm={4}>
-                                <span className="font-size-md font-weight-bold">
-                                  {ques.question}
-                                </span>
-                              </Grid>
-                              <Grid item xs={12} sm={4} className="pl-5">
-                                <div className="d-flex">
-                                  <div>
-                                    {ques.options.map((op) => (
-                                      <>
-                                        {op.candidateSelect && (
-                                          <div>
-                                            <span className="font-size-lg">
-                                              {op.name}
-                                            </span>
-                                          </div>
-                                        )}
-                                      </>
-                                    ))}
+                        {ques !== null &&
+                          (ques.candidateSelect ||
+                            ques.agencySelect ||
+                            ques.companySelect) && (
+                            <ListItem className="py-2 d-block" key={i}>
+                              <Grid container spacing={0}>
+                                <Grid item xs={12} sm={1}>
+                                  <span className="float-right font-weight-bold">
+                                    {i + 1}
+                                  </span>
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                  <span className="font-size-md font-weight-bold">
+                                    {ques.question}
+                                  </span>
+                                </Grid>
+                                <Grid item xs={12} sm={4} className="pl-5">
+                                  <div className="d-flex">
+                                    <div>
+                                      {ques.options.map((op) => (
+                                        <>
+                                          {op.candidateSelect && (
+                                            <div>
+                                              <span className="font-size-lg">
+                                                {op.name}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </>
+                                      ))}
+                                    </div>
+                                    <div>
+                                      {ques.options.map((op) => (
+                                        <>
+                                          {op.agencySelect && (
+                                            <div className="pl-5">
+                                              <span className="font-size-lg left-border">
+                                                {op.name}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </>
+                                      ))}
+                                    </div>
+                                    <div>
+                                      {ques.options.map((op) => (
+                                        <>
+                                          {op.companySelect && (
+                                            <div className="pl-5">
+                                              <span className="font-size-lg left-border">
+                                                {op.name}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </>
+                                      ))}
+                                    </div>
                                   </div>
-                                  <div>
-                                    {ques.options.map((op) => (
-                                      <>
-                                        {op.agencySelect && (
-                                          <div className="pl-5">
-                                            <span className="font-size-lg left-border">
-                                              {op.name}
-                                            </span>
-                                          </div>
-                                        )}
-                                      </>
-                                    ))}
-                                  </div>
-                                </div>
+                                </Grid>
+                                <Grid item xs={12} sm={3}>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => editQuestion(e, ques)}
+                                    className="float-right"
+                                    title="Edit Question">
+                                    Edit
+                                  </a>
+                                </Grid>
                               </Grid>
-                              <Grid item xs={12} sm={3}>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => editQuestion(e, ques)}
-                                  className="float-right"
-                                  title="Edit Question">
-                                  Edit
-                                </a>
-                              </Grid>
-                            </Grid>
-                          </ListItem>
-                        )}
+                            </ListItem>
+                          )}
                       </>
                     ))}
                   </List>
@@ -216,6 +239,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setNextQuestion: (next) => {
       dispatch(setNextQuestion(next));
+    },
+    setChecked: (next) => {
+      dispatch(setChecked(next));
     }
   };
 };
