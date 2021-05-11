@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import api from '../../api';
@@ -57,6 +58,23 @@ const AgencyTable = (props) => {
       }
     });
   }
+
+  const updateAnswer = () => {
+    api
+      .put(`/api/v1/ir_answers/${27}`, {
+        answer_json: JSON.stringify(props.questions)
+      })
+      .then((response) => {
+        if (response.data.success) {
+          console.log('data');
+        } else {
+          console.log('data');
+        }
+      })
+      .catch(() => {
+        toast.error('Something went wrong');
+      });
+  };
 
   // Accepts the array and key
   const groupBy = (array) => {
@@ -218,6 +236,13 @@ const AgencyTable = (props) => {
               </Card>
             </Card>
           ))}
+          <Button
+            size="small"
+            onClick={updateAnswer}
+            fullWidth
+            className="btn-primary mb-5">
+            Update Answers
+          </Button>
         </div>
       )}
     </>
