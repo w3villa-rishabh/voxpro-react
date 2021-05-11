@@ -37,6 +37,7 @@ const AgencyTable = (props) => {
   ]);
   const [currentUser] = useState(getCurrentUser());
   const history = useHistory();
+  const [updateBtn, setUpdateBtn] = useState(false);
 
   useEffect(() => {
     if (
@@ -52,6 +53,7 @@ const AgencyTable = (props) => {
       if (response.data.success && !!response.data.ir_answers) {
         const data = JSON.parse(response.data.ir_answers.answer_json);
         console.log('data', data);
+        localStorage.setItem('editId', response.data.ir_answers.id);
         let updateArray = groupBy(data);
         props.onIr35Questions(data);
         props.onLoadIr35QuestionsComplete(updateArray);
@@ -60,18 +62,24 @@ const AgencyTable = (props) => {
   }
 
   const updateAnswer = () => {
+    toast.dismiss();
+    setUpdateBtn(true);
+    let id = localStorage.getItem('editId');
     api
-      .put(`/api/v1/ir_answers/${27}`, {
+      .put(`/api/v1/ir_answers/${id}`, {
         answer_json: JSON.stringify(props.questions)
       })
       .then((response) => {
+        setUpdateBtn(false);
         if (response.data.success) {
           console.log('data');
+          toast.success(response.data.message);
         } else {
           console.log('data');
         }
       })
       .catch(() => {
+        setUpdateBtn(false);
         toast.error('Something went wrong');
       });
   };
@@ -128,7 +136,9 @@ const AgencyTable = (props) => {
           <b className="heading">Review IR35 Questionnaires</b>
         </div>
       </div>
-      {props.answer && (
+      {props.answer.length === 0 ? (
+        'Loading Answers...'
+      ) : (
         <div className="accordion mb-2">
           {props.answer.map((ans, index) => (
             <Card
@@ -236,13 +246,15 @@ const AgencyTable = (props) => {
               </Card>
             </Card>
           ))}
-          <Button
-            size="small"
-            onClick={updateAnswer}
-            fullWidth
-            className="btn-primary mb-5">
-            Update Answers
-          </Button>
+          <div className="m-5 text-center">
+            <Button
+              size="small"
+              onClick={updateAnswer}
+              disabled={updateBtn}
+              className="btn-primary">
+              Update Answers
+            </Button>
+          </div>
         </div>
       )}
     </>
