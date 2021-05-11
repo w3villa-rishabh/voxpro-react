@@ -2444,14 +2444,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 68
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 68
       }
     ]
@@ -2474,14 +2478,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 69
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 69
       }
     ]
@@ -2504,14 +2512,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 70
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 70
       }
     ]
@@ -2534,14 +2546,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 71
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 71
       }
     ]
@@ -2564,14 +2580,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 72
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 72
       }
     ]
@@ -2594,14 +2614,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 73
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 73
       }
     ]
@@ -2623,14 +2647,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 74
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 74
       }
     ]
@@ -2653,14 +2681,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 75
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 75
       }
     ]
@@ -2683,14 +2715,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 76
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 76
       }
     ]
@@ -2713,14 +2749,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 77
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 77
       }
     ]
@@ -2743,14 +2783,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 78
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 78
       }
     ]
@@ -2773,14 +2817,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 79
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 79
       }
     ]
@@ -2803,14 +2851,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 80
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 80
       }
     ]
@@ -2833,14 +2885,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 81
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 81
       }
     ]
@@ -2863,14 +2919,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 82
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 82
       }
     ]
@@ -2891,35 +2951,45 @@ export default [
         name: 'An hourly, daily or weekly rate',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 83
       },
       {
         name: 'A fixed price for the project',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 83
       },
       {
         name: 'A fixed amount for each piece of work completed',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 83
       },
       {
         name: 'A percentage of the sales you generate',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 83
       },
       {
         name: 'A percentage of your client’s profits or savings',
         value: 'e',
         aria_label: 'E',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 83
       }
     ]
@@ -2942,14 +3012,18 @@ export default [
         name: 'Yes',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 84
       },
       {
         name: 'No',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 84
       }
     ]
@@ -2970,40 +3044,244 @@ export default [
         name: 'An hourly, daily or weekly rate',
         value: 'a',
         aria_label: 'A',
-        checked: false,
-        next: 83
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 85
       },
       {
         name: 'A fixed price for the project',
         value: 'b',
         aria_label: 'B',
-        checked: false,
-        next: 83
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 85
       },
       {
         name: 'A fixed amount for each piece of work completed',
         value: 'c',
         aria_label: 'C',
-        checked: false,
-        next: 83
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 85
       },
       {
         name: 'A percentage of the sales you generate',
         value: 'd',
         aria_label: 'D',
-        checked: false,
-        next: 83
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 85
       },
       {
         name: 'A percentage of your client’s profits or savings',
         value: 'e',
         aria_label: 'E',
-        checked: false,
-        next: 83
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 85
       }
     ]
   },
-
+  {
+    index: 78,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 70,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 86
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 86
+      }
+    ]
+  },
+  {
+    index: 79,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 71,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 87
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 87
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 87
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 87
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 87
+      }
+    ]
+  },
+  {
+    index: 80,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 72,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 88
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 88
+      }
+    ]
+  },
+  {
+    index: 81,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 73,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 89
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 89
+      }
+    ]
+  },
+  {
+    index: 82,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 74,
+    candidateSelect: false,
+    agencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 90
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 90
+      }
+    ]
+  },
   {
     index: 83,
     heading: 'Worker’s financial risk',
@@ -3011,7 +3289,7 @@ export default [
       'If the client was not happy with your work, would you have to put it right?',
     p1: '',
     p2: '',
-    provious: 72,
+    provious: 75,
     candidateSelect: false,
     angencySelect: false,
     companySelect: false,
@@ -3022,7 +3300,9 @@ export default [
           'Yes, unpaid and you would have extra costs that your client would not pay for',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 91
       },
       {
@@ -3030,7 +3310,9 @@ export default [
           'Yes, unpaid but your only cost would be losing the opportunity to do other work',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 91
       },
       {
@@ -3038,21 +3320,27 @@ export default [
           'Yes, you would fix it in your usual hours at your usual rate or fee',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 91
       },
       {
         name: 'No, the work is time-specific or for a single event',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 91
       },
       {
         name: 'No',
         value: 'e',
         aria_label: 'E',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 91
       }
     ]
@@ -3073,36 +3361,1087 @@ export default [
         name: 'An hourly, daily or weekly rate',
         value: 'a',
         aria_label: 'A',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 92
       },
       {
         name: 'A fixed price for the project',
         value: 'b',
         aria_label: 'B',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 92
       },
       {
         name: 'A fixed amount for each piece of work completed',
         value: 'c',
         aria_label: 'C',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 92
       },
       {
         name: 'A percentage of the sales you generate',
         value: 'd',
         aria_label: 'D',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 92
       },
       {
         name: 'A percentage of your client’s profits or savings',
         value: 'e',
         aria_label: 'E',
-        checked: false,
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
         next: 92
+      }
+    ]
+  },
+  {
+    index: 85,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 77,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 93
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 93
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 93
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 93
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 93
+      }
+    ]
+  },
+  {
+    index: 86,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 78,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 94
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 94
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 94
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 94
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 94
+      }
+    ]
+  },
+  {
+    index: 87,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 79,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 95
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 95
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 95
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 95
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 95
+      }
+    ]
+  },
+  {
+    index: 88,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 80,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 96
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 96
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 96
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 96
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 96
+      }
+    ]
+  },
+  {
+    index: 89,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 81,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 97
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 97
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 97
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 97
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 97
+      }
+    ]
+  },
+  {
+    index: 90,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 82,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 98
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 98
+      }
+    ]
+  },
+  {
+    index: 91,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 83,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 99
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 99
+      }
+    ]
+  },
+  {
+    index: 92,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 84,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 100
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 100
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 100
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 100
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 100
+      }
+    ]
+  },
+  {
+    index: 93,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 85,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 101
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 101
+      }
+    ]
+  },
+  {
+    index: 94,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 86,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 102
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 102
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 102
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 91
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 102
+      }
+    ]
+  },
+  {
+    index: 95,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 87,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 103
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 103
+      }
+    ]
+  },
+  {
+    index: 96,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 88,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 104
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 104
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 104
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 104
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 104
+      }
+    ]
+  },
+  {
+    index: 97,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 89,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 105
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 105
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 105
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 105
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 105
+      }
+    ]
+  },
+  {
+    index: 98,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 90,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 106
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 106
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 106
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 106
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 106
+      }
+    ]
+  },
+  {
+    index: 99,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 91,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 107
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 107
+      }
+    ]
+  },
+  {
+    index: 100,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 92,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 108
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 108
+      }
+    ]
+  },
+  {
+    index: 101,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 93,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 109
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 109
+      }
+    ]
+  },
+  {
+    index: 102,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 84,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 110
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 110
+      }
+    ]
+  },
+  {
+    index: 103,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 95,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 111
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 111
+      }
+    ]
+  },
+  {
+    index: 104,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 96,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 112
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 112
+      }
+    ]
+  },
+  {
+    index: 105,
+    heading: 'Worker’s involvement',
+    question: 'Will your client provide you with paid-for corporate benefits?',
+    p1:
+      'This can include external gym memberships, health insurance or retail discounts.',
+    p2: '',
+    provious: 97,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 113
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 113
+      }
+    ]
+  },
+  {
+    index: 106,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 98,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 114
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 114
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 114
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 114
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 114
       }
     ]
   }
