@@ -2400,7 +2400,7 @@ export default [
       'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
     p2:
       'This question is most likely to be relevant to the construction industry.',
-    previous: 43,
+    provious: 51,
     candidateSelect: false,
     agencySelect: false,
     companySelect: false,
@@ -2423,6 +2423,686 @@ export default [
         agencySelect: false,
         companySelect: false,
         next: 67
+      }
+    ]
+  },
+  {
+    index: 60,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 52,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 68
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 68
+      }
+    ]
+  },
+  {
+    index: 61,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 53,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 69
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 69
+      }
+    ]
+  },
+  {
+    index: 62,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 54,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 70
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 70
+      }
+    ]
+  },
+  {
+    index: 63,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 55,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 71
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 71
+      }
+    ]
+  },
+  {
+    index: 64,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 56,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 72
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 72
+      }
+    ]
+  },
+  {
+    index: 65,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 57,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 73
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 73
+      }
+    ]
+  },
+  {
+    index: 66,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy equipment before your client pays you?',
+    p1:
+      'This can include heavy machinery or high-cost specialist equipment used for this work. This does not include laptops, tablets and phones.',
+    p2: 'Vehicle costs are covered in the next question',
+    provious: 58,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 74
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 74
+      }
+    ]
+  },
+  {
+    index: 67,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 59,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 75
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 75
+      }
+    ]
+  },
+  {
+    index: 68,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 60,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 76
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 76
+      }
+    ]
+  },
+  {
+    index: 69,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 61,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 77
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 77
+      }
+    ]
+  },
+  {
+    index: 70,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 62,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 78
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 78
+      }
+    ]
+  },
+  {
+    index: 71,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 63,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 79
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 79
+      }
+    ]
+  },
+  {
+    index: 72,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 64,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 80
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 80
+      }
+    ]
+  },
+  {
+    index: 73,
+    heading: 'Worker’s financial risk',
+    question: 'Will you have to buy materials before your client pays you?',
+    p1:
+      'This can include items that form a lasting part of the work, or are left behind when you leave. This does not include items like stationery.',
+    p2:
+      'This question is most likely to be relevant to the construction industry.',
+    provious: 65,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 81
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 81
+      }
+    ]
+  },
+  {
+    index: 74,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any vehicle costs before your client pays you?',
+    p1:
+      'This can include purchasing, leasing, hiring, fuel and other running costs for this work. This does not include commuting or personal vehicle costs.',
+    p2: '',
+    provious: 66,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 82
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 82
+      }
+    ]
+  },
+  {
+    index: 75,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 67,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        checked: false,
+        next: 83
+      }
+    ]
+  },
+  {
+    index: 76,
+    heading: 'Worker’s financial risk',
+    question:
+      'Will you have to fund any other costs before your client pays you?',
+    p1:
+      'This can include non-commuting travel or accommodation, or external business premises for this work only.',
+    p2: '',
+    provious: 68,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 84
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 84
+      }
+    ]
+  },
+  {
+    index: 77,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 69,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 83
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        checked: false,
+        next: 83
+      }
+    ]
+  },
+
+  {
+    index: 83,
+    heading: 'Worker’s financial risk',
+    question:
+      'If the client was not happy with your work, would you have to put it right?',
+    p1: '',
+    p2: '',
+    provious: 72,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name:
+          'Yes, unpaid and you would have extra costs that your client would not pay for',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 91
+      },
+      {
+        name:
+          'Yes, unpaid but your only cost would be losing the opportunity to do other work',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 91
+      },
+      {
+        name:
+          'Yes, you would fix it in your usual hours at your usual rate or fee',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 91
+      },
+      {
+        name: 'No, the work is time-specific or for a single event',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 91
+      },
+      {
+        name: 'No',
+        value: 'e',
+        aria_label: 'E',
+        checked: false,
+        next: 91
+      }
+    ]
+  },
+  {
+    index: 84,
+    heading: 'Worker’s financial risk',
+    question: 'How will you be paid for this work?',
+    p1: '',
+    p2: '',
+    provious: 76,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'An hourly, daily or weekly rate',
+        value: 'a',
+        aria_label: 'A',
+        checked: false,
+        next: 92
+      },
+      {
+        name: 'A fixed price for the project',
+        value: 'b',
+        aria_label: 'B',
+        checked: false,
+        next: 92
+      },
+      {
+        name: 'A fixed amount for each piece of work completed',
+        value: 'c',
+        aria_label: 'C',
+        checked: false,
+        next: 92
+      },
+      {
+        name: 'A percentage of the sales you generate',
+        value: 'd',
+        aria_label: 'D',
+        checked: false,
+        next: 92
+      },
+      {
+        name: 'A percentage of your client’s profits or savings',
+        value: 'e',
+        aria_label: 'E',
+        checked: false,
+        next: 92
       }
     ]
   }
