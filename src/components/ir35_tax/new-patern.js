@@ -72,7 +72,7 @@ export default [
   {
     index: 4,
     heading: 'Worker’s duties',
-    question: 'Will you be an ‘Office Holder?',
+    question: 'Will you be an ‘Office Holder’?',
     p1:
       'This can include being a board member, treasurer, trustee, company secretary or company director.',
     p2: 'Read more about Office Holders (opens in a new window).',

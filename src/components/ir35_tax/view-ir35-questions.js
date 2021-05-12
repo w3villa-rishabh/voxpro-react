@@ -12,7 +12,6 @@ import clsx from 'clsx';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-toastify';
 
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import api from '../../api';
@@ -22,6 +21,7 @@ import {
   getIr35QuestionsSuccess,
   onIr35Questions,
   setNextQuestion,
+  setQuestionId,
   setChecked,
   setEditMode
 } from '../../reducers/ThemeOptions';
@@ -41,61 +41,40 @@ const AgencyTable = (props) => {
   const [updateBtn, setUpdateBtn] = useState(false);
 
   useEffect(() => {
-    if (
-      (history.action === 'PUSH' || history.action === 'POP') &&
-      !props.answer.length
-    ) {
-      getAnswer();
-    }
+    // if (
+    //   (history.action === 'PUSH' || history.action === 'POP') &&
+    //   !props.answer.length
+    // ) {
+    //   getAnswer();
+    // }
+    getAnswer();
   }, []);
 
   function getAnswer() {
-    api.get(`/api/v1/ir_answers?id=${currentUser.id}`).then((response) => {
+    api.get(`/api/v1/user_answers?id=${currentUser.id}`).then((response) => {
       if (response.data.success && !!response.data.ir_answers) {
-        const data = JSON.parse(response.data.ir_answers.answer_json);
+        // const data = JSON.parse(response.data.ir_answers.answer_json);
+        const data = response.data.ir_answers.sort((a, b) => a.id - b.id);
         console.log('data', data);
-        localStorage.setItem('editId', response.data.ir_answers.id);
+        // localStorage.setItem('editId', response.data.ir_answers.id);
         props.setEditMode(false);
         let updateArray = groupBy(data);
-        props.onIr35Questions(data);
+        // props.onIr35Questions(data);
         props.onLoadIr35QuestionsComplete(updateArray);
       }
     });
   }
 
-  const updateAnswer = () => {
-    toast.dismiss();
-    setUpdateBtn(true);
-    let id = localStorage.getItem('editId');
-    api
-      .put(`/api/v1/ir_answers/${id}`, {
-        answer_json: JSON.stringify(props.questions)
-      })
-      .then((response) => {
-        setUpdateBtn(false);
-        if (response.data.success) {
-          console.log('data');
-          toast.success(response.data.message);
-        } else {
-          console.log('data');
-        }
-      })
-      .catch(() => {
-        setUpdateBtn(false);
-        toast.error('Something went wrong');
-      });
-  };
-
-  const cancel = () => {
-    getAnswer();
-  };
+  // const cancel = () => {
+  //   getAnswer();
+  // };
 
   // Accepts the array and key
   const groupBy = (array) => {
     // Return the end result
     return (
       _.chain(array)
-        .filter((a) => a.options.length !== 0)
+        // .filter((a) => a.options.length !== 0)
         // Group the elements of Array based on `heading` property
         .groupBy('heading')
         // `key` is group's name (heading), `value` is the array of objects
@@ -115,22 +94,14 @@ const AgencyTable = (props) => {
     e.preventDefault();
     console.log('editQuestion', ques);
     let updateQuestion = props.questions;
-    updateQuestion[ques.index - 1].options = ques.options;
-    let findObj = ques.options.find(
-      (a) =>
-        a.agencySelect === true ||
-        a.companySelect === true ||
-        a.candidateSelect === true
+    // updateQuestion[ques.index - 1].options = ques.options;
+    let findObj = updateQuestion[ques.question_number - 1].options.find(
+      (a) => a.name === ques.candidate_answer
     );
+    props.setQuestionId(ques.id);
     props.setNextQuestion(findObj.next);
     props.setChecked(findObj.value);
-    history.push({
-      pathname: '/ir35-verify',
-      search: '?update=true',
-      state: {
-        update: true
-      }
-    });
+    history.push('/ir35-verify');
     localStorage.setItem('editQuestion', JSON.stringify(ques));
   };
 
@@ -174,26 +145,27 @@ const AgencyTable = (props) => {
                   <List component="div" className="list-group-flush">
                     {ans.questions.map((ques, i) => (
                       <>
-                        {ques !== null &&
-                          (ques.candidateSelect ||
-                            ques.agencySelect ||
-                            ques.companySelect) && (
-                            <ListItem className="py-2 d-block" key={i}>
-                              <Grid container spacing={0}>
-                                <Grid item xs={12} sm={1}>
-                                  <span className="float-right font-weight-bold">
-                                    {i + 1}
-                                  </span>
-                                </Grid>
-                                <Grid item xs={12} sm={4}>
-                                  <span className="font-size-md font-weight-bold">
-                                    {ques.question}
-                                  </span>
-                                </Grid>
-                                <Grid item xs={12} sm={4} className="pl-5">
-                                  <div className="d-flex">
+                        {ques !== null && (
+                          <ListItem className="py-2 d-block" key={i}>
+                            <Grid container spacing={0}>
+                              <Grid item xs={12} sm={1}>
+                                <span className="float-right font-weight-bold">
+                                  {i + 1}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={4}>
+                                <span className="font-size-md font-weight-bold">
+                                  {ques.question}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={4} className="pl-5">
+                                <div className="d-flex">
+                                  {ques.candidate_answer && (
                                     <div>
-                                      {ques.options.map((op) => (
+                                      <span className="font-size-lg mr-3">
+                                        {ques.candidate_answer}
+                                      </span>
+                                      {/* {ques.options.map((op) => (
                                         <>
                                           {op.candidateSelect && (
                                             <div>
@@ -203,48 +175,60 @@ const AgencyTable = (props) => {
                                             </div>
                                           )}
                                         </>
-                                      ))}
+                                      ))} */}
                                     </div>
+                                  )}
+                                  {ques.agency_answer && (
                                     <div>
-                                      {ques.options.map((op) => (
+                                      <span className="font-size-lg left-border">
+                                        {ques.agency_answer}
+                                      </span>
+
+                                      {/* {ques.options.map((op) => (
                                         <>
-                                          {op.agencySelect && (
-                                            <div className="pl-5">
-                                              <span className="font-size-lg left-border">
+                                          {op.candidateSelect && (
+                                            <div>
+                                              <span className="font-size-lg">
                                                 {op.name}
                                               </span>
                                             </div>
                                           )}
                                         </>
-                                      ))}
+                                      ))} */}
                                     </div>
+                                  )}
+                                  {ques.company_answer && (
                                     <div>
-                                      {ques.options.map((op) => (
+                                      <span className="font-size-lg left-border">
+                                        {ques.company_answer}
+                                      </span>
+                                      {/* {ques.options.map((op) => (
                                         <>
-                                          {op.companySelect && (
-                                            <div className="pl-5">
-                                              <span className="font-size-lg left-border">
+                                          {op.candidateSelect && (
+                                            <div>
+                                              <span className="font-size-lg">
                                                 {op.name}
                                               </span>
                                             </div>
                                           )}
                                         </>
-                                      ))}
+                                      ))} */}
                                     </div>
-                                  </div>
-                                </Grid>
-                                <Grid item xs={12} sm={3}>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => editQuestion(e, ques)}
-                                    className="float-right"
-                                    title="Edit Question">
-                                    Edit
-                                  </a>
-                                </Grid>
+                                  )}
+                                </div>
                               </Grid>
-                            </ListItem>
-                          )}
+                              <Grid item xs={12} sm={3}>
+                                <a
+                                  href="#/"
+                                  onClick={(e) => editQuestion(e, ques)}
+                                  className="float-right"
+                                  title="Edit Question">
+                                  Edit
+                                </a>
+                              </Grid>
+                            </Grid>
+                          </ListItem>
+                        )}
                       </>
                     ))}
                   </List>
@@ -253,33 +237,12 @@ const AgencyTable = (props) => {
             </Card>
           ))}
           <div className="m-5 text-center">
-            {props.editMode && (
-              <>
-                <Button
-                  size="small"
-                  onClick={updateAnswer}
-                  disabled={updateBtn}
-                  className="btn-primary">
-                  Update Answers
-                </Button>
-                <Button
-                  size="small"
-                  onClick={cancel}
-                  className="btn-primary ml-2">
-                  Cancel
-                </Button>
-              </>
-            )}
-            {!props.editMode && (
-              <>
-                <Button
-                  size="small"
-                  // onClick={updateAnswer}
-                  className="btn-primary ml-2">
-                  Continue
-                </Button>
-              </>
-            )}
+            <Button
+              size="small"
+              // onClick={updateAnswer}
+              className="btn-primary ml-2">
+              Continue
+            </Button>
           </div>
         </div>
       )}
@@ -309,6 +272,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setEditMode: (mode) => {
       dispatch(setEditMode(mode));
+    },
+    setQuestionId: (id) => {
+      dispatch(setQuestionId(id));
     }
   };
 };

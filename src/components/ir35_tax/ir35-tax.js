@@ -42,14 +42,14 @@ const IR35TaxComponent = (props) => {
 
   useEffect(() => {
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
-    if (!!editQuestion && !!location.state) {
+    if (editQuestion) {
       console.log(location.state);
       // const ir35Questions = props.ir35Questions;
       // setPolicyObj({ ...ir35Questions });
       // setCheck(editQuestion.value);
-      toggle(editQuestion.index);
+      toggle(editQuestion.question_number);
     } else {
-      localStorage.removeItem('editQuestion');
+      // localStorage.removeItem('editQuestion');
     }
   }, [props.ir35Questions]);
 
@@ -115,9 +115,23 @@ const IR35TaxComponent = (props) => {
       props.onLoadIr35QuestionsComplete(updateArray);
       goBack();
     } else {
+      let updateQuestion = [];
+      props.questions.forEach((que) => {
+        if (que.candidateSelect) {
+          let findOptions = que.options.find((a) => a.candidateSelect === true);
+          updateQuestion.push({
+            user_id: currentUser.id,
+            question_number: que.index,
+            heading: que.heading,
+            question: que.question,
+            candidate_answer: findOptions.name
+          });
+        }
+      });
       api
-        .post('/api/v1/ir_answers', {
-          ir_answer: JSON.stringify(props.questions)
+        .post('/api/v1/user_answers', {
+          userId: currentUser.id,
+          answers: updateQuestion
         })
         .then((response) => {
           setDoSubmit(false);
@@ -135,7 +149,99 @@ const IR35TaxComponent = (props) => {
           setDoSubmit(false);
           toast.error('Something went wrong');
         });
+
+      // api
+      //   .post('/api/v1/ir_answers', {
+      //     ir_answer: JSON.stringify(props.questions)
+      //   })
+      //   .then((response) => {
+      //     setDoSubmit(false);
+      //     if (response.data.success) {
+      //       setActiveTab('0');
+      //       toast.success(response.data.message);
+      //       console.log('success');
+      //       goBack();
+      //     } else {
+      //       toast.error(response.data.message);
+      //       console.log('not success');
+      //     }
+      //   })
+      //   .catch(() => {
+      //     setDoSubmit(false);
+      //     toast.error('Something went wrong');
+      //   });
     }
+  };
+
+  const updateNewQuestions = () => {
+    debugger;
+
+    toast.dismiss();
+    setDoSubmit(true);
+    let updateQuestion = [];
+    props.questions.forEach((que) => {
+      if (que.agencySelect) {
+        let findOptions = que.options.find((a) => a.agencySelect === true);
+        updateQuestion.push({
+          user_id: currentUser.id,
+          question_number: que.index,
+          heading: que.heading,
+          question: que.question,
+          agency_answer: findOptions.name
+        });
+      }
+    });
+    api
+      .put(`/api/v1/user_answers/1`, {
+        answers: updateQuestion
+      })
+      .then((response) => {
+        setDoSubmit(false);
+        if (response.data.success) {
+          goBackView();
+          toast.success(response.data.message);
+          console.log('success');
+          goBack();
+        } else {
+          toast.error(response.data.message);
+          console.log('not success');
+        }
+      })
+      .catch(() => {
+        setDoSubmit(false);
+        toast.error('Something went wrong');
+      });
+  };
+
+  const updateAnswer = (answer, que) => {
+    console.log('answer', answer);
+    const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
+    let updateQuestion = [
+      {
+        user_id: currentUser.id,
+        question_number: que.index,
+        heading: que.heading,
+        question: que.question,
+        agency_answer: answer
+      }
+    ];
+    toast.dismiss();
+
+    api
+      .put(`/api/v1/user_answers/${editQuestion.id}`, {
+        answers: updateQuestion
+      })
+      .then((response) => {
+        if (response.data.success) {
+          console.log('updateQuestion', response.data);
+          // toast.success(response.data.message);
+        } else {
+          console.log('data');
+        }
+      })
+      .catch(() => {
+        toast.error('Something went wrong');
+      });
   };
 
   return (
@@ -216,8 +322,10 @@ const IR35TaxComponent = (props) => {
                                           q.index === option.next &&
                                           q.candidateSelect === true
                                       );
-
-                                      if (!checkQuestion) {
+                                      let startAgain = location.state
+                                        ? location.state.update
+                                        : false;
+                                      if (!checkQuestion && !startAgain) {
                                         let value = e.target.value;
                                         confirmAlert({
                                           title: 'Confirm to change question',
@@ -227,23 +335,26 @@ const IR35TaxComponent = (props) => {
                                             {
                                               label: 'Start',
                                               onClick: () => {
-                                                props.setEditMode(true);
-                                                props.setChecked(value);
-                                                question.agencySelect = false;
-                                                // question.options.map(
-                                                  //   (x) =>
-                                                  //     (x.candidateSelect = false)
-                                                  // );
-                                                  
-                                                  debugger
-                                                question.options.map((x) =>
-                                                  x.value === value
-                                                    ? (x.agencySelect = true)
-                                                    : (x.agencySelect = false)
+                                                updateAnswer(
+                                                  option.name,
+                                                  question
                                                 );
-                                                props.setNextQuestion(
-                                                  option.next
-                                                );
+                                                history.push('/start-ir35');
+                                                // props.setEditMode(true);
+                                                // props.setChecked(value);
+                                                // // question.agencySelect = false;
+                                                // // question.options.map(
+                                                // //   (x) =>
+                                                // //     (x.candidateSelect = false)
+                                                // // );
+                                                // question.options.map((x) =>
+                                                //   x.value === value
+                                                //     ? (x.agencySelect = true)
+                                                //     : (x.agencySelect = false)
+                                                // );
+                                                // props.setNextQuestion(
+                                                //   option.next
+                                                // );
                                               }
                                             },
                                             {
@@ -311,6 +422,9 @@ const IR35TaxComponent = (props) => {
                           size="large"
                           variant="contained"
                           onClick={() => {
+                            let startAgain = location.state
+                              ? location.state.update
+                              : false;
                             if (currentUser.role === 'candidate') {
                               question.candidateSelect = true;
                               if (
@@ -336,7 +450,7 @@ const IR35TaxComponent = (props) => {
                               } else {
                                 toggle(props.nextQuestion);
                               }
-                            } else if (props.editMode) {
+                            } else if (startAgain) {
                               if (currentUser.role === 'agency') {
                                 question.agencySelect = true;
                               } else if (currentUser.role === 'company') {
@@ -346,9 +460,11 @@ const IR35TaxComponent = (props) => {
                                 props.nextQuestion === 2 ||
                                 props.nextQuestion === 6
                               ) {
-                                history.push('/start-ir35');
+                                // history.push('/start-ir35');
+                                toggle(1);
+                              } else {
+                                toggle(props.nextQuestion);
                               }
-                              toggle(props.nextQuestion);
                               props.setChecked('');
                               if (
                                 props.nextQuestion === 60 ||
@@ -357,10 +473,13 @@ const IR35TaxComponent = (props) => {
                                 props.nextQuestion === 64 ||
                                 props.nextQuestion === 67
                               ) {
-                                goBackView();
+                                debugger;
+                                // goBackView();
+                                updateNewQuestions(question);
                               }
                             } else {
                               goBack();
+                              // updateAnswer(question);
                             }
                           }}
                           className="font-weight-bold btn-slack px-4 my-3 bg-color">
@@ -407,7 +526,8 @@ const mapStateToProps = (state) => ({
   questions: state.ThemeOptions.irQuestions,
   nextQuestion: state.ThemeOptions.nextQuestion,
   checked: state.ThemeOptions.checked,
-  editMode: state.ThemeOptions.editMode
+  editMode: state.ThemeOptions.editMode,
+  editQuestionId: state.ThemeOptions.editQuestionId
 });
 
 const mapDispatchToProps = (dispatch) => {

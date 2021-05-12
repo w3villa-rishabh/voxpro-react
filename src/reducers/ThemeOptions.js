@@ -17,6 +17,7 @@ export const GET_IR35_QUESTIONS = 'GET_IR35_QUESTIONS';
 export const SET_NEXT_QUESTIONS = 'SET_NEXT_QUESTIONS';
 export const SET_CHECKED_QUESTIONS = 'SET_CHECKED_QUESTIONS';
 export const SET_EDIT_QUESTIONS = 'SET_EDIT_QUESTIONS';
+export const SET_EDIT_QUESTIONS_ID = 'SET_EDIT_QUESTIONS';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -80,6 +81,11 @@ export const setChecked = (checked) => ({
 export const setEditMode = (editMode) => ({
   type: SET_EDIT_QUESTIONS,
   editMode
+});
+
+export const setQuestionId = (editQuestionId) => ({
+  type: SET_EDIT_QUESTIONS_ID,
+  editQuestionId
 });
 
 // Header
@@ -224,7 +230,8 @@ export default function reducer(
     nextQuestion: 0,
     irQuestions: ir35questions,
     ir35answers: [],
-    editMode: false
+    editMode: false,
+    editQuestionId: 0
   },
   action
 ) {
@@ -394,6 +401,13 @@ export default function reducer(
       return {
         ...state,
         editMode: action.editMode
+      };
+
+    case SET_EDIT_QUESTIONS_ID:
+      debugger
+      return {
+        ...state,
+        editQuestionId: action.id
       };
 
     default:

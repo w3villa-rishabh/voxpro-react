@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
 import { useHistory } from 'react-router-dom';
+import { getCurrentUser } from 'helper';
 
 export default function IR35TaxComponent() {
   const history = useHistory();
   const [startQuestion, setStartQuestion] = useState(true);
+  const [currentUser] = useState(getCurrentUser());
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,9 +32,23 @@ export default function IR35TaxComponent() {
 
   document.addEventListener('keydown', function (event) {
     if (event.code === 'Enter') {
-      history.push('/ir35-verify');
+      goQuestion();
     }
   });
+
+  const goQuestion = () => {
+    if (currentUser.role === 'agency') {
+      history.push({
+        pathname: '/ir35-verify',
+        search: '?update=true',
+        state: {
+          update: true
+        }
+      });
+    } else {
+      history.push('/ir35-verify');
+    }
+  };
 
   return (
     <div className="ir35-background text-white">
@@ -64,7 +80,7 @@ export default function IR35TaxComponent() {
               size="large"
               variant="contained"
               onClick={() => {
-                history.push('/ir35-verify');
+                goQuestion();
               }}
               className="font-weight-bold btn-slack px-4 bg-color button-width">
               START
