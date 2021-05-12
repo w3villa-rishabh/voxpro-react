@@ -161,15 +161,18 @@ const IR35TaxComponent = (props) => {
                           onClick={() => {
                             if (currentUser.role === 'agency') {
                               question.agencySelect = false;
-                              question.options.map(
-                                (x) => (x.agencySelect = false)
-                              );
                             } else {
                               question.candidateSelect = false;
-                              question.options.map(
-                                (x) => (x.candidateSelect = false)
-                              );
                             }
+
+                            question.options.map((x) =>
+                              currentUser.role === 'company'
+                                ? (x.companySelect = false)
+                                : currentUser.role === 'agency'
+                                ? (x.agencySelect = false)
+                                : (x.candidateSelect = false)
+                            );
+
                             toggle(question.previous);
                           }}>
                           Back
@@ -191,11 +194,12 @@ const IR35TaxComponent = (props) => {
                                 {currentUser.role === 'candidate' && (
                                   <Radio
                                     checked={option.candidateSelect}
-                                    onChange={() => {
-                                      question.options.map(
-                                        (x) => (x.candidateSelect = false)
+                                    onChange={(e) => {
+                                      question.options.map((x) =>
+                                        x.value === e.target.value
+                                          ? (x.candidateSelect = true)
+                                          : (x.candidateSelect = false)
                                       );
-                                      option.candidateSelect = true;
                                       props.setNextQuestion(option.next);
                                     }}
                                     value={option.value}
@@ -218,23 +222,24 @@ const IR35TaxComponent = (props) => {
                                         confirmAlert({
                                           title: 'Confirm to change question',
                                           message:
-                                            'To change an answer in this section. This will delete your question',
+                                            'To change an answer in this section. This will update your question',
                                           buttons: [
                                             {
                                               label: 'Start',
                                               onClick: () => {
                                                 props.setEditMode(true);
                                                 props.setChecked(value);
-                                                question.options.map(
-                                                  (x) =>
-                                                    (x.agencySelect = false)
+                                                question.agencySelect = false;
+                                                // question.options.map(
+                                                //   (x) =>
+                                                //     (x.candidateSelect = false)
+                                                // );
+
+                                                question.options.map((x) =>
+                                                  x.value === value
+                                                    ? (x.agencySelect = true)
+                                                    : (x.agencySelect = false)
                                                 );
-                                                // question.candidateSelect = false;
-                                                question.options.map(
-                                                  (x) =>
-                                                    (x.candidateSelect = false)
-                                                );
-                                                option.agencySelect = true;
                                                 props.setNextQuestion(
                                                   option.next
                                                 );
@@ -254,11 +259,12 @@ const IR35TaxComponent = (props) => {
                                         });
                                       } else {
                                         props.setChecked(e.target.value);
-                                        question.options.map(
-                                          (x) => (x.agencySelect = false)
-                                        );
 
-                                        option.agencySelect = true;
+                                        question.options.map((x) =>
+                                          x.value === e.target.value
+                                            ? (x.agencySelect = true)
+                                            : (x.agencySelect = false)
+                                        );
                                         props.setNextQuestion(option.next);
                                       }
                                     }}
@@ -278,16 +284,15 @@ const IR35TaxComponent = (props) => {
                                           q.candidateSelect === true
                                       );
                                       if (!checkQuestion) {
-                                        // setOpen(true);
-                                        // alert('Need to change questions');
                                         props.setEditMode(true);
                                       }
 
-                                      question.options.map(
-                                        (x) => (x.companySelect = false)
+                                      question.options.map((x) =>
+                                        x.value === e.target.value
+                                          ? (x.companySelect = true)
+                                          : (x.companySelect = false)
                                       );
 
-                                      option.companySelect = true;
                                       props.setNextQuestion(option.next);
                                     }}
                                     value={option.value}
