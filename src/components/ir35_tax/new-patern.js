@@ -35,6 +35,11 @@ export default [
   },
   {
     index: 2,
+    heading: 'You need to start again',
+    p1:
+      'The off-payroll working rules (IR35) (opens in a new window) can only apply if you are providing your services through an intermediary.',
+    p2:
+      'As you told us there is no intermediary involved, you need to find out if this work is classed as employment or self-employment for tax purposes.',
     options: []
   },
   {
@@ -6801,6 +6806,8 @@ export default [
       }
     ]
   }
+
+  ////////sb last krna
 
   // {
   //   index: 186,

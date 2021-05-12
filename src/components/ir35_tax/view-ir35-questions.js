@@ -59,6 +59,7 @@ const AgencyTable = (props) => {
       .then((response) => {
         if (response.data.success) {
           console.log('success');
+          getAnswer();
         } else {
           console.log('not success');
         }
