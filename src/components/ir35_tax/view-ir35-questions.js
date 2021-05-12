@@ -65,6 +65,23 @@ const AgencyTable = (props) => {
     });
   }
 
+  function resetQuestion() {
+    api
+      .post('/api/v1/user_answers/reset_answer', {
+        userId: 20
+      })
+      .then((response) => {
+        if (response.data.success) {
+          console.log('success');
+        } else {
+          console.log('not success');
+        }
+      })
+      .catch(() => {
+        console.log('error');
+      });
+  }
+
   // const cancel = () => {
   //   getAnswer();
   // };
@@ -237,6 +254,12 @@ const AgencyTable = (props) => {
             </Card>
           ))}
           <div className="m-5 text-center">
+            <Button
+              size="small"
+              onClick={resetQuestion}
+              className="btn-primary ml-2">
+              Reset Changes
+            </Button>
             <Button
               size="small"
               // onClick={updateAnswer}
