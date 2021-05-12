@@ -728,6 +728,9 @@ tbody.scroll {
 }
 
 .alert-overlay-custom {
+  z-index: 9999;
+  background: #ffffff69 !important;
+
   .react-confirm-alert-body {
     width: unset !important;
   }
