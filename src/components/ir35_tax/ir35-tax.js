@@ -374,13 +374,12 @@ const IR35TaxComponent = (props) => {
                           onClick={() => {
                             if (currentUser.role === 'candidate') {
                               question.candidateSelect = true;
-                              if (
-                                props.nextQuestion === 2 ||
-                                props.nextQuestion === 6
-                              ) {
+                              if (props.nextQuestion === 2) {
                                 goBack();
                               }
+
                               if (
+                                props.nextQuestion === 6 ||
                                 props.nextQuestion === 60 ||
                                 props.nextQuestion === 61 ||
                                 props.nextQuestion === 63 ||
@@ -403,17 +402,16 @@ const IR35TaxComponent = (props) => {
                               } else if (currentUser.role === 'company') {
                                 question.companySelect = true;
                               }
-                              if (
-                                props.nextQuestion === 2 ||
-                                props.nextQuestion === 6
-                              ) {
+                              if (props.nextQuestion === 2) {
                                 // history.push('/start-ir35');
                                 toggle(1);
                               } else {
                                 toggle(props.nextQuestion);
                               }
+
                               props.setChecked('');
                               if (
+                                props.nextQuestion === 6 ||
                                 props.nextQuestion === 60 ||
                                 props.nextQuestion === 61 ||
                                 props.nextQuestion === 63 ||
