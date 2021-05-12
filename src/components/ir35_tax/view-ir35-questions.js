@@ -1,13 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import {
-  Card,
-  Button,
-  Grid,
-  List,
-  ListItem,
-  Collapse
-} from '@material-ui/core';
+import { Card, Button, Table, Collapse } from '@material-ui/core';
 import clsx from 'clsx';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -38,25 +31,18 @@ const AgencyTable = (props) => {
   ]);
   const [currentUser] = useState(getCurrentUser());
   const history = useHistory();
-  const [updateBtn, setUpdateBtn] = useState(false);
+  const [userId, setUserId] = useState(0);
 
   useEffect(() => {
-    // if (
-    //   (history.action === 'PUSH' || history.action === 'POP') &&
-    //   !props.answer.length
-    // ) {
-    //   getAnswer();
-    // }
     getAnswer();
   }, []);
 
   function getAnswer() {
     api.get(`/api/v1/user_answers?id=${currentUser.id}`).then((response) => {
-      if (response.data.success && !!response.data.ir_answers) {
-        // const data = JSON.parse(response.data.ir_answers.answer_json);
+      if (response.data.success && !!response.data.ir_answers.length) {
         const data = response.data.ir_answers.sort((a, b) => a.id - b.id);
         console.log('data', data);
-        // localStorage.setItem('editId', response.data.ir_answers.id);
+        setUserId(data[0].user_id);
         props.setEditMode(false);
         let updateArray = groupBy(data);
         // props.onIr35Questions(data);
@@ -64,10 +50,6 @@ const AgencyTable = (props) => {
       }
     });
   }
-
-  // const cancel = () => {
-  //   getAnswer();
-  // };
 
   // Accepts the array and key
   const groupBy = (array) => {
@@ -94,7 +76,6 @@ const AgencyTable = (props) => {
     e.preventDefault();
     console.log('editQuestion', ques);
     let updateQuestion = props.questions;
-    // updateQuestion[ques.index - 1].options = ques.options;
     let findObj = updateQuestion[ques.question_number - 1].options.find(
       (a) => a.name === ques.candidate_answer
     );
@@ -102,6 +83,7 @@ const AgencyTable = (props) => {
     props.setNextQuestion(findObj.next);
     props.setChecked(findObj.value);
     history.push('/ir35-verify');
+    ques.user_id = userId;
     localStorage.setItem('editQuestion', JSON.stringify(ques));
   };
 
@@ -142,96 +124,63 @@ const AgencyTable = (props) => {
                   </div>
                 </div>
                 <Collapse in={accordion[index]}>
-                  <List component="div" className="list-group-flush">
-                    {ans.questions.map((ques, i) => (
-                      <>
-                        {ques !== null && (
-                          <ListItem className="py-2 d-block" key={i}>
-                            <Grid container spacing={0}>
-                              <Grid item xs={12} sm={1}>
-                                <span className="float-right font-weight-bold">
+                  <div className="table-responsive">
+                    <Table className="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th className="text-center">No</th>
+                          <th className="w-43">Question</th>
+                          <th className="tx-left">Candidate Answer</th>
+                          {currentUser.role === 'agency' && (
+                            <th className="tx-center">Agency Answer</th>
+                          )}
+                          {currentUser.role === 'company' && (
+                            <>
+                              <th className="tx-center">Agency Answer</th>
+                              <th className="tx-right">Company Answer</th>
+                            </>
+                          )}
+                          <th className="tx-right">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {ans.questions.map((ques, i) => (
+                          <>
+                            <tr>
+                              <td className="tx-nowrap">
+                                <div className="float-right font-weight-bold">
                                   {i + 1}
-                                </span>
-                              </Grid>
-                              <Grid item xs={12} sm={4}>
-                                <span className="font-size-md font-weight-bold">
-                                  {ques.question}
-                                </span>
-                              </Grid>
-                              <Grid item xs={12} sm={4} className="pl-5">
-                                <div className="d-flex">
-                                  {ques.candidate_answer && (
-                                    <div>
-                                      <span className="font-size-lg mr-3">
-                                        {ques.candidate_answer}
-                                      </span>
-                                      {/* {ques.options.map((op) => (
-                                        <>
-                                          {op.candidateSelect && (
-                                            <div>
-                                              <span className="font-size-lg">
-                                                {op.name}
-                                              </span>
-                                            </div>
-                                          )}
-                                        </>
-                                      ))} */}
-                                    </div>
-                                  )}
-                                  {ques.agency_answer && (
-                                    <div>
-                                      <span className="font-size-lg left-border">
-                                        {ques.agency_answer}
-                                      </span>
-
-                                      {/* {ques.options.map((op) => (
-                                        <>
-                                          {op.candidateSelect && (
-                                            <div>
-                                              <span className="font-size-lg">
-                                                {op.name}
-                                              </span>
-                                            </div>
-                                          )}
-                                        </>
-                                      ))} */}
-                                    </div>
-                                  )}
-                                  {ques.company_answer && (
-                                    <div>
-                                      <span className="font-size-lg left-border">
-                                        {ques.company_answer}
-                                      </span>
-                                      {/* {ques.options.map((op) => (
-                                        <>
-                                          {op.candidateSelect && (
-                                            <div>
-                                              <span className="font-size-lg">
-                                                {op.name}
-                                              </span>
-                                            </div>
-                                          )}
-                                        </>
-                                      ))} */}
-                                    </div>
-                                  )}
                                 </div>
-                              </Grid>
-                              <Grid item xs={12} sm={3}>
+                              </td>
+                              <td className="">{ques.question}</td>
+                              <td className="tx-center">
+                                {ques.candidate_answer}
+                              </td>
+                              {currentUser.role === 'agency' && (
+                                <td className="tx-center">
+                                  {ques.agency_answer}
+                                </td>
+                              )}
+                              {currentUser.role === 'company' && (
+                                <td className="tx-center">
+                                  {ques.company_answer}
+                                </td>
+                              )}
+                              <td className="tx-right">
                                 <a
                                   href="#/"
                                   onClick={(e) => editQuestion(e, ques)}
-                                  className="float-right"
+                                  className="a-blue"
                                   title="Edit Question">
                                   Edit
                                 </a>
-                              </Grid>
-                            </Grid>
-                          </ListItem>
-                        )}
-                      </>
-                    ))}
-                  </List>
+                              </td>
+                            </tr>
+                          </>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </Collapse>
               </Card>
             </Card>

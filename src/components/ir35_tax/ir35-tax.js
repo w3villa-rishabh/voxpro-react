@@ -6,10 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
-import _ from 'lodash';
 import { toast } from 'react-toastify';
 import api from '../../api';
-import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { getCurrentUser } from 'helper';
 
@@ -29,9 +27,8 @@ const IR35TaxComponent = (props) => {
   const [currentUser] = useState(getCurrentUser());
   const [activeTab, setActiveTab] = useState(1);
   const [finalSubmit, setFinalSubmit] = useState(false);
-
+  const [startAgain, setStartAgain] = useState(false);
   const [doSubmit, setDoSubmit] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -43,10 +40,6 @@ const IR35TaxComponent = (props) => {
   useEffect(() => {
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
     if (editQuestion) {
-      console.log(location.state);
-      // const ir35Questions = props.ir35Questions;
-      // setPolicyObj({ ...ir35Questions });
-      // setCheck(editQuestion.value);
       toggle(editQuestion.question_number);
     } else {
       // localStorage.removeItem('editQuestion');
@@ -89,101 +82,57 @@ const IR35TaxComponent = (props) => {
     }
   });
 
-  // Accepts the array and key
-  const groupBy = (array) => {
-    // Return the end result
-    return (
-      _.chain(array)
-        .filter((a) => a.options.length !== 0)
-        // Group the elements of Array based on `heading` property
-        .groupBy('heading')
-        // `key` is group's name (heading), `value` is the array of objects
-        .map((value, key) => ({ heading: key, questions: value }))
-        .value()
-    );
-  };
-
   const submitQuestions = () => {
     toast.dismiss();
     setDoSubmit(true);
-    // Group by heading as key to the person array
-    // let updateArray = groupBy(props.questions);
-    // props.onLoadIr35QuestionsComplete(props.questions);
-    if (currentUser.role === 'agency') {
-      let updateArray = groupBy(props.questions);
-      props.onIr35Questions(props.questions);
-      props.onLoadIr35QuestionsComplete(updateArray);
-      goBack();
-    } else {
-      let updateQuestion = [];
-      props.questions.forEach((que) => {
-        if (que.candidateSelect) {
-          let findOptions = que.options.find((a) => a.candidateSelect === true);
-          updateQuestion.push({
-            user_id: currentUser.id,
-            question_number: que.index,
-            heading: que.heading,
-            question: que.question,
-            candidate_answer: findOptions.name
-          });
-        }
-      });
-      api
-        .post('/api/v1/user_answers', {
-          userId: currentUser.id,
-          answers: updateQuestion
-        })
-        .then((response) => {
-          setDoSubmit(false);
-          if (response.data.success) {
-            setActiveTab('0');
-            toast.success(response.data.message);
-            console.log('success');
-            goBack();
-          } else {
-            toast.error(response.data.message);
-            console.log('not success');
-          }
-        })
-        .catch(() => {
-          setDoSubmit(false);
-          toast.error('Something went wrong');
-        });
 
-      // api
-      //   .post('/api/v1/ir_answers', {
-      //     ir_answer: JSON.stringify(props.questions)
-      //   })
-      //   .then((response) => {
-      //     setDoSubmit(false);
-      //     if (response.data.success) {
-      //       setActiveTab('0');
-      //       toast.success(response.data.message);
-      //       console.log('success');
-      //       goBack();
-      //     } else {
-      //       toast.error(response.data.message);
-      //       console.log('not success');
-      //     }
-      //   })
-      //   .catch(() => {
-      //     setDoSubmit(false);
-      //     toast.error('Something went wrong');
-      //   });
-    }
+    let updateQuestion = [];
+    props.questions.forEach((que) => {
+      if (que.candidateSelect) {
+        let findOptions = que.options.find((a) => a.candidateSelect === true);
+        updateQuestion.push({
+          user_id: currentUser.id,
+          question_number: que.index,
+          heading: que.heading,
+          question: que.question,
+          candidate_answer: findOptions.name
+        });
+      }
+    });
+    api
+      .post('/api/v1/user_answers', {
+        userId: currentUser.id,
+        answers: updateQuestion
+      })
+      .then((response) => {
+        setDoSubmit(false);
+        if (response.data.success) {
+          setActiveTab('0');
+          toast.success(response.data.message);
+          console.log('success');
+          goBack();
+        } else {
+          toast.error(response.data.message);
+          console.log('not success');
+        }
+      })
+      .catch(() => {
+        setDoSubmit(false);
+        toast.error('Something went wrong');
+      });
   };
 
   const updateNewQuestions = () => {
-    debugger;
-
     toast.dismiss();
+    const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
+
     setDoSubmit(true);
     let updateQuestion = [];
     props.questions.forEach((que) => {
       if (que.agencySelect) {
         let findOptions = que.options.find((a) => a.agencySelect === true);
         updateQuestion.push({
-          user_id: currentUser.id,
+          user_id: editQuestion.user_id,
           question_number: que.index,
           heading: que.heading,
           question: que.question,
@@ -193,14 +142,15 @@ const IR35TaxComponent = (props) => {
     });
     api
       .put(`/api/v1/user_answers/1`, {
+        id: editQuestion.user_id,
         answers: updateQuestion
       })
       .then((response) => {
         setDoSubmit(false);
         if (response.data.success) {
           goBackView();
-          toast.success(response.data.message);
-          console.log('success');
+          // toast.success(response.data.message);
+          console.log('agency answer create success');
           goBack();
         } else {
           toast.error(response.data.message);
@@ -218,7 +168,7 @@ const IR35TaxComponent = (props) => {
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
     let updateQuestion = [
       {
-        user_id: currentUser.id,
+        user_id: editQuestion.user_id,
         question_number: que.index,
         heading: que.heading,
         question: que.question,
@@ -229,6 +179,7 @@ const IR35TaxComponent = (props) => {
 
     api
       .put(`/api/v1/user_answers/${editQuestion.id}`, {
+        id: editQuestion.user_id,
         answers: updateQuestion
       })
       .then((response) => {
@@ -322,11 +273,8 @@ const IR35TaxComponent = (props) => {
                                           q.index === option.next &&
                                           q.candidateSelect === true
                                       );
-                                      let startAgain = location.state
-                                        ? location.state.update
-                                        : false;
                                       if (!checkQuestion && !startAgain) {
-                                        let value = e.target.value;
+                                        // let value = e.target.value;
                                         confirmAlert({
                                           title: 'Confirm to change question',
                                           message:
@@ -339,7 +287,9 @@ const IR35TaxComponent = (props) => {
                                                   option.name,
                                                   question
                                                 );
-                                                history.push('/start-ir35');
+                                                setStartAgain(true);
+                                                props.setChecked('');
+                                                toggle(1);
                                                 // props.setEditMode(true);
                                                 // props.setChecked(value);
                                                 // // question.agencySelect = false;
@@ -422,9 +372,6 @@ const IR35TaxComponent = (props) => {
                           size="large"
                           variant="contained"
                           onClick={() => {
-                            let startAgain = location.state
-                              ? location.state.update
-                              : false;
                             if (currentUser.role === 'candidate') {
                               question.candidateSelect = true;
                               if (
@@ -473,7 +420,6 @@ const IR35TaxComponent = (props) => {
                                 props.nextQuestion === 64 ||
                                 props.nextQuestion === 67
                               ) {
-                                debugger;
                                 // goBackView();
                                 updateNewQuestions(question);
                               }

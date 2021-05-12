@@ -404,7 +404,6 @@ export default function reducer(
       };
 
     case SET_EDIT_QUESTIONS_ID:
-      debugger
       return {
         ...state,
         editQuestionId: action.id
