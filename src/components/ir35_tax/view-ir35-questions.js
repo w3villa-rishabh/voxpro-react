@@ -22,7 +22,8 @@ import {
   getIr35QuestionsSuccess,
   onIr35Questions,
   setNextQuestion,
-  setChecked
+  setChecked,
+  setEditMode
 } from '../../reducers/ThemeOptions';
 
 const AgencyTable = (props) => {
@@ -54,6 +55,7 @@ const AgencyTable = (props) => {
         const data = JSON.parse(response.data.ir_answers.answer_json);
         console.log('data', data);
         localStorage.setItem('editId', response.data.ir_answers.id);
+        props.setEditMode(false);
         let updateArray = groupBy(data);
         props.onIr35Questions(data);
         props.onLoadIr35QuestionsComplete(updateArray);
@@ -82,6 +84,10 @@ const AgencyTable = (props) => {
         setUpdateBtn(false);
         toast.error('Something went wrong');
       });
+  };
+
+  const cancel = () => {
+    getAnswer();
   };
 
   // Accepts the array and key
@@ -247,13 +253,33 @@ const AgencyTable = (props) => {
             </Card>
           ))}
           <div className="m-5 text-center">
-            <Button
-              size="small"
-              onClick={updateAnswer}
-              disabled={updateBtn}
-              className="btn-primary">
-              Update Answers
-            </Button>
+            {props.editMode && (
+              <>
+                <Button
+                  size="small"
+                  onClick={updateAnswer}
+                  disabled={updateBtn}
+                  className="btn-primary">
+                  Update Answers
+                </Button>
+                <Button
+                  size="small"
+                  onClick={cancel}
+                  className="btn-primary ml-2">
+                  Cancel
+                </Button>
+              </>
+            )}
+            {!props.editMode && (
+              <>
+                <Button
+                  size="small"
+                  // onClick={updateAnswer}
+                  className="btn-primary ml-2">
+                  Continue
+                </Button>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -263,7 +289,8 @@ const AgencyTable = (props) => {
 
 const mapStateToProps = (state) => ({
   answer: state.ThemeOptions.ir35answers,
-  questions: state.ThemeOptions.irQuestions
+  questions: state.ThemeOptions.irQuestions,
+  editMode: state.ThemeOptions.editMode
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -279,6 +306,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setChecked: (next) => {
       dispatch(setChecked(next));
+    },
+    setEditMode: (mode) => {
+      dispatch(setEditMode(mode));
     }
   };
 };

@@ -231,10 +231,11 @@ const IR35TaxComponent = (props) => {
                                                 props.setChecked(value);
                                                 question.agencySelect = false;
                                                 // question.options.map(
-                                                //   (x) =>
-                                                //     (x.candidateSelect = false)
-                                                // );
-
+                                                  //   (x) =>
+                                                  //     (x.candidateSelect = false)
+                                                  // );
+                                                  
+                                                  debugger
                                                 question.options.map((x) =>
                                                   x.value === value
                                                     ? (x.agencySelect = true)
