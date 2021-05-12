@@ -727,6 +727,23 @@ tbody.scroll {
   padding-left: 10px;
 }
 
+.alert-overlay-custom {
+  z-index: 9999;
+  background: #ffffff69 !important;
+
+  .react-confirm-alert-body {
+    width: unset !important;
+  }
+
+  h1 {
+    font-size: 28px !important;
+  }
+
+  .react-confirm-alert-button-group>button {
+    padding: 12px 22px !important;
+  }
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {
