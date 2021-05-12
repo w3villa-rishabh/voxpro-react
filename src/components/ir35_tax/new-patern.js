@@ -4767,7 +4767,8 @@ export default [
   {
     index: 115,
     heading: 'Worker’s contracts',
-    question: 'Will your client provide you with paid-for corporate benefits?',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
     p1: 'This includes working for your client’s competitors',
     p2: '',
     provious: 107,
@@ -4796,7 +4797,6 @@ export default [
       }
     ]
   },
-
   {
     index: 116,
     heading: 'Worker’s involvement',
@@ -4847,5 +4847,2057 @@ export default [
         next: 125
       }
     ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 117,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 109,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 126
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 127
+      }
+    ]
+  },
+  {
+    index: 118,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 110,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 128
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 128
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 128
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 128
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 119,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 111,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 129
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 130
+      }
+    ]
+  },
+  {
+    index: 120,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 112,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 131
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 131
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 131
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 131
+      }
+    ]
+  },
+  {
+    index: 121,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 113,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 132
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 132
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 132
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 132
+      }
+    ]
+  },
+  {
+    index: 122,
+    heading: 'Worker’s involvement',
+    question: 'Will you have any management responsibilities for your client?',
+    p1:
+      'This can include deciding how much to pay someone, hiring or dismissing workers, and delivering appraisals.',
+    p2: '',
+    provious: 114,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 133
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 133
+      }
+    ]
+  },
+  {
+    index: 123,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 115,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 134
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 135
+      }
+    ]
+  },
+  {
+    index: 124,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 115,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 136
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 136
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 125,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 116,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 137
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 138
+      }
+    ]
+  },
+  {
+    index: 126,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 117,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 139
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 140
+      }
+    ]
+  },
+  {
+    index: 127,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 117,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 141
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 141
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 128,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 118,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 142
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 143
+      }
+    ]
+  },
+  {
+    index: 129,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 119,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 144
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 145
+      }
+    ]
+  },
+  {
+    index: 130,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 119,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 146
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 146
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 131,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 120,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 147
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 148
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 132,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 121,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 149
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 150
+      }
+    ]
+  },
+  {
+    index: 133,
+    heading: 'Worker’s involvement',
+    question:
+      'How would you introduce yourself to your client’s consumers or suppliers?',
+    p1: '',
+    p2: '',
+    provious: 122,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'You work for your clien',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 151
+      },
+      {
+        name: 'You are an independent worker acting on your client’s behalf',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 151
+      },
+      {
+        name: 'You work for your own business',
+        value: 'c',
+        aria_label: 'C',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 151
+      },
+      {
+        name: 'This would not happen',
+        value: 'd',
+        aria_label: 'D',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 151
+      }
+    ]
+  },
+  {
+    index: 134,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 123,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 152
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 153
+      }
+    ]
+  },
+  {
+    index: 135,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 123,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 154
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 155
+      }
+    ]
+  },
+  {
+    index: 136,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 124,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 156
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 157
+      }
+    ]
+  },
+  {
+    index: 137,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 125,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 158
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 159
+      }
+    ]
+  },
+  {
+    index: 138,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 125,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 160
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 160
+      }
+    ]
+  },
+  {
+    index: 139,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 126,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 161
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 162
+      }
+    ]
+  },
+  {
+    index: 140,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 126,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 163
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 164
+      }
+    ]
+  },
+  {
+    index: 141,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 127,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 165
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 166
+      }
+    ]
+  },
+  {
+    index: 142,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 128,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 167
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 168
+      }
+    ]
+  },
+  {
+    index: 143,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 128,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 169
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 169
+      }
+    ]
+  },
+  {
+    index: 144,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 129,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 170
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 171
+      }
+    ]
+  },
+  {
+    index: 145,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 129,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 172
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 173
+      }
+    ]
+  },
+  {
+    index: 146,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 130,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 174
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 175
+      }
+    ]
+  },
+  {
+    index: 147,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 131,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 176
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 177
+      }
+    ]
+  },
+  {
+    index: 148,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 131,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 178
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 178
+      }
+    ]
+  },
+  {
+    index: 149,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 132,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 179
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 180
+      }
+    ]
+  },
+  {
+    index: 150,
+    heading: 'Worker’s contracts',
+    question: 'Are you required to ask permission to work for other clients?',
+    p1: '',
+    p2: '',
+    provious: 132,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 181
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 181
+      }
+    ]
+  },
+  //// dhyaaaaaaaaaaaaaan dena hai is question me
+  {
+    index: 151,
+    heading: 'Worker’s contracts',
+    question:
+      'Does this contract stop you from doing similar work for other clients?',
+    p1: 'This includes working for your client’s competitors',
+    p2: '',
+    provious: 133,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 182
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 183
+      }
+    ]
+  },
+  {
+    index: 152,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 134,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 184
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 185
+      }
+    ]
+  },
+  {
+    index: 153,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract give your client the option to buy the rights for a separate fee?',
+    p1:
+      'If an option like this does not exist, you would keep all the rights relating to this work.',
+    p2: '',
+    provious: 134,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 186
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 186
+      }
+    ]
+  },
+  {
+    index: 154,
+    heading: 'Worker’s contracts',
+    question:
+      'Will this contract start immediately after the previous one ended?',
+    p1: 'This does not include any holiday period between the two contracts.',
+    p2: '',
+    provious: 135,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 187
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 188
+      }
+    ]
+  },
+  {
+    index: 155,
+    heading: 'Worker’s contracts',
+    question:
+      'Is the current contract the first in a series of contracts agreed with this client?',
+    p1: '',
+    p2: '',
+    provious: 135,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 189
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 190
+      }
+    ]
+  },
+  {
+    index: 156,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 136,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 191
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 192
+      }
+    ]
+  },
+  {
+    index: 157,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 136,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 193
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 194
+      }
+    ]
+  },
+  {
+    index: 158,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 137,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 195
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 196
+      }
+    ]
+  },
+  {
+    index: 159,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 137,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 197
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 198
+      }
+    ]
+  },
+  {
+    index: 160,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 138,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 199
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 200
+      }
+    ]
+  },
+  {
+    index: 161,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 139,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 201
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 202
+      }
+    ]
+  },
+  {
+    index: 162,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract give your client the option to buy the rights for a separate fee?',
+    p1:
+      'If an option like this does not exist, you would keep all the rights relating to this work.',
+    p2: '',
+    provious: 139,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 203
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 203
+      }
+    ]
+  },
+  {
+    index: 163,
+    heading: 'Worker’s contracts',
+    question:
+      'Will this contract start immediately after the previous one ended?',
+    p1: 'This does not include any holiday period between the two contracts.',
+    p2: '',
+    provious: 140,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 204
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 205
+      }
+    ]
+  },
+  {
+    index: 164,
+    heading: 'Worker’s contracts',
+    question:
+      'Is the current contract the first in a series of contracts agreed with this client?',
+    p1: '',
+    p2: '',
+    provious: 140,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 206
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 207
+      }
+    ]
+  },
+  {
+    index: 165,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 141,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 208
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 209
+      }
+    ]
+  },
+  {
+    index: 166,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 141,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 210
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 211
+      }
+    ]
+  },
+  {
+    index: 167,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 142,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 212
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 213
+      }
+    ]
+  },
+  {
+    index: 168,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 142,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 214
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 215
+      }
+    ]
+  },
+  {
+    index: 169,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 143,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 216
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 217
+      }
+    ]
+  },
+  {
+    index: 170,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 144,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 218
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 219
+      }
+    ]
+  },
+  {
+    index: 171,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract give your client the option to buy the rights for a separate fee?',
+    p1:
+      'If an option like this does not exist, you would keep all the rights relating to this work.',
+    p2: '',
+    provious: 144,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 220
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 220
+      }
+    ]
+  },
+  {
+    index: 172,
+    heading: 'Worker’s contracts',
+    question:
+      'Will this contract start immediately after the previous one ended?',
+    p1: 'This does not include any holiday period between the two contracts.',
+    p2: '',
+    provious: 145,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 221
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 222
+      }
+    ]
+  },
+  {
+    index: 173,
+    heading: 'Worker’s contracts',
+    question:
+      'Is the current contract the first in a series of contracts agreed with this client?',
+    p1: '',
+    p2: '',
+    provious: 145,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 223
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 224
+      }
+    ]
   }
+
+  // {
+  //   index: 186,
+  //   heading: 'Worker’s contracts',
+  //   question: 'Have you had a previous contract with this client?',
+  //   p1: '',
+  //   p2: '',
+  //   provious: 153,
+  //   candidateSelect: false,
+  //   angencySelect: false,
+  //   companySelect: false,
+  //   status: false,
+  //   options: [
+  //     {
+  //       name: 'Yes',
+  //       value: 'a',
+  //       aria_label: 'A',
+  //       candidateSelect: false,
+  //       agencySelect: false,
+  //       companySelect: false,
+  //       next: 184
+  //     },
+  //     {
+  //       name: 'No',
+  //       value: 'b',
+  //       aria_label: 'B',
+  //       candidateSelect: false,
+  //       agencySelect: false,
+  //       companySelect: false,
+  //       next: 185
+  //     }
+  //   ]
+  // },
+  // {
+  //   index: 199,
+  //   heading: 'Worker’s contracts',
+  //   question:
+  //     'Does the contract state the rights to this work belong to your client?',
+  //   p1:
+  //     'This does not include the option to buy the rights for a separate fee.',
+  //   p2: '',
+  //   provious: 160,
+  //   candidateSelect: false,
+  //   angencySelect: false,
+  //   companySelect: false,
+  //   status: false,
+  //   options: [
+  //     {
+  //       name: 'Yes',
+  //       value: 'a',
+  //       aria_label: 'A',
+  //       candidateSelect: false,
+  //       agencySelect: false,
+  //       companySelect: false,
+  //       next: 195
+  //     },
+  //     {
+  //       name: 'No',
+  //       value: 'b',
+  //       aria_label: 'B',
+  //       candidateSelect: false,
+  //       agencySelect: false,
+  //       companySelect: false,
+  //       next: 196
+  //     }
+  //   ]
+  // },
+  // {
+  //   index: 160,
+  //   heading: 'Worker’s contracts',
+  //   question: 'Have you had a previous contract with this client?',
+  //   p1: '',
+  //   p2: '',
+  //   provious: 200,
+  //   candidateSelect: false,
+  //   angencySelect: false,
+  //   companySelect: false,
+  //   status: false,
+  //   options: [
+  //     {
+  //       name: 'Yes',
+  //       value: 'a',
+  //       aria_label: 'A',
+  //       candidateSelect: false,
+  //       agencySelect: false,
+  //       companySelect: false,
+  //       next: 197
+  //     },
+  //     {
+  //       name: 'No',
+  //       value: 'b',
+  //       aria_label: 'B',
+  //       candidateSelect: false,
+  //       agencySelect: false,
+  //       companySelect: false,
+  //       next: 198
+  //     }
+  //   ]
+  // }
 ];
