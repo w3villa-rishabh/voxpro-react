@@ -184,9 +184,14 @@ const AgencyTable = (props) => {
                                 </td>
                               )}
                               {currentUser.role === 'company' && (
-                                <td className="tx-center">
-                                  {ques.company_answer}
-                                </td>
+                                <>
+                                  <td className="tx-center">
+                                    {ques.agency_answer}
+                                  </td>
+                                  <td className="tx-center">
+                                    {ques.company_answer}
+                                  </td>
+                                </>
                               )}
                               <td className="tx-right">
                                 <a
