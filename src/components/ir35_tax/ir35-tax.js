@@ -163,7 +163,7 @@ const IR35TaxComponent = (props) => {
       });
   };
 
-  const updateAnswer = (answer, que) => {
+  const updateAnswer = (answer, que, callback) => {
     console.log('answer', answer);
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
     let updateQuestion = [
@@ -184,13 +184,16 @@ const IR35TaxComponent = (props) => {
       })
       .then((response) => {
         if (response.data.success) {
+          callback(true);
           console.log('updateQuestion', response.data);
           // toast.success(response.data.message);
         } else {
+          callback(false);
           console.log('data');
         }
       })
       .catch(() => {
+        callback(false);
         toast.error('Something went wrong');
       });
   };
@@ -369,7 +372,7 @@ const IR35TaxComponent = (props) => {
                         <Button
                           size="large"
                           variant="contained"
-                          onClick={async () => {
+                          onClick={() => {
                             if (currentUser.role === 'candidate') {
                               question.candidateSelect = true;
                               if (props.nextQuestion === 2) {
@@ -420,8 +423,15 @@ const IR35TaxComponent = (props) => {
                                 updateNewQuestions(question);
                               }
                             } else {
-                              await updateAnswer(question.selectAns, question);
-                              await goBack();
+                              updateAnswer(
+                                question.selectAns,
+                                question,
+                                (res) => {
+                                  if (res) {
+                                    goBack();
+                                  }
+                                }
+                              );
                             }
                           }}
                           className="font-weight-bold btn-slack px-4 my-3 bg-color">
