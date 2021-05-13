@@ -11,11 +11,11 @@ import {
 } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
 import { getCurrentUser } from 'helper';
+import { useHistory } from 'react-router-dom';
 
-export default function AgencyTable() {
-  const location = useLocation();
-  const [currentUser] = useState(getCurrentUser());
+const ActionsApplied = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const location = useLocation();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,6 +24,87 @@ export default function AgencyTable() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const history = useHistory();
+
+  const viewQuery = (query) => {
+    console.log('query', query);
+    history.push('/view-ir35-query');
+  };
+
+  return (
+    <>
+      <div className="d-flex align-items-center justify-content-center flex-wrap">
+        <Button
+          aria-controls="simple-menu"
+          size="small"
+          className="px-4 btn-neutral-primary"
+          variant="contained"
+          aria-haspopup="true"
+          onClick={handleClick}>
+          Action
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          classes={{ list: 'p-0' }}
+          open={Boolean(anchorEl)}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left'
+          }}
+          onClose={handleClose}>
+          <div className="p-3">
+            {location.pathname !== '/ir35-pending' && (
+              <>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Shortlist
+                </MenuItem>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Contact
+                </MenuItem>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Forward
+                </MenuItem>
+              </>
+            )}
+
+            {location.pathname === '/ir35-pending' && (
+              <>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={viewQuery}>
+                  Review
+                </MenuItem>
+                <MenuItem
+                  className="pr-5 px-3 text-primary"
+                  onClick={handleClose}>
+                  Internal Chat
+                </MenuItem>
+              </>
+            )}
+          </div>
+        </Menu>
+      </div>
+    </>
+  );
+};
+
+export default function ViewIr35QuestionsComponent() {
+  const location = useLocation();
+  const [currentUser] = useState(getCurrentUser());
+
   return (
     <>
       <Grid container spacing={2}>
@@ -121,42 +202,7 @@ export default function AgencyTable() {
                         </>
                       )}
                       <td className="text-center">
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
-                          <Button
-                            aria-controls="simple-menu"
-                            size="small"
-                            className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Query
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Accept
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
+                        <ActionsApplied />
                       </td>
                     </tr>
                     <tr>
@@ -202,42 +248,7 @@ export default function AgencyTable() {
                         </>
                       )}
                       <td className="text-center">
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
-                          <Button
-                            aria-controls="simple-menu"
-                            size="small"
-                            className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Query
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Accept
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
+                        <ActionsApplied />
                       </td>
                     </tr>
                     <tr>
@@ -283,42 +294,7 @@ export default function AgencyTable() {
                         </>
                       )}
                       <td className="text-center">
-                        <div className="d-flex align-items-center justify-content-center flex-wrap">
-                          <Button
-                            aria-controls="simple-menu"
-                            size="small"
-                            className="px-4 btn-neutral-primary"
-                            variant="contained"
-                            aria-haspopup="true"
-                            onClick={handleClick}>
-                            Action
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            classes={{ list: 'p-0' }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                            <div className="p-3">
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Follow
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Query
-                              </MenuItem>
-                              <MenuItem
-                                className="pr-5 px-3 text-primary"
-                                onClick={handleClose}>
-                                Accept
-                              </MenuItem>
-                            </div>
-                          </Menu>
-                        </div>
+                        <ActionsApplied />
                       </td>
                     </tr>
                   </tbody>

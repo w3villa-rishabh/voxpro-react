@@ -129,6 +129,11 @@ const AgencyHistory = lazy(() =>
 //Agency enquiry request
 const AgencyEnquiry = lazy(() => import('./components/ir35_tax/agency-query'));
 
+//AgencyPendingQuery
+const AgencyPendingQuery = lazy(() =>
+  import('./components/ir35_tax/view-ir35-questions')
+);
+
 //AgencyNewRequestForInformation
 const AgencyNewRequestForInformation = lazy(() =>
   import('./components/request_information/new-request-agency')
@@ -304,6 +309,7 @@ const Routes = () => {
                 '/candidate-history',
                 '/candidate-enquiries',
                 '/ir35-pending',
+                '/view-ir35-query',
                 '/ir35-history',
                 '/ir35-enquiries',
                 '/request-info',
@@ -343,6 +349,10 @@ const Routes = () => {
                   <Route path="/ir35-pending" component={AgencyPending} />
                   <Route path="/ir35-history" component={AgencyHistory} />
                   <Route path="/ir35-enquiries" component={AgencyEnquiry} />
+                  <Route
+                    path="/view-ir35-query"
+                    component={AgencyPendingQuery}
+                  />
 
                   <Route path="/view-profile" component={Profile} />
 

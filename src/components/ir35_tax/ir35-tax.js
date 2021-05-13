@@ -1,23 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Grid, Button, Radio } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
+import { connect } from 'react-redux';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
+import { toast } from 'react-toastify';
+import ir35Question from './ir35Questions';
+import api from '../../api';
+import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-export default function IR35TaxComponent() {
+import { getIr35QuestionsSuccess } from '../../reducers/ThemeOptions';
+
+const IR35TaxComponent = (props) => {
+  const history = useHistory();
+
   const [activeTab, setActiveTab] = useState('0');
+  const [doSubmit, setDoSubmit] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const location = useLocation();
+  let selectQuestion = '';
 
   const [policyObj, setPolicyObj] = useState({
-    noquestion: 'b',
-    limitedCompany: 'a',
-    organization: 'b',
-    director: 'a',
-    reject: 'a',
-    substitute: 'a',
+    limitedCompany: '',
+    hasContractStarted: true,
+    director: '',
+    reject: '',
+    substitute: '',
+    payYourSubstitute: '',
+    signinficantAmountWork: 'a',
     originallyAgreed: 'a',
     organisationWorkDone: 'a',
-    payment: '',
+    payment: 'a',
     organisationHours: 'a',
     organisationWork: 'a',
     decideWorkingHours: 'a',
@@ -45,7 +61,9 @@ export default function IR35TaxComponent() {
     belongOrganisation: 'a',
     immediately: 'a',
     availableWorking: 'a',
-    months: 'a'
+    months: 'a',
+    ir35Question: ir35Question,
+    noquestion: 'b'
   });
 
   useEffect(() => {
@@ -54,6 +72,19 @@ export default function IR35TaxComponent() {
       $('.app-footer').css('display', 'none');
     }, 0);
   });
+
+  useEffect(() => {
+    const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
+    console.log(location.state);
+    if (!!editQuestion && !!location.state) {
+      const ir35Questions = props.ir35Questions;
+      setPolicyObj({ ...ir35Questions });
+      toggle(editQuestion.activeTab);
+      setEditMode(true);
+    } else {
+      localStorage.removeItem('editQuestion');
+    }
+  }, [props.ir35Questions]);
 
   useEffect(() => {
     // componentWillUnmount
@@ -66,7 +97,20 @@ export default function IR35TaxComponent() {
   }, []);
 
   const toggle = (tab) => {
+    if (parseInt(tab) >= parseInt(activeTab)) {
+      console.log('next tab', tab);
+    } else {
+      policyObj[selectQuestion] = '';
+      setPolicyObj({ ...policyObj });
+      console.log('previous tab', tab);
+    }
     if (activeTab !== tab) setActiveTab(tab);
+  };
+
+  const updateQuestion = (question) => {
+    console.log('updateQuestion', question);
+    selectQuestion = question;
+    return true;
   };
 
   document.addEventListener('keydown', function (event) {
@@ -74,6 +118,35 @@ export default function IR35TaxComponent() {
       setActiveTab('1');
     }
   });
+
+  const submitQuestions = () => {
+    console.log('submitQuestions', policyObj.ir35Question);
+    toast.dismiss();
+    setDoSubmit(true);
+    props.onLoadIr35QuestionsComplete(policyObj);
+    if (editMode) {
+      return history.goBack();
+    }
+    api
+      .post('/api/v1/ir_answers', {
+        ir_answer: JSON.stringify(policyObj)
+      })
+      .then((response) => {
+        setDoSubmit(false);
+        if (response.data.success) {
+          setActiveTab('0');
+          toast.success(response.data.message);
+          console.log('success');
+        } else {
+          toast.error(response.data.message);
+          console.log('not success');
+        }
+      })
+      .catch(() => {
+        setDoSubmit(false);
+        toast.error('Something went wrong');
+      });
+  };
 
   return (
     <div className="ir35-background text-white">
@@ -112,7 +185,7 @@ export default function IR35TaxComponent() {
           </div>
         )}
         {/* //Section 0 */}
-        {policyObj.noquestion != 'a' && (
+        {policyObj.noquestion !== 'a' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '0'
@@ -129,13 +202,13 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('1');
+                  toggle('1');
                 }}
                 className="font-weight-bold btn-slack px-4 bg-color button-width">
                 START
               </Button>
               <p className="fh">
-                Press enter{' '}
+                Press enter
                 <FontAwesomeIcon icon={['fas', 'arrow-up']} className="angle" />
               </p>
               <div className="mt-10 font-weight-bold font-size-xs">
@@ -198,7 +271,7 @@ export default function IR35TaxComponent() {
               <Button
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('2');
+                  toggle('2');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -208,11 +281,7 @@ export default function IR35TaxComponent() {
           </div>
         )}
         {/* //Section 1 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '1'
-          })}
-          index={1}>
+        {activeTab === '1' && updateQuestion('limitedCompany') && (
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
               <h6>About you and the work</h6>
@@ -234,11 +303,21 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.limitedCompany === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, limitedCompany: 'a' });
+                        let obj = policyObj;
+                        obj.limitedCompany = 'a';
+                        obj.ir35Question[0].questions[0] = {
+                          limitedCompany: 'a',
+                          activeTab: activeTab,
+                          question: `Do you provide your services through a limited company,
+                          partnership or unincorporated association?`,
+                          candidateAnswer: 'Yes'
+                        };
+
+                        setPolicyObj({ ...obj });
                       }}
-                      value="b"
+                      value="a"
                       name="radio-button-demo"
-                      aria-label="B"
+                      aria-label="A"
                     />
                     <span className="mt-3 fhh">Yes</span>
                   </li>
@@ -246,7 +325,17 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.limitedCompany === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, limitedCompany: 'b' });
+                        let obj = policyObj;
+                        obj.limitedCompany = 'b';
+                        obj.ir35Question[0].questions[0] = {
+                          activeTab: activeTab,
+                          limitedCompany: 'b',
+                          question: `Do you provide your services through a limited company,
+                          partnership or unincorporated association?`,
+                          candidateAnswer: 'No'
+                        };
+
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -260,21 +349,18 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('2');
+                  toggle('2');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
               </Button>
             </Grid>
           </Grid>
-        </div>
+        )}
         {/* //Section 2 */}
-        {policyObj.limitedCompany === 'a' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '2'
-            })}
-            index={2}>
+        {policyObj.limitedCompany === 'a' &&
+          activeTab === '2' &&
+          updateQuestion('hasContractStarted') && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h6>About you and the work</h6>
@@ -283,11 +369,21 @@ export default function IR35TaxComponent() {
                   <ul>
                     <li>
                       <Radio
-                        checked={policyObj.organization === 'a'}
+                        checked={policyObj.hasContractStarted === true}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, organization: 'a' });
+                          // setPolicyObj({ ...policyObj, hasContractStarted: 'a' });
+                          let obj = policyObj;
+                          obj.hasContractStarted = true;
+                          obj.ir35Question[0].questions[1] = {
+                            activeTab: activeTab,
+                            hasContractStarted: true,
+                            question: `Have you already started working for this client?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
-                        value="a"
+                        value={true}
                         name="radio-button-demo"
                         aria-label="A"
                       />
@@ -295,11 +391,21 @@ export default function IR35TaxComponent() {
                     </li>
                     <li>
                       <Radio
-                        checked={policyObj.organization === 'b'}
+                        checked={policyObj.hasContractStarted === false}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, organization: 'b' });
+                          // setPolicyObj({ ...policyObj, hasContractStarted: 'b' });
+                          let obj = policyObj;
+                          obj.hasContractStarted = false;
+                          obj.ir35Question[0].questions[1] = {
+                            activeTab: activeTab,
+                            hasContractStarted: false,
+                            question: `Have you already started working for this client?`,
+                            candidateAnswer: 'No'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
-                        value="b"
+                        value={false}
                         name="radio-button-demo"
                         aria-label="B"
                       />
@@ -311,35 +417,30 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('3');
+                    toggle('3');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* section 2A */}
-        {policyObj.limitedCompany === 'b' && (
-          <div
-            className={clsx('tab-item-wrapper no-scroll', {
-              active: activeTab === '2'
-            })}
-            index={2}>
+        {policyObj.limitedCompany === 'b' &&
+          activeTab === '2' &&
+          updateQuestion('limitedCompany') && (
             <Grid container spacing={1} className="pt-3">
               <Grid item xs={12}>
                 <h4>You need to start again</h4>
                 <div className="text-f">
                   <p>
-                    The{' '}
+                    The
                     <a
                       href="https://www.gov.uk/guidance/understanding-off-payroll-working-ir35"
                       style={{ color: 'blue' }}
                       target="_blank">
-                      {' '}
-                      off-payroll working rules (IR35) (opens in a new window){' '}
-                    </a>{' '}
+                      off-payroll working rules (IR35) (opens in a new window)
+                    </a>
                     can only apply if you are providing your services through an
                     intermediary.
                   </p>
@@ -356,21 +457,27 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('0');
+                    let obj = policyObj;
+                    obj.limitedCompany = 'a';
+                    obj.ir35Question[0].questions = [];
+                    obj.ir35Question[0].questions[0] = {
+                      activeTab: '0',
+                      limitedCompany: 'a',
+                      question: `Do you provide your services through a limited company,
+                      partnership or unincorporated association?`,
+                      candidateAnswer: 'Yes'
+                    };
+                    setPolicyObj({ ...obj });
+                    toggle('0');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Start Again
                 </Button>
               </Grid>
             </Grid>
-          </div>
-        )}
+          )}
         {/* Section 3 */}
-        <div
-          className={clsx('tab-item-wrapper no-scroll', {
-            active: activeTab === '3'
-          })}
-          index={3}>
+        {activeTab === '3' && updateQuestion('director') && (
           <Grid container spacing={1} className="pt-3">
             <Grid item xs={12}>
               <h6>Worker’s duties</h6>
@@ -387,7 +494,17 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.director === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, director: 'a' });
+                        // setPolicyObj({ ...policyObj, director: 'a' });
+                        let obj = policyObj;
+                        obj.director = 'a';
+                        obj.ir35Question[1].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Will you be an ‘Office Holder’?`,
+                          candidateAnswer: 'Yes',
+                          director: 'a'
+                        };
+
+                        setPolicyObj({ ...obj });
                       }}
                       value="a"
                       name="radio-button-demo"
@@ -399,7 +516,17 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.director === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, director: 'b' });
+                        // setPolicyObj({ ...policyObj, director: 'b' });
+                        let obj = policyObj;
+                        obj.director = 'b';
+                        obj.ir35Question[1].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Will you be an ‘Office Holder’?`,
+                          candidateAnswer: 'No',
+                          director: 'b'
+                        };
+
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -413,16 +540,16 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('4');
+                  toggle('4');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
               </Button>
             </Grid>
           </Grid>
-        </div>
+        )}
         {/* Section 4 */}
-        {policyObj.organization === 'a' && policyObj.director === 'b' && (
+        {policyObj.hasContractStarted === true && policyObj.director === 'b' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '4'
@@ -444,11 +571,21 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.substitute === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, substitute: 'a' });
+                          // setPolicyObj({ ...policyObj, substitute: 'a' });
+                          let obj = policyObj;
+                          obj.substitute = 'a';
+                          obj.ir35Question[2].questions[0] = {
+                            activeTab: activeTab,
+                            substitute: 'a',
+                            question: `Have you ever sent a substitute to do this work?`,
+                            candidateAnswer: 'Yes, your client accepted them'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
-                        value="b"
+                        value="a"
                         name="radio-button-demo"
-                        aria-label="B"
+                        aria-label="A"
                       />
                       <span className="mt-3 fhh">
                         Yes, your client accepted them
@@ -458,7 +595,18 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.substitute === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, substitute: 'b' });
+                          // setPolicyObj({ ...policyObj, substitute: 'b' });
+                          let obj = policyObj;
+                          obj.substitute = 'b';
+                          obj.ir35Question[2].questions[0] = {
+                            activeTab: activeTab,
+                            substitute: 'b',
+                            question: `Have you ever sent a substitute to do this work?`,
+                            candidateAnswer:
+                              'Yes, but your client did not accept them'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -472,11 +620,20 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.substitute === 'c'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, substitute: 'c' });
+                          // setPolicyObj({ ...policyObj, substitute: 'c' });
+                          let obj = policyObj;
+                          obj.substitute = 'c';
+                          obj.ir35Question[2].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Have you ever sent a substitute to do this work?`,
+                            candidateAnswer: 'No, it has not happened'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
-                        value="b"
+                        value="c"
                         name="radio-button-demo"
-                        aria-label="B"
+                        aria-label="C"
                       />
                       <span className="mt-3 fhh">No, it has not happened</span>
                     </li>
@@ -486,7 +643,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('5');
+                    toggle('5');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -497,7 +654,7 @@ export default function IR35TaxComponent() {
         )}
 
         {/* Section 4A */}
-        {policyObj.organization === 'b' && policyObj.director === 'b' && (
+        {policyObj.hasContractStarted === false && policyObj.director === 'b' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '4'
@@ -524,11 +681,20 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.reject === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, reject: 'a' });
+                          // setPolicyObj({ ...policyObj, reject: 'a' });
+                          let obj = policyObj;
+                          obj.reject = 'a';
+                          obj.ir35Question[2].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to reject a substitute?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
-                        value="b"
+                        value="a"
                         name="radio-button-demo"
-                        aria-label="B"
+                        aria-label="A"
                       />
                       <span className="mt-3 fhh">Yes</span>
                     </li>
@@ -536,7 +702,15 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.reject === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, reject: 'b' });
+                          // setPolicyObj({ ...policyObj, reject: 'b' });
+                          let obj = policyObj;
+                          obj.reject = 'b';
+                          obj.ir35Question[2].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to reject a substitute?`,
+                            candidateAnswer: 'No'
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -550,7 +724,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('5');
+                    toggle('5');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -580,7 +754,7 @@ export default function IR35TaxComponent() {
                 size="medium"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('1');
+                  toggle('1');
                 }}
                 className="font-weight-bold btn-slack px-4 bg-color button-width">
                 Go to dashboard
@@ -589,8 +763,235 @@ export default function IR35TaxComponent() {
             </div>
           </div>
         )}
-        {/* Section 5 */}
-        {policyObj.reject === 'a' && (
+        {/* section 5 */}
+        {policyObj.substitute === 'a' && policyObj.reject === '' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '5'
+            })}
+            index={5}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Substitutes and helpers</h6>
+                <h4>Did you pay your substitute?</h4>
+                <div className="text-f">
+                  <span>
+                    This includes payments made by you or your business.
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.payYourSubstitute === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payYourSubstitute: 'a' });
+                          let obj = policyObj;
+                          obj.payYourSubstitute = 'a';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Did you pay your substitute?`,
+                            candidateAnswer: 'Yes'
+                          };
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.payYourSubstitute === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payYourSubstitute: 'b' });
+                          let obj = policyObj;
+                          obj.payYourSubstitute = 'b';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Did you pay your substitute?`,
+                            candidateAnswer: 'No'
+                          };
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('6');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+        {/* section 5b*/}
+        {policyObj.substitute === 'b' && policyObj.reject === '' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '5'
+            })}
+            index={5}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Substitutes and helpers</h6>
+                <h4>
+                  Have you paid another person to do a significant amount of
+                  work?
+                </h4>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.signinficantAmountWork === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payment: 'a' });
+                          let obj = policyObj;
+                          obj.signinficantAmountWork = 'a';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: ` Have you paid another person to do a significant amount of
+                            work?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.signinficantAmountWork === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, payment: 'b' });
+                          let obj = policyObj;
+                          obj.signinficantAmountWork = 'b';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: ` Have you paid another person to do a significant amount of
+                            work?`,
+                            candidateAnswer: 'No'
+                          };
+
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('6');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+        {/* section 5c*/}
+        {policyObj.substitute === 'b' && policyObj.reject === '' && (
+          <div
+            className={clsx('tab-item-wrapper no-scroll', {
+              active: activeTab === '5'
+            })}
+            index={5}>
+            <Grid container spacing={1} className="pt-3">
+              <Grid item xs={12}>
+                <h6>Substitutes and helpers</h6>
+                <h4>Does your client have the right to reject a substitute?</h4>
+                <div className="text-f">
+                  <span>
+                    A substitute is someone the worker sends in their place to
+                    do their role.
+                  </span>
+                  <span>
+                    This can include rejecting a substitute even if they are
+                    equally qualified, and meet your interviewing, vetting and
+                    security clearance procedures.
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    <li>
+                      <Radio
+                        checked={policyObj.reject === 'a'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, reject: 'a' });
+                          let obj = policyObj;
+                          obj.reject = 'a';
+                          obj.ir35Question[2].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to reject a substitute?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="a"
+                        name="radio-button-demo"
+                        aria-label="A"
+                      />
+                      <span className="mt-3 fhh">Yes</span>
+                    </li>
+                    <li>
+                      <Radio
+                        checked={policyObj.reject === 'b'}
+                        onChange={() => {
+                          // setPolicyObj({ ...policyObj, reject: 'b' });
+                          let obj = policyObj;
+                          obj.reject = 'b';
+                          obj.ir35Question[2].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to reject a substitute?`,
+                            candidateAnswer: 'No'
+                          };
+                          setPolicyObj({ ...obj });
+                        }}
+                        value="b"
+                        name="radio-button-demo"
+                        aria-label="B"
+                      />
+                      <span className="mt-3 fhh">No</span>
+                    </li>
+                  </ul>
+                </div>
+                <Button
+                  size="large"
+                  variant="contained"
+                  onClick={() => {
+                    toggle('6');
+                  }}
+                  className="font-weight-bold btn-slack px-4 my-3 bg-color">
+                  Continue
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+        {/* Section 5d */}
+        {policyObj.reject === 'a' && policyObj.substitute === '' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '5'
@@ -613,14 +1014,13 @@ export default function IR35TaxComponent() {
                 </div>
                 <div className="text-f">
                   <span>
-                    Read more examples about the client’s control over{' '}
+                    Read more examples about the client’s control over
                     <a
                       href="https://www.gov.uk/hmrc-internal-manuals/employment-status-manual/esm0521"
                       style={{ color: 'blue' }}
                       target="_blank">
-                      {' '}
-                      what the worker does (opens in a new window).{' '}
-                    </a>{' '}
+                      what the worker does (opens in a new window).
+                    </a>
                   </span>
                 </div>
                 <div>
@@ -629,11 +1029,20 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.originallyAgreed === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'a' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'a';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: 'Yes'
+                          };
+                          setPolicyObj({ ...obj });
                         }}
-                        value="b"
+                        value="a"
                         name="radio-button-demo"
-                        aria-label="B"
+                        aria-label="A"
                       />
                       <span className="mt-3 fhh">Yes</span>
                     </li>
@@ -641,7 +1050,15 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.originallyAgreed === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'b' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'b';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: 'No, you would have to agree'
+                          };
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -655,11 +1072,21 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.originallyAgreed === 'c'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, originallyAgreed: 'c' });
+                          // setPolicyObj({ ...policyObj, originallyAgreed: 'c' });
+                          let obj = policyObj;
+                          obj.originallyAgreed = 'c';
+                          obj.ir35Question[3].questions[0] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to move you from the task you
+                            originally agreed to do?`,
+                            candidateAnswer: `No, that would require a new contract or formal working
+                              arrangement`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
-                        value="b"
+                        value="c"
                         name="radio-button-demo"
-                        aria-label="B"
+                        aria-label="C"
                       />
                       <span className="mt-3 fhh">
                         No, that would require a new contract or formal working
@@ -672,7 +1099,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('6');
+                    toggle('6');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -681,8 +1108,8 @@ export default function IR35TaxComponent() {
             </Grid>
           </div>
         )}
-        {/* section 5a */}
-        {policyObj.reject === 'b' && (
+        {/* section 5b */}
+        {policyObj.reject === 'b' && policyObj.substitute === '' && (
           <div
             className={clsx('tab-item-wrapper no-scroll', {
               active: activeTab === '5'
@@ -703,7 +1130,16 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.payment === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, payment: 'a' });
+                          // setPolicyObj({ ...policyObj, payment: 'a' });
+                          let obj = policyObj;
+                          obj.payment = 'a';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: `Would you have to pay your substitute?`,
+                            candidateAnswer: 'Yes'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -715,7 +1151,16 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.payment === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, payment: 'b' });
+                          // setPolicyObj({ ...policyObj, payment: 'b' });
+                          let obj = policyObj;
+                          obj.payment = 'b';
+                          obj.ir35Question[2].questions[2] = {
+                            activeTab: activeTab,
+                            question: `Would you have to pay your substitute?`,
+                            candidateAnswer: 'No'
+                          };
+
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -729,7 +1174,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('6');
+                    toggle('6');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -738,6 +1183,7 @@ export default function IR35TaxComponent() {
             </Grid>
           </div>
         )}
+
         {/* Section 6 */}
         {(policyObj.originallyAgreed === 'a' ||
           policyObj.originallyAgreed === 'b' ||
@@ -775,10 +1221,19 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.organisationWorkDone === 'a'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            organisationWorkDone: 'a'
-                          });
+                          let obj = policyObj;
+                          obj.organisationWorkDone = 'a';
+                          obj.ir35Question[3].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to decide how the work is
+                            done?`,
+                            candidateAnswer: `Yes`
+                          };
+                          setPolicyObj({ ...obj });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   organisationWorkDone: 'a'
+                          // });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -790,10 +1245,19 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.organisationWorkDone === 'b'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            organisationWorkDone: 'b'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   organisationWorkDone: 'b'
+                          // });
+                          let obj = policyObj;
+                          obj.organisationWorkDone = 'b';
+                          obj.ir35Question[3].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to decide how the work is
+                            done?`,
+                            candidateAnswer: `No, you solely decide`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -805,10 +1269,19 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.organisationWorkDone === 'c'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            organisationWorkDone: 'c'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   organisationWorkDone: 'c'
+                          // });
+                          let obj = policyObj;
+                          obj.organisationWorkDone = 'c';
+                          obj.ir35Question[3].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to decide how the work is
+                            done?`,
+                            candidateAnswer: ` No, you and your client agree together`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -822,10 +1295,19 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.organisationWorkDone === 'd'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            organisationWorkDone: 'd'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   organisationWorkDone: 'd'
+                          // });
+                          let obj = policyObj;
+                          obj.organisationWorkDone = 'd';
+                          obj.ir35Question[3].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Does your client have the right to decide how the work is
+                            done?`,
+                            candidateAnswer: `Not relevant, it is highly skilled work`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -841,7 +1323,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('7');
+                    toggle('7');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -868,7 +1350,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWorkingHours === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, decideWorkingHours: 'a' });
+                        // setPolicyObj({ ...policyObj, decideWorkingHours: 'a' });
+                        let obj = policyObj;
+                        obj.decideWorkingHours = 'a';
+                        obj.ir35Question[3].questions[2] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide your working hours?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -880,7 +1370,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWorkingHours === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, decideWorkingHours: 'b' });
+                        // setPolicyObj({ ...policyObj, decideWorkingHours: 'b' });
+                        let obj = policyObj;
+                        obj.decideWorkingHours = 'b';
+                        obj.ir35Question[3].questions[2] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide your working hours?`,
+                          candidateAnswer: `No, you solely decide`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -892,7 +1390,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWorkingHours === 'c'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, decideWorkingHours: 'c' });
+                        // setPolicyObj({ ...policyObj, decideWorkingHours: 'c' });
+                        let obj = policyObj;
+                        obj.decideWorkingHours = 'c';
+                        obj.ir35Question[3].questions[2] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide your working hours?`,
+                          candidateAnswer: `No, you and your client agree`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -906,7 +1412,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWorkingHours === 'd'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, decideWorkingHours: 'd' });
+                        // setPolicyObj({ ...policyObj, decideWorkingHours: 'd' });
+                        let obj = policyObj;
+                        obj.decideWorkingHours = 'd';
+                        obj.ir35Question[3].questions[2] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide your working hours?`,
+                          candidateAnswer: `No, the work is based on agreed deadlines`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -922,7 +1436,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('8');
+                  toggle('8');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -949,10 +1463,18 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWhereWorkIsDone === 'a'}
                       onChange={() => {
-                        setPolicyObj({
-                          ...policyObj,
-                          decideWhereWorkIsDone: 'a'
-                        });
+                        // setPolicyObj({
+                        //   ...policyObj,
+                        //   decideWhereWorkIsDone: 'a'
+                        // });
+                        let obj = policyObj;
+                        obj.decideWhereWorkIsDone = 'a';
+                        obj.ir35Question[3].questions[3] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide where you do the work?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -964,10 +1486,18 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWhereWorkIsDone === 'b'}
                       onChange={() => {
-                        setPolicyObj({
-                          ...policyObj,
-                          decideWhereWorkIsDone: 'b'
-                        });
+                        // setPolicyObj({
+                        //   ...policyObj,
+                        //   decideWhereWorkIsDone: 'b'
+                        // });
+                        let obj = policyObj;
+                        obj.decideWhereWorkIsDone = 'b';
+                        obj.ir35Question[3].questions[3] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide where you do the work?`,
+                          candidateAnswer: `No, you solely decide`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -979,10 +1509,18 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWhereWorkIsDone === 'c'}
                       onChange={() => {
-                        setPolicyObj({
-                          ...policyObj,
-                          decideWhereWorkIsDone: 'c'
-                        });
+                        // setPolicyObj({
+                        //   ...policyObj,
+                        //   decideWhereWorkIsDone: 'c'
+                        // });
+                        let obj = policyObj;
+                        obj.decideWhereWorkIsDone = 'c';
+                        obj.ir35Question[3].questions[3] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide where you do the work?`,
+                          candidateAnswer: `No, the task sets the location`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -996,10 +1534,19 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.decideWhereWorkIsDone === 'd'}
                       onChange={() => {
-                        setPolicyObj({
-                          ...policyObj,
-                          decideWhereWorkIsDone: 'd'
-                        });
+                        // setPolicyObj({
+                        //   ...policyObj,
+                        //   decideWhereWorkIsDone: 'd'
+                        // });
+                        let obj = policyObj;
+                        obj.decideWhereWorkIsDone = 'd';
+                        obj.ir35Question[3].questions[3] = {
+                          activeTab: activeTab,
+                          question: `Does your client have the right to decide where you do the work?`,
+                          candidateAnswer: `No, some work has to be done in an agreed location and
+                              some can be your choice`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1016,7 +1563,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('9');
+                  toggle('9');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1053,7 +1600,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.equipmentCosts === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, equipmentCosts: 'a' });
+                        // setPolicyObj({ ...policyObj, equipmentCosts: 'a' });
+                        let obj = policyObj;
+                        obj.equipmentCosts = 'a';
+                        obj.ir35Question[4].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Will you have to buy equipment
+                             before your client pays you?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1065,7 +1621,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.equipmentCosts === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, equipmentCosts: 'b' });
+                        // setPolicyObj({ ...policyObj, equipmentCosts: 'b' });
+                        let obj = policyObj;
+                        obj.equipmentCosts = 'b';
+                        obj.ir35Question[4].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Will you have to buy equipment
+                             before your client pays you?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1079,7 +1644,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('10');
+                  toggle('10');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1114,7 +1679,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.vehicleCost === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, vehicleCost: 'a' });
+                        // setPolicyObj({ ...policyObj, vehicleCost: 'a' });
+                        let obj = policyObj;
+                        obj.vehicleCost = 'a';
+                        obj.ir35Question[4].questions[1] = {
+                          activeTab: activeTab,
+                          question: ` Will you have to fund any vehicle costs before your
+                          client pays you?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1126,7 +1700,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.vehicleCost === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, vehicleCost: 'b' });
+                        // setPolicyObj({ ...policyObj, vehicleCost: 'b' });
+                        let obj = policyObj;
+                        obj.vehicleCost = 'b';
+                        obj.ir35Question[4].questions[1] = {
+                          activeTab: activeTab,
+                          question: ` Will you have to fund any vehicle costs before your
+                          client pays you?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1140,7 +1723,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('11');
+                  toggle('11');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1178,7 +1761,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.materialCost === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, materialCost: 'a' });
+                        // setPolicyObj({ ...policyObj, materialCost: 'a' });
+                        let obj = policyObj;
+                        obj.materialCost = 'a';
+                        obj.ir35Question[4].questions[2] = {
+                          activeTab: activeTab,
+                          question: `Will you have to buy materials before your client pays you?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1190,7 +1781,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.materialCost === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, materialCost: 'b' });
+                        // setPolicyObj({ ...policyObj, materialCost: 'b' });
+                        let obj = policyObj;
+                        obj.materialCost = 'b';
+                        obj.ir35Question[4].questions[2] = {
+                          activeTab: activeTab,
+                          question: `Will you have to buy materials before your client pays you?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1204,7 +1803,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('12');
+                  toggle('12');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1238,7 +1837,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.otherCost === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, otherCost: 'a' });
+                        // setPolicyObj({ ...policyObj, otherCost: 'a' });
+                        let obj = policyObj;
+                        obj.otherCost = 'a';
+                        obj.ir35Question[4].questions[3] = {
+                          activeTab: activeTab,
+                          question: `Will you have to fund any other costs before your client
+                            pays you?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1250,7 +1858,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.otherCost === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, otherCost: 'b' });
+                        // setPolicyObj({ ...policyObj, otherCost: 'b' });
+                        let obj = policyObj;
+                        obj.otherCost = 'b';
+                        obj.ir35Question[4].questions[3] = {
+                          activeTab: activeTab,
+                          question: `Will you have to fund any other costs before your client
+                            pays you?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1264,7 +1881,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('13');
+                  toggle('13');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1289,7 +1906,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.howWorkerIsPaid === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'a' });
+                        // setPolicyObj({ ...policyObj, howWorkerIsPaid: 'a' });
+                        let obj = policyObj;
+                        obj.howWorkerIsPaid = 'a';
+                        obj.ir35Question[4].questions[4] = {
+                          activeTab: activeTab,
+                          question: `How will you be paid for this work?`,
+                          candidateAnswer: `An hourly, daily or weekly rate`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1303,7 +1928,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.howWorkerIsPaid === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'b' });
+                        // setPolicyObj({ ...policyObj, howWorkerIsPaid: 'b' });
+                        let obj = policyObj;
+                        obj.howWorkerIsPaid = 'b';
+                        obj.ir35Question[4].questions[4] = {
+                          activeTab: activeTab,
+                          question: `How will you be paid for this work?`,
+                          candidateAnswer: `A fixed price for the project`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1317,7 +1950,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.howWorkerIsPaid === 'c'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'c' });
+                        // setPolicyObj({ ...policyObj, howWorkerIsPaid: 'c' });
+                        let obj = policyObj;
+                        obj.howWorkerIsPaid = 'c';
+                        obj.ir35Question[4].questions[4] = {
+                          activeTab: activeTab,
+                          question: `How will you be paid for this work?`,
+                          candidateAnswer: `A fixed amount for each piece of work completed`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1331,7 +1972,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.howWorkerIsPaid === 'd'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'd' });
+                        // setPolicyObj({ ...policyObj, howWorkerIsPaid: 'd' });
+                        let obj = policyObj;
+                        obj.howWorkerIsPaid = 'd';
+                        obj.ir35Question[4].questions[4] = {
+                          activeTab: activeTab,
+                          question: `How will you be paid for this work?`,
+                          candidateAnswer: `A percentage of the sales you generate`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1345,7 +1994,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.howWorkerIsPaid === 'e'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, howWorkerIsPaid: 'e' });
+                        // setPolicyObj({ ...policyObj, howWorkerIsPaid: 'e' });
+                        let obj = policyObj;
+                        obj.howWorkerIsPaid = 'e';
+                        obj.ir35Question[4].questions[4] = {
+                          activeTab: activeTab,
+                          question: `How will you be paid for this work?`,
+                          candidateAnswer: `A percentage of your client’s profits or savings`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1361,7 +2018,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('14');
+                  toggle('14');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1389,7 +2046,17 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.putWorkRight === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, putWorkRight: 'a' });
+                        // setPolicyObj({ ...policyObj, putWorkRight: 'a' });
+                        let obj = policyObj;
+                        obj.putWorkRight = 'a';
+                        obj.ir35Question[4].questions[5] = {
+                          activeTab: activeTab,
+                          question: `If the client was not happy with your work, would you
+                            have to put it right?`,
+                          candidateAnswer: `Yes, unpaid and you would have extra costs that your
+                              client would not pay for`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1404,7 +2071,17 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.putWorkRight === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                        // setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                        let obj = policyObj;
+                        obj.putWorkRight = 'b';
+                        obj.ir35Question[4].questions[5] = {
+                          activeTab: activeTab,
+                          question: `If the client was not happy with your work, would you
+                            have to put it right?`,
+                          candidateAnswer: `Yes, unpaid but your only cost would be losing the
+                              opportunity to do other work`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1417,9 +2094,19 @@ export default function IR35TaxComponent() {
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.putWorkRight === 'b'}
+                      checked={policyObj.putWorkRight === 'c'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                        // setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                        let obj = policyObj;
+                        obj.putWorkRight = 'c';
+                        obj.ir35Question[4].questions[5] = {
+                          activeTab: activeTab,
+                          question: `If the client was not happy with your work, would you
+                            have to put it right?`,
+                          candidateAnswer: `Yes, you would fix it in your usual hours at your usual
+                              rate or fee`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1432,9 +2119,18 @@ export default function IR35TaxComponent() {
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.putWorkRight === 'b'}
+                      checked={policyObj.putWorkRight === 'e'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                        // setPolicyObj({ ...policyObj, putWorkRight: 'b' });
+                        let obj = policyObj;
+                        obj.putWorkRight = 'e';
+                        obj.ir35Question[4].questions[5] = {
+                          activeTab: activeTab,
+                          question: `If the client was not happy with your work, would you
+                            have to put it right?`,
+                          candidateAnswer: `No, the work is time-specific or for a single event`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1446,9 +2142,18 @@ export default function IR35TaxComponent() {
                   </li>
                   <li>
                     <Radio
-                      checked={policyObj.putWorkRight === 'e'}
+                      checked={policyObj.putWorkRight === 'f'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, putWorkRight: 'e' });
+                        // setPolicyObj({ ...policyObj, putWorkRight: 'e' });
+                        let obj = policyObj;
+                        obj.putWorkRight = 'f';
+                        obj.ir35Question[4].questions[5] = {
+                          activeTab: activeTab,
+                          question: `If the client was not happy with your work, would you
+                            have to put it right?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1462,7 +2167,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('15');
+                  toggle('15');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1495,7 +2200,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.corporateBenefits === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
+                        // setPolicyObj({ ...policyObj, corporateBenefits: 'a' });
+                        let obj = policyObj;
+                        obj.corporateBenefits = 'a';
+                        obj.ir35Question[5].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Will your client provide you with paid-for corporate benefits?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1507,7 +2220,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.corporateBenefits === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
+                        // setPolicyObj({ ...policyObj, corporateBenefits: 'b' });
+                        let obj = policyObj;
+                        obj.corporateBenefits = 'b';
+                        obj.ir35Question[5].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Will your client provide you with paid-for corporate benefits?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1521,7 +2242,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('16');
+                  toggle('16');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1553,10 +2274,18 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.managementResponsibilities === 'a'}
                       onChange={() => {
-                        setPolicyObj({
-                          ...policyObj,
-                          managementResponsibilities: 'a'
-                        });
+                        // setPolicyObj({
+                        //   ...policyObj,
+                        //   managementResponsibilities: 'a'
+                        // });
+                        let obj = policyObj;
+                        obj.managementResponsibilities = 'a';
+                        obj.ir35Question[5].questions[1] = {
+                          activeTab: activeTab,
+                          question: `Will you have any management responsibilities for your client?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1568,10 +2297,18 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.managementResponsibilities === 'b'}
                       onChange={() => {
-                        setPolicyObj({
-                          ...policyObj,
-                          managementResponsibilities: 'b'
-                        });
+                        // setPolicyObj({
+                        //   ...policyObj,
+                        //   managementResponsibilities: 'b'
+                        // });
+                        let obj = policyObj;
+                        obj.managementResponsibilities = 'b';
+                        obj.ir35Question[5].questions[1] = {
+                          activeTab: activeTab,
+                          question: `Will you have any management responsibilities for your client?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1585,7 +2322,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('17');
+                  toggle('17');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1612,7 +2349,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.introduceWorker === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, introduceWorker: 'a' });
+                        // setPolicyObj({ ...policyObj, introduceWorker: 'a' });
+                        let obj = policyObj;
+                        obj.introduceWorker = 'a';
+                        obj.ir35Question[5].questions[2] = {
+                          activeTab: activeTab,
+                          question: `How would you introduce yourself to your client’s consumers or
+                            suppliers?`,
+                          candidateAnswer: `You work for your client`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1624,7 +2370,17 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.introduceWorker === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, introduceWorker: 'b' });
+                        // setPolicyObj({ ...policyObj, introduceWorker: 'b' });
+                        let obj = policyObj;
+                        obj.introduceWorker = 'b';
+                        obj.ir35Question[5].questions[2] = {
+                          activeTab: activeTab,
+                          question: `How would you introduce yourself to your client’s consumers or
+                            suppliers?`,
+                          candidateAnswer: `You are an independent worker acting on your client’s
+                              behalf`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1639,7 +2395,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.introduceWorker === 'c'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, introduceWorker: 'c' });
+                        // setPolicyObj({ ...policyObj, introduceWorker: 'c' });
+                        let obj = policyObj;
+                        obj.introduceWorker = 'c';
+                        obj.ir35Question[5].questions[2] = {
+                          activeTab: activeTab,
+                          question: `How would you introduce yourself to your client’s consumers or
+                            suppliers?`,
+                          candidateAnswer: `You work for your own business`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1653,7 +2418,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.introduceWorker === 'd'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, introduceWorker: 'd' });
+                        // setPolicyObj({ ...policyObj, introduceWorker: 'd' });
+                        let obj = policyObj;
+                        obj.introduceWorker = 'c';
+                        obj.ir35Question[5].questions[2] = {
+                          activeTab: activeTab,
+                          question: `How would you introduce yourself to your client’s consumers or
+                            suppliers?`,
+                          candidateAnswer: `This would not happen`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1667,7 +2441,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('18');
+                  toggle('18');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1697,7 +2471,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.noSimilarWork === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, noSimilarWork: 'a' });
+                        // setPolicyObj({ ...policyObj, noSimilarWork: 'a' });
+                        let obj = policyObj;
+                        obj.noSimilarWork = 'a';
+                        obj.ir35Question[6].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Does this contract stop you from doing similar work for other
+                            clients?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1709,7 +2492,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.noSimilarWork === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, noSimilarWork: 'b' });
+                        // setPolicyObj({ ...policyObj, noSimilarWork: 'b' });
+                        let obj = policyObj;
+                        obj.noSimilarWork = 'b';
+                        obj.ir35Question[6].questions[0] = {
+                          activeTab: activeTab,
+                          question: `Does this contract stop you from doing similar work for other
+                            clients?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -1723,7 +2515,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('19');
+                  toggle('19');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -1758,10 +2550,18 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.ownership === 'a'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            ownership: 'a'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   ownership: 'a'
+                          // });
+                          let obj = policyObj;
+                          obj.ownership = 'a';
+                          obj.ir35Question[6].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Are there any ownership rights relating to this contract?`,
+                            candidateAnswer: `Yes`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -1773,10 +2573,18 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.ownership === 'b'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            ownership: 'b'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   ownership: 'b'
+                          // });
+                          let obj = policyObj;
+                          obj.ownership = 'b';
+                          obj.ir35Question[6].questions[1] = {
+                            activeTab: activeTab,
+                            question: `Are there any ownership rights relating to this contract?`,
+                            candidateAnswer: `No`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -1790,7 +2598,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('20');
+                    toggle('20');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -1818,10 +2626,18 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.needPermission === 'a'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            needPermission: 'a'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   needPermission: 'a'
+                          // });
+                          let obj = policyObj;
+                          obj.needPermission = 'a';
+                          obj.ir35Question[6].questions[2] = {
+                            activeTab: activeTab,
+                            question: `Are you required to ask permission to work for other clients?`,
+                            candidateAnswer: `Yes`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -1833,10 +2649,18 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.needPermission === 'b'}
                         onChange={() => {
-                          setPolicyObj({
-                            ...policyObj,
-                            needPermission: 'b'
-                          });
+                          // setPolicyObj({
+                          //   ...policyObj,
+                          //   needPermission: 'b'
+                          // });
+                          let obj = policyObj;
+                          obj.needPermission = 'b';
+                          obj.ir35Question[6].questions[2] = {
+                            activeTab: activeTab,
+                            question: `Are you required to ask permission to work for other clients?`,
+                            candidateAnswer: `No`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -1850,7 +2674,7 @@ export default function IR35TaxComponent() {
                   size="large"
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('20');
+                    toggle('20');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -1888,10 +2712,18 @@ export default function IR35TaxComponent() {
                         <Radio
                           checked={policyObj.ownership === 'a'}
                           onChange={() => {
-                            setPolicyObj({
-                              ...policyObj,
-                              ownership: 'a'
-                            });
+                            // setPolicyObj({
+                            //   ...policyObj,
+                            //   ownership: 'a'
+                            // });
+                            let obj = policyObj;
+                            obj.ownership = 'a';
+                            obj.ir35Question[6].questions[3] = {
+                              activeTab: activeTab,
+                              question: `Are there any ownership rights relating to this contract?`,
+                              candidateAnswer: `Yes`
+                            };
+                            setPolicyObj({ ...obj });
                           }}
                           value="b"
                           name="radio-button-demo"
@@ -1903,10 +2735,18 @@ export default function IR35TaxComponent() {
                         <Radio
                           checked={policyObj.ownership === 'b'}
                           onChange={() => {
-                            setPolicyObj({
-                              ...policyObj,
-                              ownership: 'b'
-                            });
+                            // setPolicyObj({
+                            //   ...policyObj,
+                            //   ownership: 'b'
+                            // });
+                            let obj = policyObj;
+                            obj.ownership = 'b';
+                            obj.ir35Question[6].questions[3] = {
+                              activeTab: activeTab,
+                              question: `Are there any ownership rights relating to this contract?`,
+                              candidateAnswer: `No`
+                            };
+                            setPolicyObj({ ...obj });
                           }}
                           value="b"
                           name="radio-button-demo"
@@ -1920,7 +2760,7 @@ export default function IR35TaxComponent() {
                     size="large"
                     variant="contained"
                     onClick={() => {
-                      setActiveTab('20');
+                      toggle('20');
                     }}
                     className="font-weight-bold btn-slack px-4 my-3 bg-color">
                     Continue
@@ -1956,7 +2796,16 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.clientOwnsRights === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, clientOwnsRights: 'a' });
+                          // setPolicyObj({ ...policyObj, clientOwnsRights: 'a' });
+                          let obj = policyObj;
+                          obj.clientOwnsRights = 'a';
+                          obj.ir35Question[6].questions[4] = {
+                            activeTab: activeTab,
+                            question: `Does the contract state the rights to this work belong to your
+                              client?`,
+                            candidateAnswer: `Yes`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -1968,7 +2817,16 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.clientOwnsRights === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, clientOwnsRights: 'b' });
+                          // setPolicyObj({ ...policyObj, clientOwnsRights: 'b' });
+                          let obj = policyObj;
+                          obj.clientOwnsRights = 'b';
+                          obj.ir35Question[6].questions[4] = {
+                            activeTab: activeTab,
+                            question: `Does the contract state the rights to this work belong to your
+                              client?`,
+                            candidateAnswer: `No`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -1982,7 +2840,7 @@ export default function IR35TaxComponent() {
                   size="large "
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('21');
+                    toggle('21');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -2008,7 +2866,15 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.previousContract === 'a'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, previousContract: 'a' });
+                          // setPolicyObj({ ...policyObj, previousContract: 'a' });
+                          let obj = policyObj;
+                          obj.previousContract = 'a';
+                          obj.ir35Question[6].questions[5] = {
+                            activeTab: activeTab,
+                            question: `Have you had a previous contract with this client?`,
+                            candidateAnswer: `Yes`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -2020,7 +2886,15 @@ export default function IR35TaxComponent() {
                       <Radio
                         checked={policyObj.previousContract === 'b'}
                         onChange={() => {
-                          setPolicyObj({ ...policyObj, previousContract: 'b' });
+                          // setPolicyObj({ ...policyObj, previousContract: 'b' });
+                          let obj = policyObj;
+                          obj.previousContract = 'b';
+                          obj.ir35Question[6].questions[5] = {
+                            activeTab: activeTab,
+                            question: `Have you had a previous contract with this client?`,
+                            candidateAnswer: `No`
+                          };
+                          setPolicyObj({ ...obj });
                         }}
                         value="b"
                         name="radio-button-demo"
@@ -2034,7 +2908,7 @@ export default function IR35TaxComponent() {
                   size="large "
                   variant="contained"
                   onClick={() => {
-                    setActiveTab('21');
+                    toggle('21');
                   }}
                   className="font-weight-bold btn-slack px-4 my-3 bg-color">
                   Continue
@@ -2059,7 +2933,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.belongOrganisation === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, belongOrganisation: 'a' });
+                        // setPolicyObj({ ...policyObj, belongOrganisation: 'a' });
+                        let obj = policyObj;
+                        obj.belongOrganisation = 'a';
+                        obj.ir35Question[6].questions[6] = {
+                          activeTab: activeTab,
+                          question: `Have you had a previous contract with this client?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2071,7 +2953,15 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.belongOrganisation === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, belongOrganisation: 'b' });
+                        // setPolicyObj({ ...policyObj, belongOrganisation: 'b' });
+                        let obj = policyObj;
+                        obj.belongOrganisation = 'b';
+                        obj.ir35Question[6].questions[6] = {
+                          activeTab: activeTab,
+                          question: `Have you had a previous contract with this client?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2085,7 +2975,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('22');
+                  toggle('22');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -2118,7 +3008,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.previousContract === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, previousContract: 'a' });
+                        // setPolicyObj({ ...policyObj, previousContract: 'a' });
+                        let obj = policyObj;
+                        obj.previousContract = 'a';
+                        obj.ir35Question[6].questions[7] = {
+                          activeTab: activeTab,
+                          question: `Will this contract start immediately after the previous one
+                              ended?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2130,7 +3029,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.previousContract === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, previousContract: 'b' });
+                        // setPolicyObj({ ...policyObj, previousContract: 'b' });
+                        let obj = policyObj;
+                        obj.previousContract = 'b';
+                        obj.ir35Question[6].questions[7] = {
+                          activeTab: activeTab,
+                          question: `Will this contract start immediately after the previous one
+                              ended?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2144,7 +3052,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('23');
+                  toggle('23');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -2183,7 +3091,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.availableWorking === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, availableWorking: 'a' });
+                        // setPolicyObj({ ...policyObj, availableWorking: 'a' });
+                        let obj = policyObj;
+                        obj.availableWorking = 'a';
+                        obj.ir35Question[6].questions[8] = {
+                          activeTab: activeTab,
+                          question: `Will this work take up the majority of your available working
+                              time?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2195,7 +3112,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.availableWorking === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, availableWorking: 'b' });
+                        // setPolicyObj({ ...policyObj, availableWorking: 'b' });
+                        let obj = policyObj;
+                        obj.availableWorking = 'b';
+                        obj.ir35Question[6].questions[8] = {
+                          activeTab: activeTab,
+                          question: `Will this work take up the majority of your available working
+                              time?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2209,7 +3135,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('24');
+                  toggle('24');
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
                 Continue
@@ -2247,7 +3173,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.months === 'a'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, months: 'a' });
+                        // setPolicyObj({ ...policyObj, months: 'a' });
+                        let obj = policyObj;
+                        obj.months = 'a';
+                        obj.ir35Question[6].questions[9] = {
+                          activeTab: activeTab,
+                          question: `Will this work take up the majority of your available working
+                              time?`,
+                          candidateAnswer: `Yes`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2259,7 +3194,16 @@ export default function IR35TaxComponent() {
                     <Radio
                       checked={policyObj.months === 'b'}
                       onChange={() => {
-                        setPolicyObj({ ...policyObj, months: 'b' });
+                        // setPolicyObj({ ...policyObj, months: 'b' });
+                        let obj = policyObj;
+                        obj.months = 'b';
+                        obj.ir35Question[6].questions[9] = {
+                          activeTab: activeTab,
+                          question: `Will this work take up the majority of your available working
+                              time?`,
+                          candidateAnswer: `No`
+                        };
+                        setPolicyObj({ ...obj });
                       }}
                       value="b"
                       name="radio-button-demo"
@@ -2273,7 +3217,7 @@ export default function IR35TaxComponent() {
                 size="large"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('25');
+                  toggle('25');
                   console.log('policyObj', policyObj);
                 }}
                 className="font-weight-bold btn-slack px-4 my-3 bg-color">
@@ -2299,11 +3243,20 @@ export default function IR35TaxComponent() {
             </p>
             <p className="mb-2 fh"></p>
 
+            <Button
+              size="medium"
+              variant="contained"
+              disabled={doSubmit}
+              onClick={submitQuestions}
+              className="font-weight-bold btn-slack px-4 bg-color button-width">
+              Submit
+            </Button>
+
             {/* <Button
                 size="medium"
                 variant="contained"
                 onClick={() => {
-                  setActiveTab('1');
+                  toggle('1');
                 }}
                 className="font-weight-bold btn-slack px-4 bg-color button-width">
                 Go to dashboard
@@ -2314,4 +3267,18 @@ export default function IR35TaxComponent() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  ir35Questions: state.ThemeOptions.ir35Questions
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoadIr35QuestionsComplete: (question) => {
+      dispatch(getIr35QuestionsSuccess(question));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(IR35TaxComponent);
