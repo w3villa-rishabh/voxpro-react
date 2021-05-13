@@ -6805,9 +6805,141 @@ export default [
         next: 224
       }
     ]
-  }
-
+  },
   ////////sb last krna
+
+  {
+    index: 174,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 146,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 225
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 225
+      }
+    ]
+  },
+  {
+    index: 175,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 146,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 226
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 226
+      }
+    ]
+  },
+  {
+    index: 176,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 147,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 227
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 227
+      }
+    ]
+  },
+  {
+    index: 177,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 147,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 228
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 228
+      }
+    ]
+  }
 
   // {
   //   index: 186,
