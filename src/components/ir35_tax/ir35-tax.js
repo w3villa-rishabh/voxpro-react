@@ -151,6 +151,11 @@ const IR35TaxComponent = (props) => {
         updateQuestion.push(
           getQuestionObj(editQuestion.user_id, que, findOptions.name)
         );
+      } else if (que.companySelect) {
+        let findOptions = que.options.find((a) => a.companySelect === true);
+        updateQuestion.push(
+          getQuestionObj(editQuestion.user_id, que, findOptions.name)
+        );
       }
     });
     api
@@ -340,6 +345,21 @@ const IR35TaxComponent = (props) => {
                                                   question,
                                                   () => {}
                                                 );
+                                                if (
+                                                  currentUser.role === 'agency'
+                                                ) {
+                                                  question.map(
+                                                    (x) =>
+                                                      (x.agencySelect = false)
+                                                  );
+                                                } else if (
+                                                  currentUser.role === 'company'
+                                                ) {
+                                                  question.map(
+                                                    (x) =>
+                                                      (x.companySelect = false)
+                                                  );
+                                                }
                                                 setStartAgain(true);
                                                 props.setChecked('');
                                                 toggle(1);
