@@ -195,6 +195,12 @@ const IR35TaxComponent = (props) => {
       });
   };
 
+  const checkQuestion = (option) => {
+    return props.questions.find(
+      (q) => q.index === option.next && q.candidateSelect === true
+    );
+  };
+
   return (
     <div className="ir35-background text-white">
       <div className="img-bg"></div>
@@ -264,16 +270,15 @@ const IR35TaxComponent = (props) => {
                                   />
                                 )}
 
-                                {currentUser.role === 'agency' && (
+                                {(currentUser.role === 'agency' ||
+                                  currentUser.role === 'company') && (
                                   <Radio
                                     checked={option.value == props.checked}
                                     onChange={async (e) => {
-                                      let checkQuestion = props.questions.find(
-                                        (q) =>
-                                          q.index === option.next &&
-                                          q.candidateSelect === true
+                                      let checkQues = await checkQuestion(
+                                        option
                                       );
-                                      if (!checkQuestion && !startAgain) {
+                                      if (!checkQues && !startAgain) {
                                         // let value = e.target.value;
                                         confirmAlert({
                                           title: 'Confirm to change question',
@@ -322,44 +327,26 @@ const IR35TaxComponent = (props) => {
                                       } else {
                                         props.setChecked(e.target.value);
 
-                                        question.options.map((x) =>
-                                          x.value === e.target.value
-                                            ? (x.agencySelect = true)
-                                            : (x.agencySelect = false)
-                                        );
+                                        if (currentUser.role === 'agency') {
+                                          question.options.map((x) =>
+                                            x.value === e.target.value
+                                              ? (x.agencySelect = true)
+                                              : (x.agencySelect = false)
+                                          );
+                                        } else if (
+                                          currentUser.role === 'company'
+                                        ) {
+                                          question.options.map((x) =>
+                                            x.value === e.target.value
+                                              ? (x.companySelect = true)
+                                              : (x.companySelect = false)
+                                          );
+                                        }
                                         props.setNextQuestion(option.next);
                                       }
                                     }}
                                     value={option.value}
                                     name="radio-button-demo"
-                                  />
-                                )}
-
-                                {currentUser.role === 'company' && (
-                                  <Radio
-                                    checked={option.value == props.checked}
-                                    onChange={(e) => {
-                                      props.setChecked(e.target.value);
-                                      let checkQuestion = props.questions.find(
-                                        (q) =>
-                                          q.index === option.next &&
-                                          q.candidateSelect === true
-                                      );
-                                      if (!checkQuestion) {
-                                        props.setEditMode(true);
-                                      }
-
-                                      question.options.map((x) =>
-                                        x.value === e.target.value
-                                          ? (x.companySelect = true)
-                                          : (x.companySelect = false)
-                                      );
-
-                                      props.setNextQuestion(option.next);
-                                    }}
-                                    value={option.value}
-                                    name="radio-button-demo"
-                                    aria-label="A"
                                   />
                                 )}
                                 <span className="mt-3 fhh">{option.name}</span>

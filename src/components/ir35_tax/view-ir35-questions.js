@@ -69,10 +69,6 @@ const AgencyTable = (props) => {
       });
   }
 
-  // const cancel = () => {
-  //   getAnswer();
-  // };
-
   // Accepts the array and key
   const groupBy = (array) => {
     // Return the end result
@@ -98,15 +94,26 @@ const AgencyTable = (props) => {
     e.preventDefault();
     console.log('editQuestion', ques);
     let updateQuestion = props.questions;
-    let findObj = updateQuestion[ques.question_number - 1].options.find(
-      (a) => a.name === ques.candidate_answer
-    );
+    let findObj = updateQuestion[ques.question_number - 1].options.find((a) => {
+      if (
+        (currentUser.role === 'agency' && a.name === ques.agency_answer) ||
+        (currentUser.role === 'company' && a.name === ques.company_answer)
+      ) {
+        return a;
+      } else if (a.name === ques.candidate_answer) {
+        return a;
+      }
+    });
     props.setQuestionId(ques.id);
     props.setNextQuestion(findObj.next);
     props.setChecked(findObj.value);
     history.push('/ir35-verify');
     ques.user_id = userId;
     localStorage.setItem('editQuestion', JSON.stringify(ques));
+  };
+
+  const sendToCompany = () => {
+    getAnswer();
   };
 
   return (
@@ -221,7 +228,7 @@ const AgencyTable = (props) => {
             </Button>
             <Button
               size="small"
-              // onClick={updateAnswer}
+              onClick={sendToCompany}
               className="btn-primary ml-2">
               Continue
             </Button>
@@ -240,24 +247,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoadIr35QuestionsComplete: (question) => {
-      dispatch(getIr35QuestionsSuccess(question));
-    },
-    onIr35Questions: (question) => {
-      dispatch(onIr35Questions(question));
-    },
-    setNextQuestion: (next) => {
-      dispatch(setNextQuestion(next));
-    },
-    setChecked: (next) => {
-      dispatch(setChecked(next));
-    },
-    setEditMode: (mode) => {
-      dispatch(setEditMode(mode));
-    },
-    setQuestionId: (id) => {
-      dispatch(setQuestionId(id));
-    }
+    onLoadIr35QuestionsComplete: (question) =>
+      dispatch(getIr35QuestionsSuccess(question)),
+    onIr35Questions: (question) => dispatch(onIr35Questions(question)),
+    setNextQuestion: (next) => dispatch(setNextQuestion(next)),
+    setChecked: (next) => dispatch(setChecked(next)),
+    setEditMode: (mode) => dispatch(setEditMode(mode)),
+    setQuestionId: (id) => dispatch(setQuestionId(id))
   };
 };
 
