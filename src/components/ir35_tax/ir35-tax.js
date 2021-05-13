@@ -86,13 +86,21 @@ const IR35TaxComponent = (props) => {
   });
 
   const getQuestionObj = (user_id, que, answer) => {
-    return {
+    let questionObj = {
       user_id,
       question_number: que.index,
       heading: que.heading,
-      question: que.question,
-      candidate_answer: answer
+      question: que.question
     };
+
+    if (currentUser.role === 'agency') {
+      questionObj.agency_answer = answer;
+    } else if (currentUser.role === 'company') {
+      questionObj.company_answer = answer;
+    } else {
+      questionObj.candidate_answer = answer;
+    }
+    return questionObj;
   };
 
   const submitQuestions = () => {
