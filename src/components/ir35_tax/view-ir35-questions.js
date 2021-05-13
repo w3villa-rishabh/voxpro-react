@@ -16,7 +16,8 @@ import {
   setNextQuestion,
   setQuestionId,
   setChecked,
-  setEditMode
+  setEditMode,
+  setLoader
 } from '../../reducers/ThemeOptions';
 
 const AgencyTable = (props) => {
@@ -39,7 +40,9 @@ const AgencyTable = (props) => {
   }, []);
 
   function getAnswer() {
+    props.setLoader(true);
     api.get(`/api/v1/user_answers?id=${currentUser.id}`).then((response) => {
+      props.setLoader(false);
       if (response.data.success && !!response.data.ir_answers.length) {
         const data = response.data.ir_answers.sort((a, b) => a.id - b.id);
         console.log('data', data);
@@ -124,7 +127,7 @@ const AgencyTable = (props) => {
           <b className="heading">Review IR35 Questionnaires</b>
         </div>
       </div>
-      {props.answer.length === 0 ? (
+      {props.isLoading ? (
         'Loading Answers...'
       ) : (
         <div className="accordion mb-2">
@@ -242,7 +245,8 @@ const AgencyTable = (props) => {
 const mapStateToProps = (state) => ({
   answer: state.ThemeOptions.ir35answers,
   questions: state.ThemeOptions.irQuestions,
-  editMode: state.ThemeOptions.editMode
+  editMode: state.ThemeOptions.editMode,
+  isLoading: state.ThemeOptions.isLoading
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -253,7 +257,8 @@ const mapDispatchToProps = (dispatch) => {
     setNextQuestion: (next) => dispatch(setNextQuestion(next)),
     setChecked: (next) => dispatch(setChecked(next)),
     setEditMode: (mode) => dispatch(setEditMode(mode)),
-    setQuestionId: (id) => dispatch(setQuestionId(id))
+    setQuestionId: (id) => dispatch(setQuestionId(id)),
+    setLoader: (loader) => dispatch(setLoader(loader))
   };
 };
 

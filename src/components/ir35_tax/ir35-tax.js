@@ -348,14 +348,14 @@ const IR35TaxComponent = (props) => {
                                                 if (
                                                   currentUser.role === 'agency'
                                                 ) {
-                                                  question.map(
+                                                  props.questions.map(
                                                     (x) =>
                                                       (x.agencySelect = false)
                                                   );
                                                 } else if (
                                                   currentUser.role === 'company'
                                                 ) {
-                                                  question.map(
+                                                  props.questions.map(
                                                     (x) =>
                                                       (x.companySelect = false)
                                                   );
