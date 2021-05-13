@@ -34,6 +34,7 @@ const AgencyTable = (props) => {
   const [userId, setUserId] = useState(0);
 
   useEffect(() => {
+    localStorage.removeItem('editQuestion');
     getAnswer();
   }, []);
 
