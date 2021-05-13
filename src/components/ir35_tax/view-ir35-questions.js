@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import api from '../../api';
@@ -63,6 +64,7 @@ const AgencyTable = (props) => {
       .then((response) => {
         if (response.data.success) {
           console.log('success');
+          toast.success(response.data.message);
           getAnswer();
         } else {
           console.log('not success');
