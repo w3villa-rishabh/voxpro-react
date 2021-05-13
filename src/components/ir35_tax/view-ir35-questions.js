@@ -42,6 +42,7 @@ const AgencyTable = (props) => {
   }, []);
 
   function getAnswer() {
+    toast.dismiss();
     props.setLoader(true);
     api.get(`/api/v1/user_answers?id=${currentUser.id}`).then((response) => {
       props.setLoader(false);
@@ -59,6 +60,7 @@ const AgencyTable = (props) => {
   }
 
   function resetQuestion() {
+    toast.dismiss();
     api
       .post('/api/v1/user_answers/reset_answer', {
         userId: currentUser.id,
@@ -121,6 +123,7 @@ const AgencyTable = (props) => {
   };
 
   const sendToCompany = () => {
+    toast.dismiss();
     api
       .post('/api/v1/user_answers/send_to_company')
       .then((response) => {
