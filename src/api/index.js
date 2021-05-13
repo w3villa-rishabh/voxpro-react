@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCurrentUser } from 'helper';
 
 var BASE_URL = '';
 var setupAPI = function () {
@@ -11,7 +12,7 @@ var setupAPI = function () {
       BASE_URL = 'http://54.203.142.83/';
       break;
     case 'development':
-      BASE_URL = 'https://55be66c4e007.ngrok.io/';
+      BASE_URL = 'http://localhost:3001/';
       break;
     default:
       BASE_URL = 'https://d5d99e78af1a.ngrok.io/';
@@ -22,8 +23,11 @@ var setupAPI = function () {
 setupAPI();
 
 export default axios.create({
-  baseURL: BASE_URL // LOCAL
+  baseURL: BASE_URL, // LOCAL
   // timeout: 10000,
+  headers: {
+    UserId: getCurrentUser.id
+  }
   // headers: {
   //    'Content-Type': 'application/json',
   //    'Accept': 'application/json',

@@ -6939,6 +6939,138 @@ export default [
         next: 228
       }
     ]
+  },
+  {
+    index: 178,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 148,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 229
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 229
+      }
+    ]
+  },
+  {
+    index: 179,
+    heading: 'Worker’s contracts',
+    question:
+      'Does the contract state the rights to this work belong to your client?',
+    p1:
+      'This does not include the option to buy the rights for a separate fee.',
+    p2: '',
+    provious: 149,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 230
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 230
+      }
+    ]
+  },
+  {
+    index: 180,
+    heading: 'Worker’s contracts',
+    question: 'Have you had a previous contract with this client?',
+    p1: '',
+    p2: '',
+    provious: 150,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 231
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 231
+      }
+    ]
+  },
+  {
+    index: 181,
+    heading: 'Worker’s contracts',
+    question: 'Are there any ownership rights relating to this contract?',
+    p1:
+      'These types of rights are usually found in media, arts and creative industry contracts. This includes all intellectual property rights, copyright, trademarks, patents, and image rights.',
+    p2: '',
+    provious: 148,
+    candidateSelect: false,
+    angencySelect: false,
+    companySelect: false,
+    status: false,
+    options: [
+      {
+        name: 'Yes',
+        value: 'a',
+        aria_label: 'A',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 232
+      },
+      {
+        name: 'No',
+        value: 'b',
+        aria_label: 'B',
+        candidateSelect: false,
+        agencySelect: false,
+        companySelect: false,
+        next: 232
+      }
+    ]
   }
 
   // {
