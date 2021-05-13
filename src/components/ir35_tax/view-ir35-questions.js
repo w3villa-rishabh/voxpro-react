@@ -63,7 +63,7 @@ const AgencyTable = (props) => {
     toast.dismiss();
     api
       .post('/api/v1/user_answers/reset_answer', {
-        userId: currentUser.id,
+        userId: userId,
         role: currentUser.role
       })
       .then((response) => {
