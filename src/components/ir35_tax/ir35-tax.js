@@ -275,11 +275,21 @@ const IR35TaxComponent = (props) => {
                                   <Radio
                                     checked={option.value == props.checked}
                                     onChange={async (e) => {
+                                      let value = e.target.value;
                                       let checkQues = await checkQuestion(
                                         option
                                       );
+                                      if (
+                                        question.heading ===
+                                          'Working arrangements' ||
+                                        question.heading ===
+                                          'Worker’s financial risk' ||
+                                        question.heading ===
+                                          'Worker’s involvement'
+                                      ) {
+                                        checkQues = true;
+                                      }
                                       if (!checkQues && !startAgain) {
-                                        // let value = e.target.value;
                                         confirmAlert({
                                           title: 'Confirm to change question',
                                           message:
@@ -325,11 +335,11 @@ const IR35TaxComponent = (props) => {
                                             'alert-overlay-custom'
                                         });
                                       } else {
-                                        props.setChecked(e.target.value);
+                                        props.setChecked(value);
 
                                         if (currentUser.role === 'agency') {
                                           question.options.map((x) =>
-                                            x.value === e.target.value
+                                            x.value === value
                                               ? (x.agencySelect = true)
                                               : (x.agencySelect = false)
                                           );
@@ -337,11 +347,12 @@ const IR35TaxComponent = (props) => {
                                           currentUser.role === 'company'
                                         ) {
                                           question.options.map((x) =>
-                                            x.value === e.target.value
+                                            x.value === value
                                               ? (x.companySelect = true)
                                               : (x.companySelect = false)
                                           );
                                         }
+                                        question.selectAns = option.name;
                                         props.setNextQuestion(option.next);
                                       }
                                     }}
@@ -358,7 +369,7 @@ const IR35TaxComponent = (props) => {
                         <Button
                           size="large"
                           variant="contained"
-                          onClick={() => {
+                          onClick={async () => {
                             if (currentUser.role === 'candidate') {
                               question.candidateSelect = true;
                               if (props.nextQuestion === 2) {
@@ -409,8 +420,8 @@ const IR35TaxComponent = (props) => {
                                 updateNewQuestions(question);
                               }
                             } else {
-                              goBack();
-                              // updateAnswer(question);
+                              await updateAnswer(question.selectAns, question);
+                              await goBack();
                             }
                           }}
                           className="font-weight-bold btn-slack px-4 my-3 bg-color">
