@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCurrentUser } from 'helper';
 
 var BASE_URL = '';
 var setupAPI = function () {
@@ -22,8 +23,11 @@ var setupAPI = function () {
 setupAPI();
 
 export default axios.create({
-  baseURL: BASE_URL // LOCAL
+  baseURL: BASE_URL, // LOCAL
   // timeout: 10000,
+  headers: {
+    UserId: getCurrentUser.id
+  }
   // headers: {
   //    'Content-Type': 'application/json',
   //    'Accept': 'application/json',

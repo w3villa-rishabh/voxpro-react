@@ -96,7 +96,11 @@ const AgencyTable = (props) => {
     console.log('editQuestion', ques);
     let updateQuestion = props.questions;
     let findObj = updateQuestion[ques.question_number - 1].options.find((a) => {
-      let ans = ques.agency_answer ? ques.agency_answer : ques.candidate_answer;
+      let ans = ques.agency_answer
+        ? ques.agency_answer
+        : ques.company_answer
+        ? ques.company_answer
+        : ques.candidate_answer;
       return a.name === ans;
     });
 

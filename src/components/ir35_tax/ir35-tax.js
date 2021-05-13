@@ -156,14 +156,13 @@ const IR35TaxComponent = (props) => {
     api
       .put(`/api/v1/user_answers/1`, {
         id: editQuestion.user_id,
+        current_user_id: currentUser.id,
         answers: updateQuestion
       })
       .then((response) => {
         setDoSubmit(false);
         if (response.data.success) {
-          goBackView();
           console.log('agency answer create success');
-          goBack();
         } else {
           toast.error(response.data.message);
           console.log('not success');
@@ -185,6 +184,7 @@ const IR35TaxComponent = (props) => {
     api
       .put(`/api/v1/user_answers/${editQuestion.id}`, {
         id: editQuestion.user_id,
+        current_user_id: currentUser.id,
         answers: updateQuestion
       })
       .then(
@@ -443,6 +443,7 @@ const IR35TaxComponent = (props) => {
                                 props.nextQuestion === 67
                               ) {
                                 updateNewQuestions(question);
+                                goBackView();
                               }
                             } else {
                               if (question.selectAns) {
