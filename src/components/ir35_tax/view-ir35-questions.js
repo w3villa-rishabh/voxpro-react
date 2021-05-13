@@ -34,6 +34,7 @@ const AgencyTable = (props) => {
   const [currentUser] = useState(getCurrentUser());
   const history = useHistory();
   const [userId, setUserId] = useState(0);
+  const [answerState, setAnswerState] = useState('');
 
   useEffect(() => {
     localStorage.removeItem('editQuestion');
@@ -47,6 +48,7 @@ const AgencyTable = (props) => {
       if (response.data.success && !!response.data.ir_answers.length) {
         const data = response.data.ir_answers.sort((a, b) => a.id - b.id);
         console.log('data', data);
+        setAnswerState(response.data.stage);
         setUserId(data[0].user_id);
         props.setEditMode(false);
         let updateArray = groupBy(data);
@@ -59,7 +61,8 @@ const AgencyTable = (props) => {
   function resetQuestion() {
     api
       .post('/api/v1/user_answers/reset_answer', {
-        userId: 20
+        userId: currentUser.id,
+        role: currentUser.role
       })
       .then((response) => {
         if (response.data.success) {
@@ -118,7 +121,20 @@ const AgencyTable = (props) => {
   };
 
   const sendToCompany = () => {
-    getAnswer();
+    api
+      .post('/api/v1/user_answers/send_to_company')
+      .then((response) => {
+        if (response.data.success) {
+          console.log('Send to company success');
+          toast.success(response.data.message);
+          history.push('/ir35-pending');
+        } else {
+          console.log('not success');
+        }
+      })
+      .catch(() => {
+        console.log('error');
+      });
   };
 
   return (
@@ -174,7 +190,9 @@ const AgencyTable = (props) => {
                               <th className="tx-right">Company Answer</th>
                             </>
                           )}
-                          <th className="tx-right">Action</th>
+                          {currentUser.role === answerState && (
+                            <th className="tx-right">Action</th>
+                          )}
                         </tr>
                       </thead>
                       <tbody>
@@ -205,15 +223,17 @@ const AgencyTable = (props) => {
                                   </td>
                                 </>
                               )}
-                              <td className="tx-right">
-                                <a
-                                  href="#/"
-                                  onClick={(e) => editQuestion(e, ques)}
-                                  className="a-blue"
-                                  title="Edit Question">
-                                  Edit
-                                </a>
-                              </td>
+                              {currentUser.role === answerState && (
+                                <td className="tx-right">
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => editQuestion(e, ques)}
+                                    className="a-blue"
+                                    title="Edit Question">
+                                    Edit
+                                  </a>
+                                </td>
+                              )}
                             </tr>
                           </>
                         ))}
@@ -224,20 +244,22 @@ const AgencyTable = (props) => {
               </Card>
             </Card>
           ))}
-          <div className="m-5 text-center">
-            <Button
-              size="small"
-              onClick={resetQuestion}
-              className="btn-primary ml-2">
-              Reset Changes
-            </Button>
-            <Button
-              size="small"
-              onClick={sendToCompany}
-              className="btn-primary ml-2">
-              Continue
-            </Button>
-          </div>
+          {currentUser.role === answerState && (
+            <div className="m-5 text-center">
+              <Button
+                size="small"
+                onClick={resetQuestion}
+                className="btn-primary ml-2">
+                Reset Changes
+              </Button>
+              <Button
+                size="small"
+                onClick={sendToCompany}
+                className="btn-primary ml-2">
+                Continue
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </>
