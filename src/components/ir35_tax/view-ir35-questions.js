@@ -171,7 +171,7 @@ const AgencyTable = (props) => {
                       <tbody>
                         {ans.questions.map((ques, i) => (
                           <>
-                            <tr>
+                            <tr key={i}>
                               <td className="tx-nowrap">
                                 <div className="float-right font-weight-bold">
                                   {i + 1}

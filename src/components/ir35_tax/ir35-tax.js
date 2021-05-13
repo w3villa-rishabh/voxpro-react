@@ -170,7 +170,7 @@ const IR35TaxComponent = (props) => {
   const updateAnswer = (answer, que, callback) => {
     console.log('answer', answer);
     const editQuestion = JSON.parse(localStorage.getItem('editQuestion'));
-    let updateQuestion = getQuestionObj(editQuestion.user_id, que, answer);
+    let updateQuestion = [getQuestionObj(editQuestion.user_id, que, answer)];
 
     toast.dismiss();
 
@@ -179,19 +179,21 @@ const IR35TaxComponent = (props) => {
         id: editQuestion.user_id,
         answers: updateQuestion
       })
-      .then((response) => {
-        if (response.data.success) {
-          callback(true);
-          console.log('updateQuestion', response.data);
-        } else {
-          callback(false);
-          console.log('data');
+      .then(
+        (response) => {
+          if (response.data.success) {
+            callback(true);
+            console.log('updateQuestion', response.data);
+          } else {
+            callback(false);
+            console.log('data');
+          }
+        },
+        (error) => {
+          console.error('error', error);
+          toast.error('Something went wrong');
         }
-      })
-      .catch(() => {
-        callback(false);
-        toast.error('Something went wrong');
-      });
+      );
   };
 
   const checkQuestion = (option, question) => {
@@ -232,18 +234,9 @@ const IR35TaxComponent = (props) => {
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
-                            if (currentUser.role === 'agency') {
-                              question.agencySelect = false;
-                            } else {
-                              question.candidateSelect = false;
-                            }
-
-                            question.options.map((x) =>
-                              currentUser.role === 'company'
-                                ? (x.companySelect = false)
-                                : currentUser.role === 'agency'
-                                ? (x.agencySelect = false)
-                                : (x.candidateSelect = false)
+                            question.candidateSelect = false;
+                            question.options.map(
+                              (x) => (x.candidateSelect = false)
                             );
 
                             toggle(question.previous);
@@ -252,6 +245,38 @@ const IR35TaxComponent = (props) => {
                         </a>
                       </div>
                     )}
+
+                    {(currentUser.role === 'agency' ||
+                      currentUser.role === 'company') &&
+                      startAgain && (
+                        <div className="fh">
+                          <FontAwesomeIcon
+                            icon={['fas', 'angle-left']}
+                            className="mr-2"
+                          />
+                          <a
+                            href="javascript:void(0)"
+                            onClick={() => {
+                              if (currentUser.role === 'agency') {
+                                question.agencySelect = false;
+                              } else if (currentUser.role === 'company') {
+                                question.companySelect = false;
+                              }
+
+                              question.options.map((x) =>
+                                currentUser.role === 'company'
+                                  ? (x.companySelect = false)
+                                  : currentUser.role === 'agency'
+                                  ? (x.agencySelect = false)
+                                  : (x.candidateSelect = false)
+                              );
+
+                              toggle(question.previous);
+                            }}>
+                            Back
+                          </a>
+                        </div>
+                      )}
                     <Grid container spacing={1} className="pt-3">
                       <Grid item xs={12}>
                         <h6>{question.heading}</h6>
@@ -304,7 +329,8 @@ const IR35TaxComponent = (props) => {
                                               onClick: () => {
                                                 updateAnswer(
                                                   option.name,
-                                                  question
+                                                  question,
+                                                  () => {}
                                                 );
                                                 setStartAgain(true);
                                                 props.setChecked('');
@@ -384,6 +410,10 @@ const IR35TaxComponent = (props) => {
                                 toggle(props.nextQuestion);
                               }
                             } else if (startAgain) {
+                              if (!question.selectAns) {
+                                toast.dismiss();
+                                return toast.error('Please select one options');
+                              }
                               if (currentUser.role === 'agency') {
                                 question.agencySelect = true;
                               } else if (currentUser.role === 'company') {
@@ -407,15 +437,19 @@ const IR35TaxComponent = (props) => {
                                 updateNewQuestions(question);
                               }
                             } else {
-                              updateAnswer(
-                                question.selectAns,
-                                question,
-                                (res) => {
-                                  if (res) {
-                                    goBack();
+                              if (question.selectAns) {
+                                updateAnswer(
+                                  question.selectAns,
+                                  question,
+                                  (res) => {
+                                    if (res) {
+                                      goBack();
+                                    }
                                   }
-                                }
-                              );
+                                );
+                              } else {
+                                goBack();
+                              }
                             }
                           }}
                           className="font-weight-bold btn-slack px-4 my-3 bg-color">
