@@ -95,15 +95,10 @@ const AgencyTable = (props) => {
     console.log('editQuestion', ques);
     let updateQuestion = props.questions;
     let findObj = updateQuestion[ques.question_number - 1].options.find((a) => {
-      if (
-        (currentUser.role === 'agency' && a.name === ques.agency_answer) ||
-        (currentUser.role === 'company' && a.name === ques.company_answer)
-      ) {
-        return a;
-      } else if (a.name === ques.candidate_answer) {
-        return a;
-      }
+      let ans = ques.agency_answer ? ques.agency_answer : ques.candidate_answer;
+      return a.name === ans;
     });
+
     props.setQuestionId(ques.id);
     props.setNextQuestion(findObj.next);
     props.setChecked(findObj.value);
