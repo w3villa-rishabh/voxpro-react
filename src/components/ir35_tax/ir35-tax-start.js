@@ -5,19 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/images/voxpro-images/logo_vp.png';
 import $ from 'jquery';
 import { useHistory } from 'react-router-dom';
+import api from '../../api';
 import { getCurrentUser } from 'helper';
 
 export default function IR35TaxComponent() {
   const history = useHistory();
-  const [startQuestion, setStartQuestion] = useState(true);
   const [currentUser] = useState(getCurrentUser());
+  const [showQuestion, setShowQuestion] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       $('.app-content--inner').addClass('remove-p');
       $('.app-footer').css('display', 'none');
     }, 0);
-    setStartQuestion(true);
+    checkQuestions();
   });
 
   useEffect(() => {
@@ -35,6 +36,18 @@ export default function IR35TaxComponent() {
       goQuestion();
     }
   });
+
+  function checkQuestions() {
+    api
+      .get(`/api/v1/user_answers/check_questions?id=${currentUser.id}`)
+      .then((response) => {
+        if (response.data.success) {
+          setShowQuestion(true);
+        } else {
+          setShowQuestion(false);
+        }
+      });
+  }
 
   const goQuestion = () => {
     if (currentUser.role === 'agency') {
@@ -56,7 +69,7 @@ export default function IR35TaxComponent() {
 
       <div className="font-12 position-relative p-3">
         {/* when no ir-35 */}
-        {startQuestion === false && (
+        {showQuestion === false && (
           <div className="text-center w-100 mt-5">
             <img alt="..." className="ir35-logo" src={logo} />
             <h4 className="font-weight-bold mt-3 fhhh">
@@ -68,7 +81,7 @@ export default function IR35TaxComponent() {
           </div>
         )}
         {/* //Section 0 */}
-        {startQuestion === true && (
+        {showQuestion === true && (
           <div className="text-center w-100 mt-4">
             <img alt="..." className="ir35-logo" src={logo} />
             <h4 className="font-weight-bold mt-3 fhhh">
