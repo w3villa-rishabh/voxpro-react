@@ -279,9 +279,7 @@ const IR35TaxComponent = (props) => {
                                     checked={option.value == props.checked}
                                     onChange={async (e) => {
                                       let value = e.target.value;
-                                      let checkQues = await checkQuestion(
-                                        option
-                                      );
+                                      let checkQues;
                                       if (
                                         question.heading ===
                                           'Working arrangements' ||
@@ -291,6 +289,8 @@ const IR35TaxComponent = (props) => {
                                           'Worker’s involvement'
                                       ) {
                                         checkQues = true;
+                                      } else {
+                                        checkQues = await checkQuestion(option);
                                       }
                                       if (!checkQues && !startAgain) {
                                         confirmAlert({
