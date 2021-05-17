@@ -5,8 +5,9 @@ import {
   Grid,
   Card,
   Button,
+  Checkbox,
   FormControlLabel,
-  Checkbox
+  LinearProgress
 } from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
@@ -23,10 +24,28 @@ import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import 'date-fns';
 import AddsComponents from 'components/add_component';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box display="flex" alignItems="center">
+      <Box width="100%" mr={1}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box minWidth={0}>
+        <Typography variant="body2" color="textSecondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
   const [filesError, setFileError] = useState();
+  const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const [currentUser] = useState(getCurrentUser());
   const [categories, setCategories] = useState([]);
@@ -96,10 +115,8 @@ export default function UploadDocument() {
       const imageObj = { url: dataURL, extension, name: file.name };
       console.log('imageObj', imageObj);
     };
-    setErrors({
-      ...errors,
-      files: acceptedFiles.length > 0 ? 'dotted #0064FF' : 'dotted red'
-    });
+    setFileError(acceptedFiles.length > 0 ? 'dotted #0064FF' : 'dotted red');
+
     reader.readAsDataURL(file);
     setFiles(acceptedFiles);
   };
@@ -211,23 +228,34 @@ export default function UploadDocument() {
         : moment(documents.expirationDate).format('DD-MM-YYYY')
     );
 
-    api.post(`/api/v1/documents?id=${currentUser.id}`, formData).then(
-      (response) => {
-        toast.dismiss();
-        if (response.data) {
-          console.log('response.data', response.data);
-          toast.success(response.data.message);
-          setFiles([]);
-          removeDoc();
-        } else {
-          toast.error(response.data.message);
+    api
+      .post(`/api/v1/documents?id=${currentUser.id}`, formData, {
+        onUploadProgress: function (progressEvent) {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            )
+          );
         }
-      },
-      (error) => {
-        console.error('error', error);
-        toast.error('Something went wrong..');
-      }
-    );
+      })
+      .then(
+        (response) => {
+          toast.dismiss();
+          if (response.data) {
+            console.log('response.data', response.data);
+            setUploadPercentage(0);
+            toast.success(response.data.message);
+            setFiles([]);
+            removeDoc();
+          } else {
+            toast.error(response.data.message);
+          }
+        },
+        (error) => {
+          console.error('error', error);
+          toast.error('Something went wrong..');
+        }
+      );
   }
 
   return (
@@ -240,7 +268,10 @@ export default function UploadDocument() {
         </div>
       </div>
 
-      <Card className="p-3 p-lg-5 shadow-xxl">
+      {uploadPercentage > 0 && (
+        <LinearProgressWithLabel value={uploadPercentage} />
+      )}
+      <Card className="p-3 p-lg-5 shadow-xxl mt-4">
         <Dropzone
           multiple={false}
           accept="image/jpeg,image/jpg,image/png"
@@ -273,6 +304,15 @@ export default function UploadDocument() {
             </div>
           )}
         </Dropzone>
+        <ul className="list-group mt-2">
+          {files.length > 0 &&
+            files.map((acceptedFile) => (
+              <li className="list-group-item list-group-item-success">
+                {acceptedFile.name}
+              </li>
+            ))}
+        </ul>
+
         <div>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={3}>
@@ -439,6 +479,7 @@ export default function UploadDocument() {
           </Grid>
           <div className="pt-1">
             <Button
+              disabled={uploadPercentage}
               onClick={addDocument}
               className="btn-primary font-weight-bold rounded hover-scale-lg mx-1"
               size="medium">
