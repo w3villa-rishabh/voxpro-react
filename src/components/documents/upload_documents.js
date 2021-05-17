@@ -198,17 +198,14 @@ export default function UploadDocument() {
     }
 
     const formData = new FormData();
-    formData.append('user[documents_attributes][][user_id]', currentUser.id);
-    formData.append('user[documents_attributes][][doc]', files[0]);
+    formData.append('document[user_id]', currentUser.id);
+    formData.append('document[doc]', files[0]);
+    formData.append('document[category_id]', documents.docId);
+    formData.append('document[notify]', documents.notify);
+    formData.append('document[privacy]', documents.privacy);
+    formData.append('document[send_copy]', documents.copy);
     formData.append(
-      'user[documents_attributes][][category_id]',
-      documents.docId
-    );
-    formData.append('user[documents_attributes][][notify]', documents.notify);
-    formData.append('user[documents_attributes][][privacy]', documents.privacy);
-    formData.append('user[documents_attributes][][send_copy]', documents.copy);
-    formData.append(
-      'user[documents_attributes][][expiration]',
+      'document[expiration]',
       parseInt(documents.expiration) === 1
         ? 'No Expiration'
         : documents.expirationDate
