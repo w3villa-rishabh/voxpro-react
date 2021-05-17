@@ -186,16 +186,15 @@ export default function UploadDocument() {
       return;
     }
     const formData = new FormData();
-    formData.append('user[documents_attributes][][doc_name]', 'filesName');
+    formData.append('user[documents_attributes][][user_id]', currentUser.id);
     formData.append('user[documents_attributes][][doc]', files[0]);
     formData.append(
-      'user[documents_attributes][][categoryId]',
-      documents.categoryId
+      'user[documents_attributes][][category_id]',
+      documents.docId
     );
-    formData.append('user[documents_attributes][][docId]', documents.docId);
     formData.append('user[documents_attributes][][notify]', documents.notify);
     formData.append('user[documents_attributes][][privacy]', documents.privacy);
-    formData.append('user[documents_attributes][][copy]', documents.copy);
+    formData.append('user[documents_attributes][][send_copy]', documents.copy);
     formData.append(
       'user[documents_attributes][][expiration]',
       parseInt(documents.expiration) === 1
@@ -203,11 +202,12 @@ export default function UploadDocument() {
         : documents.expirationDate
     );
 
-    api.patch(`/api/user?id=${currentUser.id}`, formData).then(
+    api.patch(`/api/v1/documents?id=${currentUser.id}`, formData).then(
       (response) => {
         toast.dismiss();
         if (response.data) {
           console.log('response.data', response.data);
+          toast.error(response.data.message);
           setFiles([]);
         } else {
           toast.error(response.data.message);
@@ -416,8 +416,8 @@ export default function UploadDocument() {
                   onChange={handleChange}
                   name="privacy">
                   <option value="0">Select Privacy</option>
-                  <option value="1">Privacy 1</option>
-                  <option value="2">Privacy 2</option>
+                  <option value="1">Yes</option>
+                  <option value="2">No</option>
                 </select>
                 {errors.privacy.length > 0 && (
                   <span className="error">{errors.privacy}</span>
