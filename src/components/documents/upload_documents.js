@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 import {
@@ -20,13 +21,15 @@ import { getCurrentUser } from '../../helper';
 
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import PostAddIcon from '@material-ui/icons/PostAdd';
-// import { KeyboardDatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import AddsComponents from 'components/add_component';
 
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
   const [currentUser] = useState(getCurrentUser());
+  const [categories, setCategories] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+
   const [documents, setDocuments] = useState({
     categoryId: 0,
     docId: 0,
@@ -50,8 +53,26 @@ export default function UploadDocument() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // getDocuments();
+    getDocumentCategories();
   }, []);
+
+  const getDocumentCategories = () => {
+    api.get('/api/v1/categories').then(
+      (response) => {
+        toast.dismiss();
+        if (response.data) {
+          console.log('response.data', response.data);
+          setCategories([...response.data.categories]);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+      (error) => {
+        console.error('error', error);
+        toast.error('Something went wrong..');
+      }
+    );
+  };
 
   const handleDateChange = (date) => {
     if (date) {
@@ -71,7 +92,6 @@ export default function UploadDocument() {
     reader.onload = function () {
       const dataURL = reader.result;
       const imageObj = { url: dataURL, extension, name: file.name };
-      // setFileUpload(imageObj);
       console.log('imageObj', imageObj);
     };
     setErrors({
@@ -90,7 +110,8 @@ export default function UploadDocument() {
       notify: 1,
       privacy: 0,
       copy: true,
-      expiration: 0
+      expiration: 0,
+      expirationDate: ''
     });
     setFiles([]);
   };
@@ -188,7 +209,6 @@ export default function UploadDocument() {
         if (response.data) {
           console.log('response.data', response.data);
           setFiles([]);
-          // setFileUpload({});
         } else {
           toast.error(response.data.message);
         }
@@ -199,19 +219,6 @@ export default function UploadDocument() {
       }
     );
   }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // function getDocuments() {
-  //   api
-  //     .get(`/api/user/show_user_documents?id=${currentUser.id}`)
-  //     .then((response) => {
-  //       if (response.data) {
-  //         setDocuments(response.data);
-  //       } else {
-  //         alert('Something went wrong..');
-  //       }
-  //     });
-  // }
 
   return (
     <>
@@ -268,17 +275,24 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   name="categoryId"
-                  onChange={handleChange}
-                  // onChange={(event) => {
-                  //   setDocuments({
-                  //     ...documents,
-                  //     categoryId: event.target.value
-                  //   });
-                  // }}
+                  onChange={(e) => {
+                    documents['docId'] = 0;
+                    setDocuments(documents);
+                    const findSubCat = categories.find(
+                      (a) => a.id === parseInt(e.target.value)
+                    );
+                    if (findSubCat) {
+                      setSubCategory([...findSubCat.sub_category]);
+                    }
+                    handleChange(e);
+                  }}
                   value={documents.categoryId}>
                   <option value="0">Select Category</option>
-                  <option value="1">Category 1</option>
-                  <option value="2">Category 2</option>
+                  {categories.map((cat, index) => (
+                    <option key={index} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
                 {errors.categoryId.length > 0 && (
                   <span className="error">{errors.categoryId}</span>
@@ -298,8 +312,11 @@ export default function UploadDocument() {
                   onChange={handleChange}
                   name="docId">
                   <option value="0">Select Doc</option>
-                  <option value="1">Doc 1</option>
-                  <option value="2">Doc 1</option>
+                  {subCategory.map((cat, index) => (
+                    <option key={index} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
                 {errors.docId.length > 0 && (
                   <span className="error">{errors.docId}</span>
@@ -411,7 +428,6 @@ export default function UploadDocument() {
           <div className="pt-1">
             <Button
               onClick={addDocument}
-              // disabled={!files.length}
               className="btn-primary font-weight-bold rounded hover-scale-lg mx-1"
               size="medium">
               <span className="btn-wrapper--label">Upload</span>
