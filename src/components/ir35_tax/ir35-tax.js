@@ -501,7 +501,7 @@ const IR35TaxComponent = (props) => {
               CHECK EMPLOYMENT STATUS FOR TAX
             </h4>
             <p className="mb-2 fh mt-5">
-              Your Answers has been successfully submitted for review
+              Click the below button to submit your answers
             </p>
             <p className="mb-2 fh"></p>
 
