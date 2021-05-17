@@ -218,6 +218,7 @@ export default function UploadDocument() {
           console.log('response.data', response.data);
           toast.success(response.data.message);
           setFiles([]);
+          removeDoc();
         } else {
           toast.error(response.data.message);
         }
