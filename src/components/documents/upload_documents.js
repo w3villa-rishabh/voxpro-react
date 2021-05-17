@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 import {
@@ -12,39 +13,74 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
+import { toast } from 'react-toastify';
+import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
 
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import PostAddIcon from '@material-ui/icons/PostAdd';
-// import { KeyboardDatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import AddsComponents from 'components/add_component';
 
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
   const [currentUser] = useState(getCurrentUser());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [categories, setCategories] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+
   const [documents, setDocuments] = useState({
     categoryId: 0,
     docId: 0,
     notify: 1,
     privacy: 0,
-    copy: 'yes',
-    expiration: 0
+    copy: true,
+    expiration: 0,
+    expirationDate: ''
   });
+
+  const [errors, setErrors] = useState({
+    categoryId: '',
+    docId: '',
+    notify: '',
+    privacy: '',
+    files: '',
+    expiration: '',
+    expirationDate: ''
+  });
+
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // getDocuments();
+    getDocumentCategories();
   }, []);
+
+  const getDocumentCategories = () => {
+    api.get('/api/v1/categories').then(
+      (response) => {
+        toast.dismiss();
+        if (response.data) {
+          console.log('response.data', response.data);
+          setCategories([...response.data.categories]);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+      (error) => {
+        console.error('error', error);
+        toast.error('Something went wrong..');
+      }
+    );
+  };
 
   const handleDateChange = (date) => {
     if (date) {
       setIsOpen(false);
-      // setAvailability(date.toLocaleDateString());
+      setDocuments({
+        ...documents,
+        expirationDate: date
+      });
     }
   };
 
@@ -56,9 +92,12 @@ export default function UploadDocument() {
     reader.onload = function () {
       const dataURL = reader.result;
       const imageObj = { url: dataURL, extension, name: file.name };
-      // setFileUpload(imageObj);
       console.log('imageObj', imageObj);
     };
+    setErrors({
+      ...errors,
+      files: acceptedFiles.length > 0 ? 'dotted #0064FF' : 'dotted red'
+    });
     reader.readAsDataURL(file);
     setFiles(acceptedFiles);
   };
@@ -70,44 +109,116 @@ export default function UploadDocument() {
       docId: 0,
       notify: 1,
       privacy: 0,
-      copy: 'yes'
+      copy: true,
+      expiration: 0,
+      expirationDate: ''
     });
     setFiles([]);
   };
 
+  let handleChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'categoryId':
+        setErrors({
+          ...errors,
+          categoryId: parseInt(value) > 0 ? '' : 'Category is required!'
+        });
+        break;
+      case 'docId':
+        setErrors({
+          ...errors,
+          docId: parseInt(value) > 0 ? '' : 'Document type is required!'
+        });
+        break;
+      case 'expiration':
+        setErrors({
+          ...errors,
+          expiration:
+            parseInt(value) > 0 || documents.expirationDate
+              ? ''
+              : 'Expiration is required!'
+        });
+        break;
+      case 'notify':
+        setErrors({
+          ...errors,
+          notify: parseInt(value) > 0 ? '' : 'Notify is required!'
+        });
+        break;
+      case 'privacy':
+        setErrors({
+          ...errors,
+          privacy: parseInt(value) > 0 ? '' : 'Privacy is required!'
+        });
+        break;
+      default:
+        break;
+    }
+
+    documents[name] = value;
+    setDocuments(documents);
+  };
+
+  const validateForm = (error) => {
+    let valid = true;
+    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+    let date = parseInt(documents.expiration);
+    if (date === 2 && !documents.expirationDate) {
+      date = 0;
+    }
+    setErrors({
+      ...errors,
+      categoryId:
+        parseInt(documents.categoryId) === 0 ? 'Category is required!' : '',
+      docId:
+        parseInt(documents.docId) === 0 ? 'Document type is required!' : '',
+      expiration: parseInt(date) === 0 ? 'Expiration is required!' : '',
+      notify: parseInt(documents.notify) === 0 ? 'Notify is required!' : '',
+      privacy: parseInt(documents.privacy) === 0 ? 'Privacy is required!' : '',
+      files: files.length === 0 ? 'dotted red' : 'dotted #0064FF'
+    });
+    return valid;
+  };
+
   function addDocument() {
-    if (!files.length) {
+    if (validateForm(errors) || !files.length) {
       return;
     }
     const formData = new FormData();
-
-    formData.append('user[documents_attributes][][doc_name]', 'filesName');
+    formData.append('user[documents_attributes][][user_id]', currentUser.id);
     formData.append('user[documents_attributes][][doc]', files[0]);
+    formData.append(
+      'user[documents_attributes][][category_id]',
+      documents.docId
+    );
+    formData.append('user[documents_attributes][][notify]', documents.notify);
+    formData.append('user[documents_attributes][][privacy]', documents.privacy);
+    formData.append('user[documents_attributes][][send_copy]', documents.copy);
+    formData.append(
+      'user[documents_attributes][][expiration]',
+      parseInt(documents.expiration) === 1
+        ? 'No Expiration'
+        : documents.expirationDate
+    );
 
-    api.patch(`/api/user?id=${currentUser.id}`, formData).then((response) => {
-      if (response.data) {
-        console.log('response.data', response.data);
-        setFiles([]);
-        // setFileUpload({});
-      } else {
-        alert('Something went wrong..');
+    api.patch(`/api/v1/documents?id=${currentUser.id}`, formData).then(
+      (response) => {
+        toast.dismiss();
+        if (response.data) {
+          console.log('response.data', response.data);
+          toast.error(response.data.message);
+          setFiles([]);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+      (error) => {
+        console.error('error', error);
+        toast.error('Something went wrong..');
       }
-    });
-    console.log('The link was clicked.', files);
+    );
   }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // function getDocuments() {
-  //   api
-  //     .get(`/api/user/show_user_documents?id=${currentUser.id}`)
-  //     .then((response) => {
-  //       if (response.data) {
-  //         setDocuments(response.data);
-  //       } else {
-  //         alert('Something went wrong..');
-  //       }
-  //     });
-  // }
 
   return (
     <>
@@ -126,7 +237,11 @@ export default function UploadDocument() {
           styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
           onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps({ className: 'dropzone' })}>
+            <div
+              {...getRootProps({ className: 'dropzone' })}
+              style={{
+                border: errors.files
+              }}>
               <input {...getInputProps()} />
               <div className="center-info">
                 <div className="icon-up">
@@ -159,18 +274,29 @@ export default function UploadDocument() {
                   className="MuiTextField-root MuiFormControl-fullWidth select-doc"
                   variant="outlined"
                   fullWidth
-                  name="role"
-                  onChange={(event) => {
-                    setDocuments({
-                      ...documents,
-                      categoryId: event.target.value
-                    });
+                  name="categoryId"
+                  onChange={(e) => {
+                    documents['docId'] = 0;
+                    setDocuments(documents);
+                    const findSubCat = categories.find(
+                      (a) => a.id === parseInt(e.target.value)
+                    );
+                    if (findSubCat) {
+                      setSubCategory([...findSubCat.sub_category]);
+                    }
+                    handleChange(e);
                   }}
                   value={documents.categoryId}>
                   <option value="0">Select Category</option>
-                  <option value="1">Category 1</option>
-                  <option value="2">Category 2</option>
+                  {categories.map((cat, index) => (
+                    <option key={index} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
+                {errors.categoryId.length > 0 && (
+                  <span className="error">{errors.categoryId}</span>
+                )}
               </div>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -183,17 +309,18 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   value={documents.docId}
-                  onChange={(event) => {
-                    setDocuments({
-                      ...documents,
-                      docId: event.target.value
-                    });
-                  }}
-                  name="role">
+                  onChange={handleChange}
+                  name="docId">
                   <option value="0">Select Doc</option>
-                  <option value="1">Doc 1</option>
-                  <option value="2">Doc 1</option>
+                  {subCategory.map((cat, index) => (
+                    <option key={index} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
+                {errors.docId.length > 0 && (
+                  <span className="error">{errors.docId}</span>
+                )}
               </div>
             </Grid>
             <Grid item xs={12} sm={2}>
@@ -211,7 +338,7 @@ export default function UploadDocument() {
                         format="dd/MM/yyyy"
                         // margin="normal"
                         id="date-picker-inline"
-                        value={selectedDate}
+                        value={new Date()}
                         onChange={handleDateChange}
                         autoOk={true}
                         KeyboardButtonProps={{
@@ -227,20 +354,31 @@ export default function UploadDocument() {
                     fullWidth
                     name="expiration"
                     onChange={(event) => {
-                      setDocuments({
-                        ...documents,
-                        expiration: event.target.value
-                      });
+                      handleChange(event);
                       if (event.target.value === '2') {
                         setIsOpen(true);
+                      } else {
+                        setDocuments({
+                          ...documents,
+                          expirationDate: ''
+                        });
                       }
                       console.log('documents.expiration', event.target.value);
                     }}
                     value={documents.expiration}>
                     <option value="0">Select Expiration</option>
                     <option value="1">No Expiration</option>
-                    <option value="2">Date</option>
+                    <option value="2">
+                      {documents.expirationDate
+                        ? moment(documents.expirationDate).format('DD-MM-YYYY')
+                        : 'Date'}
+                    </option>
                   </select>
+                  {errors.expiration.length > 0 && (
+                    <span className="error date-error">
+                      {errors.expiration}
+                    </span>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -253,18 +391,16 @@ export default function UploadDocument() {
                   className="MuiTextField-root MuiFormControl-fullWidth select-doc"
                   variant="outlined"
                   fullWidth
-                  name="role"
-                  onChange={(event) => {
-                    setDocuments({
-                      ...documents,
-                      notify: event.target.value
-                    });
-                  }}
+                  name="notify"
+                  onChange={handleChange}
                   value={documents.notify}>
                   <option value="0">Select Notify</option>
                   <option value="1">No</option>
                   <option value="2">Yes</option>
                 </select>
+                {errors.notify.length > 0 && (
+                  <span className="error">{errors.notify}</span>
+                )}
               </div>
             </Grid>
             <Grid item xs={12} sm={2}>
@@ -277,24 +413,21 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   value={documents.privacy}
-                  onChange={(event) => {
-                    setDocuments({
-                      ...documents,
-                      privacy: event.target.value
-                    });
-                  }}
-                  name="role">
+                  onChange={handleChange}
+                  name="privacy">
                   <option value="0">Select Privacy</option>
-                  <option value="1">Privacy 1</option>
-                  <option value="2">Privacy 2</option>
+                  <option value="1">Yes</option>
+                  <option value="2">No</option>
                 </select>
+                {errors.privacy.length > 0 && (
+                  <span className="error">{errors.privacy}</span>
+                )}
               </div>
             </Grid>
           </Grid>
           <div className="pt-1">
             <Button
               onClick={addDocument}
-              disabled={!files.length}
               className="btn-primary font-weight-bold rounded hover-scale-lg mx-1"
               size="medium">
               <span className="btn-wrapper--label">Upload</span>
@@ -314,7 +447,7 @@ export default function UploadDocument() {
                   onChange={(event) => {
                     setDocuments({
                       ...documents,
-                      copy: event.target.value
+                      copy: event.target.checked
                     });
                   }}
                   checked={documents.copy}

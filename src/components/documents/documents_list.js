@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card, Button, Table } from '@material-ui/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
+import { getCurrentUser } from 'helper';
 
 export default function OnBoardDocument() {
+  const [currentUser] = useState(getCurrentUser());
+
   return (
     <>
       <Card className="p-4 shadow-xxl mb-spacing-6-x2">
@@ -22,9 +25,11 @@ export default function OnBoardDocument() {
                 <th scope="col">Name</th>
                 <th scope="col">Status</th>
                 <th scope="col">Required</th>
-                <th scope="col" className="text-center">
-                  Actions
-                </th>
+                {currentUser.role === 'candidate' && (
+                  <th scope="col" className="text-center">
+                    Actions
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -45,29 +50,31 @@ export default function OnBoardDocument() {
                 <td className="text-warning">
                   <span>Yes</span>
                 </td>
-                <td className="text-right">
-                  <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
-                    Upload Document
-                  </Button>
-                  <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'search']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['far', 'edit']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'times']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                </td>
+                {currentUser.role === 'candidate' && (
+                  <td className="text-right">
+                    <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
+                      Upload Document
+                    </Button>
+                    <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'search']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['far', 'edit']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                  </td>
+                )}
               </tr>
               <tr className="divider"></tr>
               <tr>
@@ -87,29 +94,31 @@ export default function OnBoardDocument() {
                 <td className="text-warning">
                   <span>Yes</span>
                 </td>
-                <td className="text-right">
-                  <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
-                    Upload Document
-                  </Button>
-                  <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'search']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['far', 'edit']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'times']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                </td>
+                {currentUser.role === 'candidate' && (
+                  <td className="text-right">
+                    <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
+                      Upload Document
+                    </Button>
+                    <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'search']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['far', 'edit']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                  </td>
+                )}
               </tr>
               <tr className="divider"></tr>
               <tr>
@@ -129,29 +138,31 @@ export default function OnBoardDocument() {
                 <td className="text-warning">
                   <span>Yes</span>
                 </td>
-                <td className="text-right">
-                  <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
-                    Upload Document
-                  </Button>
-                  <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'search']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['far', 'edit']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'times']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                </td>
+                {currentUser.role === 'candidate' && (
+                  <td className="text-right">
+                    <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
+                      Upload Document
+                    </Button>
+                    <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'search']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['far', 'edit']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                  </td>
+                )}
               </tr>
               <tr className="divider"></tr>
               <tr>
@@ -171,29 +182,31 @@ export default function OnBoardDocument() {
                 <td className="text-warning">
                   <span>Yes</span>
                 </td>
-                <td className="text-right">
-                  <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
-                    Upload Document
-                  </Button>
-                  <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'search']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['far', 'edit']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'times']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                </td>
+                {currentUser.role === 'candidate' && (
+                  <td className="text-right">
+                    <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
+                      Upload Document
+                    </Button>
+                    <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'search']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['far', 'edit']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                  </td>
+                )}
               </tr>
               <tr className="divider"></tr>
               <tr>
@@ -213,35 +226,37 @@ export default function OnBoardDocument() {
                 <td className="text-warning">
                   <span>Yes</span>
                 </td>
-                <td className="text-right">
-                  <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
-                    Upload Document
-                  </Button>
-                  <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'search']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['far', 'edit']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                  <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon
-                      icon={['fas', 'times']}
-                      className="font-size-sm"
-                    />
-                  </Button>
-                </td>
+                {currentUser.role === 'candidate' && (
+                  <td className="text-right">
+                    <Button className="btn-neutral-first rounded-sm text-uppercase font-size-xs font-weight-bold mr-4 py-0 shadow-none hover-scale-sm w-auto d-40">
+                      Upload Document
+                    </Button>
+                    <Button className="btn-neutral-primary mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'search']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-first mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['far', 'edit']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                    <Button className="btn-neutral-danger mx-1 rounded-sm shadow-none hover-scale-sm d-40 border-0 p-0 d-inline-flex align-items-center justify-content-center">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times']}
+                        className="font-size-sm"
+                      />
+                    </Button>
+                  </td>
+                )}
               </tr>
               <tr className="divider"></tr>
             </tbody>
           </Table>
         </div>
-        <AddsComponents />
+        {currentUser.role === 'candidate' && <AddsComponents />}
       </Card>
     </>
   );

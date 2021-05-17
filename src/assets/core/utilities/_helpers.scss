@@ -744,6 +744,12 @@ tbody.scroll {
   }
 }
 
+.date-error {
+  top: 40px;
+  position: absolute;
+  display: block;
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {

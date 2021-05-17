@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
 import { Card, Button, Grid, CardContent } from '@material-ui/core';
-
-import { getCurrentUser } from '../../helper';
-import AddsComponents from 'components/add_component';
-
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
+
+import AddsComponents from 'components/add_component';
+import { getCurrentUser } from '../../helper';
 
 export default function OnBoardDocument() {
-  const [documents, setDocuments] = useState([]);
+  const history = useHistory();
+  // const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
 
   // useEffect(() => {
@@ -29,6 +30,10 @@ export default function OnBoardDocument() {
   //     });
   // }
 
+  const viewDocument = (e) => {
+    e.preventDefault();
+    history.push('/view-document');
+  };
   return (
     <>
       <Grid container spacing={2}>
@@ -99,7 +104,7 @@ export default function OnBoardDocument() {
               {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
               <div className="divider mx-4 my-2" />
               <div className="text-center mb-2">
-                <a href="/view-document">
+                <a href="/#" onClick={(e) => viewDocument(e)}>
                   <Button size="small" className="px-4 btn-neutral-info">
                     View Documents
                   </Button>
