@@ -186,28 +186,25 @@ export default function UploadDocument() {
       return;
     }
     const formData = new FormData();
-    formData.append('user[documents_attributes][][user_id]', currentUser.id);
-    formData.append('user[documents_attributes][][doc]', files[0]);
+    formData.append('document[user_id]', currentUser.id);
+    formData.append('document[doc]', files[0]);
+    formData.append('document[category_id]', documents.docId);
+    formData.append('document[notify]', documents.notify);
+    formData.append('document[privacy]', documents.privacy);
+    formData.append('document[send_copy]', documents.copy);
     formData.append(
-      'user[documents_attributes][][category_id]',
-      documents.docId
-    );
-    formData.append('user[documents_attributes][][notify]', documents.notify);
-    formData.append('user[documents_attributes][][privacy]', documents.privacy);
-    formData.append('user[documents_attributes][][send_copy]', documents.copy);
-    formData.append(
-      'user[documents_attributes][][expiration]',
+      'document[expiration]',
       parseInt(documents.expiration) === 1
         ? 'No Expiration'
         : documents.expirationDate
     );
 
-    api.patch(`/api/v1/documents?id=${currentUser.id}`, formData).then(
+    api.post(`/api/v1/documents?id=${currentUser.id}`, formData).then(
       (response) => {
         toast.dismiss();
         if (response.data) {
           console.log('response.data', response.data);
-          toast.error(response.data.message);
+          toast.success(response.data.message);
           setFiles([]);
         } else {
           toast.error(response.data.message);
