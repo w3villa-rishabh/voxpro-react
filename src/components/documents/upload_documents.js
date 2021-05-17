@@ -214,7 +214,7 @@ export default function UploadDocument() {
         : documents.expirationDate
     );
 
-    api.patch(`/api/v1/documents?id=${currentUser.id}`, formData).then(
+    api.post(`/api/v1/documents?id=${currentUser.id}`, formData).then(
       (response) => {
         toast.dismiss();
         if (response.data) {

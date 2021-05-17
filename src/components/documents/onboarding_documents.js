@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 import { Card, Button, Grid, CardContent } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router-dom';
-
 import AddsComponents from 'components/add_component';
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
@@ -22,17 +22,23 @@ export default function OnBoardDocument() {
     api
       .get(`/api/v1/documents/documents_type_with_counts?id=${currentUser.id}`)
       .then((response) => {
-        if (response.data) {
-          setDocuments(response.data);
+        if (response.data.success) {
+          setDocuments([...response.data.documents]);
         } else {
           alert('Something went wrong..');
         }
       });
   }
 
-  const viewDocument = (e) => {
+  const viewDocument = (e, id) => {
     e.preventDefault();
-    history.push('/view-document');
+    history.push({
+      pathname: '/view-document',
+      search: '?id=' + id,
+      state: {
+        id: id
+      }
+    });
   };
   return (
     <>
@@ -64,203 +70,69 @@ export default function OnBoardDocument() {
         </Grid>
       </Grid>
 
-      {/* <ul className="show-doc mb-1">
-          {documents.map((file) => (
-            <li className="p-2 w-25">
-              <Card className="card-box">
-                <img height="100%" width="100%" alt="..." src={stock1} />
-                <div className="p-2">{file.doc_name}</div>
-              </Card>
-            </li>
-          ))}
-        </ul> */}
       <Grid container spacing={2}>
-        <Grid item md={3} xs={12}>
-          <Card className="card-box h-100">
-            <div className="m-2 text-capitalize font-size-lg text-center">
-              {currentUser.role === 'candidate' && <b>Personal Documents</b>}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && <b>Candidates Documents</b>}
-            </div>
-            <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
-                <FontAwesomeIcon
-                  icon={['fas', 'id-card-alt']}
-                  className="display-4"
-                />
-              </div>
-              <div className="mb-1 mt-2 text-black text-black-50">
-                4 Documents {currentUser.role === 'candidate' && 'Uploaded'}
-                {currentUser.role === 'agency' && 'added'}
-                {currentUser.role === 'company' && 'added'}
+        {documents.map((doc, index) => (
+          <Grid key={index} item md={3} xs={12}>
+            <Card className="card-box h-100">
+              <div className="m-2 text-capitalize font-size-lg text-center">
+                {currentUser.role === 'candidate' && (
+                  <b>{doc.category_name} Documents</b>
+                )}
                 {(currentUser.role === 'agency' ||
                   currentUser.role === 'company') && (
-                  <div>
-                    <div>3 Documents downloaded</div>
-                    <div>2 Documents Pending Viewing</div>
+                  <b>Candidates Documents</b>
+                )}
+              </div>
+              <div className="card-content-overlay text-center py-4">
+                <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
+                  <FontAwesomeIcon
+                    icon={['fas', 'id-card-alt']}
+                    className="display-4"
+                  />
+                </div>
+                <div className="mb-1 mt-2 text-black text-black-50">
+                  {doc.doc_count} Documents{' '}
+                  {currentUser.role === 'candidate' && 'Uploaded'}
+                  {currentUser.role === 'agency' && 'added'}
+                  {currentUser.role === 'company' && 'added'}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <div>
+                      <div>3 Documents downloaded</div>
+                      <div>2 Documents Pending Viewing</div>
+                    </div>
+                  )}
+                </div>
+                {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
+                <div className="divider mx-4 my-2" />
+                <div className="text-center mb-2">
+                  <a
+                    href="/#"
+                    onClick={(e) => viewDocument(e, doc.category_id)}>
+                    <Button size="small" className="px-4 btn-neutral-info">
+                      View Documents
+                    </Button>
+                  </a>
+                </div>
+                {currentUser.role === 'candidate' && (
+                  <div className="text-center">
+                    <Button size="small" className="px-4 btn-neutral-info">
+                      Upload Documents
+                    </Button>
+                  </div>
+                )}
+                {(currentUser.role === 'agency' ||
+                  currentUser.role === 'company') && (
+                  <div className="text-center">
+                    <Button size="small" className="px-4 btn-neutral-info">
+                      Pending Documents
+                    </Button>
                   </div>
                 )}
               </div>
-              {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
-              <div className="divider mx-4 my-2" />
-              <div className="text-center mb-2">
-                <a href="/#" onClick={(e) => viewDocument(e)}>
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    View Documents
-                  </Button>
-                </a>
-              </div>
-              {currentUser.role === 'candidate' && (
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    Upload Documents
-                  </Button>
-                </div>
-              )}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && (
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    Pending Documents
-                  </Button>
-                </div>
-              )}
-            </div>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <Card className="card-box h-100">
-            <div className="m-2 text-capitalize font-size-lg text-center">
-              {currentUser.role === 'candidate' && (
-                <b>Limited Company Documents</b>
-              )}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && <b>Placements Documents</b>}
-            </div>
-            <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
-                <FontAwesomeIcon
-                  icon={['fas', 'file-word']}
-                  className="display-4"
-                />
-              </div>
-              <div className="mb-1 mt-2 text-black text-black-50">
-                3 Documents {currentUser.role === 'candidate' && 'Uploaded'}
-                {currentUser.role === 'agency' && 'added'}
-                {currentUser.role === 'company' && 'added'}
-                {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company') && (
-                  <div>
-                    <div>2 Documents downloaded</div>
-                    <div>2 Documents Pending Viewing</div>
-                  </div>
-                )}
-              </div>
-              {/* <div className="font-size-lg opacity-8">Monthly Income</div> */}
-              <div className="divider mx-4 my-2" />
-              <div className="text-center">
-                <Button size="small" className="px-4 btn-neutral-info mb-2">
-                  View Documents
-                </Button>
-              </div>
-              {currentUser.role === 'candidate' && (
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    Upload Documents
-                  </Button>
-                </div>
-              )}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && (
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    Pending Documents
-                  </Button>
-                </div>
-              )}
-            </div>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <Card className="card-box h-100">
-            <div className="m-2 text-capitalize font-size-lg text-center">
-              {currentUser.role === 'candidate' && <b>General Documents</b>}
-              {currentUser.role === 'agency' && <b>Client Documents</b>}
-              {currentUser.role === 'company' && <b>Agency Documents</b>}
-            </div>
-            <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
-                <FontAwesomeIcon icon={['fas', 'file']} className="display-4" />
-              </div>
-              <div className="mb-1 mt-2 text-black text-black-50">
-                2 Documents {currentUser.role === 'candidate' && 'Uploaded'}
-                {currentUser.role === 'agency' && 'added'}
-                {currentUser.role === 'company' && 'added'}
-                {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company') && (
-                  <div>
-                    <div>1 Document downloaded</div>
-                    <div>2 Documents Pending Viewing</div>
-                  </div>
-                )}
-              </div>
-              {/* <div className="font-size-lg opacity-8">Total 2Sales</div> */}
-              <div className="divider mx-4 my-2" />
-              <div className="text-center mb-2">
-                <Button size="small" className="px-4 btn-neutral-info">
-                  View Documents
-                </Button>
-              </div>
-              {currentUser.role === 'candidate' && (
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    Upload Documents
-                  </Button>
-                </div>
-              )}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && (
-                <div className="text-center">
-                  <Button size="small" className="px-4 btn-neutral-info">
-                    Pending Documents
-                  </Button>
-                </div>
-              )}
-            </div>
-          </Card>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <Card className="card-box h-100">
-            <div className="m-2 text-capitalize font-size-lg text-center">
-              {currentUser.role === 'candidate' && <b>Onboarding Documents</b>}
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && <b>My Templates</b>}
-            </div>
-            <div className="card-content-overlay text-center py-4">
-              <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
-                <FontAwesomeIcon
-                  icon={['fas', 'file-powerpoint']}
-                  className="display-4"
-                />
-              </div>
-              <div className="mb-1 mt-2 text-black text-black-50">
-                4 Template Uploaded
-              </div>
-              {/* <div className="font-size-lg opacity-8">Total Sales</div> */}
-              <div className="divider mx-4 my-2" />
-              <div className="text-center mb-2">
-                <Button size="small" className="px-4 btn-neutral-info">
-                  View Documents
-                </Button>
-              </div>
-              <div className="text-center">
-                <Button size="small" className="px-4 btn-neutral-info">
-                  Upload Documents
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </Grid>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
       <Grid container spacing={2}>
         <Grid item md={3} xs={12}>
