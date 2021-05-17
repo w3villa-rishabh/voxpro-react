@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Card, Button, Grid, CardContent } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
@@ -7,28 +7,28 @@ import { useHistory } from 'react-router-dom';
 
 import AddsComponents from 'components/add_component';
 import { getCurrentUser } from '../../helper';
+import api from '../../api';
 
 export default function OnBoardDocument() {
   const history = useHistory();
-  // const [documents, setDocuments] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
 
-  // useEffect(() => {
-  //   // getDocuments();
-  // }, [getDocuments]);
+  useEffect(() => {
+    getDocuments();
+  }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // function getDocuments() {
-  //   api
-  //     .get(`/api/user/show_user_documents?id=${currentUser.id}`)
-  //     .then((response) => {
-  //       if (response.data) {
-  //         setDocuments(response.data);
-  //       } else {
-  //         alert('Something went wrong..');
-  //       }
-  //     });
-  // }
+  function getDocuments() {
+    api
+      .get(`/api/v1/documents/documents_type_with_counts?id=${currentUser.id}`)
+      .then((response) => {
+        if (response.data) {
+          setDocuments(response.data);
+        } else {
+          alert('Something went wrong..');
+        }
+      });
+  }
 
   const viewDocument = (e) => {
     e.preventDefault();
