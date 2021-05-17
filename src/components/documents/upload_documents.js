@@ -216,7 +216,7 @@ export default function UploadDocument() {
         toast.dismiss();
         if (response.data) {
           console.log('response.data', response.data);
-          toast.error(response.data.message);
+          toast.success(response.data.message);
           setFiles([]);
         } else {
           toast.error(response.data.message);
