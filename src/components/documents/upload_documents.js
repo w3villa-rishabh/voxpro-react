@@ -33,7 +33,7 @@ export default function UploadDocument() {
     docId: 0,
     notify: 1,
     privacy: 0,
-    copy: 'yes',
+    copy: true,
     expiration: 0
   });
 
@@ -42,7 +42,6 @@ export default function UploadDocument() {
     docId: '',
     notify: '',
     privacy: '',
-    copy: '',
     files: '',
     expiration: ''
   });
@@ -86,7 +85,7 @@ export default function UploadDocument() {
       docId: 0,
       notify: 1,
       privacy: 0,
-      copy: 'yes',
+      copy: true,
       expiration: 0
     });
     setFiles([]);
@@ -284,12 +283,6 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   value={documents.docId}
-                  // onChange={(event) => {
-                  //   setDocuments({
-                  //     ...documents,
-                  //     docId: event.target.value
-                  //   });
-                  // }}
                   onChange={handleChange}
                   name="docId">
                   <option value="0">Select Doc</option>
@@ -332,17 +325,12 @@ export default function UploadDocument() {
                     fullWidth
                     name="expiration"
                     onChange={(event) => {
-                      // setDocuments({
-                      //   ...documents,
-                      //   expiration: event.target.value
-                      // });
                       handleChange(event);
                       if (event.target.value === '2') {
                         setIsOpen(true);
                       }
                       console.log('documents.expiration', event.target.value);
                     }}
-                    // onChange={handleChange}
                     value={documents.expiration}>
                     <option value="0">Select Expiration</option>
                     <option value="1">No Expiration</option>
@@ -366,12 +354,6 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   name="notify"
-                  // onChange={(event) => {
-                  //   setDocuments({
-                  //     ...documents,
-                  //     notify: event.target.value
-                  //   });
-                  // }}
                   onChange={handleChange}
                   value={documents.notify}>
                   <option value="0">Select Notify</option>
@@ -393,12 +375,6 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   value={documents.privacy}
-                  // onChange={(event) => {
-                  //   setDocuments({
-                  //     ...documents,
-                  //     privacy: event.target.value
-                  //   });
-                  // }}
                   onChange={handleChange}
                   name="privacy">
                   <option value="0">Select Privacy</option>
@@ -434,7 +410,7 @@ export default function UploadDocument() {
                   onChange={(event) => {
                     setDocuments({
                       ...documents,
-                      copy: event.target.value
+                      copy: event.target.checked
                     });
                   }}
                   checked={documents.copy}
