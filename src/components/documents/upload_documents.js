@@ -13,7 +13,7 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { toast } from 'react-toastify';
-
+import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
@@ -27,14 +27,14 @@ import AddsComponents from 'components/add_component';
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
   const [currentUser] = useState(getCurrentUser());
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [documents, setDocuments] = useState({
     categoryId: 0,
     docId: 0,
     notify: 1,
     privacy: 0,
     copy: true,
-    expiration: 0
+    expiration: 0,
+    expirationDate: ''
   });
 
   const [errors, setErrors] = useState({
@@ -43,7 +43,8 @@ export default function UploadDocument() {
     notify: '',
     privacy: '',
     files: '',
-    expiration: ''
+    expiration: '',
+    expirationDate: ''
   });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,10 @@ export default function UploadDocument() {
   const handleDateChange = (date) => {
     if (date) {
       setIsOpen(false);
-      // setSelectedDate(date.toLocaleDateString());
+      setDocuments({
+        ...documents,
+        expirationDate: date
+      });
     }
   };
 
@@ -109,7 +113,10 @@ export default function UploadDocument() {
       case 'expiration':
         setErrors({
           ...errors,
-          expiration: parseInt(value) > 0 ? '' : 'Expiration is required!'
+          expiration:
+            parseInt(value) > 0 || documents.expirationDate
+              ? ''
+              : 'Expiration is required!'
         });
         break;
       case 'notify':
@@ -135,14 +142,17 @@ export default function UploadDocument() {
   const validateForm = (error) => {
     let valid = true;
     Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+    let date = parseInt(documents.expiration);
+    if (date === 2 && !documents.expirationDate) {
+      date = 0;
+    }
     setErrors({
       ...errors,
       categoryId:
         parseInt(documents.categoryId) === 0 ? 'Category is required!' : '',
       docId:
         parseInt(documents.docId) === 0 ? 'Document type is required!' : '',
-      expiration:
-        parseInt(documents.expiration) === 0 ? 'Expiration is required!' : '',
+      expiration: parseInt(date) === 0 ? 'Expiration is required!' : '',
       notify: parseInt(documents.notify) === 0 ? 'Notify is required!' : '',
       privacy: parseInt(documents.privacy) === 0 ? 'Privacy is required!' : '',
       files: files.length === 0 ? 'dotted red' : 'dotted #0064FF'
@@ -167,7 +177,9 @@ export default function UploadDocument() {
     formData.append('user[documents_attributes][][copy]', documents.copy);
     formData.append(
       'user[documents_attributes][][expiration]',
-      documents.expiration
+      parseInt(documents.expiration) === 1
+        ? 'No Expiration'
+        : documents.expirationDate
     );
 
     api.patch(`/api/user?id=${currentUser.id}`, formData).then(
@@ -309,7 +321,7 @@ export default function UploadDocument() {
                         format="dd/MM/yyyy"
                         // margin="normal"
                         id="date-picker-inline"
-                        value={selectedDate}
+                        value={new Date()}
                         onChange={handleDateChange}
                         autoOk={true}
                         KeyboardButtonProps={{
@@ -328,13 +340,22 @@ export default function UploadDocument() {
                       handleChange(event);
                       if (event.target.value === '2') {
                         setIsOpen(true);
+                      } else {
+                        setDocuments({
+                          ...documents,
+                          expirationDate: ''
+                        });
                       }
                       console.log('documents.expiration', event.target.value);
                     }}
                     value={documents.expiration}>
                     <option value="0">Select Expiration</option>
                     <option value="1">No Expiration</option>
-                    <option value="2">Date</option>
+                    <option value="2">
+                      {documents.expirationDate
+                        ? moment(documents.expirationDate).format('DD-MM-YYYY')
+                        : 'Date'}
+                    </option>
                   </select>
                   {errors.expiration.length > 0 && (
                     <span className="error date-error">
