@@ -40,6 +40,11 @@ export default function OnBoardDocument() {
       }
     });
   };
+
+  const uploadDocument = () => {
+    history.push('/upload');
+  };
+
   return (
     <>
       <Grid container spacing={2}>
@@ -116,7 +121,10 @@ export default function OnBoardDocument() {
                 </div>
                 {currentUser.role === 'candidate' && (
                   <div className="text-center">
-                    <Button size="small" className="px-4 btn-neutral-info">
+                    <Button
+                      size="small"
+                      className="px-4 btn-neutral-info"
+                      onClick={uploadDocument}>
                       Upload Documents
                     </Button>
                   </div>

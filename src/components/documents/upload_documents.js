@@ -292,6 +292,8 @@ export default function UploadDocument() {
                     );
                     if (findSubCat) {
                       setSubCategory([...findSubCat.sub_category]);
+                    } else {
+                      setSubCategory([]);
                     }
                     handleChange(e);
                   }}
