@@ -50,6 +50,7 @@ export default function OnBoardDocument() {
                 <th scope="col">Document Name</th>
                 <th scope="col">Status</th>
                 <th scope="col">Required</th>
+                <th scope="col">Expiration</th>
                 {currentUser.role === 'candidate' && (
                   <th scope="col" className="text-center">
                     Actions
@@ -69,6 +70,9 @@ export default function OnBoardDocument() {
                     </td>
                     <td className="text-warning">
                       <span>Yes</span>
+                    </td>
+                    <td>
+                      <span>{doc.expiration}</span>
                     </td>
                     {currentUser.role === 'candidate' && (
                       <td className="text-right">

@@ -208,7 +208,7 @@ export default function UploadDocument() {
       'document[expiration]',
       parseInt(documents.expiration) === 1
         ? 'No Expiration'
-        : documents.expirationDate
+        : moment(documents.expirationDate).format('DD-MM-YYYY')
     );
 
     api.post(`/api/v1/documents?id=${currentUser.id}`, formData).then(
