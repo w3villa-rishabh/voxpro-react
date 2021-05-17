@@ -26,6 +26,8 @@ import AddsComponents from 'components/add_component';
 
 export default function UploadDocument() {
   const [files, setFiles] = useState([]);
+  const [filesError, setFileError] = useState();
+
   const [currentUser] = useState(getCurrentUser());
   const [categories, setCategories] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -175,36 +177,49 @@ export default function UploadDocument() {
         parseInt(documents.docId) === 0 ? 'Document type is required!' : '',
       expiration: parseInt(date) === 0 ? 'Expiration is required!' : '',
       notify: parseInt(documents.notify) === 0 ? 'Notify is required!' : '',
-      privacy: parseInt(documents.privacy) === 0 ? 'Privacy is required!' : '',
-      files: files.length === 0 ? 'dotted red' : 'dotted #0064FF'
+      privacy: parseInt(documents.privacy) === 0 ? 'Privacy is required!' : ''
     });
+    setFileError(files.length === 0 ? 'dotted red' : 'dotted #0064FF');
+
     return valid;
   };
 
   function addDocument() {
-    if (validateForm(errors) || !files.length) {
+    validateForm(errors);
+    if (
+      !parseInt(documents.categoryId) ||
+      !parseInt(documents.docId) ||
+      !parseInt(documents.expiration) ||
+      !parseInt(documents.privacy) ||
+      !parseInt(documents.notify) ||
+      !files.length
+    ) {
       return;
     }
+
     const formData = new FormData();
-    formData.append('document[user_id]', currentUser.id);
-    formData.append('document[doc]', files[0]);
-    formData.append('document[category_id]', documents.docId);
-    formData.append('document[notify]', documents.notify);
-    formData.append('document[privacy]', documents.privacy);
-    formData.append('document[send_copy]', documents.copy);
+    formData.append('user[documents_attributes][][user_id]', currentUser.id);
+    formData.append('user[documents_attributes][][doc]', files[0]);
     formData.append(
-      'document[expiration]',
+      'user[documents_attributes][][category_id]',
+      documents.docId
+    );
+    formData.append('user[documents_attributes][][notify]', documents.notify);
+    formData.append('user[documents_attributes][][privacy]', documents.privacy);
+    formData.append('user[documents_attributes][][send_copy]', documents.copy);
+    formData.append(
+      'user[documents_attributes][][expiration]',
       parseInt(documents.expiration) === 1
         ? 'No Expiration'
         : documents.expirationDate
     );
 
-    api.post(`/api/v1/documents?id=${currentUser.id}`, formData).then(
+    api.patch(`/api/v1/documents?id=${currentUser.id}`, formData).then(
       (response) => {
         toast.dismiss();
         if (response.data) {
           console.log('response.data', response.data);
-          toast.success(response.data.message);
+          toast.error(response.data.message);
           setFiles([]);
         } else {
           toast.error(response.data.message);
@@ -237,7 +252,7 @@ export default function UploadDocument() {
             <div
               {...getRootProps({ className: 'dropzone' })}
               style={{
-                border: errors.files
+                border: filesError
               }}>
               <input {...getInputProps()} />
               <div className="center-info">
