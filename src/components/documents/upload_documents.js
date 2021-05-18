@@ -134,7 +134,8 @@ export default function UploadDocument() {
       expiration: 0,
       expirationDate: '',
       other: '',
-      otherShow: ''
+      otherShow: '',
+      message: ''
     });
     setFiles([]);
   };
@@ -336,6 +337,10 @@ export default function UploadDocument() {
                     const findSubCat = categories.find(
                       (a) => a.id === parseInt(e.target.value)
                     );
+                    documents.otherShow = false;
+                    setDocuments({
+                      ...documents
+                    });
                     if (findSubCat) {
                       setSubCategory([...findSubCat.sub_category]);
                     } else {
