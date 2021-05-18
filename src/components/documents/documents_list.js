@@ -130,7 +130,7 @@ export default function OnBoardDocument() {
                           <b>{doc.category_name}</b>
                         </td>
                         <td>
-                          <span>Uploaded</span>
+                          <span>{doc.date}</span>
                         </td>
                         <td>
                           <span>{doc.expiration}</span>
