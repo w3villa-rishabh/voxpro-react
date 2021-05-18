@@ -11,6 +11,15 @@ import { getCurrentUser } from 'helper';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
+
+const images = [
+  '//placekitten.com/1500/500',
+  '//placekitten.com/4000/3000',
+  '//placekitten.com/800/1200',
+  '//placekitten.com/1500/1500'
+];
 
 export default function OnBoardDocument() {
   const location = useLocation();
@@ -18,6 +27,8 @@ export default function OnBoardDocument() {
   const [currentUser] = useState(getCurrentUser());
   const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState({ open: false, url: '' });
+
   const [anchorElDoc, setAnchorElDoc] = useState(null);
 
   useEffect(() => {
@@ -97,7 +108,8 @@ export default function OnBoardDocument() {
     handleClose();
   };
 
-  const viewDoc = () => {
+  const viewDoc = (url) => {
+    setIsOpen({ open: true, url });
     handleClose();
   };
 
@@ -190,7 +202,7 @@ export default function OnBoardDocument() {
                               <div className="p-3">
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
-                                  onClick={viewDoc}>
+                                  onClick={(e) => viewDoc(doc.doc_url)}>
                                   View
                                 </MenuItem>
                                 <MenuItem
@@ -220,6 +232,15 @@ export default function OnBoardDocument() {
               )}
             </tbody>
           </Table>
+          {!documents.length && !isLoading && (
+            <div className="font-size-xxl m-5 text-center">No data found</div>
+          )}
+          {isOpen.open && (
+            <Lightbox
+              mainSrc={'https://b0641226ab11.ngrok.io/' + isOpen.url}
+              onCloseRequest={() => setIsOpen({ open: false, url: '' })}
+            />
+          )}
         </div>
       </Card>
       {currentUser.role === 'candidate' && <AddsComponents />}

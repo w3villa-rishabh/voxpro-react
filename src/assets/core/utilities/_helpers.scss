@@ -750,6 +750,11 @@ tbody.scroll {
   display: block;
 }
 
+
+.ReactModal__Overlay--after-open {
+  z-index: 9999 !important;
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {
