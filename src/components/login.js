@@ -83,6 +83,7 @@ export default function LoginComponent() {
       })
       .then((response) => {
         if (response.data.success) {
+          localStorage.setItem('token', response.data.authorization.token);
           localStorage.setItem('user', JSON.stringify(response.data.user));
           if (
             !response.data.user.subscribed &&

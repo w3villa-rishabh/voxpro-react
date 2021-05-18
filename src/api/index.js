@@ -32,14 +32,22 @@ const fetchClient = () => {
   // Create instance
   let instance = axios.create(defaultOptions);
 
+  instance.interceptors.response.use(
+    function (successRes) {
+      return successRes;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+
   // Set the AUTH token for any request
   instance.interceptors.request.use(function (config) {
     const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
     const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
     if (isLoggedIn) {
-      config.headers.Authorization = user.token
-        ? `Bearer ${user.token}`
-        : `Bearer ''`;
+      config.headers.Authorization = token ? `Bearer ${token}` : `Bearer ''`;
       config.headers.UserID = user.id;
     }
 
