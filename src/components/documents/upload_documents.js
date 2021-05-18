@@ -133,7 +133,8 @@ export default function UploadDocument() {
       copy: true,
       expiration: 0,
       expirationDate: '',
-      other: ''
+      other: '',
+      otherShow: ''
     });
     setFiles([]);
   };
