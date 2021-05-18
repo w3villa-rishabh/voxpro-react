@@ -230,7 +230,7 @@ export default function OnBoardDocument() {
           )}
           {isOpen.open && (
             <Lightbox
-              mainSrc={'https://b0641226ab11.ngrok.io/' + isOpen.url}
+              mainSrc={'http://54.203.142.83/' + isOpen.url}
               onCloseRequest={() => setIsOpen({ open: false, url: '' })}
             />
           )}
