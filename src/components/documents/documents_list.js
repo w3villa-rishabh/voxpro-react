@@ -11,6 +11,7 @@ import { getCurrentUser } from 'helper';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
+import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
@@ -78,12 +79,15 @@ export default function OnBoardDocument() {
               (response) => {
                 setIsLoading(false);
                 if (response.data.success) {
+                  toast.dismiss();
+                  toast.success('Document delete successfully..');
                   documents.splice(index, 1);
                   setDocuments([...documents]);
                 }
               },
               (error) => {
                 setIsLoading(false);
+                toast.error('Something went wrong');
                 console.error('error', error);
               }
             );
