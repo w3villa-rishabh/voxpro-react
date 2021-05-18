@@ -13,17 +13,22 @@ export default function OnBoardDocument() {
   const history = useHistory();
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
+  const [remainingDocuments, setRemainingDocuments] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getDocuments();
   }, []);
 
   function getDocuments() {
+    setIsLoading(true);
     api
       .get(`/api/v1/documents/documents_type_with_counts?id=${currentUser.id}`)
       .then((response) => {
+        setIsLoading(false);
         if (response.data.success) {
           setDocuments([...response.data.documents]);
+          setRemainingDocuments(response.data.remaining_documents);
         } else {
           alert('Something went wrong..');
         }
@@ -47,101 +52,96 @@ export default function OnBoardDocument() {
 
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid item sm={9} xs={12}>
-          <div className="page-title">
-            <PostAddIcon />
-            <div className="title">
-              {currentUser.role !== 'candidate' && (
-                <h5 className="heading mt-3">Document Management</h5>
-              )}
+      <div className="page-title">
+        <PostAddIcon />
+        <div className="title">
+          {currentUser.role !== 'candidate' && (
+            <h5 className="heading mt-3">Document Management</h5>
+          )}
 
-              {currentUser.role === 'candidate' && (
-                <>
-                  <h5 className="heading">Document Management</h5>
-                  <p>
-                    Upload, Store, Update and Manage your information and
-                    document requests.
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-        </Grid>
-        <Grid item sm={3} xs={12}>
-          <Button className="btn-neutral-info hover-scale-sm px-4 float-right">
-            <span className="px-2">Select Doc Type</span>
-          </Button>
-        </Grid>
-      </Grid>
+          {currentUser.role === 'candidate' && (
+            <>
+              <h5 className="heading">Document Management</h5>
+              <p>
+                Upload, Store, Update and Manage your information and document
+                requests.
+              </p>
+            </>
+          )}
+        </div>
+      </div>
 
-      <Grid container spacing={2}>
-        {documents.map((doc, index) => (
-          <Grid key={index} item md={3} xs={12}>
-            <Card className="card-box h-100">
-              <div className="m-2 text-capitalize font-size-lg text-center">
-                {currentUser.role === 'candidate' && (
-                  <b>{doc.category_name} Documents</b>
-                )}
-                {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company') && (
-                  <b>Candidates Documents</b>
-                )}
-              </div>
-              <div className="card-content-overlay text-center py-4">
-                <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
-                  <FontAwesomeIcon
-                    icon={['fas', 'id-card-alt']}
-                    className="display-4"
-                  />
-                </div>
-                <div className="mb-1 mt-2 text-black text-black-50">
-                  {doc.doc_count} Documents{' '}
-                  {currentUser.role === 'candidate' && 'Uploaded'}
-                  {currentUser.role === 'agency' && 'added'}
-                  {currentUser.role === 'company' && 'added'}
+      {isLoading ? (
+        'Loading..'
+      ) : (
+        <Grid container spacing={2}>
+          {documents.map((doc, index) => (
+            <Grid key={index} item md={3} xs={12}>
+              <Card className="card-box h-100">
+                <div className="m-2 text-capitalize font-size-lg text-center">
+                  {currentUser.role === 'candidate' && (
+                    <b>{doc.category_name} Documents</b>
+                  )}
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') && (
-                    <div>
-                      <div>3 Documents downloaded</div>
-                      <div>2 Documents Pending Viewing</div>
+                    <b>Candidates Documents</b>
+                  )}
+                </div>
+                <div className="card-content-overlay text-center py-4">
+                  <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
+                    <FontAwesomeIcon
+                      icon={['fas', 'id-card-alt']}
+                      className="display-4"
+                    />
+                  </div>
+                  <div className="mb-1 mt-2 text-black text-black-50">
+                    {doc.doc_count} Documents{' '}
+                    {currentUser.role === 'candidate' && 'Uploaded'}
+                    {currentUser.role === 'agency' && 'added'}
+                    {currentUser.role === 'company' && 'added'}
+                    {(currentUser.role === 'agency' ||
+                      currentUser.role === 'company') && (
+                      <div>
+                        <div>3 Documents downloaded</div>
+                        <div>2 Documents Pending Viewing</div>
+                      </div>
+                    )}
+                  </div>
+                  {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
+                  <div className="divider mx-4 my-2" />
+                  <div className="text-center mb-2">
+                    <a
+                      href="/#"
+                      onClick={(e) => viewDocument(e, doc.category_id)}>
+                      <Button size="small" className="px-4 btn-neutral-info">
+                        View Documents
+                      </Button>
+                    </a>
+                  </div>
+                  {currentUser.role === 'candidate' && (
+                    <div className="text-center">
+                      <Button
+                        size="small"
+                        className="px-4 btn-neutral-info"
+                        onClick={uploadDocument}>
+                        Upload Documents
+                      </Button>
+                    </div>
+                  )}
+                  {(currentUser.role === 'agency' ||
+                    currentUser.role === 'company') && (
+                    <div className="text-center">
+                      <Button size="small" className="px-4 btn-neutral-info">
+                        Pending Documents
+                      </Button>
                     </div>
                   )}
                 </div>
-                {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
-                <div className="divider mx-4 my-2" />
-                <div className="text-center mb-2">
-                  <a
-                    href="/#"
-                    onClick={(e) => viewDocument(e, doc.category_id)}>
-                    <Button size="small" className="px-4 btn-neutral-info">
-                      View Documents
-                    </Button>
-                  </a>
-                </div>
-                {currentUser.role === 'candidate' && (
-                  <div className="text-center">
-                    <Button
-                      size="small"
-                      className="px-4 btn-neutral-info"
-                      onClick={uploadDocument}>
-                      Upload Documents
-                    </Button>
-                  </div>
-                )}
-                {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company') && (
-                  <div className="text-center">
-                    <Button size="small" className="px-4 btn-neutral-info">
-                      Pending Documents
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
       <Grid container spacing={2}>
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
@@ -183,7 +183,7 @@ export default function OnBoardDocument() {
                   className="display-4"
                 />
               </div>
-              <div className="ml-1">5</div>
+              <div className="ml-1">{remainingDocuments}</div>
             </div>
             <div className="text-center mt-3">
               <Button size="small" className="px-4 btn-neutral-info">
@@ -195,7 +195,7 @@ export default function OnBoardDocument() {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              {currentUser.role === 'candidate' && 'Requests for information'}
+              {currentUser.role === 'candidate' && 'Document due to expire'}
               {currentUser.role === 'agency' &&
                 'Client documents due to expire'}
               {currentUser.role === 'company' &&
