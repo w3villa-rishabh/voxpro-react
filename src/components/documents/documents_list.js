@@ -22,8 +22,8 @@ export default function OnBoardDocument() {
   const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState({ open: false, url: '' });
-
   const [anchorElDoc, setAnchorElDoc] = useState(null);
+  const [selectIndex, setSelectIndex] = useState(0);
 
   useEffect(() => {
     let id = location.state ? location.state.id : 0;
@@ -57,7 +57,9 @@ export default function OnBoardDocument() {
     history.goBack();
   };
 
-  const handleClick = (event) => {
+  const handleClick = (event, index) => {
+    event.preventDefault();
+    setSelectIndex(index);
     setAnchorElDoc(event.currentTarget);
   };
 
@@ -105,7 +107,9 @@ export default function OnBoardDocument() {
     handleClose();
   };
 
-  const viewDoc = (url) => {
+  const viewDoc = (e) => {
+    e.preventDefault();
+    let url = documents[selectIndex].doc_url;
     setIsOpen({ open: true, url });
     handleClose();
   };
@@ -173,17 +177,18 @@ export default function OnBoardDocument() {
                         <td>
                           <div className="d-flex align-items-center justify-content-center flex-wrap">
                             <Button
-                              aria-controls="simple-menu"
+                              aria-controls={'simple-menu-' + index}
                               size="small"
                               className="px-4 btn-neutral-primary"
                               variant="contained"
                               aria-haspopup="true"
-                              onClick={handleClick}>
+                              onClick={(e) => handleClick(e, index)}>
                               Action
                             </Button>
                             <Menu
-                              id="simple-menu"
+                              id={'simple-menu-' + index}
                               anchorEl={anchorElDoc}
+                              getContentAnchorEl={null}
                               keepMounted
                               classes={{ list: 'p-0' }}
                               open={Boolean(anchorElDoc)}
@@ -199,7 +204,7 @@ export default function OnBoardDocument() {
                               <div className="p-3">
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
-                                  onClick={(e) => viewDoc(doc.doc_url)}>
+                                  onClick={viewDoc}>
                                   View
                                 </MenuItem>
                                 <MenuItem
@@ -234,7 +239,7 @@ export default function OnBoardDocument() {
           )}
           {isOpen.open && (
             <Lightbox
-              mainSrc={'http://54.203.142.83/' + isOpen.url}
+              mainSrc={'http://54.203.142.83' + isOpen.url}
               onCloseRequest={() => setIsOpen({ open: false, url: '' })}
             />
           )}

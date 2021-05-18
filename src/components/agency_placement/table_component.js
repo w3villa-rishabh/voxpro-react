@@ -28,6 +28,7 @@ const Actions = () => {
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
+          getContentAnchorEl={null}
           keepMounted
           classes={{ list: 'p-0' }}
           open={Boolean(anchorEl)}

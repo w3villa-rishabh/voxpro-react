@@ -36,6 +36,7 @@ const CandidateActionsApplied = () => {
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
+          getContentAnchorEl={null}
           keepMounted
           classes={{ list: 'p-0' }}
           open={Boolean(anchorEl)}
@@ -93,6 +94,7 @@ const CandidateActionsCandider = () => {
         <Menu
           id="simple-menu"
           anchorEl={anchorEl1}
+          getContentAnchorEl={null}
           keepMounted
           classes={{ list: 'p-0' }}
           open={Boolean(anchorEl1)}
