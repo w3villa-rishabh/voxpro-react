@@ -20,6 +20,9 @@ import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Document, pdfjs, Page } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import PostAddIcon from '@material-ui/icons/PostAdd';
@@ -27,6 +30,7 @@ import 'date-fns';
 import AddsComponents from 'components/add_component';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function LinearProgressWithLabel(props) {
   return (
@@ -264,6 +268,16 @@ export default function UploadDocument() {
       );
   }
 
+  const getExtension = (acceptedFile) => {
+    let extension = acceptedFile.name.split('.').pop().toLowerCase();
+    let img;
+    if (extension === 'jpeg' || extension === 'png' || extension === 'jpg') {
+      img = 'image';
+    } else if (extension === 'pdf') {
+      img = extension;
+    }
+    return img;
+  };
   return (
     <>
       <div className="page-title">
@@ -310,12 +324,55 @@ export default function UploadDocument() {
             </div>
           )}
         </Dropzone>
+
         <ul className="list-group mt-2">
           {files.length > 0 &&
             files.map((acceptedFile) => (
-              <li className="list-group-item list-group-item-success">
-                {acceptedFile.name}
-              </li>
+              <>
+                {getExtension(acceptedFile) === 'image' && (
+                  <li className="list-group-item list-group-item-success">
+                    <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
+                      <div className="avatar-icon rounded d-100">
+                        <FontAwesomeIcon
+                          icon={['fas', 'times-circle']}
+                          className="up-img-close"
+                          onClick={() => setFiles([])}
+                        />
+                        <img
+                          alt="..."
+                          src={URL.createObjectURL(acceptedFile)}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <h5 className="font-weight-bold font-size-xl my-1">
+                        {acceptedFile.name}
+                      </h5>
+                    </div>
+                  </li>
+                )}
+                {getExtension(acceptedFile) === 'pdf' && (
+                  <li className="document-thumb list-group-item list-group-item-success">
+                    <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
+                      <div className="avatar-icon rounded d-100">
+                        <FontAwesomeIcon
+                          icon={['fas', 'times-circle']}
+                          className="up-img-close"
+                          onClick={() => setFiles([])}
+                        />
+                        <Document file={URL.createObjectURL(acceptedFile)}>
+                          <Page pageNumber={1} />
+                        </Document>
+                      </div>
+                    </div>
+                    <div>
+                      <h5 className="font-weight-bold font-size-xl my-1">
+                        {acceptedFile.name}
+                      </h5>
+                    </div>
+                  </li>
+                )}
+              </>
             ))}
         </ul>
 
