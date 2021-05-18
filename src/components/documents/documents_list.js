@@ -60,15 +60,30 @@ export default function OnBoardDocument() {
     setAnchorElDoc(null);
   };
 
-  const deleteDoc = (e, id) => {
+  const deleteDoc = (e, id, index) => {
     e.preventDefault();
+    handleClose();
     confirmAlert({
       title: 'Confirm to delete',
       message: 'Are you sure to do this.',
       buttons: [
         {
           label: 'Yes',
-          onClick: () => handleClose()
+          onClick: () => {
+            api.delete(`/api/v1/documents/${id}`).then(
+              (response) => {
+                setIsLoading(false);
+                if (response.data.success) {
+                  documents.splice(index, 1);
+                  setDocuments([...documents]);
+                }
+              },
+              (error) => {
+                setIsLoading(false);
+                console.error('error', error);
+              }
+            );
+          }
         },
         {
           label: 'No',
@@ -127,7 +142,15 @@ export default function OnBoardDocument() {
                     <>
                       <tr key={index}>
                         <td>
-                          <b>{doc.category_name}</b>
+                          <div>
+                            <b>{doc.category_name}</b>
+                            {doc.doc_name && (
+                              <>
+                                <br />
+                                <small>{doc.doc_name}</small>
+                              </>
+                            )}
+                          </div>
                         </td>
                         <td>
                           <span>{doc.date}</span>
@@ -177,7 +200,7 @@ export default function OnBoardDocument() {
                                 </MenuItem>
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
-                                  onClick={(e) => deleteDoc(e, doc.id)}>
+                                  onClick={(e) => deleteDoc(e, doc.id, index)}>
                                   Delete
                                 </MenuItem>
                                 <MenuItem
