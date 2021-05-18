@@ -67,7 +67,7 @@ export default function OnBoardDocument() {
     setAnchorElDoc(null);
   };
 
-  const deleteDoc = (e, id, index) => {
+  const deleteDoc = (e) => {
     e.preventDefault();
     handleClose();
     confirmAlert({
@@ -77,13 +77,15 @@ export default function OnBoardDocument() {
         {
           label: 'Yes',
           onClick: () => {
-            api.delete(`/api/v1/documents/${id}`).then(
+            let doc = documents[selectIndex];
+
+            api.delete(`/api/v1/documents/${doc.id}`).then(
               (response) => {
                 setIsLoading(false);
                 if (response.data.success) {
                   toast.dismiss();
                   toast.success('Document delete successfully..');
-                  documents.splice(index, 1);
+                  documents.splice(selectIndex, 1);
                   setDocuments([...documents]);
                 }
               },
@@ -214,7 +216,7 @@ export default function OnBoardDocument() {
                                 </MenuItem>
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
-                                  onClick={(e) => deleteDoc(e, doc.id, index)}>
+                                  onClick={deleteDoc}>
                                   Delete
                                 </MenuItem>
                                 <MenuItem

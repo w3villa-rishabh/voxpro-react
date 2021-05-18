@@ -280,7 +280,7 @@ export default function UploadDocument() {
       <Card className="p-3 p-lg-5 shadow-xxl mt-4">
         <Dropzone
           multiple={false}
-          accept="image/jpeg,image/jpg,image/png"
+          accept="image/*,.pdf"
           styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
           onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
