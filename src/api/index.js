@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getCurrentUser } from 'helper';
 
 var BASE_URL = '';
 var setupAPI = function () {
@@ -12,7 +11,7 @@ var setupAPI = function () {
       BASE_URL = 'http://54.203.142.83/';
       break;
     case 'development':
-      BASE_URL = 'https://b0641226ab11.ngrok.io/';
+      BASE_URL = ' https://b7c8cf2e12de.ngrok.io/';
       break;
     default:
       BASE_URL = 'https://d5d99e78af1a.ngrok.io/';
@@ -22,16 +21,32 @@ var setupAPI = function () {
 
 setupAPI();
 
-export default axios.create({
-  baseURL: BASE_URL, // LOCAL
-  // timeout: 10000,
-  headers: {
-    UserId: getCurrentUser.id
-  }
-  // headers: {
-  //    'Content-Type': 'application/json',
-  //    'Accept': 'application/json',
-  //    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVkQXQiOjE1NDk4Nzk3NTkxNjAsInVwZGF0ZWRBdCI6MTU0OTg3OTc2MDIwNiwiaWQiOiI1YzYxNDljZjA4OGZhZjRiNGQwNDhhZjYiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiIsInBhc3N3b3JkIjoiJDJhJDEwJHpRUWx0cUpaNDYxUzIvWnQ3ZVg0MU9iWWJZWm9ZaGNmVUNmWUZLbnZla3RiMWpzTXI4NDJTIiwiZW1haWwiOiJ0ZXN0YWRtaW5AdGVzdC5jb20iLCJyb2xlIjoiNWM2MTQ0OTk5YjRmYTM0NGI3ODlhZjgwIiwicHJvZmlsZSI6IjVjNjE0OWQwMDg4ZmFmNGI0ZDA0OGFmYiIsImlhdCI6MTU1MDAzOTgzMCwiZXhwIjoxNTUwMTI2MjMwfQ.hYUX4gZoH4H0ukmxNhWyyN_HVmyWWk1MiI5tZNmLX7U',
-  //    'UserType': 'admin'
-  //  },
-});
+const fetchClient = () => {
+  const defaultOptions = {
+    baseURL: BASE_URL,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // Create instance
+  let instance = axios.create(defaultOptions);
+
+  // Set the AUTH token for any request
+  instance.interceptors.request.use(function (config) {
+    const isLoggedIn = JSON.parse(localStorage.getItem('user')) ? true : false;
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (isLoggedIn) {
+      config.headers.Authorization = user.token
+        ? `Bearer ${user.token}`
+        : `Bearer ''`;
+      config.headers.UserID = user.id;
+    }
+
+    return config;
+  });
+
+  return instance;
+};
+
+export default fetchClient();
