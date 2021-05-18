@@ -6,6 +6,7 @@ import {
   Card,
   Button,
   Checkbox,
+  TextField,
   FormControlLabel,
   LinearProgress
 } from '@material-ui/core';
@@ -58,7 +59,8 @@ export default function UploadDocument() {
     privacy: 0,
     copy: true,
     expiration: 0,
-    expirationDate: ''
+    expirationDate: '',
+    other: ''
   });
 
   const [errors, setErrors] = useState({
@@ -130,7 +132,8 @@ export default function UploadDocument() {
       privacy: 0,
       copy: true,
       expiration: 0,
-      expirationDate: ''
+      expirationDate: '',
+      other: ''
     });
     setFiles([]);
   };
@@ -221,6 +224,7 @@ export default function UploadDocument() {
     formData.append('document[notify]', documents.notify);
     formData.append('document[privacy]', documents.privacy);
     formData.append('document[send_copy]', documents.copy);
+    formData.append('document[doc_name]', documents.other);
     formData.append(
       'document[expiration]',
       parseInt(documents.expiration) === 1
@@ -361,7 +365,21 @@ export default function UploadDocument() {
                   variant="outlined"
                   fullWidth
                   value={documents.docId}
-                  onChange={handleChange}
+                  onChange={(event) => {
+                    let findMessage = subCategory.find(
+                      (a) => a.id === parseInt(event.target.value)
+                    );
+
+                    documents.message = findMessage.message;
+                    documents.expire = findMessage.expiry;
+                    documents.expiration = 0;
+                    documents.otherShow =
+                      findMessage.name === 'Other' ? true : false;
+                    setDocuments({
+                      ...documents
+                    });
+                    handleChange(event);
+                  }}
                   name="docId">
                   <option value="0">Select Doc</option>
                   {subCategory.map((cat, index) => (
@@ -372,6 +390,20 @@ export default function UploadDocument() {
                 </select>
                 {errors.docId.length > 0 && (
                   <span className="error">{errors.docId}</span>
+                )}
+                {documents.message && <span>{documents.message}</span>}
+                {documents.otherShow && (
+                  <TextField
+                    multiline
+                    rowsMax={4}
+                    variant="outlined"
+                    className="mt-3"
+                    size="small"
+                    fullWidth
+                    name="other"
+                    onChange={handleChange}
+                    placeholder="Enter document name"
+                  />
                 )}
               </div>
             </Grid>
@@ -419,7 +451,9 @@ export default function UploadDocument() {
                     }}
                     value={documents.expiration}>
                     <option value="0">Select Expiration</option>
-                    <option value="1">No Expiration</option>
+                    <option value="1" disabled={documents.expire}>
+                      No Expiration
+                    </option>
                     <option value="2">
                       {documents.expirationDate
                         ? moment(documents.expirationDate).format('DD-MM-YYYY')
@@ -511,9 +545,9 @@ export default function UploadDocument() {
               label="Send me a copy"
             />
           </div>
-          {currentUser.role === 'candidate' && <AddsComponents />}
         </div>
       </Card>
+      {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
 }
