@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
-export default function OnBoardDocument() {
+export default function OnBoardDocumentList() {
   const location = useLocation();
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
