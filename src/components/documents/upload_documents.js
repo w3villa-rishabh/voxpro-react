@@ -284,7 +284,7 @@ const UploadDocument = (props) => {
       .then(
         (response) => {
           toast.dismiss();
-          if (response.data) {
+          if (response.data.success) {
             console.log('response.data', response.data);
             setUploadPercentage(0);
             toast.success(response.data.message);
