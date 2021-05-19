@@ -9,7 +9,7 @@ import {
   Menu,
   MenuItem,
   Divider,
-  Dialog
+  Dialog,
   DialogTitle
 } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
