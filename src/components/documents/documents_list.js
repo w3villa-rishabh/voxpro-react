@@ -57,7 +57,7 @@ const OnBoardDocumentList = (props) => {
     setIsLoading(true);
     api
       .get(
-        `/api/v1/documents/send_child_documents?id=${id}&user_id=${currentUser.id}`
+        `/api/v1/documents/candidate_documents_list?id=${id}&user_id=${currentUser.id}`
       )
       .then(
         (response) => {

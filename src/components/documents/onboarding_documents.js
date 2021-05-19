@@ -23,7 +23,9 @@ export default function OnBoardDocument() {
   function getDocuments() {
     setIsLoading(true);
     api
-      .get(`/api/v1/documents/documents_type_with_counts?id=${currentUser.id}`)
+      .get(
+        `/api/v1/documents/documents_type_with_counts?user_id=${currentUser.id}`
+      )
       .then((response) => {
         setIsLoading(false);
         if (response.data.success) {
