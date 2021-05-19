@@ -133,7 +133,13 @@ const OnBoardDocumentList = (props) => {
   const editDoc = () => {
     let doc = findDoc();
     props.setEditDoc(doc);
-    history.push('/upload');
+    history.push({
+      pathname: '/upload',
+      search: '?edit=' + doc.id,
+      state: {
+        update: true
+      }
+    });
     handleClose();
   };
 

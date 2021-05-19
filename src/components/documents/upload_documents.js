@@ -23,6 +23,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
 import { setEditDoc } from '../../reducers/ThemeOptions';
@@ -52,6 +53,7 @@ function LinearProgressWithLabel(props) {
 }
 
 const UploadDocument = (props) => {
+  const location = useLocation();
   const history = useHistory();
   const [files, setFiles] = useState([]);
   const [filesError, setFileError] = useState();
@@ -87,8 +89,14 @@ const UploadDocument = (props) => {
 
   useEffect(() => {
     getDocumentCategories();
-    console.log('props.editDoc');
+    if (!getLocation()) {
+      props.setEditDoc({});
+    }
   }, []);
+
+  const getLocation = () => {
+    return location.state ? location.state.update : false;
+  };
 
   const getDocumentCategories = () => {
     return api.get('/api/v1/categories').then(
@@ -97,7 +105,8 @@ const UploadDocument = (props) => {
         if (response.data) {
           console.log('response.data', response.data);
           setCategories([...response.data.categories]);
-          if (Object.keys(props.editDoc).length) {
+
+          if (Object.keys(props.editDoc).length && getLocation()) {
             const doc = props.editDoc;
             const findSubCat = response.data.categories.find(
               (a) => a.id === doc.category_id
@@ -113,7 +122,8 @@ const UploadDocument = (props) => {
               expiration: doc.expiration === 'No Expiration' ? 1 : 2,
               notify: doc.notify,
               privacy: doc.privacy,
-              copy: Boolean(doc.send_copy)
+              copy: Boolean(doc.send_copy),
+              content_type: doc.content_type
             });
           }
         } else {
@@ -450,7 +460,7 @@ const UploadDocument = (props) => {
         </ul>
 
         {props.editDoc.doc_url && !newImg && (
-          <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
+          <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded">
             <div className="avatar-icon rounded d-100">
               <FontAwesomeIcon
                 icon={['fas', 'times-circle']}
@@ -460,7 +470,13 @@ const UploadDocument = (props) => {
                   setNewImg(true);
                 }}
               />
-              <img alt="..." src={props.editDoc.doc_url} />
+              {props.editDoc.doc.content_type !== 'application/pdf' ? (
+                <img alt="..." src={props.editDoc.doc_url} />
+              ) : (
+                <Document file={props.editDoc.doc_url}>
+                  <Page pageNumber={1} />
+                </Document>
+              )}
             </div>
           </div>
         )}
