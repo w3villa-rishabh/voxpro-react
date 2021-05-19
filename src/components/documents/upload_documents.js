@@ -470,7 +470,7 @@ const UploadDocument = (props) => {
                   setNewImg(true);
                 }}
               />
-              {props.editDoc.doc.content_type !== 'application/pdf' ? (
+              {props.editDoc.content_type !== 'application/pdf' ? (
                 <img alt="..." src={props.editDoc.doc_url} />
               ) : (
                 <Document file={props.editDoc.doc_url}>
