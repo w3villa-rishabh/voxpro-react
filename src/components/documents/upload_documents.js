@@ -286,13 +286,13 @@ const UploadDocument = (props) => {
           toast.dismiss();
           if (response.data.success) {
             console.log('response.data', response.data);
-            setUploadPercentage(0);
             toast.success(response.data.message);
             setFiles([]);
             removeDoc();
           } else {
             toast.error(response.data.message);
           }
+          setUploadPercentage(0);
         },
         (error) => {
           console.error('error', error);
