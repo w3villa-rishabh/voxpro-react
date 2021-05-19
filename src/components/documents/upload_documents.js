@@ -455,7 +455,10 @@ const UploadDocument = (props) => {
               <FontAwesomeIcon
                 icon={['fas', 'times-circle']}
                 className="up-img-close"
-                onClick={() => setFiles([])}
+                onClick={() => {
+                  setFiles([]);
+                  setNewImg(true);
+                }}
               />
               <img alt="..." src={props.editDoc.doc_url} />
             </div>
