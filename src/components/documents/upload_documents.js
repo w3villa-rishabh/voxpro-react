@@ -23,6 +23,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
 import { setEditDoc } from '../../reducers/ThemeOptions';
@@ -52,6 +53,7 @@ function LinearProgressWithLabel(props) {
 }
 
 const UploadDocument = (props) => {
+  const location = useLocation();
   const history = useHistory();
   const [files, setFiles] = useState([]);
   const [filesError, setFileError] = useState();
@@ -87,8 +89,14 @@ const UploadDocument = (props) => {
 
   useEffect(() => {
     getDocumentCategories();
-    console.log('props.editDoc');
+    if (!getLocation()) {
+      props.setEditDoc({});
+    }
   }, []);
+
+  const getLocation = () => {
+    return location.state ? location.state.update : false;
+  };
 
   const getDocumentCategories = () => {
     return api.get('/api/v1/categories').then(
@@ -97,7 +105,8 @@ const UploadDocument = (props) => {
         if (response.data) {
           console.log('response.data', response.data);
           setCategories([...response.data.categories]);
-          if (Object.keys(props.editDoc).length) {
+
+          if (Object.keys(props.editDoc).length && getLocation()) {
             const doc = props.editDoc;
             const findSubCat = response.data.categories.find(
               (a) => a.id === doc.category_id
