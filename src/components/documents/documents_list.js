@@ -1,7 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { Card, Button, Table, Menu, MenuItem } from '@material-ui/core';
+import {
+  Card,
+  Button,
+  Table,
+  Menu,
+  MenuItem,
+  Divider,
+  Dialog
+} from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -15,6 +24,60 @@ import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
+function SimpleDialog(props) {
+  const { onClose, selectedValue, open } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  return (
+    <Dialog
+      onClose={handleClose}
+      classes={{ paper: 'modal-content rounded-lg' }}
+      aria-labelledby="simple-dialog-title"
+      open={open}>
+      <div className="p-3 font-size-xl font-weight-bold">
+        Your Document is shared with
+      </div>
+      <Divider />
+      <div className="table-responsive-md">
+        <Table className="table table-alternate-spaced">
+          <thead>
+            <tr>
+              <th scope="col">Document Name</th>
+              <th scope="col">Shared To</th>
+              <th scope="col">Shared on Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div>
+                  <b>s</b>
+                </div>
+              </td>
+              <td>
+                <span>ss</span>
+              </td>
+              <td>
+                <span>ss</span>
+              </td>
+              <td>d</td>
+            </tr>
+            <tr className="divider"></tr>
+          </tbody>
+        </Table>
+      </div>
+    </Dialog>
+  );
+}
+
+SimpleDialog.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired
+};
+
 export default function OnBoardDocumentList() {
   const location = useLocation();
   const history = useHistory();
@@ -24,6 +87,16 @@ export default function OnBoardDocumentList() {
   const [isOpen, setIsOpen] = useState({ open: false, url: '' });
   const [anchorElDoc, setAnchorElDoc] = useState(null);
   const [selectIndex, setSelectIndex] = useState(0);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     let id = location.state ? location.state.id : 0;
@@ -144,6 +217,7 @@ export default function OnBoardDocumentList() {
                 <th scope="col">Document Name</th>
                 <th scope="col">Date Upload</th>
                 <th scope="col">Expiration Date</th>
+                <th scope="col">Shared With</th>
                 <th scope="col">Privacy</th>
                 <th scope="col" className="text-center"></th>
               </tr>
@@ -172,6 +246,14 @@ export default function OnBoardDocumentList() {
                         </td>
                         <td>
                           <span>{doc.expiration}</span>
+                        </td>
+                        <td>
+                          <Button
+                            className="m-2 btn-primary"
+                            onClick={handleClickOpen}>
+                            View
+                          </Button>
+                          <SimpleDialog open={open} onClose={handleClose1} />
                         </td>
                         <td>
                           <span>{doc.privacy === 1 ? 'Yes' : 'No'}</span>
@@ -241,7 +323,7 @@ export default function OnBoardDocumentList() {
           )}
           {isOpen.open && (
             <Lightbox
-              mainSrc={'http://54.203.142.83' + isOpen.url}
+              mainSrc={isOpen.url}
               onCloseRequest={() => setIsOpen({ open: false, url: '' })}
             />
           )}
