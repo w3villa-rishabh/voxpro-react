@@ -10,6 +10,7 @@ import {
   MenuItem,
   Divider,
   Dialog
+  DialogTitle
 } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -25,7 +26,12 @@ import api from '../../api';
 import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+
+import { Document, pdfjs, Page } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+
 import { setEditDoc } from '../../reducers/ThemeOptions';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
@@ -90,6 +96,7 @@ const OnBoardDocumentList = (props) => {
   const [isOpen, setIsOpen] = useState({ open: false, url: '' });
   const [anchorElDoc, setAnchorElDoc] = useState(null);
   const [selectIndex, setSelectIndex] = useState(0);
+  const [modalPdfView, seModal] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -196,13 +203,22 @@ const OnBoardDocumentList = (props) => {
   const viewDoc = (e) => {
     e.preventDefault();
     let doc = findDoc();
-    setIsOpen({ open: true, url: doc.doc_url });
+    if (doc.content_type === 'application/pdf') {
+      setIsOpen({ open: false, url: doc.doc_url });
+      toggle();
+    } else {
+      setIsOpen({ open: true, url: doc.doc_url });
+    }
     handleClose();
   };
 
   const replaceDoc = () => {
     editDoc();
     handleClose();
+  };
+
+  const toggle = () => {
+    seModal(!modalPdfView);
   };
 
   return (
@@ -342,6 +358,23 @@ const OnBoardDocumentList = (props) => {
         </div>
       </Card>
       {currentUser.role === 'candidate' && <AddsComponents />}
+
+      <Dialog
+        scroll="body"
+        fullWidth
+        maxWidth="lg"
+        open={modalPdfView}
+        onClose={toggle}
+        classes={{
+          paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+        }}>
+        <DialogTitle id="form-dialog-title">Upload PDF</DialogTitle>
+        <div>
+          <Document file={isOpen.url}>
+            <Page pageNumber={1} />
+          </Document>
+        </div>
+      </Dialog>
     </>
   );
 };
