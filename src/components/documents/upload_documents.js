@@ -15,14 +15,17 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import DateFnsUtils from '@date-io/date-fns';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
+import { useHistory } from 'react-router-dom';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
+import { setEditDoc } from '../../reducers/ThemeOptions';
 
 import 'date-fns';
 import AddsComponents from 'components/add_component';
@@ -48,10 +51,12 @@ function LinearProgressWithLabel(props) {
   );
 }
 
-export default function UploadDocument() {
+const UploadDocument = (props) => {
+  const history = useHistory();
   const [files, setFiles] = useState([]);
   const [filesError, setFileError] = useState();
   const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [newImg, setNewImg] = useState(false);
 
   const [currentUser] = useState(getCurrentUser());
   const [categories, setCategories] = useState([]);
@@ -82,15 +87,35 @@ export default function UploadDocument() {
 
   useEffect(() => {
     getDocumentCategories();
+    console.log('props.editDoc');
   }, []);
 
   const getDocumentCategories = () => {
-    api.get('/api/v1/categories').then(
+    return api.get('/api/v1/categories').then(
       (response) => {
         toast.dismiss();
         if (response.data) {
           console.log('response.data', response.data);
           setCategories([...response.data.categories]);
+          if (Object.keys(props.editDoc).length) {
+            const doc = props.editDoc;
+            const findSubCat = response.data.categories.find(
+              (a) => a.id === doc.category_id
+            );
+            if (findSubCat) {
+              setSubCategory([...findSubCat.sub_category]);
+            } else {
+              setSubCategory([]);
+            }
+            setDocuments({
+              categoryId: doc.category_id,
+              docId: doc.sub_category_id,
+              expiration: doc.expiration === 'No Expiration' ? 1 : 2,
+              notify: doc.notify,
+              privacy: doc.privacy,
+              copy: Boolean(doc.send_copy)
+            });
+          }
         } else {
           toast.error(response.data.message);
         }
@@ -122,6 +147,7 @@ export default function UploadDocument() {
       const imageObj = { url: dataURL, extension, name: file.name };
       console.log('imageObj', imageObj);
     };
+    setNewImg(true);
     setFileError(acceptedFiles.length > 0 ? 'dotted #0064FF' : 'dotted red');
 
     reader.readAsDataURL(file);
@@ -143,6 +169,9 @@ export default function UploadDocument() {
       message: ''
     });
     setFiles([]);
+    if (props.editDoc.id) {
+      history.goBack();
+    }
   };
 
   let handleChange = (event) => {
@@ -212,6 +241,9 @@ export default function UploadDocument() {
   };
 
   function addDocument() {
+    if (props.editDoc.id) {
+      return updateDocument();
+    }
     validateForm(errors);
     if (
       !parseInt(documents.categoryId) ||
@@ -268,6 +300,63 @@ export default function UploadDocument() {
         }
       );
   }
+
+  const updateDocument = () => {
+    validateForm(errors);
+    if (
+      !parseInt(documents.categoryId) ||
+      !parseInt(documents.docId) ||
+      !parseInt(documents.expiration) ||
+      !parseInt(documents.privacy) ||
+      !parseInt(documents.notify)
+    ) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    if (files.length) {
+      formData.append('document[doc]', files[0]);
+    }
+
+    formData.append('document[user_id]', currentUser.id);
+    formData.append('document[category_id]', documents.docId);
+    formData.append('document[notify]', documents.notify);
+    formData.append('document[privacy]', documents.privacy);
+    formData.append('document[send_copy]', documents.copy);
+    formData.append('document[doc_name]', documents.other);
+    formData.append(
+      'document[expiration]',
+      parseInt(documents.expiration) === 1
+        ? 'No Expiration'
+        : moment(documents.expirationDate).format('DD-MM-YYYY')
+    );
+
+    api
+      .put(`/api/v1/documents/${props.editDoc.id}`, formData, {
+        onUploadProgress: function (progressEvent) {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            )
+          );
+        }
+      })
+      .then(
+        (response) => {
+          toast.dismiss();
+          if (response.data) {
+            history.goBack();
+          } else {
+            toast.error(response.data.message);
+          }
+        },
+        (error) => {
+          console.error('error', error);
+          toast.error('Something went wrong..');
+        }
+      );
+  };
 
   const getExtension = (acceptedFile) => {
     let extension = acceptedFile.name.split('.').pop().toLowerCase();
@@ -359,6 +448,19 @@ export default function UploadDocument() {
               </>
             ))}
         </ul>
+
+        {props.editDoc.doc_url && !newImg && (
+          <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
+            <div className="avatar-icon rounded d-100">
+              <FontAwesomeIcon
+                icon={['fas', 'times-circle']}
+                className="up-img-close"
+                onClick={() => setFiles([])}
+              />
+              <img alt="..." src={props.editDoc.doc_url} />
+            </div>
+          </div>
+        )}
 
         <div>
           <Grid container spacing={2}>
@@ -597,4 +699,16 @@ export default function UploadDocument() {
       {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  editDoc: state.ThemeOptions.editDoc
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setEditDoc: (doc) => dispatch(setEditDoc(doc))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UploadDocument);

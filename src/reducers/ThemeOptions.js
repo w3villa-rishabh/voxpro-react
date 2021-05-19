@@ -19,6 +19,7 @@ export const SET_CHECKED_QUESTIONS = 'SET_CHECKED_QUESTIONS';
 export const SET_EDIT_QUESTIONS = 'SET_EDIT_QUESTIONS';
 export const SET_EDIT_QUESTIONS_ID = 'SET_EDIT_QUESTIONS_ID';
 export const SET_LOADER = 'SET_LOADER';
+export const SET_EDIT_DOC = 'SET_EDIT_DOC';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -85,13 +86,18 @@ export const setEditMode = (editMode) => ({
 });
 
 export const setQuestionId = (editQuestionId) => ({
-  type: SET_LOADER,
+  type: SET_EDIT_QUESTIONS_ID,
   editQuestionId
 });
 
 export const setLoader = (isLoading) => ({
   type: SET_LOADER,
   isLoading
+});
+
+export const setEditDoc = (editDoc) => ({
+  type: SET_EDIT_DOC,
+  editDoc
 });
 
 // Header
@@ -238,7 +244,8 @@ export default function reducer(
     ir35answers: [],
     editMode: false,
     editQuestionId: 0,
-    isLoading: false
+    isLoading: false,
+    editDoc: {}
   },
   action
 ) {
@@ -420,6 +427,12 @@ export default function reducer(
       return {
         ...state,
         isLoading: action.isLoading
+      };
+
+    case SET_EDIT_DOC:
+      return {
+        ...state,
+        editDoc: action.editDoc
       };
 
     default:
