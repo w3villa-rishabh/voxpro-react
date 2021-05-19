@@ -72,7 +72,8 @@ const UploadDocument = (props) => {
     copy: true,
     expiration: 0,
     expirationDate: '',
-    other: ''
+    other: '',
+    disableEdit: false
   });
 
   const [errors, setErrors] = useState({
@@ -123,7 +124,8 @@ const UploadDocument = (props) => {
               notify: doc.notify,
               privacy: doc.privacy,
               copy: Boolean(doc.send_copy),
-              content_type: doc.content_type
+              content_type: doc.content_type,
+              disableEdit: true
             });
           }
         } else {
@@ -176,7 +178,8 @@ const UploadDocument = (props) => {
       expirationDate: '',
       other: '',
       otherShow: '',
-      message: ''
+      message: '',
+      disableEdit: false
     });
     setFiles([]);
     if (props.editDoc.id) {
@@ -493,6 +496,7 @@ const UploadDocument = (props) => {
                   variant="outlined"
                   fullWidth
                   name="categoryId"
+                  disabled={documents.disableEdit}
                   onChange={(e) => {
                     documents['docId'] = 0;
                     setDocuments(documents);
@@ -532,6 +536,7 @@ const UploadDocument = (props) => {
                   className="MuiTextField-root MuiFormControl-fullWidth select-doc"
                   variant="outlined"
                   fullWidth
+                  disabled={documents.disableEdit}
                   value={documents.docId}
                   onChange={(event) => {
                     let findMessage = subCategory.find(
