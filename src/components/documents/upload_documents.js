@@ -14,22 +14,23 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import Dropzone from 'react-dropzone';
+import DateFnsUtils from '@date-io/date-fns';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
 import api from '../../api';
 import { getCurrentUser } from '../../helper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Document, pdfjs, Page } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-import CloudUploadTwoToneIcon from '@material-ui/icons/CloudUploadTwoTone';
-import PostAddIcon from '@material-ui/icons/PostAdd';
 import 'date-fns';
 import AddsComponents from 'components/add_component';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+
+import { Document, pdfjs, Page } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function LinearProgressWithLabel(props) {
@@ -329,49 +330,32 @@ export default function UploadDocument() {
           {files.length > 0 &&
             files.map((acceptedFile) => (
               <>
-                {getExtension(acceptedFile) === 'image' && (
-                  <li className="list-group-item list-group-item-success">
-                    <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
-                      <div className="avatar-icon rounded d-100">
-                        <FontAwesomeIcon
-                          icon={['fas', 'times-circle']}
-                          className="up-img-close"
-                          onClick={() => setFiles([])}
-                        />
+                <li className="document-thumb list-group-item list-group-item-success">
+                  <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
+                    <div className="avatar-icon rounded d-100">
+                      <FontAwesomeIcon
+                        icon={['fas', 'times-circle']}
+                        className="up-img-close"
+                        onClick={() => setFiles([])}
+                      />
+                      {getExtension(acceptedFile) === 'image' ? (
                         <img
                           alt="..."
                           src={URL.createObjectURL(acceptedFile)}
                         />
-                      </div>
-                    </div>
-                    <div>
-                      <h5 className="font-weight-bold font-size-xl my-1">
-                        {acceptedFile.name}
-                      </h5>
-                    </div>
-                  </li>
-                )}
-                {getExtension(acceptedFile) === 'pdf' && (
-                  <li className="document-thumb list-group-item list-group-item-success">
-                    <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
-                      <div className="avatar-icon rounded d-100">
-                        <FontAwesomeIcon
-                          icon={['fas', 'times-circle']}
-                          className="up-img-close"
-                          onClick={() => setFiles([])}
-                        />
+                      ) : (
                         <Document file={URL.createObjectURL(acceptedFile)}>
                           <Page pageNumber={1} />
                         </Document>
-                      </div>
+                      )}
                     </div>
-                    <div>
-                      <h5 className="font-weight-bold font-size-xl my-1">
-                        {acceptedFile.name}
-                      </h5>
-                    </div>
-                  </li>
-                )}
+                  </div>
+                  <div>
+                    <h5 className="font-weight-bold font-size-xl my-1">
+                      {acceptedFile.name}
+                    </h5>
+                  </div>
+                </li>
               </>
             ))}
         </ul>
