@@ -122,7 +122,8 @@ const UploadDocument = (props) => {
               expiration: doc.expiration === 'No Expiration' ? 1 : 2,
               notify: doc.notify,
               privacy: doc.privacy,
-              copy: Boolean(doc.send_copy)
+              copy: Boolean(doc.send_copy),
+              content_type: doc.content_type
             });
           }
         } else {
@@ -459,14 +460,20 @@ const UploadDocument = (props) => {
         </ul>
 
         {props.editDoc.doc_url && !newImg && (
-          <div className="avatar-icon-wrapper shadow-sm-dark border-white rounded">
+          <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded">
             <div className="avatar-icon rounded d-100">
               <FontAwesomeIcon
                 icon={['fas', 'times-circle']}
                 className="up-img-close"
                 onClick={() => setFiles([])}
               />
-              <img alt="..." src={props.editDoc.doc_url} />
+              {props.editDoc.doc.content_type !== 'application/pdf' ? (
+                <img alt="..." src={props.editDoc.doc_url} />
+              ) : (
+                <Document file={props.editDoc.doc_url}>
+                  <Page pageNumber={1} />
+                </Document>
+              )}
             </div>
           </div>
         )}
