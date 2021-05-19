@@ -16,13 +16,16 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
+import { connect } from 'react-redux';
 import { getCurrentUser } from 'helper';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
+
 import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import { setEditDoc } from '../../reducers/ThemeOptions';
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
@@ -78,7 +81,7 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired
 };
 
-export default function OnBoardDocumentList() {
+const OnBoardDocumentList = (props) => {
   const location = useLocation();
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
@@ -103,6 +106,7 @@ export default function OnBoardDocumentList() {
     if (id) {
       getDocuments(id);
     }
+    props.setEditDoc({});
   }, [location.state]);
 
   const getDocuments = (id) => {
@@ -140,6 +144,10 @@ export default function OnBoardDocumentList() {
     setAnchorElDoc(null);
   };
 
+  const findDoc = () => {
+    return documents[selectIndex];
+  };
+
   const deleteDoc = (e) => {
     e.preventDefault();
     handleClose();
@@ -150,7 +158,7 @@ export default function OnBoardDocumentList() {
         {
           label: 'Yes',
           onClick: () => {
-            let doc = documents[selectIndex];
+            let doc = findDoc();
 
             api.delete(`/api/v1/documents/${doc.id}`).then(
               (response) => {
@@ -179,17 +187,21 @@ export default function OnBoardDocumentList() {
   };
 
   const editDoc = () => {
+    let doc = findDoc();
+    props.setEditDoc(doc);
+    history.push('/upload');
     handleClose();
   };
 
   const viewDoc = (e) => {
     e.preventDefault();
-    let url = documents[selectIndex].doc_url;
-    setIsOpen({ open: true, url });
+    let doc = findDoc();
+    setIsOpen({ open: true, url: doc.doc_url });
     handleClose();
   };
 
   const replaceDoc = () => {
+    editDoc();
     handleClose();
   };
 
@@ -233,7 +245,7 @@ export default function OnBoardDocumentList() {
                         <td>
                           <div>
                             <b>{doc.category_name}</b>
-                            {doc.doc_name && (
+                            {doc.doc_name && doc.doc_name !== 'undefined' && (
                               <>
                                 <br />
                                 <small>{doc.doc_name}</small>
@@ -332,4 +344,12 @@ export default function OnBoardDocumentList() {
       {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setEditDoc: (doc) => dispatch(setEditDoc(doc))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(OnBoardDocumentList);

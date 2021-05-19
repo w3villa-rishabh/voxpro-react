@@ -755,6 +755,22 @@ tbody.scroll {
   z-index: 9999 !important;
 }
 
+.up-img-close {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  color: #444;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.document-thumb {
+  .react-pdf__Page__canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {
