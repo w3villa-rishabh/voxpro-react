@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import {
   Card,
@@ -33,60 +32,6 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { setEditDoc } from '../../reducers/ThemeOptions';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function SimpleDialog(props) {
-  const { onClose, selectedValue, open } = props;
-
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-
-  return (
-    <Dialog
-      onClose={handleClose}
-      classes={{ paper: 'modal-content rounded-lg' }}
-      aria-labelledby="simple-dialog-title"
-      open={open}>
-      <div className="p-3 font-size-xl font-weight-bold">
-        Your Document is shared with
-      </div>
-      <Divider />
-      <div className="table-responsive-md">
-        <Table className="table table-alternate-spaced">
-          <thead>
-            <tr>
-              <th scope="col">Document Name</th>
-              <th scope="col">Shared To</th>
-              <th scope="col">Shared on Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div>
-                  <b>s</b>
-                </div>
-              </td>
-              <td>
-                <span>ss</span>
-              </td>
-              <td>
-                <span>ss</span>
-              </td>
-              <td>d</td>
-            </tr>
-            <tr className="divider"></tr>
-          </tbody>
-        </Table>
-      </div>
-    </Dialog>
-  );
-}
-
-SimpleDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
-};
-
 const OnBoardDocumentList = (props) => {
   const location = useLocation();
   const history = useHistory();
@@ -97,16 +42,8 @@ const OnBoardDocumentList = (props) => {
   const [anchorElDoc, setAnchorElDoc] = useState(null);
   const [selectIndex, setSelectIndex] = useState(0);
   const [modalPdfView, seModal] = useState(false);
-
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose1 = () => {
-    setOpen(false);
-  };
+  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: {} });
+  // const [ shareDoc, setShareDoc ] = useState({});
 
   useEffect(() => {
     let id = location.state ? location.state.id : 0;
@@ -221,6 +158,10 @@ const OnBoardDocumentList = (props) => {
     seModal(!modalPdfView);
   };
 
+  const handleShareModalClose = () => {
+    setOpenShareDoc({ open: false, doc: {} });
+  };
+
   return (
     <>
       <div className="page-title">
@@ -278,10 +219,12 @@ const OnBoardDocumentList = (props) => {
                         <td>
                           <Button
                             className="m-2 btn-primary"
-                            onClick={handleClickOpen}>
+                            size="small"
+                            onClick={() =>
+                              setOpenShareDoc({ open: true, doc })
+                            }>
                             View
                           </Button>
-                          <SimpleDialog open={open} onClose={handleClose1} />
                         </td>
                         <td>
                           <span>{doc.privacy === 1 ? 'Yes' : 'No'}</span>
@@ -359,6 +302,7 @@ const OnBoardDocumentList = (props) => {
       </Card>
       {currentUser.role === 'candidate' && <AddsComponents />}
 
+      {/* view pdf section */}
       <Dialog
         scroll="body"
         fullWidth
@@ -373,6 +317,46 @@ const OnBoardDocumentList = (props) => {
           <Document file={isOpen.url}>
             <Page pageNumber={1} />
           </Document>
+        </div>
+      </Dialog>
+
+      {/* share details show */}
+      <Dialog
+        onClose={handleShareModalClose}
+        fullWidth
+        maxWidth="sm"
+        classes={{ paper: 'modal-content rounded-lg' }}
+        aria-labelledby="simple-dialog-title"
+        open={openShareDoc.open}>
+        <div className="p-3 font-size-xl font-weight-bold">
+          Your Document is shared with
+        </div>
+        <Divider />
+        <div className="table-responsive-md m-4">
+          <div className="table-scrollbar">
+            <Table className="table table-hover text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Shared To</th>
+                  <th>Shared on Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span>{openShareDoc.doc.category_name}</span>
+                  </td>
+                  <td>
+                    <span>Huntress Group</span>
+                  </td>
+                  <td>
+                    <span>{openShareDoc.doc.date}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
         </div>
       </Dialog>
     </>
