@@ -141,18 +141,18 @@ export default function AddNewRequestComponent() {
         });
         break;
 
-      case 'jobId':
-        setErrors({
-          ...errors,
-          jobId: value.length > 1 ? '' : 'Job is required!'
-        });
-        break;
-      case 'jobTitle':
-        setErrors({
-          ...errors,
-          jobTitle: value.length > 2 ? '' : 'Job title is required!'
-        });
-        break;
+      // case 'jobId':
+      //   setErrors({
+      //     ...errors,
+      //     jobId: value.length > 1 ? '' : 'Job is required!'
+      //   });
+      //   break;
+      // case 'jobTitle':
+      //   setErrors({
+      //     ...errors,
+      //     jobTitle: value.length > 2 ? '' : 'Job title is required!'
+      //   });
+      //   break;
       case 'reason':
         setErrors({
           ...errors,
@@ -175,9 +175,9 @@ export default function AddNewRequestComponent() {
       ...errors,
       name: requestObj.name.length === 0 ? 'Name is required!' : '',
       id: requestObj.id === 0 ? 'Id is required!' : '',
-      jobId: requestObj.jobId.length === 0 ? 'Job is required!' : '',
-      jobTitle:
-        requestObj.jobTitle.length === 0 ? 'Job title is required!' : '',
+      // jobId: requestObj.jobId.length === 0 ? 'Job is required!' : '',
+      // jobTitle:
+      //   requestObj.jobTitle.length === 0 ? 'Job title is required!' : '',
       reason: requestObj.reason.length === 0 ? 'Reason is required!' : '',
       document: documents.length === 0 ? 'Document is required!' : ''
     });
@@ -187,9 +187,11 @@ export default function AddNewRequestComponent() {
 
   const sendRequest = () => {
     console.log(requestObj, documents);
-    if (validateForm(errors)) {
+    validateForm(errors);
+    if (!requestObj.id || !requestObj.reason || !documents.length) {
       return;
     }
+
     let obj = {
       request_type: requestFilter.value,
       created_by_id: currentUser.id,
@@ -203,6 +205,7 @@ export default function AddNewRequestComponent() {
         category_id: a.value
       }))
     };
+
     api
       .post(`/api/v1/request_for_informations`, {
         request_for_information: obj
@@ -273,7 +276,7 @@ export default function AddNewRequestComponent() {
                     size="small"
                     name="name"
                     fullWidth
-                    autofocus="false"
+                    autoComplete="off"
                     value={requestObj.name}
                     onChange={handleChanges}
                     onKeyUp={(e) => {
@@ -366,17 +369,6 @@ export default function AddNewRequestComponent() {
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={12}>
-                {/* <Select
-                  name="reason"
-                  options={
-                    requestFilter.value === 'candidate'
-                      ? reasonOptions
-                      : reasonCompanyOptions
-                  }
-                  value={reason}
-                  onChange={setReason}
-                  placeholder="Reason for Request"
-                /> */}
                 <TextField
                   variant="outlined"
                   size="small"
