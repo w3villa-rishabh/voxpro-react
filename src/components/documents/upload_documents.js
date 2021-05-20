@@ -33,7 +33,7 @@ import AddsComponents from 'components/add_component';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import { Document, pdfjs, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -163,6 +163,9 @@ const UploadDocument = (props) => {
     setFileError(acceptedFiles.length > 0 ? 'dotted #0064FF' : 'dotted red');
 
     reader.readAsDataURL(file);
+    let url = URL.createObjectURL(file);
+    acceptedFiles[0].url = url;
+    acceptedFiles[0].extension = extension;
     setFiles(acceptedFiles);
   };
 
@@ -371,16 +374,6 @@ const UploadDocument = (props) => {
       );
   };
 
-  const getExtension = (acceptedFile) => {
-    let extension = acceptedFile.name.split('.').pop().toLowerCase();
-    let img;
-    if (extension === 'jpeg' || extension === 'png' || extension === 'jpg') {
-      img = 'image';
-    } else if (extension === 'pdf') {
-      img = extension;
-    }
-    return img;
-  };
   return (
     <>
       <div className="page-title">
@@ -440,15 +433,12 @@ const UploadDocument = (props) => {
                         className="up-img-close"
                         onClick={() => setFiles([])}
                       />
-                      {getExtension(acceptedFile) === 'image' ? (
-                        <img
-                          alt="..."
-                          src={URL.createObjectURL(acceptedFile)}
-                        />
-                      ) : (
-                        <Document file={URL.createObjectURL(acceptedFile)}>
+                      {acceptedFile.extension === 'pdf' ? (
+                        <Document file={acceptedFile.url}>
                           <Page pageNumber={1} />
                         </Document>
+                      ) : (
+                        <img alt="..." src={acceptedFile.url} />
                       )}
                     </div>
                   </div>
