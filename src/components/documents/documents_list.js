@@ -312,7 +312,7 @@ const OnBoardDocumentList = (props) => {
       <Dialog
         scroll="body"
         fullWidth
-        maxWidth="lg"
+        maxWidth="md"
         open={modalPdfView}
         onClose={toggle}
         classes={{
