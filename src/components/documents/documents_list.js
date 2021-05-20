@@ -155,10 +155,10 @@ const OnBoardDocumentList = (props) => {
     handleClose();
   };
 
-  const replaceDoc = () => {
-    editDoc();
-    handleClose();
-  };
+  // const replaceDoc = () => {
+  //   editDoc();
+  //   handleClose();
+  // };
 
   const toggle = () => {
     seModal(!modalPdfView);
@@ -266,23 +266,23 @@ const OnBoardDocumentList = (props) => {
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={viewDoc}>
-                                  View
+                                  View Document
                                 </MenuItem>
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={editDoc}>
-                                  Edit
+                                  Edit/Replace
                                 </MenuItem>
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={deleteDoc}>
                                   Delete
                                 </MenuItem>
-                                <MenuItem
+                                {/* <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={replaceDoc}>
                                   Replace
-                                </MenuItem>
+                                </MenuItem> */}
                               </div>
                             </Menu>
                           </div>
@@ -344,7 +344,7 @@ const OnBoardDocumentList = (props) => {
               <thead>
                 <tr>
                   <th>Document Name</th>
-                  <th>Shared To</th>
+                  <th>Shared With</th>
                   <th>Shared on Date</th>
                 </tr>
               </thead>
