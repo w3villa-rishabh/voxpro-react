@@ -169,7 +169,6 @@ export default function AddNewRequestComponent() {
 
   const validateForm = (error) => {
     let valid = true;
-    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
 
     setErrors({
       ...errors,
@@ -181,6 +180,8 @@ export default function AddNewRequestComponent() {
       reason: requestObj.reason.length === 0 ? 'Reason is required!' : '',
       document: documents.length === 0 ? 'Document is required!' : ''
     });
+    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+
     return valid;
   };
 
@@ -309,7 +310,7 @@ export default function AddNewRequestComponent() {
                       variant="outlined"
                       size="small"
                       name="id"
-                      value={requestObj.id}
+                      value={requestObj.id ? requestObj.id : ''}
                       className="user-id"
                       disabled={true}
                       onChange={handleChanges}
