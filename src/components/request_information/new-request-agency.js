@@ -42,7 +42,7 @@ export default function AddNewRequestComponent() {
   const [documents, setDocuments] = useState('');
   const [requestObj, setRequestObj] = useState({
     name: '',
-    id: '',
+    id: 0,
     jobId: '',
     jobTitle: '',
     reason: '',
@@ -113,7 +113,7 @@ export default function AddNewRequestComponent() {
     setRequestObj({
       ...requestObj,
       name: '',
-      id: '',
+      id: 0,
       jobId: '',
       jobTitle: '',
       reason: '',
@@ -150,13 +150,13 @@ export default function AddNewRequestComponent() {
       case 'jobTitle':
         setErrors({
           ...errors,
-          jobTitle: value.length > 5 ? '' : 'Job title is required!'
+          jobTitle: value.length > 2 ? '' : 'Job title is required!'
         });
         break;
       case 'reason':
         setErrors({
           ...errors,
-          reason: value.length > 5 ? '' : 'Reason is required!'
+          reason: value.length > 2 ? '' : 'Reason is required!'
         });
         break;
       default:
@@ -174,7 +174,7 @@ export default function AddNewRequestComponent() {
     setErrors({
       ...errors,
       name: requestObj.name.length === 0 ? 'Name is required!' : '',
-      id: requestObj.id.length === 0 ? 'Id is required!' : '',
+      id: requestObj.id === 0 ? 'Id is required!' : '',
       jobId: requestObj.jobId.length === 0 ? 'Job is required!' : '',
       jobTitle:
         requestObj.jobTitle.length === 0 ? 'Job title is required!' : '',
@@ -185,9 +185,31 @@ export default function AddNewRequestComponent() {
   };
 
   const sendRequest = () => {
-    validateForm(errors);
     console.log(requestObj, documents);
-    // cancelRequest();
+    if (validateForm(errors)) {
+      return;
+    }
+    let obj = {
+      request_type: requestFilter.value,
+      created_by_id: currentUser.id,
+      reason: requestObj.reason,
+      due_date: selectedDate,
+      user_id: requestObj.id,
+      job_id: requestObj.jobId,
+      job_title: requestObj.jobTitle,
+      documents
+    };
+    api.post(`/api/v1/request_for_informations`, obj).then(
+      (response) => {
+        if (response.data.success) {
+          console.log('response.data', response.data);
+          cancelRequest();
+        }
+      },
+      (error) => {
+        console.error('error', error);
+      }
+    );
   };
 
   const selectUser = (user) => {
