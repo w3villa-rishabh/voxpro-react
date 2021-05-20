@@ -319,7 +319,7 @@ const OnBoardDocumentList = (props) => {
           paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
         }}>
         <DialogTitle id="form-dialog-title">Upload PDF</DialogTitle>
-        <div>
+        <div className="document-thumb p-3">
           <Document file={isOpen.url}>
             <Page pageNumber={1} />
           </Document>
