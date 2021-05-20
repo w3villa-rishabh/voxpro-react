@@ -257,7 +257,7 @@ export default function AddNewRequestComponent() {
               <Grid item xs={12} sm={12}>
                 <Select
                   options={
-                    currentUser.role === 'Agency'
+                    currentUser.role === 'agency'
                       ? agencyFiltersOptions
                       : companyFiltersOptions
                   }
