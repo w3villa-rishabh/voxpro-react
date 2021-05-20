@@ -771,6 +771,13 @@ tbody.scroll {
   }
 }
 
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {

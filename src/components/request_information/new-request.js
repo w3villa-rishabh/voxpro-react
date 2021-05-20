@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TuneIcon from '@material-ui/icons/Tune';
-import { Grid, Card, Button, Table } from '@material-ui/core';
+import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
 
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -9,6 +9,7 @@ import { getCurrentUser } from 'helper';
 
 export default function NewRequestComponent() {
   const [currentUser] = useState(getCurrentUser());
+  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -27,6 +28,9 @@ export default function NewRequestComponent() {
         }
       });
   }
+  const handleShareModalClose = () => {
+    setOpenShareDoc({ open: false, doc: [] });
+  };
 
   return (
     <>
@@ -92,14 +96,22 @@ export default function NewRequestComponent() {
                             <td>{index + 1}</td>
                             <td>{request.company_name}</td>
                             <td className="text-center">-</td>
-                            <td className="text-center">{request.reason}</td>
+                            <td className="text-center w-25">
+                              <div className="truncate">{request.reason}</div>
+                            </td>
                             <td className="text-center text-black-50">
                               {request.due_date}
                             </td>
                             <td className="text-center">
                               <Button
                                 size="small"
-                                className="px-4 btn-neutral-danger">
+                                className="px-4 btn-neutral-danger"
+                                onClick={() =>
+                                  setOpenShareDoc({
+                                    open: true,
+                                    doc: request.requested_documents
+                                  })
+                                }>
                                 Action
                               </Button>
                             </td>
@@ -123,6 +135,52 @@ export default function NewRequestComponent() {
           <AddsComponents />
         </div>
       </div>
+
+      {/* share details show */}
+      <Dialog
+        onClose={handleShareModalClose}
+        fullWidth
+        maxWidth="sm"
+        classes={{ paper: 'modal-content rounded-lg' }}
+        aria-labelledby="simple-dialog-title"
+        open={openShareDoc.open}>
+        <div className="p-3 font-size-xl font-weight-bold">
+          Requested Documents
+        </div>
+        <Divider />
+        <div className="table-responsive-md m-4">
+          <div className="table-scrollbar">
+            <Table className="table table-hover text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Accept Request</th>
+                  <th>Decline Request</th>
+                </tr>
+              </thead>
+              <tbody>
+                {openShareDoc.doc.map((a, index) => (
+                  <tr>
+                    <td>
+                      <span>{a.name}</span>
+                    </td>
+                    <td>
+                      <Button size="small" className="btn btn-primary ml-2">
+                        Accept
+                      </Button>
+                    </td>
+                    <td>
+                      <Button size="small" className="btn btn-danger ml-2">
+                        Reject
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 }
