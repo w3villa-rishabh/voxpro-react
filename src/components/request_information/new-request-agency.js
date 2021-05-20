@@ -169,6 +169,7 @@ export default function AddNewRequestComponent() {
 
   const validateForm = (error) => {
     let valid = true;
+    Object.values(error).forEach((val) => val.length >= 0 && (valid = false));
 
     setErrors({
       ...errors,
@@ -180,7 +181,6 @@ export default function AddNewRequestComponent() {
       reason: requestObj.reason.length === 0 ? 'Reason is required!' : '',
       document: documents.length === 0 ? 'Document is required!' : ''
     });
-    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
 
     return valid;
   };
@@ -198,7 +198,9 @@ export default function AddNewRequestComponent() {
       user_id: requestObj.id,
       job_id: requestObj.jobId,
       job_title: requestObj.jobTitle,
-      documents
+      requested_categories_attributes: documents.map((a) => ({
+        category_id: a.value
+      }))
     };
     api.post(`/api/v1/request_for_informations`, obj).then(
       (response) => {
