@@ -193,6 +193,7 @@ export default function AddNewRequestComponent() {
     let obj = {
       request_type: requestFilter.value,
       created_by_id: currentUser.id,
+      company_id: 1, // has to change when we relate user to company
       reason: requestObj.reason,
       due_date: selectedDate,
       user_id: requestObj.id,
@@ -202,17 +203,21 @@ export default function AddNewRequestComponent() {
         category_id: a.value
       }))
     };
-    api.post(`/api/v1/request_for_informations`, obj).then(
-      (response) => {
-        if (response.data.success) {
-          console.log('response.data', response.data);
-          cancelRequest();
+    api
+      .post(`/api/v1/request_for_informations`, {
+        request_for_information: obj
+      })
+      .then(
+        (response) => {
+          if (response.data.success) {
+            console.log('response.data', response.data);
+            cancelRequest();
+          }
+        },
+        (error) => {
+          console.error('error', error);
         }
-      },
-      (error) => {
-        console.error('error', error);
-      }
-    );
+      );
   };
 
   const selectUser = (user) => {
@@ -268,6 +273,7 @@ export default function AddNewRequestComponent() {
                     size="small"
                     name="name"
                     fullWidth
+                    autofocus="false"
                     value={requestObj.name}
                     onChange={handleChanges}
                     onKeyUp={(e) => {
