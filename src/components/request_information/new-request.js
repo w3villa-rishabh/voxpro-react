@@ -101,7 +101,7 @@ export default function NewRequestComponent() {
                               <tr>
                                 <td>{index + 1}</td>
                                 <td>{request.company_name}</td>
-                                <td>--</td>
+                                <td>{request.requester_name}</td>
                                 <td className="text-center">--</td>
                                 <td className="text-center w-25">
                                   <div className="truncate">
