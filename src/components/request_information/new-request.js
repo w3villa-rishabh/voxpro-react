@@ -23,7 +23,9 @@ export default function NewRequestComponent() {
   function getDocuments() {
     setIsLoading(true);
     api
-      .get(`/api/v1/users/get_request_infos?user_id=${currentUser.id}`)
+      .get(
+        `/api/v1/users/get_request_infos?user_id=${currentUser.id}/request_type='new'`
+      )
       .then((response) => {
         setIsLoading(false);
         if (response.data.success) {
@@ -142,8 +144,8 @@ export default function NewRequestComponent() {
                         ) : (
                           <>
                             {requests.map((request, index) => (
-                              <tr>
-                                <td>{index + 1}</td>
+                              <tr key={index}>
+                                <td>{request.id}</td>
                                 <td>{request.company_name}</td>
                                 <td>{request.requester_name}</td>
                                 <td className="text-center">--</td>

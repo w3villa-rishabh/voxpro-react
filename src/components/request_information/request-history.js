@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import TuneIcon from '@material-ui/icons/Tune';
-import {
-  Grid,
-  Card,
-  Button,
-  Table,
-  LinearProgress,
-  Menu,
-  MenuItem
-} from '@material-ui/core';
+import { Grid, Card, Button, Table } from '@material-ui/core';
 
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import { getCurrentUser } from 'helper';
+import api from '../../api';
 
 export default function RequestHistoryComponent() {
   const [currentUser] = useState(getCurrentUser());
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [requests, setRequests] = useState([]);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  useEffect(() => {
+    getDocuments();
+  }, []);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  function getDocuments() {
+    setIsLoading(true);
+    api
+      .get(
+        `/api/v1/users/get_request_infos?user_id=${currentUser.id}/request_type='history'`
+      )
+      .then((response) => {
+        setIsLoading(false);
+        if (response.data.success) {
+          setRequests([...response.data.request_for_information]);
+        }
+      });
+  }
+
   return (
     <>
       <div className="page-title">
@@ -93,212 +99,42 @@ export default function RequestHistoryComponent() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>#453</td>
-                          <td>Headhunters</td>
-                          <td className="text-center text-black-50">
-                            12/12/2020
-                          </td>
-                          <td className="text-center">
-                            <Button
-                              size="small"
-                              className="px-4 btn-neutral-info">
-                              View
-                            </Button>
-                          </td>
-                          <td className="text-black-50">
-                            <LinearProgress
-                              variant="determinate"
-                              className="progress-sm progress-bar-success"
-                              value={100}
-                            />
-                            <div className="font-size-sm text-black-50 pt-1">
-                              Completed
-                            </div>
-                          </td>
-                          <td className="text-center">
-                            <div className="d-flex align-items-center justify-content-center flex-wrap">
-                              <Button
-                                aria-controls="simple-menu"
-                                size="small"
-                                className="px-4 btn-neutral-primary"
-                                variant="contained"
-                                aria-haspopup="true"
-                                onClick={handleClick}>
-                                Action
-                              </Button>
-                              <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                getContentAnchorEl={null}
-                                keepMounted
-                                classes={{ list: 'p-0' }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}>
-                                <div className="p-3">
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Delete
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    View
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Edit
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Follow Up
-                                  </MenuItem>
-                                </div>
-                              </Menu>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#584</td>
-                          <td>Career Appear</td>
-                          <td className="text-center text-black-50">
-                            06/08/2022
-                          </td>
-                          <td className="text-center">
-                            <Button
-                              size="small"
-                              className="px-4 btn-neutral-info">
-                              View
-                            </Button>
-                          </td>
-                          <td className="text-black-50">
-                            <LinearProgress
-                              variant="determinate"
-                              className="progress-sm progress-bar-info"
-                              value={50}
-                            />
-                            <div className="font-size-sm text-black-50 pt-1">
-                              In-progress
-                            </div>
-                          </td>
-                          <td className="text-center">
-                            <div className="d-flex align-items-center justify-content-center flex-wrap">
-                              <Button
-                                aria-controls="simple-menu"
-                                size="small"
-                                className="px-4 btn-neutral-primary"
-                                variant="contained"
-                                aria-haspopup="true"
-                                onClick={handleClick}>
-                                Action
-                              </Button>
-                              <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                getContentAnchorEl={null}
-                                keepMounted
-                                classes={{ list: 'p-0' }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}>
-                                <div className="p-3">
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Delete
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    View
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Edit
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Follow Up
-                                  </MenuItem>
-                                </div>
-                              </Menu>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>#764</td>
-                          <td>Starting Stars</td>
-                          <td className="text-center text-black-50">
-                            12/12/2020
-                          </td>
-                          <td className="text-center">
-                            <Button
-                              size="small"
-                              className="px-4 btn-neutral-info">
-                              View
-                            </Button>
-                          </td>
-                          <td className="text-black-50">
-                            <LinearProgress
-                              variant="determinate"
-                              className="progress-sm progress-bar-warning"
-                              value={30}
-                            />
-                            <div className="font-size-sm text-black-50 pt-1">
-                              Pending
-                            </div>
-                          </td>
-                          <td className="text-center">
-                            <div className="d-flex align-items-center justify-content-center flex-wrap">
-                              <Button
-                                aria-controls="simple-menu"
-                                size="small"
-                                className="px-4 btn-neutral-primary"
-                                variant="contained"
-                                aria-haspopup="true"
-                                onClick={handleClick}>
-                                Action
-                              </Button>
-                              <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                getContentAnchorEl={null}
-                                keepMounted
-                                classes={{ list: 'p-0' }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}>
-                                <div className="p-3">
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Delete
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    View
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Edit
-                                  </MenuItem>
-                                  <MenuItem
-                                    className="pr-5 px-3 text-primary"
-                                    onClick={handleClose}>
-                                    Follow Up
-                                  </MenuItem>
-                                </div>
-                              </Menu>
-                            </div>
-                          </td>
-                        </tr>
+                        {isLoading ? (
+                          'Loading..'
+                        ) : (
+                          <>
+                            {requests.map((request, index) => (
+                              <tr>
+                                <td>{request.id}</td>
+                                <td>{request.company_name}</td>
+                                <td>{request.requester_name}</td>
+                                <td className="text-center">--</td>
+                                <td className="text-center w-25">
+                                  <div className="truncate">
+                                    {request.reason}
+                                  </div>
+                                </td>
+                                <td className="text-center text-black-50">
+                                  {request.due_date}
+                                </td>
+                                <td className="text-center">
+                                  <Button
+                                    size="small"
+                                    className="px-4 btn-neutral-danger">
+                                    Action
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))}
+                          </>
+                        )}
                       </tbody>
                     </Table>
+                    {!requests.length && !isLoading && (
+                      <div className="font-size-xxl m-5 text-center">
+                        No data found
+                      </div>
+                    )}
                   </PerfectScrollbar>
                 </div>
                 <div className="card-footer py-3 text-center">
