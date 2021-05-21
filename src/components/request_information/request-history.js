@@ -104,7 +104,7 @@ export default function RequestHistoryComponent() {
                         ) : (
                           <>
                             {requests.map((request, index) => (
-                              <tr>
+                              <tr key={index}>
                                 <td>{request.id}</td>
                                 <td>{request.company_name}</td>
                                 <td>{request.requester_name}</td>
