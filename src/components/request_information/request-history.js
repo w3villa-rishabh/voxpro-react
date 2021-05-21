@@ -22,7 +22,7 @@ export default function RequestHistoryComponent() {
     setIsLoading(true);
     api
       .get(
-        `/api/v1/users/get_request_infos?user_id=${currentUser.id}/request_type='history'`
+        `/api/v1/users/get_request_infos?user_id=${currentUser.id}&request_type=history`
       )
       .then((response) => {
         setIsLoading(false);

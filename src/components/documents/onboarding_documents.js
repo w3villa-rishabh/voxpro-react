@@ -190,7 +190,7 @@ export default function OnBoardDocument() {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              Documents
+              Documents due to expire
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center mr-3 shadow-danger">

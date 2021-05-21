@@ -24,7 +24,7 @@ export default function NewRequestComponent() {
     setIsLoading(true);
     api
       .get(
-        `/api/v1/users/get_request_infos?user_id=${currentUser.id}/request_type='new'`
+        `/api/v1/users/get_request_infos?user_id=${currentUser.id}&request_type=new`
       )
       .then((response) => {
         setIsLoading(false);
