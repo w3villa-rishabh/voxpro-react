@@ -7,6 +7,7 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { toast } from 'react-toastify';
 import { getCurrentUser } from 'helper';
 import api from '../../api';
 
@@ -38,8 +39,9 @@ export default function AddNewRequestComponent() {
     value: 'candidate',
     label: 'Candidate'
   });
-  const [selectedDate, setSelectedDate] = useState(new Date('2020-08-18'));
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [documents, setDocuments] = useState('');
+  const [doRequest, setDoRequest] = useState(false);
   const [requestObj, setRequestObj] = useState({
     name: '',
     id: 0,
@@ -52,8 +54,6 @@ export default function AddNewRequestComponent() {
   const [errors, setErrors] = useState({
     name: '',
     id: '',
-    jobId: '',
-    jobTitle: '',
     reason: '',
     document: ''
   });
@@ -84,15 +84,18 @@ export default function AddNewRequestComponent() {
   };
 
   const search = (search) => {
-    if (search.length < 3) {
+    if (search.length < 2) {
       return;
     }
 
     api.get(`/api/v1/users/candidate_search?q=${search}`).then(
       (response) => {
+        toast.dismiss();
         if (response.data.success) {
           console.log('response.data', response.data);
           setSearchUser([...response.data.users]);
+        } else if (!searchUser.length) {
+          toast.error('No available..');
         }
       },
       (error) => {
@@ -141,18 +144,6 @@ export default function AddNewRequestComponent() {
         });
         break;
 
-      // case 'jobId':
-      //   setErrors({
-      //     ...errors,
-      //     jobId: value.length > 1 ? '' : 'Job is required!'
-      //   });
-      //   break;
-      // case 'jobTitle':
-      //   setErrors({
-      //     ...errors,
-      //     jobTitle: value.length > 2 ? '' : 'Job title is required!'
-      //   });
-      //   break;
       case 'reason':
         setErrors({
           ...errors,
@@ -191,7 +182,7 @@ export default function AddNewRequestComponent() {
     if (!requestObj.id || !requestObj.reason || !documents.length) {
       return;
     }
-
+    setDoRequest(true);
     let obj = {
       request_type: requestFilter.value,
       created_by_id: currentUser.id,
@@ -212,12 +203,17 @@ export default function AddNewRequestComponent() {
       })
       .then(
         (response) => {
+          setDoRequest(false);
+          toast.dismiss();
           if (response.data.success) {
             console.log('response.data', response.data);
             cancelRequest();
+            toast.success(response.data.message);
           }
         },
         (error) => {
+          setDoRequest(false);
+          toast.error(error);
           console.error('error', error);
         }
       );
@@ -343,28 +339,29 @@ export default function AddNewRequestComponent() {
                       variant="outlined"
                       size="small"
                       name="jobId"
-                      onChange={handleChanges}
+                      onChange={(e) => {
+                        setRequestObj({ ...requestObj, jobId: e.target.value });
+                      }}
                       value={requestObj.jobId}
-                      label="Job or (Placement) ID"
+                      label="Placement ID"
                       fullWidth
                     />
-                    {errors.jobId.length > 0 && (
-                      <span className="error">{errors.jobId}</span>
-                    )}
                   </Grid>
                   <Grid item xs={12} sm={4}>
                     <TextField
                       variant="outlined"
                       size="small"
                       name="jobTitle"
-                      onChange={handleChanges}
+                      onChange={(e) => {
+                        setRequestObj({
+                          ...requestObj,
+                          jobTitle: e.target.value
+                        });
+                      }}
                       value={requestObj.jobTitle}
                       label="Job Title"
                       fullWidth
                     />
-                    {errors.jobTitle.length > 0 && (
-                      <span className="error">{errors.jobTitle}</span>
-                    )}
                   </Grid>
                 </Grid>
               </Grid>
@@ -398,14 +395,13 @@ export default function AddNewRequestComponent() {
                     });
                   }}
                   name="document"
-                  placeholder={
-                    currentUser.role === 'agency'
-                      ? 'Documents for Request'
-                      : 'Documents Requested'
-                  }
+                  placeholder="Documents Requested"
                 />
-                {errors.document.length > 0 && (
+
+                {errors.document.length > 0 ? (
                   <span className="error">{errors.document}</span>
+                ) : (
+                  <small>(Choose multiple documents)</small>
                 )}
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -418,6 +414,7 @@ export default function AddNewRequestComponent() {
                     id="date-picker-inline"
                     className="w-100"
                     label="Due Date"
+                    minDate={new Date()}
                     value={selectedDate}
                     autoOk={true}
                     onChange={handleDateChange}
@@ -432,6 +429,7 @@ export default function AddNewRequestComponent() {
                   <Button
                     variant="contained"
                     onClick={sendRequest}
+                    disabled={doRequest}
                     className="font-weight-bold btn-second px-4 my-1 mr-3">
                     Send Request
                   </Button>

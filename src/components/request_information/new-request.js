@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import TuneIcon from '@material-ui/icons/Tune';
 import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
@@ -11,20 +12,20 @@ export default function NewRequestComponent() {
   const [currentUser] = useState(getCurrentUser());
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [requests, setRequests] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getDocuments();
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   function getDocuments() {
+    setIsLoading(true);
     api
       .get(`/api/v1/users/get_request_infos?user_id=${currentUser.id}`)
       .then((response) => {
+        setIsLoading(false);
         if (response.data.success) {
           setRequests([...response.data.request_for_informations]);
-        } else {
-          alert('Something went wrong..');
         }
       });
   }
@@ -91,34 +92,47 @@ export default function NewRequestComponent() {
                         </tr>
                       </thead>
                       <tbody>
-                        {requests.map((request, index) => (
-                          <tr>
-                            <td>{index + 1}</td>
-                            <td>{request.company_name}</td>
-                            <td className="text-center">-</td>
-                            <td className="text-center w-25">
-                              <div className="truncate">{request.reason}</div>
-                            </td>
-                            <td className="text-center text-black-50">
-                              {request.due_date}
-                            </td>
-                            <td className="text-center">
-                              <Button
-                                size="small"
-                                className="px-4 btn-neutral-danger"
-                                onClick={() =>
-                                  setOpenShareDoc({
-                                    open: true,
-                                    doc: request.requested_documents
-                                  })
-                                }>
-                                Action
-                              </Button>
-                            </td>
-                          </tr>
-                        ))}
+                        {isLoading ? (
+                          'Loading..'
+                        ) : (
+                          <>
+                            {requests.map((request, index) => (
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{request.company_name}</td>
+                                <td className="text-center">-</td>
+                                <td className="text-center w-25">
+                                  <div className="truncate">
+                                    {request.reason}
+                                  </div>
+                                </td>
+                                <td className="text-center text-black-50">
+                                  {request.due_date}
+                                </td>
+                                <td className="text-center">
+                                  <Button
+                                    size="small"
+                                    className="px-4 btn-neutral-danger"
+                                    onClick={() =>
+                                      setOpenShareDoc({
+                                        open: true,
+                                        doc: request.requested_documents
+                                      })
+                                    }>
+                                    Action
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))}
+                          </>
+                        )}
                       </tbody>
                     </Table>
+                    {!requests.length && !isLoading && (
+                      <div className="font-size-xxl m-5 text-center">
+                        No data found
+                      </div>
+                    )}
                   </PerfectScrollbar>
                 </div>
                 <div className="card-footer py-3 text-center">
