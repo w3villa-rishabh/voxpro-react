@@ -37,6 +37,7 @@ export default function NewRequestComponent() {
 
   const acceptReject = (e, event, id, index) => {
     e.preventDefault();
+    let status = event === 'accept' ? 'accepted' : 'rejected';
     confirmAlert({
       title: 'Confirm',
       message: 'Are you sure to do this.',
@@ -47,15 +48,14 @@ export default function NewRequestComponent() {
           onClick: () => {
             api
               .post(`/api/v1/request_for_informations/accept_reject_request`, {
-                status: event === 'accept' ? 'accepted' : 'rejected',
+                status,
                 id
               })
               .then(
                 (response) => {
                   if (response.data.success) {
                     setIsLoading(false);
-                    openShareDoc.doc[index].status =
-                      event === 'accept' ? 'accepted' : 'rejected';
+                    openShareDoc.doc[index].status = status;
                     setOpenShareDoc({ ...openShareDoc });
                     toast.success(response.data.message);
                   } else {
