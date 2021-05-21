@@ -778,6 +778,10 @@ tbody.scroll {
   text-overflow: ellipsis;
 }
 
+.confirm-alert {
+  z-index: 9999;
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {

@@ -7,6 +7,8 @@ import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import api from '../../api';
 import { getCurrentUser } from 'helper';
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert'; // Import
 
 export default function NewRequestComponent() {
   const [currentUser] = useState(getCurrentUser());
@@ -25,12 +27,54 @@ export default function NewRequestComponent() {
       .then((response) => {
         setIsLoading(false);
         if (response.data.success) {
-          setRequests([...response.data.request_for_informations]);
+          setRequests([...response.data.request_for_information]);
         }
       });
   }
   const handleShareModalClose = () => {
     setOpenShareDoc({ open: false, doc: [] });
+  };
+
+  const acceptReject = (e, event, id, index) => {
+    e.preventDefault();
+    confirmAlert({
+      title: 'Confirm',
+      message: 'Are you sure to do this.',
+      overlayClassName: 'confirm-alert',
+      buttons: [
+        {
+          label: event.toUpperCase(),
+          onClick: () => {
+            api
+              .post(`/api/v1/request_for_informations/accept_reject_request`, {
+                status: event === 'accept' ? 'accepted' : 'rejected',
+                id
+              })
+              .then(
+                (response) => {
+                  if (response.data.success) {
+                    setIsLoading(false);
+                    openShareDoc.doc[index].status =
+                      event === 'accept' ? 'accepted' : 'rejected';
+                    setOpenShareDoc({ ...openShareDoc });
+                    toast.success(response.data.message);
+                  } else {
+                    toast.success(response.data.message);
+                  }
+                },
+                (error) => {
+                  setIsLoading(false);
+                  toast.error('Something went wrong');
+                  console.error('error', error);
+                }
+              );
+          }
+        },
+        {
+          label: 'Cancel'
+        }
+      ]
+    });
   };
 
   return (
@@ -181,12 +225,29 @@ export default function NewRequestComponent() {
                     </td>
                     <td>
                       <div className="float-right">
-                        <Button size="small" className="btn btn-primary ml-2">
-                          Accept
-                        </Button>
-                        <Button size="small" className="btn btn-danger ml-2">
-                          Reject
-                        </Button>
+                        {a.status === null ? (
+                          <>
+                            <Button
+                              size="small"
+                              className="btn btn-primary ml-2"
+                              onClick={(e) =>
+                                acceptReject(e, 'accept', a.rcategory_id, index)
+                              }>
+                              Accept
+                            </Button>
+
+                            <Button
+                              size="small"
+                              className="btn btn-danger ml-2"
+                              onClick={(e) =>
+                                acceptReject(e, 'reject', a.rcategory_id, index)
+                              }>
+                              Reject
+                            </Button>
+                          </>
+                        ) : (
+                          <span>{a.status.toUpperCase()}</span>
+                        )}
                         <Button size="small" className="btn btn-info ml-2">
                           Query
                         </Button>
