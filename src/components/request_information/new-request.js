@@ -59,7 +59,7 @@ export default function NewRequestComponent() {
                     setOpenShareDoc({ ...openShareDoc });
                     toast.success(response.data.message);
                   } else {
-                    toast.success(response.data.message);
+                    toast.error(response.data.message);
                   }
                 },
                 (error) => {
@@ -246,7 +246,7 @@ export default function NewRequestComponent() {
                             </Button>
                           </>
                         ) : (
-                          <span>{a.status.toUpperCase()}</span>
+                          <span className="mr-2">{a.status.toUpperCase()}</span>
                         )}
                         <Button size="small" className="btn btn-info ml-2">
                           Query
