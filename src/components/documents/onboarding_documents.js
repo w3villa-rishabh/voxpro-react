@@ -221,13 +221,21 @@ export default function OnBoardDocument() {
                 />
               </div> */}
               <div className="ml-1">
-                <span>2 Documents uploaded</span>
+                <a href="#/" onClick={(e) => e.preventDefault()}>
+                  2 Documents uploaded
+                </a>
                 <br />
-                <span>3 Documents due to expire</span>
+                <a href="#/" onClick={(e) => e.preventDefault()}>
+                  3 Documents due to expire
+                </a>
                 <br />
-                <span>2 Total request for information</span>
+                <a href="#/" onClick={(e) => e.preventDefault()}>
+                  2 Total request for information
+                </a>
                 <br />
-                <span>2 Pending request for information</span>
+                <a href="#/" onClick={(e) => e.preventDefault()}>
+                  2 Pending request for information
+                </a>
                 <br />
               </div>
             </div>
