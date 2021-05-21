@@ -124,7 +124,7 @@ export default function AddNewRequestComponent() {
     });
     setDocuments('');
     setSearchUser([]);
-    setSelectedDate(new Date('2020-08-18'));
+    setSelectedDate(new Date());
   };
 
   const handleChanges = (event) => {
@@ -209,6 +209,8 @@ export default function AddNewRequestComponent() {
             console.log('response.data', response.data);
             cancelRequest();
             toast.success(response.data.message);
+          } else {
+            toast.error('Something went wrong..');
           }
         },
         (error) => {

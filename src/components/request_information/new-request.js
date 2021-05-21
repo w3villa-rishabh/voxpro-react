@@ -83,6 +83,7 @@ export default function NewRequestComponent() {
                         <tr>
                           <th className="bg-white">S.No</th>
                           <th className="bg-white">Company/Agency</th>
+                          <th className="bg-white">Requester Name</th>
                           <th className="bg-white text-center">Placement</th>
                           <th className="bg-white text-center">
                             Reason for request
@@ -100,7 +101,8 @@ export default function NewRequestComponent() {
                               <tr>
                                 <td>{index + 1}</td>
                                 <td>{request.company_name}</td>
-                                <td className="text-center">-</td>
+                                <td>--</td>
+                                <td className="text-center">--</td>
                                 <td className="text-center w-25">
                                   <div className="truncate">
                                     {request.reason}
@@ -168,25 +170,27 @@ export default function NewRequestComponent() {
               <thead>
                 <tr>
                   <th>Document Name</th>
-                  <th>Accept Request</th>
-                  <th>Decline Request</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {openShareDoc.doc.map((a, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>
                       <span>{a.name}</span>
                     </td>
                     <td>
-                      <Button size="small" className="btn btn-primary ml-2">
-                        Accept
-                      </Button>
-                    </td>
-                    <td>
-                      <Button size="small" className="btn btn-danger ml-2">
-                        Reject
-                      </Button>
+                      <div className="float-right">
+                        <Button size="small" className="btn btn-primary ml-2">
+                          Accept
+                        </Button>
+                        <Button size="small" className="btn btn-danger ml-2">
+                          Reject
+                        </Button>
+                        <Button size="small" className="btn btn-info ml-2">
+                          Query
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}
