@@ -271,7 +271,7 @@ const NewRequestComponent = (props) => {
                       <span>{a.name}</span>
                     </td>
                     <td>
-                      {a.category_id !== sendQueryId && (
+                      {a.requested_category_id !== sendQueryId && (
                         <Grid container spacing={0}>
                           <Grid item sm={8} xs={12}>
                             <div className="float-right">
@@ -334,11 +334,13 @@ const NewRequestComponent = (props) => {
 
                           <Grid item sm={4} xs={12}>
                             <div className="text-wrap">
-                              {a.category_id !== sendQueryId && (
+                              {a.requested_category_id !== sendQueryId && (
                                 <Button
                                   size="small"
                                   className="btn btn-info"
-                                  onClick={() => setSendQueryId(a.category_id)}>
+                                  onClick={() =>
+                                    setSendQueryId(a.requested_category_id)
+                                  }>
                                   Query
                                 </Button>
                               )}
@@ -346,7 +348,7 @@ const NewRequestComponent = (props) => {
                           </Grid>
                         </Grid>
                       )}
-                      {a.category_id === sendQueryId && (
+                      {a.requested_category_id === sendQueryId && (
                         <>
                           <div className="d-flex float-right">
                             <TextField
