@@ -86,15 +86,16 @@ export default function RequestHistoryComponent() {
                     <Table className="table table-hover text-nowrap mb-0">
                       <thead>
                         <tr>
-                          <th className="bg-white text-left">Job ID</th>
-                          <th className="bg-white">Requester</th>
+                          <th className="bg-white">Company/Agency</th>
+                          <th className="bg-white">Requester Name</th>
+                          <th className="bg-white text-center">Placement</th>
                           <th className="bg-white text-center">
-                            Date Requested
+                            Reason for request
                           </th>
-                          <th className="bg-white text-center">Documents</th>
-                          <th className="bg-white text-center">
+                          <th className="bg-white text-center">Due Date</th>
+                          {/* <th className="bg-white text-center">
                             Interview Process Stages
-                          </th>
+                          </th> */}
                           <th className="bg-white text-center"></th>
                         </tr>
                       </thead>
@@ -105,7 +106,6 @@ export default function RequestHistoryComponent() {
                           <>
                             {requests.map((request, index) => (
                               <tr key={index}>
-                                <td>{request.id}</td>
                                 <td>{request.company_name}</td>
                                 <td>{request.requester_name}</td>
                                 <td className="text-center">--</td>
@@ -117,6 +117,7 @@ export default function RequestHistoryComponent() {
                                 <td className="text-center text-black-50">
                                   {request.due_date}
                                 </td>
+                                {/* <td>--</td> */}
                                 <td className="text-center">
                                   <Button
                                     size="small"
