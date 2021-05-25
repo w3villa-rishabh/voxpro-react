@@ -137,7 +137,8 @@ const OnBoardDocumentList = (props) => {
       pathname: '/upload',
       search: '?edit=' + doc.id,
       state: {
-        update: true
+        update: true,
+        expire_edit: false
       }
     });
     handleClose();

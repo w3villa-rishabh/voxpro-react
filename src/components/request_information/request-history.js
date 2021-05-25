@@ -48,7 +48,7 @@ export default function RequestHistoryComponent() {
                 <div className="display-3 font-weight-bold">12</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Total Requests
+                  Total document requested
                 </div>
               </Card>
             </Grid>
@@ -57,7 +57,7 @@ export default function RequestHistoryComponent() {
                 <div className="display-3 font-weight-bold">10</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Requests Accepted
+                  Total Document accepted
                 </div>
               </Card>
             </Grid>
@@ -66,7 +66,7 @@ export default function RequestHistoryComponent() {
                 <div className="display-3 font-weight-bold">02</div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Requests Denied
+                  Total document rejected
                 </div>
               </Card>
             </Grid>

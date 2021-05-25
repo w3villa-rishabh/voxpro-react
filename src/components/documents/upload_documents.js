@@ -125,7 +125,8 @@ const UploadDocument = (props) => {
               privacy: doc.privacy,
               copy: Boolean(doc.send_copy),
               content_type: doc.content_type,
-              disableEdit: true
+              disableEdit: true,
+              expire_edit: location.state.expire_edit
             });
           }
         } else {
@@ -642,6 +643,7 @@ const UploadDocument = (props) => {
                   fullWidth
                   name="notify"
                   onChange={handleChange}
+                  disabled={documents.expire_edit}
                   value={documents.notify}>
                   <option value="0">Select Notify</option>
                   <option value="1">No</option>
@@ -662,6 +664,7 @@ const UploadDocument = (props) => {
                   variant="outlined"
                   fullWidth
                   value={documents.privacy}
+                  disabled={documents.expire_edit}
                   onChange={handleChange}
                   name="privacy">
                   <option value="0">Select Privacy</option>

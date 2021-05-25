@@ -1,20 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import TuneIcon from '@material-ui/icons/Tune';
-import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
-
+import {
+  Grid,
+  Card,
+  Button,
+  Table,
+  Dialog,
+  Divider,
+  TextField
+} from '@material-ui/core';
+import { connect } from 'react-redux';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import api from '../../api';
-import { getCurrentUser } from 'helper';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
+import { useHistory } from 'react-router-dom';
+import api from '../../api';
+import { getCurrentUser } from 'helper';
+import { setEditDoc } from '../../reducers/ThemeOptions';
 
-export default function NewRequestComponent() {
+const NewRequestComponent = (props) => {
+  const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [requests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [sendQueryId, setSendQueryId] = useState(0);
 
   useEffect(() => {
     getDocuments();
@@ -55,6 +67,7 @@ export default function NewRequestComponent() {
               })
               .then(
                 (response) => {
+                  toast.dismiss();
                   if (response.data.success) {
                     setIsLoading(false);
                     openShareDoc.doc[index].status = status;
@@ -77,6 +90,26 @@ export default function NewRequestComponent() {
         }
       ]
     });
+  };
+
+  const uploadNewDoc = (e, doc) => {
+    e.preventDefault();
+    console.log('doc', doc);
+    props.setEditDoc(doc);
+    history.push({
+      pathname: '/upload',
+      search: '?expire_edit=' + 0,
+      state: {
+        update: true,
+        expire_edit: true
+      }
+    });
+  };
+
+  const docQuery = (e, doc) => {
+    e.preventDefault();
+    console.log('doc', doc);
+    history.push('/chat');
   };
 
   return (
@@ -127,7 +160,6 @@ export default function NewRequestComponent() {
                     <Table className="table table-hover text-nowrap mb-0">
                       <thead>
                         <tr>
-                          <th className="bg-white">S.No</th>
                           <th className="bg-white">Company/Agency</th>
                           <th className="bg-white">Requester Name</th>
                           <th className="bg-white text-center">Placement</th>
@@ -145,7 +177,6 @@ export default function NewRequestComponent() {
                           <>
                             {requests.map((request, index) => (
                               <tr key={index}>
-                                <td>{request.id}</td>
                                 <td>{request.company_name}</td>
                                 <td>{request.requester_name}</td>
                                 <td className="text-center">--</td>
@@ -202,7 +233,7 @@ export default function NewRequestComponent() {
       <Dialog
         onClose={handleShareModalClose}
         fullWidth
-        maxWidth="sm"
+        maxWidth="md"
         classes={{ paper: 'modal-content rounded-lg' }}
         aria-labelledby="simple-dialog-title"
         open={openShareDoc.open}>
@@ -226,34 +257,104 @@ export default function NewRequestComponent() {
                       <span>{a.name}</span>
                     </td>
                     <td>
-                      <div className="float-right">
-                        {a.status === null ? (
-                          <>
-                            <Button
-                              size="small"
-                              className="btn btn-primary ml-2"
-                              onClick={(e) =>
-                                acceptReject(e, 'accept', a.rcategory_id, index)
-                              }>
-                              Accept
-                            </Button>
+                      <Grid container spacing={0}>
+                        <Grid item sm={8} xs={12}>
+                          <div className="float-right">
+                            {a.status === null ? (
+                              <>
+                                <Button
+                                  size="small"
+                                  className="btn btn-primary ml-2"
+                                  onClick={(e) =>
+                                    acceptReject(
+                                      e,
+                                      'accept',
+                                      a.rcategory_id,
+                                      index
+                                    )
+                                  }>
+                                  Accept
+                                </Button>
 
-                            <Button
-                              size="small"
-                              className="btn btn-danger ml-2"
-                              onClick={(e) =>
-                                acceptReject(e, 'reject', a.rcategory_id, index)
-                              }>
-                              Reject
-                            </Button>
-                          </>
-                        ) : (
-                          <span className="mr-2">{a.status.toUpperCase()}</span>
-                        )}
-                        <Button size="small" className="btn btn-info ml-2">
-                          Query
-                        </Button>
-                      </div>
+                                <Button
+                                  size="small"
+                                  className="btn btn-danger ml-2"
+                                  onClick={(e) =>
+                                    acceptReject(
+                                      e,
+                                      'reject',
+                                      a.rcategory_id,
+                                      index
+                                    )
+                                  }>
+                                  Reject
+                                </Button>
+                              </>
+                            ) : (
+                              <>
+                                <div>
+                                  <span className="mr-2">
+                                    {a.status.toUpperCase()}
+                                  </span>
+                                  {a.status === 'accepted' && a.expire && (
+                                    <>
+                                      <br></br>
+                                      <small className="text-danger">
+                                        Expire document date
+                                      </small>
+                                      <br></br>
+                                      <a
+                                        className="a-blue"
+                                        href="#/"
+                                        onClick={(e) => uploadNewDoc(e, a)}>
+                                        Upload new
+                                      </a>
+                                    </>
+                                  )}
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </Grid>
+                        <Grid item sm={4} xs={12}>
+                          <div className="text-wrap">
+                            {a.rcategory_id !== sendQueryId && (
+                              <Button
+                                size="small"
+                                className="btn btn-info"
+                                onClick={() => setSendQueryId(a.rcategory_id)}>
+                                Query
+                              </Button>
+                            )}
+                            {a.rcategory_id === sendQueryId && (
+                              <>
+                                <TextField
+                                  variant="outlined"
+                                  size="small"
+                                  id="text-query"
+                                  label="Query"
+                                  type="text"
+                                  name="query"
+                                />
+                                <div className="d-flex">
+                                  <Button
+                                    size="small"
+                                    className="btn shadow btn-slack  bg-color ml-2 mt-2"
+                                    onClick={(e) => docQuery(e, a)}>
+                                    Send
+                                  </Button>
+                                  <Button
+                                    size="small"
+                                    className="btn shadow btn-dark ml-2 mt-2"
+                                    onClick={() => setSendQueryId(0)}>
+                                    Cancel
+                                  </Button>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </Grid>
+                      </Grid>
                     </td>
                   </tr>
                 ))}
@@ -264,4 +365,12 @@ export default function NewRequestComponent() {
       </Dialog>
     </>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setEditDoc: (doc) => dispatch(setEditDoc(doc))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewRequestComponent);
