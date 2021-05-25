@@ -27,6 +27,7 @@ const NewRequestComponent = (props) => {
   const [requests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sendQueryId, setSendQueryId] = useState(0);
+  const [queryText, setQueryText] = useState('');
 
   useEffect(() => {
     getDocuments();
@@ -108,8 +109,20 @@ const NewRequestComponent = (props) => {
 
   const docQuery = (e, doc) => {
     e.preventDefault();
+    if (!queryText) {
+      return;
+    }
     console.log('doc', doc);
-    history.push('/chat');
+    setQueryText('');
+    setSendQueryId(0);
+    toast.dismiss();
+    toast.success('Query send to requester');
+    // history.push('/chat');
+  };
+
+  const cancelQuery = () => {
+    setSendQueryId(0);
+    setQueryText('');
   };
 
   return (
@@ -335,6 +348,9 @@ const NewRequestComponent = (props) => {
                                   label="Query"
                                   type="text"
                                   name="query"
+                                  placeholder="Enter text"
+                                  value={queryText}
+                                  onChange={(e) => setQueryText(e.target.value)}
                                 />
                                 <div className="d-flex">
                                   <Button
@@ -346,7 +362,7 @@ const NewRequestComponent = (props) => {
                                   <Button
                                     size="small"
                                     className="btn shadow btn-dark ml-2 mt-2"
-                                    onClick={() => setSendQueryId(0)}>
+                                    onClick={cancelQuery}>
                                     Cancel
                                   </Button>
                                 </div>
