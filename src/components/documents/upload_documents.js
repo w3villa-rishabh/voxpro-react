@@ -120,7 +120,12 @@ const UploadDocument = (props) => {
             setDocuments({
               categoryId: doc.category_id,
               docId: doc.sub_category_id,
-              expiration: doc.expiration === 'No Expiration' ? 1 : 2,
+              expiration:
+                location.state.expire_edit === true
+                  ? 0
+                  : doc.expiration === 'No Expiration'
+                  ? 1
+                  : 2,
               notify: doc.notify,
               privacy: doc.privacy,
               copy: Boolean(doc.send_copy),
