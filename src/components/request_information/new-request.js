@@ -31,6 +31,7 @@ const NewRequestComponent = (props) => {
 
   useEffect(() => {
     getDocuments();
+    props.setEditDoc({});
   }, []);
 
   function getDocuments() {
@@ -99,7 +100,7 @@ const NewRequestComponent = (props) => {
     props.setEditDoc(doc);
     history.push({
       pathname: '/upload',
-      search: '?expire_edit=' + 0,
+      search: '?expire_edit=' + doc.id,
       state: {
         update: true,
         expire_edit: true
@@ -270,107 +271,110 @@ const NewRequestComponent = (props) => {
                       <span>{a.name}</span>
                     </td>
                     <td>
-                      <Grid container spacing={0}>
-                        <Grid item sm={8} xs={12}>
-                          <div className="float-right">
-                            {a.status === null ? (
-                              <>
-                                <Button
-                                  size="small"
-                                  className="btn btn-primary ml-2"
-                                  onClick={(e) =>
-                                    acceptReject(
-                                      e,
-                                      'accept',
-                                      a.rcategory_id,
-                                      index
-                                    )
-                                  }>
-                                  Accept
-                                </Button>
+                      {a.category_id !== sendQueryId && (
+                        <Grid container spacing={0}>
+                          <Grid item sm={8} xs={12}>
+                            <div className="float-right">
+                              {a.status === null ? (
+                                <>
+                                  <Button
+                                    size="small"
+                                    className="btn btn-primary ml-2"
+                                    onClick={(e) =>
+                                      acceptReject(
+                                        e,
+                                        'accept',
+                                        a.requested_category_id,
+                                        index
+                                      )
+                                    }>
+                                    Accept
+                                  </Button>
 
+                                  <Button
+                                    size="small"
+                                    className="btn btn-danger ml-2"
+                                    onClick={(e) =>
+                                      acceptReject(
+                                        e,
+                                        'reject',
+                                        a.requested_category_id,
+                                        index
+                                      )
+                                    }>
+                                    Reject
+                                  </Button>
+                                </>
+                              ) : (
+                                <>
+                                  <div>
+                                    <span className="mr-2">
+                                      {a.status.toUpperCase()}
+                                    </span>
+                                    {a.status === 'accepted' && a.doc_expired && (
+                                      <>
+                                        <br></br>
+                                        <small className="text-danger">
+                                          Expire document date
+                                        </small>
+                                        <br></br>
+                                        <a
+                                          className="a-blue"
+                                          href="#/"
+                                          onClick={(e) => uploadNewDoc(e, a)}>
+                                          Upload new
+                                        </a>
+                                      </>
+                                    )}
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          </Grid>
+
+                          <Grid item sm={4} xs={12}>
+                            <div className="text-wrap">
+                              {a.category_id !== sendQueryId && (
                                 <Button
                                   size="small"
-                                  className="btn btn-danger ml-2"
-                                  onClick={(e) =>
-                                    acceptReject(
-                                      e,
-                                      'reject',
-                                      a.rcategory_id,
-                                      index
-                                    )
-                                  }>
-                                  Reject
+                                  className="btn btn-info"
+                                  onClick={() => setSendQueryId(a.category_id)}>
+                                  Query
                                 </Button>
-                              </>
-                            ) : (
-                              <>
-                                <div>
-                                  <span className="mr-2">
-                                    {a.status.toUpperCase()}
-                                  </span>
-                                  {a.status === 'accepted' && a.expire && (
-                                    <>
-                                      <br></br>
-                                      <small className="text-danger">
-                                        Expire document date
-                                      </small>
-                                      <br></br>
-                                      <a
-                                        className="a-blue"
-                                        href="#/"
-                                        onClick={(e) => uploadNewDoc(e, a)}>
-                                        Upload new
-                                      </a>
-                                    </>
-                                  )}
-                                </div>
-                              </>
-                            )}
-                          </div>
+                              )}
+                            </div>
+                          </Grid>
                         </Grid>
-                        <Grid item sm={4} xs={12}>
-                          <div className="text-wrap">
-                            {a.rcategory_id !== sendQueryId && (
-                              <Button
-                                size="small"
-                                className="btn btn-info"
-                                onClick={() => setSendQueryId(a.rcategory_id)}>
-                                Query
-                              </Button>
-                            )}
-                            {a.rcategory_id === sendQueryId && (
-                              <>
-                                <TextField
-                                  variant="outlined"
-                                  size="small"
-                                  id="text-query"
-                                  label="Query"
-                                  type="text"
-                                  name="query"
-                                  placeholder="Enter text"
-                                  value={queryText}
-                                  onChange={(e) => setQueryText(e.target.value)}
-                                />
-                                <div className="d-flex">
-                                  <Button
-                                    size="small"
-                                    className="btn shadow btn-slack  bg-color ml-2 mt-2"
-                                    onClick={(e) => docQuery(e, a)}>
-                                    Send
-                                  </Button>
-                                  <Button
-                                    size="small"
-                                    className="btn shadow btn-dark ml-2 mt-2"
-                                    onClick={cancelQuery}>
-                                    Cancel
-                                  </Button>
-                                </div>
-                              </>
-                            )}
+                      )}
+                      {a.category_id === sendQueryId && (
+                        <>
+                          <div className="d-flex float-right">
+                            <TextField
+                              variant="outlined"
+                              size="small"
+                              id="text-query"
+                              label="Query"
+                              type="text"
+                              name="query"
+                              placeholder="Enter text"
+                              value={queryText}
+                              onChange={(e) => setQueryText(e.target.value)}
+                            />
+                            <Button
+                              size="small"
+                              className="btn shadow btn-slack  bg-color ml-2"
+                              onClick={(e) => docQuery(e, a)}>
+                              Send
+                            </Button>
+                            <Button
+                              size="small"
+                              className="btn shadow btn-dark ml-2"
+                              onClick={cancelQuery}>
+                              Cancel
+                            </Button>
                           </div>
-                        </Grid>
-                      </Grid>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
