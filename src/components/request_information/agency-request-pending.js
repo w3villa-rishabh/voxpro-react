@@ -41,7 +41,6 @@ export default function AgencyRequestPendingComponent() {
   };
 
   const editDoc = () => {
-    return;
     if (openShareDoc.requestId) {
       history.push({
         pathname: '/request-info/update-request',

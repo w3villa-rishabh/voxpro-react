@@ -235,7 +235,7 @@ export default function RequestHistoryComponent() {
                           </div>
                         ) : (
                           <div className="badge badge-neutral-danger text-danger">
-                            {doc.status.toUpperCase()}
+                            {doc.status ? doc.status.toUpperCase() : 'Pending'}
                           </div>
                         )}
                       </span>

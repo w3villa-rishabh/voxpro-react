@@ -1,11 +1,69 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+
+import {
+  Grid,
+  Card,
+  Button,
+  Table,
+  Dialog,
+  Divider,
+  TextField
+} from '@material-ui/core';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import { Grid, Card, Button, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { toast } from 'react-toastify';
+
+import api from '../../api';
 import { getCurrentUser } from 'helper';
 
 export default function AgencyRequestHistoryComponent() {
   const [currentUser] = useState(getCurrentUser());
+  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
+  const [candidateRequests, setCandidateRequests] = useState([]);
+  const [companyRequests, setCompanyRequests] = useState([]);
+  const [sendQueryId, setSendQueryId] = useState(0);
+  const [queryText, setQueryText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getDocuments();
+  }, []);
+
+  function getDocuments() {
+    setIsLoading(true);
+    api
+      .get(`/api/v1/request_for_informations/agency_requests`)
+      .then((response) => {
+        setIsLoading(false);
+        if (response.data.success) {
+          setCandidateRequests([...response.data.candidate_requests]);
+          setCompanyRequests([...response.data.company_requests]);
+        }
+      });
+  }
+
+  const handleShareModalClose = () => {
+    setOpenShareDoc({ open: false, doc: [] });
+  };
+
+  const docQuery = (e, doc) => {
+    e.preventDefault();
+    if (!queryText) {
+      return;
+    }
+    console.log('doc', doc);
+    setQueryText('');
+    setSendQueryId(0);
+    toast.dismiss();
+    toast.success('Query send to requester');
+    // history.push('/chat');
+  };
+
+  const cancelQuery = () => {
+    setSendQueryId(0);
+    setQueryText('');
+  };
 
   return (
     <>
@@ -52,106 +110,58 @@ export default function AgencyRequestHistoryComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="text-left">Job ID</th>
                       <th>Candidate</th>
-                      <th className="text-left">Job Title</th>
-                      <th>
-                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
-                      </th>
-                      <th className="text-center">Date of Request</th>
+                      <th className="text-center">Reason for request</th>
                       <th className="text-center">Doc requested</th>
-                      <th className="text-center">Date of Response</th>
-                      <th className="text-center">Response</th>
+                      <th className="text-center">Date of Request</th>
                       <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>#453</td>
-                      <td>Deepak Kumar</td>
-                      <td>Data Analyst</td>
-                      <td>Adecco</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Accepted
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#584</td>
-                      <td>Rishabh</td>
-                      <td>Huntress Group</td>
-                      <td>Ops Analyst</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          3
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-danger text-danger">
-                          Declined
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#764</td>
-                      <td>Rishabh Pandey</td>
-                      <td>Bussiness Analyst</td>
-                      <td>Satigo</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-info text-info">
-                          Queried
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
+                    {isLoading ? (
+                      <div className="m-3">Loading...</div>
+                    ) : (
+                      <>
+                        {candidateRequests.map((request, index) => (
+                          <tr key={index}>
+                            <td>{request.candidate_name}</td>
+                            <td className="text-center">{request.reason}</td>
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="btn btn-info"
+                                variant="text">
+                                {request.document_count}
+                              </Button>
+                            </td>
+                            <td className="text-center text-black-50">
+                              {request.date}
+                            </td>
+
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-danger"
+                                onClick={() =>
+                                  setOpenShareDoc({
+                                    open: true,
+                                    doc: request.requested_documents
+                                  })
+                                }>
+                                View
+                              </Button>
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
+                {!candidateRequests.length && !isLoading && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">
@@ -183,102 +193,61 @@ export default function AgencyRequestHistoryComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="text-left">Job ID</th>
                       <th>
                         {currentUser.role === 'agency' ? 'Company' : 'Agency'}
                       </th>
-                      <th className="text-left">Job Title</th>
-                      <th className="text-center">Date of Request</th>
+                      <th className="text-center">Reason for request</th>
                       <th className="text-center">Doc requested</th>
-                      <th className="text-center">Date of Response</th>
-                      <th className="text-center">Response</th>
+                      <th className="text-center">Date of Request</th>
                       <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>#453</td>
-                      <td>Data Analyst</td>
-                      <td>Adecco</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Accepted
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#584</td>
-                      <td>Ops Analyst</td>
-                      <td>Huntress Group</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          3
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-danger text-danger">
-                          Declined
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#764</td>
-                      <td>Satigo</td>
-                      <td>Bussiness Analyst</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-info text-info">
-                          Queried
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
+                    {isLoading ? (
+                      <div className="m-3">Loading...</div>
+                    ) : (
+                      <>
+                        {companyRequests.map((request, index) => (
+                          <tr key={index}>
+                            <td>{request.company_name}</td>
+                            <td className="text-center">{request.reason}</td>
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="btn btn-info"
+                                variant="text">
+                                {request.document_count}
+                              </Button>
+                            </td>
+                            <td className="text-center text-black-50">
+                              {request.date}
+                            </td>
+
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-danger"
+                                onClick={() =>
+                                  setOpenShareDoc({
+                                    open: true,
+                                    doc: request.requested_documents,
+                                    requestId: request.id
+                                  })
+                                }>
+                                View
+                              </Button>
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
+                {!companyRequests.length && !isLoading && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">
@@ -292,6 +261,98 @@ export default function AgencyRequestHistoryComponent() {
           </Card>
         </Grid>
       </Grid>
+
+      {/* share details show */}
+      <Dialog
+        onClose={handleShareModalClose}
+        fullWidth
+        maxWidth="md"
+        classes={{ paper: 'modal-content rounded-lg' }}
+        aria-labelledby="simple-dialog-title"
+        open={openShareDoc.open}>
+        <div className="p-3 font-size-xl font-weight-bold">
+          Requested Documents
+        </div>
+        <Divider />
+        <div className="table-responsive-md m-4">
+          <div className="table-scrollbar">
+            <Table className="table table-hover text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Action Date</th>
+                  <th className="text-center">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {openShareDoc.doc.map((doc, index) => (
+                  <tr key={index}>
+                    <td>
+                      <span>{doc.name}</span>
+                    </td>
+                    <td>{doc.created_at}</td>
+                    <td className="text-center">
+                      <span className="mr-2">
+                        {doc.status === 'accepted' ? (
+                          <div className="badge badge-neutral-success text-success">
+                            {doc.status.toUpperCase()}
+                          </div>
+                        ) : (
+                          <div className="badge badge-neutral-danger text-danger">
+                            {doc.status ? doc.status.toUpperCase() : 'Pending'}
+                          </div>
+                        )}
+                      </span>
+                    </td>
+                    <td>
+                      {doc.requested_category_id !== sendQueryId && (
+                        <Button
+                          size="small"
+                          className="btn btn-info"
+                          onClick={() =>
+                            setSendQueryId(doc.requested_category_id)
+                          }>
+                          Query
+                        </Button>
+                      )}
+                      {doc.requested_category_id === sendQueryId && (
+                        <>
+                          <div className="d-flex float-right">
+                            <TextField
+                              variant="outlined"
+                              size="small"
+                              id="text-query"
+                              label="Query"
+                              type="text"
+                              name="query"
+                              placeholder="Enter text"
+                              value={queryText}
+                              onChange={(e) => setQueryText(e.target.value)}
+                            />
+                            <Button
+                              size="small"
+                              className="btn shadow btn-slack  bg-color ml-2"
+                              onClick={(e) => docQuery(e, doc)}>
+                              Send
+                            </Button>
+                            <Button
+                              size="small"
+                              className="btn shadow btn-dark ml-2"
+                              onClick={cancelQuery}>
+                              Cancel
+                            </Button>
+                          </div>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 }

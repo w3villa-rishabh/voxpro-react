@@ -1,23 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
-import { Card, Button, Grid } from '@material-ui/core';
+import { Card, Button, Grid, Dialog, Divider, Table } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router-dom';
 import AddsComponents from 'components/add_component';
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
+import { setEditDoc } from '../../reducers/ThemeOptions';
+import { connect } from 'react-redux';
 
-export default function OnBoardDocument() {
+const OnBoardDocument = (props) => {
   const history = useHistory();
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [requests, setRequest] = useState({});
+  const [openExpDoc, setOpenExpDoc] = useState({ open: false, doc: [] });
 
   useEffect(() => {
     getDocuments();
+    props.setEditDoc({});
   }, []);
 
   function getDocuments() {
@@ -53,8 +57,22 @@ export default function OnBoardDocument() {
     });
   };
 
-  const uploadDocument = () => {
-    history.push('/upload');
+  const handleExpModalClose = () => {
+    setOpenExpDoc({ open: false, doc: [] });
+  };
+
+  const uploadNewDoc = (e, doc) => {
+    e.preventDefault();
+    console.log('doc', doc);
+    props.setEditDoc(doc);
+    history.push({
+      pathname: '/upload',
+      search: '?expire_edit=' + doc.id,
+      state: {
+        update: true,
+        expire_edit: true
+      }
+    });
   };
 
   return (
@@ -79,7 +97,7 @@ export default function OnBoardDocument() {
       </div>
 
       {isLoading ? (
-        'Loading..'
+        <div className="m-3">Loading...</div>
       ) : (
         <Grid container spacing={2}>
           {documents.map((doc, index) => (
@@ -130,7 +148,7 @@ export default function OnBoardDocument() {
                       <Button
                         size="small"
                         className="px-4 btn-neutral-info"
-                        onClick={uploadDocument}>
+                        onClick={() => history.push('/upload')}>
                         Upload Documents
                       </Button>
                     </div>
@@ -219,7 +237,15 @@ export default function OnBoardDocument() {
               </div>
             </div>
             <div className="text-center mt-3">
-              <Button size="small" className="px-4 btn-neutral-info">
+              <Button
+                size="small"
+                className="px-4 btn-neutral-info"
+                onClick={() =>
+                  setOpenExpDoc({
+                    open: true,
+                    doc: requests.doc_due_to_expire
+                  })
+                }>
                 View Documents
               </Button>
             </div>
@@ -231,12 +257,6 @@ export default function OnBoardDocument() {
               Overview
             </div>
             <div className="d-flex py-2 align-items-center">
-              {/* <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-success btn-icon text-center shadow-success mr-3">
-                <FontAwesomeIcon
-                  icon={['fas', 'tachometer-alt']}
-                  className="display-4"
-                />
-              </div> */}
               <div className="ml-1">
                 <a href="#/" onClick={(e) => e.preventDefault()}>
                   {requests.total_documents || 0} Documents uploaded
@@ -259,21 +279,63 @@ export default function OnBoardDocument() {
                 <br />
               </div>
             </div>
-
-            {/* <div className="text-black-50 mb-2">
-              <a
-                className="text-first"
-                href="#/"
-                onClick={(e) => e.preventDefault()}>
-                See clients
-              </a>{' '}
-              that accepted your invitation to connect.
-            </div> */}
           </Card>
         </Grid>
       </Grid>
 
+      {/* expire doc view details show */}
+      <Dialog
+        onClose={handleExpModalClose}
+        fullWidth
+        maxWidth="md"
+        classes={{ paper: 'modal-content rounded-lg' }}
+        aria-labelledby="simple-dialog-title"
+        open={openExpDoc.open}>
+        <div className="p-3 font-size-xl font-weight-bold">
+          Expired Documents
+        </div>
+        <Divider />
+        <div className="table-responsive-md m-4">
+          <div className="table-scrollbar">
+            <Table className="table table-hover text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th className="text-center">Document Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {openExpDoc.doc.map((doc, index) => (
+                  <tr key={index}>
+                    <td>
+                      <span>{doc.category_name}</span>
+                    </td>
+                    <td className="text-center">{doc.expiration}</td>
+                    <td>
+                      <Button
+                        size="small"
+                        className="btn shadow btn-dark ml-2"
+                        onClick={(e) => uploadNewDoc(e, doc)}>
+                        Upload New
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </Dialog>
       {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setEditDoc: (doc) => dispatch(setEditDoc(doc))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(OnBoardDocument);
