@@ -13,8 +13,8 @@ export default function OnBoardDocument() {
   const history = useHistory();
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
-  const [remainingDocuments, setRemainingDocuments] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [requests, setRequest] = useState({});
 
   useEffect(() => {
     getDocuments();
@@ -30,7 +30,11 @@ export default function OnBoardDocument() {
         setIsLoading(false);
         if (response.data.success) {
           setDocuments([...response.data.documents]);
-          setRemainingDocuments(response.data.remaining_documents);
+          setRequest({
+            pending_rfi: response.data.pending_rfi,
+            total_rfi: response.data.total_rfi,
+            total_documents: response.data.total_documents
+          });
         } else {
           alert('Something went wrong..');
         }
@@ -151,16 +155,21 @@ export default function OnBoardDocument() {
               Pending requests for information
             </div>
             <div className="d-flex py-2 align-items-center">
-              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-warning mr-3">
                 <FontAwesomeIcon
-                  icon={['far', 'comment-dots']}
+                  icon={['far', 'clock']}
                   className="display-4"
                 />
               </div>
-              <div className="ml-1">7</div>
+              <div className="ml-1">{requests.pending_rfi || 0}</div>
             </div>
             <div className="text-center mt-3">
-              <Button size="small" className="px-4 btn-neutral-info">
+              <Button
+                size="small"
+                className="px-4 btn-neutral-info"
+                onClick={() =>
+                  history.push('/request-info/candidate-new-request')
+                }>
                 Respond
               </Button>
             </div>
@@ -172,16 +181,19 @@ export default function OnBoardDocument() {
               Total request for information
             </div>
             <div className="d-flex py-2 align-items-center">
-              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-warning mr-3">
+              <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
                 <FontAwesomeIcon
-                  icon={['fas', 'map-marked-alt']}
+                  icon={['far', 'clock']}
                   className="display-4"
                 />
               </div>
-              <div className="ml-1">{remainingDocuments}</div>
+              <div className="ml-1">{requests.total_rfi || 0}</div>
             </div>
             <div className="text-center mt-3">
-              <Button size="small" className="px-4 btn-neutral-info">
+              <Button
+                size="small"
+                className="px-4 btn-neutral-info"
+                onClick={() => history.push('/request-info/request-history')}>
                 View
               </Button>
             </div>
@@ -195,7 +207,7 @@ export default function OnBoardDocument() {
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center mr-3 shadow-danger">
                 <FontAwesomeIcon
-                  icon={['far', 'envelope']}
+                  icon={['fas', 'stopwatch']}
                   className="display-4"
                 />
               </div>
@@ -222,7 +234,7 @@ export default function OnBoardDocument() {
               </div> */}
               <div className="ml-1">
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  2 Documents uploaded
+                  {requests.total_documents || 0} Documents uploaded
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
@@ -230,11 +242,11 @@ export default function OnBoardDocument() {
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  2 Total request for information
+                  {requests.total_rfi || 0} Total request for information
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  2 Pending request for information
+                  {requests.pending_rfi || 0} Pending request for information
                 </a>
                 <br />
               </div>
