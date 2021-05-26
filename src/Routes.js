@@ -141,6 +141,11 @@ const AgencyNewRequestForInformation = lazy(() =>
   import('./components/request_information/new-request-agency')
 );
 
+//AgencyUpdateRequestForInformation
+const AgencyUpdateRequestForInformation = lazy(() =>
+  import('./components/request_information/update-request-agency')
+);
+
 //Agency request
 const AgencyRequestPending = lazy(() =>
   import('./components/request_information/agency-request-pending')
@@ -380,6 +385,10 @@ const Routes = () => {
                     <Route
                       path="/request-info/new-request"
                       component={AgencyNewRequestForInformation}
+                    />
+                    <Route
+                      path="/request-info/update-request"
+                      component={AgencyUpdateRequestForInformation}
                     />
                   </Route>
 

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
-import { connect } from 'react-redux';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { confirmAlert } from 'react-confirm-alert';
@@ -10,9 +9,8 @@ import { confirmAlert } from 'react-confirm-alert';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
 import { getCurrentUser } from 'helper';
-import { setEditDoc } from '../../reducers/ThemeOptions';
 
-const AgencyRequestPendingComponent = (props) => {
+export default function AgencyRequestPendingComponent() {
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
@@ -23,7 +21,6 @@ const AgencyRequestPendingComponent = (props) => {
 
   useEffect(() => {
     getDocuments();
-    props.setEditDoc({});
   }, []);
 
   function getDocuments() {
@@ -43,7 +40,16 @@ const AgencyRequestPendingComponent = (props) => {
     setOpenShareDoc({ open: false, doc: [] });
   };
 
-  const editDoc = (e, doc) => {};
+  const editDoc = () => {
+    if (openShareDoc.requestId) {
+      history.push({
+        pathname: '/request-info/update-request',
+        state: {
+          id: openShareDoc.requestId
+        }
+      });
+    }
+  };
 
   const deleteDoc = (e, doc) => {
     e.preventDefault();
@@ -259,7 +265,8 @@ const AgencyRequestPendingComponent = (props) => {
                                 onClick={() =>
                                   setOpenShareDoc({
                                     open: true,
-                                    doc: request.requested_documents
+                                    doc: request.requested_documents,
+                                    requestId: request.id
                                   })
                                 }>
                                 View
@@ -345,7 +352,7 @@ const AgencyRequestPendingComponent = (props) => {
                           <Button
                             size="small"
                             className="btn btn-primary ml-2"
-                            onClick={(e) => editDoc(e, doc)}>
+                            onClick={editDoc}>
                             Edit
                           </Button>
 
@@ -373,12 +380,4 @@ const AgencyRequestPendingComponent = (props) => {
       </Dialog>
     </>
   );
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setEditDoc: (doc) => dispatch(setEditDoc(doc))
-  };
-};
-
-export default connect(null, mapDispatchToProps)(AgencyRequestPendingComponent);
+}
