@@ -213,7 +213,9 @@ export default function OnBoardDocument() {
                 />
               </div>
               <div className="ml-1">
-                {requests.doc_due_to_expire.length || 0}
+                {requests.doc_due_to_expire
+                  ? requests.doc_due_to_expire.length
+                  : 0}
               </div>
             </div>
             <div className="text-center mt-3">
@@ -241,7 +243,10 @@ export default function OnBoardDocument() {
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  3 Documents due to expire
+                  {requests.doc_due_to_expire
+                    ? requests.doc_due_to_expire.length
+                    : 0}{' '}
+                  Documents due to expire
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
