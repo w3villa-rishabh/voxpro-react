@@ -162,7 +162,7 @@ const NewRequestComponent = (props) => {
             <Grid item md={4}>
               <Card className="p-3">
                 <div className="display-3 font-weight-bold">
-                  {boxes.due_today}
+                  {boxes.due_today || 0}
                 </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
