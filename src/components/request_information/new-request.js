@@ -186,7 +186,7 @@ const NewRequestComponent = (props) => {
                       </thead>
                       <tbody>
                         {isLoading ? (
-                          'Loading..'
+                          <div className="m-3">Loading...</div>
                         ) : (
                           <>
                             {requests.map((request, index) => (

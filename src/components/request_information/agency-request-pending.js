@@ -1,12 +1,77 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+
+import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
+import { connect } from 'react-redux';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import { Grid, Card, Button, Table } from '@material-ui/core';
-import { getCurrentUser } from 'helper';
-
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { confirmAlert } from 'react-confirm-alert';
 
-export default function AgencyRequestPendingComponent() {
+import { useHistory } from 'react-router-dom';
+import api from '../../api';
+import { getCurrentUser } from 'helper';
+import { setEditDoc } from '../../reducers/ThemeOptions';
+
+const AgencyRequestPendingComponent = (props) => {
+  const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
+  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
+  const [candidateRequests, setCandidateRequests] = useState([]);
+  const [companyRequests, setCompanyRequests] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getDocuments();
+    props.setEditDoc({});
+  }, []);
+
+  function getDocuments() {
+    setIsLoading(true);
+    api
+      .get(`/api/v1/request_for_informations/agency_requests`)
+      .then((response) => {
+        setIsLoading(false);
+        if (response.data.success) {
+          setCandidateRequests([...response.data.candidate_requests]);
+          setCompanyRequests([...response.data.company_requests]);
+        }
+      });
+  }
+
+  const handleShareModalClose = () => {
+    setOpenShareDoc({ open: false, doc: [] });
+  };
+
+  const editDoc = (e, doc) => {};
+
+  const deleteDoc = (e, doc) => {
+    e.preventDefault();
+    confirmAlert({
+      overlayClassName: 'confirm-alert',
+      title: 'Confirm to delete',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {}
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+  };
+
+  const followUp = (doc) => {
+    history.push({
+      pathname: '/chat',
+      search: '?user=' + doc.category_id,
+      state: {
+        doc
+      }
+    });
+  };
 
   return (
     <>
@@ -74,90 +139,58 @@ export default function AgencyRequestPendingComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="text-left">Job ID</th>
                       <th>Candidate</th>
-                      <th className="text-left">Job Title</th>
-                      <th>
-                        {currentUser.role === 'agency' ? 'Company' : 'Agency'}
-                      </th>
-                      <th className="text-center">Date of Request</th>
+                      <th className="text-center">Reason for request</th>
                       <th className="text-center">Doc requested</th>
-                      <th className="text-center">Due Date</th>
+                      <th className="text-center">Date of Request</th>
                       <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>#453</td>
-                      <td>Deepak Kumar</td>
-                      <td>Data Analyst</td>
-                      <td>Adecco</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#584</td>
-                      <td>Rishabh</td>
-                      <td>Huntress Group</td>
-                      <td>Ops Analyst</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          3
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#764</td>
-                      <td>Rishabh Pandey</td>
-                      <td>Bussiness Analyst</td>
-                      <td>Satigo</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
+                    {isLoading ? (
+                      <div className="m-3">Loading...</div>
+                    ) : (
+                      <>
+                        {candidateRequests.map((request, index) => (
+                          <tr key={index}>
+                            <td>{request.candidate_name}</td>
+                            <td className="text-center">{request.reason}</td>
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="btn btn-info"
+                                variant="text">
+                                {request.document_count}
+                              </Button>
+                            </td>
+                            <td className="text-center text-black-50">
+                              {request.date}
+                            </td>
+
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-danger"
+                                onClick={() =>
+                                  setOpenShareDoc({
+                                    open: true,
+                                    doc: request.requested_documents
+                                  })
+                                }>
+                                View
+                              </Button>
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
+                {!candidateRequests.length && !isLoading && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">
@@ -189,86 +222,60 @@ export default function AgencyRequestPendingComponent() {
                 <Table className="table table-hover text-nowrap mb-0">
                   <thead>
                     <tr>
-                      <th className="text-left">Job ID</th>
                       <th>
                         {currentUser.role === 'agency' ? 'Company' : 'Agency'}
                       </th>
-                      <th className="text-left">Job Title</th>
-                      <th className="text-center">Date of Request</th>
+                      <th className="text-center">Reason for request</th>
                       <th className="text-center">Doc requested</th>
-                      <th className="text-center">Due Date</th>
+                      <th className="text-center">Date of Request</th>
                       <th className="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>#453</td>
-                      <td>Data Analyst</td>
-                      <td>Adecco</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#584</td>
-                      <td>Ops Analyst</td>
-                      <td>Huntress Group</td>
-                      <td className="text-center text-black-50">06/08/2022</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          3
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#764</td>
-                      <td>Satigo</td>
-                      <td>Bussiness Analyst</td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          variant="text">
-                          4
-                        </Button>
-                      </td>
-                      <td className="text-center text-black-50">12/12/2020</td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          View
-                        </Button>
-                      </td>
-                    </tr>
+                    {isLoading ? (
+                      <div className="m-3">Loading...</div>
+                    ) : (
+                      <>
+                        {companyRequests.map((request, index) => (
+                          <tr key={index}>
+                            <td>{request.company_name}</td>
+                            <td className="text-center">{request.reason}</td>
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="btn btn-info"
+                                variant="text">
+                                {request.document_count}
+                              </Button>
+                            </td>
+                            <td className="text-center text-black-50">
+                              {request.date}
+                            </td>
+
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-danger"
+                                onClick={() =>
+                                  setOpenShareDoc({
+                                    open: true,
+                                    doc: request.requested_documents
+                                  })
+                                }>
+                                View
+                              </Button>
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
+                {!companyRequests.length && !isLoading && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">
@@ -282,6 +289,96 @@ export default function AgencyRequestPendingComponent() {
           </Card>
         </Grid>
       </Grid>
+
+      {/* share details show */}
+      <Dialog
+        onClose={handleShareModalClose}
+        fullWidth
+        maxWidth="md"
+        classes={{ paper: 'modal-content rounded-lg' }}
+        aria-labelledby="simple-dialog-title"
+        open={openShareDoc.open}>
+        <div className="p-3 font-size-xl font-weight-bold">
+          Requested Documents
+        </div>
+        <Divider />
+        <div className="table-responsive-md m-4">
+          <div className="table-scrollbar">
+            <Table className="table table-hover text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th className="text-center">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {openShareDoc.doc.map((doc, index) => (
+                  <tr key={index}>
+                    <td>
+                      <span>{doc.name}</span>
+                    </td>
+                    <td className="text-center">
+                      <span className="mr-2">
+                        {doc.status === null ? (
+                          <div className="badge badge-neutral-warning text-warning">
+                            Pending
+                          </div>
+                        ) : (
+                          <>
+                            {doc.status === 'accepted' ? (
+                              <div className="badge badge-neutral-success text-success">
+                                {doc.status.toUpperCase()}
+                              </div>
+                            ) : (
+                              <div className="badge badge-neutral-danger text-danger">
+                                {doc.status.toUpperCase()}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </span>
+                    </td>
+                    <td>
+                      {doc.status === null && (
+                        <>
+                          <Button
+                            size="small"
+                            className="btn btn-primary ml-2"
+                            onClick={(e) => editDoc(e, doc)}>
+                            Edit
+                          </Button>
+
+                          <Button
+                            size="small"
+                            className="btn btn-danger ml-2"
+                            onClick={(e) => deleteDoc(e, doc)}>
+                            Delete
+                          </Button>
+                        </>
+                      )}
+                      <Button
+                        size="small"
+                        className="btn btn-info ml-2"
+                        onClick={() => followUp(doc)}>
+                        Follow Up
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setEditDoc: (doc) => dispatch(setEditDoc(doc))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AgencyRequestPendingComponent);

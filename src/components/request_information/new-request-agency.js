@@ -88,20 +88,24 @@ export default function AddNewRequestComponent() {
       return;
     }
 
-    api.get(`/api/v1/users/candidate_search?q=${search}`).then(
-      (response) => {
-        toast.dismiss();
-        if (response.data.success) {
-          console.log('response.data', response.data);
-          setSearchUser([...response.data.users]);
-        } else if (!searchUser.length) {
-          toast.error('No available..');
+    api
+      .get(
+        `/api/v1/users/search_company_or_candidates?q=${search}&request_type=${requestFilter.value}`
+      )
+      .then(
+        (response) => {
+          toast.dismiss();
+          if (response.data.success) {
+            console.log('response.data', response.data);
+            setSearchUser([...response.data.results]);
+          } else if (!searchUser.length) {
+            toast.error('No available..');
+          }
+        },
+        (error) => {
+          console.error('error', error);
         }
-      },
-      (error) => {
-        console.error('error', error);
-      }
-    );
+      );
   };
 
   const handleDateChange = (date) => {
@@ -301,9 +305,15 @@ export default function AddNewRequestComponent() {
                         <li
                           key={index}
                           className="list-group-item list-group-item-success">
-                          <span onClick={() => selectUser(user)}>
-                            {user.first_name} {user.last_name}
-                          </span>
+                          {requestFilter.value === 'candidate' ? (
+                            <span onClick={() => selectUser(user)}>
+                              {user.first_name} {user.last_name}
+                            </span>
+                          ) : (
+                            <span onClick={() => selectUser(user)}>
+                              {user.name}
+                            </span>
+                          )}
                         </li>
                       ))}
                     </ul>
