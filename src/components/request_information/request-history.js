@@ -22,6 +22,7 @@ export default function RequestHistoryComponent() {
   const [currentUser] = useState(getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [requests, setRequests] = useState([]);
+  const [boxes, setBoxes] = useState([]);
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [sendQueryId, setSendQueryId] = useState(0);
   const [queryText, setQueryText] = useState('');
@@ -40,6 +41,7 @@ export default function RequestHistoryComponent() {
         setIsLoading(false);
         if (response.data.success) {
           setRequests([...response.data.request_for_information]);
+          setBoxes(response.data);
         }
       });
   }
@@ -79,7 +81,9 @@ export default function RequestHistoryComponent() {
           <Grid container spacing={6}>
             <Grid item md={4}>
               <Card className="p-3">
-                <div className="display-3 font-weight-bold">12</div>
+                <div className="display-3 font-weight-bold">
+                  {boxes.total_document_requested}
+                </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
                   Total document requested
@@ -88,7 +92,10 @@ export default function RequestHistoryComponent() {
             </Grid>
             <Grid item md={4}>
               <Card className="p-3">
-                <div className="display-3 font-weight-bold">10</div>
+                <div className="display-3 font-weight-bold">
+                  {' '}
+                  {boxes.total_document_accepted}
+                </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
                   Total Document accepted
@@ -97,7 +104,10 @@ export default function RequestHistoryComponent() {
             </Grid>
             <Grid item md={4}>
               <Card className="p-3">
-                <div className="display-3 font-weight-bold">02</div>
+                <div className="display-3 font-weight-bold">
+                  {' '}
+                  {boxes.total_document_rejected}
+                </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
                   Total document rejected

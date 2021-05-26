@@ -25,6 +25,7 @@ const NewRequestComponent = (props) => {
   const [currentUser] = useState(getCurrentUser());
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [requests, setRequests] = useState([]);
+  const [boxes, setBoxes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sendQueryId, setSendQueryId] = useState(0);
   const [queryText, setQueryText] = useState('');
@@ -44,6 +45,7 @@ const NewRequestComponent = (props) => {
         setIsLoading(false);
         if (response.data.success) {
           setRequests([...response.data.request_for_information]);
+          setBoxes(response.data);
         }
       });
   }
@@ -139,7 +141,9 @@ const NewRequestComponent = (props) => {
           <Grid container spacing={6}>
             <Grid item md={4}>
               <Card className="p-3">
-                <div className="display-3 font-weight-bold">31</div>
+                <div className="display-3 font-weight-bold">
+                  {boxes.new_requests}
+                </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
                   New Requests
@@ -157,7 +161,9 @@ const NewRequestComponent = (props) => {
             </Grid>
             <Grid item md={4}>
               <Card className="p-3">
-                <div className="display-3 font-weight-bold">57</div>
+                <div className="display-3 font-weight-bold">
+                  {boxes.due_today}
+                </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
                   Due today!
