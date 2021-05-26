@@ -103,8 +103,9 @@ export default function AddUpdateRequestComponent() {
             reason: request.reason,
             document: ''
           });
+
           let selectDoc = request.requested_documents.map((a) => ({
-            value: a.category_id,
+            value: a.sub_category_id,
             label: a.name
           }));
           setDocuments(selectDoc);
@@ -239,9 +240,8 @@ export default function AddUpdateRequestComponent() {
         category_id: a.value
       }))
     };
-
     api
-      .post(`/api/v1/request_for_informations`, {
+      .put(`/api/v1/request_for_informations/${location.state.id}`, {
         request_for_information: obj
       })
       .then(
@@ -436,9 +436,11 @@ export default function AddUpdateRequestComponent() {
               <Grid item xs={12} sm={12}>
                 <Select
                   hideSelectedOptions={documents.length < 3 ? true : false}
+                  closeMenuOnSelect={false}
                   isMulti
                   options={categories}
                   value={documents}
+                  defaultValue={[documents]}
                   onChange={(e) => {
                     setDocuments(e);
                     setErrors({
