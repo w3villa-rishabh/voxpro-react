@@ -33,7 +33,8 @@ export default function OnBoardDocument() {
           setRequest({
             pending_rfi: response.data.pending_rfi,
             total_rfi: response.data.total_rfi,
-            total_documents: response.data.total_documents
+            total_documents: response.data.total_documents,
+            doc_due_to_expire: response.data.doc_due_to_expire
           });
         } else {
           alert('Something went wrong..');
@@ -211,7 +212,9 @@ export default function OnBoardDocument() {
                   className="display-4"
                 />
               </div>
-              <div className="ml-1">2</div>
+              <div className="ml-1">
+                {requests.doc_due_to_expire.length || 0}
+              </div>
             </div>
             <div className="text-center mt-3">
               <Button size="small" className="px-4 btn-neutral-info">
