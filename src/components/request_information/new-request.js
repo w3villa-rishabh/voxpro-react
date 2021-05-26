@@ -265,17 +265,17 @@ const NewRequestComponent = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {openShareDoc.doc.map((a, index) => (
+                {openShareDoc.doc.map((doc, index) => (
                   <tr key={index}>
                     <td>
-                      <span>{a.name}</span>
+                      <span>{doc.name}</span>
                     </td>
                     <td>
-                      {a.requested_category_id !== sendQueryId && (
+                      {doc.requested_category_id !== sendQueryId && (
                         <Grid container spacing={0}>
                           <Grid item sm={8} xs={12}>
                             <div className="float-right">
-                              {a.status === null ? (
+                              {doc.status === null ? (
                                 <>
                                   <Button
                                     size="small"
@@ -284,7 +284,7 @@ const NewRequestComponent = (props) => {
                                       acceptReject(
                                         e,
                                         'accept',
-                                        a.requested_category_id,
+                                        doc.requested_category_id,
                                         index
                                       )
                                     }>
@@ -298,7 +298,7 @@ const NewRequestComponent = (props) => {
                                       acceptReject(
                                         e,
                                         'reject',
-                                        a.requested_category_id,
+                                        doc.requested_category_id,
                                         index
                                       )
                                     }>
@@ -309,23 +309,43 @@ const NewRequestComponent = (props) => {
                                 <>
                                   <div>
                                     <span className="mr-2">
-                                      {a.status.toUpperCase()}
+                                      {doc.status === 'accepted' ? (
+                                        <div className="badge badge-neutral-success text-success">
+                                          {doc.status.toUpperCase()}
+                                        </div>
+                                      ) : (
+                                        <div className="badge badge-neutral-danger text-danger">
+                                          {doc.status.toUpperCase()}
+                                        </div>
+                                      )}
                                     </span>
-                                    {a.status === 'accepted' && a.doc_expired && (
-                                      <>
-                                        <br></br>
-                                        <small className="text-danger">
-                                          Expire document date
-                                        </small>
-                                        <br></br>
-                                        <a
-                                          className="a-blue"
-                                          href="#/"
-                                          onClick={(e) => uploadNewDoc(e, a)}>
-                                          Upload new
-                                        </a>
-                                      </>
-                                    )}
+                                    {doc.status === 'accepted' &&
+                                      (doc.doc_expired ||
+                                        doc.upload_new_doc) && (
+                                        <>
+                                          <br></br>
+                                          {doc.expire && doc.doc_expired && (
+                                            <small className="text-danger">
+                                              Expire document date
+                                            </small>
+                                          )}
+                                          {!doc.expire &&
+                                            doc.upload_new_doc && (
+                                              <small className="text-danger">
+                                                Please upload latest document
+                                              </small>
+                                            )}
+                                          <br></br>
+                                          <a
+                                            className="a-blue"
+                                            href="#/"
+                                            onClick={(e) =>
+                                              uploadNewDoc(e, doc)
+                                            }>
+                                            Upload new
+                                          </a>
+                                        </>
+                                      )}
                                   </div>
                                 </>
                               )}
@@ -334,12 +354,12 @@ const NewRequestComponent = (props) => {
 
                           <Grid item sm={4} xs={12}>
                             <div className="text-wrap">
-                              {a.requested_category_id !== sendQueryId && (
+                              {doc.requested_category_id !== sendQueryId && (
                                 <Button
                                   size="small"
                                   className="btn btn-info"
                                   onClick={() =>
-                                    setSendQueryId(a.requested_category_id)
+                                    setSendQueryId(doc.requested_category_id)
                                   }>
                                   Query
                                 </Button>
@@ -348,7 +368,7 @@ const NewRequestComponent = (props) => {
                           </Grid>
                         </Grid>
                       )}
-                      {a.requested_category_id === sendQueryId && (
+                      {doc.requested_category_id === sendQueryId && (
                         <>
                           <div className="d-flex float-right">
                             <TextField
@@ -365,7 +385,7 @@ const NewRequestComponent = (props) => {
                             <Button
                               size="small"
                               className="btn shadow btn-slack  bg-color ml-2"
-                              onClick={(e) => docQuery(e, a)}>
+                              onClick={(e) => docQuery(e, doc)}>
                               Send
                             </Button>
                             <Button

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import TuneIcon from '@material-ui/icons/Tune';
-import { Grid, Card, Button, Table } from '@material-ui/core';
+import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
 
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -13,6 +13,7 @@ export default function RequestHistoryComponent() {
   const [currentUser] = useState(getCurrentUser());
   const [isLoading, setIsLoading] = useState(false);
   const [requests, setRequests] = useState([]);
+  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
 
   useEffect(() => {
     getDocuments();
@@ -31,6 +32,10 @@ export default function RequestHistoryComponent() {
         }
       });
   }
+
+  const handleShareModalClose = () => {
+    setOpenShareDoc({ open: false, doc: [] });
+  };
 
   return (
     <>
@@ -92,7 +97,6 @@ export default function RequestHistoryComponent() {
                           <th className="bg-white text-center">
                             Reason for request
                           </th>
-                          <th className="bg-white text-center">Due Date</th>
                           {/* <th className="bg-white text-center">
                             Interview Process Stages
                           </th> */}
@@ -114,14 +118,17 @@ export default function RequestHistoryComponent() {
                                     {request.reason}
                                   </div>
                                 </td>
-                                <td className="text-center text-black-50">
-                                  {request.due_date}
-                                </td>
                                 {/* <td>--</td> */}
                                 <td className="text-center">
                                   <Button
                                     size="small"
-                                    className="px-4 btn-neutral-danger">
+                                    className="px-4 btn-neutral-danger"
+                                    onClick={() =>
+                                      setOpenShareDoc({
+                                        open: true,
+                                        doc: request.requested_documents
+                                      })
+                                    }>
                                     Action
                                   </Button>
                                 </td>
@@ -152,6 +159,56 @@ export default function RequestHistoryComponent() {
           <AddsComponents />
         </div>
       </div>
+
+      {/* share details show */}
+      <Dialog
+        onClose={handleShareModalClose}
+        fullWidth
+        maxWidth="md"
+        classes={{ paper: 'modal-content rounded-lg' }}
+        aria-labelledby="simple-dialog-title"
+        open={openShareDoc.open}>
+        <div className="p-3 font-size-xl font-weight-bold">
+          Requested Documents
+        </div>
+        <Divider />
+        <div className="table-responsive-md m-4">
+          <div className="table-scrollbar">
+            <Table className="table table-hover text-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Action Date</th>
+                  <th className="text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {openShareDoc.doc.map((a, index) => (
+                  <tr key={index}>
+                    <td>
+                      <span>{a.name}</span>
+                    </td>
+                    <td>{a.created_at}</td>
+                    <td className="text-center">
+                      <span className="mr-2">
+                        {a.status === 'accepted' ? (
+                          <div className="badge badge-neutral-success text-success">
+                            {a.status.toUpperCase()}
+                          </div>
+                        ) : (
+                          <div className="badge badge-neutral-danger text-danger">
+                            {a.status.toUpperCase()}
+                          </div>
+                        )}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 }
