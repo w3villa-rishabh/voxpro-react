@@ -1,10 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import TuneIcon from '@material-ui/icons/Tune';
-import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
+import {
+  Grid,
+  Card,
+  Button,
+  Table,
+  Dialog,
+  Divider,
+  TextField
+} from '@material-ui/core';
 
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { toast } from 'react-toastify';
 
 import { getCurrentUser } from 'helper';
 import api from '../../api';
@@ -14,6 +23,8 @@ export default function RequestHistoryComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [requests, setRequests] = useState([]);
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
+  const [sendQueryId, setSendQueryId] = useState(0);
+  const [queryText, setQueryText] = useState('');
 
   useEffect(() => {
     getDocuments();
@@ -35,6 +46,24 @@ export default function RequestHistoryComponent() {
 
   const handleShareModalClose = () => {
     setOpenShareDoc({ open: false, doc: [] });
+  };
+
+  const docQuery = (e, doc) => {
+    e.preventDefault();
+    if (!queryText) {
+      return;
+    }
+    console.log('doc', doc);
+    setQueryText('');
+    setSendQueryId(0);
+    toast.dismiss();
+    toast.success('Query send to requester');
+    // history.push('/chat');
+  };
+
+  const cancelQuery = () => {
+    setSendQueryId(0);
+    setQueryText('');
   };
 
   return (
@@ -180,27 +209,69 @@ export default function RequestHistoryComponent() {
                   <th>Document Name</th>
                   <th>Action Date</th>
                   <th className="text-center">Status</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                {openShareDoc.doc.map((a, index) => (
+                {openShareDoc.doc.map((doc, index) => (
                   <tr key={index}>
                     <td>
-                      <span>{a.name}</span>
+                      <span>{doc.name}</span>
                     </td>
-                    <td>{a.created_at}</td>
+                    <td>{doc.created_at}</td>
                     <td className="text-center">
                       <span className="mr-2">
-                        {a.status === 'accepted' ? (
+                        {doc.status === 'accepted' ? (
                           <div className="badge badge-neutral-success text-success">
-                            {a.status.toUpperCase()}
+                            {doc.status.toUpperCase()}
                           </div>
                         ) : (
                           <div className="badge badge-neutral-danger text-danger">
-                            {a.status.toUpperCase()}
+                            {doc.status.toUpperCase()}
                           </div>
                         )}
                       </span>
+                    </td>
+                    <td>
+                      {doc.requested_category_id !== sendQueryId && (
+                        <Button
+                          size="small"
+                          className="btn btn-info"
+                          onClick={() =>
+                            setSendQueryId(doc.requested_category_id)
+                          }>
+                          Query
+                        </Button>
+                      )}
+                      {doc.requested_category_id === sendQueryId && (
+                        <>
+                          <div className="d-flex float-right">
+                            <TextField
+                              variant="outlined"
+                              size="small"
+                              id="text-query"
+                              label="Query"
+                              type="text"
+                              name="query"
+                              placeholder="Enter text"
+                              value={queryText}
+                              onChange={(e) => setQueryText(e.target.value)}
+                            />
+                            <Button
+                              size="small"
+                              className="btn shadow btn-slack  bg-color ml-2"
+                              onClick={(e) => docQuery(e, doc)}>
+                              Send
+                            </Button>
+                            <Button
+                              size="small"
+                              className="btn shadow btn-dark ml-2"
+                              onClick={cancelQuery}>
+                              Cancel
+                            </Button>
+                          </div>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
