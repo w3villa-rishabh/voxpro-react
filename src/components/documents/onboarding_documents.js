@@ -71,7 +71,9 @@ const OnBoardDocument = (props) => {
       search: '?expire_edit=' + doc.id,
       state: {
         update: true,
-        expire_edit: true
+        expire_edit: true,
+        request_category_id: 0,
+        moveToHistory: false
       }
     });
   };

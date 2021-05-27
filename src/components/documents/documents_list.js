@@ -139,7 +139,9 @@ const OnBoardDocumentList = (props) => {
       search: '?edit=' + doc.id,
       state: {
         update: true,
-        expire_edit: false
+        expire_edit: false,
+        request_category_id: 0,
+        moveToHistory: false
       }
     });
     handleClose();

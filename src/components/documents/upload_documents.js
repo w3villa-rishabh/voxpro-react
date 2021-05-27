@@ -354,6 +354,15 @@ const UploadDocument = (props) => {
         : moment(documents.expirationDate).format('DD-MM-YYYY')
     );
 
+    let state = location.state;
+    if (state.moveToHistory) {
+      formData.append('document[move_to_history]', true);
+      formData.append(
+        'document[request_category_id]',
+        state.request_category_id
+      );
+    }
+
     api
       .put(`/api/v1/documents/${props.editDoc.id}`, formData, {
         onUploadProgress: function (progressEvent) {

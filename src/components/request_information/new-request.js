@@ -101,12 +101,19 @@ const NewRequestComponent = (props) => {
     e.preventDefault();
     console.log('doc', doc);
     props.setEditDoc(doc);
+
+    let moveToHistory = false;
+    if (!doc.expiry && doc.upload_new_doc) {
+      moveToHistory = true;
+    }
     history.push({
       pathname: '/upload',
       search: '?expire_edit=' + doc.id,
       state: {
         update: true,
-        expire_edit: true
+        expire_edit: true,
+        request_category_id: doc.requested_category_id,
+        moveToHistory
       }
     });
   };
@@ -333,12 +340,12 @@ const NewRequestComponent = (props) => {
                                         doc.upload_new_doc) && (
                                         <>
                                           <br></br>
-                                          {doc.expire && doc.doc_expired && (
+                                          {doc.expiry && doc.doc_expired && (
                                             <small className="text-danger">
                                               Expire document date
                                             </small>
                                           )}
-                                          {!doc.expire &&
+                                          {!doc.expiry &&
                                             doc.upload_new_doc && (
                                               <small className="text-danger">
                                                 Please upload latest document
