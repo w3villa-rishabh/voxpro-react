@@ -63,6 +63,9 @@ export default function AgencyRequestPendingComponent() {
 
   const closedDoc = (e, index) => {
     e.preventDefault();
+    if (!openShareDoc.requestId) {
+      return;
+    }
     confirmAlert({
       overlayClassName: 'confirm-alert',
       title: 'Confirm to closed',
@@ -213,7 +216,8 @@ export default function AgencyRequestPendingComponent() {
                                 onClick={() =>
                                   setOpenShareDoc({
                                     open: true,
-                                    doc: request.requested_documents
+                                    doc: request.requested_documents,
+                                    requestId: request.id
                                   })
                                 }>
                                 View
