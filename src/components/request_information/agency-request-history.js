@@ -8,24 +8,33 @@ import {
   Table,
   Dialog,
   Divider,
-  TextField
+  DialogTitle
 } from '@material-ui/core';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { toast } from 'react-toastify';
 
 import api from '../../api';
 import { getCurrentUser } from 'helper';
 import LoaderComponent from 'components/loader';
 
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
+
+import { Document, pdfjs, Page } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { useHistory } from 'react-router';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 export default function AgencyRequestHistoryComponent() {
+  const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [candidateRequests, setCandidateRequests] = useState([]);
   const [companyRequests, setCompanyRequests] = useState([]);
-  const [sendQueryId, setSendQueryId] = useState(0);
-  const [queryText, setQueryText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState({ open: false, url: '' });
+  const [modalPdfView, seModal] = useState(false);
 
   useEffect(() => {
     getDocuments();
@@ -56,22 +65,27 @@ export default function AgencyRequestHistoryComponent() {
     setOpenShareDoc({ open: false, doc: [] });
   };
 
-  const docQuery = (e, doc) => {
-    e.preventDefault();
-    if (!queryText) {
-      return;
-    }
-    console.log('doc', doc);
-    setQueryText('');
-    setSendQueryId(0);
-    toast.dismiss();
-    toast.success('Query send to requester');
-    // history.push('/chat');
+  const followUp = (doc) => {
+    history.push({
+      pathname: '/chat',
+      search: '?user=' + doc.category_id,
+      state: {
+        doc
+      }
+    });
   };
 
-  const cancelQuery = () => {
-    setSendQueryId(0);
-    setQueryText('');
+  const toggle = () => {
+    seModal(!modalPdfView);
+  };
+
+  const viewDoc = (doc) => {
+    if (doc.content_type === 'application/pdf') {
+      setIsOpen({ open: false, url: doc.doc_url });
+      toggle();
+    } else {
+      setIsOpen({ open: true, url: doc.doc_url });
+    }
   };
 
   return (
@@ -271,6 +285,31 @@ export default function AgencyRequestHistoryComponent() {
         </Grid>
       </Grid>
 
+      {isOpen.open && (
+        <Lightbox
+          mainSrc={isOpen.url}
+          onCloseRequest={() => setIsOpen({ open: false, url: '' })}
+        />
+      )}
+
+      {/* view pdf section */}
+      <Dialog
+        scroll="body"
+        fullWidth
+        maxWidth="md"
+        open={modalPdfView}
+        onClose={toggle}
+        classes={{
+          paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+        }}>
+        <DialogTitle id="form-dialog-title">Upload PDF</DialogTitle>
+        <div className="document-thumb p-3">
+          <Document file={isOpen.url}>
+            <Page pageNumber={1} />
+          </Document>
+        </div>
+      </Dialog>
+
       {/* share details show */}
       <Dialog
         onClose={handleShareModalClose}
@@ -315,47 +354,19 @@ export default function AgencyRequestHistoryComponent() {
                       </span>
                     </td>
                     <td>
-                      <div closeName="float-right">
-                        {doc.requested_category_id !== sendQueryId && (
-                          <Button
-                            size="small"
-                            className="btn btn-info"
-                            onClick={() =>
-                              setSendQueryId(doc.requested_category_id)
-                            }>
-                            Query
-                          </Button>
-                        )}
-                        {doc.requested_category_id === sendQueryId && (
-                          <>
-                            <div className="d-flex float-right">
-                              <TextField
-                                variant="outlined"
-                                size="small"
-                                id="text-query"
-                                label="Query"
-                                type="text"
-                                name="query"
-                                placeholder="Enter text"
-                                value={queryText}
-                                onChange={(e) => setQueryText(e.target.value)}
-                              />
-                              <Button
-                                size="small"
-                                className="btn shadow btn-slack  bg-color ml-2"
-                                onClick={(e) => docQuery(e, doc)}>
-                                Send
-                              </Button>
-                              <Button
-                                size="small"
-                                className="btn shadow btn-dark ml-2"
-                                onClick={cancelQuery}>
-                                Cancel
-                              </Button>
-                            </div>
-                          </>
-                        )}
-                      </div>
+                      <Button
+                        size="small"
+                        disabled={doc.status !== 'accepted'}
+                        className="btn btn-primary ml-2"
+                        onClick={() => viewDoc(doc)}>
+                        View
+                      </Button>
+                      <Button
+                        size="small"
+                        className="btn btn-info ml-2"
+                        onClick={() => followUp(doc)}>
+                        Follow Up
+                      </Button>
                     </td>
                   </tr>
                 ))}
