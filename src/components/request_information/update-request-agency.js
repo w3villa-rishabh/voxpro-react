@@ -177,6 +177,7 @@ export default function AddUpdateRequestComponent() {
     setDocuments('');
     setSearchUser([]);
     setSelectedDate(new Date());
+    history.goBack();
   };
 
   const handleChanges = (event) => {

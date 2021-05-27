@@ -189,8 +189,6 @@ export default function AddNewRequestComponent() {
     setDoRequest(true);
     let obj = {
       request_type: requestFilter.value,
-      created_by_id: currentUser.id,
-      company_id: 1, // has to change when we relate user to company
       reason: requestObj.reason,
       due_date: selectedDate,
       user_id: requestObj.id,
