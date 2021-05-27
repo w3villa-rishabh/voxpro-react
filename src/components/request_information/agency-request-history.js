@@ -315,45 +315,47 @@ export default function AgencyRequestHistoryComponent() {
                       </span>
                     </td>
                     <td>
-                      {doc.requested_category_id !== sendQueryId && (
-                        <Button
-                          size="small"
-                          className="btn btn-info"
-                          onClick={() =>
-                            setSendQueryId(doc.requested_category_id)
-                          }>
-                          Query
-                        </Button>
-                      )}
-                      {doc.requested_category_id === sendQueryId && (
-                        <>
-                          <div className="d-flex float-right">
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              id="text-query"
-                              label="Query"
-                              type="text"
-                              name="query"
-                              placeholder="Enter text"
-                              value={queryText}
-                              onChange={(e) => setQueryText(e.target.value)}
-                            />
-                            <Button
-                              size="small"
-                              className="btn shadow btn-slack  bg-color ml-2"
-                              onClick={(e) => docQuery(e, doc)}>
-                              Send
-                            </Button>
-                            <Button
-                              size="small"
-                              className="btn shadow btn-dark ml-2"
-                              onClick={cancelQuery}>
-                              Cancel
-                            </Button>
-                          </div>
-                        </>
-                      )}
+                      <div closeName="float-right">
+                        {doc.requested_category_id !== sendQueryId && (
+                          <Button
+                            size="small"
+                            className="btn btn-info"
+                            onClick={() =>
+                              setSendQueryId(doc.requested_category_id)
+                            }>
+                            Query
+                          </Button>
+                        )}
+                        {doc.requested_category_id === sendQueryId && (
+                          <>
+                            <div className="d-flex float-right">
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                id="text-query"
+                                label="Query"
+                                type="text"
+                                name="query"
+                                placeholder="Enter text"
+                                value={queryText}
+                                onChange={(e) => setQueryText(e.target.value)}
+                              />
+                              <Button
+                                size="small"
+                                className="btn shadow btn-slack  bg-color ml-2"
+                                onClick={(e) => docQuery(e, doc)}>
+                                Send
+                              </Button>
+                              <Button
+                                size="small"
+                                className="btn shadow btn-dark ml-2"
+                                onClick={cancelQuery}>
+                                Cancel
+                              </Button>
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

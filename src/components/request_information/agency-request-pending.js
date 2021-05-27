@@ -28,9 +28,7 @@ export default function AgencyRequestPendingComponent() {
   function getDocuments() {
     setIsLoading(true);
     api
-      .get(
-        `/api/v1/request_for_informations/agency_requests?request_type=pending`
-      )
+      .get(`/api/v1/request_for_informations/agency_requests?request_type=new`)
       .then(
         (response) => {
           setIsLoading(false);
@@ -61,11 +59,8 @@ export default function AgencyRequestPendingComponent() {
     }
   };
 
-  const closedDoc = (e, index) => {
+  const closedDoc = (e, index, id) => {
     e.preventDefault();
-    if (!openShareDoc.requestId) {
-      return;
-    }
     confirmAlert({
       overlayClassName: 'confirm-alert',
       title: 'Confirm to closed',
@@ -76,7 +71,7 @@ export default function AgencyRequestPendingComponent() {
           onClick: () => {
             api
               .put(
-                `/api/v1/request_for_informations/${openShareDoc.requestId}/close_requested_category`
+                `/api/v1/request_for_informations/${id}/close_requested_category`
               )
               .then(
                 (response) => {
@@ -384,29 +379,33 @@ export default function AgencyRequestPendingComponent() {
                       </span>
                     </td>
                     <td>
-                      {doc.status === null && (
-                        <>
-                          <Button
-                            size="small"
-                            className="btn btn-primary ml-2"
-                            onClick={editDoc}>
-                            Edit
-                          </Button>
+                      <div className="float-right">
+                        {doc.status === null && (
+                          <>
+                            <Button
+                              size="small"
+                              className="btn btn-primary ml-2"
+                              onClick={editDoc}>
+                              Edit
+                            </Button>
 
-                          <Button
-                            size="small"
-                            className="btn btn-danger ml-2"
-                            onClick={(e) => closedDoc(e, index)}>
-                            Closed
-                          </Button>
-                        </>
-                      )}
-                      <Button
-                        size="small"
-                        className="btn btn-info ml-2"
-                        onClick={() => followUp(doc)}>
-                        Follow Up
-                      </Button>
+                            <Button
+                              size="small"
+                              className="btn btn-danger ml-2"
+                              onClick={(e) =>
+                                closedDoc(e, index, doc.requested_category_id)
+                              }>
+                              Closed
+                            </Button>
+                          </>
+                        )}
+                        <Button
+                          size="small"
+                          className="btn btn-info ml-2"
+                          onClick={() => followUp(doc)}>
+                          Follow Up
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}
