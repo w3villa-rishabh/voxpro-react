@@ -147,16 +147,18 @@ const NewRequestComponent = (props) => {
                 </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  New Requests
+                  Today's Request
                 </div>
               </Card>
             </Grid>
             <Grid item md={4}>
               <Card className="p-3">
-                <div className="display-3 font-weight-bold">68</div>
+                <div className="display-3 font-weight-bold">
+                  {boxes.new_requests || 0}
+                </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Due
+                  Total Outstanding Requests
                 </div>
               </Card>
             </Grid>
@@ -167,7 +169,7 @@ const NewRequestComponent = (props) => {
                 </div>
                 <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                 <div className="font-weight-bold font-size-sm text-uppercase">
-                  Due today!
+                  Requests due today
                 </div>
               </Card>
             </Grid>
