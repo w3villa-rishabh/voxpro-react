@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom';
 import api from '../../api';
 import { getCurrentUser } from 'helper';
 import { setEditDoc } from '../../reducers/ThemeOptions';
+import LoaderComponent from 'components/loader';
 
 const NewRequestComponent = (props) => {
   const history = useHistory();
@@ -72,8 +73,8 @@ const NewRequestComponent = (props) => {
               .then(
                 (response) => {
                   toast.dismiss();
+                  setIsLoading(false);
                   if (response.data.success) {
-                    setIsLoading(false);
                     openShareDoc.doc[index].status = status;
                     setOpenShareDoc({ ...openShareDoc });
                     toast.success(response.data.message);
@@ -192,7 +193,7 @@ const NewRequestComponent = (props) => {
                       </thead>
                       <tbody>
                         {isLoading ? (
-                          <div className="m-3">Loading...</div>
+                          <LoaderComponent />
                         ) : (
                           <>
                             {requests.map((request, index) => (

@@ -13,6 +13,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getCurrentUser } from 'helper';
 import api from '../../api';
+import LoaderComponent from 'components/loader';
 
 const agencyFiltersOptions = [
   {
@@ -47,6 +48,7 @@ export default function AddUpdateRequestComponent() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [documents, setDocuments] = useState('');
   const [doRequest, setDoRequest] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [requestObj, setRequestObj] = useState({
     name: '',
@@ -67,10 +69,12 @@ export default function AddUpdateRequestComponent() {
   const [searchUser, setSearchUser] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     forkJoin([
       api.get(`/api/v1/request_for_informations/${location.state.id}`),
       api.get('/api/v1/categories/all_sub_categories')
     ]).subscribe((results) => {
+      setIsLoading(false);
       try {
         let oldResponse = results[0].data;
         let categoryResponse = results[1].data;
@@ -121,6 +125,7 @@ export default function AddUpdateRequestComponent() {
           setCategories([...categories]);
         }
       } catch (error) {
+        setIsLoading(false);
         console.error('error', error);
       }
     });
@@ -290,7 +295,9 @@ export default function AddUpdateRequestComponent() {
       </div>
 
       <Card className="p-3" onClick={closeDropDown}>
-        <div className="font-weight-bold">Update Requests</div>
+        <div className="font-weight-bold">
+          Update Requests {isLoading && <LoaderComponent />}
+        </div>
         <div className="divider my-3" />
         <Grid container spacing={0}>
           <Grid item xs={12} sm={8}>
@@ -392,7 +399,10 @@ export default function AddUpdateRequestComponent() {
                       size="small"
                       name="jobId"
                       onChange={(e) => {
-                        setRequestObj({ ...requestObj, jobId: e.target.value });
+                        setRequestObj({
+                          ...requestObj,
+                          jobId: e.target.value
+                        });
                       }}
                       value={requestObj.jobId}
                       label="Placement ID"

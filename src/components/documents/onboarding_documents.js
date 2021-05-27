@@ -10,6 +10,7 @@ import { getCurrentUser } from '../../helper';
 import api from '../../api';
 import { setEditDoc } from '../../reducers/ThemeOptions';
 import { connect } from 'react-redux';
+import LoaderComponent from 'components/loader';
 
 const OnBoardDocument = (props) => {
   const history = useHistory();
@@ -97,7 +98,7 @@ const OnBoardDocument = (props) => {
       </div>
 
       {isLoading ? (
-        <div className="m-3">Loading...</div>
+        <LoaderComponent />
       ) : (
         <Grid container spacing={2}>
           {documents.map((doc, index) => (

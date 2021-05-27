@@ -9,6 +9,8 @@ import { confirmAlert } from 'react-confirm-alert';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
 import { getCurrentUser } from 'helper';
+import LoaderComponent from 'components/loader';
+import { toast } from 'react-toastify';
 
 export default function AgencyRequestPendingComponent() {
   const history = useHistory();
@@ -26,14 +28,22 @@ export default function AgencyRequestPendingComponent() {
   function getDocuments() {
     setIsLoading(true);
     api
-      .get(`/api/v1/request_for_informations/agency_requests`)
-      .then((response) => {
-        setIsLoading(false);
-        if (response.data.success) {
-          setCandidateRequests([...response.data.candidate_requests]);
-          setCompanyRequests([...response.data.company_requests]);
+      .get(
+        `/api/v1/request_for_informations/agency_requests?request_type=pending`
+      )
+      .then(
+        (response) => {
+          setIsLoading(false);
+          if (response.data.success) {
+            setCandidateRequests([...response.data.candidate_requests]);
+            setCompanyRequests([...response.data.company_requests]);
+          }
+        },
+        (error) => {
+          console.error(error);
+          setIsLoading(false);
         }
-      });
+      );
   }
 
   const handleShareModalClose = () => {
@@ -51,16 +61,39 @@ export default function AgencyRequestPendingComponent() {
     }
   };
 
-  const deleteDoc = (e, doc) => {
+  const closedDoc = (e, index) => {
     e.preventDefault();
     confirmAlert({
       overlayClassName: 'confirm-alert',
-      title: 'Confirm to delete',
+      title: 'Confirm to closed',
       message: 'Are you sure to do this.',
       buttons: [
         {
           label: 'Yes',
-          onClick: () => {}
+          onClick: () => {
+            api
+              .put(
+                `/api/v1/request_for_informations/${openShareDoc.requestId}/close_requested_category`
+              )
+              .then(
+                (response) => {
+                  toast.dismiss();
+                  setIsLoading(false);
+                  if (response.data.success) {
+                    openShareDoc.doc[index].status = 'closed';
+                    setOpenShareDoc({ ...openShareDoc });
+                    toast.success(response.data.message);
+                  } else {
+                    toast.error(response.data.message);
+                  }
+                },
+                (error) => {
+                  setIsLoading(false);
+                  toast.error('Something went wrong');
+                  console.error('error', error);
+                }
+              );
+          }
         },
         {
           label: 'No'
@@ -154,7 +187,7 @@ export default function AgencyRequestPendingComponent() {
                   </thead>
                   <tbody>
                     {isLoading ? (
-                      <div className="m-3">Loading...</div>
+                      <LoaderComponent />
                     ) : (
                       <>
                         {candidateRequests.map((request, index) => (
@@ -239,7 +272,7 @@ export default function AgencyRequestPendingComponent() {
                   </thead>
                   <tbody>
                     {isLoading ? (
-                      <div className="m-3">Loading...</div>
+                      <LoaderComponent />
                     ) : (
                       <>
                         {companyRequests.map((request, index) => (
@@ -359,8 +392,8 @@ export default function AgencyRequestPendingComponent() {
                           <Button
                             size="small"
                             className="btn btn-danger ml-2"
-                            onClick={(e) => deleteDoc(e, doc)}>
-                            Delete
+                            onClick={(e) => closedDoc(e, index)}>
+                            Closed
                           </Button>
                         </>
                       )}

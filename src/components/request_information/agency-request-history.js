@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 
 import api from '../../api';
 import { getCurrentUser } from 'helper';
+import LoaderComponent from 'components/loader';
 
 export default function AgencyRequestHistoryComponent() {
   const [currentUser] = useState(getCurrentUser());
@@ -33,14 +34,22 @@ export default function AgencyRequestHistoryComponent() {
   function getDocuments() {
     setIsLoading(true);
     api
-      .get(`/api/v1/request_for_informations/agency_requests`)
-      .then((response) => {
-        setIsLoading(false);
-        if (response.data.success) {
-          setCandidateRequests([...response.data.candidate_requests]);
-          setCompanyRequests([...response.data.company_requests]);
+      .get(
+        `/api/v1/request_for_informations/agency_requests?request_type=history`
+      )
+      .then(
+        (response) => {
+          setIsLoading(false);
+          if (response.data.success) {
+            setCandidateRequests([...response.data.candidate_requests]);
+            setCompanyRequests([...response.data.company_requests]);
+          }
+        },
+        (error) => {
+          console.error(error);
+          setIsLoading(false);
         }
-      });
+      );
   }
 
   const handleShareModalClose = () => {
@@ -119,7 +128,7 @@ export default function AgencyRequestHistoryComponent() {
                   </thead>
                   <tbody>
                     {isLoading ? (
-                      <div className="m-3">Loading...</div>
+                      <LoaderComponent />
                     ) : (
                       <>
                         {candidateRequests.map((request, index) => (
@@ -204,7 +213,7 @@ export default function AgencyRequestHistoryComponent() {
                   </thead>
                   <tbody>
                     {isLoading ? (
-                      <div className="m-3">Loading...</div>
+                      <LoaderComponent />
                     ) : (
                       <>
                         {companyRequests.map((request, index) => (

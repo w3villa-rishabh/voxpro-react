@@ -14,6 +14,7 @@ import {
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { toast } from 'react-toastify';
+import LoaderComponent from 'components/loader';
 
 import { getCurrentUser } from 'helper';
 import api from '../../api';
@@ -142,7 +143,7 @@ export default function RequestHistoryComponent() {
                       </thead>
                       <tbody>
                         {isLoading ? (
-                          <div className="m-3">Loading...</div>
+                          <LoaderComponent />
                         ) : (
                           <>
                             {requests.map((request, index) => (

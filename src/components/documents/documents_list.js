@@ -21,6 +21,7 @@ import { getCurrentUser } from 'helper';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
+import LoaderComponent from 'components/loader';
 
 import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
@@ -200,7 +201,7 @@ const OnBoardDocumentList = (props) => {
             </thead>
             <tbody>
               {isLoading ? (
-                'Loading..'
+                <LoaderComponent />
               ) : (
                 <>
                   {documents.map((doc, index) => (
