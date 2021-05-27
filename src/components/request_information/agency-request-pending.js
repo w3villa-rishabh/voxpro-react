@@ -1,7 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
-import { Grid, Card, Button, Table, Dialog, Divider } from '@material-ui/core';
+import {
+  Grid,
+  Card,
+  Button,
+  Table,
+  Dialog,
+  Divider,
+  DialogTitle
+} from '@material-ui/core';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { confirmAlert } from 'react-confirm-alert';
@@ -12,12 +20,22 @@ import { getCurrentUser } from 'helper';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
 
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
+
+import { Document, pdfjs, Page } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 export default function AgencyRequestPendingComponent() {
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
   const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   const [candidateRequests, setCandidateRequests] = useState([]);
   const [companyRequests, setCompanyRequests] = useState([]);
+  const [isOpen, setIsOpen] = useState({ open: false, url: '' });
+  const [modalPdfView, seModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -108,6 +126,19 @@ export default function AgencyRequestPendingComponent() {
         doc
       }
     });
+  };
+
+  const toggle = () => {
+    seModal(!modalPdfView);
+  };
+
+  const viewDoc = (doc) => {
+    if (doc.content_type === 'application/pdf') {
+      setIsOpen({ open: false, url: doc.doc_url });
+      toggle();
+    } else {
+      setIsOpen({ open: true, url: doc.doc_url });
+    }
   };
 
   return (
@@ -329,6 +360,31 @@ export default function AgencyRequestPendingComponent() {
         </Grid>
       </Grid>
 
+      {isOpen.open && (
+        <Lightbox
+          mainSrc={isOpen.url}
+          onCloseRequest={() => setIsOpen({ open: false, url: '' })}
+        />
+      )}
+
+      {/* view pdf section */}
+      <Dialog
+        scroll="body"
+        fullWidth
+        maxWidth="md"
+        open={modalPdfView}
+        onClose={toggle}
+        classes={{
+          paper: 'modal-content rounded border-0 bg-white p-3 p-xl-0'
+        }}>
+        <DialogTitle id="form-dialog-title">Upload PDF</DialogTitle>
+        <div className="document-thumb p-3">
+          <Document file={isOpen.url}>
+            <Page pageNumber={1} />
+          </Document>
+        </div>
+      </Dialog>
+
       {/* share details show */}
       <Dialog
         onClose={handleShareModalClose}
@@ -399,6 +455,14 @@ export default function AgencyRequestPendingComponent() {
                             </Button>
                           </>
                         )}
+
+                        <Button
+                          size="small"
+                          disabled={doc.status !== 'accepted'}
+                          className="btn btn-primary ml-2"
+                          onClick={() => viewDoc(doc)}>
+                          View
+                        </Button>
                         <Button
                           size="small"
                           className="btn btn-info ml-2"

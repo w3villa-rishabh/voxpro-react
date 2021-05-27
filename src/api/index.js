@@ -11,7 +11,7 @@ var setupAPI = function () {
       BASE_URL = 'http://54.203.142.83/';
       break;
     case 'development':
-      BASE_URL = 'https://59f2d7050a8f.ngrok.io/';
+      BASE_URL = 'https://2c8aed52f309.ngrok.io/';
       break;
     default:
       BASE_URL = 'https://d5d99e78af1a.ngrok.io/';

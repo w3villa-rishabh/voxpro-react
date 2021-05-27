@@ -225,10 +225,14 @@ export default function AddNewRequestComponent() {
 
   const selectUser = (user) => {
     console.log('selectUser', user);
+    let name =
+      requestFilter.value === 'candidate'
+        ? user.first_name + ' ' + user.last_name
+        : user.name;
     setRequestObj({
       ...requestObj,
       id: user.id,
-      name: user.first_name + ' ' + user.last_name
+      name
     });
     setSearchUser([]);
   };
