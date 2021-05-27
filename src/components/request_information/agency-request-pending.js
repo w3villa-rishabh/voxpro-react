@@ -36,6 +36,7 @@ export default function AgencyRequestPendingComponent() {
   const [companyRequests, setCompanyRequests] = useState([]);
   const [isOpen, setIsOpen] = useState({ open: false, url: '' });
   const [modalPdfView, seModal] = useState(false);
+  const [boxes, setBoxes] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,6 +54,7 @@ export default function AgencyRequestPendingComponent() {
           if (response.data.success) {
             setCandidateRequests([...response.data.candidate_requests]);
             setCompanyRequests([...response.data.company_requests]);
+            setBoxes(response.data);
           }
         },
         (error) => {
@@ -153,7 +155,10 @@ export default function AgencyRequestPendingComponent() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={3}>
           <Card className="p-3 h-100">
-            <div className="display-3 font-weight-bold">31</div>
+            <div className="display-3 font-weight-bold">
+              {' '}
+              {boxes.canidate_request_count || 0}{' '}
+            </div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
             <div className="font-weight-bold font-size-sm text-uppercase">
               Pending Candidate Requests
@@ -162,7 +167,10 @@ export default function AgencyRequestPendingComponent() {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Card className="p-3 h-100">
-            <div className="display-3 font-weight-bold">68</div>
+            <div className="display-3 font-weight-bold">
+              {' '}
+              {boxes.company_request_count || 0}{' '}
+            </div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
             <div className="font-weight-bold font-size-sm text-uppercase">
               {currentUser.role === 'agency'
@@ -173,7 +181,9 @@ export default function AgencyRequestPendingComponent() {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Card className="p-3 h-100">
-            <div className="display-3 font-weight-bold">57</div>
+            <div className="display-3 font-weight-bold">
+              {boxes.candidate_due_today || 0}
+            </div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
             <div className="font-weight-bold font-size-sm text-uppercase">
               Candidate Request Due today!
@@ -182,7 +192,9 @@ export default function AgencyRequestPendingComponent() {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Card className="p-3 h-100">
-            <div className="display-3 font-weight-bold">20</div>
+            <div className="display-3 font-weight-bold">
+              {boxes.company_due_today || 0}
+            </div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-info rounded border-info" />
             <div className="font-weight-bold font-size-sm text-uppercase">
               {currentUser.role === 'agency'

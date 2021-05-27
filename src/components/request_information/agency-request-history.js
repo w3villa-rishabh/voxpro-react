@@ -35,6 +35,7 @@ export default function AgencyRequestHistoryComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState({ open: false, url: '' });
   const [modalPdfView, seModal] = useState(false);
+  const [boxes, setBoxes] = useState([]);
 
   useEffect(() => {
     getDocuments();
@@ -52,6 +53,7 @@ export default function AgencyRequestHistoryComponent() {
           if (response.data.success) {
             setCandidateRequests([...response.data.candidate_requests]);
             setCompanyRequests([...response.data.company_requests]);
+            setBoxes(response.data);
           }
         },
         (error) => {
@@ -100,7 +102,9 @@ export default function AgencyRequestHistoryComponent() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={3}>
           <Card className="p-3">
-            <div className="display-3 font-weight-bold">31</div>
+            <div className="display-3 font-weight-bold">
+              {boxes.canidate_request_count || 0}
+            </div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
             <div className="font-weight-bold font-size-sm text-uppercase">
               Candidate Requests History
@@ -109,7 +113,9 @@ export default function AgencyRequestHistoryComponent() {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Card className="p-3">
-            <div className="display-3 font-weight-bold">68</div>
+            <div className="display-3 font-weight-bold">
+              {boxes.company_request_count || 0}
+            </div>
             <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
             <div className="font-weight-bold font-size-sm text-uppercase">
               {currentUser.role === 'agency' ? 'Company' : 'Agency'} Requests
