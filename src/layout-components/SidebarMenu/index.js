@@ -106,9 +106,19 @@ const SidebarMenu = (props) => {
               <Collapse in={dashboardOpen}>
                 <ul>
                   <li>
-                    <NavLink onClick={toggleSidebarMobile} to="/documents">
-                      My Documents
-                    </NavLink>
+                    {currentUser.role === 'candidate' && (
+                      <NavLink onClick={toggleSidebarMobile} to="/documents">
+                        My Documents
+                      </NavLink>
+                    )}
+                    {(currentUser.role === 'agency' ||
+                      currentUser.role === 'company') && (
+                      <NavLink
+                        onClick={toggleSidebarMobile}
+                        to="/document-agency-company">
+                        My Documents
+                      </NavLink>
+                    )}
                   </li>
                   <li>
                     <NavLink onClick={toggleSidebarMobile} to="/upload">

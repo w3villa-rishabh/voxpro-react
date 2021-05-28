@@ -21,6 +21,7 @@ import { getCurrentUser } from 'helper';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import api from '../../api';
+
 import LoaderComponent from 'components/loader';
 
 import { toast } from 'react-toastify';
@@ -172,6 +173,20 @@ const OnBoardDocumentList = (props) => {
     setOpenShareDoc({ open: false, doc: {} });
   };
 
+  const downloadFile = () => {
+    let doc = findDoc();
+    handleClose();
+    let extension = doc.content_type.split('/')[1];
+    api.get(doc.doc_url, { responseType: 'blob' }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', doc.category_name + '.' + extension); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
+
   return (
     <>
       <div className="page-title">
@@ -281,6 +296,11 @@ const OnBoardDocumentList = (props) => {
                                   className="pr-5 px-3 text-primary"
                                   onClick={deleteDoc}>
                                   Delete
+                                </MenuItem>
+                                <MenuItem
+                                  className="pr-5 px-3 text-primary"
+                                  onClick={downloadFile}>
+                                  Download
                                 </MenuItem>
                                 {/* <MenuItem
                                   className="pr-5 px-3 text-primary"

@@ -5,14 +5,14 @@ import { Card, Button, Grid, Dialog, Divider, Table } from '@material-ui/core';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router-dom';
-import AddsComponents from 'components/add_component';
+
 import { getCurrentUser } from '../../helper';
 import api from '../../api';
 import { setEditDoc } from '../../reducers/ThemeOptions';
 import { connect } from 'react-redux';
 import LoaderComponent from 'components/loader';
 
-const OnBoardDocument = (props) => {
+const AgencyCompanyDocument = (props) => {
   const history = useHistory();
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
@@ -27,24 +27,20 @@ const OnBoardDocument = (props) => {
 
   function getDocuments() {
     setIsLoading(true);
-    api
-      .get(
-        `/api/v1/documents/documents_type_with_counts?user_id=${currentUser.id}`
-      )
-      .then((response) => {
-        setIsLoading(false);
-        if (response.data.success) {
-          setDocuments([...response.data.documents]);
-          setRequest({
-            pending_rfi: response.data.pending_rfi,
-            total_rfi: response.data.total_rfi,
-            total_documents: response.data.total_documents,
-            doc_due_to_expire: response.data.doc_due_to_expire
-          });
-        } else {
-          alert('Something went wrong..');
-        }
-      });
+    api.get(`/api/v1/documents/agency_company_documents`).then((response) => {
+      setIsLoading(false);
+      if (response.data.success) {
+        setDocuments([
+          response.data.candidate_docs,
+          response.data.placement_docs,
+          response.data.client_docs,
+          response.data.my_templates
+        ]);
+        setRequest({});
+      } else {
+        alert('Something went wrong..');
+      }
+    });
   }
 
   const viewDocument = (e, id) => {
@@ -86,16 +82,6 @@ const OnBoardDocument = (props) => {
           {currentUser.role !== 'candidate' && (
             <h5 className="heading mt-3">Document Management</h5>
           )}
-
-          {currentUser.role === 'candidate' && (
-            <>
-              <h5 className="heading">Document Management</h5>
-              <p>
-                Upload, Store, Update and Manage your information and document
-                requests.
-              </p>
-            </>
-          )}
         </div>
       </div>
 
@@ -107,9 +93,6 @@ const OnBoardDocument = (props) => {
             <Grid key={index} item md={3} xs={12}>
               <Card className="card-box h-100">
                 <div className="m-2 text-capitalize font-size-lg text-center">
-                  {currentUser.role === 'candidate' && (
-                    <b>{doc.category_name} Documents</b>
-                  )}
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') &&
                     index === 0 && <b>Candidates Documents</b>}
@@ -135,15 +118,16 @@ const OnBoardDocument = (props) => {
                   </div>
                   <div className="mb-1 mt-2 text-black text-black-50">
                     {doc.doc_count} Documents{' '}
-                    {currentUser.role === 'candidate' && 'Uploaded'}
                     {(currentUser.role === 'agency' ||
                       currentUser.role === 'company') &&
                       'added'}
                     {(currentUser.role === 'agency' ||
                       currentUser.role === 'company') && (
                       <div>
-                        <div>3 Documents downloaded</div>
-                        <div>2 Documents Pending Viewing</div>
+                        <div>{doc.doc_downloades} Documents downloaded</div>
+                        <div>
+                          {doc.pending_viewing_doc} Documents Pending Viewing
+                        </div>
                       </div>
                     )}
                   </div>
@@ -158,16 +142,7 @@ const OnBoardDocument = (props) => {
                       </Button>
                     </a>
                   </div>
-                  {currentUser.role === 'candidate' && (
-                    <div className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 btn-neutral-info"
-                        onClick={() => history.push('/upload')}>
-                        Upload Documents
-                      </Button>
-                    </div>
-                  )}
+
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') && (
                     <div className="text-center">
@@ -186,7 +161,7 @@ const OnBoardDocument = (props) => {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              Pending requests for information
+              Candidate documents due to expire
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-warning text-white btn-icon text-center shadow-warning mr-3">
@@ -202,9 +177,12 @@ const OnBoardDocument = (props) => {
                 size="small"
                 className="px-4 btn-neutral-info"
                 onClick={() =>
-                  history.push('/request-info/candidate-new-request')
+                  setOpenExpDoc({
+                    open: true,
+                    doc: requests.doc_due_to_expire
+                  })
                 }>
-                Respond
+                View Documents
               </Button>
             </div>
           </Card>
@@ -212,7 +190,7 @@ const OnBoardDocument = (props) => {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              Total request for information
+              Placement documents due to expire
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-first text-white btn-icon text-center shadow-first mr-3">
@@ -227,8 +205,13 @@ const OnBoardDocument = (props) => {
               <Button
                 size="small"
                 className="px-4 btn-neutral-info"
-                onClick={() => history.push('/request-info/request-history')}>
-                View
+                onClick={() =>
+                  setOpenExpDoc({
+                    open: true,
+                    doc: requests.doc_due_to_expire
+                  })
+                }>
+                View Documents
               </Button>
             </div>
           </Card>
@@ -236,7 +219,10 @@ const OnBoardDocument = (props) => {
         <Grid item md={3} xs={12}>
           <Card className="card-box p-3 h-100">
             <div className="font-12 font-size-sm text-uppercase text-second mt-2">
-              Documents due to expire
+              {currentUser.role === 'agency' &&
+                'Client Documents due to expire'}
+              {currentUser.role === 'company' &&
+                'Agency Documents due to expire'}
             </div>
             <div className="d-flex py-2 align-items-center">
               <div className="d-50 rounded border-0 card-icon-wrapper flex-shrink-0 bg-danger text-white btn-icon text-center mr-3 shadow-danger">
@@ -285,11 +271,11 @@ const OnBoardDocument = (props) => {
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  {requests.total_rfi || 0} Total request for information
+                  {requests.total_rfi || 0} Placement documents due to expire
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  {requests.pending_rfi || 0} Pending request for information
+                  {requests.pending_rfi || 0} Candidate documents due to expire
                 </a>
                 <br />
               </div>
@@ -342,7 +328,6 @@ const OnBoardDocument = (props) => {
           </div>
         </div>
       </Dialog>
-      {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
 };
@@ -353,4 +338,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(OnBoardDocument);
+export default connect(null, mapDispatchToProps)(AgencyCompanyDocument);

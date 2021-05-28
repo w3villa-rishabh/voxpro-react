@@ -40,6 +40,11 @@ const Onboarding = lazy(() =>
   import('./components/documents/onboarding_documents')
 );
 
+//company agency document
+const AgencyCompanyDocument = lazy(() =>
+  import('./components/documents/agency-company-document')
+);
+
 // show document list
 const DocList = lazy(() => import('./components/documents/documents_list'));
 
@@ -309,6 +314,7 @@ const Routes = () => {
                 '/profile-edit',
                 '/documents',
                 '/upload',
+                '/document-agency-company',
                 '/start-ir35',
                 '/ir35-verify',
                 '/request-information',
@@ -343,6 +349,10 @@ const Routes = () => {
                   <Route path="/dashboard" component={DashboardMonitoring} />
                   <Route path="/profile-edit" component={EditProfile} />
                   <Route path="/documents" component={Onboarding} />
+                  <Route
+                    path="/document-agency-company"
+                    component={AgencyCompanyDocument}
+                  />
                   <Route path="/upload" component={UploadDocument} />
                   <Route path="/view-document" component={DocList} />
                   <Route path="/start-ir35" component={StartIR35TaxComponent} />
