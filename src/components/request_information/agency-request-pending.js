@@ -463,7 +463,7 @@ export default function AgencyRequestPendingComponent() {
                               onClick={(e) =>
                                 closedDoc(e, index, doc.requested_category_id)
                               }>
-                              Canceled
+                              Cancel
                             </Button>
                           </>
                         )}
