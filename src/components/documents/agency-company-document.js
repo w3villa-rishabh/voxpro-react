@@ -43,15 +43,17 @@ const AgencyCompanyDocument = (props) => {
     });
   }
 
-  const viewDocument = (e, id) => {
+  const viewDocument = (e, doc) => {
     e.preventDefault();
-    history.push({
-      pathname: '/view-document',
-      search: '?id=' + id,
-      state: {
-        id: id
-      }
-    });
+    if (doc.category_id) {
+      history.push({
+        pathname: '/view-document',
+        search: '?id=' + doc.category_id,
+        state: {
+          id: doc.category_id
+        }
+      });
+    }
   };
 
   const handleExpModalClose = () => {
@@ -134,9 +136,7 @@ const AgencyCompanyDocument = (props) => {
                   {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
                   <div className="divider mx-4 my-2" />
                   <div className="text-center mb-2">
-                    <a
-                      href="/#"
-                      onClick={(e) => viewDocument(e, doc.category_id)}>
+                    <a href="/#" onClick={(e) => viewDocument(e, doc)}>
                       <Button size="small" className="px-4 btn-neutral-info">
                         View Documents
                       </Button>
@@ -147,7 +147,7 @@ const AgencyCompanyDocument = (props) => {
                     currentUser.role === 'company') && (
                     <div className="text-center">
                       <Button size="small" className="px-4 btn-neutral-info">
-                        Pending Documents
+                        {index === 3 ? 'Upload' : 'Pending'} Documents
                       </Button>
                     </div>
                   )}
