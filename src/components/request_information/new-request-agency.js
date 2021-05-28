@@ -61,26 +61,28 @@ export default function AddNewRequestComponent() {
   const [searchUser, setSearchUser] = useState([]);
 
   useEffect(() => {
-    getCategoriesList();
-  }, []);
+    getCategoriesList(requestFilter.value);
+  }, [requestFilter.value]);
 
-  const getCategoriesList = () => {
-    return api.get('/api/v1/categories/all_sub_categories').then(
-      (response) => {
-        if (response.data.success) {
-          console.log('response.data', response.data);
-          let categories = response.data.categories.map((cat) => ({
-            value: cat.id,
-            label: cat.name
-          }));
+  const getCategoriesList = (request) => {
+    return api
+      .get(`/api/v1/categories/all_sub_categories?request_type=${request}`)
+      .then(
+        (response) => {
+          if (response.data.success) {
+            console.log('response.data', response.data);
+            let categories = response.data.categories.map((cat) => ({
+              value: cat.id,
+              label: cat.name
+            }));
 
-          setCategories([...categories]);
+            setCategories([...categories]);
+          }
+        },
+        (error) => {
+          console.error('error', error);
         }
-      },
-      (error) => {
-        console.error('error', error);
-      }
-    );
+      );
   };
 
   const search = (search) => {
