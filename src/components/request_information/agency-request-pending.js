@@ -83,7 +83,7 @@ export default function AgencyRequestPendingComponent() {
     e.preventDefault();
     confirmAlert({
       overlayClassName: 'confirm-alert',
-      title: 'Confirm to closed',
+      title: 'Confirm to Canceled',
       message: 'Are you sure to do this.',
       buttons: [
         {
@@ -98,7 +98,7 @@ export default function AgencyRequestPendingComponent() {
                   toast.dismiss();
                   setIsLoading(false);
                   if (response.data.success) {
-                    openShareDoc.doc[index].status = 'closed';
+                    openShareDoc.doc[index].status = 'Canceled';
                     setOpenShareDoc({ ...openShareDoc });
                     toast.success(response.data.message);
                   } else {
@@ -463,7 +463,7 @@ export default function AgencyRequestPendingComponent() {
                               onClick={(e) =>
                                 closedDoc(e, index, doc.requested_category_id)
                               }>
-                              Closed
+                              Canceled
                             </Button>
                           </>
                         )}
