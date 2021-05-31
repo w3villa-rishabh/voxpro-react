@@ -222,13 +222,6 @@ const SidebarMenu = (props) => {
                           New Request
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-info/request-history">
-                          Request History
-                        </NavLink>
-                      </li>
                     </div>
                   )}
 
@@ -239,7 +232,7 @@ const SidebarMenu = (props) => {
                         <NavLink
                           onClick={toggleSidebarMobile}
                           to="/request-info/new-request">
-                          New Request
+                          Create Request
                         </NavLink>
                       </li>
                       <li>
@@ -249,13 +242,7 @@ const SidebarMenu = (props) => {
                           Pending
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-info/assign-new-request">
-                          Request
-                        </NavLink>
-                      </li>
+
                       <li>
                         <NavLink
                           onClick={toggleSidebarMobile}
@@ -263,8 +250,22 @@ const SidebarMenu = (props) => {
                           History
                         </NavLink>
                       </li>
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/request-info/assign-new-request">
+                          New Request
+                        </NavLink>
+                      </li>
                     </div>
                   )}
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      to="/request-info/request-history">
+                      Request History
+                    </NavLink>
+                  </li>
                 </ul>
               </Collapse>
             </li>

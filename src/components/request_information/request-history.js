@@ -194,7 +194,7 @@ export default function RequestHistoryComponent() {
               </Card>
             </Grid>
           </Grid>
-          <AddsComponents />
+          {currentUser.role === 'candidate' && <AddsComponents />}
         </div>
       </div>
 
