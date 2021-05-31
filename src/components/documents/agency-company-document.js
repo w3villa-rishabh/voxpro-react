@@ -53,6 +53,8 @@ const AgencyCompanyDocument = (props) => {
           id: doc.category_id
         }
       });
+    } else {
+      history.push('/view-document');
     }
   };
 

@@ -49,13 +49,18 @@ const OnBoardDocumentList = (props) => {
 
   useEffect(() => {
     let id = location.state ? location.state.id : 0;
-    if (id) {
-      getDocuments(id);
+    if (id && currentUser.role === 'candidate') {
+      getDocumentsForCandidate(id);
+    } else if (
+      currentUser.role === 'agency' ||
+      currentUser.role === 'company'
+    ) {
+      getDocumentsForAgencyCompany();
     }
     props.setEditDoc({});
   }, [location.state]);
 
-  const getDocuments = (id) => {
+  const getDocumentsForCandidate = (id) => {
     setIsLoading(true);
     api
       .get(
@@ -73,6 +78,22 @@ const OnBoardDocumentList = (props) => {
           console.error('error', error);
         }
       );
+  };
+
+  const getDocumentsForAgencyCompany = () => {
+    setIsLoading(true);
+    api.get('/api/v1/documents/document_list').then(
+      (response) => {
+        setIsLoading(false);
+        if (response.data.success) {
+          setDocuments([...response.data.documents]);
+        }
+      },
+      (error) => {
+        setIsLoading(false);
+        console.error('error', error);
+      }
+    );
   };
 
   const goBack = (e) => {
@@ -287,26 +308,25 @@ const OnBoardDocumentList = (props) => {
                                   onClick={viewDoc}>
                                   View Document
                                 </MenuItem>
-                                <MenuItem
-                                  className="pr-5 px-3 text-primary"
-                                  onClick={editDoc}>
-                                  Edit/Replace
-                                </MenuItem>
-                                <MenuItem
-                                  className="pr-5 px-3 text-primary"
-                                  onClick={deleteDoc}>
-                                  Delete
-                                </MenuItem>
+                                {currentUser.role === 'candidate' && (
+                                  <>
+                                    <MenuItem
+                                      className="pr-5 px-3 text-primary"
+                                      onClick={editDoc}>
+                                      Edit/Replace
+                                    </MenuItem>
+                                    <MenuItem
+                                      className="pr-5 px-3 text-primary"
+                                      onClick={deleteDoc}>
+                                      Delete
+                                    </MenuItem>
+                                  </>
+                                )}
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={downloadFile}>
                                   Download
                                 </MenuItem>
-                                {/* <MenuItem
-                                  className="pr-5 px-3 text-primary"
-                                  onClick={replaceDoc}>
-                                  Replace
-                                </MenuItem> */}
                               </div>
                             </Menu>
                           </div>
