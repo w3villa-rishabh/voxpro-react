@@ -232,7 +232,9 @@ const OnBoardDocumentList = (props) => {
                 <th scope="col">Document Name</th>
                 <th scope="col">Date Upload</th>
                 <th scope="col">Expiration Date</th>
-                <th scope="col">Shared With</th>
+                {currentUser.role === 'candidate' && (
+                  <th scope="col">Shared With</th>
+                )}
                 <th scope="col">Privacy</th>
                 <th scope="col" className="text-center"></th>
               </tr>
@@ -262,16 +264,18 @@ const OnBoardDocumentList = (props) => {
                         <td>
                           <span>{doc.expiration}</span>
                         </td>
-                        <td>
-                          <Button
-                            className="m-2 btn-primary"
-                            size="small"
-                            onClick={() =>
-                              setOpenShareDoc({ open: true, doc })
-                            }>
-                            View
-                          </Button>
-                        </td>
+                        {currentUser.role === 'candidate' && (
+                          <td>
+                            <Button
+                              className="m-2 btn-primary"
+                              size="small"
+                              onClick={() =>
+                                setOpenShareDoc({ open: true, doc })
+                              }>
+                              View
+                            </Button>
+                          </td>
+                        )}
                         <td>
                           <span>{doc.privacy === 1 ? 'Yes' : 'No'}</span>
                         </td>
@@ -308,20 +312,22 @@ const OnBoardDocumentList = (props) => {
                                   onClick={viewDoc}>
                                   View Document
                                 </MenuItem>
-                                {location.state.id && (
-                                  <>
-                                    <MenuItem
-                                      className="pr-5 px-3 text-primary"
-                                      onClick={editDoc}>
-                                      Edit/Replace
-                                    </MenuItem>
-                                    <MenuItem
-                                      className="pr-5 px-3 text-primary"
-                                      onClick={deleteDoc}>
-                                      Delete
-                                    </MenuItem>
-                                  </>
-                                )}
+                                {location.state
+                                  ? location.state.id && (
+                                      <>
+                                        <MenuItem
+                                          className="pr-5 px-3 text-primary"
+                                          onClick={editDoc}>
+                                          Edit/Replace
+                                        </MenuItem>
+                                        <MenuItem
+                                          className="pr-5 px-3 text-primary"
+                                          onClick={deleteDoc}>
+                                          Delete
+                                        </MenuItem>
+                                      </>
+                                    )
+                                  : ''}
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={downloadFile}>
@@ -388,7 +394,7 @@ const OnBoardDocumentList = (props) => {
               <thead>
                 <tr>
                   <th>Document Name</th>
-                  <th>Shared With</th>
+                  {currentUser.role === 'candidate' && <th>Shared With</th>}
                   <th>Shared on Date</th>
                 </tr>
               </thead>
@@ -397,9 +403,11 @@ const OnBoardDocumentList = (props) => {
                   <td>
                     <span>{openShareDoc.doc.category_name}</span>
                   </td>
-                  <td>
-                    <span>Huntress Group</span>
-                  </td>
+                  {currentUser.role === 'candidate' && (
+                    <td>
+                      <span>Huntress Group</span>
+                    </td>
+                  )}
                   <td>
                     <span>{openShareDoc.doc.date}</span>
                   </td>
