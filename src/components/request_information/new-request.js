@@ -255,7 +255,7 @@ const NewRequestComponent = (props) => {
               </Card>
             </Grid>
           </Grid>
-          <AddsComponents />
+          {currentUser.role === 'candidate' && <AddsComponents />}
         </div>
       </div>
 

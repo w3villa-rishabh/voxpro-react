@@ -308,7 +308,7 @@ const OnBoardDocumentList = (props) => {
                                   onClick={viewDoc}>
                                   View Document
                                 </MenuItem>
-                                {currentUser.role === 'candidate' && (
+                                {location.state.id && (
                                   <>
                                     <MenuItem
                                       className="pr-5 px-3 text-primary"
