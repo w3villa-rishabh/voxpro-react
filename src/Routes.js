@@ -377,7 +377,7 @@ const Routes = () => {
 
                   <Route path="/request-info">
                     <Route
-                      path="/request-info/candidate-new-request"
+                      path="/request-info/assign-new-request"
                       component={NewRequestComponent}
                     />
                     <Route

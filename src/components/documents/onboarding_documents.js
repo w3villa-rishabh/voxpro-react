@@ -202,7 +202,7 @@ const OnBoardDocument = (props) => {
                 size="small"
                 className="px-4 btn-neutral-info"
                 onClick={() =>
-                  history.push('/request-info/candidate-new-request')
+                  history.push('/request-info/assign-new-request')
                 }>
                 Respond
               </Button>

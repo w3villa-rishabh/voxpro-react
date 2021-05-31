@@ -38,17 +38,17 @@ const NewRequestComponent = (props) => {
 
   function getDocuments() {
     setIsLoading(true);
-    api
-      .get(
-        `/api/v1/users/get_request_infos?user_id=${currentUser.id}&request_type=new`
-      )
-      .then((response) => {
-        setIsLoading(false);
-        if (response.data.success) {
-          setRequests([...response.data.request_for_information]);
-          setBoxes(response.data);
-        }
-      });
+    let url = `/api/v1/users/get_request_infos?user_id=${currentUser.id}&request_type=new`;
+    if (currentUser.role === 'agency' || currentUser.role === 'company') {
+      url = '/api/v1/users/agency_company_new_request';
+    }
+    api.get(url).then((response) => {
+      setIsLoading(false);
+      if (response.data.success) {
+        setRequests([...response.data.request_for_information]);
+        setBoxes(response.data);
+      }
+    });
   }
   const handleShareModalClose = () => {
     setOpenShareDoc({ open: false, doc: [] });
