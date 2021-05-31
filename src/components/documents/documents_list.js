@@ -49,7 +49,7 @@ const OnBoardDocumentList = (props) => {
 
   useEffect(() => {
     let id = location.state ? location.state.id : 0;
-    if (id && currentUser.role === 'candidate') {
+    if (id) {
       getDocumentsForCandidate(id);
     } else if (
       currentUser.role === 'agency' ||
