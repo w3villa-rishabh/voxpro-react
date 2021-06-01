@@ -48,6 +48,11 @@ const AgencyCompanyDocument = lazy(() =>
 // show document list
 const DocList = lazy(() => import('./components/documents/documents_list'));
 
+//PendingDocList
+const PendingDocList = lazy(() =>
+  import('./components/documents/pending_documents_list')
+);
+
 //onboarding documents
 const UploadDocument = lazy(() =>
   import('./components/documents/upload_documents')
@@ -320,6 +325,7 @@ const Routes = () => {
                 '/request-information',
                 '/view-profile',
                 '/view-document',
+                '/pending-document',
                 '/candidate-history',
                 '/candidate-enquiries',
                 '/ir35-pending',
@@ -355,6 +361,8 @@ const Routes = () => {
                   />
                   <Route path="/upload" component={UploadDocument} />
                   <Route path="/view-document" component={DocList} />
+                  <Route path="/pending-document" component={PendingDocList} />
+
                   <Route path="/start-ir35" component={StartIR35TaxComponent} />
                   <Route path="/ir35-verify" component={IR35TaxComponent} />
                   <Route

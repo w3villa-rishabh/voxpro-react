@@ -56,15 +56,27 @@ const AgencyCompanyDocument = (props) => {
       name = 'My Templates';
     }
 
-    history.push({
-      pathname: '/view-document',
-      search: '?id=' + doc.category_id ? doc.category_id : 0,
-      state: {
-        id: doc.category_id,
-        status,
-        name
-      }
-    });
+    if (status === 'accepted') {
+      history.push({
+        pathname: '/view-document',
+        search: '?id=' + doc.category_id ? doc.category_id : 0,
+        state: {
+          id: doc.category_id,
+          status,
+          name
+        }
+      });
+    } else if (status === 'pending') {
+      history.push({
+        pathname: '/pending-document',
+        search: '?id=' + doc.category_id ? doc.category_id : 0,
+        state: {
+          id: doc.category_id,
+          status,
+          name
+        }
+      });
+    }
   };
 
   const viewExpireDocument = (requests) => {
