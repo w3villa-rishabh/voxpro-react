@@ -43,7 +43,7 @@ const AgencyCompanyDocument = (props) => {
     });
   }
 
-  const viewDocument = (e, doc, index, eventName) => {
+  const viewDocument = (e, doc, index, status) => {
     e.preventDefault();
     let name = 'Candidates Documents';
     if (index === 1) {
@@ -58,10 +58,10 @@ const AgencyCompanyDocument = (props) => {
 
     history.push({
       pathname: '/view-document',
-      search: '?id=' + doc.category_id,
+      search: '?id=' + doc.category_id ? doc.category_id : 0,
       state: {
         id: doc.category_id,
-        eventName: eventName,
+        status,
         name
       }
     });
@@ -158,7 +158,7 @@ const AgencyCompanyDocument = (props) => {
                   <div className="text-center mb-2">
                     <a
                       href="/#"
-                      onClick={(e) => viewDocument(e, doc, index, 'view')}>
+                      onClick={(e) => viewDocument(e, doc, index, 'accepted')}>
                       <Button size="small" className="px-4 btn-neutral-info">
                         View Documents
                       </Button>

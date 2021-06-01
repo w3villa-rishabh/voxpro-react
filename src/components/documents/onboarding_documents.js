@@ -55,7 +55,8 @@ const OnBoardDocument = (props) => {
       search: '?id=' + id,
       state: {
         id: id,
-        name: name + ' ' + 'Documents'
+        name: name + ' ' + 'Documents',
+        status: 'accepted'
       }
     });
   };

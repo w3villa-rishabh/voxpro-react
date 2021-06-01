@@ -82,18 +82,24 @@ const OnBoardDocumentList = (props) => {
 
   const getDocumentsForAgencyCompany = () => {
     setIsLoading(true);
-    api.get('/api/v1/documents/document_list').then(
-      (response) => {
-        setIsLoading(false);
-        if (response.data.success) {
-          setDocuments([...response.data.documents]);
+    let type = location.state ? location.state.name : '';
+    let status = location.state ? location.state.status : '';
+    api
+      .get(
+        `/api/v1/documents/document_list?status=${status}&request_type=${type}`
+      )
+      .then(
+        (response) => {
+          setIsLoading(false);
+          if (response.data.success) {
+            setDocuments([...response.data.documents]);
+          }
+        },
+        (error) => {
+          setIsLoading(false);
+          console.error('error', error);
         }
-      },
-      (error) => {
-        setIsLoading(false);
-        console.error('error', error);
-      }
-    );
+      );
   };
 
   const goBack = (e) => {
