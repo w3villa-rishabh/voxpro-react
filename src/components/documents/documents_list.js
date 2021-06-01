@@ -58,7 +58,7 @@ const OnBoardDocumentList = (props) => {
       getDocumentsForAgencyCompany();
     }
     props.setEditDoc({});
-  }, [location.state]);
+  }, []);
 
   const getDocumentsForCandidate = (id) => {
     setIsLoading(true);

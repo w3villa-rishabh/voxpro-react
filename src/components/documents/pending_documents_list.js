@@ -158,7 +158,10 @@ const OnBoardDocumentList = (props) => {
               <tr>
                 <th scope="col">Document Name</th>
                 <th scope="col">Date Upload</th>
-                <th scope="col">Status</th>
+                <th scope="col" className="text-center">
+                  Status
+                </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -183,8 +186,20 @@ const OnBoardDocumentList = (props) => {
                         <td>
                           <span>{doc.date}</span>
                         </td>
-                        <td>
-                          <span>{doc.status ? doc.status : 'Pending'}</span>
+                        <td className="text-center">
+                          <span>
+                            {doc.status === 'accepted' ? (
+                              <div className="badge badge-neutral-success text-success">
+                                {doc.status.toUpperCase()}
+                              </div>
+                            ) : (
+                              <div className="badge badge-neutral-danger text-danger">
+                                {doc.status
+                                  ? doc.status.toUpperCase()
+                                  : 'Pending'}
+                              </div>
+                            )}
+                          </span>
                         </td>
 
                         <td>

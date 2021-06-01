@@ -24,6 +24,7 @@ setupAPI();
 const fetchClient = () => {
   const defaultOptions = {
     baseURL: BASE_URL,
+    // timeout: 20000,
     headers: {
       'Content-Type': 'application/json'
     }

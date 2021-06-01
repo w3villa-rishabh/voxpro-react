@@ -36,7 +36,10 @@ const AgencyCompanyDocument = (props) => {
           response.data.client_docs,
           response.data.my_templates
         ]);
-        setRequest({});
+        setRequest({
+          document_uploaded: response.data.document_uploaded,
+          candidate_expiry_doc: response.data.candidate_expiry_doc
+        });
       } else {
         alert('Something went wrong..');
       }
@@ -56,12 +59,13 @@ const AgencyCompanyDocument = (props) => {
       name = 'My Templates';
     }
 
+    let id = doc.category_id ? doc.category_id : 0;
     if (status === 'accepted') {
       history.push({
         pathname: '/view-document',
-        search: '?id=' + doc.category_id ? doc.category_id : 0,
+        search: '?id=' + id,
         state: {
-          id: doc.category_id,
+          id,
           status,
           name
         }
@@ -69,9 +73,9 @@ const AgencyCompanyDocument = (props) => {
     } else if (status === 'pending') {
       history.push({
         pathname: '/pending-document',
-        search: '?id=' + doc.category_id ? doc.category_id : 0,
+        search: '?id=' + id,
         state: {
-          id: doc.category_id,
+          id,
           status,
           name
         }
@@ -213,7 +217,7 @@ const AgencyCompanyDocument = (props) => {
                   className="display-4"
                 />
               </div>
-              <div className="ml-1">{requests.pending_rfi || 0}</div>
+              <div className="ml-1">{requests.candidate_expiry_doc || 0}</div>
             </div>
             <div className="text-center mt-3">
               <Button
@@ -288,14 +292,18 @@ const AgencyCompanyDocument = (props) => {
             <div className="d-flex py-2 align-items-center">
               <div className="ml-1">
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  {requests.total_documents || 0} Documents uploaded
+                  {requests.document_uploaded || 0} Documents uploaded
                 </a>
-                <br />
+                {/* <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
                   {requests.doc_due_to_expire
                     ? requests.doc_due_to_expire.length
                     : 0}{' '}
                   Documents due to expire
+                </a> */}
+                <br />
+                <a href="#/" onClick={(e) => e.preventDefault()}>
+                  {requests.total_rfi || 0} Client documents due to expire
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
@@ -303,7 +311,8 @@ const AgencyCompanyDocument = (props) => {
                 </a>
                 <br />
                 <a href="#/" onClick={(e) => e.preventDefault()}>
-                  {requests.pending_rfi || 0} Candidate documents due to expire
+                  {requests.candidate_expiry_doc || 0} Candidate documents due
+                  to expire
                 </a>
                 <br />
               </div>
