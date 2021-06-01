@@ -238,17 +238,21 @@ const SidebarMenu = (props) => {
                     currentUser.role === 'company') && (
                     <>
                       <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/request-info/new-request">
+                          New Request
+                        </NavLink>
+                      </li>
+                      <li>
                         <a
                           href="javascript:void(0)"
                           onClick={() => {
                             setSendRequest(!sendRequest);
                           }}
                           className={clsx({ active: sendRequest })}>
-                          <span className="sidebar-icon">
-                            <BallotTwoToneIcon />
-                          </span>
                           <span className="sidebar-item-label">
-                            Send Request
+                            Request Sent
                           </span>
                           <span className="sidebar-icon-indicator">
                             <ChevronRightTwoToneIcon />
@@ -256,13 +260,6 @@ const SidebarMenu = (props) => {
                         </a>
                         <Collapse in={sendRequest}>
                           <ul>
-                            <li>
-                              <NavLink
-                                onClick={toggleSidebarMobile}
-                                to="/request-info/new-request">
-                                New Request
-                              </NavLink>
-                            </li>
                             <li>
                               <NavLink
                                 onClick={toggleSidebarMobile}
@@ -288,11 +285,8 @@ const SidebarMenu = (props) => {
                             setReceiveRequest(!receiveRequest);
                           }}
                           className={clsx({ active: receiveRequest })}>
-                          <span className="sidebar-icon">
-                            <BallotTwoToneIcon />
-                          </span>
                           <span className="sidebar-item-label">
-                            Receive Request
+                            Request Receive
                           </span>
                           <span className="sidebar-icon-indicator">
                             <ChevronRightTwoToneIcon />
