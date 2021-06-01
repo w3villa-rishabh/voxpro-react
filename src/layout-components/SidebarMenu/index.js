@@ -249,6 +249,7 @@ const SidebarMenu = (props) => {
                           href="javascript:void(0)"
                           onClick={() => {
                             setSendRequest(!sendRequest);
+                            setReceiveRequest(false);
                           }}
                           className={clsx({ active: sendRequest })}>
                           <span className="sidebar-item-label">
@@ -283,6 +284,7 @@ const SidebarMenu = (props) => {
                           href="javascript:void(0)"
                           onClick={() => {
                             setReceiveRequest(!receiveRequest);
+                            setSendRequest(false);
                           }}
                           className={clsx({ active: receiveRequest })}>
                           <span className="sidebar-item-label">
