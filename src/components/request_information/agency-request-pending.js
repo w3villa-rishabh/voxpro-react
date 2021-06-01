@@ -68,12 +68,13 @@ export default function AgencyRequestPendingComponent() {
     setOpenShareDoc({ open: false, doc: [] });
   };
 
-  const editDoc = () => {
+  const editDoc = (request_type) => {
     if (openShareDoc.requestId) {
       history.push({
         pathname: '/request-info/update-request',
         state: {
-          id: openShareDoc.requestId
+          id: openShareDoc.requestId,
+          request_type
         }
       });
     }
@@ -453,7 +454,7 @@ export default function AgencyRequestPendingComponent() {
                             <Button
                               size="small"
                               className="btn btn-primary ml-2"
-                              onClick={editDoc}>
+                              onClick={() => editDoc(doc.request_type)}>
                               Edit
                             </Button>
 

@@ -84,6 +84,9 @@ const OnBoardDocumentList = (props) => {
     setIsLoading(true);
     let type = location.state ? location.state.name : '';
     let status = location.state ? location.state.status : '';
+    if (type) {
+      type = type.toLowerCase().split(' ').join('_');
+    }
     api
       .get(
         `/api/v1/documents/document_list?status=${status}&request_type=${type}`

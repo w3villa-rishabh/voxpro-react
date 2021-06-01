@@ -73,7 +73,7 @@ export default function AddUpdateRequestComponent() {
     forkJoin([
       api.get(`/api/v1/request_for_informations/${location.state.id}`),
       api.get(
-        `/api/v1/categories/all_sub_categories?request_type=${requestFilter.value}`
+        `/api/v1/categories/all_sub_categories?request_type=${location.state.request_type}`
       )
     ]).subscribe((results) => {
       setIsLoading(false);
