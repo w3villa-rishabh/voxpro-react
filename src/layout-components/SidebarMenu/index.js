@@ -54,6 +54,8 @@ const SidebarMenu = (props) => {
   const [placementM, setPlacementM] = useState(false);
   const [placement, setPlacement] = useState(false);
   const [setting, setSetting] = useState(false);
+  const [sendRequest, setSendRequest] = useState(false);
+  const [receiveRequest, setReceiveRequest] = useState(false);
 
   return (
     <>
@@ -222,50 +224,101 @@ const SidebarMenu = (props) => {
                           New Request
                         </NavLink>
                       </li>
+                      <li>
+                        <NavLink
+                          onClick={toggleSidebarMobile}
+                          to="/request-info/request-history">
+                          Request History
+                        </NavLink>
+                      </li>
                     </div>
                   )}
 
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') && (
-                    <div>
+                    <>
                       <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-info/new-request">
-                          Create Request
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-info/pending">
-                          Pending
-                        </NavLink>
-                      </li>
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setSendRequest(!sendRequest);
+                          }}
+                          className={clsx({ active: sendRequest })}>
+                          <span className="sidebar-icon">
+                            <BallotTwoToneIcon />
+                          </span>
+                          <span className="sidebar-item-label">
+                            Send Request
+                          </span>
+                          <span className="sidebar-icon-indicator">
+                            <ChevronRightTwoToneIcon />
+                          </span>
+                        </a>
+                        <Collapse in={sendRequest}>
+                          <ul>
+                            <li>
+                              <NavLink
+                                onClick={toggleSidebarMobile}
+                                to="/request-info/new-request">
+                                New Request
+                              </NavLink>
+                            </li>
+                            <li>
+                              <NavLink
+                                onClick={toggleSidebarMobile}
+                                to="/request-info/pending">
+                                Pending
+                              </NavLink>
+                            </li>
 
-                      <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-info/history">
-                          History
-                        </NavLink>
+                            <li>
+                              <NavLink
+                                onClick={toggleSidebarMobile}
+                                to="/request-info/history">
+                                History
+                              </NavLink>
+                            </li>
+                          </ul>
+                        </Collapse>
                       </li>
                       <li>
-                        <NavLink
-                          onClick={toggleSidebarMobile}
-                          to="/request-info/assign-new-request">
-                          New Request
-                        </NavLink>
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setReceiveRequest(!receiveRequest);
+                          }}
+                          className={clsx({ active: receiveRequest })}>
+                          <span className="sidebar-icon">
+                            <BallotTwoToneIcon />
+                          </span>
+                          <span className="sidebar-item-label">
+                            Receive Request
+                          </span>
+                          <span className="sidebar-icon-indicator">
+                            <ChevronRightTwoToneIcon />
+                          </span>
+                        </a>
+                        <Collapse in={receiveRequest}>
+                          <ul>
+                            <li>
+                              <NavLink
+                                onClick={toggleSidebarMobile}
+                                to="/request-info/assign-new-request">
+                                New Request
+                              </NavLink>
+                            </li>
+                            <li>
+                              <NavLink
+                                onClick={toggleSidebarMobile}
+                                to="/request-info/request-history">
+                                Request History
+                              </NavLink>
+                            </li>
+                          </ul>
+                        </Collapse>
                       </li>
-                    </div>
+                    </>
                   )}
-                  <li>
-                    <NavLink
-                      onClick={toggleSidebarMobile}
-                      to="/request-info/request-history">
-                      Request History
-                    </NavLink>
-                  </li>
                 </ul>
               </Collapse>
             </li>
