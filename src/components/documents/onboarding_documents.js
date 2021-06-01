@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
@@ -47,13 +48,14 @@ const OnBoardDocument = (props) => {
       });
   }
 
-  const viewDocument = (e, id) => {
+  const viewDocument = (e, id, name) => {
     e.preventDefault();
     history.push({
       pathname: '/view-document',
       search: '?id=' + id,
       state: {
-        id: id
+        id: id,
+        name: name + ' ' + 'Documents'
       }
     });
   };
@@ -110,21 +112,6 @@ const OnBoardDocument = (props) => {
                   {currentUser.role === 'candidate' && (
                     <b>{doc.category_name} Documents</b>
                   )}
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') &&
-                    index === 0 && <b>Candidates Documents</b>}
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') &&
-                    index === 1 && <b>Placements Documents</b>}
-                  {currentUser.role === 'agency' && index === 2 && (
-                    <b>Clients Documents</b>
-                  )}
-                  {currentUser.role === 'company' && index === 2 && (
-                    <b>Agency Documents</b>
-                  )}
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') &&
-                    index === 3 && <b>My Templates</b>}
                 </div>
                 <div className="card-content-overlay text-center py-4">
                   <div className="d-70 rounded-circle bg-info text-white btn-icon mx-auto text-center">
@@ -152,7 +139,9 @@ const OnBoardDocument = (props) => {
                   <div className="text-center mb-2">
                     <a
                       href="/#"
-                      onClick={(e) => viewDocument(e, doc.category_id)}>
+                      onClick={(e) =>
+                        viewDocument(e, doc.category_id, doc.category_name)
+                      }>
                       <Button size="small" className="px-4 btn-neutral-info">
                         View Documents
                       </Button>

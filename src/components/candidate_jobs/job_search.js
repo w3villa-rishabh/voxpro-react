@@ -98,7 +98,7 @@ export default function JobSearchComponent() {
     <>
       <div className="page-title">
         <Grid container spacing={2}>
-          <Grid item md={4} xs={4}>
+          <Grid item md={4} xs={12}>
             <WorkIcon />
             <div className="title">
               <h5 className="heading pt-3">Job Search</h5>
@@ -124,8 +124,8 @@ export default function JobSearchComponent() {
       </div>
 
       <Card className="card-box">
-        <Grid container spacing={2}>
-          <Grid item md={3} xs={4}>
+        <Grid container spacing={2} wrap={width <= 768 || 'nowrap'}>
+          <Grid item sm={3} xs={12}>
             <div className="mb-0 mt-3 ml-3">
               <TextField
                 variant="outlined"
@@ -146,7 +146,7 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-          <Grid item md={3} xs={4}>
+          <Grid item sm={3} xs={12}>
             <div className="mb-0 mt-3">
               <Select
                 options={options}
@@ -156,7 +156,7 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-          <Grid item md={2} xs={4}>
+          <Grid item sm={3} xs={12}>
             <div className="mb-0 mt-3">
               <Select
                 options={jobtype}
@@ -166,8 +166,8 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-          <Grid item md={2} xs={4}>
-            <div className="mb-0 mt-3 mr-3">
+          <Grid item sm={3} xs={12}>
+            <div className="mb-0 mt-3">
               <Select
                 options={jobposted}
                 value={value2}
@@ -176,52 +176,24 @@ export default function JobSearchComponent() {
               />
             </div>
           </Grid>
-          <Grid item md={2} xs={3}>
-            <div className="mb-0 mt-3 ml-2">
-              <Button className="btn-neutral-info hover-scale-sm">
-                <span className="px-2">Search</span>
-              </Button>
-            </div>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          {/* <Grid item md={3} xs={4}></Grid> */}
-          {/* <Grid item md={2} xs={4}> */}
-          {/* <div className="float-right mb-3">
-              <Button className="btn-neutral-info hover-scale-sm">
-                <span className="px-2">Advance Search</span>
-              </Button>
-            </div> */}
-          {/* </Grid> */}
-          {/* <Grid item md={2} xs={4}> */}
-          {/* <div className="float-right mb-3">
-              <Button className="btn-neutral-info hover-scale-sm">
-                <span className="px-2">Search</span>
-              </Button>
-            </div> */}
-          {/* </Grid> */}
-          {/* <Grid item md={3} xs={4}> */}
-          {/* <div className="mt-2 mb-3 float-right">
-              <span className="ml-3">Relevent</span>
-              <Switch
-                onChange={handleChange}
-                checked={state.checkedA}
-                name="checkedA"
-                color="primary"
-                className="switch-medium ml-1 mr-1"
-              />
-              Recent
-            </div> */}
-          {/* </Grid> */}
-          <Grid item md={12} xs={12} className="mr-4">
-            <div className="mb-2 ml-0 float-right">
-              <Button className="m-1 btn-transparent btn-link btn-link-primary">
-                <span>Browse Jobs </span>{' '}
-                <FontAwesomeIcon
-                  icon={['fas', 'arrow-right']}
-                  className="svg-none"
-                />
-              </Button>
+          <Grid item sm={2} xs={12}>
+            <div className="mb-0 mt-3">
+              <Grid container>
+                <Grid item xs={12}>
+                  <Button className="btn-neutral-info hover-scale-sm ml-4">
+                    <span className="px-2">Search</span>
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button className="m-1 btn-transparent btn-link btn-link-primary">
+                    <span>Browse Jobs </span>{' '}
+                    <FontAwesomeIcon
+                      icon={['fas', 'arrow-right']}
+                      className="svg-none"
+                    />
+                  </Button>
+                </Grid>
+              </Grid>
             </div>
           </Grid>
         </Grid>
@@ -408,7 +380,6 @@ export default function JobSearchComponent() {
       </div>
 
       {currentUser.role === 'candidate' && <AddsComponents />}
-
     </>
   );
 }

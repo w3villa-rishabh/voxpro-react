@@ -213,7 +213,9 @@ const OnBoardDocumentList = (props) => {
       <div className="page-title">
         <PostAddIcon />
         <div className="title">
-          <h5 className="heading mt-3">Personal Documents</h5>
+          <h5 className="heading mt-3">
+            {location.state ? location.state.name : ''}
+          </h5>
         </div>
       </div>
 

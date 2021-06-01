@@ -59,6 +59,7 @@ export default function AddNewRequestComponent() {
   });
   const [categories, setCategories] = useState([]);
   const [searchUser, setSearchUser] = useState([]);
+  const [searchData, setSearchData] = useState(false);
 
   useEffect(() => {
     getCategoriesList(requestFilter.value);
@@ -86,10 +87,10 @@ export default function AddNewRequestComponent() {
   };
 
   const search = (search) => {
+    setSearchData(false);
     if (search.length < 2) {
       return;
     }
-
     api
       .get(
         `/api/v1/users/search_company_or_candidates?q=${search}&request_type=${requestFilter.value}`
@@ -101,7 +102,8 @@ export default function AddNewRequestComponent() {
             console.log('response.data', response.data);
             setSearchUser([...response.data.results]);
           } else if (!searchUser.length) {
-            toast.error('No available..');
+            // toast.error('No available..');
+            setSearchData(true);
           }
         },
         (error) => {
@@ -140,7 +142,7 @@ export default function AddNewRequestComponent() {
       case 'name':
         setErrors({
           ...errors,
-          name: value.length > 2 ? '' : 'Name is required!'
+          name: value.length > 1 ? '' : 'Name is required!'
         });
         break;
       case 'id':
@@ -289,6 +291,7 @@ export default function AddNewRequestComponent() {
                       if (e.key === 'Backspace' && e.target.value.length < 2) {
                         setRequestObj({ ...requestObj, name: '', id: '' });
                         setSearchUser([]);
+                        setSearchData(false);
                       }
                     }}
                     onKeyPress={(e) => search(e.target.value)}
@@ -320,6 +323,12 @@ export default function AddNewRequestComponent() {
                           )}
                         </li>
                       ))}
+                    </ul>
+                  ) : searchData === true ? (
+                    <ul className="list-group mt-2">
+                      <li className="list-group-item list-group-item-success">
+                        <span>Not Found</span>
+                      </li>
                     </ul>
                   ) : (
                     ''

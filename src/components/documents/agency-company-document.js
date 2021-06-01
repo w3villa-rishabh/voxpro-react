@@ -43,18 +43,36 @@ const AgencyCompanyDocument = (props) => {
     });
   }
 
-  const viewDocument = (e, doc) => {
+  const viewDocument = (e, doc, index, eventName) => {
     e.preventDefault();
-    if (doc.category_id) {
-      history.push({
-        pathname: '/view-document',
-        search: '?id=' + doc.category_id,
-        state: {
-          id: doc.category_id
-        }
+    let name = 'Candidates Documents';
+    if (index === 1) {
+      name = 'Placements Documents';
+    } else if (index === 2 && currentUser.role === 'agency') {
+      name = 'Clients Documents';
+    } else if (index === 2 && currentUser.role === 'company') {
+      name = 'Agency Documents';
+    } else if (index === 3) {
+      name = 'My Templates';
+    }
+
+    history.push({
+      pathname: '/view-document',
+      search: '?id=' + doc.category_id,
+      state: {
+        id: doc.category_id,
+        eventName: eventName,
+        name
+      }
+    });
+  };
+
+  const viewExpireDocument = (requests) => {
+    if (requests.doc_due_to_expire) {
+      setOpenExpDoc({
+        open: true,
+        doc: requests.doc_due_to_expire
       });
-    } else {
-      history.push('/view-document');
     }
   };
 
@@ -138,7 +156,9 @@ const AgencyCompanyDocument = (props) => {
                   {/* <div className="font-size-lg opacity-8">Today's Sales</div> */}
                   <div className="divider mx-4 my-2" />
                   <div className="text-center mb-2">
-                    <a href="/#" onClick={(e) => viewDocument(e, doc)}>
+                    <a
+                      href="/#"
+                      onClick={(e) => viewDocument(e, doc, index, 'view')}>
                       <Button size="small" className="px-4 btn-neutral-info">
                         View Documents
                       </Button>
@@ -148,7 +168,16 @@ const AgencyCompanyDocument = (props) => {
                   {(currentUser.role === 'agency' ||
                     currentUser.role === 'company') && (
                     <div className="text-center">
-                      <Button size="small" className="px-4 btn-neutral-info">
+                      <Button
+                        size="small"
+                        className="px-4 btn-neutral-info"
+                        onClick={(e) => {
+                          if (index === 3) {
+                            history.push('/upload');
+                          } else {
+                            viewDocument(e, doc, index, 'pending');
+                          }
+                        }}>
                         {index === 3 ? 'Upload' : 'Pending'} Documents
                       </Button>
                     </div>
@@ -178,12 +207,7 @@ const AgencyCompanyDocument = (props) => {
               <Button
                 size="small"
                 className="px-4 btn-neutral-info"
-                onClick={() =>
-                  setOpenExpDoc({
-                    open: true,
-                    doc: requests.doc_due_to_expire
-                  })
-                }>
+                onClick={() => viewExpireDocument(requests)}>
                 View Documents
               </Button>
             </div>
@@ -207,12 +231,7 @@ const AgencyCompanyDocument = (props) => {
               <Button
                 size="small"
                 className="px-4 btn-neutral-info"
-                onClick={() =>
-                  setOpenExpDoc({
-                    open: true,
-                    doc: requests.doc_due_to_expire
-                  })
-                }>
+                onClick={() => viewExpireDocument(requests)}>
                 View Documents
               </Button>
             </div>
@@ -243,12 +262,7 @@ const AgencyCompanyDocument = (props) => {
               <Button
                 size="small"
                 className="px-4 btn-neutral-info"
-                onClick={() =>
-                  setOpenExpDoc({
-                    open: true,
-                    doc: requests.doc_due_to_expire
-                  })
-                }>
+                onClick={() => viewExpireDocument(requests)}>
                 View Documents
               </Button>
             </div>
