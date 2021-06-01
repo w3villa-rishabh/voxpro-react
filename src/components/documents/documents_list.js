@@ -44,7 +44,7 @@ const OnBoardDocumentList = (props) => {
   const [anchorElDoc, setAnchorElDoc] = useState(null);
   const [selectIndex, setSelectIndex] = useState(0);
   const [modalPdfView, seModal] = useState(false);
-  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: {} });
+  const [openShareDoc, setOpenShareDoc] = useState({ open: false, doc: [] });
   // const [ shareDoc, setShareDoc ] = useState({});
 
   useEffect(() => {
@@ -200,7 +200,7 @@ const OnBoardDocumentList = (props) => {
   };
 
   const handleShareModalClose = () => {
-    setOpenShareDoc({ open: false, doc: {} });
+    setOpenShareDoc({ open: false, doc: [] });
   };
 
   const downloadFile = () => {
@@ -281,7 +281,10 @@ const OnBoardDocumentList = (props) => {
                               className="m-2 btn-primary"
                               size="small"
                               onClick={() =>
-                                setOpenShareDoc({ open: true, doc })
+                                setOpenShareDoc({
+                                  open: true,
+                                  doc: doc.shared_with
+                                })
                               }>
                               View
                             </Button>
@@ -323,22 +326,20 @@ const OnBoardDocumentList = (props) => {
                                   onClick={viewDoc}>
                                   View Document
                                 </MenuItem>
-                                {location.state
-                                  ? location.state.id && (
-                                      <>
-                                        <MenuItem
-                                          className="pr-5 px-3 text-primary"
-                                          onClick={editDoc}>
-                                          Edit/Replace
-                                        </MenuItem>
-                                        <MenuItem
-                                          className="pr-5 px-3 text-primary"
-                                          onClick={deleteDoc}>
-                                          Delete
-                                        </MenuItem>
-                                      </>
-                                    )
-                                  : ''}
+                                {!!location.state.id && (
+                                  <>
+                                    <MenuItem
+                                      className="pr-5 px-3 text-primary"
+                                      onClick={editDoc}>
+                                      Edit/Replace
+                                    </MenuItem>
+                                    <MenuItem
+                                      className="pr-5 px-3 text-primary"
+                                      onClick={deleteDoc}>
+                                      Delete
+                                    </MenuItem>
+                                  </>
+                                )}
                                 <MenuItem
                                   className="pr-5 px-3 text-primary"
                                   onClick={downloadFile}>
@@ -410,19 +411,21 @@ const OnBoardDocumentList = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <span>{openShareDoc.doc.category_name}</span>
-                  </td>
-                  {currentUser.role === 'candidate' && (
+                {openShareDoc.doc.map((d, index) => (
+                  <tr key={index}>
                     <td>
-                      <span>Huntress Group</span>
+                      <span>{d.document_name}</span>
                     </td>
-                  )}
-                  <td>
-                    <span>{openShareDoc.doc.date}</span>
-                  </td>
-                </tr>
+                    {currentUser.role === 'candidate' && (
+                      <td>
+                        <span>{d.company_name}</span>
+                      </td>
+                    )}
+                    <td>
+                      <span>{d.date}</span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>
