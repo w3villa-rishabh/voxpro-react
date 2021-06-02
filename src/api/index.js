@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 var BASE_URL = '';
 var setupAPI = function () {
@@ -11,7 +12,7 @@ var setupAPI = function () {
       BASE_URL = 'http://54.203.142.83/';
       break;
     case 'development':
-      BASE_URL = 'https://43b72a287be3.ngrok.io/';
+      BASE_URL = 'https://2a20eb823cca.ngrok.io/';
       break;
     default:
       BASE_URL = 'https://d5d99e78af1a.ngrok.io/';
@@ -35,9 +36,11 @@ const fetchClient = () => {
 
   instance.interceptors.response.use(
     function (successRes) {
+      toast.dismiss();
       return successRes;
     },
     function (error) {
+      toast.dismiss();
       return Promise.reject(error);
     }
   );

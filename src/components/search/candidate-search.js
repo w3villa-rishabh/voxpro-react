@@ -25,7 +25,7 @@ export default function CandidateSearchComponent() {
     name: '',
     location: '',
     jobTitle: '',
-    availability: '',
+    availability: '0',
     availabilityDate: ''
   });
 
@@ -154,7 +154,7 @@ export default function CandidateSearchComponent() {
                 fullWidth
                 name="availability"
                 onChange={(event) => {
-                  if (event.target.value === 'available_from') {
+                  if (event.target.value === '3') {
                     setIsOpen(true);
                   }
                   setSearchQuery({
@@ -167,9 +167,9 @@ export default function CandidateSearchComponent() {
                 }}
                 value={searchQuery.availability}>
                 <option value="0">Select Availability</option>
-                <option value="Immediately">Immediately</option>
-                <option value="Unavailable">Unavailable</option>
-                <option value="available_from">
+                <option value="1">Immediately</option>
+                <option value="2">Unavailable</option>
+                <option value="3">
                   {searchQuery.availabilityDate
                     ? moment(searchQuery.availabilityDate).format('DD-MM-YYYY')
                     : 'Available from'}
