@@ -1,47 +1,50 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
-
+import { ClipLoader } from 'react-spinners';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
+import moment from 'moment';
+import DateFnsUtils from '@date-io/date-fns';
+import countryList from 'react-select-country-list';
 
 export default function CandidateSearchComponent() {
-  // const [value, setValue] = useState('');
-  // const options = useMemo(() => countryList().getData(), []);
+  const options = useMemo(() => countryList().getData(), []);
+  const [searchLoader, setSearchLoader] = useState(false);
+  const [searchQuery, setSearchQuery] = useState({
+    name: '',
+    location: '',
+    jobTitle: '',
+    availability: '',
+    availabilityDate: ''
+  });
+  const [isOpen, setIsOpen] = useState(false);
 
-  // const changeHandler = (value) => {
-  //   setValue(value);
-  // };
-  // const [value1, setValue1] = useState('');
-  // const [value2, setValue2] = useState('');
+  const handlerSearch = (event) => {
+    setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
+  };
 
-  // const changeHandler1 = (value1) => {
-  //   setValue1(value1);
-  // };
-  // const changeHandler2 = (value2) => {
-  //   setValue2(value2);
-  // };
+  const search = () => {
+    setSearchLoader(true);
+    console.log('searchQuery', searchQuery);
+    setTimeout(() => {
+      setSearchLoader(false);
+    }, 3000);
+  };
 
-  // const [value_range1, setValueRange1] = useState([10, 40]);
-  // const [value_range2, setValueRange2] = useState([20, 37]);
-  // const [value_range3, setValueRange3] = useState([10, 77]);
-  // const [value_range4, setValueRange4] = useState([20, 57]);
-
-  // const handleChange1 = (event, newValue) => {
-  //   setValueRange1(newValue);
-  // };
-
-  // const handleChange2 = (event, newValue) => {
-  //   setValueRange2(newValue);
-  // };
-
-  // const handleChange3 = (event, newValue) => {
-  //   setValueRange3(newValue);
-  // };
-
-  // const handleChange4 = (event, newValue) => {
-  //   setValueRange4(newValue);
-  // };
+  const handleDateChange = (date) => {
+    if (date) {
+      setIsOpen(false);
+      setSearchQuery({
+        ...searchQuery,
+        availabilityDate: date
+      });
+    }
+  };
 
   return (
     <>
@@ -56,82 +59,120 @@ export default function CandidateSearchComponent() {
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
             <b>Name</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by name"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by name"
+              className="w-100"
+              name="name"
+              onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Job Title</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by job title"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
+            <TextField
+              variant="outlined"
+              size="small"
+              name="jobTitle"
+              onChange={handlerSearch}
+              placeholder="Search by job title"
+              className="w-100"
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by location"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
+            <select
+              className="MuiTextField-root MuiFormControl-fullWidth"
+              variant="outlined"
+              fullWidth
+              name="location"
+              onChange={(event) => {
+                setSearchQuery({
+                  ...searchQuery,
+                  location: event.target.value
+                });
+              }}
+              value={searchQuery.location}>
+              <option value="0">Select location</option>
+              {options.map((op) => (
+                <option value={op.label}>{op.label}</option>
+              ))}
+            </select>
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Availability</b>
-            <div className="mb-3 mt-2">
-              <TextField
+            <div className="position-relative">
+              {isOpen && (
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    disablePast
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    // margin="normal"
+                    id="date-picker-inline"
+                    value={new Date()}
+                    onChange={handleDateChange}
+                    autoOk={true}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date'
+                    }}
+                    open={isOpen}
+                  />
+                </MuiPickersUtilsProvider>
+              )}
+              <select
+                className="MuiTextField-root MuiFormControl-fullWidth select-doc date-pic"
                 variant="outlined"
-                size="small"
-                placeholder="Search by candidate availability"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
+                fullWidth
+                name="availability"
+                onChange={(event) => {
+                  if (event.target.value === '3') {
+                    setIsOpen(true);
                   }
+                  setSearchQuery({
+                    ...searchQuery,
+                    [event.target.name]: event.target.value,
+                    availabilityDate: ''
+                  });
+
+                  console.log('documents.expiration', event.target.value);
                 }}
-              />
+                value={searchQuery.availability}>
+                <option value="0">Select Availability</option>
+                <option value="1">Immediately</option>
+                <option value="2">Unavailable</option>
+                <option value="3">
+                  {searchQuery.availabilityDate
+                    ? moment(searchQuery.availabilityDate).format('DD-MM-YYYY')
+                    : 'Date'}
+                </option>
+              </select>
             </div>
-            {/* <b>Price Range</b>
-            <div className="range-meter">
-              <Slider
-                value={value_range4}
-                onChange={handleChange4}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                getAriaValueText={valuetext}
-              />
-            </div> */}
           </Grid>
         </Grid>
-        <div className="divider opacity-8 my-1 mx-2" />
-        <div className="card-footer float-right">
-          <Button className="btn-primary">Search now</Button>
+        <div className="card-footer float-right pr-0">
+          <Button
+            disabled={searchLoader}
+            className="btn-neutral-info hover-scale-sm"
+            onClick={search}>
+            <span className="px-2">Search</span>
+            <ClipLoader
+              color={'var(--info)'}
+              loading={searchLoader}
+              size={20}
+            />
+          </Button>
         </div>
       </Card>
 

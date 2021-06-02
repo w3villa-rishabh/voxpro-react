@@ -520,7 +520,7 @@ const UploadDocument = (props) => {
                     handleChange(e);
                   }}
                   value={documents.categoryId}>
-                  <option value="0">My documents</option>
+                  <option value="0">Select Category</option>
                   {categories.map((cat, index) => (
                     <option key={index} value={cat.id}>
                       {cat.name}
