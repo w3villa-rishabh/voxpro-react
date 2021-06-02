@@ -5,13 +5,11 @@ import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import countryList from 'react-select-country-list';
-import Select from 'react-select';
 import { ClipLoader } from 'react-spinners';
 import api from '../../api';
 import { toast } from 'react-toastify';
-
-import clogo1 from '../../assets/images/stock-photos/company.png';
-import { getCurrentUser } from '../../helper';
+import LoaderComponent from 'components/loader';
+import { getCurrentUser, convertDate } from '../../helper';
 
 export default function CompaniesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
@@ -22,9 +20,8 @@ export default function CompaniesSearchComponent() {
   const [searchQuery, setSearchQuery] = useState({
     name: '',
     location: '',
-    jobTitle: '',
-    availability: '',
-    availabilityDate: ''
+    job: '',
+    industry: ''
   });
 
   const handlerSearch = (event) => {
@@ -37,7 +34,7 @@ export default function CompaniesSearchComponent() {
     api.post('/api/v1/searches/search_company', { query: searchQuery }).then(
       (response) => {
         setSearchLoader(false);
-        if (response.success) {
+        if (response.data.success) {
           setCompany([...response.data.company]);
         }
       },
@@ -94,17 +91,23 @@ export default function CompaniesSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <Select
-              options={options}
+            <select
+              className="MuiTextField-root MuiFormControl-fullWidth"
+              variant="outlined"
+              fullWidth
               name="location"
               onChange={(event) => {
                 setSearchQuery({
                   ...searchQuery,
-                  location: event.label
+                  location: event.target.value
                 });
               }}
-              placeholder="Location"
-            />
+              value={searchQuery.location}>
+              <option value="0">Select location</option>
+              {options.map((op) => (
+                <option value={op.label}>{op.label}</option>
+              ))}
+            </select>
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Jobs</b>
@@ -113,7 +116,7 @@ export default function CompaniesSearchComponent() {
               size="small"
               placeholder="Search by number of jobs active"
               className="w-100"
-              name="name"
+              name="job"
               onChange={handlerSearch}
               InputProps={{
                 style: {
@@ -162,34 +165,46 @@ export default function CompaniesSearchComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    {company.map((com, index) => (
-                      <tr key={index}>
-                        <td className="font-weight-bold">12/12/2020</td>
-                        <td>Helpful Headhunt</td>
-                        <td className="text-center">
-                          <div
-                            className="avatar-icon-wrapper avatar-icon-sm"
-                            title="Lili Pemberton">
-                            <div className="avatar-icon">
-                              <img alt="..." src={clogo1} />
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center text-black-50">
-                          Manchester, UK
-                        </td>
-                        <td className="text-center">IT Industry</td>
-                        <td className="text-center">20</td>
-                        <td className="text-center">
-                          <a
-                            className="a-blue"
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}>
-                            View Profile
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
+                    {searchLoader ? (
+                      <LoaderComponent />
+                    ) : (
+                      <>
+                        {company.map((com, index) => (
+                          <tr key={index}>
+                            <td className="font-weight-bold">
+                              {convertDate(com.created_at)}
+                            </td>
+                            <td>{com.name}</td>
+                            <td className="text-center">
+                              <div
+                                className="avatar-icon-wrapper avatar-icon-sm"
+                                title="Lili Pemberton">
+                                <div className="avatar-icon">
+                                  <img alt="..." src={com.logo} />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center text-black-50">
+                              {com.location || '--'}
+                            </td>
+                            <td className="text-center">
+                              {com.industry || '--'}
+                            </td>
+                            <td className="text-center">
+                              {com.jobCount || '--'}
+                            </td>
+                            <td className="text-center">
+                              <a
+                                className="a-blue"
+                                href="!#"
+                                onClick={(e) => e.preventDefault()}>
+                                View Profile
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
                 {!company.length && !searchLoader && (

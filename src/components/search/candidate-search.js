@@ -13,6 +13,8 @@ import DateFnsUtils from '@date-io/date-fns';
 import countryList from 'react-select-country-list';
 import api from '../../api';
 import { toast } from 'react-toastify';
+import LoaderComponent from 'components/loader';
+import { convertDate } from 'helper';
 
 export default function CandidateSearchComponent() {
   const options = useMemo(() => countryList().getData(), []);
@@ -34,11 +36,11 @@ export default function CandidateSearchComponent() {
   const search = () => {
     setSearchLoader(true);
     console.log('searchQuery', searchQuery);
-    api.post('/api/v1/searches/search_user', { query: searchQuery }).then(
+    api.post('/api/v1/searches/search_candidate', { query: searchQuery }).then(
       (response) => {
         setSearchLoader(false);
-        if (response.success) {
-          setCandidate([...response.data.users]);
+        if (response.data.success) {
+          setCandidate([...response.data.candidate]);
         }
       },
       (error) => {
@@ -168,7 +170,7 @@ export default function CandidateSearchComponent() {
                 <option value="3">
                   {searchQuery.availabilityDate
                     ? moment(searchQuery.availabilityDate).format('DD-MM-YYYY')
-                    : 'Date'}
+                    : 'Available from'}
                 </option>
               </select>
             </div>
@@ -212,25 +214,45 @@ export default function CandidateSearchComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    {candidate.map((can, index) => (
-                      <tr key={index}>
-                        <td className="font-weight-bold">12/12/2020</td>
-                        <td className="text-center">Deepak Kumar</td>
-                        <td className="text-center text-black-50">
-                          Manchester, UK
-                        </td>
-                        <td className="text-center">IT Analyst</td>
-                        <td className="text-center">Immediately</td>
-                        <td className="text-center">
-                          <a
-                            className="a-blue"
-                            href="!#"
-                            onClick={(e) => e.preventDefault()}>
-                            View Profile
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
+                    {searchLoader ? (
+                      <LoaderComponent />
+                    ) : (
+                      <>
+                        {candidate.map((can, index) => (
+                          <tr key={index}>
+                            <td className="font-weight-bold">
+                              {convertDate(can.created_at)}
+                            </td>
+                            <td className="text-center">
+                              {can.first_name} {can.last_name}
+                            </td>
+                            <td className="text-center text-black-50">
+                              {can.job_title || '--'}
+                            </td>
+                            <td className="text-center">
+                              {can.location || '--'}
+                            </td>
+                            <td className="text-center">
+                              {can.availability === '1'
+                                ? 'Immediately'
+                                : can.availability === '2'
+                                ? 'Unavailable'
+                                : can.availability === '3'
+                                ? can.available_from
+                                : '--'}
+                            </td>
+                            <td className="text-center">
+                              <a
+                                className="a-blue"
+                                href="!#"
+                                onClick={(e) => e.preventDefault()}>
+                                View Profile
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
                 {!candidate.length && !searchLoader && (
