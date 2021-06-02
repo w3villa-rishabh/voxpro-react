@@ -154,7 +154,7 @@ export default function CandidateSearchComponent() {
                 fullWidth
                 name="availability"
                 onChange={(event) => {
-                  if (event.target.value === '3') {
+                  if (event.target.value === 'available_from') {
                     setIsOpen(true);
                   }
                   setSearchQuery({
@@ -167,9 +167,9 @@ export default function CandidateSearchComponent() {
                 }}
                 value={searchQuery.availability}>
                 <option value="0">Select Availability</option>
-                <option value="1">Immediately</option>
-                <option value="2">Unavailable</option>
-                <option value="3">
+                <option value="Immediately">Immediately</option>
+                <option value="Unavailable">Unavailable</option>
+                <option value="available_from">
                   {searchQuery.availabilityDate
                     ? moment(searchQuery.availabilityDate).format('DD-MM-YYYY')
                     : 'Available from'}
@@ -208,7 +208,7 @@ export default function CandidateSearchComponent() {
                   <thead>
                     <tr>
                       <th className="text-left">Added On</th>
-                      <th className="text-center">Name</th>
+                      <th>Name</th>
                       <th className="text-center">Location</th>
                       <th className="text-center">Job Title</th>
                       <th className="text-center">Availability</th>
@@ -225,7 +225,7 @@ export default function CandidateSearchComponent() {
                             <td className="font-weight-bold">
                               {convertDate(can.created_at)}
                             </td>
-                            <td className="text-center">
+                            <td>
                               {can.first_name} {can.last_name}
                             </td>
                             <td className="text-center text-black-50">
@@ -235,13 +235,9 @@ export default function CandidateSearchComponent() {
                               {can.location || '--'}
                             </td>
                             <td className="text-center">
-                              {can.availability === '1'
-                                ? 'Immediately'
-                                : can.availability === '2'
-                                ? 'Unavailable'
-                                : can.availability === '3'
+                              {can.availability === 'available_from'
                                 ? can.available_from
-                                : '--'}
+                                : can.availability}
                             </td>
                             <td className="text-center">
                               <a

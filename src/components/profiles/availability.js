@@ -7,14 +7,24 @@ import {
 } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import api from '../../api';
+import { getCurrentUser } from '../../helper';
+import { toast } from 'react-toastify';
 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 export default function OnlineAndAvailability() {
+  const [currentUser] = useState(getCurrentUser());
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl1, setAnchorEl1] = useState(null);
-  const [onlineStatus, setOnlineStatus] = useState('Online');
-  const [availability, setAvailability] = useState('Immediate');
+  const [onlineStatus, setOnlineStatus] = useState(
+    currentUser.online === true ? 'Online' : 'Offline'
+  );
+  const [availability, setAvailability] = useState(
+    currentUser.availability === 'available_from'
+      ? currentUser.available_from
+      : currentUser.availability
+  );
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleClick = (event) => {
@@ -25,6 +35,8 @@ export default function OnlineAndAvailability() {
     setAnchorEl(null);
     if (event.target.innerText) {
       setOnlineStatus(event.target.innerText);
+      let online = event.target.innerText === 'Online' ? true : false;
+      updateUserAvailability('', '', online);
     }
   };
 
@@ -37,6 +49,7 @@ export default function OnlineAndAvailability() {
     if (event && event.target.innerText) {
       setAvailability(event.target.innerText);
       // childRef.current.showAlert();
+      updateUserAvailability(event.target.innerText, '', '');
     }
   };
 
@@ -44,8 +57,38 @@ export default function OnlineAndAvailability() {
     setSelectedDate(date);
     if (date) {
       setAvailability(date.toLocaleDateString());
+      updateUserAvailability('', date, '');
     }
     handleClose1();
+  };
+
+  const updateUserAvailability = (event, date, online) => {
+    let obj;
+    if (event || date) {
+      obj = {
+        availability: event ? event : 'available_from',
+        available_from: date
+      };
+    } else {
+      obj = {
+        online: online
+      };
+    }
+    api.put(`/api/v1/users/${currentUser.id}`, obj).then(
+      (response) => {
+        toast.dismiss();
+        if (response.data.success) {
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          toast.success(response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        console.error(error);
+      }
+    );
   };
 
   return (
