@@ -596,10 +596,10 @@ const UploadDocument = (props) => {
                       <KeyboardDatePicker
                         disablePast
                         disableToolbar
-                        variant="inline"
+                        variant="outlined"
                         format="dd/MM/yyyy"
                         // margin="normal"
-                        id="date-picker-inline"
+                        id="date-picker-outlined"
                         value={new Date()}
                         onChange={handleDateChange}
                         autoOk={true}
