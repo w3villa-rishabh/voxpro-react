@@ -22,7 +22,7 @@ export default function OnlineAndAvailability() {
   );
   const [availability, setAvailability] = useState(
     currentUser.availability === 'available_from'
-      ? currentUser.available_from
+      ? currentUser.available_date
       : currentUser.availability
   );
   const [selectedDate, setSelectedDate] = useState(new Date());

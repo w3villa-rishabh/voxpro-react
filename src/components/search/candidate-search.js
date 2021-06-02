@@ -236,7 +236,7 @@ export default function CandidateSearchComponent() {
                             </td>
                             <td className="text-center">
                               {can.availability === 'available_from'
-                                ? can.available_from
+                                ? can.available_date
                                 : can.availability}
                             </td>
                             <td className="text-center">
