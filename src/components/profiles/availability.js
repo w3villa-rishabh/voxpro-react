@@ -76,7 +76,8 @@ export default function OnlineAndAvailability() {
         if (response.data.success) {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           toast.success(response.data.message);
-          let online = response.data.user === true ? 'Online' : 'Offline';
+          let online =
+            response.data.user.online === true ? 'Online' : 'Offline';
           let availability =
             response.data.user.availability === 'available_from'
               ? response.data.user.available_date
