@@ -34,7 +34,6 @@ export default function OnlineAndAvailability() {
   const handleClose = (event) => {
     setAnchorEl(null);
     if (event.target.innerText) {
-      setOnlineStatus(event.target.innerText);
       let online = event.target.innerText === 'Online' ? true : false;
       updateUserAvailability('', '', online);
     }
@@ -47,8 +46,6 @@ export default function OnlineAndAvailability() {
   const handleClose1 = (event) => {
     setAnchorEl1(null);
     if (event && event.target.innerText) {
-      setAvailability(event.target.innerText);
-      // childRef.current.showAlert();
       updateUserAvailability(event.target.innerText, '', '');
     }
   };
@@ -56,7 +53,6 @@ export default function OnlineAndAvailability() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     if (date) {
-      setAvailability(date.toLocaleDateString());
       updateUserAvailability('', date, '');
     }
     handleClose1();
@@ -80,6 +76,13 @@ export default function OnlineAndAvailability() {
         if (response.data.success) {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           toast.success(response.data.message);
+          let online = response.data.user === true ? 'Online' : 'Offline';
+          let availability =
+            response.data.user.availability === 'available_from'
+              ? response.data.user.available_date
+              : response.data.user.availability;
+          setOnlineStatus(online);
+          setAvailability(availability);
         } else {
           toast.error(response.data.message);
         }
