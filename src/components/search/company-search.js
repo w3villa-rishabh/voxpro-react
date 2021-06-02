@@ -10,6 +10,7 @@ import api from '../../api';
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { getCurrentUser, convertDate } from '../../helper';
+import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
 
 export default function CompaniesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
@@ -36,6 +37,8 @@ export default function CompaniesSearchComponent() {
         setSearchLoader(false);
         if (response.data.success) {
           setCompany([...response.data.company]);
+        } else {
+          setCompany([]);
         }
       },
       (error) => {
@@ -180,12 +183,15 @@ export default function CompaniesSearchComponent() {
                                 className="avatar-icon-wrapper avatar-icon-sm"
                                 title="Lili Pemberton">
                                 <div className="avatar-icon">
-                                  <img alt="..." src={com.logo} />
+                                  <img
+                                    alt="..."
+                                    src={com.logo || projectLogo}
+                                  />
                                 </div>
                               </div>
                             </td>
                             <td className="text-center text-black-50">
-                              {com.location || '--'}
+                              {com.city} {','} {com.country || '--'}
                             </td>
                             <td className="text-center">
                               {com.industry || '--'}

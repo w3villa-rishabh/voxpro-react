@@ -41,6 +41,8 @@ export default function CandidateSearchComponent() {
         setSearchLoader(false);
         if (response.data.success) {
           setCandidate([...response.data.candidate]);
+        } else {
+          setCandidate([]);
         }
       },
       (error) => {

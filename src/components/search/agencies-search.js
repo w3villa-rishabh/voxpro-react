@@ -10,6 +10,7 @@ import api from '../../api';
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { getCurrentUser, convertDate } from 'helper';
+import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
 
 export default function AgenciesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
@@ -35,6 +36,8 @@ export default function AgenciesSearchComponent() {
         setSearchLoader(false);
         if (response.data.success) {
           setAgency([...response.data.agency]);
+        } else {
+          setAgency([]);
         }
       },
       (error) => {
@@ -179,12 +182,12 @@ export default function AgenciesSearchComponent() {
                                 className="avatar-icon-wrapper avatar-icon-sm"
                                 title="Lili Pemberton">
                                 <div className="avatar-icon">
-                                  <img alt="..." src={ag.logo} />
+                                  <img alt="..." src={ag.logo || projectLogo} />
                                 </div>
                               </div>
                             </td>
                             <td className="text-center text-black-50">
-                              {ag.location || '--'}
+                              {ag.city} {','} {ag.country || '--'}
                             </td>
                             <td className="text-center">
                               {ag.industry || '--'}
