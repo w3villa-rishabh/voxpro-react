@@ -1,60 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import countryList from 'react-select-country-list';
+import Select from 'react-select';
+import { ClipLoader } from 'react-spinners';
+import api from '../../api';
+import { toast } from 'react-toastify';
 
-import clogo from '../../assets/images/stock-photos/c-logo.webp';
 import clogo1 from '../../assets/images/stock-photos/company.png';
 import { getCurrentUser } from 'helper';
 
 export default function AgenciesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
+  const options = useMemo(() => countryList().getData(), []);
+  const [searchLoader, setSearchLoader] = useState(false);
+  const [agency, setAgency] = useState([]);
+  const [searchQuery, setSearchQuery] = useState({
+    name: '',
+    location: '',
+    jobTitle: '',
+    availability: '',
+    availabilityDate: ''
+  });
 
-  // const [value, setValue] = useState('');
-  // const options = useMemo(() => countryList().getData(), []);
+  const handlerSearch = (event) => {
+    setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
+  };
 
-  // const changeHandler = (value) => {
-  //   setValue(value);
-  // };
-  // const [value1, setValue1] = useState('');
-  // const [value2, setValue2] = useState('');
-
-  // const changeHandler1 = (value1) => {
-  //   setValue1(value1);
-  // };
-  // const changeHandler2 = (value2) => {
-  //   setValue2(value2);
-  // };
-
-  // const [value_range1, setValueRange1] = useState([10, 40]);
-  // const [value_range2, setValueRange2] = useState([20, 37]);
-  // const [value_range3, setValueRange3] = useState([10, 77]);
-  // const [value_range4, setValueRange4] = useState([20, 57]);
-
-  // const handleChange1 = (event, newValue) => {
-  //   setValueRange1(newValue);
-  // };
-
-  // const handleChange2 = (event, newValue) => {
-  //   setValueRange2(newValue);
-  // };
-
-  // const handleChange3 = (event, newValue) => {
-  //   setValueRange3(newValue);
-  // };
-
-  // const handleChange4 = (event, newValue) => {
-  //   setValueRange4(newValue);
-  // };
+  const search = () => {
+    setSearchLoader(true);
+    console.log('searchQuery', searchQuery);
+    api.post('/api/v1/searches/search_agency', { query: searchQuery }).then(
+      (response) => {
+        setSearchLoader(false);
+        if (response.success) {
+          setAgency([...response.data.agency]);
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        setSearchLoader(false);
+        console.error(error);
+      }
+    );
+  };
 
   return (
     <>
       <div className="page-title">
         <WorkIcon />
         <div className="title pt-3">
-          <b className="heading">Search Agencies</b>
+          <b className="heading">Search Companies</b>
         </div>
       </div>
 
@@ -62,82 +61,79 @@ export default function AgenciesSearchComponent() {
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
             <b>Name</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by name"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by name"
+              className="w-100"
+              name="name"
+              onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Industry</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by industry"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by industry"
+              className="w-100"
+              name="industry"
+              onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by location"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
+            <Select
+              options={options}
+              name="location"
+              onChange={(event) => {
+                setSearchQuery({
+                  ...searchQuery,
+                  location: event.label
+                });
+              }}
+              placeholder="Location"
+            />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Jobs</b>
-            <div className="mb-3 mt-2">
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Search by number of jobs active"
-                className="w-100"
-                InputProps={{
-                  style: {
-                    height: '37px'
-                  }
-                }}
-              />
-            </div>
-            {/* <b>Price Range</b>
-            <div className="range-meter">
-              <Slider
-                value={value_range4}
-                onChange={handleChange4}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                getAriaValueText={valuetext}
-              />
-            </div> */}
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by number of jobs active"
+              className="w-100"
+              name="name"
+              onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
           </Grid>
         </Grid>
-        <div className="divider opacity-8 my-1 mx-2" />
         <div className="card-footer float-right">
-          <Button className="btn-primary">Search now</Button>
+          <Button
+            disabled={searchLoader}
+            className="btn-neutral-info hover-scale-sm"
+            onClick={search}>
+            <span className="px-2">Search</span>
+            <ClipLoader
+              color={'var(--info)'}
+              loading={searchLoader}
+              size={20}
+            />
+          </Button>
         </div>
       </Card>
 
@@ -165,108 +161,41 @@ export default function AgenciesSearchComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="font-weight-bold">12/12/2020</td>
-                      <td>Helpful Headhunt</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={clogo1} />
+                    {agency.map((ag, index) => (
+                      <tr key={index}>
+                        <td className="font-weight-bold">12/12/2020</td>
+                        <td>Helpful Headhunt</td>
+                        <td className="text-center">
+                          <div
+                            className="avatar-icon-wrapper avatar-icon-sm"
+                            title="Lili Pemberton">
+                            <div className="avatar-icon">
+                              <img alt="..." src={clogo1} />
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="text-center text-black-50">
-                        Manchester, UK
-                      </td>
-                      <td className="text-center">IT Industry</td>
-                      <td className="text-center">20</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">10/12/2020</td>
-                      <td>Accurafind</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={clogo} />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="text-center text-black-50">London, UK</td>
-                      <td className="text-center">Biotechnology</td>
-                      <td className="text-center">15</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">05/12/2020</td>
-                      <td>Right Recruiting</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={clogo1} />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="text-center text-black-50">
-                        Billingham, UK
-                      </td>
-                      <td className="text-center">E-commerce</td>
-                      <td className="text-center">12</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">21/11/2020</td>
-                      <td>Career Co.</td>
-                      <td className="text-center">
-                        <div
-                          className="avatar-icon-wrapper avatar-icon-sm"
-                          title="Lili Pemberton">
-                          <div className="avatar-icon">
-                            <img alt="..." src={clogo} />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="text-center text-black-50">London, UK</td>
-                      <td className="text-center">Media and Entertainment</td>
-                      <td className="text-center">10</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
+                        </td>
+                        <td className="text-center text-black-50">
+                          Manchester, UK
+                        </td>
+                        <td className="text-center">IT Industry</td>
+                        <td className="text-center">20</td>
+                        <td className="text-center">
+                          <a
+                            className="a-blue"
+                            href="!#"
+                            onClick={(e) => e.preventDefault()}>
+                            View Profile
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
+                {!agency.length && !searchLoader && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">

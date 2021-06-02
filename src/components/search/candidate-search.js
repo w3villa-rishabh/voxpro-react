@@ -11,6 +11,8 @@ import {
 import moment from 'moment';
 import DateFnsUtils from '@date-io/date-fns';
 import countryList from 'react-select-country-list';
+import api from '../../api';
+import { toast } from 'react-toastify';
 
 export default function CandidateSearchComponent() {
   const options = useMemo(() => countryList().getData(), []);
@@ -32,10 +34,19 @@ export default function CandidateSearchComponent() {
   const search = () => {
     setSearchLoader(true);
     console.log('searchQuery', searchQuery);
-    setTimeout(() => {
-      setCandidate([]);
-      setSearchLoader(false);
-    }, 3000);
+    api.post('/api/v1/searches/search_user', { query: searchQuery }).then(
+      (response) => {
+        setSearchLoader(false);
+        if (response.success) {
+          setCandidate([...response.data.users]);
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        setSearchLoader(false);
+        console.error(error);
+      }
+    );
   };
 
   const handleDateChange = (date) => {
@@ -201,8 +212,8 @@ export default function CandidateSearchComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    {candidate.map((can) => (
-                      <tr>
+                    {candidate.map((can, index) => (
+                      <tr key={index}>
                         <td className="font-weight-bold">12/12/2020</td>
                         <td className="text-center">Deepak Kumar</td>
                         <td className="text-center text-black-50">
@@ -220,13 +231,13 @@ export default function CandidateSearchComponent() {
                         </td>
                       </tr>
                     ))}
-                    {!candidate.length && !searchLoader && (
-                      <div className="font-size-xxl m-5 text-center">
-                        No data found
-                      </div>
-                    )}
                   </tbody>
                 </Table>
+                {!candidate.length && !searchLoader && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">
