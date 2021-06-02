@@ -15,6 +15,8 @@ import countryList from 'react-select-country-list';
 export default function CandidateSearchComponent() {
   const options = useMemo(() => countryList().getData(), []);
   const [searchLoader, setSearchLoader] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [candidate, setCandidate] = useState([]);
   const [searchQuery, setSearchQuery] = useState({
     name: '',
     location: '',
@@ -22,7 +24,6 @@ export default function CandidateSearchComponent() {
     availability: '',
     availabilityDate: ''
   });
-  const [isOpen, setIsOpen] = useState(false);
 
   const handlerSearch = (event) => {
     setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
@@ -32,6 +33,7 @@ export default function CandidateSearchComponent() {
     setSearchLoader(true);
     console.log('searchQuery', searchQuery);
     setTimeout(() => {
+      setCandidate([]);
       setSearchLoader(false);
     }, 3000);
   };
@@ -199,72 +201,30 @@ export default function CandidateSearchComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="font-weight-bold">12/12/2020</td>
-                      <td className="text-center">Deepak Kumar</td>
-                      <td className="text-center text-black-50">
-                        Manchester, UK
-                      </td>
-                      <td className="text-center">IT Analyst</td>
-                      <td className="text-center">Immediately</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">10/12/2020</td>
-                      <td className="text-center">Akshay Sharma</td>
-                      <td className="text-center text-black-50">London, UK</td>
-                      <td className="text-center">Software Developer</td>
-                      <td className="text-center">
-                        Availabile from 20/01/2021
-                      </td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">05/12/2020</td>
-                      <td className="text-center">Rohit Wasan</td>
-                      <td className="text-center text-black-50">
-                        Billingham, UK
-                      </td>
-                      <td className="text-center">Business Developer</td>
-                      <td className="text-center">Unavailable</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="font-weight-bold">21/11/2020</td>
-                      <td className="text-center">Rishabh Pandey</td>
-                      <td className="text-center text-black-50">London, UK</td>
-                      <td className="text-center">Business Analyst</td>
-                      <td className="text-center">Immediately</td>
-                      <td className="text-center">
-                        <a
-                          className="a-blue"
-                          href="!#"
-                          onClick={(e) => e.preventDefault()}>
-                          View Profile
-                        </a>
-                      </td>
-                    </tr>
+                    {candidate.map((can) => (
+                      <tr>
+                        <td className="font-weight-bold">12/12/2020</td>
+                        <td className="text-center">Deepak Kumar</td>
+                        <td className="text-center text-black-50">
+                          Manchester, UK
+                        </td>
+                        <td className="text-center">IT Analyst</td>
+                        <td className="text-center">Immediately</td>
+                        <td className="text-center">
+                          <a
+                            className="a-blue"
+                            href="!#"
+                            onClick={(e) => e.preventDefault()}>
+                            View Profile
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                    {!candidate.length && !searchLoader && (
+                      <div className="font-size-xxl m-5 text-center">
+                        No data found
+                      </div>
+                    )}
                   </tbody>
                 </Table>
               </PerfectScrollbar>

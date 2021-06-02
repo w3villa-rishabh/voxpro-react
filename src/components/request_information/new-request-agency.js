@@ -195,13 +195,18 @@ export default function AddNewRequestComponent() {
       request_type: requestFilter.value,
       reason: requestObj.reason,
       due_date: selectedDate,
-      user_id: requestObj.id,
       job_id: requestObj.jobId,
       job_title: requestObj.jobTitle,
       requested_categories_attributes: documents.map((a) => ({
         category_id: a.value
       }))
     };
+
+    if (requestFilter.value === 'candidate') {
+      obj.user_id = requestObj.id;
+    } else {
+      obj.requested_company_id = requestObj.id;
+    }
 
     api
       .post(`/api/v1/request_for_informations`, {
