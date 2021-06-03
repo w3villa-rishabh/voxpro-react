@@ -1,20 +1,19 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import countryList from 'react-select-country-list';
 import { ClipLoader } from 'react-spinners';
 import api from '../../api';
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { getCurrentUser, convertDate } from 'helper';
 import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
+import PlaceSearchComponent from './search-place';
 
 export default function AgenciesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
-  const options = useMemo(() => countryList().getData(), []);
   const [searchLoader, setSearchLoader] = useState(false);
   const [agency, setAgency] = useState([]);
   const [searchQuery, setSearchQuery] = useState({
@@ -93,23 +92,7 @@ export default function AgenciesSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <select
-              className="MuiTextField-root MuiFormControl-fullWidth"
-              variant="outlined"
-              fullWidth
-              name="location"
-              onChange={(event) => {
-                setSearchQuery({
-                  ...searchQuery,
-                  location: event.target.value
-                });
-              }}
-              value={searchQuery.location}>
-              <option value="0">Select location</option>
-              {options.map((op) => (
-                <option value={op.label}>{op.label}</option>
-              ))}
-            </select>
+            <PlaceSearchComponent />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Jobs</b>

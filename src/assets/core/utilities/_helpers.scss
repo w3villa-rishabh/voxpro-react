@@ -782,6 +782,23 @@ tbody.scroll {
   z-index: 9999;
 }
 
+.pac-container:after {
+  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+  background-image: none !important;
+  height: 0px;
+}
+
+.search-box {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0 9px;
+
+  .MuiOutlinedInput-inputMarginDense {
+    padding-top: 8.5px !important;
+    padding-bottom: 8.5px !important;
+  }
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {

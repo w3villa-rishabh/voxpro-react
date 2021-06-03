@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
@@ -10,14 +11,13 @@ import {
 } from '@material-ui/pickers';
 import moment from 'moment';
 import DateFnsUtils from '@date-io/date-fns';
-import countryList from 'react-select-country-list';
 import api from '../../api';
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { convertDate } from 'helper';
+import PlaceSearchComponent from './search-place';
 
 export default function CandidateSearchComponent() {
-  const options = useMemo(() => countryList().getData(), []);
   const [searchLoader, setSearchLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [candidate, setCandidate] = useState([]);
@@ -108,23 +108,7 @@ export default function CandidateSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <select
-              className="MuiTextField-root MuiFormControl-fullWidth"
-              variant="outlined"
-              fullWidth
-              name="location"
-              onChange={(event) => {
-                setSearchQuery({
-                  ...searchQuery,
-                  location: event.target.value
-                });
-              }}
-              value={searchQuery.location}>
-              <option value="0">Select location</option>
-              {options.map((op) => (
-                <option value={op.label}>{op.label}</option>
-              ))}
-            </select>
+            <PlaceSearchComponent />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Availability</b>
