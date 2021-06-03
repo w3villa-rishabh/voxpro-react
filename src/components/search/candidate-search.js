@@ -16,8 +16,9 @@ import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { convertDate } from 'helper';
 import PlaceSearchComponent from './search-place';
+import { connect } from 'react-redux';
 
-export default function CandidateSearchComponent() {
+const CandidateSearchComponent = (props) => {
   const [searchLoader, setSearchLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [candidate, setCandidate] = useState([]);
@@ -35,7 +36,7 @@ export default function CandidateSearchComponent() {
 
   const search = () => {
     setSearchLoader(true);
-    console.log('searchQuery', searchQuery);
+    console.log('searchQuery', searchQuery, props.placesSearch);
     api.post('/api/v1/searches/search_candidate', { query: searchQuery }).then(
       (response) => {
         setSearchLoader(false);
@@ -72,7 +73,7 @@ export default function CandidateSearchComponent() {
         </div>
       </div>
 
-      <Card className="px-3 pt-3">
+      <Card className="px-3 pt-3 overflow-visible h-180px">
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
             <b>Name</b>
@@ -257,4 +258,10 @@ export default function CandidateSearchComponent() {
       </Grid>
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  placesSearch: state.ThemeOptions.placesSearch
+});
+
+export default connect(mapStateToProps)(CandidateSearchComponent);
