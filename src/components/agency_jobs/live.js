@@ -98,7 +98,7 @@ export default function LiveComponent() {
                   className="text-success mr-2"
                 />
               </small>
-              <div>4867</div>
+              <div>30</div>
             </div>
           </Card>
         </Grid>

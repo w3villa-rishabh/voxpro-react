@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Button,
@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
 import { getCurrentUser } from 'helper';
+import api from '../../api';
+import LoaderComponent from 'components/loader';
 
 const CandidateActionsApplied = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,6 +23,7 @@ const CandidateActionsApplied = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
       <div className="d-flex align-items-center justify-content-center flex-wrap">
@@ -68,6 +71,7 @@ const CandidateActionsApplied = () => {
     </>
   );
 };
+
 
 const CandidateActionsCandider = () => {
   const [anchorEl1, setAnchorEl1] = useState(null);
@@ -134,6 +138,24 @@ export default function TableComponent() {
   const location = useLocation();
   const [currentUser] = useState(getCurrentUser());
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    getDocuments();
+  }, []);
+
+  function getDocuments() {
+    setIsLoading(false);
+    api.get(`/api/v1/jobs`).then((response) => {
+      setIsLoading(false);
+      if (response.data.success) {
+        setRequests([...response.data.jobs]);
+      }
+    });
+  }
+
+
   return (
     <>
       <div className="pt-3">
@@ -167,178 +189,59 @@ export default function TableComponent() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="font-weight-bold text-center">#0001</td>
-                    <td>Headhunters</td>
-                    <td>Business Analyst</td>
-                    <td className="text-center">£4000</td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Interim</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td>
-                      <CandidateActionsApplied />
-                    </td>
-                    <td>
-                      <CandidateActionsCandider />
-                    </td>
-                    {location.pathname === '/agency-jobs-history' && (
-                      <td className="text-center">
-                        <div className="badge badge-neutral-success text-success">
-                          Placed
-                        </div>
-                      </td>
-                    )}
-                    {location.pathname === '/agency-jobs-live' && (
-                      <th>
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-sm progress-bar-success"
-                          value={100}
-                        />
-                        <div className="font-size-sm text-black-50 pt-1">
-                          Placement
-                        </div>
-                      </th>
-                    )}
-                    <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white">
-                        View
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="font-weight-bold text-center">#0002</td>
-                    <td>Software Developer</td>
-                    <td>Career Appear</td>
-                    <td className="text-center">£2000</td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Contract</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td>
-                      <CandidateActionsApplied />
-                    </td>
-                    <td>
-                      <CandidateActionsCandider />
-                    </td>
-                    {location.pathname === '/agency-jobs-history' && (
-                      <td className="text-center">
-                        <div className="badge badge-neutral-info text-info">
-                          Hold
-                        </div>
-                      </td>
-                    )}
-                    {location.pathname === '/agency-jobs-live' && (
-                      <th>
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-sm progress-bar-info"
-                          value={70}
-                        />
-                        <div className="font-size-sm text-black-50 pt-1">
-                          Offer
-                        </div>
-                      </th>
-                    )}
-                    <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white">
-                        View
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="font-weight-bold text-center">#0003</td>
-                    <td>Headhunters</td>
-                    <td>Business Analyst</td>
-                    <td className="text-center">£4000</td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Permanent</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td>
-                      <CandidateActionsApplied />
-                    </td>
-                    <td>
-                      <CandidateActionsCandider />
-                    </td>
-                    {location.pathname === '/agency-jobs-history' && (
-                      <td className="text-center">
-                        <div className="badge badge-neutral-danger text-danger">
-                          Unsuccessful
-                        </div>
-                      </td>
-                    )}
-                    {location.pathname === '/agency-jobs-live' && (
-                      <th>
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-sm progress-bar-warning"
-                          value={50}
-                        />
-                        <div className="font-size-sm text-black-50 pt-1">
-                          Interview
-                        </div>
-                      </th>
-                    )}
-                    <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white">
-                        View
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="font-weight-bold text-center">#0004</td>
-                    <td>Software Developer</td>
-                    <td>Career Appear</td>
-                    <td className="text-center">£2000</td>
-                    <td className="text-center">London, UK</td>
-                    <td className="text-center">Interim</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td className="text-center">14 Feb 2020</td>
-                    <td>
-                      <CandidateActionsApplied />
-                    </td>
-                    <td>
-                      <CandidateActionsCandider />
-                    </td>
-                    {location.pathname === '/agency-jobs-history' && (
-                      <td className="text-center">
-                        <div className="badge badge-neutral-info text-info">
-                          Hold
-                        </div>
-                      </td>
-                    )}
-                    {location.pathname === '/agency-jobs-live' && (
-                      <th>
-                        <LinearProgress
-                          variant="determinate"
-                          className="progress-sm progress-bar-warning"
-                          value={30}
-                        />
-                        <div className="font-size-sm text-black-50 pt-1">
-                          Unsuccessful
-                        </div>
-                      </th>
-                    )}
-                    <td className="text-center">
-                      <Button
-                        size="small"
-                        className="px-4 bg-primary text-white">
-                        View
-                      </Button>
-                    </td>
-                  </tr>
+                  {isLoading ? (
+                    <LoaderComponent />
+                  ) : (
+                    <>
+                      {requests.map((request, index) => (
+                        <tr>
+                          <td className="font-weight-bold text-center">
+                            {request.job_name}
+                          </td>
+                          <td>Headhunters</td>
+                          <td>{request.job_title}</td>
+                          <td className="text-center">{request.salary_high}</td>
+                          <td className="text-center">{request.location}</td>
+                          <td className="text-center">{request.job_type}</td>
+                          <td className="text-center">{request.start_date}</td>
+                          <td className="text-center">{request.end_date}</td>
+                          <td className="text-center">14 Feb 2020</td>
+                          <td>
+                            <CandidateActionsApplied />
+                          </td>
+                          <td>
+                            <CandidateActionsCandider />
+                          </td>
+                          {location.pathname === '/agency-jobs-history' && (
+                            <td className="text-center">
+                              <div className="badge badge-neutral-success text-success">
+                                Placed
+                              </div>
+                            </td>
+                          )}
+                          {location.pathname === '/agency-jobs-live' && (
+                            <th>
+                              <LinearProgress
+                                variant="determinate"
+                                className="progress-sm progress-bar-success"
+                                value={100}
+                              />
+                              <div className="font-size-sm text-black-50 pt-1">
+                                Placement
+                              </div>
+                            </th>
+                          )}
+                          <td className="text-center">
+                            <Button
+                              size="small"
+                              className="px-4 bg-primary text-white">
+                              View
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </>
+                  )}
                 </tbody>
               </Table>
             </div>
