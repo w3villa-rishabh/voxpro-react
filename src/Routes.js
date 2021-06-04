@@ -113,6 +113,9 @@ const JobSearchComponent = lazy(() =>
   import('./components/candidate_jobs/job_search')
 );
 
+//ViewJob
+const ViewJob = lazy(() => import('./components/candidate_jobs/job_view'));
+
 //SearchAgenciesComponent
 const SearchAgenciesComponent = lazy(() =>
   import('./components/search/agencies-search')
@@ -335,6 +338,7 @@ const Routes = () => {
                 '/request-info',
                 '/candidate-placements',
                 '/applied-jobs',
+                '/view-job',
                 '/jobs-live',
                 '/jobs-history',
                 '/placements',
@@ -434,6 +438,8 @@ const Routes = () => {
                   <Route path="/save-jobs" component={SaveJobComponent} />
                   <Route path="/search-job" component={JobSearchComponent} />
                   <Route path="/jobs-live" component={AgencyJobsLive} />
+                  <Route path="/view-job" component={ViewJob} />
+
                   <Route path="/jobs-history" component={AgencyJobsHistory} />
                   <Route
                     path="/search-agencies"
