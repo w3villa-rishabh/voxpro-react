@@ -1,0 +1,196 @@
+.cards-filter {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards__item {
+  display: flex;
+  padding: 2px 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 3px;
+}
+
+.card__title {
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+
+}
+
+/* Hide by default */
+
+.switch .slide-button,
+.toggle p span {
+  display: none;
+}
+
+/* Toggle Switches */
+
+/* We can't test for a specific feature,
+ * so we only target browsers with support for media queries.
+ */
+@media only screen {
+
+  /* Checkbox
+	 */
+  .toggle {
+    position: relative;
+    padding: 0;
+    margin-left: 100px;
+  }
+
+  /* Position the label over all the elements, except the slide-button
+	 * Clicking anywhere on the label will change the switch-state
+	 */
+  .toggle label {
+    position: relative;
+    z-index: 3;
+
+    display: block;
+    width: 100%;
+  }
+
+  /* Don't hide the input from screen-readers and keyboard access
+	 */
+  .toggle input {
+    position: absolute;
+    opacity: 0;
+    z-index: 5;
+  }
+
+  .toggle p {
+    position: absolute;
+    left: -100px;
+
+    width: 100%;
+    margin: 0;
+    padding-right: 100px;
+
+    text-align: left;
+  }
+
+  .toggle p span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+
+    display: block;
+    width: 50%;
+    margin-left: 100px;
+
+    text-align: center;
+  }
+
+  .toggle p span:last-child {
+    left: 50%;
+  }
+
+  .toggle .slide-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 4;
+
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+  }
+
+  /* Shared */
+  .toggle,
+  .switch {
+    display: block;
+    height: 30px;
+  }
+
+  .switch *,
+  .toggle * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .switch .slide-button,
+  .toggle .slide-button {
+    display: block;
+
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+  }
+
+  .toggle label,
+  .toggle p,
+  .switch label {
+    line-height: 30px;
+    vertical-align: middle;
+  }
+
+  .toggle input:checked~.slide-button {
+    right: 50%;
+  }
+
+  .toggle input:checked~.filters {
+    display: block;
+  }
+
+  .filters {
+    display: none;
+  }
+
+  /* Outline the toggles when the inputs are focused */
+  .toggle input:focus~.slide-button,
+  .switch input:focus+label {
+    outline: 1px dotted #888;
+  }
+
+  /* Standalone Themes */
+
+
+  /* Candy Theme
+	 * Based on the "Sort Switches / Toggles (PSD)" by Ormal Clarck
+	 * http://www.premiumpixels.com/freebies/sort-switches-toggles-psd/
+	 */
+
+  .candy {
+    background-color: whitesmoke;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid #4191ff;
+  }
+
+  .candy input:checked+label {
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .candy .slide-button {
+    background-color: #4191ff;
+    border-radius: 20px;
+  }
+
+  .candy span {
+    color: #253053;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .candy.blue .slide-button {
+    background-color: #38a3d4;
+  }
+
+  .candy.yellow .slide-button {
+    background-color: #f5e560;
+  }
+}

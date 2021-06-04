@@ -946,7 +946,7 @@ const SidebarUserbox = (props) => {
         </div>
         <div className="py-1">
           <Tooltip title="Github">
-            <Button className="btn-github text-github btn-pill bg-white d-30 p-0">
+            <Button className="m-1 btn-github text-github btn-pill bg-white d-30 p-0">
               <span className="btn-wrapper--icon">
                 <FontAwesomeIcon
                   icon={['fab', 'github']}
@@ -956,7 +956,7 @@ const SidebarUserbox = (props) => {
             </Button>
           </Tooltip>
           <Tooltip title="Instagram" arrow>
-            <Button className="btn-instagram text-instagram btn-pill bg-white d-30 p-0 mx-2">
+            <Button className="m-1 btn-instagram text-instagram btn-pill bg-white d-30 p-0 mx-2">
               <span className="btn-wrapper--icon">
                 <FontAwesomeIcon
                   icon={['fab', 'instagram']}
@@ -966,7 +966,7 @@ const SidebarUserbox = (props) => {
             </Button>
           </Tooltip>
           <Tooltip title="Google" arrow>
-            <Button className="btn-google text-google btn-pill bg-white d-30 p-0">
+            <Button className="m-1 btn-google text-google btn-pill bg-white d-30 p-0">
               <span className="btn-wrapper--icon">
                 <FontAwesomeIcon
                   icon={['fab', 'google']}
