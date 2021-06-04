@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 
 import { Grid, Card, Button, List, ListItem } from '@material-ui/core';
 
-import AddsComponents from 'components/add_component';
-import WorkIcon from '@material-ui/icons/Work';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCurrentUser } from 'helper';
 import { useHistory } from 'react-router';
+import AddsComponents from 'components/add_component';
+import SearchComponent from './search-component';
 
 export default function JobSearchComponent() {
   const history = useHistory();
@@ -15,12 +14,7 @@ export default function JobSearchComponent() {
 
   return (
     <>
-      <div className="page-title" style={{ height: 'unset' }}>
-        <WorkIcon />
-        <div className="title">
-          <h5 className="heading pt-3">View Job</h5>
-        </div>
-      </div>
+      <SearchComponent />
 
       <div className="mt-3 py-2">
         <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
@@ -92,7 +86,7 @@ export default function JobSearchComponent() {
                     </Grid>
                   </Grid>
                 </div>
-                {/* <div className="mt-2">
+                <div className="mt-2">
                   <p>To all Software Developers out there!</p>
                   <p>
                     A renowned International Retailer is currently looking for a
@@ -153,7 +147,7 @@ export default function JobSearchComponent() {
                     applying for a job. For information on how to stay safe in
                     your job search, visit SAFERjobs.
                   </span>
-                </div> */}
+                </div>
               </Grid>
               <Grid item xs={12} sm={3} className="px-3 py-2">
                 <Button
@@ -207,7 +201,7 @@ export default function JobSearchComponent() {
             className="card-box"
             style={{ 'border-top': '5px solid green' }}>
             <h4 className="p-3 border-bottom">Recommended courses</h4>
-            {/* <List className="list-group-flush mb-4 mb-lg-0 text-left">
+            <List className="list-group-flush mb-4 mb-lg-0 text-left">
               <ListItem
                 component="a"
                 button
@@ -287,13 +281,13 @@ export default function JobSearchComponent() {
                   </div>
                 </div>
               </ListItem>
-            </List> */}
+            </List>
           </Card>
           <Card
             className="card-box mt-3"
             style={{ 'border-top': '5px solid grey' }}>
             <h4 className="p-3 border-bottom">Similar jobs</h4>
-            {/* <List className="list-group-flush mb-4 mb-lg-0 text-left">
+            <List className="list-group-flush mb-4 mb-lg-0 text-left">
               <ListItem
                 component="a"
                 button
@@ -373,7 +367,7 @@ export default function JobSearchComponent() {
                   </div>
                 </div>
               </ListItem>
-            </List> */}
+            </List>
           </Card>
         </Grid>
       </Grid>
