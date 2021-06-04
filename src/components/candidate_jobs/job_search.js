@@ -234,7 +234,15 @@ export default function JobSearchComponent() {
             <h6 className="font-size-xxl">11,965 Developer Jobs</h6>
             <div className="d-flex">
               <b>Applied filters</b>
-              <a>clear all</a>
+              <a
+                href="#/"
+                className="a-blue ml-2 font-weight-bold"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setFilterApplied([]);
+                }}>
+                clear all
+              </a>
             </div>
           </div>
         </Grid>
@@ -282,6 +290,10 @@ export default function JobSearchComponent() {
                     <FontAwesomeIcon
                       className="ml-2 pt-1 a-blue"
                       icon={['fas', 'times']}
+                      onClick={() => {
+                        filterApplied.splice(index, 1);
+                        setFilterApplied([...filterApplied]);
+                      }}
                     />
                   </div>
                 </li>
