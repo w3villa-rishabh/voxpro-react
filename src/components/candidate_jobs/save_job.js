@@ -39,7 +39,7 @@ export default function SaveJobComponent() {
   }, []);
 
   function getSavedJobs() {
-    setIsLoading(false);
+    setIsLoading(true);
     api.get(`/api/v1/jobs/candidate_saved_jobs`).then((response) => {
       setIsLoading(false);
       if (response.data.success) {
@@ -94,7 +94,7 @@ export default function SaveJobComponent() {
                     ) : (
                       <>
                         {savedJob.map((job, index) => (
-                          <tr>
+                          <tr key={index}>
                             <td className="text-left d-flex border-0">
                               <div>
                                 <FontAwesomeIcon
@@ -141,6 +141,11 @@ export default function SaveJobComponent() {
                     )}
                   </tbody>
                 </Table>
+                {!savedJob.length && (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
+                  </div>
+                )}
               </PerfectScrollbar>
             </div>
             <div className="card-footer py-3 text-center">

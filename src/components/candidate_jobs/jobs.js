@@ -26,29 +26,42 @@ export default function JobsComponent() {
 
   function getJobs() {
     setIsLoading(true);
-    api.get(`/api/v1/jobs/candidate_related_jobs`).then((response) => {
-      setIsLoading(false);
-      if (response.data.success) {
-        setRecombedJob([...response.data.jobs]);
-      }
-    });
-  }
-
-  const saveJob = (e, request) => {
-    e.preventDefault();
-    console.log('doc', request);
-    api.post(`/api/v1/jobs/${request.id}/save_job`).then(
+    api.get(`/api/v1/jobs/candidate_related_jobs`).then(
       (response) => {
+        setIsLoading(false);
         if (response.data.success) {
-          toast.success('Job successfully Saved..');
-        } else {
-          toast.error('error in saving job..');
+          setRecombedJob([...response.data.jobs]);
         }
       },
-      (error) => {
-        console.error(error);
+      () => {
+        setIsLoading(false);
       }
     );
+  }
+
+  const saveJob = (e, request, index) => {
+    e.preventDefault();
+    console.log('doc', request);
+    api
+      .post(
+        `/api/v1/jobs/${
+          request.id
+        }/save_job?status=${(request.favorite = !request.favorite)}`
+      )
+      .then(
+        (response) => {
+          if (response.data.success) {
+            toast.success('Job successfully Saved..');
+            recombedJob[index] = response.data.job;
+            setRecombedJob([...recombedJob]);
+          } else {
+            toast.error('error in saving job..');
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   };
 
   const viewJob = (e) => {
@@ -102,13 +115,13 @@ export default function JobsComponent() {
                     </div>
                     <Button
                       className="btn-neutral-info hover-scale-sm mt-2"
-                      onClick={(e) => saveJob(e, request)}>
+                      onClick={(e) => saveJob(e, request, index)}>
                       <span className="px-2">
                         <FontAwesomeIcon
                           icon={
                             request.favorite
-                              ? ['far', 'heart']
-                              : ['fas', 'heart']
+                              ? ['fas', 'heart']
+                              : ['far', 'heart']
                           }
                         />
                       </span>
