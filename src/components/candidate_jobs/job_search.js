@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Grid, Card, Button } from '@material-ui/core';
-import Select from 'react-select';
+import { connect } from 'react-redux';
+import { setSearchResult } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
 
 import logo from '../../assets/images/stock-photos/c-logo.webp';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import countryList from 'react-select-country-list';
 import { getCurrentUser } from 'helper';
 import { useHistory } from 'react-router';
 import FormControl from '@material-ui/core/FormControl';
@@ -44,7 +44,7 @@ const distanceObj = [
   }
 ];
 
-const jobposted = [
+const jobPosted = [
   {
     value: 'anytime',
     label: 'Anytime'
@@ -60,6 +60,25 @@ const jobposted = [
   {
     value: 'last_2-weeks',
     label: 'Last 2 Weeks'
+  }
+];
+
+const dolorPrice = [
+  {
+    value: '1',
+    label: '10,000'
+  },
+  {
+    value: '2',
+    label: '12,000'
+  },
+  {
+    value: '3',
+    label: '14,000'
+  },
+  {
+    value: '4',
+    label: '16,000'
   }
 ];
 
@@ -84,20 +103,33 @@ const SmartText = ({ text, length = 500 }) => {
   );
 };
 
-export default function JobSearchComponent() {
+const JobSearchComponent = (props) => {
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
-  const options = useMemo(() => countryList().getData(), []);
 
-  const [searchJobs, setSearchJobs] = useState([]);
+  // const [searchJobs, setSearchJobs] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
   const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false
+    permanent: true,
+    temporary: false,
+    contract: false,
+    fullTime: false,
+    partTime: false,
+    agencyPost: false,
+    employerPost: false,
+    relatedJob: false
   });
 
-  const { gilad, jason, antoine } = state;
+  const {
+    permanent,
+    temporary,
+    contract,
+    fullTime,
+    partTime,
+    agencyPost,
+    employerPost,
+    relatedJob
+  } = state;
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -108,7 +140,7 @@ export default function JobSearchComponent() {
   }, []);
 
   const getJobs = () => {
-    setSearchJobs([1, 2, 3, 4, 5]);
+    // setSearchJobs([1, 2, 3, 4, 5]);
     setFilterApplied([
       { name: 'angular 1' },
       { name: 'react 1' },
@@ -137,7 +169,7 @@ export default function JobSearchComponent() {
               <b>Applied filters</b>
               <a
                 href="#/"
-                className="a-blue ml-2 font-weight-bold"
+                className="a-blue ml-1 font-weight-bold"
                 onClick={(e) => {
                   e.preventDefault();
                   setFilterApplied([]);
@@ -152,7 +184,7 @@ export default function JobSearchComponent() {
             size="small"
             className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
             <span className="px-2">
-              <FontAwesomeIcon icon={['fas', 'heart']} />
+              <FontAwesomeIcon icon={['fas', 'bell']} />
             </span>
             <span>Get job alert</span>
           </Button>
@@ -205,34 +237,43 @@ export default function JobSearchComponent() {
               <div className="px-3 py-2">
                 <div>
                   <label className="font-weight-bold">Distance</label>
-                  <Select
-                    name="country"
-                    options={options}
-                    onChange={distanceObj}
-                    e
-                    required="true"
-                  />
+                  <select
+                    className="MuiTextField-root MuiFormControl-fullWidth"
+                    variant="outlined"
+                    fullWidth
+                    name="distance">
+                    <option value="0">Select Distance</option>
+                    {distanceObj.map((dis) => (
+                      <option value={dis.value}>{dis.label}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="mt-3">
                   <b>Salary range</b>
                 </div>
                 <div>
                   <label className="font-weight-bold mt-2">From:</label>
-                  <Select
-                    name="country"
-                    options={options}
-                    onChange={distanceObj}
-                    e
-                    required="true"
-                  />
+                  <select
+                    className="MuiTextField-root MuiFormControl-fullWidth"
+                    variant="outlined"
+                    fullWidth
+                    name="expiration">
+                    <option value="0">Start at</option>
+                    {dolorPrice.map((price) => (
+                      <option value={price.value}>{price.label}</option>
+                    ))}
+                  </select>
                   <label className="font-weight-bold mt-2">To:</label>
-                  <Select
-                    name="country"
-                    options={options}
-                    onChange={distanceObj}
-                    e
-                    required="true"
-                  />
+                  <select
+                    className="MuiTextField-root MuiFormControl-fullWidth"
+                    variant="outlined"
+                    fullWidth
+                    name="expiration">
+                    <option value="0">End at</option>
+                    {dolorPrice.map((price) => (
+                      <option value={price.value}>{price.label}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -246,32 +287,52 @@ export default function JobSearchComponent() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={gilad}
+                              checked={permanent}
                               onChange={handleChange}
-                              name="gilad"
+                              name="permanent"
                             />
                           }
-                          label="Gilad Gray"
+                          label="Permanent"
                         />
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={jason}
+                              checked={temporary}
                               onChange={handleChange}
-                              name="jason"
+                              name="temporary"
                             />
                           }
-                          label="Jason Killian"
+                          label="Temporary"
                         />
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={antoine}
+                              checked={contract}
                               onChange={handleChange}
-                              name="antoine"
+                              name="contract"
                             />
                           }
-                          label="Antoine Llorca"
+                          label="Contract"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={fullTime}
+                              onChange={handleChange}
+                              name="fullTime"
+                            />
+                          }
+                          label="Full-time"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={partTime}
+                              onChange={handleChange}
+                              name="partTime"
+                            />
+                          }
+                          label="Part-time"
                         />
                       </FormGroup>
                     </FormControl>
@@ -281,8 +342,49 @@ export default function JobSearchComponent() {
               <div className="divider opacity-8 my-1" />
               <div className="px-3 py-2">
                 <div className="mt-3">
-                  <b>Date post</b>
-                  <Select options={jobposted} placeholder="Date Posted" />
+                  <b>Date posted</b>
+                  <select
+                    className="MuiTextField-root MuiFormControl-fullWidth"
+                    variant="outlined"
+                    fullWidth
+                    value={'anytime'}
+                    name="date-post">
+                    {jobPosted.map((post) => (
+                      <option value={post.value}>{post.label}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="divider opacity-8 my-1" />
+              <div className="px-3 py-2">
+                <div className="mt-3">
+                  <b>Specialisms</b>
+                  <div>
+                    <FormControl component="fieldset">
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={agencyPost}
+                              onChange={handleChange}
+                              name="agencyPost"
+                            />
+                          }
+                          label="Agency"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={employerPost}
+                              onChange={handleChange}
+                              name="employer"
+                            />
+                          }
+                          label="Employer"
+                        />
+                      </FormGroup>
+                    </FormControl>
+                  </div>
                 </div>
               </div>
               <div className="divider opacity-8 my-1" />
@@ -295,32 +397,22 @@ export default function JobSearchComponent() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={gilad}
+                              checked={agencyPost}
                               onChange={handleChange}
-                              name="gilad"
+                              name="agencyPost"
                             />
                           }
-                          label="Gilad Gray"
+                          label="Agency"
                         />
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={jason}
+                              checked={employerPost}
                               onChange={handleChange}
-                              name="jason"
+                              name="employer"
                             />
                           }
-                          label="Jason Killian"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={antoine}
-                              onChange={handleChange}
-                              name="antoine"
-                            />
-                          }
-                          label="Antoine Llorca"
+                          label="Employer"
                         />
                       </FormGroup>
                     </FormControl>
@@ -337,12 +429,12 @@ export default function JobSearchComponent() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={gilad}
+                              checked={relatedJob}
                               onChange={handleChange}
-                              name="gilad"
+                              name="relatedJob"
                             />
                           }
-                          label="Gilad Gray"
+                          label="Related Jobs"
                         />
                       </FormGroup>
                     </FormControl>
@@ -352,7 +444,7 @@ export default function JobSearchComponent() {
             </Card>
           </Grid>
           <Grid item xs={12} sm={9}>
-            {searchJobs.map((job, index) => (
+            {props.searchResult.map((job, index) => (
               <div className="card card-box gutter-b card-stretch bg-white btn rounded text-left py-2 mb-2">
                 <div key={index}>
                   <Grid container spacing={0}>
@@ -360,7 +452,7 @@ export default function JobSearchComponent() {
                       <div className="py-2">
                         <div className="card-header--title">
                           <h2 className="a-blue" onClick={viewJob}>
-                            Developer
+                            {job.job_title}
                           </h2>
                           <p>
                             Posted 1 week ago by{' '}
@@ -382,7 +474,9 @@ export default function JobSearchComponent() {
                               icon={['fas', 'rupee-sign']}
                             />
 
-                            <b>£35,000 - £40,000 per annum</b>
+                            <b>
+                              £{job.salary_low} - £{job.salary_high}
+                            </b>
                           </Grid>
                           <Grid item xs={12} sm={6}>
                             <FontAwesomeIcon
@@ -390,7 +484,7 @@ export default function JobSearchComponent() {
                               icon={['fas', 'map-marker-alt']}
                             />
 
-                            <b>Cardiff, South Glamorgan</b>
+                            <b>{job.location}</b>
                           </Grid>
                           <Grid item xs={12} sm={6}>
                             <FontAwesomeIcon
@@ -398,7 +492,7 @@ export default function JobSearchComponent() {
                               icon={['fas', 'clock']}
                             />
 
-                            <b>Permanent, full-time</b>
+                            <b>{job.job_type}</b>
                           </Grid>
                           <Grid item xs={12} sm={6}>
                             <FontAwesomeIcon
@@ -411,13 +505,7 @@ export default function JobSearchComponent() {
                         </Grid>
                       </div>
                       <div className="mt-2">
-                        <SmartText
-                          text={`A renowned International Retailer is currently looking for
-                      a Software Developer. Reporting to the Lead Developer, the
-                      ideal candidate will be responsible for software
-                      development to help bridge the gap between the business
-                      applications and technical implementation. A renowned International Retailer is currently looking for a Software Developer. Reporting to the Lead Developer, the ideal candidate will be responsible for software development to help bridge the gap between the business applications and technical implementation.`}
-                        />
+                        <SmartText text={job.description} />
                       </div>
                     </Grid>
                     <Grid item xs={12} sm={3} className="px-3 py-2">
@@ -437,7 +525,9 @@ export default function JobSearchComponent() {
                         size="small"
                         className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
                         <span className="px-2">
-                          <FontAwesomeIcon icon={['fas', 'heart']} />
+                          <FontAwesomeIcon
+                            icon={logo ? ['far', 'heart'] : ['fas', 'heart']}
+                          />
                         </span>
                         <span>Shortlisted</span>
                       </Button>
@@ -461,6 +551,17 @@ export default function JobSearchComponent() {
                 </div>
               </div>
             ))}
+
+            {props.searchResult.length > 5 && (
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View more
+                </Button>
+              </div>
+            )}
           </Grid>
         </Grid>
       </div>
@@ -468,4 +569,16 @@ export default function JobSearchComponent() {
       {currentUser.role === 'candidate' && <AddsComponents />}
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  searchResult: state.ThemeOptions.searchResult
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSearchResult: (search) => dispatch(setSearchResult(search))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(JobSearchComponent);
