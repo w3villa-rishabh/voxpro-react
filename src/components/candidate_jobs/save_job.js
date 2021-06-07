@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Card, Button, Grid, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -6,6 +6,8 @@ import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
+import api from '../../api';
+import LoaderComponent from 'components/loader';
 
 const jobposted = [
   {
@@ -28,6 +30,23 @@ const jobposted = [
 
 export default function SaveJobComponent() {
   const [value2, setValue2] = useState('');
+  const [savedJob, setSavedJob] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getSavedJobs();
+  }, []);
+
+  function getSavedJobs() {
+    setIsLoading(false);
+    api.get(`/api/v1/jobs/candidate_saved_jobs`).then((response) => {
+      setIsLoading(false);
+      if (response.data.success) {
+        setSavedJob([...response.data.jobs]);
+      }
+    });
+  }
 
   const changeHandler2 = (value2) => {
     setValue2(value2);
@@ -70,166 +89,56 @@ export default function SaveJobComponent() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="text-left d-flex border-0">
-                        <div>
-                          <FontAwesomeIcon
-                            icon={['fas', 'heart']}
-                            className="font-size-lg mr-2 mt-1 text-danger"
-                          />
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black a-blue"
-                            title="...">
-                            Finance Director
-                          </a>
-                          <small className="text-black-50 d-block">
-                            London, South East England-Harper May Ltd.
-                          </small>
-                          <small className="text-black-50">Saved: Today</small>
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <a href="!#" onClick={(e) => e.preventDefault()}>
-                          <div className="badge badge-neutral-success text-success px-4">
-                            Live
-                          </div>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-primary">
-                          Apply
-                        </Button>
-                      </td>
-                      <td>
-                        <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left d-flex">
-                        <div>
-                          <FontAwesomeIcon
-                            icon={['fas', 'heart']}
-                            className="font-size-lg mr-2 mt-1 text-danger"
-                          />
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black a-blue"
-                            title="...">
-                            Finance Director
-                          </a>
-                          <small className="text-black-50 d-block">
-                            London, South East England-Harper May Ltd.
-                          </small>
-                          <small className="text-black-50">Saved: Today</small>
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <a href="!#" onClick={(e) => e.preventDefault()}>
-                          <div className="badge badge-neutral-danger text-danger px-4">
-                            Closed
-                          </div>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          Remove
-                        </Button>
-                      </td>
-                      <td>
-                        <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left d-flex">
-                        <div>
-                          <FontAwesomeIcon
-                            icon={['fas', 'heart']}
-                            className="font-size-lg mr-2 mt-1 text-danger"
-                          />
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black a-blue"
-                            title="...">
-                            Finance Director
-                          </a>
-                          <small className="text-black-50 d-block">
-                            London, South East England-Harper May Ltd.
-                          </small>
-                          <small className="text-black-50">Saved: Today</small>
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <a href="!#" onClick={(e) => e.preventDefault()}>
-                          <div className="badge badge-neutral-success text-success px-4">
-                            Live
-                          </div>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-primary">
-                          Apply
-                        </Button>
-                      </td>
-                      <td>
-                        <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left d-flex">
-                        <div>
-                          <FontAwesomeIcon
-                            icon={['fas', 'heart']}
-                            className="font-size-lg mr-2 mt-1 text-danger"
-                          />
-                        </div>
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-weight-bold text-black a-blue"
-                            title="...">
-                            Finance Director
-                          </a>
-                          <small className="text-black-50 d-block">
-                            London, South East England-Harper May Ltd.
-                          </small>
-                          <small className="text-black-50">Saved: Today</small>
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <a href="!#" onClick={(e) => e.preventDefault()}>
-                          <div className="badge badge-neutral-danger text-danger px-4">
-                            Closed
-                          </div>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="small"
-                          className="px-4 btn-neutral-danger">
-                          Remove
-                        </Button>
-                      </td>
-                      <td>
-                        <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-                      </td>
-                    </tr>
+                    {isLoading ? (
+                      <LoaderComponent />
+                    ) : (
+                      <>
+                        {savedJob.map((job, index) => (
+                          <tr>
+                            <td className="text-left d-flex border-0">
+                              <div>
+                                <FontAwesomeIcon
+                                  icon={['fas', 'heart']}
+                                  className="font-size-lg mr-2 mt-1 text-danger"
+                                />
+                              </div>
+                              <div>
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="font-weight-bold text-black a-blue"
+                                  title="...">
+                                  {job.job_title}
+                                </a>
+                                <small className="text-black-50 d-block">
+                                  {job.location}
+                                </small>
+                                <small className="text-black-50">
+                                  Saved: Today
+                                </small>
+                              </div>
+                            </td>
+                            <td className="text-center">
+                              <a href="!#" onClick={(e) => e.preventDefault()}>
+                                <div className="badge badge-neutral-success text-success px-4">
+                                  {job.status}
+                                </div>
+                              </a>
+                            </td>
+                            <td className="text-center">
+                              <Button
+                                size="small"
+                                className="px-4 btn-neutral-primary">
+                                Apply
+                              </Button>
+                            </td>
+                            <td>
+                              <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </Table>
               </PerfectScrollbar>
