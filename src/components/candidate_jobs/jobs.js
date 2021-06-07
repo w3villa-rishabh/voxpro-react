@@ -125,7 +125,7 @@ export default function JobsComponent() {
                           }
                         />
                       </span>
-                      <span> Save</span>
+                      <span> {request.favorite ? 'Saved' : 'Save'}</span>
                     </Button>
                   </div>
                 </Grid>
