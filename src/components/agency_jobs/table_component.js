@@ -72,7 +72,6 @@ const CandidateActionsApplied = () => {
   );
 };
 
-
 const CandidateActionsCandider = () => {
   const [anchorEl1, setAnchorEl1] = useState(null);
 
@@ -142,10 +141,10 @@ export default function TableComponent() {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    getDocuments();
+    getJobs();
   }, []);
 
-  function getDocuments() {
+  function getJobs() {
     setIsLoading(false);
     api.get(`/api/v1/jobs`).then((response) => {
       setIsLoading(false);
@@ -154,7 +153,6 @@ export default function TableComponent() {
       }
     });
   }
-
 
   return (
     <>
