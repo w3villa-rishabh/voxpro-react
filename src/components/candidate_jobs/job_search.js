@@ -444,113 +444,121 @@ const JobSearchComponent = (props) => {
             </Card>
           </Grid>
           <Grid item xs={12} sm={9}>
-            {props.searchResult.map((job, index) => (
-              <div className="card card-box gutter-b card-stretch bg-white btn rounded text-left py-2 mb-2">
-                <div key={index}>
-                  <Grid container spacing={0}>
-                    <Grid item xs={12} sm={9} className="px-3">
-                      <div className="py-2">
-                        <div className="card-header--title">
-                          <h2 className="a-blue" onClick={viewJob}>
-                            {job.job_title}
-                          </h2>
-                          <p>
-                            Posted 1 week ago by{' '}
-                            <a
-                              href="#/"
-                              onClick={(e) => e.preventDefault()}
-                              className="a-blue font-weight-bold">
-                              REED Easy Apply
-                            </a>{' '}
-                            Featured
-                          </p>
-                        </div>
-                      </div>
-                      <div className="">
-                        <Grid container spacing={0}>
-                          <Grid item xs={12} sm={6}>
-                            <FontAwesomeIcon
-                              className="mr-2"
-                              icon={['fas', 'rupee-sign']}
-                            />
+            {props.searchResult.length ? (
+              <>
+                {props.searchResult.map((job, index) => (
+                  <div className="card card-box gutter-b card-stretch bg-white btn rounded text-left py-2 mb-2">
+                    <div key={index}>
+                      <Grid container spacing={0}>
+                        <Grid item xs={12} sm={9} className="px-3">
+                          <div className="py-2">
+                            <div className="card-header--title">
+                              <h2 className="a-blue" onClick={viewJob}>
+                                {job.job_title}
+                              </h2>
+                              <p>
+                                Posted 1 week ago by{' '}
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="a-blue font-weight-bold">
+                                  REED Easy Apply
+                                </a>{' '}
+                                Featured
+                              </p>
+                            </div>
+                          </div>
+                          <div className="">
+                            <Grid container spacing={0}>
+                              <Grid item xs={12} sm={6}>
+                                <FontAwesomeIcon
+                                  className="mr-2"
+                                  icon={['fas', 'rupee-sign']}
+                                />
 
-                            <b>
-                              £{job.salary_low} - £{job.salary_high}
-                            </b>
-                          </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <FontAwesomeIcon
-                              className="mr-2"
-                              icon={['fas', 'map-marker-alt']}
-                            />
+                                <b>
+                                  £{job.salary_low} - £{job.salary_high}
+                                </b>
+                              </Grid>
+                              <Grid item xs={12} sm={6}>
+                                <FontAwesomeIcon
+                                  className="mr-2"
+                                  icon={['fas', 'map-marker-alt']}
+                                />
 
-                            <b>{job.location}</b>
-                          </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <FontAwesomeIcon
-                              className="mr-2"
-                              icon={['fas', 'clock']}
-                            />
+                                <b>{job.location}</b>
+                              </Grid>
+                              <Grid item xs={12} sm={6}>
+                                <FontAwesomeIcon
+                                  className="mr-2"
+                                  icon={['fas', 'clock']}
+                                />
 
-                            <b>{job.job_type}</b>
-                          </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <FontAwesomeIcon
-                              className="mr-2"
-                              icon={['fas', 'user']}
-                            />
+                                <b>{job.job_type}</b>
+                              </Grid>
+                              <Grid item xs={12} sm={6}>
+                                <FontAwesomeIcon
+                                  className="mr-2"
+                                  icon={['fas', 'user']}
+                                />
 
-                            <b>Be one of the first ten applicants</b>
-                          </Grid>
+                                <b>Be one of the first ten applicants</b>
+                              </Grid>
+                            </Grid>
+                          </div>
+                          <div className="mt-2">
+                            <SmartText text={job.description} />
+                          </div>
                         </Grid>
-                      </div>
-                      <div className="mt-2">
-                        <SmartText text={job.description} />
-                      </div>
-                    </Grid>
-                    <Grid item xs={12} sm={3} className="px-3 py-2">
-                      <div className="d-flex border flex-column justify-content-between">
-                        <div>
-                          <img
-                            style={{ height: '90px', width: '100%' }}
-                            className=""
-                            alt="..."
-                            src={logo}
-                          />
-                        </div>
-                        <div className="d-flex flex-column"></div>
-                      </div>
-                      <Button
-                        fullWidth
-                        size="small"
-                        className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                        <span className="px-2">
-                          <FontAwesomeIcon
-                            icon={logo ? ['far', 'heart'] : ['fas', 'heart']}
-                          />
-                        </span>
-                        <span>Shortlisted</span>
-                      </Button>
-                      <Button
-                        fullWidth
-                        size="small"
-                        className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                        <span className="px-2">
-                          <FontAwesomeIcon icon={['fas', 'eye-slash']} />
-                        </span>
-                        <span>Hide</span>
-                      </Button>
-                      <Button
-                        fullWidth
-                        size="small"
-                        className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2">
-                        <span>Apply now</span>
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </div>
-              </div>
-            ))}
+                        <Grid item xs={12} sm={3} className="px-3 py-2">
+                          <div className="d-flex border flex-column justify-content-between">
+                            <div>
+                              <img
+                                style={{ height: '90px', width: '100%' }}
+                                className=""
+                                alt="..."
+                                src={logo}
+                              />
+                            </div>
+                            <div className="d-flex flex-column"></div>
+                          </div>
+                          <Button
+                            fullWidth
+                            size="small"
+                            className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                            <span className="px-2">
+                              <FontAwesomeIcon
+                                icon={
+                                  logo ? ['far', 'heart'] : ['fas', 'heart']
+                                }
+                              />
+                            </span>
+                            <span>Shortlisted</span>
+                          </Button>
+                          <Button
+                            fullWidth
+                            size="small"
+                            className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                            <span className="px-2">
+                              <FontAwesomeIcon icon={['fas', 'eye-slash']} />
+                            </span>
+                            <span>Hide</span>
+                          </Button>
+                          <Button
+                            fullWidth
+                            size="small"
+                            className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2">
+                            <span>Apply now</span>
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div className="font-size-xxl m-5 text-center">No data found</div>
+            )}
 
             {props.searchResult.length > 5 && (
               <div className="card-footer py-3 text-center">

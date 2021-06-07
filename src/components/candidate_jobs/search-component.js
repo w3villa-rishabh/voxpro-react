@@ -88,7 +88,7 @@ const JobSearchComponent = (props) => {
           if (response.data.success) {
             console.log('response.data', response.data.jobs);
             props.setSearchResult(response.data.jobs);
-            setPageNo(response.data.page_info.current_page + 1);
+            setPageNo(response.data.page_info.current_page);
           } else if (!searchJobs.length) {
             // toast.error('No available..');
             setSearchLoader(true);
