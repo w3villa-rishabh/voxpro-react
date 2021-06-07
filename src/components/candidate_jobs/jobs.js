@@ -25,7 +25,7 @@ export default function JobsComponent() {
   }, []);
 
   function getJobs() {
-    setIsLoading(false);
+    setIsLoading(true);
     api.get(`/api/v1/jobs/candidate_related_jobs`).then((response) => {
       setIsLoading(false);
       if (response.data.success) {
@@ -65,13 +65,13 @@ export default function JobsComponent() {
       </div>
 
       <div className="mt-3">
-        <Grid container spacing={2}>
-          {isLoading ? (
-            <LoaderComponent />
-          ) : (
-            <>
+        {isLoading ? (
+          <LoaderComponent />
+        ) : (
+          <>
+            <Grid container spacing={2}>
               {recombedJob.map((request, index) => (
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={3} key={index}>
                   <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
                     <div className="pointer" onClick={viewJob}>
                       <div className="d-flex flex-column justify-content-between">
@@ -104,17 +104,22 @@ export default function JobsComponent() {
                       className="btn-neutral-info hover-scale-sm mt-2"
                       onClick={(e) => saveJob(e, request)}>
                       <span className="px-2">
-                        {' '}
-                        <FontAwesomeIcon icon={['fas', 'heart']} />
+                        <FontAwesomeIcon
+                          icon={
+                            request.favorite
+                              ? ['far', 'heart']
+                              : ['fas', 'heart']
+                          }
+                        />
                       </span>
                       <span> Save</span>
                     </Button>
                   </div>
                 </Grid>
               ))}
-            </>
-          )}
-        </Grid>
+            </Grid>
+          </>
+        )}
       </div>
 
       {currentUser.role === 'candidate' && <AddsComponents />}
