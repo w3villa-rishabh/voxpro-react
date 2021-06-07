@@ -551,14 +551,17 @@ const JobSearchComponent = (props) => {
                 </div>
               </div>
             ))}
-            <div className="card-footer py-3 text-center">
-              <Button
-                size="small"
-                className="btn-outline-second"
-                variant="text">
-                View more
-              </Button>
-            </div>
+
+            {props.searchResult.length > 5 && (
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text">
+                  View more
+                </Button>
+              </div>
+            )}
           </Grid>
         </Grid>
       </div>

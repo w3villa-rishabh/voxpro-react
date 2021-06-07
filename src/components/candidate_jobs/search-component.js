@@ -26,6 +26,7 @@ const JobSearchComponent = (props) => {
   const [searchData, setSearchData] = useState(false);
   const [searchJobStatus, setSearchJobStatus] = useState(false);
   const [searchLoader, setSearchLoader] = useState(false);
+  const [pageNo, setPageNo] = useState(1);
 
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
@@ -76,12 +77,10 @@ const JobSearchComponent = (props) => {
 
   const search = () => {
     setSearchLoader(true);
-    console.log('CountryCity', countyCity);
-    console.log('searchQuery', searchQuery);
     history.push('/jobs');
     api
       .post(
-        `/api/v1/searches/job_search?q=${searchQuery.query}&location=${searchQuery.location}`
+        `/api/v1/searches/job_search?q=${searchQuery.query}&location=${searchQuery.location}&page=${pageNo}`
       )
       .then(
         (response) => {
@@ -89,11 +88,10 @@ const JobSearchComponent = (props) => {
           if (response.data.success) {
             console.log('response.data', response.data.jobs);
             props.setSearchResult(response.data.jobs);
-
-            // setSearchJobs([...response.data]);
+            setPageNo(response.data.page_info.current_page + 1);
           } else if (!searchJobs.length) {
             // toast.error('No available..');
-            // setSearchJobStatus(true);
+            setSearchLoader(true);
           }
         },
         (error) => {
@@ -240,17 +238,15 @@ const JobSearchComponent = (props) => {
                   {countyCity.map((user, index) => (
                     <li
                       key={index}
-                      className="list-group-item list-group-item-success">
-                      <span
-                        onClick={() => {
-                          setSearchQuery({
-                            ...searchQuery,
-                            location: user
-                          });
-                          setCountryCity([]);
-                        }}>
-                        {user}
-                      </span>
+                      className="list-group-item list-group-item-success"
+                      onClick={() => {
+                        setSearchQuery({
+                          ...searchQuery,
+                          location: user
+                        });
+                        setCountryCity([]);
+                      }}>
+                      <span>{user}</span>
                     </li>
                   ))}
                 </ul>
