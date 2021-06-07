@@ -64,9 +64,14 @@ export default function JobsComponent() {
       );
   };
 
-  const viewJob = (e) => {
+  const viewJob = (e, id) => {
     e.preventDefault();
-    history.push('/view-job');
+    history.push({
+      pathname: '/view-job',
+      state: {
+        id
+      }
+    });
   };
 
   return (
@@ -86,7 +91,9 @@ export default function JobsComponent() {
               {recombedJob.map((request, index) => (
                 <Grid item xs={12} sm={3} key={index}>
                   <div className="card card-custom gutter-b card-stretch bg-white btn rounded text-left p-4">
-                    <div className="pointer" onClick={viewJob}>
+                    <div
+                      className="pointer"
+                      onClick={(e) => viewJob(e, request.id)}>
                       <div className="d-flex flex-column justify-content-between">
                         <div>
                           <img
