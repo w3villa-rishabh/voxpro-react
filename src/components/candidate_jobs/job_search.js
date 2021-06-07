@@ -152,9 +152,14 @@ const JobSearchComponent = (props) => {
     ]);
   };
 
-  const viewJob = (e) => {
+  const viewJob = (e, id) => {
     e.preventDefault();
-    history.push('/view-job');
+    history.push({
+      pathname: '/view-job',
+      state: {
+        id
+      }
+    });
   };
 
   return (
@@ -453,7 +458,9 @@ const JobSearchComponent = (props) => {
                         <Grid item xs={12} sm={9} className="px-3">
                           <div className="py-2">
                             <div className="card-header--title">
-                              <h2 className="a-blue" onClick={viewJob}>
+                              <h2
+                                className="a-blue"
+                                onClick={(e) => viewJob(e, job.id)}>
                                 {job.job_title}
                               </h2>
                               <p>

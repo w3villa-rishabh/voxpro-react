@@ -1,17 +1,38 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
 
 import { Grid, Card, Button, List, ListItem } from '@material-ui/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCurrentUser } from 'helper';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import AddsComponents from 'components/add_component';
 import SearchComponent from './search-component';
 import logo from '../../assets/images/stock-photos/c-logo.webp';
+import api from '../../api';
 
 export default function JobSearchComponent() {
   const history = useHistory();
+  const location = useLocation();
+
   const [currentUser] = useState(getCurrentUser());
+  const [job, setJob] = useState({});
+
+  useEffect(() => {
+    getJobDetails();
+  }, []);
+
+  const getJobDetails = () => {
+    let id = location.state ? location.state.id : 0;
+    if (id) {
+      api.get(`/api/v1/jobs/${id}`).then((response) => {
+        if (response.data.success) {
+          setJob({ ...response.data.jobs });
+          console.log('job', job);
+        }
+      });
+    }
+  };
 
   return (
     <>
