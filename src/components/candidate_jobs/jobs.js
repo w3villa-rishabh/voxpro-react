@@ -51,7 +51,7 @@ export default function JobsComponent() {
       .then(
         (response) => {
           if (response.data.success) {
-            toast.success('Job successfully Saved..');
+            toast.success(response.data.message);
             recombedJob[index] = response.data.job;
             setRecombedJob([...recombedJob]);
           } else {
