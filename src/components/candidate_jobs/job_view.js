@@ -7,6 +7,7 @@ import { getCurrentUser } from 'helper';
 import { useHistory } from 'react-router';
 import AddsComponents from 'components/add_component';
 import SearchComponent from './search-component';
+import logo from '../../assets/images/stock-photos/c-logo.webp';
 
 export default function JobSearchComponent() {
   const history = useHistory();
@@ -148,6 +149,16 @@ export default function JobSearchComponent() {
                     your job search, visit SAFERjobs.
                   </span>
                 </div>
+                <div className="text-center py-5">
+                  <Button
+                    size="small"
+                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                    <span className="px-2">
+                      <FontAwesomeIcon icon={['fas', 'bell']} />
+                    </span>
+                    <span>Get job alert</span>
+                  </Button>
+                </div>
               </Grid>
               <Grid item xs={12} sm={3} className="px-3 py-2">
                 <Button
@@ -187,12 +198,63 @@ export default function JobSearchComponent() {
                   </span>
                   <span>Share job</span>
                 </Button>
+                <div className="d-flex mt-3 border flex-column justify-content-between">
+                  <div>
+                    <img
+                      style={{ height: '90px', width: '100%' }}
+                      className=""
+                      alt="..."
+                      src={logo}
+                    />
+                  </div>
+                  <div className="d-flex flex-column"></div>
+                  <Button
+                    fullWidth
+                    size="small"
+                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                    <span>Connect</span>
+                  </Button>
+                </div>
               </Grid>
             </Grid>
             <div className="card-footer mt-4">
               <b>
                 Not quite what you are looking for? Try these similar searches
               </b>
+              <Grid container spacing={0} className="mt-3">
+                <Grid item xs={12} sm={6}>
+                  <a
+                    href="#/"
+                    className="a-blue"
+                    onClick={(e) => e.preventDefault()}>
+                    Implement Technology jobs in Holbein
+                  </a>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <a
+                    href="#/"
+                    className="a-blue"
+                    onClick={(e) => e.preventDefault()}>
+                    Developer jobs in Holbein
+                  </a>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <a
+                    href="#/"
+                    className="a-blue"
+                    onClick={(e) => e.preventDefault()}>
+                    Jobs in Holbein
+                  </a>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <a
+                    href="#/"
+                    className="a-blue"
+                    onClick={(e) => e.preventDefault()}>
+                    Information Technology jobs
+                  </a>
+                </Grid>
+              </Grid>
             </div>
           </Card>
         </Grid>

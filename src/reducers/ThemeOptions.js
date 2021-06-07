@@ -21,6 +21,7 @@ export const SET_EDIT_QUESTIONS_ID = 'SET_EDIT_QUESTIONS_ID';
 export const SET_LOADER = 'SET_LOADER';
 export const SET_EDIT_DOC = 'SET_EDIT_DOC';
 export const SET_PLACES_SEARCH = 'SET_PLACES_SEARCH';
+export const SET_JOBS_SEARCH = 'SET_JOBS_SEARCH';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -104,6 +105,11 @@ export const setEditDoc = (editDoc) => ({
 export const setPlacesSearch = (placesSearch) => ({
   type: SET_PLACES_SEARCH,
   placesSearch
+});
+
+export const setSearchResult = (searchResult) => ({
+  type: SET_JOBS_SEARCH,
+  searchResult
 });
 
 // Header
@@ -252,7 +258,8 @@ export default function reducer(
     editQuestionId: 0,
     isLoading: false,
     editDoc: {},
-    placesSearch: []
+    placesSearch: [],
+    searchResult: []
   },
   action
 ) {
@@ -446,6 +453,12 @@ export default function reducer(
       return {
         ...state,
         placesSearch: action.placesSearch
+      };
+
+    case SET_JOBS_SEARCH:
+      return {
+        ...state,
+        searchResult: action.searchResult
       };
 
     default:
