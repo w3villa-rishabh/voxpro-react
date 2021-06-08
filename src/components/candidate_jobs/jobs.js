@@ -51,7 +51,7 @@ export default function JobsComponent() {
       .then(
         (response) => {
           if (response.data.success) {
-            toast.success('Job successfully Saved..');
+            toast.success(response.data.message);
             recombedJob[index] = response.data.job;
             setRecombedJob([...recombedJob]);
           } else {
@@ -132,7 +132,7 @@ export default function JobsComponent() {
                           }
                         />
                       </span>
-                      <span> Save</span>
+                      <span> {request.favorite ? 'Saved' : 'Save'}</span>
                     </Button>
                   </div>
                 </Grid>
