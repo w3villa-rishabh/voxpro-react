@@ -17,6 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SearchComponent from './search-component';
 import api from '../../api';
 import { toast } from 'react-toastify';
+import Pagination from '@material-ui/lab/Pagination';
 
 const distanceObj = [
   {
@@ -248,8 +249,10 @@ const JobSearchComponent = (props) => {
   const removeAllFilter = () => {
     let allFilter = state;
     for (const [key, value] of Object.entries(allFilter)) {
-      let v = value === true ? false : value === false ? false : '';
-      state[key] = v;
+      if (key !== 'page') {
+        let v = value === true ? false : value === false ? false : '';
+        state[key] = v;
+      }
     }
     setFilterApplied([]);
     getJobsFilters(state);
@@ -290,8 +293,8 @@ const JobSearchComponent = (props) => {
       );
   };
 
-  const viewMoreResult = () => {
-    props.searchFilter.page += 1;
+  const viewMoreResult = (event, newPage) => {
+    props.searchFilter.page = newPage;
     getJobsFilters(props.searchFilter);
   };
 
@@ -787,19 +790,26 @@ const JobSearchComponent = (props) => {
               <div className="font-size-xxl m-5 text-center">No data found</div>
             )}
 
-            {props.searchResult.length > 4 &&
-              !!props.searchPages &&
-              props.searchPages.total !== props.searchResult.length && (
-                <div className="card-footer py-3 text-center">
-                  <Button
-                    size="small"
-                    className="btn-outline-second"
-                    variant="text"
-                    onClick={viewMoreResult}>
-                    View more
-                  </Button>
-                </div>
-              )}
+            {/* {props.searchResult.length > 4 && (
+              <div className="card-footer py-3 text-center">
+                <Button
+                  size="small"
+                  className="btn-outline-second"
+                  variant="text"
+                  onClick={viewMoreResult}>
+                  View more
+                </Button>
+              </div>
+            )} */}
+            {props.searchResult.length >= 1 && (
+              <div className="p-3 d-flex justify-content-center">
+                <Pagination
+                  className="pagination-primary"
+                  onChange={viewMoreResult}
+                  count={props.searchPages ? props.searchPages.total_pages : 0}
+                />
+              </div>
+            )}
           </Grid>
         </Grid>
       </div>

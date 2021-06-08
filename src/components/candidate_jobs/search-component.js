@@ -17,7 +17,6 @@ import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
-import _ from 'lodash';
 
 import { useHistory } from 'react-router';
 import CountryCity from '../../assets/city-country';
@@ -95,9 +94,7 @@ const JobSearchComponent = (props) => {
           setSearchLoader(false);
           if (response.data.success) {
             console.log('response.data', response.data.jobs);
-            let searchResult = props.searchResult.concat(response.data.jobs);
-            let uniqueSearch = _.unionBy(searchResult, 'id');
-            props.setSearchResult(uniqueSearch, response.data.page_info);
+            props.setSearchResult(response.data.jobs, response.data.page_info);
             props.searchFilter.page = response.data.page_info.current_page;
           } else {
             props.setSearchResult([]);
