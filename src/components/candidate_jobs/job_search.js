@@ -309,7 +309,9 @@ const JobSearchComponent = (props) => {
           <div className="title pl-2">
             <h6 className="font-size-xxl">
               {props.searchResult.length !== 0 ? props.searchResult.length : ''}{' '}
-              {props.searchResult.query}
+              {props.searchResult.query
+                ? props.searchResult.query
+                : 'Jobs found'}
             </h6>
             <div className="d-flex">
               <b>Applied filters</b>
