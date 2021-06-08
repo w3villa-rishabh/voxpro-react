@@ -162,7 +162,7 @@ export default function JobSearchComponent() {
                       </Button>
                     </div>
                     <div>
-                      <b>Reference: 42856925</b>
+                      <b>Reference: {job.job_name}</b>
                     </div>
                     <div>
                       <span>

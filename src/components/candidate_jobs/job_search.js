@@ -149,6 +149,7 @@ const JobSearchComponent = (props) => {
 
   useEffect(() => {
     props.setSearchResult([]);
+    props.callSearch(true, props.searchFilter);
   }, []);
 
   const getJobsFilters = (state) => {
@@ -274,7 +275,7 @@ const JobSearchComponent = (props) => {
           if (response.data.success) {
             toast.success(response.data.message);
             props.searchResult[index] = response.data.job;
-            // setRecombedJob([...recombedJob]);
+            props.setSearchResult([...props.searchResult]);
           } else {
             toast.error('error in saving job..');
           }
