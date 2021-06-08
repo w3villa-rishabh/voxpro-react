@@ -271,7 +271,7 @@ export default function reducer(
       page: 1,
       query: '',
       location: '',
-      permanent: true,
+      permanent: false,
       temporary: false,
       contract: false,
       fullTime: false,

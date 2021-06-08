@@ -119,25 +119,113 @@ const JobSearchComponent = (props) => {
     partTime,
     agencyPost,
     employerPost,
-    relatedJob
+    relatedJob,
+    startSalary,
+    endSalary,
+    distance
   } = state;
 
   useEffect(() => {
     props.setSearchResult([]);
-    getJobs();
   }, []);
 
-  const getJobs = () => {
-    // setSearchJobs([1, 2, 3, 4, 5]);
-    setFilterApplied([
-      { name: 'angular 1' },
-      { name: 'react 1' },
-      { name: 'node 1' },
-      { name: 'electron 1' },
-      { name: 'react 1' },
-      { name: 'node 1' },
-      { name: 'electron 1' }
-    ]);
+  const getJobsFilters = (state) => {
+    let filleter = [];
+    for (const [key, value] of Object.entries(state)) {
+      if (key !== 'page' && !!value) {
+        switch (key) {
+          case 'permanent':
+            filleter.push({
+              name: 'Permanent',
+              key
+            });
+            break;
+          case 'temporary':
+            filleter.push({
+              name: 'Temporary',
+              key
+            });
+            break;
+          case 'contract':
+            filleter.push({
+              name: 'Contract',
+              key
+            });
+            break;
+          case 'fullTime':
+            filleter.push({
+              name: 'Full time',
+              key
+            });
+            break;
+          case 'partTime':
+            filleter.push({
+              name: 'Part time',
+              key
+            });
+            break;
+          case 'agencyPost':
+            filleter.push({
+              name: 'Agency Post',
+              key
+            });
+            break;
+          case 'employerPost':
+            filleter.push({
+              name: 'Employer Post',
+              key
+            });
+            break;
+          case 'startSalary':
+            filleter.push({
+              name: value,
+              key
+            });
+            break;
+          case 'endSalary':
+            filleter.push({
+              name: value,
+              key
+            });
+            break;
+
+          case 'distance':
+            filleter.push({
+              name: value,
+              key
+            });
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+
+    setFilterApplied([...filleter]);
+    setState({ ...state });
+    props.callSearch(true, state);
+  };
+
+  const removeFilter = (key, index) => {
+    let getStatue = state[key];
+    let value = getStatue === true ? false : getStatue === false ? false : '';
+
+    state[key] = value;
+    filterApplied.splice(index, 1);
+
+    setFilterApplied([...filterApplied]);
+    getJobsFilters(state);
+  };
+
+  const removeAllFilter = () => {
+    let allFilter = state;
+    for (const [key, value] of Object.entries(allFilter)) {
+      let v = value === true ? false : value === false ? false : '';
+      state[key] = v;
+    }
+    setFilterApplied([]);
+    getJobsFilters(state);
   };
 
   const viewJob = (e, id) => {
@@ -152,19 +240,17 @@ const JobSearchComponent = (props) => {
 
   const viewMoreResult = () => {
     props.searchFilter.page += 1;
-    props.callSearch(true, props.searchFilter);
+    getJobsFilters(props.searchFilter);
   };
 
   const handleChange = (event) => {
     state[event.target.name] = event.target.checked;
-    setState({ ...state });
-    props.callSearch(true, state);
+    getJobsFilters(state);
   };
 
   const handelSearch = (event) => {
     state[event.target.name] = event.target.value;
-    setState({ ...state });
-    props.callSearch(true, state);
+    getJobsFilters(state);
   };
 
   return (
@@ -174,7 +260,10 @@ const JobSearchComponent = (props) => {
       <Grid container spacing={0} className="mt-5">
         <Grid item xs={12} sm={3}>
           <div className="title pl-2">
-            <h6 className="font-size-xxl">11,965 Developer Jobs</h6>
+            <h6 className="font-size-xxl">
+              {props.searchResult.length !== 0 ? props.searchResult.length : ''}{' '}
+              {props.searchResult.query}
+            </h6>
             <div className="d-flex">
               <b>Applied filters</b>
               <a
@@ -182,7 +271,7 @@ const JobSearchComponent = (props) => {
                 className="a-blue ml-1 font-weight-bold"
                 onClick={(e) => {
                   e.preventDefault();
-                  setFilterApplied([]);
+                  removeAllFilter();
                 }}>
                 clear all
               </a>
@@ -234,8 +323,7 @@ const JobSearchComponent = (props) => {
                       className="ml-2 pt-1 a-blue"
                       icon={['fas', 'times']}
                       onClick={() => {
-                        filterApplied.splice(index, 1);
-                        setFilterApplied([...filterApplied]);
+                        removeFilter(filter.key, index);
                       }}
                     />
                   </div>
@@ -251,9 +339,10 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
+                    value={distance}
                     onChange={handelSearch}
                     name="distance">
-                    <option value="0">Select Distance</option>
+                    <option value="">Select Distance</option>
                     {distanceObj.map((dis) => (
                       <option value={dis.value}>{dis.label}</option>
                     ))}
@@ -268,6 +357,7 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
+                    value={startSalary}
                     onChange={handelSearch}
                     name="startSalary">
                     <option value="0">Start at</option>
@@ -280,6 +370,7 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
+                    value={endSalary}
                     onChange={handelSearch}
                     name="endSalary">
                     <option value="0">End at</option>

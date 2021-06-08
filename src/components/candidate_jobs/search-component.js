@@ -152,6 +152,7 @@ const JobSearchComponent = (props) => {
                 }}
                 onKeyUp={(e) => {
                   if (e.key === 'Backspace' && e.target.value.length < 2) {
+                    searchQuery[e.target.name] = '';
                     props.searchFilter[e.target.name] = '';
                     setSearchQuery({ ...props.searchFilter });
                     setSearchJobs([]);
