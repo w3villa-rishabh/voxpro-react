@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useState, useEffect } from 'react';
 
 import { Grid, Card, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { setSearchResult } from '../../reducers/ThemeOptions';
+import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
 
 import logo from '../../assets/images/stock-photos/c-logo.webp';
@@ -109,7 +110,7 @@ const JobSearchComponent = (props) => {
 
   // const [searchJobs, setSearchJobs] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     permanent: true,
     temporary: false,
     contract: false,
@@ -131,11 +132,8 @@ const JobSearchComponent = (props) => {
     relatedJob
   } = state;
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   useEffect(() => {
+    props.setSearchResult([]);
     getJobs();
   }, []);
 
@@ -160,6 +158,23 @@ const JobSearchComponent = (props) => {
         id
       }
     });
+  };
+
+  const viewMoreResult = () => {
+    props.searchFilter.page += 1;
+    props.callSearch(true, props.searchFilter);
+  };
+
+  const handleChange = (event) => {
+    state[event.target.name] = event.target.checked;
+    setState({ ...state });
+    props.callSearch(true, state);
+  };
+
+  const handelSearch = (event) => {
+    state[event.target.name] = event.target.value;
+    setState({ ...state });
+    props.callSearch(true, state);
   };
 
   return (
@@ -246,6 +261,7 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
+                    onChange={handelSearch}
                     name="distance">
                     <option value="0">Select Distance</option>
                     {distanceObj.map((dis) => (
@@ -262,7 +278,8 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
-                    name="expiration">
+                    onChange={handelSearch}
+                    name="startSalary">
                     <option value="0">Start at</option>
                     {dolorPrice.map((price) => (
                       <option value={price.value}>{price.label}</option>
@@ -273,7 +290,8 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
-                    name="expiration">
+                    onChange={handelSearch}
+                    name="endSalary">
                     <option value="0">End at</option>
                     {dolorPrice.map((price) => (
                       <option value={price.value}>{price.label}</option>
@@ -352,6 +370,7 @@ const JobSearchComponent = (props) => {
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
                     fullWidth
+                    onChange={handelSearch}
                     value={'anytime'}
                     name="date-post">
                     {jobPosted.map((post) => (
@@ -572,7 +591,8 @@ const JobSearchComponent = (props) => {
                 <Button
                   size="small"
                   className="btn-outline-second"
-                  variant="text">
+                  variant="text"
+                  onClick={viewMoreResult}>
                   View more
                 </Button>
               </div>
@@ -587,12 +607,15 @@ const JobSearchComponent = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  searchResult: state.ThemeOptions.searchResult
+  searchResult: state.ThemeOptions.searchResult,
+  searchFilter: state.ThemeOptions.searchFilter
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setSearchResult: (search) => dispatch(setSearchResult(search))
+    setSearchResult: (search) => dispatch(setSearchResult(search)),
+    callSearch: (status, searchFilter) =>
+      dispatch(callSearch(status, searchFilter))
   };
 };
 

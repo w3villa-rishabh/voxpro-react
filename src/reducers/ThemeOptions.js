@@ -22,6 +22,7 @@ export const SET_LOADER = 'SET_LOADER';
 export const SET_EDIT_DOC = 'SET_EDIT_DOC';
 export const SET_PLACES_SEARCH = 'SET_PLACES_SEARCH';
 export const SET_JOBS_SEARCH = 'SET_JOBS_SEARCH';
+export const CALL_JOBS_SEARCH = 'CALL_JOBS_SEARCH';
 
 export const setSidebarShadow = (sidebarShadow) => ({
   type: SET_SIDEBAR_SHADOW,
@@ -110,6 +111,12 @@ export const setPlacesSearch = (placesSearch) => ({
 export const setSearchResult = (searchResult) => ({
   type: SET_JOBS_SEARCH,
   searchResult
+});
+
+export const callSearch = (searchAction, searchFilter) => ({
+  type: CALL_JOBS_SEARCH,
+  searchAction,
+  searchFilter
 });
 
 // Header
@@ -259,7 +266,23 @@ export default function reducer(
     isLoading: false,
     editDoc: {},
     placesSearch: [],
-    searchResult: []
+    searchResult: [],
+    searchFilter: {
+      page: 1,
+      query: '',
+      location: '',
+      permanent: true,
+      temporary: false,
+      contract: false,
+      fullTime: false,
+      partTime: false,
+      agencyPost: false,
+      employerPost: false,
+      relatedJob: false,
+      startSalary: '',
+      endSalary: '',
+      distance: ''
+    }
   },
   action
 ) {
@@ -459,6 +482,13 @@ export default function reducer(
       return {
         ...state,
         searchResult: action.searchResult
+      };
+
+    case CALL_JOBS_SEARCH:
+      return {
+        ...state,
+        searchAction: action.searchAction,
+        searchFilter: action.searchFilter
       };
 
     default:

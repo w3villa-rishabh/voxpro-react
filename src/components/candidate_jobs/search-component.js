@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Grid,
@@ -15,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setSearchResult } from '../../reducers/ThemeOptions';
+import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 
 import { useHistory } from 'react-router';
 import CountryCity from '../../assets/city-country';
@@ -26,16 +27,18 @@ const JobSearchComponent = (props) => {
   const [searchData, setSearchData] = useState(false);
   const [searchJobStatus, setSearchJobStatus] = useState(false);
   const [searchLoader, setSearchLoader] = useState(false);
-  const [pageNo, setPageNo] = useState(1);
+  // const [pageNo, setPageNo] = useState(1);
 
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
-  const [searchQuery, setSearchQuery] = useState({
-    query: '',
-    location: '',
-    jobType: '',
-    datePost: ''
-  });
+  const [searchQuery, setSearchQuery] = useState(props.searchFilter);
+
+  useEffect(() => {
+    if (props.searchAction) {
+      search();
+      props.callSearch(false);
+    }
+  }, [props.searchAction]);
 
   const countryFilter = (value) => {
     if (value.length < 2) {
@@ -79,16 +82,19 @@ const JobSearchComponent = (props) => {
     setSearchLoader(true);
     history.push('/jobs');
     api
-      .post(
-        `/api/v1/searches/job_search?q=${searchQuery.query}&location=${searchQuery.location}&page=${pageNo}`
-      )
+      .post(`/api/v1/searches/job_search`, {
+        searchFilter: props.searchFilter
+      })
       .then(
         (response) => {
           setSearchLoader(false);
           if (response.data.success) {
             console.log('response.data', response.data.jobs);
             props.setSearchResult(response.data.jobs);
-            setPageNo(response.data.page_info.current_page);
+            // setPageNo(response.data.page_info.current_page);
+            props.searchFilter.page = response.data.page_info.current_page;
+          } else {
+            props.setSearchResult([]);
           }
         },
         (error) => {
@@ -131,10 +137,8 @@ const JobSearchComponent = (props) => {
                 className="w-100"
                 value={searchQuery.query}
                 onChange={(event) => {
-                  setSearchQuery({
-                    ...searchQuery,
-                    [event.target.name]: event.target.value
-                  });
+                  props.searchFilter[event.target.name] = event.target.value;
+                  setSearchQuery({ ...props.searchFilter });
                 }}
                 InputProps={{
                   startAdornment: (
@@ -148,10 +152,8 @@ const JobSearchComponent = (props) => {
                 }}
                 onKeyUp={(e) => {
                   if (e.key === 'Backspace' && e.target.value.length < 2) {
-                    setSearchQuery({
-                      ...searchQuery,
-                      [e.target.name]: ''
-                    });
+                    props.searchFilter[e.target.name] = '';
+                    setSearchQuery({ ...props.searchFilter });
                     setSearchJobs([]);
                     setSearchJobStatus(false);
                   }
@@ -167,10 +169,9 @@ const JobSearchComponent = (props) => {
                       className="list-group-item list-group-item-success">
                       <span
                         onClick={() => {
-                          setSearchQuery({
-                            ...searchQuery,
-                            query: user.normalized_job_title
-                          });
+                          props.searchFilter['query'] =
+                            user.normalized_job_title;
+                          setSearchQuery({ ...props.searchFilter });
                           setSearchJobs([]);
                         }}>
                         {user.normalized_job_title}
@@ -202,10 +203,8 @@ const JobSearchComponent = (props) => {
                 className="w-100"
                 value={searchQuery.location}
                 onChange={(event) => {
-                  setSearchQuery({
-                    ...searchQuery,
-                    [event.target.name]: event.target.value
-                  });
+                  props.searchFilter[event.target.name] = event.target.value;
+                  setSearchQuery({ ...props.searchFilter });
                 }}
                 InputProps={{
                   startAdornment: (
@@ -219,10 +218,8 @@ const JobSearchComponent = (props) => {
                 }}
                 onKeyUp={(e) => {
                   if (e.key === 'Backspace' && e.target.value.length < 2) {
-                    setSearchQuery({
-                      ...searchQuery,
-                      [e.target.name]: ''
-                    });
+                    props.searchFilter[e.target.name] = '';
+                    setSearchQuery({ ...props.searchFilter });
                     setCountryCity([]);
                     setSearchData(false);
                   }
@@ -237,10 +234,8 @@ const JobSearchComponent = (props) => {
                       key={index}
                       className="list-group-item list-group-item-success"
                       onClick={() => {
-                        setSearchQuery({
-                          ...searchQuery,
-                          location: user
-                        });
+                        props.searchFilter['location'] = user;
+                        setSearchQuery({ ...props.searchFilter });
                         setCountryCity([]);
                       }}>
                       <span>{user}</span>
@@ -292,10 +287,17 @@ const JobSearchComponent = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  searchAction: state.ThemeOptions.searchAction,
+  searchFilter: state.ThemeOptions.searchFilter
+});
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    setSearchResult: (search) => dispatch(setSearchResult(search))
+    setSearchResult: (search) => dispatch(setSearchResult(search)),
+    callSearch: (status, searchFilter) =>
+      dispatch(callSearch(status, searchFilter))
   };
 };
 
-export default connect(null, mapDispatchToProps)(JobSearchComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(JobSearchComponent);
