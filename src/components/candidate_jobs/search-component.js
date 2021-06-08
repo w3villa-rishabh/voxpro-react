@@ -35,8 +35,9 @@ const JobSearchComponent = (props) => {
 
   useEffect(() => {
     if (props.searchAction) {
-      search();
-      props.callSearch(false);
+      search(false);
+      setSearchQuery(props.searchFilter);
+      props.callSearch(false, props.searchFilter);
     }
   }, [props.searchAction]);
 
@@ -78,9 +79,13 @@ const JobSearchComponent = (props) => {
       );
   };
 
-  const search = () => {
-    setSearchLoader(true);
+  const searchFind = () => {
     history.push('/jobs');
+    search(true);
+  };
+
+  const search = (status) => {
+    setSearchLoader(status);
     api
       .post(`/api/v1/searches/job_search`, {
         searchFilter: props.searchFilter
@@ -98,9 +103,16 @@ const JobSearchComponent = (props) => {
           }
         },
         (error) => {
+          setSearchLoader(false);
           console.error('error', error);
         }
       );
+  };
+
+  const handelSearch = (event) => {
+    searchQuery[event.target.name] = event.target.value;
+    props.searchFilter[event.target.name] = event.target.value;
+    setSearchQuery({ ...props.searchFilter });
   };
 
   return (
@@ -136,10 +148,7 @@ const JobSearchComponent = (props) => {
                 placeholder="e.g. 'angular'"
                 className="w-100"
                 value={searchQuery.query}
-                onChange={(event) => {
-                  props.searchFilter[event.target.name] = event.target.value;
-                  setSearchQuery({ ...props.searchFilter });
-                }}
+                onChange={handelSearch}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -203,10 +212,7 @@ const JobSearchComponent = (props) => {
                 placeholder="e.g. 'london'"
                 className="w-100"
                 value={searchQuery.location}
-                onChange={(event) => {
-                  props.searchFilter[event.target.name] = event.target.value;
-                  setSearchQuery({ ...props.searchFilter });
-                }}
+                onChange={handelSearch}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -219,6 +225,7 @@ const JobSearchComponent = (props) => {
                 }}
                 onKeyUp={(e) => {
                   if (e.key === 'Backspace' && e.target.value.length < 2) {
+                    searchQuery[e.target.name] = '';
                     props.searchFilter[e.target.name] = '';
                     setSearchQuery({ ...props.searchFilter });
                     setCountryCity([]);
@@ -259,7 +266,7 @@ const JobSearchComponent = (props) => {
               size="small"
               disabled={searchLoader}
               className="btn-dribbble hover-scale-sm"
-              onClick={search}>
+              onClick={searchFind}>
               <span className="px-2">Search</span>
               <ClipLoader
                 color={'var(--info)'}

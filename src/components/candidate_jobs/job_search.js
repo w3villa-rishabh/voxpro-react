@@ -224,9 +224,9 @@ const JobSearchComponent = (props) => {
       }
     }
 
+    props.callSearch(true, state);
     setFilterApplied([...filleter]);
     setState({ ...state });
-    props.callSearch(true, state);
   };
 
   const removeFilter = (key, index) => {
