@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Grid, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import WorkIcon from '@material-ui/icons/Work';
+import { useHistory } from 'react-router';
 import AddsComponents from 'components/add_component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 import api from '../../api';
 import LoaderComponent from 'components/loader';
+import { toast } from 'react-toastify';
 
 const jobposted = [
   {
@@ -29,6 +31,7 @@ const jobposted = [
 ];
 
 export default function SaveJobComponent() {
+  const history = useHistory();
   const [value2, setValue2] = useState('');
   const [savedJob, setSavedJob] = useState([]);
 
@@ -52,6 +55,36 @@ export default function SaveJobComponent() {
       }
     );
   }
+
+  const viewJob = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-job',
+      state: {
+        id
+      }
+    });
+  };
+
+  const removeJob = (e, request, index) => {
+    e.preventDefault();
+    api.post(`/api/v1/jobs/${request.id}/save_job?status=${false}`).then(
+      (response) => {
+        if (response.data.success) {
+          toast.success(response.data.message);
+          savedJob.splice(index, 1);
+          setSavedJob([...savedJob]);
+          // savedJob[index] = response.data.job;
+          // setRecombedJob([...recombedJob]);
+        } else {
+          toast.error('error in saving job..');
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  };
 
   const changeHandler2 = (value2) => {
     setValue2(value2);
@@ -111,10 +144,8 @@ export default function SaveJobComponent() {
                               </div>
                               <div>
                                 <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="font-weight-bold text-black a-blue"
-                                  title="...">
+                                  onClick={(e) => viewJob(e, job.id)}
+                                  className="font-weight-bold text-black a-blue">
                                   {job.job_title}
                                 </a>
                                 <small className="text-black-50 d-block">
@@ -140,7 +171,9 @@ export default function SaveJobComponent() {
                               </Button>
                             </td>
                             <td>
-                              <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+                              <Button onClick={(e) => removeJob(e, job, index)}>
+                                <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+                              </Button>
                             </td>
                           </tr>
                         ))}
