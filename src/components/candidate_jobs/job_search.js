@@ -157,7 +157,7 @@ const JobSearchComponent = (props) => {
     props.callSearch(true, props.searchFilter);
   }, []);
 
-  const getJobsFilters = (state) => {
+  const getJobsFilters = (state, page) => {
     let filleter = [];
     for (const [key, value] of Object.entries(state)) {
       if (key !== 'page' && !!value) {
@@ -227,6 +227,8 @@ const JobSearchComponent = (props) => {
           default:
             break;
         }
+      } else if (key === 'page') {
+        state[key] = page;
       }
     }
 
@@ -243,7 +245,7 @@ const JobSearchComponent = (props) => {
     filterApplied.splice(index, 1);
 
     setFilterApplied([...filterApplied]);
-    getJobsFilters(state);
+    getJobsFilters(state, 1);
   };
 
   const removeAllFilter = () => {
@@ -257,7 +259,7 @@ const JobSearchComponent = (props) => {
       }
     }
     setFilterApplied([]);
-    getJobsFilters(state);
+    getJobsFilters(state, 1);
   };
 
   const viewJob = (e, id) => {
@@ -297,22 +299,22 @@ const JobSearchComponent = (props) => {
 
   const viewMoreResult = (event, newPage) => {
     props.searchFilter.page = newPage;
-    getJobsFilters(props.searchFilter);
+    getJobsFilters(props.searchFilter, newPage);
   };
 
   const handleChange = (event) => {
     state[event.target.name] = event.target.checked;
-    getJobsFilters(state);
+    getJobsFilters(state, 1);
   };
 
   const handelSearch = (event) => {
     state[event.target.name] = event.target.value;
-    getJobsFilters(state);
+    getJobsFilters(state, 1);
   };
 
   const recentApply = (event) => {
     state['relevant'] = event.target.checked;
-    getJobsFilters(state);
+    getJobsFilters(state, 1);
   };
 
   return (
@@ -792,22 +794,12 @@ const JobSearchComponent = (props) => {
               <div className="font-size-xxl m-5 text-center">No data found</div>
             )}
 
-            {/* {props.searchResult.length > 4 && (
-              <div className="card-footer py-3 text-center">
-                <Button
-                  size="small"
-                  className="btn-outline-second"
-                  variant="text"
-                  onClick={viewMoreResult}>
-                  View more
-                </Button>
-              </div>
-            )} */}
             {props.searchResult.length >= 1 && (
               <div className="p-3 d-flex justify-content-center">
                 <Pagination
                   className="pagination-primary"
                   onChange={viewMoreResult}
+                  page={props.searchFilter.page}
                   count={props.searchPages ? props.searchPages.total_pages : 0}
                 />
               </div>
