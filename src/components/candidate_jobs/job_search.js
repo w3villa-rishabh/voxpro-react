@@ -108,18 +108,8 @@ const JobSearchComponent = (props) => {
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
 
-  // const [searchJobs, setSearchJobs] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
-  const [state, setState] = useState({
-    permanent: true,
-    temporary: false,
-    contract: false,
-    fullTime: false,
-    partTime: false,
-    agencyPost: false,
-    employerPost: false,
-    relatedJob: false
-  });
+  const [state, setState] = useState(props.searchFilter);
 
   const {
     permanent,
