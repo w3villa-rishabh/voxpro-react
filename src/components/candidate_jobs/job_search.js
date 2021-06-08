@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useState, useEffect } from 'react';
 
-import { Grid, Card, Button } from '@material-ui/core';
+import { Grid, Card, Button, Dialog, Divider } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
@@ -131,6 +131,7 @@ const JobSearchComponent = (props) => {
 
   const [filterApplied, setFilterApplied] = useState([]);
   const [state, setState] = useState(props.searchFilter);
+  const [openApplyBox, setopenApplyBox] = useState({ open: false, job: [] });
 
   const {
     permanent,
@@ -156,6 +157,10 @@ const JobSearchComponent = (props) => {
     props.setSearchResult([]);
     props.callSearch(true, props.searchFilter);
   }, []);
+
+  const handleExpModalClose = () => {
+    setopenApplyBox({ open: false, job: [] });
+  };
 
   const getJobsFilters = (state, page) => {
     let filleter = [];
@@ -295,6 +300,24 @@ const JobSearchComponent = (props) => {
           console.error(error);
         }
       );
+  };
+
+  const hideJob = (e, job, index) => {
+    e.preventDefault();
+    api.post(`/api/v1/jobs/${job.id}/hide_job`).then(
+      (response) => {
+        if (response.data.success) {
+          toast.success(response.data.message);
+          props.searchResult.splice(index, 1);
+          props.setSearchResult([...props.searchResult]);
+        } else {
+          toast.error('error in saving job..');
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   };
 
   const viewMoreResult = (event, newPage) => {
@@ -772,6 +795,7 @@ const JobSearchComponent = (props) => {
                           <Button
                             fullWidth
                             size="small"
+                            onClick={(e) => hideJob(e, job, index)}
                             className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
                             <span className="px-2">
                               <FontAwesomeIcon icon={['fas', 'eye-slash']} />
@@ -781,7 +805,13 @@ const JobSearchComponent = (props) => {
                           <Button
                             fullWidth
                             size="small"
-                            className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2">
+                            className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2"
+                            onClick={() =>
+                              setopenApplyBox({
+                                open: true,
+                                job: job
+                              })
+                            }>
                             <span>Apply now</span>
                           </Button>
                         </Grid>
@@ -806,6 +836,28 @@ const JobSearchComponent = (props) => {
             )}
           </Grid>
         </Grid>
+        {/* expire doc view details show */}
+        <Dialog
+          onClose={handleExpModalClose}
+          fullWidth
+          maxWidth="md"
+          classes={{ paper: 'modal-content rounded-lg' }}
+          aria-labelledby="simple-dialog-title"
+          open={openApplyBox.open}>
+          <div className="p-3 font-size-xl font-weight-bold">
+            Apply to {openApplyBox.job.company_name}
+          </div>
+          <Divider />
+          <div className="p-3 font-size-ml font-weight-bold">Contact Info</div>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={3}>
+              {currentUser.first_name + ' ' + currentUser.last_name}
+            </Grid>
+          </Grid>
+          <div className="table-responsive-md m-4">
+            <div className="table-scrollbar"></div>
+          </div>
+        </Dialog>
       </div>
 
       {currentUser.role === 'candidate' && <AddsComponents />}
