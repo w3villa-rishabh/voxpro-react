@@ -57,16 +57,17 @@ export default function JobSearchComponent() {
             style={{ 'border-top': '5px solid #0e5bbc' }}>
             <div className="rounded-0 border-bottom px-3 py-2">
               <div className="card-header--title">
-                <h2>Developer</h2>
+                <h2>{job.job_title}</h2>
                 <p>
-                  Posted 1 week ago by{' '}
+                  Posted 1 week ago
+                  {/* Posted 1 week ago by{' '}
                   <a
                     href="#/"
                     onClick={(e) => e.preventDefault()}
                     className="a-blue font-weight-bold">
                     REED Easy Apply
                   </a>{' '}
-                  Featured
+                  Featured */}
                 </p>
               </div>
             </div>
@@ -80,7 +81,10 @@ export default function JobSearchComponent() {
                         icon={['fas', 'rupee-sign']}
                       />
 
-                      <b>£35,000 - £40,000 per annum</b>
+                      <b>
+                        {' '}
+                        £{job.salary_low} - £{job.salary_high}
+                      </b>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <FontAwesomeIcon
@@ -88,7 +92,7 @@ export default function JobSearchComponent() {
                         icon={['fas', 'map-marker-alt']}
                       />
 
-                      <b>Cardiff, South Glamorgan</b>
+                      <b>{job.location}</b>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <FontAwesomeIcon
@@ -96,7 +100,7 @@ export default function JobSearchComponent() {
                         icon={['fas', 'clock']}
                       />
 
-                      <b>Permanent, full-time</b>
+                      <b>{job.job_type}</b>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <FontAwesomeIcon
@@ -109,24 +113,7 @@ export default function JobSearchComponent() {
                   </Grid>
                 </div>
                 <div className="mt-2">
-                  <p>To all Software Developers out there!</p>
-                  <p>
-                    A renowned International Retailer is currently looking for a
-                    Software Developer. Reporting to the Lead Developer, the
-                    ideal candidate will be responsible for software development
-                    to help bridge the gap between the business applications and
-                    technical implementation.
-                  </p>
-                  <p>
-                    Mainly working on both frontend and backend procedures to
-                    support business applications, eCommerce platforms and
-                    contribute directly to the success of the business products
-                    by materialising the company’s visions into tangible user
-                    experience.
-                  </p>
-                </div>
-                <div>
-                  <b>The ideal candidate should be knowledgeable in:</b>
+                  <p>{job.description} </p>
                 </div>
                 <div>
                   <ul

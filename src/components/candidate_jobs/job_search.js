@@ -16,6 +16,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import SearchComponent from './search-component';
+import api from '../../api';
+import { toast } from 'react-toastify';
 
 const distanceObj = [
   {
@@ -160,6 +162,31 @@ const JobSearchComponent = (props) => {
         id
       }
     });
+  };
+
+  const saveJob = (e, job, index) => {
+    e.preventDefault();
+    console.log('doc', job);
+    api
+      .post(
+        `/api/v1/jobs/${
+          job.id
+        }/save_job?status=${(job.favorite = !job.favorite)}`
+      )
+      .then(
+        (response) => {
+          if (response.data.success) {
+            toast.success(response.data.message);
+            props.searchResult[index] = response.data.job;
+            // setRecombedJob([...recombedJob]);
+          } else {
+            toast.error('error in saving job..');
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   };
 
   return (
@@ -532,15 +559,20 @@ const JobSearchComponent = (props) => {
                           <Button
                             fullWidth
                             size="small"
-                            className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                            className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2"
+                            onClick={(e) => saveJob(e, job, index)}>
                             <span className="px-2">
                               <FontAwesomeIcon
                                 icon={
-                                  logo ? ['far', 'heart'] : ['fas', 'heart']
+                                  job.favorite
+                                    ? ['fas', 'heart']
+                                    : ['far', 'heart']
                                 }
                               />
                             </span>
-                            <span>Shortlisted</span>
+                            <span>
+                              {job.favorite ? 'Shortlisted' : 'Shortlist'}
+                            </span>
                           </Button>
                           <Button
                             fullWidth
