@@ -108,9 +108,10 @@ export const setPlacesSearch = (placesSearch) => ({
   placesSearch
 });
 
-export const setSearchResult = (searchResult) => ({
+export const setSearchResult = (searchResult, searchPages) => ({
   type: SET_JOBS_SEARCH,
-  searchResult
+  searchResult,
+  searchPages
 });
 
 export const callSearch = (searchAction, searchFilter) => ({
@@ -286,7 +287,8 @@ export default function reducer(
       nursing: false,
       registerNurse: false,
       NHS: false,
-      staffNurse: false
+      staffNurse: false,
+      datePost: 'anytime'
     }
   },
   action
@@ -486,7 +488,8 @@ export default function reducer(
     case SET_JOBS_SEARCH:
       return {
         ...state,
-        searchResult: action.searchResult
+        searchResult: action.searchResult,
+        searchPages: action.searchPages
       };
 
     case CALL_JOBS_SEARCH:

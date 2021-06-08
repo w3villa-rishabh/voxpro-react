@@ -91,7 +91,7 @@ export default function JobSearchComponent() {
 
       {isLoading ? <LoaderComponent /> : ''}
 
-      {Object.keys(job).length && (
+      {!!Object.keys(job).length && (
         <Grid container spacing={1}>
           <Grid item xs={12} sm={9}>
             <Card

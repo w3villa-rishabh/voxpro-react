@@ -147,7 +147,8 @@ const JobSearchComponent = (props) => {
     nursing,
     registerNurse,
     NHS,
-    staffNurse
+    staffNurse,
+    datePost
   } = state;
 
   useEffect(() => {
@@ -316,10 +317,10 @@ const JobSearchComponent = (props) => {
       <Grid container spacing={0} className="mt-5">
         <Grid item xs={12} sm={3}>
           <div className="title pl-2">
-            <h6 className="font-size-xxl">
-              {props.searchResult.length !== 0 ? props.searchResult.length : ''}{' '}
-              {props.searchResult.query
-                ? props.searchResult.query
+            <h6 className="font-size-xxl text-capitalize">
+              {props.searchPages ? props.searchPages.total : 0}{' '}
+              {props.searchFilter.query
+                ? props.searchFilter.query
                 : 'Jobs found'}
             </h6>
             <div className="d-flex">
@@ -514,8 +515,8 @@ const JobSearchComponent = (props) => {
                     variant="outlined"
                     fullWidth
                     onChange={handelSearch}
-                    value={'anytime'}
-                    name="date-post">
+                    value={datePost}
+                    name="datePost">
                     {jobPosted.map((post) => (
                       <option value={post.value}>{post.label}</option>
                     ))}
@@ -786,17 +787,19 @@ const JobSearchComponent = (props) => {
               <div className="font-size-xxl m-5 text-center">No data found</div>
             )}
 
-            {props.searchResult.length > 5 && (
-              <div className="card-footer py-3 text-center">
-                <Button
-                  size="small"
-                  className="btn-outline-second"
-                  variant="text"
-                  onClick={viewMoreResult}>
-                  View more
-                </Button>
-              </div>
-            )}
+            {props.searchResult.length > 4 &&
+              !!props.searchPages &&
+              props.searchPages.total !== props.searchResult.length && (
+                <div className="card-footer py-3 text-center">
+                  <Button
+                    size="small"
+                    className="btn-outline-second"
+                    variant="text"
+                    onClick={viewMoreResult}>
+                    View more
+                  </Button>
+                </div>
+              )}
           </Grid>
         </Grid>
       </div>
@@ -808,7 +811,8 @@ const JobSearchComponent = (props) => {
 
 const mapStateToProps = (state) => ({
   searchResult: state.ThemeOptions.searchResult,
-  searchFilter: state.ThemeOptions.searchFilter
+  searchFilter: state.ThemeOptions.searchFilter,
+  searchPages: state.ThemeOptions.searchPages
 });
 
 const mapDispatchToProps = (dispatch) => {

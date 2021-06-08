@@ -40,12 +40,17 @@ export default function SaveJobComponent() {
 
   function getSavedJobs() {
     setIsLoading(true);
-    api.get(`/api/v1/jobs/candidate_saved_jobs`).then((response) => {
-      setIsLoading(false);
-      if (response.data.success) {
-        setSavedJob([...response.data.jobs]);
+    api.get(`/api/v1/jobs/candidate_saved_jobs`).then(
+      (response) => {
+        setIsLoading(false);
+        if (response.data.success) {
+          setSavedJob([...response.data.jobs]);
+        }
+      },
+      () => {
+        setIsLoading(false);
       }
-    });
+    );
   }
 
   const changeHandler2 = (value2) => {
@@ -66,7 +71,9 @@ export default function SaveJobComponent() {
           <Card className="px-3 pt-3">
             <div className="card-header-alt d-flex align-items-center justify-content-between p-2">
               <div>
-                <b className="text-danger">5 Shortlisted Jobs list</b>
+                <b className="text-danger">
+                  {savedJob.length} Shortlisted Jobs list
+                </b>
               </div>
               <div className="w-25">
                 <Select
@@ -95,7 +102,7 @@ export default function SaveJobComponent() {
                       <>
                         {savedJob.map((job, index) => (
                           <tr key={index}>
-                            <td className="text-left d-flex border-0">
+                            <td className="text-left">
                               <div>
                                 <FontAwesomeIcon
                                   icon={['fas', 'heart']}

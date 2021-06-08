@@ -27,7 +27,6 @@ const JobSearchComponent = (props) => {
   const [searchData, setSearchData] = useState(false);
   const [searchJobStatus, setSearchJobStatus] = useState(false);
   const [searchLoader, setSearchLoader] = useState(false);
-  // const [pageNo, setPageNo] = useState(1);
 
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
@@ -95,8 +94,9 @@ const JobSearchComponent = (props) => {
           setSearchLoader(false);
           if (response.data.success) {
             console.log('response.data', response.data.jobs);
-            props.setSearchResult(response.data.jobs);
-            // setPageNo(response.data.page_info.current_page);
+            let searchResult = props.searchResult.concat(response.data.jobs);
+            props.setSearchResult(searchResult, response.data.page_info);
+            // setPageNo(response.data.page_info);
             props.searchFilter.page = response.data.page_info.current_page;
           } else {
             props.setSearchResult([]);
@@ -297,12 +297,14 @@ const JobSearchComponent = (props) => {
 
 const mapStateToProps = (state) => ({
   searchAction: state.ThemeOptions.searchAction,
-  searchFilter: state.ThemeOptions.searchFilter
+  searchFilter: state.ThemeOptions.searchFilter,
+  searchResult: state.ThemeOptions.searchResult
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setSearchResult: (search) => dispatch(setSearchResult(search)),
+    setSearchResult: (search, pages) =>
+      dispatch(setSearchResult(search, pages)),
     callSearch: (status, searchFilter) =>
       dispatch(callSearch(status, searchFilter))
   };
