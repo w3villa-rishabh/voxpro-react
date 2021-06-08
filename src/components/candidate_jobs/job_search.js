@@ -252,6 +252,8 @@ const JobSearchComponent = (props) => {
       if (key !== 'page') {
         let v = value === true ? false : value === false ? false : '';
         state[key] = v;
+      } else if (key === 'page') {
+        state[key] = 0;
       }
     }
     setFilterApplied([]);
