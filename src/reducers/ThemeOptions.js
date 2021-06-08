@@ -278,10 +278,15 @@ export default function reducer(
       partTime: false,
       agencyPost: false,
       employerPost: false,
-      relatedJob: false,
       startSalary: '',
       endSalary: '',
-      distance: ''
+      distance: '',
+      relevant: true,
+      careAssistant: false,
+      nursing: false,
+      registerNurse: false,
+      NHS: false,
+      staffNurse: false
     }
   },
   action

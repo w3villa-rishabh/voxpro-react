@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
 
-import logo from '../../assets/images/stock-photos/c-logo.webp';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCurrentUser } from 'helper';
 import { useHistory } from 'react-router';
@@ -141,14 +139,20 @@ const JobSearchComponent = (props) => {
     partTime,
     agencyPost,
     employerPost,
-    relatedJob,
     startSalary,
     endSalary,
-    distance
+    distance,
+    relevant,
+    careAssistant,
+    nursing,
+    registerNurse,
+    NHS,
+    staffNurse
   } = state;
 
   useEffect(() => {
     props.setSearchResult([]);
+    props.callSearch(true, props.searchFilter);
   }, []);
 
   const getJobsFilters = (state) => {
@@ -274,7 +278,7 @@ const JobSearchComponent = (props) => {
           if (response.data.success) {
             toast.success(response.data.message);
             props.searchResult[index] = response.data.job;
-            // setRecombedJob([...recombedJob]);
+            props.setSearchResult([...props.searchResult]);
           } else {
             toast.error('error in saving job..');
           }
@@ -297,6 +301,11 @@ const JobSearchComponent = (props) => {
 
   const handelSearch = (event) => {
     state[event.target.name] = event.target.value;
+    getJobsFilters(state);
+  };
+
+  const recentApply = (event) => {
+    state['relevant'] = event.target.checked;
     getJobsFilters(state);
   };
 
@@ -345,9 +354,13 @@ const JobSearchComponent = (props) => {
               </div>
               <label
                 className="checkbox toggle candy"
-                onClick=""
                 style={{ width: '165px' }}>
-                <input id="view" type="checkbox" />
+                <input
+                  id="view"
+                  type="checkbox"
+                  checked={relevant}
+                  onClick={recentApply}
+                />
                 <p>
                   <span>Relevant</span>
                   <span>Recent</span>
@@ -583,12 +596,64 @@ const JobSearchComponent = (props) => {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={relatedJob}
+                              checked={nursing}
                               onChange={handleChange}
-                              name="relatedJob"
+                              name="nursing"
                             />
                           }
-                          label="Related Jobs"
+                          label="Nursing"
+                        />
+                      </FormGroup>
+
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={registerNurse}
+                              onChange={handleChange}
+                              name="registerNurse"
+                            />
+                          }
+                          label="Register Nurse"
+                        />
+                      </FormGroup>
+
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={NHS}
+                              onChange={handleChange}
+                              name="NHS"
+                            />
+                          }
+                          label="NHS"
+                        />
+                      </FormGroup>
+
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={staffNurse}
+                              onChange={handleChange}
+                              name="staffNurse"
+                            />
+                          }
+                          label="Staff Nurse"
+                        />
+                      </FormGroup>
+
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={careAssistant}
+                              onChange={handleChange}
+                              name="careAssistant"
+                            />
+                          }
+                          label="Care Assistant"
                         />
                       </FormGroup>
                     </FormControl>
@@ -673,7 +738,7 @@ const JobSearchComponent = (props) => {
                                 style={{ height: '90px', width: '100%' }}
                                 className=""
                                 alt="..."
-                                src={logo}
+                                src={job.company_logo}
                               />
                             </div>
                             <div className="d-flex flex-column"></div>
