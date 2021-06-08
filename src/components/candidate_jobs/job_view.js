@@ -11,6 +11,7 @@ import SearchComponent from './search-component';
 import logo from '../../assets/images/stock-photos/c-logo.webp';
 import api from '../../api';
 import LoaderComponent from 'components/loader';
+import { toast } from 'react-toastify';
 
 export default function JobSearchComponent() {
   const history = useHistory();
@@ -41,6 +42,30 @@ export default function JobSearchComponent() {
         }
       );
     }
+  };
+
+  const saveJob = (e, request, index) => {
+    e.preventDefault();
+    console.log('doc', request);
+    api
+      .post(
+        `/api/v1/jobs/${
+          request.id
+        }/save_job?status=${(request.favorite = !request.favorite)}`
+      )
+      .then(
+        (response) => {
+          if (response.data.success) {
+            toast.success(response.data.message);
+            setJob(response.data.job);
+          } else {
+            toast.error('error in saving job..');
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   };
 
   return (
@@ -206,11 +231,16 @@ export default function JobSearchComponent() {
                     <Button
                       fullWidth
                       size="small"
+                      onClick={(e) => saveJob(e, job)}
                       className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
                       <span className="px-2">
-                        <FontAwesomeIcon icon={['fas', 'heart']} />
+                        <FontAwesomeIcon
+                          icon={
+                            job.favorite ? ['fas', 'heart'] : ['far', 'heart']
+                          }
+                        />
                       </span>
-                      <span>Shortlisted</span>
+                      <span>{job.favorite ? 'Shortlisted' : 'Shortlist'}</span>
                     </Button>
                     <Button
                       fullWidth
