@@ -19,7 +19,15 @@
   font-size: 1.25rem;
   font-weight: 300;
   letter-spacing: 2px;
+}
 
+.cards__item_search {
+  display: flex;
+  padding: 4px 14px;
+  background: #bcf2ff;
+  border: 1px solid #20b2d6;
+  border-radius: 15px;
+  margin: 3px;
 }
 
 /* Hide by default */

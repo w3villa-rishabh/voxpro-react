@@ -6,47 +6,50 @@ import {
   Grid,
   Button,
   TextField,
-  Table,
-  CardContent
+  CardContent,
+  Dialog,
+  DialogTitle,
+  InputAdornment
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import { ClipLoader } from 'react-spinners';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-import moment from 'moment';
-import DateFnsUtils from '@date-io/date-fns';
+
 import api from '../../api';
 import { toast } from 'react-toastify';
-import LoaderComponent from 'components/loader';
-import { convertDate } from 'helper';
-import PlaceSearchComponent from './search-place';
+
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from '@material-ui/lab/Pagination';
-
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import CountryCity from '../../assets/city-country';
+import axios from 'axios';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 const CandidateSearchComponent = (props) => {
   const [searchLoader, setSearchLoader] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [candidate, setCandidate] = useState([]);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [candidate, setCandidate] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
   const [searchResult] = useState([1, 2, 3, 4]);
   const [searchQuery, setSearchQuery] = useState({
     name: '',
-    location: '',
-    jobTitle: '',
+    location: [],
+    jobTitles: [],
+    // jobTitle: '',
     availability: '0',
     availabilityDate: ''
   });
+
+  // const [searchJobStatus, setSearchJobStatus] = useState(false);
+  const [searchData, setSearchData] = useState(false);
+
+  const [countyCity, setCountryCity] = useState([]);
+  const [searchJobs, setSearchJobs] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState(props.searchFilter);
+  const [openLocation, setOpenLocation] = useState({ open: false, do: [] });
+  const [openJobs, setOpenJobs] = useState({ open: false, do: [] });
+  const [searchJobStatus, setSearchJobStatus] = useState(false);
 
   useEffect(() => {
     setFilterApplied([
@@ -68,9 +71,9 @@ const CandidateSearchComponent = (props) => {
       (response) => {
         setSearchLoader(false);
         if (response.data.success) {
-          setCandidate([...response.data.candidate]);
+          // setCandidate([...response.data.candidate]);
         } else {
-          setCandidate([]);
+          // setCandidate([]);
         }
       },
       (error) => {
@@ -81,14 +84,100 @@ const CandidateSearchComponent = (props) => {
     );
   };
 
-  const handleDateChange = (date) => {
-    if (date) {
-      setIsOpen(false);
-      setSearchQuery({
-        ...searchQuery,
-        availabilityDate: date
-      });
+  // const handleDateChange = (date) => {
+  //   if (date) {
+  //     setIsOpen(false);
+  //     setSearchQuery({
+  //       ...searchQuery,
+  //       availabilityDate: date
+  //     });
+  //   }
+  // };
+
+  useEffect(() => {
+    if (props.searchAction) {
+      search(false);
+      setSearchQuery(props.searchFilter);
+      props.callSearch(false, props.searchFilter);
     }
+  }, [props.searchAction]);
+
+  const countryFilter = (value) => {
+    if (value.length < 2) {
+      return;
+    }
+    setSearchData(false);
+    var search = new RegExp(value, 'i'); // prepare a regex object
+    let searchLog = CountryCity.filter((item) => search.test(item));
+    setCountryCity([...searchLog]);
+    if (!searchLog.length) {
+      setSearchData(true);
+    }
+  };
+
+  const findJobs = (search) => {
+    setSearchJobStatus(false);
+    if (search.length < 2) {
+      return;
+    }
+    axios
+      .get(
+        `http://api.dataatwork.org/v1/jobs/autocomplete?begins_with=${search}`
+      )
+      .then(
+        (response) => {
+          if (response.statusText === 'OK') {
+            console.log('response.data', response.data);
+            setSearchJobs([...response.data]);
+          } else if (!searchJobs.length) {
+            // toast.error('No available..');
+            setSearchJobStatus(true);
+          }
+        },
+        (error) => {
+          console.error('error', error);
+        }
+      );
+  };
+
+  // const searchFind = () => {
+  //   history.push('/jobs');
+  //   search(true);
+  // };
+
+  // const search = (status) => {
+  //   setSearchLoader(status);
+  //   api
+  //     .post(`/api/v1/searches/job_search`, {
+  //       searchFilter: props.searchFilter
+  //     })
+  //     .then(
+  //       (response) => {
+  //         setSearchLoader(false);
+  //         if (response.data.success) {
+  //           console.log('response.data', response.data.jobs);
+  //           props.setSearchResult(response.data.jobs, response.data.page_info);
+  //           props.searchFilter.page = response.data.page_info.current_page;
+  //         } else {
+  //           props.setSearchResult([]);
+  //         }
+  //       },
+  //       (error) => {
+  //         setSearchLoader(false);
+  //         console.error('error', error);
+  //       }
+  //     );
+  // };
+
+  const handelSearch = (event) => {
+    searchQuery[event.target.name] = event.target.value;
+    props.searchFilter[event.target.name] = event.target.value;
+    setSearchQuery({ ...props.searchFilter });
+  };
+
+  const handleModalClose = () => {
+    setOpenLocation({ open: false, do: [] });
+    setOpenJobs({ open: false, do: [] });
   };
 
   return (
@@ -100,276 +189,229 @@ const CandidateSearchComponent = (props) => {
         </div>
       </div>
 
-      <div className="mt-3">
+      <Card className="card-box p-3 d-lg-none">
+        <Grid container spacing={2}>
+          <Grid item sm={4} xs={12}>
+            <div className="user-new-request">
+              <TextField
+                variant="outlined"
+                size="small"
+                name="query"
+                fullWidth
+                autoComplete="off"
+                label="What"
+                placeholder="e.g. 'name'"
+                className="w-100"
+                value={searchQuery.query}
+                onChange={handlerSearch}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchTwoToneIcon />
+                    </InputAdornment>
+                  ),
+                  style: {
+                    height: '37px'
+                  }
+                }}
+              />
+            </div>
+          </Grid>
+          <Grid item sm={4} xs={12}>
+            <div className="user-new-request">
+              <TextField
+                variant="outlined"
+                size="small"
+                name="location"
+                fullWidth
+                autoComplete="off"
+                label="Where"
+                placeholder="e.g. 'london'"
+                className="w-100"
+                value={searchQuery.location}
+                onChange={handelSearch}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchTwoToneIcon />
+                    </InputAdornment>
+                  ),
+                  style: {
+                    height: '37px'
+                  }
+                }}
+                onKeyUp={(e) => {
+                  if (e.key === 'Backspace' && e.target.value.length < 2) {
+                    searchQuery[e.target.name] = '';
+                    props.searchFilter[e.target.name] = '';
+                    setSearchQuery({ ...props.searchFilter });
+                    setCountryCity([]);
+                    setSearchData(false);
+                  }
+                }}
+                onKeyPress={(e) => countryFilter(e.target.value)}
+              />
+
+              {countyCity.length ? (
+                <ul className="list-group mt-2">
+                  {countyCity.map((user, index) => (
+                    <li
+                      key={index}
+                      className="list-group-item list-group-item-success"
+                      onClick={() => {
+                        props.searchFilter['location'] = user;
+                        setSearchQuery({ ...props.searchFilter });
+                        setCountryCity([]);
+                      }}>
+                      <span>{user}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : searchData === true ? (
+                <ul className="list-group mt-2">
+                  <li className="list-group-item list-group-item-success">
+                    <span>Not Found</span>
+                  </li>
+                </ul>
+              ) : (
+                ''
+              )}
+            </div>
+          </Grid>
+          <Grid item sm={4} xs={12}>
+            <Button
+              size="small"
+              disabled={searchLoader}
+              className="btn-dribbble hover-scale-sm"
+              onClick={search}>
+              <span className="px-2">Search</span>
+              <ClipLoader
+                color={'var(--info)'}
+                loading={searchLoader}
+                size={20}
+              />
+            </Button>
+          </Grid>
+        </Grid>
+      </Card>
+
+      <div className="mt-5">
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
             <Card className="card-box">
               <h4 className="p-3 border-bottom">Showing results for</h4>
               <div className="px-3 py-2">
-                <div>
-                  <label className="font-weight-bold">Distance</label>
-                  <select
-                    className="MuiTextField-root MuiFormControl-fullWidth"
-                    variant="outlined"
-                    fullWidth
-                    // value={distance}
-                    // onChange={handelSearch}
-                    name="distance">
-                    <option value="">Select Distance</option>
-                    {/* {distanceObj.map((dis) => (
-                      <option value={dis.value}>{dis.label}</option>
+                <b>Job title</b>
+                <ul className="cards-filter">
+                  {searchQuery.jobTitles.map((filter, index) => (
+                    <li key={index} className="cards__item_search">
+                      <div>
+                        <span>{filter.name}</span>
+                      </div>
+                    </li>
+                  ))}
+                  <li>
+                    <div className="ml-3 pt-2 pointer text-black-50">
+                      {!searchQuery.jobTitles.length && (
+                        <span className="mr-2">Add Job title</span>
+                      )}
+                      <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                        onClick={() => {
+                          setOpenJobs({ open: true, do: [] });
+                        }}
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="divider opacity-8 my-1" />
+              <div className="px-3 py-2">
+                <b>Locations</b>
+                <ul className="cards-filter">
+                  {searchQuery.location.map((filter, index) => (
+                    <li key={index} className="cards__item_search">
+                      <div>
+                        <span>{filter.name}</span>
+                      </div>
+                    </li>
+                  ))}
+                  <li>
+                    <div className="ml-3 pt-2 pointer text-black-50">
+                      {!searchQuery.location.length && (
+                        <span className="mr-2">Add Locations</span>
+                      )}
+                      <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                        onClick={() => {
+                          setOpenLocation({ open: true, do: [] });
+                        }}
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div className="divider opacity-8 my-1" />
+              <div className="px-3 py-2">
+                <b>Skills</b>
+                <ul className="cards-filter">
+                  {filterApplied.map((filter, index) => (
+                    <li key={index} className="cards__item_search">
+                      <div>
+                        <span>{filter.name}</span>
+                      </div>
+                    </li>
+                  ))}
+                  <li>
+                    <div className="ml-3 pt-2 pointer text-black-50">
+                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div className="divider opacity-8 my-1" />
+              <div className="px-3 py-2">
+                <b>Companies</b>
+                <ul className="cards-filter">
+                  {/* {filterApplied.map((filter, index) => (
+                      <li key={index} className="cards__item_search">
+                        <div>
+                          <span>{filter.name}</span>
+                        </div>
+                      </li>
                     ))} */}
-                  </select>
-                </div>
-                <div className="mt-3">
-                  <b>Salary range</b>
-                </div>
-                <div>
-                  <label className="font-weight-bold mt-2">From:</label>
-                  <select
-                    className="MuiTextField-root MuiFormControl-fullWidth"
-                    variant="outlined"
-                    fullWidth
-                    // value={startSalary}
-                    // onChange={handelSearch}
-                    name="startSalary">
-                    <option value="0">Start at</option>
-                    {/* {dolorPrice.map((price) => (
-                      <option value={price.value}>{price.label}</option>
-                    ))} */}
-                  </select>
-                  <label className="font-weight-bold mt-2">To:</label>
-                  <select
-                    className="MuiTextField-root MuiFormControl-fullWidth"
-                    variant="outlined"
-                    fullWidth
-                    // value={endSalary}
-                    // onChange={handelSearch}
-                    name="endSalary">
-                    <option value="0">End at</option>
-                    {/* {dolorPrice.map((price) => (
-                      <option value={price.value}>{price.label}</option>
-                    ))} */}
-                  </select>
-                </div>
-              </div>
-
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2">
-                <div className="mt-3">
-                  <b>Job type</b>
-                  <div>
-                    <FormControl component="fieldset">
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={permanent}
-                              // onChange={handleChange}
-                              name="permanent"
-                            />
-                          }
-                          label="Permanent"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={temporary}
-                              // onChange={handleChange}
-                              name="temporary"
-                            />
-                          }
-                          label="Temporary"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={contract}
-                              // onChange={handleChange}
-                              name="contract"
-                            />
-                          }
-                          label="Contract"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={fullTime}
-                              // onChange={handleChange}
-                              name="fullTime"
-                            />
-                          }
-                          label="Full-time"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={partTime}
-                              // onChange={handleChange}
-                              name="partTime"
-                            />
-                          }
-                          label="Part-time"
-                        />
-                      </FormGroup>
-                    </FormControl>
-                  </div>
-                </div>
+                  <li>
+                    <div className="ml-3 pt-2 pointer text-black-50">
+                      <span className="mr-2">Add Companies</span>
+                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div className="divider opacity-8 my-1" />
               <div className="px-3 py-2">
-                <div className="mt-3">
-                  <b>Date posted</b>
-                  <select
-                    className="MuiTextField-root MuiFormControl-fullWidth"
-                    variant="outlined"
-                    fullWidth
-                    // onChange={handelSearch}
-                    // value={datePost}
-                    name="datePost">
-                    {/* {jobPosted.map((post) => (
-                      <option value={post.value}>{post.label}</option>
-                    ))} */}
-                  </select>
-                </div>
+                <b>Eductions</b>
+                <ul className="cards-filter">
+                  <li>
+                    <div className="ml-3 pt-2 pointer text-black-50">
+                      <span className="mr-2">Add Eductions</span>
+                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div className="divider opacity-8 my-1" />
               <div className="px-3 py-2">
-                <div className="mt-3">
-                  <b>Specialisms</b>
-                  <div>
-                    <FormControl component="fieldset">
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={agencyPost}
-                              // onChange={handleChange}
-                              name="agencyPost"
-                            />
-                          }
-                          label="Agency"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={employerPost}
-                              // onChange={handleChange}
-                              name="employer"
-                            />
-                          }
-                          label="Employer"
-                        />
-                      </FormGroup>
-                    </FormControl>
-                  </div>
-                </div>
-              </div>
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2">
-                <div className="mt-3">
-                  <b>Post by</b>
-                  <div>
-                    <FormControl component="fieldset">
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={agencyPost}
-                              // onChange={handleChange}
-                              name="agencyPost"
-                            />
-                          }
-                          label="Agency"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={employerPost}
-                              // onChange={handleChange}
-                              name="employer"
-                            />
-                          }
-                          label="Employer"
-                        />
-                      </FormGroup>
-                    </FormControl>
-                  </div>
-                </div>
-              </div>
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2">
-                <div className="mt-3">
-                  <b>Related jobs</b>
-                  <div>
-                    <FormControl component="fieldset">
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={nursing}
-                              // onChange={handleChange}
-                              name="nursing"
-                            />
-                          }
-                          label="Nursing"
-                        />
-                      </FormGroup>
-
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={registerNurse}
-                              // onChange={handleChange}
-                              name="registerNurse"
-                            />
-                          }
-                          label="Register Nurse"
-                        />
-                      </FormGroup>
-
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={NHS}
-                              // onChange={handleChange}
-                              name="NHS"
-                            />
-                          }
-                          label="NHS"
-                        />
-                      </FormGroup>
-
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={staffNurse}
-                              // onChange={handleChange}
-                              name="staffNurse"
-                            />
-                          }
-                          label="Staff Nurse"
-                        />
-                      </FormGroup>
-
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              // checked={careAssistant}
-                              // onChange={handleChange}
-                              name="careAssistant"
-                            />
-                          }
-                          label="Care Assistant"
-                        />
-                      </FormGroup>
-                    </FormControl>
-                  </div>
-                </div>
+                <b>Keyword</b>
+                <ul className="cards-filter">
+                  <li>
+                    <div className="ml-3 pt-2 pointer text-black-50">
+                      <span className="mr-2">Add Keyword</span>
+                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                    </div>{' '}
+                  </li>
+                </ul>
               </div>
             </Card>
           </Grid>
@@ -377,145 +419,144 @@ const CandidateSearchComponent = (props) => {
             {searchResult.length ? (
               <>
                 {searchResult.map((job, index) => (
-                  <div className="card card-box gutter-b card-stretch bg-white btn rounded text-left mb-2">
-                    <div key={0}>
-                      <Card className="card-box">
-                        <CardContent>
-                          <Grid container spacing={1}>
-                            <Grid item xs={12} sm={2}>
-                              <div className="avatar-icon-wrapper avatar-icon-lg">
-                                <div className="avatar-icon rounded d-110">
-                                  <img alt="..." src={avatar7} />
-                                </div>
+                  <div
+                    key={index}
+                    className="card card-box gutter-b card-stretch bg-white btn rounded text-left mb-2">
+                    <Card className="card-box">
+                      <CardContent>
+                        <Grid container spacing={1}>
+                          <Grid item xs={12} sm={2}>
+                            <div className="avatar-icon-wrapper avatar-icon-lg">
+                              <div className="avatar-icon rounded d-110">
+                                <img alt="..." src={avatar7} />
                               </div>
-                            </Grid>
-                            <Grid item xs={12} sm={8}>
-                              <div>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="a-blue font-weight-bold ml-1 font-size-xxl"
-                                  title="...">
-                                  Kate Winchester
-                                </a>
-                                <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
-                                  2nd
-                                </Button>
-                                <div className="float-right">
-                                  <span className="text-black-50 font-size-xl">
-                                    Above{' '}
-                                    <span className="a-blue font-weight-bold font-size-xxl">
-                                      20%
-                                    </span>
+                            </div>
+                          </Grid>
+                          <Grid item xs={12} sm={8}>
+                            <div>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="a-blue font-weight-bold ml-1 font-size-xxl"
+                                title="...">
+                                Kate Winchester
+                              </a>
+                              <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
+                                2nd
+                              </Button>
+                              <div className="float-right">
+                                <span className="text-black-50 font-size-xl">
+                                  Above{' '}
+                                  <span className="a-blue font-weight-bold font-size-xxl">
+                                    20%
                                   </span>
-                                </div>
+                                </span>
                               </div>
+                            </div>
 
-                              <ul className="cards-filter">
-                                {filterApplied.map((filter, index) => (
-                                  <li
-                                    key={index}
-                                    className="cards__item bg-primary text-white">
-                                    <div>
-                                      <span>{filter.name}</span>
-                                    </div>
-                                  </li>
-                                ))}
-                                <li className="cards__item bg-brand-discord text-white">
+                            <ul className="cards-filter">
+                              {filterApplied.map((filter, index) => (
+                                <li
+                                  key={index}
+                                  className="cards__item bg-primary text-white">
                                   <div>
-                                    <span>10+ years</span>
+                                    <span>{filter.name}</span>
                                   </div>
                                 </li>
-                              </ul>
-
-                              <div className="">
-                                <span className="d-block">
-                                  Senior Software Engineer.
-                                </span>
-                                <span className="text-black-50 d-block">
-                                  San Francisco Bay Area.
-                                </span>
-                                <a
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  className="text-success d-block">
-                                  <FontAwesomeIcon
-                                    icon={['fas', 'caret-right']}
-                                  />{' '}
-                                  2 Shared connections &bull; Similar
-                                </a>
-                              </div>
-                            </Grid>
-
-                            <Grid item xs={12} sm={2}>
-                              <div className="d-flex justify-content-between">
-                                <div className="d-flex align-items-center">
-                                  <Button
-                                    fullWidth
-                                    size="small"
-                                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                                    <span>Connect</span>
-                                  </Button>
+                              ))}
+                              <li className="cards__item bg-brand-discord text-white">
+                                <div>
+                                  <span>10+ years</span>
                                 </div>
-                              </div>
-                            </Grid>
-                          </Grid>
+                              </li>
+                            </ul>
 
-                          <Grid container spacing={1}>
-                            <Grid item xs={12} sm={2}>
-                              <span className="text-black-50 nowrap float-right">
-                                Post :{' '}
+                            <div className="">
+                              <span className="d-block">
+                                Senior Software Engineer.
                               </span>
-                            </Grid>
-                            <Grid item xs={12} sm={8}>
-                              <div>
-                                <p className="mb-0">
-                                  From its medieval origins to the digital era,
-                                  learn everything there is to know about the
-                                  ubiquitous lorem ipsum passage learn
-                                  everything there is.
-                                </p>
-                              </div>
-                            </Grid>
-                            <Grid item xs={12} sm={2}></Grid>
-                          </Grid>
-
-                          <Grid container spacing={1}>
-                            <Grid item xs={12} sm={2}>
-                              <span className="text-black-50 nowrap float-right">
-                                Post :{' '}
+                              <span className="text-black-50 d-block">
+                                San Francisco Bay Area.
                               </span>
-                            </Grid>
-                            <Grid item xs={12} sm={8}>
-                              <div>
-                                <p className="mb-0">
-                                  Primary website/webapp Engineer (employee) At
-                                  Anglepoise Primary
-                                </p>
-                              </div>
-                            </Grid>
-                            <Grid item xs={12} sm={2}></Grid>
+                              <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="text-success d-block">
+                                <FontAwesomeIcon
+                                  icon={['fas', 'caret-right']}
+                                />{' '}
+                                2 Shared connections &bull; Similar
+                              </a>
+                            </div>
                           </Grid>
 
-                          <Grid container spacing={1}>
-                            <Grid item xs={12} sm={2}>
-                              <span className="text-black-50 nowrap float-right">
-                                Summary :{' '}
-                              </span>
-                            </Grid>
-                            <Grid item xs={12} sm={8}>
-                              <div>
-                                <p className="mb-0">
-                                  Senior software developer
-                                </p>
+                          <Grid item xs={12} sm={2}>
+                            <div className="d-flex justify-content-between">
+                              <div className="d-flex align-items-center">
+                                <Button
+                                  fullWidth
+                                  size="small"
+                                  className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                                  <span>Connect</span>
+                                </Button>
                               </div>
-                            </Grid>
-                            <Grid item xs={12} sm={2}></Grid>
+                            </div>
                           </Grid>
-                        </CardContent>
-                        <div className="divider" />
+                        </Grid>
 
-                        {/* <div className="card-footer bg-white text-center p-3">
+                        <Grid container spacing={1}>
+                          <Grid item xs={12} sm={2}>
+                            <span className="text-black-50 nowrap float-right">
+                              Post :{' '}
+                            </span>
+                          </Grid>
+                          <Grid item xs={12} sm={8}>
+                            <div>
+                              <p className="mb-0">
+                                From its medieval origins to the digital era,
+                                learn everything there is to know about the
+                                ubiquitous lorem ipsum passage learn everything
+                                there is.
+                              </p>
+                            </div>
+                          </Grid>
+                          <Grid item xs={12} sm={2}></Grid>
+                        </Grid>
+
+                        <Grid container spacing={1}>
+                          <Grid item xs={12} sm={2}>
+                            <span className="text-black-50 nowrap float-right">
+                              Post :{' '}
+                            </span>
+                          </Grid>
+                          <Grid item xs={12} sm={8}>
+                            <div>
+                              <p className="mb-0">
+                                Primary website/webapp Engineer (employee) At
+                                Anglepoise Primary
+                              </p>
+                            </div>
+                          </Grid>
+                          <Grid item xs={12} sm={2}></Grid>
+                        </Grid>
+
+                        <Grid container spacing={1}>
+                          <Grid item xs={12} sm={2}>
+                            <span className="text-black-50 nowrap float-right">
+                              Summary :{' '}
+                            </span>
+                          </Grid>
+                          <Grid item xs={12} sm={8}>
+                            <div>
+                              <p className="mb-0">Senior software developer</p>
+                            </div>
+                          </Grid>
+                          <Grid item xs={12} sm={2}></Grid>
+                        </Grid>
+                      </CardContent>
+                      <div className="divider" />
+
+                      {/* <div className="card-footer bg-white text-center p-3">
                     <Button className="btn-primary btn-icon d-40 p-0 hover-scale-lg rounded-circle mr-2">
                       <FontAwesomeIcon
                         icon={['far', 'question-circle']}
@@ -529,8 +570,7 @@ const CandidateSearchComponent = (props) => {
                       />
                     </Button>
                   </div> */}
-                      </Card>
-                    </div>
+                    </Card>
                   </div>
                 ))}
               </>
@@ -551,189 +591,177 @@ const CandidateSearchComponent = (props) => {
           </Grid>
         </Grid>
       </div>
-      <Card className="px-3 pt-3 overflow-visible h-180px">
-        <Grid container spacing={2}>
-          <Grid item md={3} xs={12}>
-            <b>Name</b>
-            <TextField
-              variant="outlined"
-              size="small"
-              placeholder="Search by name"
-              className="w-100"
-              name="name"
-              onChange={handlerSearch}
-              InputProps={{
-                style: {
-                  height: '37px'
-                }
-              }}
-            />
-          </Grid>
-          <Grid item md={3} xs={12}>
-            <b>Job Title</b>
-            <TextField
-              variant="outlined"
-              size="small"
-              name="jobTitle"
-              onChange={handlerSearch}
-              placeholder="Search by job title"
-              className="w-100"
-              InputProps={{
-                style: {
-                  height: '37px'
-                }
-              }}
-            />
-          </Grid>
-          <Grid item md={3} xs={12}>
-            <b>Location</b>
-            <PlaceSearchComponent />
-          </Grid>
-          <Grid item md={3} xs={12}>
-            <b>Availability</b>
-            <div className="position-relative">
-              {isOpen && (
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disablePast
-                    disableToolbar
-                    variant="outlined"
-                    format="dd/MM/yyyy"
-                    // margin="normal"
-                    id="date-picker-outlined"
-                    value={new Date()}
-                    onChange={handleDateChange}
-                    autoOk={true}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date'
-                    }}
-                    open={isOpen}
-                  />
-                </MuiPickersUtilsProvider>
-              )}
-              <select
-                className="MuiTextField-root MuiFormControl-fullWidth select-doc date-pic"
-                variant="outlined"
-                fullWidth
-                name="availability"
-                onChange={(event) => {
-                  if (event.target.value === '3') {
-                    setIsOpen(true);
-                  }
-                  setSearchQuery({
-                    ...searchQuery,
-                    [event.target.name]: event.target.value,
-                    availabilityDate: ''
-                  });
 
-                  console.log('documents.expiration', event.target.value);
-                }}
-                value={searchQuery.availability}>
-                <option value="0">Select Availability</option>
-                <option value="1">Immediately</option>
-                <option value="2">Unavailable</option>
-                <option value="3">
-                  {searchQuery.availabilityDate
-                    ? moment(searchQuery.availabilityDate).format('DD-MM-YYYY')
-                    : 'Available from'}
-                </option>
-              </select>
-            </div>
-          </Grid>
-        </Grid>
-        <div className="card-footer float-right pr-0">
-          <Button
-            disabled={searchLoader}
-            className="btn-neutral-info hover-scale-sm"
-            onClick={search}>
-            <span className="px-2">Search</span>
-            <ClipLoader
-              color={'var(--info)'}
-              loading={searchLoader}
-              size={20}
+      {/* Location search modal */}
+      <Dialog
+        fullWidth
+        open={openLocation.open}
+        onClose={handleModalClose}
+        classes={{
+          paper:
+            'modal-content rounded border-0 bg-white p-3 p-xl-0 overflow-visible'
+        }}>
+        <DialogTitle id="form-dialog-title" className="p-2">
+          <div className="card-badges card-badges-top">
+            <FontAwesomeIcon
+              icon={['fas', 'times']}
+              className="pointer mr-3"
+              onClick={handleModalClose}
             />
-          </Button>
+          </div>
+          <span>Location</span>
+        </DialogTitle>
+        <div className="p-3">
+          <div className="user-new-request">
+            <TextField
+              variant="outlined"
+              size="small"
+              name="location"
+              fullWidth
+              autoComplete="off"
+              label="Where"
+              placeholder="e.g. 'london'"
+              className="w-100"
+              onChange={(e) => {
+                return e.target.value;
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchTwoToneIcon />
+                  </InputAdornment>
+                ),
+                style: {
+                  height: '37px'
+                }
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Backspace' && e.target.value.length < 2) {
+                  searchQuery.location = [];
+                  setSearchQuery({ ...searchQuery });
+                  setCountryCity([]);
+                  setSearchData(false);
+                }
+              }}
+              onKeyPress={(e) => countryFilter(e.target.value)}
+            />
+
+            {countyCity.length ? (
+              <ul className="list-group mt-2">
+                {countyCity.map((user, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-success"
+                    onClick={() => {
+                      searchQuery.location.push({ name: user });
+                      setSearchQuery({ ...searchQuery });
+                      setCountryCity([]);
+                      handleModalClose();
+                    }}>
+                    <span>{user}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : searchData === true ? (
+              <ul className="list-group mt-2">
+                <li className="list-group-item list-group-item-success">
+                  <span>Not Found</span>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
-      </Card>
+      </Dialog>
 
-      <Grid container spacing={2} className="mt-2">
-        <Grid item xs={12} sm={12}>
-          <Card className="">
-            <div className="card-header">
-              <div className="card-header--title font-size-lg">
-                <b>Candidates recently added</b>
-              </div>
-            </div>
+      {/* job title search modal */}
+      <Dialog
+        fullWidth
+        open={openJobs.open}
+        onClose={handleModalClose}
+        classes={{
+          paper:
+            'modal-content rounded border-0 bg-white p-3 p-xl-0 overflow-visible'
+        }}>
+        <DialogTitle id="form-dialog-title" className="p-2">
+          <div className="card-badges card-badges-top">
+            <FontAwesomeIcon
+              icon={['fas', 'times']}
+              className="pointer mr-3"
+              onClick={handleModalClose}
+            />
+          </div>
+          <span>Jobs Titles</span>
+        </DialogTitle>
+        <div className="p-3">
+          <div className="user-new-request">
+            <TextField
+              variant="outlined"
+              size="small"
+              name="query"
+              fullWidth
+              autoComplete="off"
+              label="What"
+              placeholder="e.g. 'angular'"
+              className="w-100"
+              // value={searchQuery.query}
+              onChange={(e) => {
+                return e.target.value;
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchTwoToneIcon />
+                  </InputAdornment>
+                ),
+                style: {
+                  height: '37px'
+                }
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Backspace' && e.target.value.length < 2) {
+                  // searchQuery.jobTitles.push({ name: user });
+                  //   setSearchQuery({ ...searchQuery });
+                  setSearchJobs([]);
+                  setSearchJobStatus(false);
+                }
+              }}
+              onKeyPress={(e) => findJobs(e.target.value)}
+            />
 
-            <div className="table-responsive-md">
-              <PerfectScrollbar>
-                <Table className="table table-hover text-nowrap mb-0">
-                  <thead>
-                    <tr>
-                      <th className="text-left">Added On</th>
-                      <th>Name</th>
-                      <th className="text-center">Location</th>
-                      <th className="text-center">Job Title</th>
-                      <th className="text-center">Availability</th>
-                      <th className="text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {searchLoader ? (
-                      <LoaderComponent />
-                    ) : (
-                      <>
-                        {candidate.map((can, index) => (
-                          <tr key={index}>
-                            <td className="font-weight-bold">
-                              {convertDate(can.created_at)}
-                            </td>
-                            <td>
-                              {can.first_name} {can.last_name}
-                            </td>
-                            <td className="text-center text-black-50">
-                              {can.job_title || '--'}
-                            </td>
-                            <td className="text-center">
-                              {can.location || '--'}
-                            </td>
-                            <td className="text-center">
-                              {can.availability === 'available_from'
-                                ? can.available_date
-                                : can.availability}
-                            </td>
-                            <td className="text-center">
-                              <a
-                                className="a-blue"
-                                href="!#"
-                                onClick={(e) => e.preventDefault()}>
-                                View Profile
-                              </a>
-                            </td>
-                          </tr>
-                        ))}
-                      </>
-                    )}
-                  </tbody>
-                </Table>
-                {!candidate.length && !searchLoader && (
-                  <div className="font-size-xxl m-5 text-center">
-                    No data found
-                  </div>
-                )}
-              </PerfectScrollbar>
-            </div>
-            <div className="card-footer py-3 text-center">
-              <Button
-                size="small"
-                className="btn-outline-second"
-                variant="text">
-                View more
-              </Button>
-            </div>
-          </Card>
-        </Grid>
-      </Grid>
+            {searchJobs.length ? (
+              <ul className="list-group mt-2">
+                {searchJobs.map((user, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-success">
+                    <span
+                      onClick={() => {
+                        searchQuery.jobTitles.push({
+                          name: user.normalized_job_title
+                        });
+                        setSearchQuery({ ...searchQuery });
+                        setSearchJobs([]);
+                        handleModalClose();
+                      }}>
+                      {user.normalized_job_title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : searchJobStatus === true ? (
+              <ul className="list-group mt-2">
+                <li className="list-group-item list-group-item-success">
+                  <span>Not Found</span>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 };
