@@ -131,7 +131,7 @@ const JobSearchComponent = (props) => {
 
   const [filterApplied, setFilterApplied] = useState([]);
   const [state, setState] = useState(props.searchFilter);
-  const [openApplyBox, setopenApplyBox] = useState({ open: false, job: [] });
+  const [openApplyBox, setOpenApplyBox] = useState({ open: false, job: [] });
 
   const {
     permanent,
@@ -159,7 +159,7 @@ const JobSearchComponent = (props) => {
   }, []);
 
   const handleExpModalClose = () => {
-    setopenApplyBox({ open: false, job: [] });
+    setOpenApplyBox({ open: false, job: [] });
   };
 
   const getJobsFilters = (state, page) => {
@@ -807,7 +807,7 @@ const JobSearchComponent = (props) => {
                             size="small"
                             className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2"
                             onClick={() =>
-                              setopenApplyBox({
+                              setOpenApplyBox({
                                 open: true,
                                 job: job
                               })
