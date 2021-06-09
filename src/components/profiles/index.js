@@ -2211,7 +2211,7 @@ export default function LivePreviewExample() {
                             rowsMax={4}
                             inputProps={{
                               style: { fontSize: 10 },
-                              maxlength: CHARACTER_LIMIT
+                              maxLength: CHARACTER_LIMIT
                             }}
                             onChange={(event) => {
                               setEditProfile(event.target.value);
