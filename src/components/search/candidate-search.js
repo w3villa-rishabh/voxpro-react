@@ -34,8 +34,18 @@ const CandidateSearchComponent = (props) => {
   const [searchResult] = useState([1, 2, 3, 4]);
   const [searchQuery, setSearchQuery] = useState({
     name: '',
-    location: [],
-    jobTitles: [],
+    location: [
+      { name: 'London' },
+      { name: 'Uk' },
+      { name: 'Noida' },
+      { name: 'Delhi' }
+    ],
+    jobTitles: [
+      { name: 'Node js' },
+      { name: 'Full stack' },
+      { name: 'Angular 4+' },
+      { name: 'React js' }
+    ],
     // jobTitle: '',
     availability: '0',
     availabilityDate: ''
@@ -295,7 +305,7 @@ const CandidateSearchComponent = (props) => {
         </Grid>
       </Card>
 
-      <div className="mt-5">
+      <div className="mt-3">
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
             <Card className="card-box">
@@ -317,9 +327,9 @@ const CandidateSearchComponent = (props) => {
                       )}
                       <FontAwesomeIcon
                         icon={['fas', 'plus']}
-                        onClick={() => {
-                          setOpenJobs({ open: true, do: [] });
-                        }}
+                        // onClick={() => {
+                        //   setOpenJobs({ open: true, do: [] });
+                        // }}
                       />
                     </div>
                   </li>
@@ -344,9 +354,9 @@ const CandidateSearchComponent = (props) => {
                       )}
                       <FontAwesomeIcon
                         icon={['fas', 'plus']}
-                        onClick={() => {
-                          setOpenLocation({ open: true, do: [] });
-                        }}
+                        // onClick={() => {
+                        //   setOpenLocation({ open: true, do: [] });
+                        // }}
                       />
                     </div>
                   </li>
