@@ -41,12 +41,10 @@ const CandidateSearchComponent = (props) => {
     availabilityDate: ''
   });
 
-  // const [searchJobStatus, setSearchJobStatus] = useState(false);
-  const [searchData, setSearchData] = useState(false);
-
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
-  // const [searchQuery, setSearchQuery] = useState(props.searchFilter);
+
+  const [searchData, setSearchData] = useState(false);
   const [openLocation, setOpenLocation] = useState({ open: false, do: [] });
   const [openJobs, setOpenJobs] = useState({ open: false, do: [] });
   const [searchJobStatus, setSearchJobStatus] = useState(false);
@@ -178,6 +176,8 @@ const CandidateSearchComponent = (props) => {
   const handleModalClose = () => {
     setOpenLocation({ open: false, do: [] });
     setOpenJobs({ open: false, do: [] });
+    setCountryCity([]);
+    setSearchJobs([]);
   };
 
   return (
@@ -655,7 +655,6 @@ const CandidateSearchComponent = (props) => {
                     onClick={() => {
                       searchQuery.location.push({ name: user });
                       setSearchQuery({ ...searchQuery });
-                      setCountryCity([]);
                       handleModalClose();
                     }}>
                     <span>{user}</span>
@@ -742,7 +741,6 @@ const CandidateSearchComponent = (props) => {
                           name: user.normalized_job_title
                         });
                         setSearchQuery({ ...searchQuery });
-                        setSearchJobs([]);
                         handleModalClose();
                       }}>
                       {user.normalized_job_title}
