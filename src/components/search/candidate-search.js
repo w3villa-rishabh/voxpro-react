@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -7,8 +7,7 @@ import {
   Button,
   TextField,
   Table,
-  List,
-  ListItem
+  CardContent
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import { ClipLoader } from 'react-spinners';
@@ -25,21 +24,22 @@ import LoaderComponent from 'components/loader';
 import { convertDate } from 'helper';
 import PlaceSearchComponent from './search-place';
 import { connect } from 'react-redux';
-import avatar6 from '../../assets/images/avatars/avatar6.jpg';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Pagination from '@material-ui/lab/Pagination';
 
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import Pagination from '@material-ui/lab/Pagination';
+import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 
 const CandidateSearchComponent = (props) => {
   const [searchLoader, setSearchLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [candidate, setCandidate] = useState([]);
+  const [filterApplied, setFilterApplied] = useState([]);
+  const [searchResult] = useState([1, 2, 3, 4]);
   const [searchQuery, setSearchQuery] = useState({
     name: '',
     location: '',
@@ -47,6 +47,15 @@ const CandidateSearchComponent = (props) => {
     availability: '0',
     availabilityDate: ''
   });
+
+  useEffect(() => {
+    setFilterApplied([
+      { name: 'Node js' },
+      { name: 'Full stack' },
+      { name: 'Angular 4+' },
+      { name: 'React js' }
+    ]);
+  }, []);
 
   const handlerSearch = (event) => {
     setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
@@ -365,195 +374,169 @@ const CandidateSearchComponent = (props) => {
             </Card>
           </Grid>
           <Grid item xs={12} sm={9}>
-            {/* {props.searchResult.length ? (
+            {searchResult.length ? (
               <>
-                {props.searchResult.map((job, index) => ( */}
-            <div className="card card-box gutter-b card-stretch bg-white btn rounded text-left py-2 mb-2">
-              <div key={0}>
-                <List component="div" className="list-group-flush">
-                  <ListItem className="text-center text-md-left p-4 d-block d-md-flex justify-content-between align-items-start">
-                    <a
-                      href="#/"
-                      onClick={(e) => e.preventDefault()}
-                      className="avatar-icon-wrapper mr-0 mr-md-3">
-                      <div className="d-block p-0 avatar-icon-wrapper m-0 d-100">
-                        <div className="badge badge-success badge-circle p-top-a">
-                          Online
-                        </div>
-                        <div className="rounded overflow-hidden">
-                          <img alt="..." className="img-fluid" src={avatar6} />
-                        </div>
-                      </div>
-                    </a>
-                    <div className="d-flex flex-grow-1 pl-1 flex-column">
-                      <div className="d-flex flex-column flex-xl-row justify-content-between">
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-size-lg mx-0 my-3 my-xl-0 font-weight-bold p-0">
-                            Trystan Russo
-                          </a>
-                          <div className="d-block d-md-flex align-items-center mt-1 mb-3">
-                            <FontAwesomeIcon
-                              icon={['far', 'envelope']}
-                              className="mr-2"
-                            />
-                            <span className="text-black-50 pr-4">
-                              russotry@russo.com
-                            </span>
+                {searchResult.map((job, index) => (
+                  <div className="card card-box gutter-b card-stretch bg-white btn rounded text-left mb-2">
+                    <div key={0}>
+                      <Card className="card-box">
+                        <CardContent>
+                          <Grid container spacing={1}>
+                            <Grid item xs={12} sm={2}>
+                              <div className="avatar-icon-wrapper avatar-icon-lg">
+                                <div className="avatar-icon rounded d-110">
+                                  <img alt="..." src={avatar7} />
+                                </div>
+                              </div>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                              <div>
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="a-blue font-weight-bold ml-1 font-size-xxl"
+                                  title="...">
+                                  Kate Winchester
+                                </a>
+                                <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
+                                  2nd
+                                </Button>
+                                <div className="float-right">
+                                  <span className="text-black-50 font-size-xl">
+                                    Above{' '}
+                                    <span className="a-blue font-weight-bold font-size-xxl">
+                                      20%
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
 
-                            <FontAwesomeIcon
-                              icon={['far', 'address-card']}
-                              className="mr-2"
-                            />
-                            <span className="text-black-50 pr-4">
-                              Project Manager
-                            </span>
+                              <ul className="cards-filter">
+                                {filterApplied.map((filter, index) => (
+                                  <li
+                                    key={index}
+                                    className="cards__item bg-primary text-white">
+                                    <div>
+                                      <span>{filter.name}</span>
+                                    </div>
+                                  </li>
+                                ))}
+                                <li className="cards__item bg-brand-discord text-white">
+                                  <div>
+                                    <span>10+ years</span>
+                                  </div>
+                                </li>
+                              </ul>
 
-                            <FontAwesomeIcon
-                              icon={['far', 'map']}
-                              className="mr-2"
-                            />
-                            <span className="text-black-50">
-                              San Francisco, USA
-                            </span>
-                          </div>
-                        </div>
-                        <div className="divider mb-3 mb-xl-0" />
-                        <div className="pb-3 pt-1 py-xl-0">
-                          <Button
-                            size="small"
-                            className="btn-primary shadow-none mr-2 text-uppercase font-size-xs font-weight-bold">
-                            Chat
-                          </Button>
-                          <Button
-                            size="small"
-                            className="btn-neutral-primary text-uppercase font-size-xs font-weight-bold">
-                            Profile
-                          </Button>
-                        </div>
-                      </div>
-                      <Grid
-                        container
-                        spacing={6}
-                        className="d-flex align-items-center">
-                        <Grid item lg={6}>
-                          <p className="mb-0">
-                            McClintock's eye for detail certainly helped narrow
-                            the whereabouts.
-                          </p>
-                        </Grid>
-                        <Grid item lg={6}>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="text-black-50">Progress</div>
-                            {/* <LinearProgress
-                              variant="determinate"
-                              className="progress-bar-rounded flex-grow-1 progress-xs progress-animated-alt mx-2 progress-bar-danger"
-                              value={56}
-                            /> */}
-                            <div className="font-weight-bold font-size-lg">
-                              56%
-                            </div>
-                          </div>
-                        </Grid>
-                      </Grid>
+                              <div className="">
+                                <span className="d-block">
+                                  Senior Software Engineer.
+                                </span>
+                                <span className="text-black-50 d-block">
+                                  San Francisco Bay Area.
+                                </span>
+                                <a
+                                  href="#/"
+                                  onClick={(e) => e.preventDefault()}
+                                  className="text-success d-block">
+                                  <FontAwesomeIcon
+                                    icon={['fas', 'caret-right']}
+                                  />{' '}
+                                  2 Shared connections &bull; Similar
+                                </a>
+                              </div>
+                            </Grid>
+
+                            <Grid item xs={12} sm={2}>
+                              <div className="d-flex justify-content-between">
+                                <div className="d-flex align-items-center">
+                                  <Button
+                                    fullWidth
+                                    size="small"
+                                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                                    <span>Connect</span>
+                                  </Button>
+                                </div>
+                              </div>
+                            </Grid>
+                          </Grid>
+
+                          <Grid container spacing={1}>
+                            <Grid item xs={12} sm={2}>
+                              <span className="text-black-50 nowrap float-right">
+                                Post :{' '}
+                              </span>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                              <div>
+                                <p className="mb-0">
+                                  From its medieval origins to the digital era,
+                                  learn everything there is to know about the
+                                  ubiquitous lorem ipsum passage learn
+                                  everything there is.
+                                </p>
+                              </div>
+                            </Grid>
+                            <Grid item xs={12} sm={2}></Grid>
+                          </Grid>
+
+                          <Grid container spacing={1}>
+                            <Grid item xs={12} sm={2}>
+                              <span className="text-black-50 nowrap float-right">
+                                Post :{' '}
+                              </span>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                              <div>
+                                <p className="mb-0">
+                                  Primary website/webapp Engineer (employee) At
+                                  Anglepoise Primary
+                                </p>
+                              </div>
+                            </Grid>
+                            <Grid item xs={12} sm={2}></Grid>
+                          </Grid>
+
+                          <Grid container spacing={1}>
+                            <Grid item xs={12} sm={2}>
+                              <span className="text-black-50 nowrap float-right">
+                                Summary :{' '}
+                              </span>
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                              <div>
+                                <p className="mb-0">
+                                  Senior software developer
+                                </p>
+                              </div>
+                            </Grid>
+                            <Grid item xs={12} sm={2}></Grid>
+                          </Grid>
+                        </CardContent>
+                        <div className="divider" />
+
+                        {/* <div className="card-footer bg-white text-center p-3">
+                    <Button className="btn-primary btn-icon d-40 p-0 hover-scale-lg rounded-circle mr-2">
+                      <FontAwesomeIcon
+                        icon={['far', 'question-circle']}
+                        className="font-size-lg"
+                      />
+                    </Button>
+                    <Button className="btn-primary btn-icon d-40 p-0 hover-scale-lg rounded-circle">
+                      <FontAwesomeIcon
+                        icon={['far', 'user-circle']}
+                        className="font-size-lg"
+                      />
+                    </Button>
+                  </div> */}
+                      </Card>
                     </div>
-                  </ListItem>
-                  <ListItem className="text-center text-md-left p-4 d-block d-md-flex justify-content-between align-items-start">
-                    <a
-                      href="#/"
-                      onClick={(e) => e.preventDefault()}
-                      className="mr-0 mr-md-3">
-                      <div className="avatar-icon-wrapper m-0 d-100">
-                        <div className="badge badge-danger badge-position badge-position--bottom-right badge-circle">
-                          Offline
-                        </div>
-                        <div className="rounded overflow-hidden bg-neutral-danger font-size-lg text-center font-weight-bold text-danger d-flex justify-content-center flex-column">
-                          <span>HS</span>
-                        </div>
-                      </div>
-                    </a>
-                    <div className="d-flex flex-grow-1 pl-1 flex-column">
-                      <div className="d-flex flex-column flex-xl-row justify-content-between">
-                        <div>
-                          <a
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}
-                            className="font-size-lg mx-0 my-3 my-xl-0 font-weight-bold p-0">
-                            Zara Wagstaff
-                          </a>
-                          <div className="d-block d-md-flex align-items-center mt-1 mb-3">
-                            <FontAwesomeIcon
-                              icon={['far', 'envelope']}
-                              className="mr-2"
-                            />
-                            <span className="text-black-50 pr-4">
-                              zara@wags.com
-                            </span>
-
-                            <FontAwesomeIcon
-                              icon={['far', 'address-card']}
-                              className="mr-2"
-                            />
-                            <span className="text-black-50 pr-4">
-                              UX Consultant
-                            </span>
-
-                            <FontAwesomeIcon
-                              icon={['far', 'map']}
-                              className="mr-2"
-                            />
-                            <span className="text-black-50">London, UK</span>
-                          </div>
-                        </div>
-                        <div className="divider mb-3 mb-xl-0" />
-                        <div className="pb-3 pt-1 py-xl-0">
-                          <Button
-                            size="small"
-                            className="btn-primary shadow-none mr-2 text-uppercase font-size-xs font-weight-bold">
-                            Chat
-                          </Button>
-                          <Button
-                            size="small"
-                            className="btn-neutral-primary text-uppercase font-size-xs font-weight-bold">
-                            Profile
-                          </Button>
-                        </div>
-                      </div>
-                      <Grid
-                        container
-                        spacing={6}
-                        className="d-flex align-items-center">
-                        <Grid item lg={6}>
-                          <p className="mb-0">
-                            A 1914 English translation by Harris Rackham reads.
-                          </p>
-                        </Grid>
-                        <Grid item lg={6}>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="text-black-50">Progress</div>
-                            {/* <LinearProgress
-                              variant="determinate"
-                              className="progress-bar-rounded flex-grow-1 progress-xs progress-animated-alt mx-2 progress-bar-success"
-                              value={89}
-                            /> */}
-                            <div className="font-weight-bold font-size-lg">
-                              56%
-                            </div>
-                          </div>
-                        </Grid>
-                      </Grid>
-                    </div>
-                  </ListItem>
-                </List>
-              </div>
-            </div>
-            {/* ))}
+                  </div>
+                ))}
               </>
             ) : (
               <div className="font-size-xxl m-5 text-center">No data found</div>
-            )} */}
+            )}
 
             {props.searchResult.length >= 1 && (
               <div className="p-3 d-flex justify-content-center">
