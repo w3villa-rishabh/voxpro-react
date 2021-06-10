@@ -134,6 +134,11 @@ const CandidateSearchComponent = lazy(() =>
   import('./components/search/candidate-search')
 );
 
+//CandidateAdvanceSearchComponent
+const CandidateAdvanceSearchComponent = lazy(() =>
+  import('./components/search/candidate-advance-search')
+);
+
 //Agency Pending request
 const AgencyPending = lazy(() =>
   import('./components/ir35_tax/agency-pending')
@@ -353,6 +358,7 @@ const Routes = () => {
                 '/search-agencies',
                 '/search-companies',
                 '/search-candidates',
+                '/candidate-advance-search',
                 '/management-company',
                 '/management-agency',
                 '/management-candidate',
@@ -458,6 +464,11 @@ const Routes = () => {
                     path="/search-candidates"
                     component={CandidateSearchComponent}
                   />
+                  <Route
+                    path="/candidate-advance-search"
+                    component={CandidateAdvanceSearchComponent}
+                  />
+
                   <Route
                     path="/management-company"
                     component={AgencyManagementCompany}
