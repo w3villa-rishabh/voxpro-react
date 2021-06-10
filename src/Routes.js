@@ -107,6 +107,10 @@ const TasksCalendarComponent = lazy(() =>
 const SaveJobComponent = lazy(() =>
   import('./components/candidate_jobs/save_job')
 );
+//Hide Jobs
+const HideJobComponent = lazy(() =>
+  import('./components/candidate_jobs/hidden_jobs')
+);
 
 // candidate job search
 const JobSearchComponent = lazy(() =>
@@ -352,6 +356,7 @@ const Routes = () => {
                 '/tasks',
                 '/task-calendar',
                 '/save-jobs',
+                '/hide-jobs',
                 '/search-job',
                 '/jobs',
                 '/view-job',
@@ -446,6 +451,7 @@ const Routes = () => {
                     component={TasksCalendarComponent}
                   />
                   <Route path="/save-jobs" component={SaveJobComponent} />
+                  <Route path="/hide-jobs" component={HideJobComponent} />
                   <Route path="/search-job" component={JobComponent} />
                   <Route path="/jobs" component={JobSearchComponent} />
                   <Route path="/view-job" component={ViewJob} />

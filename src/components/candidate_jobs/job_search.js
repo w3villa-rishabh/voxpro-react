@@ -691,7 +691,7 @@ const JobSearchComponent = (props) => {
 
   const hideJob = (e, job, index) => {
     e.preventDefault();
-    api.post(`/api/v1/jobs/${job.id}/hide_job`).then(
+    api.post(`/api/v1/jobs/${job.id}/hide_job?hide=${true}`).then(
       (response) => {
         if (response.data.success) {
           toast.success(response.data.message);

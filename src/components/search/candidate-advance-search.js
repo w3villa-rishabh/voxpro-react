@@ -9,7 +9,8 @@ import {
   CardContent,
   Dialog,
   DialogTitle,
-  InputAdornment
+  InputAdornment,
+  Link
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import api from '../../api';
@@ -300,8 +301,8 @@ const CandidateAdvanceSearchComponent = (props) => {
                               <Grid item xs={12} sm={8}>
                                 <div>
                                   <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
+                                    href='/view-profile/#{can.id}'
+                                    // onClick={(e) => e.preventDefault()}
                                     className="a-blue font-weight-bold ml-1 font-size-xxl"
                                     title="...">
                                     {can.first_name} {can.last_name}
@@ -338,10 +339,10 @@ const CandidateAdvanceSearchComponent = (props) => {
 
                                 <div className="">
                                   <span className="d-block">
-                                    Senior Software Engineer.
+                                    {can.job_title}
                                   </span>
                                   <span className="text-black-50 d-block">
-                                    San Francisco Bay Area.
+                                    {can.city}, {can.country}
                                   </span>
                                   <a
                                     href="#/"
@@ -390,23 +391,18 @@ const CandidateAdvanceSearchComponent = (props) => {
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
-                                  Post :{' '}
+                                  Description :{' '}
                                 </span>
                               </Grid>
                               <Grid item xs={12} sm={8}>
                                 <div>
-                                  <p className="mb-0">
-                                    From its medieval origins to the digital
-                                    era, learn everything there is to know about
-                                    the ubiquitous lorem ipsum passage learn
-                                    everything there is.
-                                  </p>
+                                  <p className="mb-0">{can.description}</p>
                                 </div>
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>
                             </Grid>
 
-                            <Grid container spacing={1}>
+                            {/* <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
                                   Post :{' '}
@@ -421,19 +417,17 @@ const CandidateAdvanceSearchComponent = (props) => {
                                 </div>
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>
-                            </Grid>
+                            </Grid> */}
 
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
-                                  Summary :{' '}
+                                  Job Title :{' '}
                                 </span>
                               </Grid>
                               <Grid item xs={12} sm={8}>
                                 <div>
-                                  <p className="mb-0">
-                                    Senior software developer
-                                  </p>
+                                  <p className="mb-0">{can.job_title}</p>
                                 </div>
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>

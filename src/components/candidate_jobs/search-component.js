@@ -276,10 +276,9 @@ const JobSearchComponent = (props) => {
           <Grid item sm={2} xs={12}>
             <div className="border-left mt-2 pl-4">
               <a
-                href="#/"
-                className="btn-transparent btn-link btn-link-primary"
-                onClick={(e) => e.preventDefault()}>
-                <span>Browse Jobs </span>
+                href="/hide-jobs"
+                className="btn-transparent btn-link btn-link-primary">
+                <span>Hidden Jobs</span>
                 <FontAwesomeIcon
                   icon={['fas', 'arrow-right']}
                   className="svg-none pt-1"
