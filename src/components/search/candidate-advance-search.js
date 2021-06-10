@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { generatePath, useHistory } from 'react-router';
 
 import {
   Card,
@@ -9,8 +10,7 @@ import {
   CardContent,
   Dialog,
   DialogTitle,
-  InputAdornment,
-  Link
+  InputAdornment
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import api from '../../api';
@@ -29,6 +29,7 @@ import { useLocation } from 'react-router';
 
 const CandidateAdvanceSearchComponent = (props) => {
   const location = useLocation();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [candidate, setCandidate] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
@@ -128,6 +129,16 @@ const CandidateAdvanceSearchComponent = (props) => {
     setOpenJobs({ open: false, do: [] });
     setCountryCity([]);
     setSearchJobs([]);
+  };
+
+  const handleProceed = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-profile/',
+      state: {
+        id
+      }
+    });
   };
 
   return (
@@ -301,8 +312,8 @@ const CandidateAdvanceSearchComponent = (props) => {
                               <Grid item xs={12} sm={8}>
                                 <div>
                                   <a
-                                    href='/view-profile/#{can.id}'
-                                    // onClick={(e) => e.preventDefault()}
+                                    href="#"
+                                    onClick={(e) => handleProceed(e, can.id)}
                                     className="a-blue font-weight-bold ml-1 font-size-xxl"
                                     title="...">
                                     {can.first_name} {can.last_name}

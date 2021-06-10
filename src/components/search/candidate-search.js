@@ -134,6 +134,15 @@ const CandidateSearchComponent = (props) => {
         }
       );
   };
+  const handleProceed = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-profile/',
+      state: {
+        id
+      }
+    });
+  };
 
   return (
     <>
@@ -379,7 +388,7 @@ const CandidateSearchComponent = (props) => {
                               <a
                                 className="a-blue"
                                 href="!#"
-                                onClick={(e) => e.preventDefault()}>
+                                onClick={(e) => handleProceed(e, can.id)}>
                                 View Profile
                               </a>
                             </td>

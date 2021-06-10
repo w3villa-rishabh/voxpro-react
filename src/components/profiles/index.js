@@ -23,9 +23,9 @@ import {
 import PropTypes from 'prop-types';
 
 import avatar1 from '../../assets/images/avatars/default.png';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
-import { getCurrentUser } from '../../helper';
+
 import api from '../../api';
 import avatar5 from '../../assets/images/avatars/default.png';
 import stock2 from '../../assets/images/stock-photos/stock-7.jpg';
@@ -70,12 +70,32 @@ TabPanel.propTypes = {
 const MapMarker = ({ text }) => <div>{text}</div>;
 
 export default function LivePreviewExample() {
+  const location = useLocation();
   const [aboutText, setAboutText] = useState();
   const CHARACTER_LIMIT = 255;
   const [, setData] = useState({});
   const [modal1, seModal1] = useState(false);
-  const [currentUser] = useState(getCurrentUser());
+  // const [currentUser] = useState(getCurrentUser());
+  const [user, setUser] = useState({});
 
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
+  const getUserDetails = () => {
+    let id = location.state ? location.state.id : 0;
+    if (id) {
+      findUserById(id);
+    }
+  };
+  const findUserById = (id) => {
+    api.get(`/api/v1/users/${id}`).then((response) => {
+      if (response.data.success) {
+        setUser({ ...response.data.user });
+        console.log('user', user);
+      }
+    });
+  };
   //  copy from sidebar
   const history = useHistory();
   const [anchorElMenu1, setAnchorElMenu1] = useState(null);
@@ -85,7 +105,7 @@ export default function LivePreviewExample() {
   const [editSocialProfile, setEditProfile] = useState(editValue);
 
   const handleClickMenu1 = (event) => {
-    // if (currentUser.role !== 'company') {
+    // if (user.role !== 'company') {
     setAnchorElMenu1(event.currentTarget);
     setEditProfile(editValue);
     // }
@@ -203,18 +223,18 @@ export default function LivePreviewExample() {
       });
   };
 
-  useEffect(() => {
-    api.get(`/api/user?id=${currentUser.id}`).then((response) => {
-      if (response.data) {
-        setData(response.data);
-        setUserDetials(response.data);
-        setDescription(response.data);
-        // setAboutText(response.data.description);
-      } else {
-        alert('Something went wrong..');
-      }
-    });
-  }, [currentUser.id]);
+  // useEffect(() => {
+  //   api.get(`/api/user?id=${id}`).then((response) => {
+  //     if (response.data) {
+  //       setData(response.data);
+  //       setUserDetials(response.data);
+  //       setDescription(response.data);
+  //       // setAboutText(response.data.description);
+  //     } else {
+  //       alert('Something went wrong..');
+  //     }
+  //   });
+  // }, [user.id]);
 
   const toggle1 = () => {
     seModal1(!modal1);
@@ -264,11 +284,8 @@ export default function LivePreviewExample() {
       <div className="page-title">
         <PersonIcon />
         <div className="title pt-3">
-          {currentUser.role === 'candidate' && (
-            <b className="heading">Profile</b>
-          )}
-          {(currentUser.role === 'agency' ||
-            currentUser.role === 'company') && (
+          {user.role === 'candidate' && <b className="heading">Profile</b>}
+          {(user.role === 'agency' || user.role === 'company') && (
             <b className="heading">Profile</b>
           )}
         </div>
@@ -287,8 +304,7 @@ export default function LivePreviewExample() {
                   </div>
                   <img alt="..." className="img-fit-container" src={stock2} />
 
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') && (
+                  {(user.role === 'agency' || user.role === 'company') && (
                     <div className="py-1 card-bagdes-down text-white">
                       <Tooltip title="Github">
                         <Button className="btn-github text-github btn-pill bg-white d-30 p-0">
@@ -383,20 +399,19 @@ export default function LivePreviewExample() {
                   </div>
                   <div className="font-size-xxl font-weight-bold text-capitalize text-center mt-2">
                     <h4 className="m-0">
-                      {currentUser.first_name} {currentUser.last_name}
+                      {user.first_name} {user.last_name}
                     </h4>
-                    {currentUser.role === 'candidate' && (
+                    {user.role === 'candidate' && (
                       <small>Software Engineer</small>
                     )}
-                    {(currentUser.role === 'agency' ||
-                      currentUser.role === 'company') && <small>London</small>}
+                    {(user.role === 'agency' || user.role === 'company') && (
+                      <small>London</small>
+                    )}
                   </div>
-                  {currentUser.role === 'candidate' && <hr></hr>}
-                  {currentUser.role === 'candidate' && (
-                    <OnlineAndAvailability />
-                  )}
+                  {user.role === 'candidate' && <hr></hr>}
+                  {user.role === 'candidate' && <OnlineAndAvailability />}
                   <hr></hr>
-                  {currentUser.role === 'candidate' && (
+                  {user.role === 'candidate' && (
                     <div className="align-content-center d-flex justify-content-center">
                       <Button
                         variant="contained"
@@ -418,8 +433,7 @@ export default function LivePreviewExample() {
                       </Button>
                     </div>
                   )}
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') && (
+                  {(user.role === 'agency' || user.role === 'company') && (
                     <div>
                       <NotListedLocationIcon />
                       <small>Live roles</small>
@@ -427,7 +441,7 @@ export default function LivePreviewExample() {
                     </div>
                   )}
 
-                  {currentUser.role === 'candidate' && (
+                  {user.role === 'candidate' && (
                     <div>
                       <hr></hr>
                       <b>About</b>
@@ -548,8 +562,7 @@ export default function LivePreviewExample() {
                       </CardContent>
                     </div>
                   )}
-                  {(currentUser.role === 'agency' ||
-                    currentUser.role === 'company') && (
+                  {(user.role === 'agency' || user.role === 'company') && (
                     <div>
                       <hr></hr>
                       <b>Description</b>
@@ -629,7 +642,7 @@ export default function LivePreviewExample() {
                     </GoogleMapReact>
                   </div>
                 </Card>
-                {currentUser.role === 'candidate' && (
+                {user.role === 'candidate' && (
                   <div>
                     <Card className="card-box p-3 mt-2">
                       <b>People also viewed</b>
@@ -960,7 +973,7 @@ export default function LivePreviewExample() {
             </Grid>
             <Grid item xs={12} sm={8} className="mt-70px">
               <Card className="card-box p-3">
-                {currentUser.role === 'candidate' && (
+                {user.role === 'candidate' && (
                   <div>
                     <b>Skills</b>
                     <CardContent className="pb-0">
@@ -1023,8 +1036,7 @@ export default function LivePreviewExample() {
                   </div>
                 )}
 
-                {(currentUser.role === 'agency' ||
-                  currentUser.role === 'company') && (
+                {(user.role === 'agency' || user.role === 'company') && (
                   <div>
                     <b>Team</b>
                     <Grid container spacing={2} className="mt-1">
@@ -1153,7 +1165,7 @@ export default function LivePreviewExample() {
                 )}
               </Card>
 
-              {currentUser.role === 'candidate' && (
+              {user.role === 'candidate' && (
                 <div>
                   <Card className="card-box p-3 mt-2">
                     <b>Education</b>
@@ -1387,8 +1399,7 @@ export default function LivePreviewExample() {
                 </div>
               )}
 
-              {(currentUser.role === 'agency' ||
-                currentUser.role === 'company') && (
+              {(user.role === 'agency' || user.role === 'company') && (
                 <Card className="card-box mt-3">
                   <div className="card-header py-3">
                     <div className="card-header--title font-size-lg">
@@ -1588,7 +1599,7 @@ export default function LivePreviewExample() {
                 </Card>
               )}
               {/* Adds section */}
-              {currentUser.role === 'candidate' && <AddsComponents />}
+              {user.role === 'candidate' && <AddsComponents />}
             </Grid>
           </Grid>
         </div>
@@ -2196,7 +2207,7 @@ export default function LivePreviewExample() {
                             </div>
                           </a>
                           <h3 className="font-weight-bold font-size-xxl mb-0">
-                            {currentUser.first_name} {currentUser.last_name}
+                            {user.first_name} {user.last_name}
                           </h3>
 
                           <p className="font-12 font-weight-bold mb-0">

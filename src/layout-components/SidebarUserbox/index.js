@@ -95,6 +95,16 @@ const SidebarUserbox = (props) => {
     console.log('miniProfile', miniProfile);
   }, [anchorElMenu1, miniProfile]);
 
+  const handleProceed = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-profile/',
+      state: {
+        id
+      }
+    });
+  };
+
   return (
     <>
       <div className="app-sidebar--userbox">
@@ -925,9 +935,7 @@ const SidebarUserbox = (props) => {
               className="pointer"
               alt="..."
               src={avatar2}
-              onClick={() => {
-                history.push('/view-profile');
-              }}
+              onClick={(e) => handleProceed(e, currentUser.id)}
             />
           </div>
         </div>
