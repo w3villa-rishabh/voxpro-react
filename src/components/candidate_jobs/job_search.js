@@ -2,22 +2,8 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useState, useEffect } from 'react';
 
-import {
-  Grid,
-  Card,
-  Button,
-  Dialog,
-  Divider,
-  TextField,
-  Container,
-  Stepper,
-  StepLabel,
-  StepConnector,
-  Step
-} from '@material-ui/core';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import Select from 'react-select';
+import { Grid, Card, Button } from '@material-ui/core';
+
 import { connect } from 'react-redux';
 import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
@@ -32,17 +18,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SearchComponent from './search-component';
 import api from '../../api';
 import { toast } from 'react-toastify';
-import avatar2 from '../../assets/images/avatars/avatar2.jpg';
+
 import Pagination from '@material-ui/lab/Pagination';
-
-// stepper
-
-import Check from '@material-ui/icons/Check';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
+
+import ApplyNewJob from './apply-new-job';
 
 const distanceObj = [
   {
@@ -150,374 +130,12 @@ const SmartText = ({ text, length = 500 }) => {
   );
 };
 
-const Step1 = () => {
-  const [currentUser] = useState(getCurrentUser());
-  let [account, setAccount] = useState({
-    email: currentUser.email,
-    contact_number: currentUser.contact_number,
-    country_code: ''
-  });
-  const changeHandler = (value) => {
-    setAccount({ ...account, country_code: value });
-  };
-  let handleChange = (event) => {
-    const { name, value } = event.target;
-    account[name] = value;
-    setAccount(account);
-  };
-
-  return (
-    <>
-      <Container>
-        <div className="p-4">
-          <h5 className="font-size-xl mb-1 font-weight-bold">
-            Contact information
-          </h5>
-          <Grid container spacing={2} className="p-3">
-            <Grid
-              item
-              xs={6}
-              // md={6}
-              className="d-flex align-items-center">
-              <div className="d-flex align-items-center">
-                <div className="avatar-icon-wrapper mr-2">
-                  <div className="avatar-icon">
-                    <img alt="..." src={avatar2} />
-                  </div>
-                </div>
-                <div>
-                  <a
-                    href="#/"
-                    onClick={(e) => e.preventDefault()}
-                    className="font-weight-bold text-black"
-                    title="...">
-                    {currentUser.first_name} {currentUser.last_name}
-                  </a>
-                  <span className="text-black-50 d-block">
-                    {currentUser.city}
-                  </span>
-                </div>
-              </div>
-            </Grid>
-
-            <Grid
-              item
-              xs={12}
-              // md={6}
-              className="d-flex align-items-center">
-              <TextField
-                variant="outlined"
-                size="small"
-                label="email"
-                placeholder="town or postcode"
-                id="input-with-icon-textfield1"
-                className="w-100 mb-4"
-                value={'rishabhcs0109@gmail.com'}
-              />
-            </Grid>
-
-            <Grid
-              item
-              xs={6}
-              // md={6}
-              className="d-flex align-items-center">
-              <TextField
-                variant="outlined"
-                size="small"
-                label="city"
-                placeholder=""
-                id="input-with-icon-textfield1"
-                className="w-100 mb-4"
-                value="London"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={6}
-              // md={6}
-              className="d-flex align-items-center">
-              <TextField
-                variant="outlined"
-                size="small"
-                label="phone number"
-                placeholder="town or postcode"
-                id="input-with-icon-textfield1"
-                name="contact_number"
-                onChange={handleChange}
-                className="w-100 mb-4"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // md={6}
-              className="d-flex align-items-center">
-              Submitting your application won't change your profile
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
-    </>
-  );
-};
-const Step2 = () => {
-  const [state, setState] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
-  const [isFilePicked, setIsFilePicked] = useState(false);
-  const [currentUser] = useState(getCurrentUser());
-  const [isLoading, setIsLoading] = useState(false);
-  const [resume, setResume] = useState([]);
-
-  useEffect(() => {
-    getResume();
-  }, []);
-
-  function getResume() {
-    setIsLoading(true);
-    api
-      .get(`/api/v1/users/candidates_resume?user_id=${currentUser.id}`)
-      .then((response) => {
-        setIsLoading(false);
-        if (response.data.success) {
-          setResume([response.data.cv]);
-        } else {
-          console.log('cv not found');
-        }
-      });
-  }
-
-  const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
-  };
-
-  const handleSubmission = () => {
-    const formData = new FormData();
-    formData.append('File', selectedFile);
-    // 	fetch(
-    // 		'https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>',
-    // 		{
-    // 			method: 'POST',
-    // 			body: formData,
-    // 		}
-    // 	)
-    // 		.then((response) => response.json())
-    // 		.then((result) => {
-    // 			console.log('Success:', result);
-    // 		})
-    // 		.catch((error) => {
-    // 			console.error('Error:', error);
-    // 		});
-    // };
-  };
-
-  // const handleChange = (event) => {
-  //   setState(event.target.value);
-  // };
-
-  return (
-    <>
-      <Container>
-        <div className="p-4">
-          <h5 className="font-size-xl mb-1 font-weight-bold">Resume</h5>
-          <p className="text-black-50 mb-4"></p>
-          <h3 className="font-size-xl mb-1 font-weight-bold">
-            Be sure to include an updated resume*
-          </h3>
-
-          {resume.length !== 0 && (
-            <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded">
-              <div className="avatar-icon rounded d-100">
-                <img alt="..." src={resume.doc_ur} />
-              </div>
-            </div>
-          )}
-
-          <br />
-          <input type="file" name="file" onChange={changeHandler} />
-          {isFilePicked ? (
-            <div>
-              <p>Filename: {selectedFile.name}</p>
-              <p>Filetype: {selectedFile.type}</p>
-              <p>Size in bytes: {selectedFile.size}</p>
-              <p>
-                lastModifiedDate:{' '}
-                {selectedFile.lastModifiedDate.toLocaleDateString()}
-              </p>
-            </div>
-          ) : (
-            <p>Select a file to show details</p>
-          )}
-          {/* <div>
-            <button onClick={handleSubmission}>Submit</button>
-          </div> */}
-
-          <Button
-            size="small"
-            className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2"
-            onClick={handleSubmission}>
-            {/* <span className="px-2">
-              <FontAwesomeIcon icon={['fas', 'bell']} />
-            </span> */}
-            <span>Upload resume</span>
-          </Button>
-        </div>
-        <Grid
-          item
-          xs={12}
-          // md={6}
-          className="d-flex align-items-center">
-          Submitting your application won't change your profile
-        </Grid>
-      </Container>
-    </>
-  );
-};
-const Step3 = () => {
-  const [currentUser] = useState(getCurrentUser());
-
-  return (
-    <>
-      <Container>
-        <div className="p-4">
-          <h5 className="font-size-xl mb-1 font-weight-bold">
-            Review your application
-          </h5>
-          <p className="text-black-50 mb-4"></p>
-          <Grid container spacing={2} className="p-3">
-            <Grid
-              item
-              xs={6}
-              // md={6}
-              className="d-flex align-items-center">
-              <div className="d-flex align-items-center">
-                <div className="avatar-icon-wrapper mr-2">
-                  <div className="avatar-icon">
-                    <img alt="..." src={avatar2} />
-                  </div>
-                </div>
-                <div>
-                  <a
-                    href="#/"
-                    onClick={(e) => e.preventDefault()}
-                    className="font-weight-bold text-black"
-                    title="...">
-                    {currentUser.first_name} {currentUser.last_name}
-                  </a>
-                  <span className="text-black-50 d-block">
-                    {currentUser.city}
-                  </span>
-                </div>
-              </div>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // md={6}
-              className="d-flex align-items-center">
-              Email address: <br />
-              {/* {account.email} */}
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // md={6}
-              className="d-flex align-items-center">
-              Phone country code: <br />
-              India (+91)
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              // md={6}
-              className="d-flex align-items-center">
-              Mobile phone number: <br />
-              7007864900
-            </Grid>
-            <Divider />
-
-            <Grid
-              item
-              xs={12}
-              // md={6}
-              className="d-flex align-items-center">
-              <h3 className="font-size-xl mb-1 font-weight-bold">Resume</h3>
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
-    </>
-  );
-};
-
-function StepIcon(props) {
-  const { active, completed } = props;
-
-  const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />
-  };
-
-  return (
-    <div
-      className={clsx(
-        'd-50 transition-base d-flex align-items-center bg-gray-400 justify-content-center rounded',
-        {
-          'd-80 bg-primary text-white shadow-primary-sm': active,
-          'd-50 bg-success text-white shadow-success-sm': completed
-        }
-      )}>
-      {completed ? <Check className="completed" /> : icons[String(props.icon)]}
-    </div>
-  );
-}
-
-StepIcon.propTypes = {
-  active: PropTypes.bool,
-  completed: PropTypes.bool,
-  icon: PropTypes.node
-};
-
-function getSteps() {
-  return ['Contact Information', 'Resume Information', 'Review'];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Step1 />;
-    case 1:
-      return <Step2 />;
-    case 2:
-      return <Step3 />;
-    default:
-      return <Step1 />;
-  }
-}
-
 const JobSearchComponent = (props) => {
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
 
   const [filterApplied, setFilterApplied] = useState([]);
   const [state, setState] = useState(props.searchFilter);
-  const [openApplyBox, setOpenApplyBox] = useState({ open: false, job: [] });
-
-  const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  // const handleReset = () => {
-  //   setActiveStep(0);
-  // };
 
   const {
     permanent,
@@ -543,11 +161,6 @@ const JobSearchComponent = (props) => {
     props.setSearchResult([]);
     props.callSearch(true, props.searchFilter);
   }, []);
-
-  const handleExpModalClose = () => {
-    setOpenApplyBox({ open: false, job: [] });
-    setActiveStep(0);
-  };
 
   const getJobsFilters = (state, page) => {
     let filleter = [];
@@ -818,7 +431,6 @@ const JobSearchComponent = (props) => {
                   <select
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
-                    fullWidth
                     value={distance}
                     onChange={handelSearch}
                     name="distance">
@@ -1180,18 +792,7 @@ const JobSearchComponent = (props) => {
                             </span>
                             <span>Hide</span>
                           </Button>
-                          <Button
-                            fullWidth
-                            size="small"
-                            className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2"
-                            onClick={() =>
-                              setOpenApplyBox({
-                                open: true,
-                                job: job
-                              })
-                            }>
-                            <span>Apply now</span>
-                          </Button>
+                          <ApplyNewJob job={job} />
                         </Grid>
                       </Grid>
                     </div>
@@ -1214,83 +815,6 @@ const JobSearchComponent = (props) => {
             )}
           </Grid>
         </Grid>
-        {/* expire doc view details show */}
-        <Dialog
-          onClose={handleExpModalClose}
-          fullWidth
-          maxWidth="md"
-          classes={{ paper: 'modal-content rounded-lg' }}
-          aria-labelledby="simple-dialog-title"
-          open={openApplyBox.open}>
-          <Card className="card-box">
-            <div className="card-header">
-              <div className="card-header--title">
-                <div className="p-3 font-size-xl font-weight-bold">
-                  Apply to {openApplyBox.job.company_name}
-                </div>
-              </div>
-              <div className="card-header--actions"></div>
-            </div>
-            <div>
-              <div className="bg-secondary mb-3">
-                <Stepper
-                  className="stepper-horizontal-1"
-                  alternativeLabel
-                  activeStep={activeStep}
-                  connector={<StepConnector />}>
-                  {steps.map((label) => (
-                    <Step key={label}>
-                      <StepLabel StepIconComponent={StepIcon}>
-                        {label}
-                      </StepLabel>
-                    </Step>
-                  ))}
-                </Stepper>
-              </div>
-              {activeStep === steps.length ? (
-                <div className="text-center p-5">
-                  <div className="avatar-icon-wrapper rounded-circle m-0">
-                    <div className="d-inline-flex justify-content-center p-0 rounded-circle btn-icon avatar-icon-wrapper bg-neutral-warning text-warning m-0 d-130">
-                      <FontAwesomeIcon
-                        icon={['far', 'lightbulb']}
-                        className="d-flex align-self-center display-3"
-                      />
-                    </div>
-                  </div>
-                  <h4 className="font-weight-bold mt-4">
-                    Successfully Applied For the Job!
-                  </h4>
-                  <p className="mb-0 font-size-lg text-muted"></p>
-                  <div className="pt-4">
-                    <Button
-                      onClick={handleExpModalClose}
-                      className="btn-warning font-weight-bold rounded hover-scale-lg mx-1"
-                      size="large">
-                      <span className="btn-wrapper--label">Close</span>
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <div>{getStepContent(activeStep)}</div>
-                  <div className="card-footer mt-4 p-4 d-flex align-items-center justify-content-between bg-secondary">
-                    <Button
-                      disabled={activeStep === 0}
-                      className="btn-primary font-weight-bold"
-                      onClick={handleBack}>
-                      Back
-                    </Button>
-                    <Button
-                      className="btn-primary font-weight-bold"
-                      onClick={handleNext}>
-                      {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </Card>
-        </Dialog>
       </div>
 
       {currentUser.role === 'candidate' && <AddsComponents />}
