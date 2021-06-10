@@ -44,7 +44,6 @@ import stock3 from '../../assets/images/stock-photos/stock-5.jpg';
 import stock4 from '../../assets/images/stock-photos/stock-6.jpg';
 
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
-
 import GoogleMapReact from 'google-map-react';
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 
