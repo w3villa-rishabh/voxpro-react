@@ -21,16 +21,16 @@ import Pagination from '@material-ui/lab/Pagination';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import CountryCity from '../../assets/city-country';
 import axios from 'axios';
+import LoaderComponent from 'components/loader';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import { useLocation } from 'react-router';
 
 const CandidateAdvanceSearchComponent = (props) => {
   const location = useLocation();
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [candidate, setCandidate] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [candidate, setCandidate] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
-  const [searchResult] = useState([1, 2, 3, 4]);
   const [searchQuery, setSearchQuery] = useState(
     location.state
       ? location.state.searchQuery
@@ -38,7 +38,6 @@ const CandidateAdvanceSearchComponent = (props) => {
           name: '',
           location: [],
           jobTitles: [],
-          // jobTitle: '',
           availability: '0',
           availabilityDate: ''
         }
@@ -53,30 +52,33 @@ const CandidateAdvanceSearchComponent = (props) => {
   const [searchJobStatus, setSearchJobStatus] = useState(false);
 
   useEffect(() => {
+    findSearch(searchQuery);
     setFilterApplied([
       { name: 'Node js' },
       { name: 'Full stack' },
       { name: 'Angular 4+' },
       { name: 'React js' }
     ]);
-    search(searchQuery);
   }, []);
 
+  const findSearch = (searchQuery) => {
+    setIsLoading(true);
+    search(searchQuery);
+  };
+
   const search = (search) => {
-    // setSearchLoader(true);
-    // console.log('search', search, props.placesSearch);
     api.post('/api/v1/searches/search_candidate', { query: search }).then(
       (response) => {
-        // setSearchLoader(false);
+        setIsLoading(false);
         if (response.data.success) {
-          // setCandidate([...response.data.candidate]);
+          setCandidate([...response.data.candidate]);
         } else {
-          // setCandidate([]);
+          setCandidate([]);
         }
       },
       (error) => {
         toast.error('Something went wrong');
-        // setSearchLoader(false);
+        setIsLoading(false);
         console.error(error);
       }
     );
@@ -275,147 +277,171 @@ const CandidateAdvanceSearchComponent = (props) => {
             </Card>
           </Grid>
           <Grid item xs={12} sm={9}>
-            {searchResult.length ? (
+            {isLoading ? (
+              <LoaderComponent />
+            ) : (
               <>
-                {searchResult.map((job, index) => (
-                  <div
-                    key={index}
-                    className="card card-box gutter-b card-stretch bg-white btn rounded text-left mb-2">
-                    <Card className="card-box">
-                      <CardContent>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} sm={2}>
-                            <div className="avatar-icon-wrapper avatar-icon-lg">
-                              <div className="avatar-icon rounded d-110">
-                                <img alt="..." src={avatar7} />
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} sm={8}>
-                            <div>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="a-blue font-weight-bold ml-1 font-size-xxl"
-                                title="...">
-                                Kate Winchester
-                              </a>
-                              <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
-                                2nd
-                              </Button>
-                              <div className="float-right">
-                                <span className="text-black-50 font-size-xl">
-                                  Above{' '}
-                                  <span className="a-blue font-weight-bold font-size-xxl">
-                                    20%
-                                  </span>
-                                </span>
-                              </div>
-                            </div>
-
-                            <ul className="cards-filter">
-                              {filterApplied.map((filter, index) => (
-                                <li
-                                  key={index}
-                                  className="cards__item bg-primary text-white">
-                                  <div>
-                                    <span>{filter.name}</span>
+                {candidate.length ? (
+                  <>
+                    {candidate.map((can, index) => (
+                      <div
+                        key={index}
+                        className="card card-box gutter-b card-stretch bg-white btn rounded text-left mb-2">
+                        <Card className="card-box">
+                          <CardContent>
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} sm={2}>
+                                <div className="avatar-icon-wrapper avatar-icon-lg">
+                                  <div className="avatar-icon rounded d-110">
+                                    <img alt="..." src={avatar7} />
                                   </div>
-                                </li>
-                              ))}
-                              <li className="cards__item bg-brand-discord text-white">
-                                <div>
-                                  <span>10+ years</span>
                                 </div>
-                              </li>
-                            </ul>
+                              </Grid>
+                              <Grid item xs={12} sm={8}>
+                                <div>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="a-blue font-weight-bold ml-1 font-size-xxl"
+                                    title="...">
+                                    {can.first_name} {can.last_name}
+                                  </a>
+                                  <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
+                                    2nd
+                                  </Button>
+                                  <div className="float-right">
+                                    <span className="text-black-50 font-size-xl">
+                                      Above{' '}
+                                      <span className="a-blue font-weight-bold font-size-xxl">
+                                        20%
+                                      </span>
+                                    </span>
+                                  </div>
+                                </div>
 
-                            <div className="">
-                              <span className="d-block">
-                                Senior Software Engineer.
-                              </span>
-                              <span className="text-black-50 d-block">
-                                San Francisco Bay Area.
-                              </span>
-                              <a
-                                href="#/"
-                                onClick={(e) => e.preventDefault()}
-                                className="text-success d-block">
-                                <FontAwesomeIcon
-                                  icon={['fas', 'caret-right']}
-                                />{' '}
-                                2 Shared connections &bull; Similar
-                              </a>
-                            </div>
-                          </Grid>
+                                <ul className="cards-filter">
+                                  {filterApplied.map((filter, index) => (
+                                    <li
+                                      key={index}
+                                      className="cards__item bg-primary text-white">
+                                      <div>
+                                        <span>{filter.name}</span>
+                                      </div>
+                                    </li>
+                                  ))}
+                                  <li className="cards__item bg-brand-discord text-white">
+                                    <div>
+                                      <span>10+ years</span>
+                                    </div>
+                                  </li>
+                                </ul>
 
-                          <Grid item xs={12} sm={2}>
-                            <div className="d-flex justify-content-between">
-                              <div className="d-flex align-items-center">
-                                <Button
-                                  fullWidth
-                                  size="small"
-                                  className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                                  <span>Connect</span>
-                                </Button>
-                              </div>
-                            </div>
-                          </Grid>
-                        </Grid>
+                                <div className="">
+                                  <span className="d-block">
+                                    Senior Software Engineer.
+                                  </span>
+                                  <span className="text-black-50 d-block">
+                                    San Francisco Bay Area.
+                                  </span>
+                                  <a
+                                    href="#/"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="text-success d-block">
+                                    <FontAwesomeIcon
+                                      icon={['fas', 'caret-right']}
+                                    />{' '}
+                                    2 Shared connections &bull; Similar
+                                  </a>
+                                </div>
+                              </Grid>
 
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} sm={2}>
-                            <span className="text-black-50 nowrap float-right">
-                              Post :{' '}
-                            </span>
-                          </Grid>
-                          <Grid item xs={12} sm={8}>
-                            <div>
-                              <p className="mb-0">
-                                From its medieval origins to the digital era,
-                                learn everything there is to know about the
-                                ubiquitous lorem ipsum passage learn everything
-                                there is.
-                              </p>
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} sm={2}></Grid>
-                        </Grid>
+                              <Grid item xs={12} sm={2}>
+                                <div className="d-flex justify-content-between">
+                                  <div className="d-flex align-items-center">
+                                    <Button
+                                      fullWidth
+                                      size="small"
+                                      className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                                      <span>Connect</span>
+                                    </Button>
+                                  </div>
+                                </div>
+                              </Grid>
+                            </Grid>
 
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} sm={2}>
-                            <span className="text-black-50 nowrap float-right">
-                              Post :{' '}
-                            </span>
-                          </Grid>
-                          <Grid item xs={12} sm={8}>
-                            <div>
-                              <p className="mb-0">
-                                Primary website/webapp Engineer (employee) At
-                                Anglepoise Primary
-                              </p>
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} sm={2}></Grid>
-                        </Grid>
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} sm={2}>
+                                <span className="text-black-50 nowrap float-right">
+                                  Availability :{' '}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={8}>
+                                <div>
+                                  <p className="mb-0">
+                                    {can.availability === 'available_from'
+                                      ? can.available_date
+                                      : can.availability}
+                                  </p>
+                                </div>
+                              </Grid>
+                              <Grid item xs={12} sm={2}></Grid>
+                            </Grid>
 
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} sm={2}>
-                            <span className="text-black-50 nowrap float-right">
-                              Summary :{' '}
-                            </span>
-                          </Grid>
-                          <Grid item xs={12} sm={8}>
-                            <div>
-                              <p className="mb-0">Senior software developer</p>
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} sm={2}></Grid>
-                        </Grid>
-                      </CardContent>
-                      <div className="divider" />
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} sm={2}>
+                                <span className="text-black-50 nowrap float-right">
+                                  Post :{' '}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={8}>
+                                <div>
+                                  <p className="mb-0">
+                                    From its medieval origins to the digital
+                                    era, learn everything there is to know about
+                                    the ubiquitous lorem ipsum passage learn
+                                    everything there is.
+                                  </p>
+                                </div>
+                              </Grid>
+                              <Grid item xs={12} sm={2}></Grid>
+                            </Grid>
 
-                      {/* <div className="card-footer bg-white text-center p-3">
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} sm={2}>
+                                <span className="text-black-50 nowrap float-right">
+                                  Post :{' '}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={8}>
+                                <div>
+                                  <p className="mb-0">
+                                    Primary website/webapp Engineer (employee)
+                                    At Anglepoise Primary
+                                  </p>
+                                </div>
+                              </Grid>
+                              <Grid item xs={12} sm={2}></Grid>
+                            </Grid>
+
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} sm={2}>
+                                <span className="text-black-50 nowrap float-right">
+                                  Summary :{' '}
+                                </span>
+                              </Grid>
+                              <Grid item xs={12} sm={8}>
+                                <div>
+                                  <p className="mb-0">
+                                    Senior software developer
+                                  </p>
+                                </div>
+                              </Grid>
+                              <Grid item xs={12} sm={2}></Grid>
+                            </Grid>
+                          </CardContent>
+                          <div className="divider" />
+
+                          {/* <div className="card-footer bg-white text-center p-3">
                     <Button className="btn-primary btn-icon d-40 p-0 hover-scale-lg rounded-circle mr-2">
                       <FontAwesomeIcon
                         icon={['far', 'question-circle']}
@@ -429,12 +455,16 @@ const CandidateAdvanceSearchComponent = (props) => {
                       />
                     </Button>
                   </div> */}
-                    </Card>
+                        </Card>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div className="font-size-xxl m-5 text-center">
+                    No data found
                   </div>
-                ))}
+                )}
               </>
-            ) : (
-              <div className="font-size-xxl m-5 text-center">No data found</div>
             )}
 
             {props.searchResult.length >= 1 && (
