@@ -31,14 +31,18 @@ const CandidateAdvanceSearchComponent = (props) => {
   // const [candidate, setCandidate] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
   const [searchResult] = useState([1, 2, 3, 4]);
-  const [searchQuery, setSearchQuery] = useState({
-    name: '',
-    location: [],
-    jobTitles: [],
-    // jobTitle: '',
-    availability: '0',
-    availabilityDate: ''
-  });
+  const [searchQuery, setSearchQuery] = useState(
+    location.state
+      ? location.state.searchQuery
+      : {
+          name: '',
+          location: [],
+          jobTitles: [],
+          // jobTitle: '',
+          availability: '0',
+          availabilityDate: ''
+        }
+  );
 
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
@@ -49,22 +53,19 @@ const CandidateAdvanceSearchComponent = (props) => {
   const [searchJobStatus, setSearchJobStatus] = useState(false);
 
   useEffect(() => {
-    let filleter = location.state ? location.state.searchQuery : [];
-    setSearchQuery({ ...filleter });
     setFilterApplied([
       { name: 'Node js' },
       { name: 'Full stack' },
       { name: 'Angular 4+' },
       { name: 'React js' }
     ]);
-    search();
+    search(searchQuery);
   }, []);
 
-  const search = () => {
+  const search = (search) => {
     // setSearchLoader(true);
-    let searchQuery = location.state.searchQuery;
-    // console.log('searchQuery', searchQuery, props.placesSearch);
-    api.post('/api/v1/searches/search_candidate', { query: searchQuery }).then(
+    // console.log('search', search, props.placesSearch);
+    api.post('/api/v1/searches/search_candidate', { query: search }).then(
       (response) => {
         // setSearchLoader(false);
         if (response.data.success) {
@@ -153,6 +154,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                           onClick={() => {
                             searchQuery.jobTitles.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
+                            search(searchQuery);
                           }}
                         />
                       </div>
@@ -188,6 +190,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                           onClick={() => {
                             searchQuery.location.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
+                            search(searchQuery);
                           }}
                         />
                       </div>
@@ -510,6 +513,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                       searchQuery.location.push({ name: user });
                       setSearchQuery({ ...searchQuery });
                       handleModalClose();
+                      search(searchQuery);
                     }}>
                     <span>{user}</span>
                   </li>
@@ -594,6 +598,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                         });
                         setSearchQuery({ ...searchQuery });
                         handleModalClose();
+                        search(searchQuery);
                       }}>
                       {user.normalized_job_title}
                     </span>
