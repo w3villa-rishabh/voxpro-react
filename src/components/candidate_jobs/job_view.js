@@ -11,6 +11,7 @@ import SearchComponent from './search-component';
 import api from '../../api';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
+import ApplyNewJob from './apply-new-job';
 
 export default function JobSearchComponent() {
   const history = useHistory();
@@ -179,15 +180,7 @@ export default function JobSearchComponent() {
                     </b>
                   </div>
                   <div className="text-center py-5">
-                    <Button
-                      fullWidth
-                      size="small"
-                      className="btn-danger w-50 font-size-lg font-weight-bold hover-scale-sm mt-2">
-                      <span className="px-2">
-                        <FontAwesomeIcon icon={['fas', 'apply']} />
-                      </span>
-                      <span>Apply now</span>
-                    </Button>
+                    <ApplyNewJob width={'w-50'} job={job} />
                   </div>
                   <div>
                     <b>Reference: {job.job_name}</b>
@@ -211,12 +204,7 @@ export default function JobSearchComponent() {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={3} className="px-3 py-2">
-                  <Button
-                    fullWidth
-                    size="small"
-                    className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2">
-                    <span>Apply now</span>
-                  </Button>
+                  <ApplyNewJob job={job} />
                   <div className="mt-3">
                     <span>
                       You're using CV Deepak_Kumar_js.pdf to apply for this

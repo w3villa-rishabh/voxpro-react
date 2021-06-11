@@ -29,12 +29,13 @@ import StepConnector from '@material-ui/core/StepConnector';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import 'react-phone-number-input/style.css';
 
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { useHistory } from 'react-router';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const useStepIconStyles = makeStyles({
@@ -91,17 +92,8 @@ function getSteps() {
   return ['Contact Information', 'Resume', 'Review'];
 }
 
-const styles = (theme) => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: 'none'
-  }
-});
-
-const ApplyNewJobComponent = (props) => {
-  const { classes } = props;
+export default function ApplyNewJobComponent(props) {
+  const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
   const [openApplyBox, setOpenApplyBox] = useState({ open: false, job: {} });
   const [tabs, setTabs] = useState([true, false, false]);
@@ -109,7 +101,6 @@ const ApplyNewJobComponent = (props) => {
 
   let [account, setAccount] = useState(currentUser);
 
-  const [selectedFile, setSelectedFile] = useState();
   const [resume, setResume] = useState({});
   const [resumeError, setResumeError] = useState('');
   const steps = getSteps();
@@ -193,21 +184,6 @@ const ApplyNewJobComponent = (props) => {
     );
   }
 
-  const changeHandler = (event) => {
-    const file = event.target.files[0];
-    const extension = file.name.split('.').pop().toLowerCase();
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    let url = URL.createObjectURL(file);
-    file.doc_url = url;
-    file.extension = extension;
-    setResume({ ...file });
-    setSelectedFile(event.target.files[0]);
-    setResumeError('');
-  };
-
   const handleNext = () => {
     if (validateForm(errors)) {
       let tab = activeTab + 1;
@@ -232,9 +208,11 @@ const ApplyNewJobComponent = (props) => {
   };
 
   const handleFinish = () => {
-    handleModalClose();
-    const formData = new FormData();
-    formData.append('File', selectedFile);
+    api.post(`/api/v1/job/${props.job.id}apply_job`).then((response) => {
+      if (response.data.success) {
+        handleModalClose();
+      }
+    });
   };
 
   const openTab = () => {
@@ -253,7 +231,7 @@ const ApplyNewJobComponent = (props) => {
       <Button
         fullWidth
         size="small"
-        className="btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2"
+        className={`btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}
         onClick={openTab}>
         <span>Apply now</span>
       </Button>
@@ -319,6 +297,7 @@ const ApplyNewJobComponent = (props) => {
                     </label>
                     <TextField
                       fullWidth
+                      disabled
                       variant="outlined"
                       size="small"
                       placeholder="Enter email id"
@@ -393,24 +372,16 @@ const ApplyNewJobComponent = (props) => {
                 )}
                 <br />
                 <div>
-                  <input
-                    accept="image/*"
-                    className={classes.input}
-                    id="contained-button-file"
-                    type="file"
-                    onChange={changeHandler}
-                  />
                   <b>Select a file to show details</b>
                   <br></br>
-                  <label htmlFor="contained-button-file">
-                    <Button
-                      variant="outlined"
-                      component="span"
-                      size="small"
-                      className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                      <span>Upload resume</span>
-                    </Button>
-                  </label>
+                  <Button
+                    variant="outlined"
+                    component="span"
+                    size="small"
+                    onClick={() => history.push('/upload')}
+                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                    <span>Upload resume</span>
+                  </Button>
                   {resumeError.length > 0 && (
                     <>
                       <br></br>
@@ -521,6 +492,4 @@ const ApplyNewJobComponent = (props) => {
       </Dialog>
     </>
   );
-};
-
-export default withStyles(styles)(ApplyNewJobComponent);
+}
