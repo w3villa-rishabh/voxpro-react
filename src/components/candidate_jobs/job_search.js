@@ -802,7 +802,7 @@ const JobSearchComponent = (props) => {
             ) : (
               <div className="font-size-xxl m-5 text-center">No data found</div>
             )}
-
+<ApplyNewJob job={{}} />
             {props.searchResult.length >= 1 && (
               <div className="p-3 d-flex justify-content-center">
                 <Pagination

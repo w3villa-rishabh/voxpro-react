@@ -109,20 +109,75 @@ const ApplyNewJobComponent = (props) => {
 
   let [account, setAccount] = useState(currentUser);
 
+  const [selectedFile, setSelectedFile] = useState();
+  const [resume, setResume] = useState({});
+  const [resumeError, setResumeError] = useState('');
+  const steps = getSteps();
+
+  const [errors, setErrors] = useState({
+    email: '',
+    city: '',
+    contact_number: ''
+  });
+
+  const validateForm = (error) => {
+    let valid = true;
+    Object.values(error).forEach((val) => val.length > 0 && (valid = false));
+
+    setErrors({
+      ...errors,
+      email: account.email.length === 0 ? 'Email is required!' : '',
+      city: account.city.length === 0 ? 'City is required!' : '',
+      contact_number:
+        account.contact_number.length === 0
+          ? 'Contact number required!'
+          : account.contact_number.length < 10
+          ? 'Minimum 10 digits is required!'
+          : ''
+    });
+    return valid;
+  };
+
+  const validEmailRegex = RegExp(
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  );
+
   let handleChange = (event) => {
     const { name, value } = event.target;
+    switch (name) {
+      case 'email':
+        setErrors({
+          ...errors,
+          email: validEmailRegex.test(value) ? '' : 'Email is not valid!'
+        });
+        break;
+
+      case 'city':
+        setErrors({
+          ...errors,
+          city: value.length > 1 ? '' : 'city is required!'
+        });
+        break;
+      case 'contact_number':
+        setErrors({
+          ...errors,
+          contact_number:
+            value.length > 10 ? '' : 'Minimum 10 digits is required!'
+        });
+        break;
+
+      default:
+        break;
+    }
+
     account[name] = value;
     setAccount({ ...account });
   };
 
-  const [selectedFile, setSelectedFile] = useState();
-  const [resume, setResume] = useState({});
-  const steps = getSteps();
-
   function getResume() {
-    api
-      .get(`/api/v1/users/candidates_resume?user_id=${currentUser.id}`)
-      .then((response) => {
+    api.get(`/api/v1/users/candidates_resume?user_id=${currentUser.id}`).then(
+      (response) => {
         if (response.data.success) {
           let resumeFind = response.data.cv;
           resumeFind.extension = resumeFind.content_type.split('/')[1];
@@ -131,7 +186,11 @@ const ApplyNewJobComponent = (props) => {
           setResume({});
           console.log('cv not found');
         }
-      });
+      },
+      () => {
+        setResume({});
+      }
+    );
   }
 
   const changeHandler = (event) => {
@@ -146,13 +205,19 @@ const ApplyNewJobComponent = (props) => {
     file.extension = extension;
     setResume({ ...file });
     setSelectedFile(event.target.files[0]);
+    setResumeError('');
   };
 
   const handleNext = () => {
-    let tab = activeTab + 1;
-    setActiveTab(tab);
-    let tabsChange = tabs.map((x, index) => (tab === index ? !x : false));
-    setTabs([...tabsChange]);
+    if (validateForm(errors)) {
+      let tab = activeTab + 1;
+      if (tab === 2 && !resume.doc_url) {
+        return setResumeError('Required resume');
+      }
+      setActiveTab(tab);
+      let tabsChange = tabs.map((x, index) => (tab === index ? !x : false));
+      setTabs([...tabsChange]);
+    }
   };
 
   const handlePrevious = () => {
@@ -249,24 +314,31 @@ const ApplyNewJobComponent = (props) => {
                   </Grid>
 
                   <Grid item xs={12}>
+                    <label>
+                      Email <span className="text-danger">*</span>
+                    </label>
                     <TextField
                       fullWidth
                       variant="outlined"
                       size="small"
-                      label="Email"
                       placeholder="Enter email id"
                       id="input-with-icon-textfield1"
                       value={account.email}
                       name="email"
                       onChange={handleChange}
                     />
+                    {errors.email.length > 0 && (
+                      <span className="error">{errors.email}</span>
+                    )}
                   </Grid>
 
                   <Grid item xs={6}>
+                    <label>
+                      City <span className="text-danger">*</span>
+                    </label>
                     <TextField
                       variant="outlined"
                       size="small"
-                      label="City"
                       placeholder="Enter city name"
                       id="input-with-icon-textfield1"
                       fullWidth
@@ -274,19 +346,27 @@ const ApplyNewJobComponent = (props) => {
                       value={account.city}
                       onChange={handleChange}
                     />
+                    {errors.city.length > 0 && (
+                      <span className="error">{errors.city}</span>
+                    )}
                   </Grid>
                   <Grid item xs={6}>
+                    <label>
+                      Phone number <span className="text-danger">*</span>
+                    </label>
                     <TextField
                       fullWidth
                       variant="outlined"
                       size="small"
-                      label="Phone number"
                       placeholder="Enter phone number"
                       id="input-with-icon-textfield1"
                       name="contact_number"
                       value={account.contact_number}
                       onChange={handleChange}
                     />
+                    {errors.contact_number.length > 0 && (
+                      <span className="error">{errors.contact_number}</span>
+                    )}
                   </Grid>
                   <Grid item xs={12}>
                     <span className="mb-4">
@@ -298,18 +378,19 @@ const ApplyNewJobComponent = (props) => {
             )}
             {tabs[1] && (
               <div className="text-center">
-                <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded">
-                  <div className="avatar-icon rounded d-100">
-                    {resume.extension === 'pdf' ? (
-                      <Document file={resume.doc_url}>
-                        <Page pageNumber={1} />
-                      </Document>
-                    ) : (
-                      <img alt="..." src={resume.doc_url} />
-                    )}
+                {resume.extension && (
+                  <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded">
+                    <div className="avatar-icon rounded d-100">
+                      {resume.extension === 'pdf' ? (
+                        <Document file={resume.doc_url}>
+                          <Page pageNumber={1} />
+                        </Document>
+                      ) : (
+                        <img alt="..." src={resume.doc_url} />
+                      )}
+                    </div>
                   </div>
-                </div>
-
+                )}
                 <br />
                 <div>
                   <input
@@ -330,6 +411,12 @@ const ApplyNewJobComponent = (props) => {
                       <span>Upload resume</span>
                     </Button>
                   </label>
+                  {resumeError.length > 0 && (
+                    <>
+                      <br></br>
+                      <span className="error">{resumeError}</span>
+                    </>
+                  )}
                 </div>
               </div>
             )}
@@ -425,7 +512,7 @@ const ApplyNewJobComponent = (props) => {
                   onClick={() => handleFinish()}
                   className="btn-primary font-weight-bold hover-scale-lg float-right"
                   size="small">
-                  Review
+                  Apply
                 </Button>
               )}
             </DialogActions>
