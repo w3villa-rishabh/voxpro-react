@@ -10,7 +10,8 @@ import {
   DialogActions,
   TextField,
   List,
-  ListItem
+  ListItem,
+  LinearProgress
 } from '@material-ui/core';
 
 import { getCurrentUser } from 'helper';
@@ -29,8 +30,10 @@ import StepConnector from '@material-ui/core/StepConnector';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { toast } from 'react-toastify';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 import 'react-phone-number-input/style.css';
 
@@ -38,6 +41,21 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { useHistory } from 'react-router';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box display="flex" alignItems="center">
+      <Box width="100%" mr={1}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box minWidth={0}>
+        <Typography variant="body2" color="textSecondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 const useStepIconStyles = makeStyles({
   root: {
@@ -93,9 +111,20 @@ function getSteps() {
   return ['Contact Information', 'Resume', 'Review'];
 }
 
-export default function ApplyNewJobComponent(props) {
+const styles = (theme) => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  input: {
+    display: 'none'
+  }
+});
+
+const ApplyNewJobComponent = (props) => {
+  const { classes } = props;
   const history = useHistory();
   const [currentUser] = useState(getCurrentUser());
+  const [uploadPercentage, setUploadPercentage] = useState(0);
   const [openApplyBox, setOpenApplyBox] = useState({ open: false, job: {} });
   const [tabs, setTabs] = useState([true, false, false]);
   const [activeTab, setActiveTab] = useState(0);
@@ -184,8 +213,59 @@ export default function ApplyNewJobComponent(props) {
     );
   }
 
+  const changeHandler = (event) => {
+    const file = event.target.files[0];
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    let url = URL.createObjectURL(file);
+    file.doc_url = url;
+    file.extension = extension;
+    setResume({ ...file });
+    setResumeError('');
+    updateDocument(event.target.files[0]);
+  };
+
+  const updateDocument = (file) => {
+    const formData = new FormData();
+    formData.append('document[doc]', file);
+
+    api
+      .put(`/api/v1/users/update_resume`, formData, {
+        onUploadProgress: function (progressEvent) {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            )
+          );
+        }
+      })
+      .then(
+        (response) => {
+          toast.dismiss();
+          if (response.data.success) {
+            toast.success('Resume upload successfully..');
+          } else {
+            toast.error(response.data.message);
+          }
+          setUploadPercentage(0);
+        },
+        (error) => {
+          console.error('error', error);
+          toast.error('Something went wrong..');
+        }
+      );
+  };
+
   const handleNext = () => {
-    if (validateForm(errors) && account.contact_number && account.city) {
+    if (
+      validateForm(errors) &&
+      account.contact_number &&
+      account.city &&
+      !uploadPercentage
+    ) {
       let tab = activeTab + 1;
       if (tab === 2 && !resume.doc_url) {
         return setResumeError('Required resume');
@@ -374,8 +454,11 @@ export default function ApplyNewJobComponent(props) {
             )}
             {tabs[1] && (
               <div className="text-center">
+                {uploadPercentage > 0 && (
+                  <LinearProgressWithLabel value={uploadPercentage} />
+                )}
                 {resume.extension && (
-                  <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded">
+                  <div className="document-thumb avatar-icon-wrapper shadow-sm-dark border-white rounded mt-2">
                     <div className="avatar-icon rounded d-100">
                       {resume.extension === 'pdf' ? (
                         <Document file={resume.doc_url}>
@@ -389,16 +472,30 @@ export default function ApplyNewJobComponent(props) {
                 )}
                 <br />
                 <div>
+                  <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="contained-button-file"
+                    type="file"
+                    onChange={changeHandler}
+                  />
                   <b>Select a file to show details</b>
                   <br></br>
-                  <Button
-                    variant="outlined"
-                    component="span"
-                    size="small"
-                    onClick={() => history.push('/upload')}
-                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                    <span>Upload resume</span>
-                  </Button>
+                  <label htmlFor="contained-button-file">
+                    <Button
+                      variant="outlined"
+                      component="span"
+                      size="small"
+                      onClick={() => {
+                        if (!resume.doc_url) {
+                          history.push('/upload');
+                        }
+                      }}
+                      className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
+                      <span>Upload resume</span>
+                    </Button>
+                  </label>
+
                   {resumeError.length > 0 && (
                     <>
                       <br></br>
@@ -509,4 +606,6 @@ export default function ApplyNewJobComponent(props) {
       </Dialog>
     </>
   );
-}
+};
+
+export default withStyles(styles)(ApplyNewJobComponent);

@@ -214,7 +214,10 @@ export default function JobSearchComponent() {
                       <a
                         href="#/"
                         className="a-blue font-weight-bold"
-                        onClick={(e) => e.preventDefault()}>
+                        onClick={(e) => {
+                          e.preventDefault();
+                          history.push('/upload');
+                        }}>
                         Upload CV
                       </a>
                     </div>
