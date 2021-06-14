@@ -30,6 +30,7 @@ import StepConnector from '@material-ui/core/StepConnector';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { toast } from 'react-toastify';
 
 import 'react-phone-number-input/style.css';
 
@@ -114,7 +115,6 @@ export default function ApplyNewJobComponent(props) {
   const validateForm = (error) => {
     let valid = true;
     Object.values(error).forEach((val) => val.length > 0 && (valid = false));
-
     setErrors({
       ...errors,
       email: account.email.length === 0 ? 'Email is required!' : '',
@@ -185,7 +185,7 @@ export default function ApplyNewJobComponent(props) {
   }
 
   const handleNext = () => {
-    if (validateForm(errors)) {
+    if (validateForm(errors) && account.contact_number && account.city) {
       let tab = activeTab + 1;
       if (tab === 2 && !resume.doc_url) {
         return setResumeError('Required resume');
@@ -208,11 +208,17 @@ export default function ApplyNewJobComponent(props) {
   };
 
   const handleFinish = () => {
-    api.post(`/api/v1/job/${props.job.id}apply_job`).then((response) => {
-      if (response.data.success) {
-        handleModalClose();
+    api.post(`/api/v1/jobs/${props.job.id}/apply_job`).then(
+      (response) => {
+        toast.success(response.data.message);
+        if (response.data.success) {
+          handleModalClose();
+        }
+      },
+      () => {
+        toast.error('Something went wrong..');
       }
-    });
+    );
   };
 
   const openTab = () => {
