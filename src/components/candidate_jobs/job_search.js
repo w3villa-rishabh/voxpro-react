@@ -390,6 +390,7 @@ const JobSearchComponent = (props) => {
                   id="view"
                   type="checkbox"
                   checked={relevant}
+                  onChange={(e) => e.target.checked}
                   onClick={recentApply}
                 />
                 <p>
@@ -435,8 +436,10 @@ const JobSearchComponent = (props) => {
                     onChange={handelSearch}
                     name="distance">
                     <option value="">Select Distance</option>
-                    {distanceObj.map((dis) => (
-                      <option value={dis.value}>{dis.label}</option>
+                    {distanceObj.map((dis, index) => (
+                      <option key={index} value={dis.value}>
+                        {dis.label}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -448,26 +451,28 @@ const JobSearchComponent = (props) => {
                   <select
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
-                    fullWidth
                     value={startSalary}
                     onChange={handelSearch}
                     name="startSalary">
                     <option value="0">Start at</option>
-                    {dolorPrice.map((price) => (
-                      <option value={price.value}>{price.label}</option>
+                    {dolorPrice.map((price, index) => (
+                      <option key={index} value={price.value}>
+                        {price.label}
+                      </option>
                     ))}
                   </select>
                   <label className="font-weight-bold mt-2">To:</label>
                   <select
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
-                    fullWidth
                     value={endSalary}
                     onChange={handelSearch}
                     name="endSalary">
                     <option value="0">End at</option>
-                    {dolorPrice.map((price) => (
-                      <option value={price.value}>{price.label}</option>
+                    {dolorPrice.map((price, index) => (
+                      <option key={index} value={price.value}>
+                        {price.label}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -542,7 +547,6 @@ const JobSearchComponent = (props) => {
                   <select
                     className="MuiTextField-root MuiFormControl-fullWidth"
                     variant="outlined"
-                    fullWidth
                     onChange={handelSearch}
                     value={datePost}
                     name="datePost">

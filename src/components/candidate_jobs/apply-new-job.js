@@ -111,10 +111,7 @@ function getSteps() {
   return ['Contact Information', 'Resume', 'Review'];
 }
 
-const styles = (theme) => ({
-  button: {
-    margin: theme.spacing.unit
-  },
+const styles = () => ({
   input: {
     display: 'none'
   }
