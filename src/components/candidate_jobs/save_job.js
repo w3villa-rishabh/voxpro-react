@@ -91,6 +91,13 @@ export default function SaveJobComponent() {
     setValue2(value2);
   };
 
+  const sendDataToParent = (id) => {
+    // the callback. Use a better name
+    let index = savedJob.findIndex((a) => a.id === id);
+    savedJob[index].applied = true;
+    setSavedJob([...savedJob]);
+  };
+
   return (
     <>
       <div className="page-title">
@@ -165,7 +172,11 @@ export default function SaveJobComponent() {
                               </a>
                             </td>
                             <td className="text-center">
-                              <ApplyNewJob width={'w-50'} job={job} />
+                              <ApplyNewJob
+                                width={'w-50'}
+                                job={job}
+                                sendDataToParent={sendDataToParent}
+                              />
                             </td>
                             <td>
                               <Button onClick={(e) => removeJob(e, job, index)}>

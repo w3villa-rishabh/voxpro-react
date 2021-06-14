@@ -289,6 +289,7 @@ const ApplyNewJobComponent = (props) => {
       (response) => {
         toast.success(response.data.message);
         if (response.data.success) {
+          props.sendDataToParent(props.job.id);
           handleModalClose();
         }
       },

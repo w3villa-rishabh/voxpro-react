@@ -340,6 +340,13 @@ const JobSearchComponent = (props) => {
     getJobsFilters(state, 1);
   };
 
+  const sendDataToParent = (id) => {
+    // the callback. Use a better name
+    let index = props.searchResult.findIndex((a) => a.id === id);
+    props.searchResult[index].applied = true;
+    props.setSearchResult([...props.searchResult]);
+  };
+
   return (
     <>
       <SearchComponent />
@@ -796,7 +803,10 @@ const JobSearchComponent = (props) => {
                             </span>
                             <span>Hide</span>
                           </Button>
-                          <ApplyNewJob job={job} />
+                          <ApplyNewJob
+                            job={job}
+                            sendDataToParent={sendDataToParent}
+                          />
                         </Grid>
                       </Grid>
                     </div>

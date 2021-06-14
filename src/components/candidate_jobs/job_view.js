@@ -74,6 +74,13 @@ export default function JobSearchComponent() {
       );
   };
 
+  const sendDataToParent = (id) => {
+    // the callback. Use a better name
+    console.log('id', id);
+    job.applied = true;
+    setJob({ ...job });
+  };
+
   return (
     <>
       <SearchComponent />
@@ -180,7 +187,11 @@ export default function JobSearchComponent() {
                     </b>
                   </div>
                   <div className="text-center py-5">
-                    <ApplyNewJob width={'w-50'} job={job} />
+                    <ApplyNewJob
+                      width={'w-50'}
+                      job={job}
+                      sendDataToParent={sendDataToParent}
+                    />
                   </div>
                   <div>
                     <b>Reference: {job.job_name}</b>
@@ -204,7 +215,7 @@ export default function JobSearchComponent() {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={3} className="px-3 py-2">
-                  <ApplyNewJob job={job} />
+                  <ApplyNewJob job={job} sendDataToParent={sendDataToParent} />
                   <div className="mt-3">
                     <span>
                       You're using CV Deepak_Kumar_js.pdf to apply for this

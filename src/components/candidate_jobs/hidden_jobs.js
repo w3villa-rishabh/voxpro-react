@@ -91,6 +91,13 @@ export default function HideJobComponent() {
     setValue2(value2);
   };
 
+  const sendDataToParent = (id) => {
+    // the callback. Use a better name
+    let index = hiddenJob.findIndex((a) => a.id === id);
+    hiddenJob[index].applied = true;
+    setHiddenJob([...hiddenJob]);
+  };
+
   return (
     <>
       <div className="page-title">
@@ -157,7 +164,11 @@ export default function HideJobComponent() {
                               </a>
                             </td>
                             <td className="text-center">
-                              <ApplyNewJob width={'w-50'} job={job} />
+                              <ApplyNewJob
+                                width={'w-50'}
+                                job={job}
+                                sendDataToParent={sendDataToParent}
+                              />
                             </td>
                             <td>
                               <Button
