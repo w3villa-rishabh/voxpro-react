@@ -5,7 +5,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import WorkIcon from '@material-ui/icons/Work';
 import { useHistory } from 'react-router';
 import AddsComponents from 'components/add_component';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Select from 'react-select';
 import api from '../../api';
 import LoaderComponent from 'components/loader';
@@ -160,9 +160,10 @@ export default function HideJobComponent() {
                               <ApplyNewJob width={'w-50'} job={job} />
                             </td>
                             <td>
-                              <Button onClick={(e) => removeJob(e, job, index)}
-                              size="small"
-                              className="px-4 btn-neutral-primary">
+                              <Button
+                                onClick={(e) => removeJob(e, job, index)}
+                                size="small"
+                                className="px-4 btn-neutral-primary">
                                 {/* <FontAwesomeIcon icon={['fas', 'redo']} /> */}
                                 Unhide
                               </Button>

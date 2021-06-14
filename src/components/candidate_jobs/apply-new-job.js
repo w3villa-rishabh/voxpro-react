@@ -240,16 +240,16 @@ export default function ApplyNewJobComponent(props) {
         <Button
           fullWidth
           size="small"
-          className={`btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}
-          onClick={openTab}>
-          <span>Apply now</span>
+          className={`btn-success font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}>
+          <span>Applied</span>
         </Button>
       ) : (
         <Button
           fullWidth
           size="small"
-          className={`btn-success font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}>
-          <span>Applied</span>
+          className={`btn-danger font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}
+          onClick={openTab}>
+          <span>Apply now</span>
         </Button>
       )}
 
