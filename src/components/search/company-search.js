@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
@@ -6,6 +6,8 @@ import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { ClipLoader } from 'react-spinners';
 import api from '../../api';
+import { useHistory } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { getCurrentUser, convertDate } from '../../helper';
@@ -16,12 +18,35 @@ export default function CompaniesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
   const [searchLoader, setSearchLoader] = useState(false);
   const [company, setCompany] = useState([]);
+  const [recentCompanies, setRecentCompanies] = useState([]);
+  const history = useHistory();
+
   const [searchQuery, setSearchQuery] = useState({
     name: '',
     location: '',
     job: '',
     industry: ''
   });
+
+  useEffect(() => {
+    getRecentAddCompanies();
+  }, []);
+
+  const getRecentAddCompanies = () => {
+    api.get('/api/v1/companies/recently_added_companies').then(
+      (response) => {
+        if (response.data.success) {
+          setRecentCompanies([...response.data.companies]);
+        } else {
+          setRecentCompanies([]);
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        console.error(error);
+      }
+    );
+  };
 
   const handlerSearch = (event) => {
     setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
@@ -45,6 +70,16 @@ export default function CompaniesSearchComponent() {
         console.error(error);
       }
     );
+  };
+
+  const handleCompany = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-company/',
+      state: {
+        id
+      }
+    });
   };
 
   return (
@@ -154,7 +189,7 @@ export default function CompaniesSearchComponent() {
                       <LoaderComponent />
                     ) : (
                       <>
-                        {company.map((com, index) => (
+                        {recentCompanies.map((com, index) => (
                           <tr key={index}>
                             <td className="font-weight-bold">
                               {convertDate(com.created_at)}
@@ -185,8 +220,8 @@ export default function CompaniesSearchComponent() {
                               <a
                                 className="a-blue"
                                 href="!#"
-                                onClick={(e) => e.preventDefault()}>
-                                View Profile
+                                onClick={(e) => handleCompany(e, com.id)}>
+                                View
                               </a>
                             </td>
                           </tr>
@@ -195,7 +230,7 @@ export default function CompaniesSearchComponent() {
                     )}
                   </tbody>
                 </Table>
-                {!company.length && !searchLoader && (
+                {!recentCompanies.length && !searchLoader && (
                   <div className="font-size-xxl m-5 text-center">
                     No data found
                   </div>

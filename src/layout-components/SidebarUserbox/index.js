@@ -105,11 +105,22 @@ const SidebarUserbox = (props) => {
     });
   };
 
+  const handleCompany = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-company/',
+      state: {
+        id
+      }
+    });
+  };
+
   return (
     <>
       <div className="app-sidebar--userbox">
         <Box className="card-tr-actions">
-          <Button
+          {currentUser.role === 'candidate' && (
+            <Button
             variant="text"
             onClick={handleClickMenu1}
             className="ml-2 p-0 d-30 border-0 btn-transition-none text-white-50"
@@ -118,7 +129,23 @@ const SidebarUserbox = (props) => {
               icon={['fas', 'ellipsis-h']}
               className="font-size-lg"
             />
-          </Button>
+          </Button>                
+          )}
+          {(currentUser.role === 'agency' ||
+                            currentUser.role === 'company')  && (
+            <Button
+            variant="text"
+            onClick={(e) => handleCompany(e, currentUser.company_id)}
+            className="ml-2 p-0 d-30 border-0 btn-transition-none text-white-50"
+            disableRipple>
+            <FontAwesomeIcon
+              icon={['fas', 'ellipsis-h']}
+              className="font-size-lg"
+            />
+          </Button>                
+          )}
+
+          
           <div className="mt-5">
             <Menu
               anchorEl={anchorElMenu1}

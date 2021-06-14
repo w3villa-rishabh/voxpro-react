@@ -135,12 +135,6 @@ export default function HideJobComponent() {
                           <tr key={index}>
                             <td className="text-left">
                               <div>
-                                <FontAwesomeIcon
-                                  icon={['fas', 'heart']}
-                                  className="font-size-lg mr-2 mt-1 text-danger"
-                                />
-                              </div>
-                              <div>
                                 <a
                                   onClick={(e) => viewJob(e, job.id)}
                                   className="font-weight-bold text-black a-blue">
@@ -169,8 +163,11 @@ export default function HideJobComponent() {
                               </Button>
                             </td>
                             <td>
-                              <Button onClick={(e) => removeJob(e, job, index)}>
-                                <FontAwesomeIcon icon={['fas', 'redo']} />
+                              <Button onClick={(e) => removeJob(e, job, index)}
+                              size="small"
+                              className="px-4 btn-neutral-primary">
+                                {/* <FontAwesomeIcon icon={['fas', 'redo']} /> */}
+                                Unhide
                               </Button>
                             </td>
                           </tr>
