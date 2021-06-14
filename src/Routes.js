@@ -29,6 +29,9 @@ const LoginPage = lazy(() => import('./components/login.js'));
 // routes for Profile Page
 const Profile = lazy(() => import('./components/profile'));
 
+// routes for Company profile
+const CompanyProfile = lazy(() => import('./components/profiles/company_profile.js'))
+
 // routes for Dashboard
 const DashboardMonitoring = lazy(() => import('./components/dashboard.js'));
 
@@ -339,6 +342,7 @@ const Routes = () => {
                 '/ir35-verify',
                 '/request-information',
                 '/view-profile',
+                '/view-company',
                 '/view-document',
                 '/pending-document',
                 '/candidate-history',
@@ -401,7 +405,7 @@ const Routes = () => {
                   />
 
                   <Route path="/view-profile" component={Profile} />
-
+                  <Route path="/view-company" component={CompanyProfile} />
                   <Route path="/request-info">
                     <Route
                       path="/request-info/assign-new-request"

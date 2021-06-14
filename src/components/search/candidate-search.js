@@ -40,6 +40,8 @@ const CandidateSearchComponent = (props) => {
     jobTitleName: '',
     location: [],
     jobTitles: [],
+    skills: [],
+    educations: [],
     availability: '0',
     availabilityDate: ''
   });

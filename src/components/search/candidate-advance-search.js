@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { generatePath, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 import {
   Card,
@@ -38,8 +38,10 @@ const CandidateAdvanceSearchComponent = (props) => {
       ? location.state.searchQuery
       : {
           name: '',
+          skills: [],
           location: [],
           jobTitles: [],
+          educations: [],
           availability: '0',
           availabilityDate: ''
         }
@@ -47,26 +49,31 @@ const CandidateAdvanceSearchComponent = (props) => {
 
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
+  const [searchSkills, setSearchSkills] = useState([]);
+  const [searchEducations, setSearchEducations] = useState([]);
 
   const [searchData, setSearchData] = useState(false);
   const [openLocation, setOpenLocation] = useState({ open: false, do: [] });
+  const [openSkills, setOpenSkills] = useState({ open: false, do: [] });
+  const [openEducations, setOpenEducations] = useState({ open: false, do: [] });
   const [openJobs, setOpenJobs] = useState({ open: false, do: [] });
   const [searchJobStatus, setSearchJobStatus] = useState(false);
+  const [searchSkillStatus, setSearchSkillStatus] = useState(false);
+  const [searchEducationStatus, setSearchEducationStatus] = useState(false);
+  // useEffect(() => {
+  //   findSearch(searchQuery);
+  //   setFilterApplied([
+  //     { name: 'Node js' },
+  //     { name: 'Full stack' },
+  //     { name: 'Angular 4+' },
+  //     { name: 'React js' }
+  //   ]);
+  // }, []);
 
-  useEffect(() => {
-    findSearch(searchQuery);
-    setFilterApplied([
-      { name: 'Node js' },
-      { name: 'Full stack' },
-      { name: 'Angular 4+' },
-      { name: 'React js' }
-    ]);
-  }, []);
-
-  const findSearch = (searchQuery) => {
-    setIsLoading(true);
-    search(searchQuery);
-  };
+  // const findSearch = (searchQuery) => {
+  //   setIsLoading(true);
+  //   search(searchQuery);
+  // };
 
   const search = (search) => {
     api.post('/api/v1/searches/search_candidate', { query: search }).then(
@@ -124,9 +131,63 @@ const CandidateAdvanceSearchComponent = (props) => {
       );
   };
 
+  const findSkills = (search) => {
+    setSearchEducationStatus(false);
+    if (search.length < 2) {
+      return;
+    }
+    axios
+      .get(
+        `http://api.dataatwork.org/v1/skills/autocomplete?begins_with=${search}`
+      )
+      .then(
+        (response) => {
+          if (response.statusText === 'OK') {
+            console.log('response.data', response.data);
+            setSearchSkills([...response.data]);
+          } else if (!searchSkills.length) {
+            // toast.error('No available..');
+            setSearchEducationStatus(true);
+          }
+        },
+        (error) => {
+          console.error('error', error);
+        }
+      );
+  };
+
+  // http://universities.hipolabs.com/search?name=oxford
+  
+  const findUniversity = (search) => {
+    setSearchEducationStatus(false);
+    if (search.length < 2) {
+      return;
+    }
+    axios
+      .get(
+        `http://universities.hipolabs.com/search?name=${search}`
+      )
+      .then(
+        (response) => {
+          if (response.statusText === 'OK') {
+            console.log('response.data', response.data);
+            setSearchEducations([...response.data]);
+          } else if (!searchEducations.length) {
+            // toast.error('No available..');
+            setSearchEducationStatus(true);
+          }
+        },
+        (error) => {
+          console.error('error', error);
+        }
+      );
+  };
+
   const handleModalClose = () => {
     setOpenLocation({ open: false, do: [] });
     setOpenJobs({ open: false, do: [] });
+    setOpenSkills({ open: false, do: [] });
+    setOpenEducations({ open: false, do: [] });
     setCountryCity([]);
     setSearchJobs([]);
   };
@@ -229,16 +290,33 @@ const CandidateAdvanceSearchComponent = (props) => {
               <div className="px-3 py-2">
                 <b>Skills</b>
                 <ul className="cards-filter">
-                  {filterApplied.map((filter, index) => (
+                  {searchQuery.skills.map((filter, index) => (
                     <li key={index} className="cards__item_search">
                       <div>
                         <span>{filter.name}</span>
+                        <FontAwesomeIcon
+                          className="ml-2 pt-1 a-blue"
+                          icon={['fas', 'times']}
+                          onClick={() => {
+                            searchQuery.skills.splice(index, 1);
+                            setSearchQuery({ ...searchQuery });
+                            search(searchQuery);
+                          }}
+                        />
                       </div>
                     </li>
                   ))}
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                    {!searchQuery.location.length && (
+                        <span className="mr-2">Add Skills</span>
+                      )}
+                      <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                        onClick={() => {
+                          setOpenSkills({ open: true, do: [] });
+                        }}
+                      />
                     </div>
                   </li>
                 </ul>
@@ -266,10 +344,31 @@ const CandidateAdvanceSearchComponent = (props) => {
               <div className="px-3 py-2">
                 <b>Eductions</b>
                 <ul className="cards-filter">
+                {searchQuery.educations.map((filter, index) => (
+                    <li key={index} className="cards__item_search">
+                      <div>
+                        <span>{filter.name}</span>
+                        <FontAwesomeIcon
+                          className="ml-2 pt-1 a-blue"
+                          icon={['fas', 'times']}
+                          onClick={() => {
+                            searchQuery.skills.splice(index, 1);
+                            setSearchQuery({ ...searchQuery });
+                            search(searchQuery);
+                          }}
+                        />
+                      </div>
+                    </li>
+                  ))}
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
-                      <span className="mr-2">Add Eductions</span>
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                      {!searchQuery.educations.length && (
+                        <span className="mr-2">Add Eductions</span>
+                      )}
+                      <FontAwesomeIcon icon={['fas', 'plus']} 
+                      onClick={() => {
+                        setOpenEducations({ open: true, do: [] });
+                      }}/>
                     </div>
                   </li>
                 </ul>
@@ -332,7 +431,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                                 </div>
 
                                 <ul className="cards-filter">
-                                  {filterApplied.map((filter, index) => (
+                                  {/* {filterApplied.map((filter, index) => (
                                     <li
                                       key={index}
                                       className="cards__item bg-primary text-white">
@@ -340,7 +439,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                                         <span>{filter.name}</span>
                                       </div>
                                     </li>
-                                  ))}
+                                  ))} */}
                                   <li className="cards__item bg-brand-discord text-white">
                                     <div>
                                       <span>10+ years</span>
@@ -641,6 +740,178 @@ const CandidateAdvanceSearchComponent = (props) => {
                 ))}
               </ul>
             ) : searchJobStatus === true ? (
+              <ul className="list-group mt-2">
+                <li className="list-group-item list-group-item-success">
+                  <span>Not Found</span>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+      </Dialog>
+
+      {/* skills search modal */}
+      <Dialog
+        fullWidth
+        open={openSkills.open}
+        onClose={handleModalClose}
+        classes={{
+          paper:
+            'modal-content rounded border-0 bg-white p-3 p-xl-0 overflow-visible'
+        }}>
+        <DialogTitle id="form-dialog-title" className="p-2">
+          <div className="card-badges card-badges-top">
+            <FontAwesomeIcon
+              icon={['fas', 'times']}
+              className="pointer mr-3"
+              onClick={handleModalClose}
+            />
+          </div>
+          <span>Skills</span>
+        </DialogTitle>
+        <div className="p-3">
+          <div className="user-new-request">
+            <TextField
+              variant="outlined"
+              size="small"
+              name="query"
+              fullWidth
+              autoComplete="off"
+              label="Skills"
+              placeholder="e.g. 'node'"
+              className="w-100"
+              // value={searchQuery.query}
+              onChange={(e) => {
+                return e.target.value;
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchTwoToneIcon />
+                  </InputAdornment>
+                ),
+                style: {
+                  height: '37px'
+                }
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Backspace' && e.target.value.length < 2) {
+                  setSearchSkills([]);
+                  setSearchSkillStatus(false);
+                }
+              }}
+              onKeyPress={(e) => findSkills(e.target.value)}
+            />
+
+            {searchSkills.length ? (
+              <ul className="list-group mt-2">
+                {searchSkills.map((user, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-success">
+                    <span
+                      onClick={() => {
+                        searchQuery.skills.push({
+                          name: user.normalized_skill_name
+                        });
+                        setSearchQuery({ ...searchQuery });
+                        handleModalClose();
+                        search(searchQuery);
+                      }}>
+                      {user.normalized_skill_name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : searchSkillStatus === true ? (
+              <ul className="list-group mt-2">
+                <li className="list-group-item list-group-item-success">
+                  <span>Not Found</span>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+      </Dialog>
+
+      {/* unversity search modal */}
+      <Dialog
+        fullWidth
+        open={openEducations.open}
+        onClose={handleModalClose}
+        classes={{
+          paper:
+            'modal-content rounded border-0 bg-white p-3 p-xl-0 overflow-visible'
+        }}>
+        <DialogTitle id="form-dialog-title" className="p-2">
+          <div className="card-badges card-badges-top">
+            <FontAwesomeIcon
+              icon={['fas', 'times']}
+              className="pointer mr-3"
+              onClick={handleModalClose}
+            />
+          </div>
+          <span>University</span>
+        </DialogTitle>
+        <div className="p-3">
+          <div className="user-new-request">
+            <TextField
+              variant="outlined"
+              size="small"
+              name="query"
+              fullWidth
+              autoComplete="off"
+              label="Education"
+              placeholder="e.g. 'oxford'"
+              className="w-100"
+              // value={searchQuery.query}
+              onChange={(e) => {
+                return e.target.value;
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchTwoToneIcon />
+                  </InputAdornment>
+                ),
+                style: {
+                  height: '37px'
+                }
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Backspace' && e.target.value.length < 2) {
+                  setSearchEducations([]);
+                  setSearchEducationStatus(false);
+                }
+              }}
+              onKeyPress={(e) => findUniversity(e.target.value)}
+            />
+
+            {searchEducations.length ? (
+              <ul className="list-group mt-2">
+                {searchEducations.map((user, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-success">
+                    <span
+                      onClick={() => {
+                        searchQuery.educations.push({
+                          name: user.name
+                        });
+                        setSearchQuery({ ...searchQuery });
+                        handleModalClose();
+                        search(searchQuery);
+                      }}>
+                      {user.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : searchEducationStatus === true ? (
               <ul className="list-group mt-2">
                 <li className="list-group-item list-group-item-success">
                   <span>Not Found</span>

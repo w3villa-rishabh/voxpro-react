@@ -76,23 +76,24 @@ export default function LivePreviewExample() {
   const [, setData] = useState({});
   const [modal1, seModal1] = useState(false);
   // const [currentUser] = useState(getCurrentUser());
-  const [user, setUser] = useState({});
+  const [company, setCompany] = useState({});
 
   useEffect(() => {
-    getUserDetails();
+    debugger
+    getCompanyDetails();
   }, []);
 
-  const getUserDetails = () => {
+  const getCompanyDetails = () => {
     let id = location.state ? location.state.id : 0;
     if (id) {
-      findUserById(id);
+        findCompanyById(id);
     }
   };
-  const findUserById = (id) => {
-    api.get(`/api/v1/users/${id}`).then((response) => {
+  const findCompanyById = (id) => {
+    api.get(`/api/v1/companies/${id}`).then((response) => {
       if (response.data.success) {
-        setUser({ ...response.data.user });
-        console.log('user', user);
+        setCompany({ ...response.data.company });
+        console.log('user', company);
       }
     });
   };
@@ -284,10 +285,7 @@ export default function LivePreviewExample() {
       <div className="page-title">
         <PersonIcon />
         <div className="title pt-3">
-          {user.role === 'candidate' && <b className="heading">Profile</b>}
-          {(user.role === 'agency' || user.role === 'company') && (
-            <b className="heading">Profile</b>
-          )}
+          <b className="heading">{company.name} Profile</b>
         </div>
       </div>
       <div className="app-inner-content-layout">
@@ -303,8 +301,6 @@ export default function LivePreviewExample() {
                     />
                   </div>
                   <img alt="..." className="img-fit-container" src={stock2} />
-
-                  {/* {(user.role === 'agency' || user.role === 'company') && (
                     <div className="py-1 card-bagdes-down text-white">
                       <Tooltip title="Github">
                         <Button className="btn-github text-github btn-pill bg-white d-30 p-0">
@@ -347,7 +343,6 @@ export default function LivePreviewExample() {
                         </Button>
                       </Tooltip>
                     </div>
-                  )} */}
                 </div>
               </Card>
             </Grid>
@@ -399,158 +394,69 @@ export default function LivePreviewExample() {
                   </div>
                   <div className="font-size-xxl font-weight-bold text-capitalize text-center mt-2">
                     <h4 className="m-0">
-                      {user.first_name} {user.last_name}
+                      {company.name}
                     </h4>
-                    {user.role === 'candidate' && (
-                      <small>Software Engineer</small>
-                    )}
-                    {(user.role === 'agency' || user.role === 'company') && (
-                      <small>{user.job_title}</small>
-                    )}
+                      <small>{company.city}</small>
                   </div>
                   <hr></hr>
-                  <OnlineAndAvailability />
-                  <hr></hr>
-                  <div className="align-content-center d-flex justify-content-center">
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="btn-pill m-1 btn-primary">
-                      Connect
-                    </Button>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="btn-pill m-1">
-                      Message
-                    </Button>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      className="btn-pill m-1">
-                      More..
-                    </Button>
-                  </div>
-                  <div>
-                    <hr></hr>
-                    <b>About</b>
-                    <div className="float-right text-first font-size-sm">
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon ml-1 pointer"
-                        // onClick={handleExperience}
-                      />
+                    <div>
+                      <NotListedLocationIcon />
+                      <small>Live roles</small>
+                      <h4 className="ml-4">23</h4>
                     </div>
-                    <br />
-                    <small>
-                      Founder & Director | Frank Belford a Consultancy Senior
-                      Business Analyst with 15 years experience in the retail
-                      industry and FMCG industry, with project spending 5-10
-                      million.
-                    </small>
-                    <hr></hr>
-                      {user.role === 'candidate' && (
-                      <CardContent className="text-center p-0">
-                        <Grid container spacing={1}>
-                          <Grid item md={4}>
-                            <div className="bg-secondary p-2 text-center h-100 rounded">
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={['far', 'user']}
-                                  className="font-size-xxl text-warning"
-                                />
-                              </div>
-                              <div className="mt-2 line-height-sm">
-                                <b className="font-12 cb">Permanent</b>
-                                <span className="text-black-50 font-10 d-block">
-                                  Desired Employment Type
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item md={4}>
-                            <div className="bg-secondary p-2 text-center h-100 rounded">
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={['fas', 'lemon']}
-                                  className="font-size-xxl text-success"
-                                />
-                              </div>
-                              <div className="mt-2 line-height-sm">
-                                <b className="font-12 cb">$3,586</b>
-                                <span className="text-black-50 font-10 d-block">
-                                  Desired Annual Salary
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item md={4}>
-                            <div className="bg-secondary p-2 text-center h-100 rounded">
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={['far', 'chart-bar']}
-                                  className="font-size-xxl text-info"
-                                />
-                              </div>
-                              <div className="mt-2 line-height-sm">
-                                <b className="font-12 cb">City of London</b>
-                                <span className="text-black-50 font-10 d-block">
-                                  Desired Location
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item md={4}>
-                            <div className="bg-secondary p-2 text-center h-100 rounded">
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={['far', 'user']}
-                                  className="font-size-xxl text-warning"
-                                />
-                              </div>
-                              <div className="mt-2 line-height-sm">
-                                <b className="font-12 cb">Permanent</b>
-                                <span className="text-black-50 font-10 d-block">
-                                  Current Employment Type
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item md={4}>
-                            <div className="bg-secondary p-2 text-center h-100 rounded">
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={['fas', 'lemon']}
-                                  className="font-size-xxl text-success"
-                                />
-                              </div>
-                              <div className="mt-2 line-height-sm">
-                                <b className="font-12 cb">$57,500</b>
-                                <span className="text-black-50 font-10 d-block">
-                                  Current Annual Salary
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                          <Grid item md={4}>
-                            <div className="bg-secondary p-2 text-center h-100 rounded">
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={['far', 'chart-bar']}
-                                  className="font-size-xxl text-info"
-                                />
-                              </div>
-                              <div className="mt-2 line-height-sm">
-                                <b className="font-12 cb">West London</b>
-                                <span className="text-black-50 font-10 d-block">
-                                  Current Location
-                                </span>
-                              </div>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </CardContent>
-                      )}
+                    <div>
+                      <hr></hr>
+                      <b>Description</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
+                      <br />
+                      <small>
+                       {company.description}
+                      </small>
+                      <hr></hr>
+                      <b>Company Sector</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
+                      <br />
+                      <div className="m-1 badge badge-dark">Advertising</div>
+                      <div className="m-1 badge badge-dark">Analytics</div>
+                      <div className="m-1 badge badge-dark">
+                        Enterprise Software
+                      </div>
+                      <div className="m-1 badge badge-dark">eCommerce</div>
+                      <div className="m-1 badge badge-dark">
+                        Information Technology
+                      </div>
+                      <br />
+
+                      <hr></hr>
+                      <b>Company Size</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
+                      <br />
+                      <h5>Medium (50-200)</h5>
+                      <hr></hr>
+                      <b>Establised</b>
+                      <div className="float-right text-first font-size-sm">
+                        <FontAwesomeIcon
+                          icon={['fas', 'pencil-alt']}
+                          className="icon ml-1 pointer"
+                        />
+                      </div>
+                      <br />
+                      <h5>1999</h5>
                     </div>
                   <hr></hr>
                   <b>Location</b>
@@ -571,339 +477,136 @@ export default function LivePreviewExample() {
                     </GoogleMapReact>
                   </div>
                 </Card>
-                  <div>
-                    <Card className="card-box p-3 mt-2">
-                      <b>People also viewed</b>
-
-                      <List component="div" className="list-group-flush">
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Shanelle Wynn
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    UI Engineer, Apple Inc.
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                &nbsp;&nbsp;View &nbsp;&nbsp;
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar5} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Akeem Griffith
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    Manager, Google Inc.
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                &nbsp;&nbsp;View &nbsp;&nbsp;
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Abigayle Hicks
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    Project Manager, Spotify
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 mr-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                &nbsp;&nbsp;View &nbsp;&nbsp;
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                      </List>
-                      <div className="card-footer text-center">
-                        <Button
-                          size="small"
-                          className="btn-outline-second"
-                          variant="text">
-                          View More
-                        </Button>
-                      </div>
-                    </Card>
-
-                    <Card className="card-box p-3 mt-2">
-                      <b>People you may know</b>
-
-                      <List component="div" className="list-group-flush">
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Manas Singh
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    System Engineer, Apple Inc.
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                &nbsp;&nbsp;View &nbsp;&nbsp;
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Shanelle Wynn
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    UI Engineer, Apple Inc.
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                &nbsp;&nbsp;View &nbsp;&nbsp;
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                        <ListItem className="px-0 border-0">
-                          <Grid container spacing={0}>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="d-flex align-items-center">
-                              <div className="d-flex align-items-center">
-                                <div className="avatar-icon-wrapper mr-2">
-                                  <div className="avatar-icon">
-                                    <img alt="..." src={avatar2} />
-                                  </div>
-                                </div>
-                                <div>
-                                  <a
-                                    href="#/"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="font-weight-bold text-black"
-                                    title="...">
-                                    Inez Conley
-                                  </a>
-                                  <span className="text-black-50 d-block">
-                                    UX Engineer, Apple Inc.
-                                  </span>
-                                </div>
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              xs={6}
-                              // md={6}
-                              className="pt-2 pt-xl-0 d-flex align-items-center">
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                Connect
-                              </Button>
-                              <Button
-                                style={{ padding: '4px' }}
-                                size="small"
-                                className="btn-pill ml-3 btn-outline-primary border-1"
-                                variant="outlined">
-                                &nbsp;&nbsp;View &nbsp;&nbsp;
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </ListItem>
-                      </List>
-                      <div className="card-footer text-center mt-2">
-                        <Button
-                          size="small"
-                          className="btn-outline-second"
-                          variant="text">
-                          View More
-                        </Button>
-                      </div>
-                    </Card>
-                  </div>
               </div>
             </Grid>
-
-            
             <Grid item xs={12} sm={8} className="mt-70px">
-
-
-            {(user.role === 'agency' || user.role === 'company') && (
+              <Card className="card-box p-3">
+                  <div>
+                    <b>Team</b>
+                    <Grid container spacing={2} className="mt-1">
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            // href="#/"
+                            onClick={handleClickMenu1}
+                            // onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock1}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>Akshay Sharma</b>
+                              <p className="text-second opacity-8 mb-0">
+                                Business Analyst
+                              </p>
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                variant="outlined"
+                                onClick={handleClickMenu1}
+                                disableRipple>
+                                View
+                              </Button>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock2}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>Rishabh Pandey</b>
+                              <p className="text-second opacity-8 mb-0">
+                                Developer
+                              </p>
+                              {/* <a
+                                href="#/"
+                                onClick={(e) => e.preventDefault()}
+                                className="a-blue">
+                                View
+                              </a> */}
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                onClick={handleClickMenu1}
+                                variant="outlined">
+                                View
+                              </Button>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock3}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>Deepak Kumar</b>
+                              <p className="text-second opacity-8 mb-0">
+                                Developer
+                              </p>
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                onClick={handleClickMenu1}
+                                variant="outlined">
+                                View
+                              </Button>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <div>
+                          <a
+                            href="#/"
+                            onClick={(e) => e.preventDefault()}
+                            className="card bg-white shadow-sm-dark card-box-hover-rise">
+                            <img
+                              src={stock4}
+                              className="card-img-top"
+                              alt="..."
+                            />
+                            <div className="pt-2 bg-secondary rounded-bottom p-xl-4 text-center">
+                              <b>Rohit Wasan</b>
+                              <p className="text-second opacity-8 mb-0">
+                                HR executive
+                              </p>
+                              <Button
+                                className="btn-outline-info border-1 m-2"
+                                onClick={handleClickMenu1}
+                                variant="outlined">
+                                View
+                              </Button>
+                            </div>
+                          </a>
+                        </div>
+                      </Grid>
+                    </Grid>
+                    <div className="mt-4  text-center">
+                      <Button
+                        size="small"
+                        className="btn-outline-second"
+                        variant="text">
+                        View More
+                      </Button>
+                    </div>
+                  </div>
+              </Card>
                 <Card className="card-box mt-3">
                   <div className="card-header py-3">
                     <div className="card-header--title font-size-lg">
@@ -1101,309 +804,8 @@ export default function LivePreviewExample() {
                     </div>
                   </div>
                 </Card>
-              )}
-
-              <Card className="card-box p-3 mt-3">
-                  <div>
-                    <b>Skills</b>
-                    <CardContent className="pb-0">
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                          <spam>Web developer</spam>
-                        </div>
-                        <div className="font-weight-bold text-first font-size-lg">
-                          <FontAwesomeIcon
-                            icon={['fas', 'times']}
-                            className="font-size-lg d-block mr-3 text-dark opacity-5"
-                          />
-                        </div>
-                      </div>
-                      <div className="divider my-3" />
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                          <spam>Javascript</spam>
-                        </div>
-                        <div className="font-weight-bold text-first font-size-lg">
-                          <FontAwesomeIcon
-                            icon={['fas', 'times']}
-                            className="font-size-lg d-block mr-3 text-dark opacity-5"
-                          />
-                        </div>
-                      </div>
-                      <div className="divider my-3" />
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                          <spam>Angular</spam>
-                        </div>
-                        <div className="font-weight-bold text-first font-size-lg">
-                          <FontAwesomeIcon
-                            icon={['fas', 'times']}
-                            className="font-size-lg d-block mr-3 text-dark opacity-5"
-                          />
-                        </div>
-                      </div>
-                      <div className="divider my-3" />
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                          <spam>React</spam>
-                        </div>
-                        <div className="font-weight-bold text-first font-size-lg">
-                          <FontAwesomeIcon
-                            icon={['fas', 'times']}
-                            className="font-size-lg d-block mr-3 text-dark opacity-5"
-                          />
-                        </div>
-                      </div>
-                    </CardContent>
-
-                    <div className="text-center card-body-button-wrapper">
-                      <Button
-                        size="small"
-                        className="btn-primary btn-pill text-nowrap px-5 shadow-none border-3 border-white">
-                        + Add Skills
-                      </Button>
-                    </div>
-                  </div>
-              </Card>
-
-              {/* {user.role === 'candidate' && ( */}
-                <div>
-                  <Card className="card-box p-3 mt-2">
-                    <b>Education</b>
-                    <div className="float-right text-first font-size-lg">
-                      {/* <span>Education</span> */}
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon ml-2 pointer"
-                        // onClick={handleExperience}
-                      />
-                    </div>
-                    <div>
-                      <CardContent className="pb-0">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="card-footer text-center">
-                          <Button
-                            size="small"
-                            className="btn-outline-second"
-                            variant="text">
-                            View More
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </div>
-                  </Card>
-                  
-                  {user.role === 'candidate' && (
-                  <Card className="card-box p-3 mt-2">
-                    <b>Experience</b>
-                    <div className="float-right text-first font-size-lg">
-                      {/* <span>Add Experience</span> */}
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon ml-2 pointer"
-                        // onClick={handleExperience}
-                      />
-                    </div>
-                    <div>
-                      <CardContent className="pb-0">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div className="avatar-icon-wrapper mr-3">
-                              <div className="avatar-icon rounded">
-                                <img alt="..." src={avatar2} />
-                              </div>
-                            </div>
-                            <div className="position-relative">
-                              <span>Inez Conley</span>
-                              <span className="text-black-50 d-block">
-                                Frank Belford is a leading professional services
-                                Consultancy for selesforce and bullhorn for
-                                selesforce product.
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="card-footer text-center">
-                          <Button
-                            size="small"
-                            className="btn-outline-second"
-                            variant="text">
-                            View More
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </div>
-                  </Card>
-                  )}
-                 {user.role === 'candidate' && (
-                  <Card className="card-box p-3 mt-2">
-                    <b>Recommendation and endorsements</b>
-                    <div className="float-right text-first font-size-lg">
-                      {/* <span>Add Recommendation</span> */}
-                      <FontAwesomeIcon
-                        icon={['fas', 'pencil-alt']}
-                        className="icon ml-2 pointer"
-                        // onClick={handleExperience}
-                      />
-                    </div>
-
-                    <div>
-                      <CardContent className="pb-0">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <spam>Web developer</spam>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <spam>Javascript</spam>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <spam>Angular</spam>
-                          </div>
-                        </div>
-                        <div className="divider my-3" />
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <spam>React</spam>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </div>
-                  </Card>
-                  )}
-                </div>
-              {/* )} */}
               {/* Adds section */}
-              {user.role === 'candidate' && <AddsComponents />}
+              {/* {user.role === 'candidate' && <AddsComponents />} */}
             </Grid>
           </Grid>
         </div>
@@ -2011,7 +1413,7 @@ export default function LivePreviewExample() {
                             </div>
                           </a>
                           <h3 className="font-weight-bold font-size-xxl mb-0">
-                            {user.first_name} {user.last_name}
+                            {/* {user.first_name} {user.last_name} */}
                           </h3>
 
                           <p className="font-12 font-weight-bold mb-0">

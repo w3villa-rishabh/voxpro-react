@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
@@ -6,6 +6,7 @@ import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { ClipLoader } from 'react-spinners';
 import api from '../../api';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { getCurrentUser, convertDate } from 'helper';
@@ -16,12 +17,35 @@ export default function AgenciesSearchComponent() {
   const [currentUser] = useState(getCurrentUser());
   const [searchLoader, setSearchLoader] = useState(false);
   const [agency, setAgency] = useState([]);
+  const [recentAgencies, setRecentAgencies] = useState([]);
+  const history = useHistory();
+
   const [searchQuery, setSearchQuery] = useState({
     name: '',
     location: '',
     job: '',
     industry: ''
   });
+
+  useEffect(() => {
+    getRecentAddAgencies();
+  }, []);
+
+  const getRecentAddAgencies = () => {
+    api.get('/api/v1/companies/recently_added_agencies').then(
+      (response) => {
+        if (response.data.success) {
+          setRecentAgencies([...response.data.agencies]);
+        } else {
+          setRecentAgencies([]);
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        console.error(error);
+      }
+    );
+  };
 
   const handlerSearch = (event) => {
     setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
@@ -45,6 +69,16 @@ export default function AgenciesSearchComponent() {
         console.error(error);
       }
     );
+  };
+
+  const handleCompany = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-company/',
+      state: {
+        id
+      }
+    });
   };
 
   return (
@@ -154,7 +188,7 @@ export default function AgenciesSearchComponent() {
                       <LoaderComponent />
                     ) : (
                       <>
-                        {agency.map((ag, index) => (
+                        {recentAgencies.map((ag, index) => (
                           <tr key={index}>
                             <td className="font-weight-bold">
                               {convertDate(ag.created_at)}
@@ -182,8 +216,8 @@ export default function AgenciesSearchComponent() {
                               <a
                                 className="a-blue"
                                 href="!#"
-                                onClick={(e) => e.preventDefault()}>
-                                View Profile
+                                onClick={(e) => handleCompany(e, ag.id)}>
+                                View
                               </a>
                             </td>
                           </tr>
@@ -192,7 +226,7 @@ export default function AgenciesSearchComponent() {
                     )}
                   </tbody>
                 </Table>
-                {!agency.length && !searchLoader && (
+                {!recentAgencies.length && !searchLoader && (
                   <div className="font-size-xxl m-5 text-center">
                     No data found
                   </div>
