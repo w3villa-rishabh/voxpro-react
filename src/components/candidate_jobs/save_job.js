@@ -10,6 +10,7 @@ import Select from 'react-select';
 import api from '../../api';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
+import ApplyNewJob from './apply-new-job';
 
 const jobposted = [
   {
@@ -164,11 +165,7 @@ export default function SaveJobComponent() {
                               </a>
                             </td>
                             <td className="text-center">
-                              <Button
-                                size="small"
-                                className="px-4 btn-neutral-primary">
-                                Apply
-                              </Button>
+                              <ApplyNewJob width={'w-50'} job={job} />
                             </td>
                             <td>
                               <Button onClick={(e) => removeJob(e, job, index)}>

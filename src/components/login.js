@@ -48,7 +48,7 @@ export default function LoginComponent() {
     if (email) {
       confirmAccount();
     }
-  }, [confirmAccount]);
+  }, [confirmAccount, email]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function confirmAccount() {
@@ -83,6 +83,10 @@ export default function LoginComponent() {
       })
       .then((response) => {
         if (response.data.success) {
+          let currentUser = response.data.user;
+          currentUser.contact_number = currentUser.contact_number
+            ? currentUser.contact_number
+            : '';
           localStorage.setItem('token', response.data.authorization.token);
           localStorage.setItem('user', JSON.stringify(response.data.user));
           if (
