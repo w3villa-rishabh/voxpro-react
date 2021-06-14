@@ -318,7 +318,7 @@ const ApplyNewJobComponent = (props) => {
         <Button
           fullWidth
           size="small"
-          className={`btn-success font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}>
+          className={`btn-discord font-size-lg font-weight-bold hover-scale-sm mt-2 ${props.width}`}>
           <span>Applied</span>
         </Button>
       ) : (
