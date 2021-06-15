@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import {
@@ -60,22 +60,23 @@ const CandidateAdvanceSearchComponent = (props) => {
   const [searchJobStatus, setSearchJobStatus] = useState(false);
   const [searchSkillStatus, setSearchSkillStatus] = useState(false);
   const [searchEducationStatus, setSearchEducationStatus] = useState(false);
-  // useEffect(() => {
-  //   findSearch(searchQuery);
-  //   setFilterApplied([
-  //     { name: 'Node js' },
-  //     { name: 'Full stack' },
-  //     { name: 'Angular 4+' },
-  //     { name: 'React js' }
-  //   ]);
-  // }, []);
 
-  // const findSearch = (searchQuery) => {
-  //   setIsLoading(true);
-  //   search(searchQuery);
-  // };
+  useEffect(() => {
+    findSearch(searchQuery);
+    setFilterApplied([
+      { name: 'Node js' },
+      { name: 'Full stack' },
+      { name: 'Angular 4+' },
+      { name: 'React js' }
+    ]);
+  }, []);
 
-  const search = (search) => {
+  const findSearch = (searchQuery) => {
+    setIsLoading(true);
+    searchCandidate(searchQuery);
+  };
+
+  const searchCandidate = (search) => {
     api.post('/api/v1/searches/search_candidate', { query: search }).then(
       (response) => {
         setIsLoading(false);
@@ -157,30 +158,26 @@ const CandidateAdvanceSearchComponent = (props) => {
   };
 
   // http://universities.hipolabs.com/search?name=oxford
-  
+
   const findUniversity = (search) => {
     setSearchEducationStatus(false);
     if (search.length < 2) {
       return;
     }
-    axios
-      .get(
-        `http://universities.hipolabs.com/search?name=${search}`
-      )
-      .then(
-        (response) => {
-          if (response.statusText === 'OK') {
-            console.log('response.data', response.data);
-            setSearchEducations([...response.data]);
-          } else if (!searchEducations.length) {
-            // toast.error('No available..');
-            setSearchEducationStatus(true);
-          }
-        },
-        (error) => {
-          console.error('error', error);
+    axios.get(`http://universities.hipolabs.com/search?name=${search}`).then(
+      (response) => {
+        if (response.statusText === 'OK') {
+          console.log('response.data', response.data);
+          setSearchEducations([...response.data]);
+        } else if (!searchEducations.length) {
+          // toast.error('No available..');
+          setSearchEducationStatus(true);
         }
-      );
+      },
+      (error) => {
+        console.error('error', error);
+      }
+    );
   };
 
   const handleModalClose = () => {
@@ -229,7 +226,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                           onClick={() => {
                             searchQuery.jobTitles.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            search(searchQuery);
+                            searchCandidate(searchQuery);
                           }}
                         />
                       </div>
@@ -265,7 +262,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                           onClick={() => {
                             searchQuery.location.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            search(searchQuery);
+                            searchCandidate(searchQuery);
                           }}
                         />
                       </div>
@@ -300,7 +297,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                           onClick={() => {
                             searchQuery.skills.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            search(searchQuery);
+                            searchCandidate(searchQuery);
                           }}
                         />
                       </div>
@@ -308,7 +305,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                   ))}
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
-                    {!searchQuery.location.length && (
+                      {!searchQuery.skills.length && (
                         <span className="mr-2">Add Skills</span>
                       )}
                       <FontAwesomeIcon
@@ -326,12 +323,12 @@ const CandidateAdvanceSearchComponent = (props) => {
                 <b>Companies</b>
                 <ul className="cards-filter">
                   {/* {filterApplied.map((filter, index) => (
-                      <li key={index} className="cards__item_search">
-                        <div>
-                          <span>{filter.name}</span>
-                        </div>
-                      </li>
-                    ))} */}
+                    <li key={index} className="cards__item_search">
+                      <div>
+                        <span>{filter.name}</span>
+                      </div>
+                    </li>
+                  ))} */}
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
                       <span className="mr-2">Add Companies</span>
@@ -344,7 +341,7 @@ const CandidateAdvanceSearchComponent = (props) => {
               <div className="px-3 py-2">
                 <b>Eductions</b>
                 <ul className="cards-filter">
-                {searchQuery.educations.map((filter, index) => (
+                  {searchQuery.educations.map((filter, index) => (
                     <li key={index} className="cards__item_search">
                       <div>
                         <span>{filter.name}</span>
@@ -352,9 +349,9 @@ const CandidateAdvanceSearchComponent = (props) => {
                           className="ml-2 pt-1 a-blue"
                           icon={['fas', 'times']}
                           onClick={() => {
-                            searchQuery.skills.splice(index, 1);
+                            searchQuery.educations.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            search(searchQuery);
+                            searchCandidate(searchQuery);
                           }}
                         />
                       </div>
@@ -365,10 +362,12 @@ const CandidateAdvanceSearchComponent = (props) => {
                       {!searchQuery.educations.length && (
                         <span className="mr-2">Add Eductions</span>
                       )}
-                      <FontAwesomeIcon icon={['fas', 'plus']} 
-                      onClick={() => {
-                        setOpenEducations({ open: true, do: [] });
-                      }}/>
+                      <FontAwesomeIcon
+                        icon={['fas', 'plus']}
+                        onClick={() => {
+                          setOpenEducations({ open: true, do: [] });
+                        }}
+                      />
                     </div>
                   </li>
                 </ul>
@@ -431,7 +430,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                                 </div>
 
                                 <ul className="cards-filter">
-                                  {/* {filterApplied.map((filter, index) => (
+                                  {filterApplied.map((filter, index) => (
                                     <li
                                       key={index}
                                       className="cards__item bg-primary text-white">
@@ -439,7 +438,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                                         <span>{filter.name}</span>
                                       </div>
                                     </li>
-                                  ))} */}
+                                  ))}
                                   <li className="cards__item bg-brand-discord text-white">
                                     <div>
                                       <span>10+ years</span>
@@ -647,7 +646,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                       searchQuery.location.push({ name: user });
                       setSearchQuery({ ...searchQuery });
                       handleModalClose();
-                      search(searchQuery);
+                      searchCandidate(searchQuery);
                     }}>
                     <span>{user}</span>
                   </li>
@@ -732,7 +731,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                         });
                         setSearchQuery({ ...searchQuery });
                         handleModalClose();
-                        search(searchQuery);
+                        searchCandidate(searchQuery);
                       }}>
                       {user.normalized_job_title}
                     </span>
@@ -818,7 +817,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                         });
                         setSearchQuery({ ...searchQuery });
                         handleModalClose();
-                        search(searchQuery);
+                        searchCandidate(searchQuery);
                       }}>
                       {user.normalized_skill_name}
                     </span>
@@ -904,7 +903,7 @@ const CandidateAdvanceSearchComponent = (props) => {
                         });
                         setSearchQuery({ ...searchQuery });
                         handleModalClose();
-                        search(searchQuery);
+                        searchCandidate(searchQuery);
                       }}>
                       {user.name}
                     </span>
