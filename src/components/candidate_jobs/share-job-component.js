@@ -87,10 +87,12 @@ const ShareJobComponent = (props) => {
   };
 
   const openModal = () => {
-    setAccount({
+    let obj = {
       email: '',
       subject: ''
-    });
+    };
+    setAccount(obj);
+    setErrors(obj);
     setOpenApplyBox({
       open: true,
       job: props.job
