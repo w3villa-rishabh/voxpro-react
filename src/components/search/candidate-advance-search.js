@@ -10,7 +10,8 @@ import {
   CardContent,
   Dialog,
   DialogTitle,
-  InputAdornment
+  InputAdornment,
+  LinearProgress
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import api from '../../api';
@@ -206,6 +207,115 @@ const CandidateAdvanceSearchComponent = (props) => {
         <div className="title pt-3">
           <b className="heading">Search Candidates</b>
         </div>
+      </div>
+
+      <div className="mb-spacing-6">
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Card className="p-3">
+              <b>Knowledge/Educate</b>
+              <ul>
+                <li>
+                  <div className="align-box-row">
+                    <div className="flex-grow-1">
+                      <LinearProgress
+                        variant="determinate"
+                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
+                        value={55}
+                      />
+                    </div>
+                    <div className="text-first font-size-xl font-weight-bold pl-2">
+                      3,228
+                    </div>
+                  </div>
+                  <div className="text-black-50">Job title</div>
+                </li>
+                <li>
+                  <div className="align-box-row">
+                    <div className="flex-grow-1">
+                      <LinearProgress
+                        variant="determinate"
+                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
+                        value={40}
+                      />
+                    </div>
+                    <div className="text-first font-size-xl font-weight-bold pl-2">
+                      2,715
+                    </div>
+                  </div>
+                  <div className="text-black-50">Skills</div>
+                </li>
+                <li>
+                  <div className="align-box-row">
+                    <div className="flex-grow-1">
+                      <LinearProgress
+                        variant="determinate"
+                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
+                        value={22}
+                      />
+                    </div>
+                    <div className="text-first font-size-xl font-weight-bold pl-2">
+                      2,040
+                    </div>
+                  </div>
+                  <div className="text-black-50">Eductions</div>
+                </li>
+              </ul>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Card className="p-3">
+              <b>Locality</b>
+              <ul>
+                <li>
+                  <div className="align-box-row">
+                    <div className="flex-grow-1">
+                      <LinearProgress
+                        variant="determinate"
+                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
+                        value={80}
+                      />
+                    </div>
+                    <div className="text-first font-size-xl font-weight-bold pl-2">
+                      6,368
+                    </div>
+                  </div>
+                  <div className="text-black-50">Locations</div>
+                </li>
+                <li>
+                  <div className="align-box-row">
+                    <div className="flex-grow-1">
+                      <LinearProgress
+                        variant="determinate"
+                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
+                        value={50}
+                      />
+                    </div>
+                    <div className="text-first font-size-xl font-weight-bold pl-2">
+                      5,660
+                    </div>
+                  </div>
+                  <div className="text-black-50">Companies</div>
+                </li>
+                <li>
+                  <div className="align-box-row">
+                    <div className="flex-grow-1">
+                      <LinearProgress
+                        variant="determinate"
+                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
+                        value={10}
+                      />
+                    </div>
+                    <div className="text-first font-size-xl font-weight-bold pl-2">
+                      3,371
+                    </div>
+                  </div>
+                  <div className="text-black-50">Keyword</div>
+                </li>
+              </ul>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
 
       <div className="mt-3">
