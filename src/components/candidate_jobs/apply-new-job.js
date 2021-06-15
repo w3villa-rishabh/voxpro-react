@@ -14,7 +14,7 @@ import {
   LinearProgress
 } from '@material-ui/core';
 
-import { getCurrentUser } from 'helper';
+import { getCurrentUser, validEmailRegex } from 'helper';
 import api from '../../api';
 import avatar2 from '../../assets/images/avatars/avatar2.jpg';
 
@@ -155,18 +155,13 @@ const ApplyNewJobComponent = (props) => {
     return valid;
   };
 
-  const validEmailRegex = RegExp(
-    // eslint-disable-next-line no-useless-escape
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  );
-
   let handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
       case 'email':
         setErrors({
           ...errors,
-          email: validEmailRegex.test(value) ? '' : 'Email is not valid!'
+          email: validEmailRegex(value) ? '' : 'Email is not valid!'
         });
         break;
 
@@ -250,6 +245,7 @@ const ApplyNewJobComponent = (props) => {
           setUploadPercentage(0);
         },
         (error) => {
+          setUploadPercentage(0);
           console.error('error', error);
           toast.error('Something went wrong..');
         }
@@ -289,7 +285,7 @@ const ApplyNewJobComponent = (props) => {
       (response) => {
         toast.success(response.data.message);
         if (response.data.success) {
-          props.sendDataToParent(props.job.id);
+          props.jobApplyCallback(props.job.id);
           handleModalClose();
         }
       },
@@ -341,7 +337,7 @@ const ApplyNewJobComponent = (props) => {
         <Card className="card-box">
           <div className="card-header">
             <div className="card-header--title">
-              <div className="p-3 font-size-xl font-weight-bold">
+              <div className="font-size-xl font-weight-bold">
                 Apply to {openApplyBox.job.company_name}
               </div>
             </div>

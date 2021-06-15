@@ -73,7 +73,7 @@ export default function LoginComponent() {
     setAccount(account);
   };
 
-  let save = (e) => {
+  const login = (e) => {
     e.preventDefault();
     setIsLogin(true);
     toast.dismiss();
@@ -127,9 +127,8 @@ export default function LoginComponent() {
                           <LoginSocialComponent name={'Sign-In'} />
 
                           <div>
-                            <form method="post" onSubmit={save}>
+                            <form method="post" onSubmit={login}>
                               <div className="mb-4">
-                                {/* <input type="text" name="email" onChange={handleChange} /> */}
                                 <TextField
                                   fullWidth
                                   variant="outlined"

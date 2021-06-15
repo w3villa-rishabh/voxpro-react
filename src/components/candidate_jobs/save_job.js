@@ -91,7 +91,7 @@ export default function SaveJobComponent() {
     setValue2(value2);
   };
 
-  const sendDataToParent = (id) => {
+  const jobApplyCallback = (id) => {
     // the callback. Use a better name
     let index = savedJob.findIndex((a) => a.id === id);
     savedJob[index].applied = true;
@@ -175,7 +175,7 @@ export default function SaveJobComponent() {
                               <ApplyNewJob
                                 width={'w-50'}
                                 job={job}
-                                sendDataToParent={sendDataToParent}
+                                jobApplyCallback={jobApplyCallback}
                               />
                             </td>
                             <td>

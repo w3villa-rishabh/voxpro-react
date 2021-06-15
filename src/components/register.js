@@ -26,6 +26,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Select from 'react-select';
 import countryList from 'react-select-country-list';
+import { validEmailRegex } from 'helper';
+
 // import 'react-phone-number-input/style.css';
 // import PhoneInput from 'react-phone-number-input'
 
@@ -118,7 +120,7 @@ export default function LivePreviewExample() {
       case 'email':
         setErrors({
           ...errors,
-          email: validEmailRegex.test(value) ? '' : 'Email is not valid!'
+          email: validEmailRegex(value) ? '' : 'Email is not valid!'
         });
         break;
       case 'password':
@@ -184,11 +186,6 @@ export default function LivePreviewExample() {
     });
     setAccount({ ...account, country: value });
   };
-
-  const validEmailRegex = RegExp(
-    // eslint-disable-next-line no-useless-escape
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  );
 
   // const passwordRegex = new RegExp(
   //   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'

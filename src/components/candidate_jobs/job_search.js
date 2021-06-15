@@ -9,7 +9,7 @@ import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getCurrentUser } from 'helper';
+import { getCurrentUser, SmartText } from 'helper';
 import { useHistory } from 'react-router';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -108,27 +108,6 @@ const dolorPrice = [
     label: '90,000'
   }
 ];
-
-const SmartText = ({ text, length = 500 }) => {
-  const [showLess, setShowLess] = React.useState(true);
-
-  if (text.length < length) {
-    return <p>{text}</p>;
-  }
-
-  return (
-    <div>
-      <p>
-        {showLess ? `${text.slice(0, length)}...` : text}{' '}
-        <a
-          style={{ color: 'blue', cursor: 'pointer' }}
-          onClick={() => setShowLess(!showLess)}>
-          &nbsp;See {showLess ? 'More' : 'Less'}
-        </a>
-      </p>
-    </div>
-  );
-};
 
 const JobSearchComponent = (props) => {
   const history = useHistory();
@@ -340,7 +319,7 @@ const JobSearchComponent = (props) => {
     getJobsFilters(state, 1);
   };
 
-  const sendDataToParent = (id) => {
+  const jobApplyCallback = (id) => {
     // the callback. Use a better name
     let index = props.searchResult.findIndex((a) => a.id === id);
     props.searchResult[index].applied = true;
@@ -805,7 +784,7 @@ const JobSearchComponent = (props) => {
                           </Button>
                           <ApplyNewJob
                             job={job}
-                            sendDataToParent={sendDataToParent}
+                            jobApplyCallback={jobApplyCallback}
                           />
                         </Grid>
                       </Grid>

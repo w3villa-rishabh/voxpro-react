@@ -91,7 +91,7 @@ export default function HideJobComponent() {
     setValue2(value2);
   };
 
-  const sendDataToParent = (id) => {
+  const jobApplyCallback = (id) => {
     // the callback. Use a better name
     let index = hiddenJob.findIndex((a) => a.id === id);
     hiddenJob[index].applied = true;
@@ -167,7 +167,7 @@ export default function HideJobComponent() {
                               <ApplyNewJob
                                 width={'w-50'}
                                 job={job}
-                                sendDataToParent={sendDataToParent}
+                                jobApplyCallback={jobApplyCallback}
                               />
                             </td>
                             <td>

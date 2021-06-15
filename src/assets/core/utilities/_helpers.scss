@@ -467,9 +467,14 @@ $num: 20;
   cursor: pointer;
 }
 
-.Mui-disabled {
-  color: white !important;
-  background: #3c44b1 !important;
+// .Mui-disabled {
+//   color: white !important;
+//   background: #3c44b1 !important;
+// }
+
+button.Mui-disabled {
+  background: #eeeff8 !important;
+  color: unset !important;
 }
 
 .svg-none {

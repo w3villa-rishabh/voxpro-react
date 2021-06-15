@@ -12,6 +12,7 @@ import api from '../../api';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
 import ApplyNewJob from './apply-new-job';
+import ShareJob from './share-job-component';
 
 export default function JobSearchComponent() {
   const history = useHistory();
@@ -74,7 +75,7 @@ export default function JobSearchComponent() {
       );
   };
 
-  const sendDataToParent = (id) => {
+  const jobApplyCallback = (id) => {
     // the callback. Use a better name
     console.log('id', id);
     job.applied = true;
@@ -190,7 +191,7 @@ export default function JobSearchComponent() {
                     <ApplyNewJob
                       width={'w-50'}
                       job={job}
-                      sendDataToParent={sendDataToParent}
+                      jobApplyCallback={jobApplyCallback}
                     />
                   </div>
                   <div>
@@ -215,7 +216,7 @@ export default function JobSearchComponent() {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={3} className="px-3 py-2">
-                  <ApplyNewJob job={job} sendDataToParent={sendDataToParent} />
+                  <ApplyNewJob job={job} jobApplyCallback={jobApplyCallback} />
                   <div className="mt-3">
                     <span>
                       You're using CV Deepak_Kumar_js.pdf to apply for this
@@ -247,15 +248,8 @@ export default function JobSearchComponent() {
                     </span>
                     <span>{job.favorite ? 'Shortlisted' : 'Shortlist'}</span>
                   </Button>
-                  <Button
-                    fullWidth
-                    size="small"
-                    className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                    <span className="px-2">
-                      <FontAwesomeIcon icon={['fas', 'share']} />
-                    </span>
-                    <span>Share job</span>
-                  </Button>
+
+                  <ShareJob job={job} />
                   <div className="d-flex mt-3 border flex-column justify-content-between">
                     <div>
                       <img

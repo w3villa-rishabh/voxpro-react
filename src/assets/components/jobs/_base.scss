@@ -204,6 +204,11 @@
 }
 
 .Mui-disabled {
+  background: #eeeff8 !important;
+  color: unset !important;
+}
+
+span.Mui-disabled {
   background: unset !important;
   color: unset !important;
 }
