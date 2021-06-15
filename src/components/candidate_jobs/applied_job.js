@@ -7,7 +7,8 @@ import {
   Menu,
   Card,
   LinearProgress,
-  Table
+  Table,
+  TextField
 } from '@material-ui/core';
 
 import { getCurrentUser } from '../../helper';
@@ -16,6 +17,8 @@ import LoaderComponent from 'components/loader';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import api from '../../api';
+import PlaceSearchComponent from '../search/search-place';
+import { ClipLoader } from 'react-spinners';
 
 export default function AppliedJobComponent() {
   const [documents, setDocuments] = useState([]);
@@ -23,6 +26,7 @@ export default function AppliedJobComponent() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [appliedJob, setAppliedJob] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchLoader, setSearchLoader] = useState(false);
 
   useEffect(() => {
     getAppliedJobs();
@@ -60,7 +64,78 @@ export default function AppliedJobComponent() {
         </div>
       </div>
 
-      <Grid container spacing={2}>
+      <Card className="px-3 pt-3">
+        <Grid container spacing={2}>
+          <Grid item md={3} xs={12}>
+            <b>Job Title</b>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by job title"
+              className="w-100"
+              name="name"
+              // onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <b>Job Type</b>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by job type"
+              className="w-100"
+              name="industry"
+              // onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <b>Location</b>
+            <PlaceSearchComponent />
+          </Grid>
+          <Grid item md={3} xs={12}>
+            <b>Status</b>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Search by Status"
+              className="w-100"
+              name="job"
+              // onChange={handlerSearch}
+              InputProps={{
+                style: {
+                  height: '37px'
+                }
+              }}
+            />
+          </Grid>
+        </Grid>
+        <div className="card-footer float-right">
+          <Button
+            disabled={searchLoader}
+            className="btn-neutral-info hover-scale-sm"
+            // onClick={search}
+            >
+            <span className="px-2">Search</span>
+            <ClipLoader
+              color={'var(--info)'}
+              loading={searchLoader}
+              size={20}
+            />
+          </Button>
+        </div>
+      </Card>
+
+      <Grid container spacing={2} className="mt-2">
         <Grid item md={2} xs={4}>
           <Card className="card-box">
             <div className="card-content-overlay text-center py-4">
