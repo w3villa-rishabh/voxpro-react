@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Button,
@@ -12,14 +12,37 @@ import {
 
 import { getCurrentUser } from '../../helper';
 import { CircularProgressbar } from 'react-circular-progressbar';
-
+import LoaderComponent from 'components/loader';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
+import api from '../../api';
 
 export default function AppliedJobComponent() {
   const [documents, setDocuments] = useState([]);
   const [currentUser] = useState(getCurrentUser());
   const [anchorEl, setAnchorEl] = useState(null);
+  const [appliedJob, setAppliedJob] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getAppliedJobs();
+  }, []);
+
+  function getAppliedJobs() {
+    setIsLoading(true);
+    api.get(`/api/v1/users/applied_jobs`).then(
+      (response) => {
+        setIsLoading(false);
+        if (response.data.success) {
+          setAppliedJob([...response.data.jobs]);
+        }
+      },
+      () => {
+        setIsLoading(false);
+      }
+    );
+  }
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -145,21 +168,26 @@ export default function AppliedJobComponent() {
                 </tr>
               </thead>
               <tbody>
+              {isLoading ? (
+                      <LoaderComponent />
+                    ) : (
+                      <>
+                        {appliedJob.map((job, index) => (
                 <tr>
-                  <td className="font-weight-bold text-center">#0001</td>
-                  <td className="text-center">Headhunters</td>
-                  <td className="text-center">Software Developer</td>
-                  <td className="text-center">London, UK</td>
-                  <td className="text-center">14 Feb 2020</td>
+                  <td className="font-weight-bold text-center">{job.job_name}</td>
+                  <td className="text-center">{job.company_name}</td>
+                  <td className="text-center">{job.job_title}</td>
+                  <td className="text-center">{job.location}</td>
+                  <td className="text-center">15 June 2020</td>
                   <td className="text-center">Active</td>
                   <td className="">
                     <LinearProgress
                       variant="determinate"
                       className="progress-sm progress-bar-success"
-                      value={100}
+                      value={25}
                     />
                     <div className="font-size-sm text-black-50 pt-1">
-                      Placement
+                      Applied
                     </div>
                   </td>
                   <td className="text-center">
@@ -197,162 +225,16 @@ export default function AppliedJobComponent() {
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td className="font-weight-bold text-center">#0002</td>
-                  <td className="text-center">Career Appear</td>
-                  <td className="text-center">Software Developer</td>
-                  <td className="text-center">London, UK</td>
-                  <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">Active</td>
-                  <td>
-                    <LinearProgress
-                      variant="determinate"
-                      value={85}
-                      className="progress-bar-animated progress-bar-striped progress-sm progress-bar-info"
-                    />
-                    <div className="font-size-sm text-black-50 pt-1">Offer</div>
-                  </td>
-                  <td className="text-center">
-                    <div className="d-flex align-items-center justify-content-center flex-wrap">
-                      <Button
-                        aria-controls="simple-menu"
-                        size="small"
-                        className="px-4 btn-neutral-primary"
-                        variant="contained"
-                        aria-haspopup="true"
-                        onClick={handleClick}>
-                        Action
-                      </Button>
-                      <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        getContentAnchorEl={null}
-                        keepMounted
-                        classes={{ list: 'p-0' }}
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}>
-                        <div className="p-3">
-                          <MenuItem
-                            className="pr-5 px-3 text-primary"
-                            onClick={handleClose}>
-                            Follow Up
-                          </MenuItem>
-                          <MenuItem
-                            className="pr-5 px-3 text-primary"
-                            onClick={handleClose}>
-                            Withdraw application
-                          </MenuItem>
-                        </div>
-                      </Menu>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-weight-bold text-center">#0003</td>
-                  <td className="text-center">Starting Stars</td>
-                  <td className="text-center">Software Developer</td>
-                  <td className="text-center">London, UK</td>
-                  <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">Closed</td>
-                  <td>
-                    <LinearProgress
-                      variant="determinate"
-                      value={60}
-                      className="progress-sm progress-bar-warning"
-                    />
-                    <div className="font-size-sm text-black-50 pt-1">
-                      Interview
-                    </div>
-                  </td>
-                  <td className="text-center">
-                    <div className="d-flex align-items-center justify-content-center flex-wrap">
-                      <Button
-                        aria-controls="simple-menu"
-                        size="small"
-                        className="px-4 btn-neutral-primary"
-                        variant="contained"
-                        aria-haspopup="true"
-                        onClick={handleClick}>
-                        Action
-                      </Button>
-                      <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        getContentAnchorEl={null}
-                        keepMounted
-                        classes={{ list: 'p-0' }}
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}>
-                        <div className="p-3">
-                          <MenuItem
-                            className="pr-5 px-3 text-primary"
-                            onClick={handleClose}>
-                            Follow Up
-                          </MenuItem>
-                          <MenuItem
-                            className="pr-5 px-3 text-primary"
-                            onClick={handleClose}>
-                            Withdraw application
-                          </MenuItem>
-                        </div>
-                      </Menu>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-weight-bold text-center">#0004</td>
-                  <td className="text-center">Humble Hunters</td>
-                  <td className="text-center">Software Developer</td>
-                  <td className="text-center">London, UK</td>
-                  <td className="text-center">14 Feb 2020</td>
-                  <td className="text-center">Expired</td>
-                  <td>
-                    <LinearProgress
-                      variant="determinate"
-                      className="progress-sm progress-bar-danger"
-                      value={30}
-                    />
-                    <div className="font-size-sm text-black-50 pt-1">
-                      Unsuccessful
-                    </div>
-                  </td>
-                  <td className="text-center">
-                    <div className="d-flex align-items-center justify-content-center flex-wrap">
-                      <Button
-                        aria-controls="simple-menu"
-                        size="small"
-                        className="px-4 btn-neutral-primary"
-                        variant="contained"
-                        aria-haspopup="true"
-                        onClick={handleClick}>
-                        Action
-                      </Button>
-                      <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        getContentAnchorEl={null}
-                        keepMounted
-                        classes={{ list: 'p-0' }}
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}>
-                        <div className="p-3">
-                          <MenuItem
-                            className="pr-5 px-3 text-primary"
-                            onClick={handleClose}>
-                            Follow Up
-                          </MenuItem>
-                          <MenuItem
-                            className="pr-5 px-3 text-primary"
-                            onClick={handleClose}>
-                            Withdraw application
-                          </MenuItem>
-                        </div>
-                      </Menu>
-                    </div>
-                  </td>
-                </tr>
+                  ))}
+                      </>
+                    )}
               </tbody>
             </Table>
+            {!appliedJob.length && (
+              <div className="font-size-xxl m-5 text-center">
+                No data found
+              </div>
+            )}
           </div>
           <div className="card-footer py-3 text-center">
             <Button size="small" className="btn-outline-second" variant="text">

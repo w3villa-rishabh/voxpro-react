@@ -7,6 +7,7 @@ import { Grid, Card, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setSearchResult, callSearch } from '../../reducers/ThemeOptions';
 import AddsComponents from 'components/add_component';
+import { confirmAlert } from 'react-confirm-alert';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getCurrentUser, SmartText } from 'helper';
@@ -281,23 +282,64 @@ const JobSearchComponent = (props) => {
       );
   };
 
+  const [anchorElDoc, setAnchorElDoc] = useState(null);
+
+
+  const handleClose = () => {
+    setAnchorElDoc(null);
+  };
+
   const hideJob = (e, job, index) => {
     e.preventDefault();
-    api.post(`/api/v1/jobs/${job.id}/hide_job?hide=${true}`).then(
-      (response) => {
-        if (response.data.success) {
-          toast.success(response.data.message);
-          props.searchResult.splice(index, 1);
-          props.setSearchResult([...props.searchResult]);
-        } else {
-          toast.error('error in saving job..');
+    handleClose();
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            api.post(`/api/v1/jobs/${job.id}/hide_job?hide=${true}`).then(
+              (response) => {
+                if (response.data.success) {
+                  toast.success(response.data.message);
+                  props.searchResult.splice(index, 1);
+                  props.setSearchResult([...props.searchResult]);
+                } else {
+                  toast.error('error in saving job..');
+                }
+              },
+              (error) => {
+                console.error(error);
+              }
+            );
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => handleClose()
         }
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  };
+      ]
+    });
+  }
+
+
+  //   e.preventDefault();
+  //   api.post(`/api/v1/jobs/${job.id}/hide_job?hide=${true}`).then(
+  //     (response) => {
+  //       if (response.data.success) {
+  //         toast.success(response.data.message);
+  //         props.searchResult.splice(index, 1);
+  //         props.setSearchResult([...props.searchResult]);
+  //       } else {
+  //         toast.error('error in saving job..');
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // };
 
   const viewMoreResult = (event, newPage) => {
     props.searchFilter.page = newPage;
