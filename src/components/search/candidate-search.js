@@ -4,14 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-import moment from 'moment';
-import DateFnsUtils from '@date-io/date-fns';
 
 import LoaderComponent from 'components/loader';
+import AvailabilityComp from '../availability/availability';
+
 import { convertDate } from 'helper';
 
 import { connect } from 'react-redux';
@@ -26,7 +22,6 @@ const CandidateSearchComponent = (props) => {
 
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [candidate, setCandidate] = useState([]);
 
   const [searchData, setSearchData] = useState(false);
@@ -43,7 +38,8 @@ const CandidateSearchComponent = (props) => {
     skills: [],
     educations: [],
     availability: '0',
-    availabilityDate: ''
+    availabilityDate: '',
+    page: 1
   });
 
   useEffect(() => {
@@ -102,16 +98,6 @@ const CandidateSearchComponent = (props) => {
     });
   };
 
-  const handleDateChange = (date) => {
-    if (date) {
-      setIsOpen(false);
-      setSearchQuery({
-        ...searchQuery,
-        availabilityDate: date
-      });
-    }
-  };
-
   const findJobs = (search) => {
     setSearchJobStatus(false);
     if (search.length < 2) {
@@ -144,6 +130,22 @@ const CandidateSearchComponent = (props) => {
         id
       }
     });
+  };
+
+  const availabilityCallback = (event, status, date) => {
+    // the callback. Use a better name
+    if (status === 'remove') {
+      setSearchQuery({
+        ...searchQuery,
+        availability: event.target.value,
+        availabilityDate: ''
+      });
+    } else {
+      setSearchQuery({
+        ...searchQuery,
+        availabilityDate: date
+      });
+    }
   };
 
   return (
@@ -280,54 +282,10 @@ const CandidateSearchComponent = (props) => {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Availability</b>
-            <div className="position-relative">
-              {isOpen && (
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disablePast
-                    disableToolbar
-                    variant="outlined"
-                    format="dd/MM/yyyy"
-                    // margin="normal"
-                    id="date-picker-outlined"
-                    value={new Date()}
-                    onChange={handleDateChange}
-                    autoOk={true}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date'
-                    }}
-                    open={isOpen}
-                  />
-                </MuiPickersUtilsProvider>
-              )}
-              <select
-                className="MuiTextField-root MuiFormControl-fullWidth select-doc date-pic"
-                variant="outlined"
-                fullWidth
-                name="availability"
-                onChange={(event) => {
-                  if (event.target.value === '3') {
-                    setIsOpen(true);
-                  }
-                  setSearchQuery({
-                    ...searchQuery,
-                    [event.target.name]: event.target.value,
-                    availabilityDate: ''
-                  });
-
-                  console.log('documents.expiration', event.target.value);
-                }}
-                value={searchQuery.availability}>
-                <option value="0">Select Availability</option>
-                <option value="1">Immediately</option>
-                <option value="2">Unavailable</option>
-                <option value="3">
-                  {searchQuery.availabilityDate
-                    ? moment(searchQuery.availabilityDate).format('DD-MM-YYYY')
-                    : 'Available from'}
-                </option>
-              </select>
-            </div>
+            <AvailabilityComp
+              searchQuery={searchQuery}
+              availabilityCallback={availabilityCallback}
+            />
           </Grid>
           <Grid item md={2} xs={12}>
             <Button

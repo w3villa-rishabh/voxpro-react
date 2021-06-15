@@ -27,6 +27,7 @@ import LoaderComponent from 'components/loader';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import { useLocation } from 'react-router';
+import AvailabilityComp from '../availability/availability';
 
 const CandidateAdvanceSearchComponent = (props) => {
   const location = useLocation();
@@ -44,9 +45,15 @@ const CandidateAdvanceSearchComponent = (props) => {
           jobTitles: [],
           educations: [],
           availability: '0',
-          availabilityDate: ''
+          availabilityDate: '',
+          page: 1
         }
   );
+  const [searchPageCount, setSearchPageCount] = useState({
+    total_pages: 0,
+    page: 0,
+    total: 0
+  });
 
   const [countyCity, setCountryCity] = useState([]);
   const [searchJobs, setSearchJobs] = useState([]);
@@ -82,6 +89,7 @@ const CandidateAdvanceSearchComponent = (props) => {
       (response) => {
         setIsLoading(false);
         if (response.data.success) {
+          setSearchPageCount({ ...response.data.page_info });
           setCandidate([...response.data.candidate]);
         } else {
           setCandidate([]);
@@ -93,6 +101,12 @@ const CandidateAdvanceSearchComponent = (props) => {
         console.error(error);
       }
     );
+  };
+
+  const viewMoreResult = (event, newPage) => {
+    searchQuery.page = newPage;
+    setSearchQuery({ ...searchQuery });
+    searchCandidate(searchQuery);
   };
 
   const countryFilter = (value) => {
@@ -198,6 +212,18 @@ const CandidateAdvanceSearchComponent = (props) => {
         id
       }
     });
+  };
+
+  const availabilityCallback = (event, status, date) => {
+    // the callback. Use a better name
+    if (status === 'remove') {
+      searchQuery.availability = event.target.value;
+      searchQuery.availabilityDate = '';
+    } else {
+      searchQuery.availabilityDate = date;
+    }
+    setSearchQuery({ ...searchQuery });
+    searchCandidate(searchQuery);
   };
 
   return (
@@ -319,6 +345,9 @@ const CandidateAdvanceSearchComponent = (props) => {
       </div>
 
       <div className="mt-3">
+        <h6 className="font-size-xxl text-capitalize">
+          {searchPageCount ? searchPageCount.total : 0} {'Candidates found'}
+        </h6>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
             <Card className="card-box">
@@ -493,6 +522,16 @@ const CandidateAdvanceSearchComponent = (props) => {
                     </div>{' '}
                   </li>
                 </ul>
+              </div>
+              <div className="divider opacity-8 my-1" />
+              <div className="px-3 py-2 h-100px">
+                <b>Availability</b>
+                <div>
+                  <AvailabilityComp
+                    searchQuery={searchQuery}
+                    availabilityCallback={availabilityCallback}
+                  />
+                </div>
               </div>
             </Card>
           </Grid>
@@ -680,13 +719,13 @@ const CandidateAdvanceSearchComponent = (props) => {
               </>
             )}
 
-            {props.searchResult.length >= 1 && (
+            {candidate.length >= 1 && (
               <div className="p-3 d-flex justify-content-center">
                 <Pagination
                   className="pagination-primary"
-                  // onChange={viewMoreResult}
-                  page={props.searchFilter.page}
-                  count={props.searchPages ? props.searchPages.total_pages : 0}
+                  onChange={viewMoreResult}
+                  page={searchPageCount.page}
+                  count={searchPageCount.total_pages}
                 />
               </div>
             )}
