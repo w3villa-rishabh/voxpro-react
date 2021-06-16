@@ -85,7 +85,7 @@ const JobSearchComponent = (props) => {
 
   const saveJobs = () => {
     history.push('/save-jobs');
-  }
+  };
 
   const search = (status) => {
     setSearchLoader(status);
@@ -130,10 +130,13 @@ const JobSearchComponent = (props) => {
         </Grid>
         <Grid item sm={3} xs={12}>
           <Button
-          onClick={saveJobs} 
-          className="btn-neutral-info hover-scale-sm px-4 mt-2 float-right">
-            <FontAwesomeIcon icon={['fas', 'heart']} className="svg-none"
-            onClick />
+            onClick={saveJobs}
+            className="btn-neutral-info hover-scale-sm px-4 mt-2 float-right">
+            <FontAwesomeIcon
+              icon={['fas', 'heart']}
+              className="svg-none"
+              onClick
+            />
             <span className="px-2">Shortlisted Jobs</span>
           </Button>
         </Grid>

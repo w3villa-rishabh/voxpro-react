@@ -282,15 +282,8 @@ const JobSearchComponent = (props) => {
       );
   };
 
-  const [anchorElDoc, setAnchorElDoc] = useState(null);
-
-  const handleClose = () => {
-    setAnchorElDoc(null);
-  };
-
   const hideJob = (e, job, index) => {
     e.preventDefault();
-    handleClose();
     confirmAlert({
       title: 'Confirm to Hide',
       message: 'Are you sure to hide this job.',
@@ -315,29 +308,11 @@ const JobSearchComponent = (props) => {
           }
         },
         {
-          label: 'No',
-          onClick: () => handleClose()
+          label: 'No'
         }
       ]
     });
   };
-
-  //   e.preventDefault();
-  //   api.post(`/api/v1/jobs/${job.id}/hide_job?hide=${true}`).then(
-  //     (response) => {
-  //       if (response.data.success) {
-  //         toast.success(response.data.message);
-  //         props.searchResult.splice(index, 1);
-  //         props.setSearchResult([...props.searchResult]);
-  //       } else {
-  //         toast.error('error in saving job..');
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // };
 
   const viewMoreResult = (event, newPage) => {
     props.searchFilter.page = newPage;
