@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, InputAdornment } from '@material-ui/core';
 import CountryCity from '../../assets/city-country';
+
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 
 export default function SearchLocationComponent(props) {
   const [searchData, setSearchData] = useState(false);
@@ -38,6 +40,13 @@ export default function SearchLocationComponent(props) {
           className="w-100"
           value={searchQuery}
           onChange={handlerSearch}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchTwoToneIcon />
+              </InputAdornment>
+            )
+          }}
           onKeyUp={(e) => {
             if (e.key === 'Backspace' && e.target.value.length < 2) {
               props.searchQuery[e.target.name] = '';

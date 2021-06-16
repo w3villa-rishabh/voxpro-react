@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, InputAdornment } from '@material-ui/core';
 import axios from 'axios';
+
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 
 export default function SearchJobsComponent(props) {
   const [searchJobs, setSearchJobs] = useState([]);
@@ -50,6 +52,13 @@ export default function SearchJobsComponent(props) {
           className="w-100"
           value={searchQuery}
           onChange={handlerSearch}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchTwoToneIcon />
+              </InputAdornment>
+            )
+          }}
           onKeyUp={(e) => {
             if (e.key === 'Backspace' && e.target.value.length < 2) {
               props.searchQuery[e.target.name] = '';
