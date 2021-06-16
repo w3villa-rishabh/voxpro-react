@@ -7,8 +7,7 @@ import {
   Button,
   TextField,
   Dialog,
-  DialogActions,
-  TextareaAutosize
+  DialogActions
 } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -171,19 +170,17 @@ const ShareJobComponent = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <b>Description</b> <br/>
-                <textarea
-                 style={{
-                  minWidth: '100%',
-                  minHeight: '100px'
-                }}
-                fullWidth
-                variant="outlined"
-                size="small"
-                placeholder="Enter description"
-                id="input-with-icon-textfield2"
-                value={account.description}
-                name="description"
-                onChange={handleChange}
+                <TextField
+                  fullWidth
+                  multiline
+                  rows="4"
+                  variant="outlined"
+                  size="small"
+                  placeholder="Enter description"
+                  id="input-with-icon-textfield2"
+                  value={account.description}
+                  name="description"
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
