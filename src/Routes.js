@@ -30,7 +30,9 @@ const LoginPage = lazy(() => import('./components/login.js'));
 const Profile = lazy(() => import('./components/profile'));
 
 // routes for Company profile
-const CompanyProfile = lazy(() => import('./components/profiles/company_profile.js'))
+const CompanyProfile = lazy(() =>
+  import('./components/profiles/company_profile.js')
+);
 
 // routes for Dashboard
 const DashboardMonitoring = lazy(() => import('./components/dashboard.js'));
@@ -144,6 +146,16 @@ const CandidateSearchComponent = lazy(() =>
 //CandidateAdvanceSearchComponent
 const CandidateAdvanceSearchComponent = lazy(() =>
   import('./components/search/candidate-advance-search')
+);
+
+//CompanyAdvanceSearchComponent
+const CompanyAdvanceSearchComponent = lazy(() =>
+  import('./components/search/company-advance-search')
+);
+
+//CompanyAdvanceSearchComponent
+const AgencyAdvanceSearchComponent = lazy(() =>
+  import('./components/search/agency-advance-search')
 );
 
 //Agency Pending request
@@ -368,6 +380,8 @@ const Routes = () => {
                 '/search-companies',
                 '/search-candidates',
                 '/candidate-advance-search',
+                '/company-advance-search',
+                '/agency-advance-search',
                 '/management-company',
                 '/management-agency',
                 '/management-candidate',
@@ -477,6 +491,16 @@ const Routes = () => {
                   <Route
                     path="/candidate-advance-search"
                     component={CandidateAdvanceSearchComponent}
+                  />
+
+                  <Route
+                    path="/company-advance-search"
+                    component={CompanyAdvanceSearchComponent}
+                  />
+
+                  <Route
+                    path="/agency-advance-search"
+                    component={AgencyAdvanceSearchComponent}
                   />
 
                   <Route

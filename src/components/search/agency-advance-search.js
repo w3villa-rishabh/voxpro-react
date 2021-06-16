@@ -21,16 +21,15 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from '@material-ui/lab/Pagination';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import CountryCity from '../../assets/city-country';
 import axios from 'axios';
 import LoaderComponent from 'components/loader';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import { useLocation } from 'react-router';
 import AvailabilityComp from '../availability/availability';
-import SearchJobsComponent from './search-jobs';
-import SearchLocationComponent from './search-location';
 
-const CandidateAdvanceSearchComponent = () => {
+const AgencyAdvanceSearchComponent = () => {
   const location = useLocation();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -56,13 +55,17 @@ const CandidateAdvanceSearchComponent = () => {
     total: 0
   });
 
+  const [countyCity, setCountryCity] = useState([]);
+  const [searchJobs, setSearchJobs] = useState([]);
   const [searchSkills, setSearchSkills] = useState([]);
   const [searchEducations, setSearchEducations] = useState([]);
 
+  const [searchData, setSearchData] = useState(false);
   const [openLocation, setOpenLocation] = useState({ open: false, do: [] });
   const [openSkills, setOpenSkills] = useState({ open: false, do: [] });
   const [openEducations, setOpenEducations] = useState({ open: false, do: [] });
   const [openJobs, setOpenJobs] = useState({ open: false, do: [] });
+  const [searchJobStatus, setSearchJobStatus] = useState(false);
   const [searchSkillStatus, setSearchSkillStatus] = useState(false);
   const [searchEducationStatus, setSearchEducationStatus] = useState(false);
 
@@ -104,6 +107,44 @@ const CandidateAdvanceSearchComponent = () => {
     searchQuery.page = newPage;
     setSearchQuery({ ...searchQuery });
     searchCandidate(searchQuery);
+  };
+
+  const countryFilter = (value) => {
+    if (value.length < 2) {
+      return;
+    }
+    setSearchData(false);
+    var search = new RegExp(value, 'i'); // prepare a regex object
+    let searchLog = CountryCity.filter((item) => search.test(item));
+    setCountryCity([...searchLog]);
+    if (!searchLog.length) {
+      setSearchData(true);
+    }
+  };
+
+  const findJobs = (search) => {
+    setSearchJobStatus(false);
+    if (search.length < 2) {
+      return;
+    }
+    axios
+      .get(
+        `http://api.dataatwork.org/v1/jobs/autocomplete?begins_with=${search}`
+      )
+      .then(
+        (response) => {
+          if (response.statusText === 'OK') {
+            console.log('response.data', response.data);
+            setSearchJobs([...response.data]);
+          } else if (!searchJobs.length) {
+            // toast.error('No available..');
+            setSearchJobStatus(true);
+          }
+        },
+        (error) => {
+          console.error('error', error);
+        }
+      );
   };
 
   const findSkills = (search) => {
@@ -159,6 +200,8 @@ const CandidateAdvanceSearchComponent = () => {
     setOpenJobs({ open: false, do: [] });
     setOpenSkills({ open: false, do: [] });
     setOpenEducations({ open: false, do: [] });
+    setCountryCity([]);
+    setSearchJobs([]);
   };
 
   const handleProceed = (e, id) => {
@@ -183,17 +226,12 @@ const CandidateAdvanceSearchComponent = () => {
     searchCandidate(searchQuery);
   };
 
-  const locationCallback = () => {
-    searchCandidate(searchQuery);
-    handleModalClose();
-  };
-
   return (
     <>
       <div className="page-title">
         <WorkIcon />
         <div className="title pt-3">
-          <b className="heading">Search Candidates</b>
+          <b className="heading">Search Agencies</b>
         </div>
       </div>
 
@@ -715,10 +753,64 @@ const CandidateAdvanceSearchComponent = () => {
           <span>Location</span>
         </DialogTitle>
         <div className="p-3">
-          <SearchLocationComponent
-            searchQuery={searchQuery}
-            locationCallback={locationCallback}
-          />
+          <div className="user-new-request">
+            <TextField
+              variant="outlined"
+              size="small"
+              name="location"
+              fullWidth
+              autoComplete="off"
+              label="Where"
+              placeholder="e.g. 'london'"
+              className="w-100"
+              onChange={(e) => {
+                return e.target.value;
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchTwoToneIcon />
+                  </InputAdornment>
+                ),
+                style: {
+                  height: '37px'
+                }
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Backspace' && e.target.value.length < 2) {
+                  setCountryCity([]);
+                  setSearchData(false);
+                }
+              }}
+              onKeyPress={(e) => countryFilter(e.target.value)}
+            />
+
+            {countyCity.length ? (
+              <ul className="list-group mt-2">
+                {countyCity.map((user, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-success"
+                    onClick={() => {
+                      searchQuery.location.push({ name: user });
+                      setSearchQuery({ ...searchQuery });
+                      handleModalClose();
+                      searchCandidate(searchQuery);
+                    }}>
+                    <span>{user}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : searchData === true ? (
+              <ul className="list-group mt-2">
+                <li className="list-group-item list-group-item-success">
+                  <span>Not Found</span>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </Dialog>
 
@@ -742,7 +834,69 @@ const CandidateAdvanceSearchComponent = () => {
           <span>Jobs Titles</span>
         </DialogTitle>
         <div className="p-3">
-          <SearchJobsComponent searchQuery={searchQuery} />
+          <div className="user-new-request">
+            <TextField
+              variant="outlined"
+              size="small"
+              name="query"
+              fullWidth
+              autoComplete="off"
+              label="What"
+              placeholder="e.g. 'angular'"
+              className="w-100"
+              // value={searchQuery.query}
+              onChange={(e) => {
+                return e.target.value;
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchTwoToneIcon />
+                  </InputAdornment>
+                ),
+                style: {
+                  height: '37px'
+                }
+              }}
+              onKeyUp={(e) => {
+                if (e.key === 'Backspace' && e.target.value.length < 2) {
+                  setSearchJobs([]);
+                  setSearchJobStatus(false);
+                }
+              }}
+              onKeyPress={(e) => findJobs(e.target.value)}
+            />
+
+            {searchJobs.length ? (
+              <ul className="list-group mt-2">
+                {searchJobs.map((user, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item list-group-item-success">
+                    <span
+                      onClick={() => {
+                        searchQuery.jobTitles.push({
+                          name: user.normalized_job_title
+                        });
+                        setSearchQuery({ ...searchQuery });
+                        handleModalClose();
+                        searchCandidate(searchQuery);
+                      }}>
+                      {user.normalized_job_title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : searchJobStatus === true ? (
+              <ul className="list-group mt-2">
+                <li className="list-group-item list-group-item-success">
+                  <span>Not Found</span>
+                </li>
+              </ul>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </Dialog>
 
@@ -936,4 +1090,4 @@ const mapStateToProps = (state) => ({
 //   };
 // };
 
-export default connect(mapStateToProps)(CandidateAdvanceSearchComponent);
+export default connect(mapStateToProps)(AgencyAdvanceSearchComponent);
