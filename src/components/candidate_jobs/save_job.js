@@ -160,7 +160,7 @@ export default function SaveJobComponent() {
                                   {job.location}
                                 </small>
                                 <small className="text-black-50">
-                                  Saved: Today
+                                  Saved: {job.created_date}
                                 </small>
                               </div>
                             </td>

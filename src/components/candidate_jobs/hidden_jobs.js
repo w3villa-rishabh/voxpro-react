@@ -11,6 +11,7 @@ import api from '../../api';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
 import ApplyNewJob from './apply-new-job';
+import { join } from 'lodash';
 
 const jobposted = [
   {
@@ -152,7 +153,7 @@ export default function HideJobComponent() {
                                   {job.location}
                                 </small>
                                 <small className="text-black-50">
-                                  Saved: Today
+                                  Hidden: {job.created_date}
                                 </small>
                               </div>
                             </td>
