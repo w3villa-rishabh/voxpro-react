@@ -25,7 +25,6 @@ import LoaderComponent from 'components/loader';
 import SearchLocationComponent from './search-location';
 import SearchJobsComponent from './search-jobs';
 
-import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import { useLocation } from 'react-router';
 
 const CompanyAgencyAdvanceSearchComponent = () => {
@@ -33,7 +32,6 @@ const CompanyAgencyAdvanceSearchComponent = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [company, setCompanies] = useState([]);
-  const [filterApplied, setFilterApplied] = useState([]);
   const [searchQuery, setSearchQuery] = useState(
     location.state
       ? location.state.searchQuery
@@ -58,12 +56,6 @@ const CompanyAgencyAdvanceSearchComponent = () => {
 
   useEffect(() => {
     findSearch(searchQuery);
-    setFilterApplied([
-      { name: 'Node js' },
-      { name: 'Full stack' },
-      { name: 'Angular 4+' },
-      { name: 'React js' }
-    ]);
   }, []);
 
   const findSearch = (searchQuery) => {
@@ -105,16 +97,6 @@ const CompanyAgencyAdvanceSearchComponent = () => {
     setOpenLocation({ open: false, do: [] });
     setOpenJobs({ open: false, do: [] });
     setOpenIndustry({ open: false, do: [] });
-  };
-
-  const handleProceed = (e, id) => {
-    e.preventDefault();
-    history.push({
-      pathname: '/view-profile/',
-      state: {
-        id
-      }
-    });
   };
 
   const handleCompany = (e, id) => {
@@ -275,7 +257,9 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                               <Grid item xs={12} sm={2}>
                                 <div className="avatar-icon-wrapper avatar-icon-lg">
                                   <div className="avatar-icon rounded d-110">
-                                    <img alt="..." src={com.logo_url} 
+                                    <img
+                                      alt="..."
+                                      src={com.logo_url}
                                       onClick={(e) => handleCompany(e, com.id)}
                                     />
                                   </div>
@@ -288,37 +272,12 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                                     onClick={(e) => handleCompany(e, com.id)}
                                     className="a-blue font-weight-bold ml-1 font-size-xxl"
                                     title="...">
-                                     {com.name}
+                                    {com.name}
                                   </a>
                                   <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
                                     2nd
                                   </Button>
-                                  <div className="float-right">
-                                    <span className="text-black-50 font-size-xl">
-                                      Above{' '}
-                                      <span className="a-blue font-weight-bold font-size-xxl">
-                                        20%
-                                      </span>
-                                    </span>
-                                  </div>
                                 </div>
-
-                                <ul className="cards-filter">
-                                  {/* {filterApplied.map((filter, index) => (
-                                    <li
-                                      key={index}
-                                      className="cards__item bg-primary text-white">
-                                      <div>
-                                        <span>{filter.name}</span>
-                                      </div>
-                                    </li>
-                                  ))} */}
-                                  <li className="cards__item bg-brand-discord text-white">
-                                    <div>
-                                      {/* <span>10+ years</span> */}
-                                    </div>
-                                  </li>
-                                </ul>
 
                                 <div className="">
                                   <span className="d-block">
@@ -342,12 +301,14 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                               <Grid item xs={12} sm={2}>
                                 <div className="d-flex justify-content-between">
                                   <div className="d-flex align-items-center">
-                                    {/* <Button
-                                      fullWidth
-                                      size="small"
-                                      className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
-                                      <span>Connect</span>
-                                    </Button> */}
+                                    <div className="float-right">
+                                      <span className="text-black-50 font-size-xl">
+                                        Above{' '}
+                                        <span className="a-blue font-weight-bold font-size-xxl">
+                                          20%
+                                        </span>
+                                      </span>
+                                    </div>
                                   </div>
                                 </div>
                               </Grid>
@@ -361,9 +322,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                               </Grid>
                               <Grid item xs={12} sm={8}>
                                 <div>
-                                  <p className="mb-0">
-                                    {com.location}
-                                  </p>
+                                  <p className="mb-0">{com.location}</p>
                                 </div>
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>
@@ -523,32 +482,6 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                 }
               }}
             />
-
-            {/* {countyCity.length ? (
-              <ul className="list-group mt-2">
-                {countyCity.map((user, index) => (
-                  <li
-                    key={index}
-                    className="list-group-item list-group-item-success"
-                    onClick={() => {
-                      searchQuery.location.push({ name: user });
-                      setSearchQuery({ ...searchQuery });
-                      handleModalClose();
-                      searchCandidate(searchQuery);
-                    }}>
-                    <span>{user}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : searchData === true ? (
-              <ul className="list-group mt-2">
-                <li className="list-group-item list-group-item-success">
-                  <span>Not Found</span>
-                </li>
-              </ul>
-            ) : (
-              ''
-            )} */}
           </div>
         </div>
       </Dialog>
