@@ -4,6 +4,7 @@ import { Card, Button, Grid, Table } from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import WorkIcon from '@material-ui/icons/Work';
 import { useHistory } from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
 
 import Select from 'react-select';
@@ -105,6 +106,18 @@ export default function HideJobComponent() {
         <div className="title pt-3">
           <b className="heading">Hidden Jobs</b>
         </div>
+      </div>
+
+      <div className="mt-3 py-2">
+        <FontAwesomeIcon icon={['fas', 'angle-left']} className="mr-2" />
+        <a
+          href="#/"
+          onClick={(e) => {
+            e.preventDefault();
+            history.goBack();
+          }}>
+          Back
+        </a>
       </div>
 
       <Grid container spacing={2}>
