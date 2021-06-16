@@ -28,7 +28,7 @@ import SearchJobsComponent from './search-jobs';
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import { useLocation } from 'react-router';
 
-const CompanyAdvanceSearchComponent = () => {
+const CompanyAgencyAdvanceSearchComponent = () => {
   const location = useLocation();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +72,12 @@ const CompanyAdvanceSearchComponent = () => {
   };
 
   const searchCompanies = (search) => {
-    api.post('/api/v1/searches/search_company', { query: search }).then(
+    let url = '/api/v1/searches/search_company';
+    if (location.state.role === 'agency') {
+      url = '/api/v1/searches/search_agency';
+    }
+
+    api.post(url, { query: search }).then(
       (response) => {
         setIsLoading(false);
         if (response.data.success) {
@@ -122,7 +127,7 @@ const CompanyAdvanceSearchComponent = () => {
       <div className="page-title">
         <WorkIcon />
         <div className="title pt-3">
-          <b className="heading">Search Companies</b>
+          <b className="heading">Advance Search</b>
         </div>
       </div>
 
@@ -553,4 +558,4 @@ const mapStateToProps = (state) => ({
 //   };
 // };
 
-export default connect(mapStateToProps)(CompanyAdvanceSearchComponent);
+export default connect(mapStateToProps)(CompanyAgencyAdvanceSearchComponent);

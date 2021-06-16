@@ -69,8 +69,8 @@ export default function CompaniesSearchComponent() {
 
   const search = () => {
     return history.push({
-      pathname: '/company-advance-search',
-      state: { searchQuery }
+      pathname: '/advance-search',
+      state: { searchQuery, role: 'company' }
     });
   };
 

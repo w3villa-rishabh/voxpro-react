@@ -148,14 +148,9 @@ const CandidateAdvanceSearchComponent = lazy(() =>
   import('./components/search/candidate-advance-search')
 );
 
-//CompanyAdvanceSearchComponent
-const CompanyAdvanceSearchComponent = lazy(() =>
-  import('./components/search/company-advance-search')
-);
-
-//CompanyAdvanceSearchComponent
-const AgencyAdvanceSearchComponent = lazy(() =>
-  import('./components/search/agency-advance-search')
+//CompanyAgencyAdvanceSearchComponent
+const CompanyAgencyAdvanceSearchComponent = lazy(() =>
+  import('./components/search/agency-company-advance-search')
 );
 
 //Agency Pending request
@@ -380,8 +375,7 @@ const Routes = () => {
                 '/search-companies',
                 '/search-candidates',
                 '/candidate-advance-search',
-                '/company-advance-search',
-                '/agency-advance-search',
+                '/advance-search',
                 '/management-company',
                 '/management-agency',
                 '/management-candidate',
@@ -494,13 +488,8 @@ const Routes = () => {
                   />
 
                   <Route
-                    path="/company-advance-search"
-                    component={CompanyAdvanceSearchComponent}
-                  />
-
-                  <Route
-                    path="/agency-advance-search"
-                    component={AgencyAdvanceSearchComponent}
+                    path="/advance-search"
+                    component={CompanyAgencyAdvanceSearchComponent}
                   />
 
                   <Route
