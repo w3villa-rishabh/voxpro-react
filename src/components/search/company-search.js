@@ -124,11 +124,11 @@ export default function CompaniesSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <SearchLocationComponent searchQuery={searchQuery} />
+            <SearchLocationComponent searchQuery={searchQuery} return={false} />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Jobs</b>
-            <SearchJobsComponent searchQuery={searchQuery} />
+            <SearchJobsComponent searchQuery={searchQuery} return={false} />
           </Grid>
           <Grid item md={2} xs={12}>
             <Button
@@ -141,7 +141,7 @@ export default function CompaniesSearchComponent() {
         </Grid>
       </Card>
 
-      <Grid container spacing={2} className="mt-2">
+      <Grid container spacing={2} className="mt-3">
         <Grid item xs={12} sm={12}>
           <Card className="">
             <div className="card-header">

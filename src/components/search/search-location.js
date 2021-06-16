@@ -52,7 +52,9 @@ export default function SearchLocationComponent(props) {
               props.searchQuery[e.target.name] = '';
               props.searchQuery.location = [];
               setCountryCity([]);
-              props.locationCallback('remove', '');
+              if (props.return) {
+                props.locationCallback('remove', '');
+              }
             }
           }}
           onKeyPress={(e) => countryFilter(e.target.value)}
@@ -67,7 +69,9 @@ export default function SearchLocationComponent(props) {
                 onClick={() => {
                   props.searchQuery['locationName'] = user;
                   props.searchQuery.location.push({ name: user });
-                  props.locationCallback('add', user);
+                  if (props.return) {
+                    props.locationCallback('add', user);
+                  }
                   setSearchQuery(user);
                   setCountryCity([]);
                 }}>

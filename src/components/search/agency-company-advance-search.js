@@ -435,6 +435,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
         <div className="p-3">
           <SearchLocationComponent
             searchQuery={searchQuery}
+            return={true}
             locationCallback={modalCallback}
           />
         </div>
@@ -462,6 +463,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
         <div className="p-3">
           <SearchJobsComponent
             searchQuery={searchQuery}
+            return={true}
             jobsCallback={modalCallback}
           />
         </div>

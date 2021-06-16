@@ -717,6 +717,7 @@ const CandidateAdvanceSearchComponent = () => {
         <div className="p-3">
           <SearchLocationComponent
             searchQuery={searchQuery}
+            return={true}
             locationCallback={locationCallback}
           />
         </div>
@@ -742,7 +743,7 @@ const CandidateAdvanceSearchComponent = () => {
           <span>Jobs Titles</span>
         </DialogTitle>
         <div className="p-3">
-          <SearchJobsComponent searchQuery={searchQuery} />
+          <SearchJobsComponent searchQuery={searchQuery} return={false} />
         </div>
       </Dialog>
 

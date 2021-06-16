@@ -131,11 +131,11 @@ const CandidateSearchComponent = (props) => {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Job Title</b>
-            <SearchJobsComponent searchQuery={searchQuery} />
+            <SearchJobsComponent searchQuery={searchQuery} return={false} />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <SearchLocationComponent searchQuery={searchQuery} />
+            <SearchLocationComponent searchQuery={searchQuery} return={false} />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Availability</b>

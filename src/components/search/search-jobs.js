@@ -66,6 +66,9 @@ export default function SearchJobsComponent(props) {
               setSearch('');
               setSearchJobs([]);
               setSearchJobStatus(false);
+              if (props.return) {
+                props.jobsCallback();
+              }
             }
           }}
           onKeyPress={(e) => findJobs(e.target.value)}
@@ -87,6 +90,9 @@ export default function SearchJobsComponent(props) {
                     // setSearch({ ...searchQuery });
                     setSearch(user.normalized_job_title);
                     setSearchJobs([]);
+                    if (props.return) {
+                      props.jobsCallback();
+                    }
                   }}>
                   {user.normalized_job_title}
                 </span>
