@@ -133,7 +133,8 @@ const CompanyAgencyAdvanceSearchComponent = () => {
 
       <div className="mt-3">
         <h6 className="font-size-xxl text-capitalize">
-          {searchPageCount ? searchPageCount.total : 0} {'Companies found'}
+          {searchPageCount ? searchPageCount.total : 0}{' '}
+          {`${location.state.role} found`}
         </h6>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
