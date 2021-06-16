@@ -6,47 +6,43 @@ import {
   Card,
   Grid,
   Button,
-  TextField,
   CardContent,
+  TextField,
   Dialog,
   DialogTitle,
-  InputAdornment,
-  LinearProgress
+  InputAdornment
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import api from '../../api';
 import { toast } from 'react-toastify';
+import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from '@material-ui/lab/Pagination';
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
-import axios from 'axios';
+
 import LoaderComponent from 'components/loader';
+import SearchLocationComponent from './search-location';
+import SearchJobsComponent from './search-jobs';
 
 import avatar7 from '../../assets/images/avatars/avatar7.jpg';
 import { useLocation } from 'react-router';
-import AvailabilityComp from '../availability/availability';
-import SearchJobsComponent from './search-jobs';
-import SearchLocationComponent from './search-location';
 
-const CandidateAdvanceSearchComponent = () => {
+const CompanyAgencyAdvanceSearchComponent = () => {
   const location = useLocation();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
-  const [candidate, setCandidate] = useState([]);
+  const [candidate, setCompanies] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
   const [searchQuery, setSearchQuery] = useState(
     location.state
       ? location.state.searchQuery
       : {
           name: '',
-          skills: [],
+          industry: [],
           location: [],
+          locationName: '',
           jobTitles: [],
-          educations: [],
-          availability: '0',
-          availabilityDate: '',
           page: 1
         }
   );
@@ -56,15 +52,9 @@ const CandidateAdvanceSearchComponent = () => {
     total: 0
   });
 
-  const [searchSkills, setSearchSkills] = useState([]);
-  const [searchEducations, setSearchEducations] = useState([]);
-
   const [openLocation, setOpenLocation] = useState({ open: false, do: [] });
-  const [openSkills, setOpenSkills] = useState({ open: false, do: [] });
-  const [openEducations, setOpenEducations] = useState({ open: false, do: [] });
   const [openJobs, setOpenJobs] = useState({ open: false, do: [] });
-  const [searchSkillStatus, setSearchSkillStatus] = useState(false);
-  const [searchEducationStatus, setSearchEducationStatus] = useState(false);
+  const [openIndustry, setOpenIndustry] = useState({ open: false, do: [] });
 
   useEffect(() => {
     findSearch(searchQuery);
@@ -78,18 +68,23 @@ const CandidateAdvanceSearchComponent = () => {
 
   const findSearch = (searchQuery) => {
     setIsLoading(true);
-    searchCandidate(searchQuery);
+    searchCompanies(searchQuery);
   };
 
-  const searchCandidate = (search) => {
-    api.post('/api/v1/searches/search_candidate', { query: search }).then(
+  const searchCompanies = (search) => {
+    let url = '/api/v1/searches/search_company';
+    if (location.state.role === 'agency') {
+      url = '/api/v1/searches/search_agency';
+    }
+
+    api.post(url, { query: search }).then(
       (response) => {
         setIsLoading(false);
         if (response.data.success) {
           setSearchPageCount({ ...response.data.page_info });
-          setCandidate([...response.data.candidate]);
+          setCompanies([...response.data.candidate]);
         } else {
-          setCandidate([]);
+          setCompanies([]);
         }
       },
       (error) => {
@@ -103,62 +98,13 @@ const CandidateAdvanceSearchComponent = () => {
   const viewMoreResult = (event, newPage) => {
     searchQuery.page = newPage;
     setSearchQuery({ ...searchQuery });
-    searchCandidate(searchQuery);
-  };
-
-  const findSkills = (search) => {
-    setSearchEducationStatus(false);
-    if (search.length < 2) {
-      return;
-    }
-    axios
-      .get(
-        `http://api.dataatwork.org/v1/skills/autocomplete?begins_with=${search}`
-      )
-      .then(
-        (response) => {
-          if (response.statusText === 'OK') {
-            console.log('response.data', response.data);
-            setSearchSkills([...response.data]);
-          } else if (!searchSkills.length) {
-            // toast.error('No available..');
-            setSearchEducationStatus(true);
-          }
-        },
-        (error) => {
-          console.error('error', error);
-        }
-      );
-  };
-
-  // http://universities.hipolabs.com/search?name=oxford
-
-  const findUniversity = (search) => {
-    setSearchEducationStatus(false);
-    if (search.length < 2) {
-      return;
-    }
-    axios.get(`http://universities.hipolabs.com/search?name=${search}`).then(
-      (response) => {
-        if (response.statusText === 'OK') {
-          console.log('response.data', response.data);
-          setSearchEducations([...response.data]);
-        } else if (!searchEducations.length) {
-          // toast.error('No available..');
-          setSearchEducationStatus(true);
-        }
-      },
-      (error) => {
-        console.error('error', error);
-      }
-    );
+    searchCompanies(searchQuery);
   };
 
   const handleModalClose = () => {
     setOpenLocation({ open: false, do: [] });
     setOpenJobs({ open: false, do: [] });
-    setOpenSkills({ open: false, do: [] });
-    setOpenEducations({ open: false, do: [] });
+    setOpenIndustry({ open: false, do: [] });
   };
 
   const handleProceed = (e, id) => {
@@ -171,20 +117,8 @@ const CandidateAdvanceSearchComponent = () => {
     });
   };
 
-  const availabilityCallback = (event, status, date) => {
-    // the callback. Use a better name
-    if (status === 'remove') {
-      searchQuery.availability = event.target.value;
-      searchQuery.availabilityDate = '';
-    } else {
-      searchQuery.availabilityDate = date;
-    }
-    setSearchQuery({ ...searchQuery });
-    searchCandidate(searchQuery);
-  };
-
-  const locationCallback = () => {
-    searchCandidate(searchQuery);
+  const modalCallback = () => {
+    searchCompanies(searchQuery);
     handleModalClose();
   };
 
@@ -193,129 +127,21 @@ const CandidateAdvanceSearchComponent = () => {
       <div className="page-title">
         <WorkIcon />
         <div className="title pt-3">
-          <b className="heading">Search Candidates</b>
+          <b className="heading">Advance Search</b>
         </div>
-      </div>
-
-      <div className="mb-spacing-6">
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Card className="p-3">
-              <b>Knowledge/Educate</b>
-              <ul>
-                <li>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
-                        value={55}
-                      />
-                    </div>
-                    <div className="text-first font-size-xl font-weight-bold pl-2">
-                      3,228
-                    </div>
-                  </div>
-                  <div className="text-black-50">Job title</div>
-                </li>
-                <li>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
-                        value={40}
-                      />
-                    </div>
-                    <div className="text-first font-size-xl font-weight-bold pl-2">
-                      2,715
-                    </div>
-                  </div>
-                  <div className="text-black-50">Skills</div>
-                </li>
-                <li>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
-                        value={22}
-                      />
-                    </div>
-                    <div className="text-first font-size-xl font-weight-bold pl-2">
-                      2,040
-                    </div>
-                  </div>
-                  <div className="text-black-50">Eductions</div>
-                </li>
-              </ul>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Card className="p-3">
-              <b>Locality</b>
-              <ul>
-                <li>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
-                        value={80}
-                      />
-                    </div>
-                    <div className="text-first font-size-xl font-weight-bold pl-2">
-                      6,368
-                    </div>
-                  </div>
-                  <div className="text-black-50">Locations</div>
-                </li>
-                <li>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
-                        value={50}
-                      />
-                    </div>
-                    <div className="text-first font-size-xl font-weight-bold pl-2">
-                      5,660
-                    </div>
-                  </div>
-                  <div className="text-black-50">Companies</div>
-                </li>
-                <li>
-                  <div className="align-box-row">
-                    <div className="flex-grow-1">
-                      <LinearProgress
-                        variant="determinate"
-                        className="progress-animated-alt progress-bar-rounded progress-sm progress-bar-first"
-                        value={10}
-                      />
-                    </div>
-                    <div className="text-first font-size-xl font-weight-bold pl-2">
-                      3,371
-                    </div>
-                  </div>
-                  <div className="text-black-50">Keyword</div>
-                </li>
-              </ul>
-            </Card>
-          </Grid>
-        </Grid>
       </div>
 
       <div className="mt-3">
         <h6 className="font-size-xxl text-capitalize">
-          {searchPageCount ? searchPageCount.total : 0} {'Candidates found'}
+          {searchPageCount ? searchPageCount.total : 0}{' '}
+          {`${location.state.role} found`}
         </h6>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
             <Card className="card-box">
               <h4 className="p-3 border-bottom">Showing results for</h4>
               <div className="px-3 py-2">
-                <b>Job title</b>
+                <b>Jobs</b>
                 <ul className="cards-filter">
                   {searchQuery.jobTitles.map((filter, index) => (
                     <li key={index} className="cards__item_search">
@@ -327,7 +153,7 @@ const CandidateAdvanceSearchComponent = () => {
                           onClick={() => {
                             searchQuery.jobTitles.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            searchCandidate(searchQuery);
+                            searchCompanies(searchQuery);
                           }}
                         />
                       </div>
@@ -336,7 +162,7 @@ const CandidateAdvanceSearchComponent = () => {
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
                       {!searchQuery.jobTitles.length && (
-                        <span className="mr-2">Add Job title</span>
+                        <span className="mr-2">Add jobs</span>
                       )}
                       <FontAwesomeIcon
                         icon={['fas', 'plus']}
@@ -363,7 +189,7 @@ const CandidateAdvanceSearchComponent = () => {
                           onClick={() => {
                             searchQuery.location.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            searchCandidate(searchQuery);
+                            searchCompanies(searchQuery);
                           }}
                         />
                       </div>
@@ -386,9 +212,10 @@ const CandidateAdvanceSearchComponent = () => {
               </div>
               <div className="divider opacity-8 my-1" />
               <div className="px-3 py-2">
-                <b>Skills</b>
+                <b>Industry</b>
+
                 <ul className="cards-filter">
-                  {searchQuery.skills.map((filter, index) => (
+                  {searchQuery.industry.map((filter, index) => (
                     <li key={index} className="cards__item_search">
                       <div>
                         <span>{filter.name}</span>
@@ -396,9 +223,9 @@ const CandidateAdvanceSearchComponent = () => {
                           className="ml-2 pt-1 a-blue"
                           icon={['fas', 'times']}
                           onClick={() => {
-                            searchQuery.skills.splice(index, 1);
+                            searchQuery.industry.splice(index, 1);
                             setSearchQuery({ ...searchQuery });
-                            searchCandidate(searchQuery);
+                            searchCompanies(searchQuery);
                           }}
                         />
                       </div>
@@ -406,94 +233,18 @@ const CandidateAdvanceSearchComponent = () => {
                   ))}
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
-                      {!searchQuery.skills.length && (
-                        <span className="mr-2">Add Skills</span>
+                      {!searchQuery.industry.length && (
+                        <span className="mr-2">Add industry's</span>
                       )}
                       <FontAwesomeIcon
                         icon={['fas', 'plus']}
                         onClick={() => {
-                          setOpenSkills({ open: true, do: [] });
+                          setOpenIndustry({ open: true, do: [] });
                         }}
                       />
                     </div>
                   </li>
                 </ul>
-              </div>
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2">
-                <b>Companies</b>
-                <ul className="cards-filter">
-                  {/* {filterApplied.map((filter, index) => (
-                    <li key={index} className="cards__item_search">
-                      <div>
-                        <span>{filter.name}</span>
-                      </div>
-                    </li>
-                  ))} */}
-                  <li>
-                    <div className="ml-3 pt-2 pointer text-black-50">
-                      <span className="mr-2">Add Companies</span>
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2">
-                <b>Eductions</b>
-                <ul className="cards-filter">
-                  {searchQuery.educations.map((filter, index) => (
-                    <li key={index} className="cards__item_search">
-                      <div>
-                        <span>{filter.name}</span>
-                        <FontAwesomeIcon
-                          className="ml-2 pt-1 a-blue"
-                          icon={['fas', 'times']}
-                          onClick={() => {
-                            searchQuery.educations.splice(index, 1);
-                            setSearchQuery({ ...searchQuery });
-                            searchCandidate(searchQuery);
-                          }}
-                        />
-                      </div>
-                    </li>
-                  ))}
-                  <li>
-                    <div className="ml-3 pt-2 pointer text-black-50">
-                      {!searchQuery.educations.length && (
-                        <span className="mr-2">Add Eductions</span>
-                      )}
-                      <FontAwesomeIcon
-                        icon={['fas', 'plus']}
-                        onClick={() => {
-                          setOpenEducations({ open: true, do: [] });
-                        }}
-                      />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2">
-                <b>Keyword</b>
-                <ul className="cards-filter">
-                  <li>
-                    <div className="ml-3 pt-2 pointer text-black-50">
-                      <span className="mr-2">Add Keyword</span>
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </div>{' '}
-                  </li>
-                </ul>
-              </div>
-              <div className="divider opacity-8 my-1" />
-              <div className="px-3 py-2 h-100px">
-                <b>Availability</b>
-                <div>
-                  <AvailabilityComp
-                    searchQuery={searchQuery}
-                    availabilityCallback={availabilityCallback}
-                  />
-                </div>
               </div>
             </Card>
           </Grid>
@@ -621,24 +372,6 @@ const CandidateAdvanceSearchComponent = () => {
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>
                             </Grid>
-
-                            {/* <Grid container spacing={1}>
-                              <Grid item xs={12} sm={2}>
-                                <span className="text-black-50 nowrap float-right">
-                                  Post :{' '}
-                                </span>
-                              </Grid>
-                              <Grid item xs={12} sm={8}>
-                                <div>
-                                  <p className="mb-0">
-                                    Primary website/webapp Engineer (employee)
-                                    At Anglepoise Primary
-                                  </p>
-                                </div>
-                              </Grid>
-                              <Grid item xs={12} sm={2}></Grid>
-                            </Grid> */}
-
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
@@ -654,21 +387,6 @@ const CandidateAdvanceSearchComponent = () => {
                             </Grid>
                           </CardContent>
                           <div className="divider" />
-
-                          {/* <div className="card-footer bg-white text-center p-3">
-                    <Button className="btn-primary btn-icon d-40 p-0 hover-scale-lg rounded-circle mr-2">
-                      <FontAwesomeIcon
-                        icon={['far', 'question-circle']}
-                        className="font-size-lg"
-                      />
-                    </Button>
-                    <Button className="btn-primary btn-icon d-40 p-0 hover-scale-lg rounded-circle">
-                      <FontAwesomeIcon
-                        icon={['far', 'user-circle']}
-                        className="font-size-lg"
-                      />
-                    </Button>
-                  </div> */}
                         </Card>
                       </div>
                     ))}
@@ -717,7 +435,7 @@ const CandidateAdvanceSearchComponent = () => {
         <div className="p-3">
           <SearchLocationComponent
             searchQuery={searchQuery}
-            locationCallback={locationCallback}
+            locationCallback={modalCallback}
           />
         </div>
       </Dialog>
@@ -742,14 +460,17 @@ const CandidateAdvanceSearchComponent = () => {
           <span>Jobs Titles</span>
         </DialogTitle>
         <div className="p-3">
-          <SearchJobsComponent searchQuery={searchQuery} />
+          <SearchJobsComponent
+            searchQuery={searchQuery}
+            jobsCallback={modalCallback}
+          />
         </div>
       </Dialog>
 
-      {/* skills search modal */}
+      {/* job title search modal */}
       <Dialog
         fullWidth
-        open={openSkills.open}
+        open={openIndustry.open}
         onClose={handleModalClose}
         classes={{
           paper:
@@ -763,20 +484,19 @@ const CandidateAdvanceSearchComponent = () => {
               onClick={handleModalClose}
             />
           </div>
-          <span>Skills</span>
+          <span>Industry</span>
         </DialogTitle>
         <div className="p-3">
           <div className="user-new-request">
             <TextField
               variant="outlined"
               size="small"
-              name="query"
+              name="industry"
               fullWidth
               autoComplete="off"
-              label="Skills"
-              placeholder="e.g. 'node'"
+              label="Industry"
+              placeholder="e.g. 'industry'"
               className="w-100"
-              // value={searchQuery.query}
               onChange={(e) => {
                 return e.target.value;
               }}
@@ -790,36 +510,25 @@ const CandidateAdvanceSearchComponent = () => {
                   height: '37px'
                 }
               }}
-              onKeyUp={(e) => {
-                if (e.key === 'Backspace' && e.target.value.length < 2) {
-                  setSearchSkills([]);
-                  setSearchSkillStatus(false);
-                }
-              }}
-              onKeyPress={(e) => findSkills(e.target.value)}
             />
 
-            {searchSkills.length ? (
+            {/* {countyCity.length ? (
               <ul className="list-group mt-2">
-                {searchSkills.map((user, index) => (
+                {countyCity.map((user, index) => (
                   <li
                     key={index}
-                    className="list-group-item list-group-item-success">
-                    <span
-                      onClick={() => {
-                        searchQuery.skills.push({
-                          name: user.normalized_skill_name
-                        });
-                        setSearchQuery({ ...searchQuery });
-                        handleModalClose();
-                        searchCandidate(searchQuery);
-                      }}>
-                      {user.normalized_skill_name}
-                    </span>
+                    className="list-group-item list-group-item-success"
+                    onClick={() => {
+                      searchQuery.location.push({ name: user });
+                      setSearchQuery({ ...searchQuery });
+                      handleModalClose();
+                      searchCandidate(searchQuery);
+                    }}>
+                    <span>{user}</span>
                   </li>
                 ))}
               </ul>
-            ) : searchSkillStatus === true ? (
+            ) : searchData === true ? (
               <ul className="list-group mt-2">
                 <li className="list-group-item list-group-item-success">
                   <span>Not Found</span>
@@ -827,93 +536,7 @@ const CandidateAdvanceSearchComponent = () => {
               </ul>
             ) : (
               ''
-            )}
-          </div>
-        </div>
-      </Dialog>
-
-      {/* unversity search modal */}
-      <Dialog
-        fullWidth
-        open={openEducations.open}
-        onClose={handleModalClose}
-        classes={{
-          paper:
-            'modal-content rounded border-0 bg-white p-3 p-xl-0 overflow-visible'
-        }}>
-        <DialogTitle id="form-dialog-title" className="p-2">
-          <div className="card-badges card-badges-top">
-            <FontAwesomeIcon
-              icon={['fas', 'times']}
-              className="pointer mr-3"
-              onClick={handleModalClose}
-            />
-          </div>
-          <span>University</span>
-        </DialogTitle>
-        <div className="p-3">
-          <div className="user-new-request">
-            <TextField
-              variant="outlined"
-              size="small"
-              name="query"
-              fullWidth
-              autoComplete="off"
-              label="Education"
-              placeholder="e.g. 'oxford'"
-              className="w-100"
-              // value={searchQuery.query}
-              onChange={(e) => {
-                return e.target.value;
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchTwoToneIcon />
-                  </InputAdornment>
-                ),
-                style: {
-                  height: '37px'
-                }
-              }}
-              onKeyUp={(e) => {
-                if (e.key === 'Backspace' && e.target.value.length < 2) {
-                  setSearchEducations([]);
-                  setSearchEducationStatus(false);
-                }
-              }}
-              onKeyPress={(e) => findUniversity(e.target.value)}
-            />
-
-            {searchEducations.length ? (
-              <ul className="list-group mt-2">
-                {searchEducations.map((user, index) => (
-                  <li
-                    key={index}
-                    className="list-group-item list-group-item-success">
-                    <span
-                      onClick={() => {
-                        searchQuery.educations.push({
-                          name: user.name
-                        });
-                        setSearchQuery({ ...searchQuery });
-                        handleModalClose();
-                        searchCandidate(searchQuery);
-                      }}>
-                      {user.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            ) : searchEducationStatus === true ? (
-              <ul className="list-group mt-2">
-                <li className="list-group-item list-group-item-success">
-                  <span>Not Found</span>
-                </li>
-              </ul>
-            ) : (
-              ''
-            )}
+            )} */}
           </div>
         </div>
       </Dialog>
@@ -936,4 +559,4 @@ const mapStateToProps = (state) => ({
 //   };
 // };
 
-export default connect(mapStateToProps)(CandidateAdvanceSearchComponent);
+export default connect(mapStateToProps)(CompanyAgencyAdvanceSearchComponent);

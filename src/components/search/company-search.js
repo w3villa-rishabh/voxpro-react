@@ -4,7 +4,6 @@ import { Card, Grid, Button, TextField, Table } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import AddsComponents from 'components/add_component';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { ClipLoader } from 'react-spinners';
 import api from '../../api';
 import { useHistory } from 'react-router-dom';
 
@@ -12,29 +11,44 @@ import { toast } from 'react-toastify';
 import LoaderComponent from 'components/loader';
 import { getCurrentUser, convertDate } from '../../helper';
 import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
-import PlaceSearchComponent from './search-place';
+import SearchLocationComponent from './search-location';
+import SearchJobsComponent from './search-jobs';
 
 export default function CompaniesSearchComponent() {
+  const [width, setWidth] = useState(window.innerWidth);
   const [currentUser] = useState(getCurrentUser());
   const [searchLoader, setSearchLoader] = useState(false);
-  const [company, setCompany] = useState([]);
   const [recentCompanies, setRecentCompanies] = useState([]);
   const history = useHistory();
 
   const [searchQuery, setSearchQuery] = useState({
     name: '',
-    location: '',
-    job: '',
-    industry: ''
+    location: [],
+    locationName: '',
+    jobTitles: [],
+    jobName: '',
+    industryName: '',
+    industry: [],
+    page: 1
   });
 
   useEffect(() => {
     getRecentAddCompanies();
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
   }, []);
 
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth);
+  };
+
   const getRecentAddCompanies = () => {
+    setSearchLoader(true);
     api.get('/api/v1/companies/recently_added_companies').then(
       (response) => {
+        setSearchLoader(false);
         if (response.data.success) {
           setRecentCompanies([...response.data.companies]);
         } else {
@@ -42,6 +56,7 @@ export default function CompaniesSearchComponent() {
         }
       },
       (error) => {
+        setSearchLoader(false);
         toast.error('Something went wrong');
         console.error(error);
       }
@@ -53,23 +68,10 @@ export default function CompaniesSearchComponent() {
   };
 
   const search = () => {
-    setSearchLoader(true);
-    console.log('searchQuery', searchQuery);
-    api.post('/api/v1/searches/search_company', { query: searchQuery }).then(
-      (response) => {
-        setSearchLoader(false);
-        if (response.data.success) {
-          setCompany([...response.data.company]);
-        } else {
-          setCompany([]);
-        }
-      },
-      (error) => {
-        toast.error('Something went wrong');
-        setSearchLoader(false);
-        console.error(error);
-      }
-    );
+    return history.push({
+      pathname: '/advance-search',
+      state: { searchQuery, role: 'company' }
+    });
   };
 
   const handleCompany = (e, id) => {
@@ -91,8 +93,8 @@ export default function CompaniesSearchComponent() {
         </div>
       </div>
 
-      <Card className="px-3 pt-3">
-        <Grid container spacing={2}>
+      <Card className="px-3 pt-3 overflow-visible">
+        <Grid container spacing={2} wrap={width <= 768 || 'nowrap'}>
           <Grid item md={3} xs={12}>
             <b>Name</b>
             <TextField
@@ -102,11 +104,6 @@ export default function CompaniesSearchComponent() {
               className="w-100"
               name="name"
               onChange={handlerSearch}
-              InputProps={{
-                style: {
-                  height: '37px'
-                }
-              }}
             />
           </Grid>
           <Grid item md={3} xs={12}>
@@ -116,7 +113,7 @@ export default function CompaniesSearchComponent() {
               size="small"
               placeholder="Search by industry"
               className="w-100"
-              name="industry"
+              name="industryName"
               onChange={handlerSearch}
               InputProps={{
                 style: {
@@ -127,38 +124,21 @@ export default function CompaniesSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <PlaceSearchComponent />
+            <SearchLocationComponent searchQuery={searchQuery} />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Jobs</b>
-            <TextField
-              variant="outlined"
+            <SearchJobsComponent searchQuery={searchQuery} />
+          </Grid>
+          <Grid item md={2} xs={12}>
+            <Button
               size="small"
-              placeholder="Search by number of jobs active"
-              className="w-100"
-              name="job"
-              onChange={handlerSearch}
-              InputProps={{
-                style: {
-                  height: '37px'
-                }
-              }}
-            />
+              className="btn-dribbble hover-scale-sm mt-4"
+              onClick={search}>
+              <span className="px-2">Search</span>
+            </Button>
           </Grid>
         </Grid>
-        <div className="card-footer float-right">
-          <Button
-            disabled={searchLoader}
-            className="btn-neutral-info hover-scale-sm"
-            onClick={search}>
-            <span className="px-2">Search</span>
-            <ClipLoader
-              color={'var(--info)'}
-              loading={searchLoader}
-              size={20}
-            />
-          </Button>
-        </div>
       </Card>
 
       <Grid container spacing={2} className="mt-2">

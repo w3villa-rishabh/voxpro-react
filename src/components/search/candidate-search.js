@@ -14,8 +14,9 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import api from '../../api';
 import { toast } from 'react-toastify';
-import CountryCity from '../../assets/city-country';
-import axios from 'axios';
+
+import SearchLocationComponent from './search-location';
+import SearchJobsComponent from './search-jobs';
 
 const CandidateSearchComponent = (props) => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -23,11 +24,6 @@ const CandidateSearchComponent = (props) => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [candidate, setCandidate] = useState([]);
-
-  const [searchData, setSearchData] = useState(false);
-  const [countyCity, setCountryCity] = useState([]);
-  const [searchJobs, setSearchJobs] = useState([]);
-  const [searchJobStatus, setSearchJobStatus] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState({
     name: '',
@@ -74,19 +70,6 @@ const CandidateSearchComponent = (props) => {
     );
   };
 
-  const countryFilter = (value) => {
-    if (value.length < 2) {
-      return;
-    }
-    setSearchData(false);
-    var search = new RegExp(value, 'i'); // prepare a regex object
-    let searchLog = CountryCity.filter((item) => search.test(item));
-    setCountryCity([...searchLog]);
-    if (!searchLog.length) {
-      setSearchData(true);
-    }
-  };
-
   const handlerSearch = (event) => {
     setSearchQuery({ ...searchQuery, [event.target.name]: event.target.value });
   };
@@ -98,30 +81,6 @@ const CandidateSearchComponent = (props) => {
     });
   };
 
-  const findJobs = (search) => {
-    setSearchJobStatus(false);
-    if (search.length < 2) {
-      return;
-    }
-    axios
-      .get(
-        `http://api.dataatwork.org/v1/jobs/autocomplete?begins_with=${search}`
-      )
-      .then(
-        (response) => {
-          if (response.statusText === 'OK') {
-            console.log('response.data', response.data);
-            setSearchJobs([...response.data]);
-          } else if (!searchJobs.length) {
-            // toast.error('No available..');
-            setSearchJobStatus(true);
-          }
-        },
-        (error) => {
-          console.error('error', error);
-        }
-      );
-  };
   const handleProceed = (e, id) => {
     e.preventDefault();
     history.push({
@@ -172,113 +131,11 @@ const CandidateSearchComponent = (props) => {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Job Title</b>
-            <div className="user-new-request">
-              <TextField
-                variant="outlined"
-                size="small"
-                name="jobTitleName"
-                fullWidth
-                autoComplete="off"
-                placeholder="Search jobs"
-                className="w-100"
-                value={searchQuery.jobTitleName}
-                onChange={handlerSearch}
-                onKeyUp={(e) => {
-                  if (e.key === 'Backspace' && e.target.value.length < 2) {
-                    searchQuery[e.target.name] = '';
-                    searchQuery.jobTitles = [];
-                    setSearchQuery({ ...searchQuery });
-                    setSearchJobs([]);
-                    setSearchJobStatus(false);
-                  }
-                }}
-                onKeyPress={(e) => findJobs(e.target.value)}
-              />
-
-              {searchJobs.length ? (
-                <ul className="list-group mt-2">
-                  {searchJobs.map((user, index) => (
-                    <li
-                      key={index}
-                      className="list-group-item list-group-item-success">
-                      <span
-                        onClick={() => {
-                          searchQuery['jobTitleName'] =
-                            user.normalized_job_title;
-                          searchQuery.jobTitles.push({
-                            name: user.normalized_job_title
-                          });
-                          setSearchQuery({ ...searchQuery });
-                          setSearchJobs([]);
-                        }}>
-                        {user.normalized_job_title}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : searchJobStatus === true ? (
-                <ul className="list-group mt-2">
-                  <li className="list-group-item list-group-item-success">
-                    <span>Not Found</span>
-                  </li>
-                </ul>
-              ) : (
-                ''
-              )}
-            </div>
+            <SearchJobsComponent searchQuery={searchQuery} />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Location</b>
-            <div className="user-new-request">
-              <TextField
-                variant="outlined"
-                size="small"
-                name="locationName"
-                fullWidth
-                autoComplete="off"
-                placeholder="Search location"
-                className="w-100"
-                value={searchQuery.locationName}
-                onChange={handlerSearch}
-                onKeyUp={(e) => {
-                  if (e.key === 'Backspace' && e.target.value.length < 2) {
-                    searchQuery[e.target.name] = '';
-                    searchQuery.location = [];
-                    // props.searchFilter[e.target.name] = '';
-                    setSearchQuery({ ...searchQuery });
-                    setCountryCity([]);
-                    setSearchData(false);
-                  }
-                }}
-                onKeyPress={(e) => countryFilter(e.target.value)}
-              />
-
-              {countyCity.length ? (
-                <ul className="list-group mt-2">
-                  {countyCity.map((user, index) => (
-                    <li
-                      key={index}
-                      className="list-group-item list-group-item-success"
-                      onClick={() => {
-                        searchQuery['locationName'] = user;
-                        searchQuery.location.push({ name: user });
-                        setSearchQuery({ ...searchQuery });
-                        setCountryCity([]);
-                      }}>
-                      <span>{user}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : searchData === true ? (
-                <ul className="list-group mt-2">
-                  <li className="list-group-item list-group-item-success">
-                    <span>Not Found</span>
-                  </li>
-                </ul>
-              ) : (
-                ''
-              )}
-            </div>
+            <SearchLocationComponent searchQuery={searchQuery} />
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Availability</b>

@@ -284,7 +284,6 @@ const JobSearchComponent = (props) => {
 
   const [anchorElDoc, setAnchorElDoc] = useState(null);
 
-
   const handleClose = () => {
     setAnchorElDoc(null);
   };
@@ -321,8 +320,7 @@ const JobSearchComponent = (props) => {
         }
       ]
     });
-  }
-
+  };
 
   //   e.preventDefault();
   //   api.post(`/api/v1/jobs/${job.id}/hide_job?hide=${true}`).then(
