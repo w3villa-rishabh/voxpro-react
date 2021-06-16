@@ -32,7 +32,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
   const location = useLocation();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
-  const [candidate, setCompanies] = useState([]);
+  const [company, setCompanies] = useState([]);
   const [filterApplied, setFilterApplied] = useState([]);
   const [searchQuery, setSearchQuery] = useState(
     location.state
@@ -82,7 +82,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
         setIsLoading(false);
         if (response.data.success) {
           setSearchPageCount({ ...response.data.page_info });
-          setCompanies([...response.data.candidate]);
+          setCompanies([...response.data.company]);
         } else {
           setCompanies([]);
         }
@@ -111,6 +111,16 @@ const CompanyAgencyAdvanceSearchComponent = () => {
     e.preventDefault();
     history.push({
       pathname: '/view-profile/',
+      state: {
+        id
+      }
+    });
+  };
+
+  const handleCompany = (e, id) => {
+    e.preventDefault();
+    history.push({
+      pathname: '/view-company/',
       state: {
         id
       }
@@ -253,9 +263,9 @@ const CompanyAgencyAdvanceSearchComponent = () => {
               <LoaderComponent />
             ) : (
               <>
-                {candidate.length ? (
+                {company.length ? (
                   <>
-                    {candidate.map((can, index) => (
+                    {company.map((com, index) => (
                       <div
                         key={index}
                         className="card card-box gutter-b card-stretch bg-white btn rounded text-left mb-2">
@@ -265,7 +275,9 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                               <Grid item xs={12} sm={2}>
                                 <div className="avatar-icon-wrapper avatar-icon-lg">
                                   <div className="avatar-icon rounded d-110">
-                                    <img alt="..." src={avatar7} />
+                                    <img alt="..." src={com.logo_url} 
+                                      onClick={(e) => handleCompany(e, com.id)}
+                                    />
                                   </div>
                                 </div>
                               </Grid>
@@ -273,10 +285,10 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                                 <div>
                                   <a
                                     href="#"
-                                    onClick={(e) => handleProceed(e, can.id)}
+                                    onClick={(e) => handleCompany(e, com.id)}
                                     className="a-blue font-weight-bold ml-1 font-size-xxl"
                                     title="...">
-                                    {can.first_name} {can.last_name}
+                                     {com.name}
                                   </a>
                                   <Button className="btn-gray border px-2 py-0 ml-3 font-size-md text-primary">
                                     2nd
@@ -292,7 +304,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                                 </div>
 
                                 <ul className="cards-filter">
-                                  {filterApplied.map((filter, index) => (
+                                  {/* {filterApplied.map((filter, index) => (
                                     <li
                                       key={index}
                                       className="cards__item bg-primary text-white">
@@ -300,20 +312,20 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                                         <span>{filter.name}</span>
                                       </div>
                                     </li>
-                                  ))}
+                                  ))} */}
                                   <li className="cards__item bg-brand-discord text-white">
                                     <div>
-                                      <span>10+ years</span>
+                                      {/* <span>10+ years</span> */}
                                     </div>
                                   </li>
                                 </ul>
 
                                 <div className="">
                                   <span className="d-block">
-                                    {can.job_title}
+                                    {com.location}
                                   </span>
                                   <span className="text-black-50 d-block">
-                                    {can.city}, {can.country}
+                                    {com.industry}
                                   </span>
                                   <a
                                     href="#/"
@@ -330,12 +342,12 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                               <Grid item xs={12} sm={2}>
                                 <div className="d-flex justify-content-between">
                                   <div className="d-flex align-items-center">
-                                    <Button
+                                    {/* <Button
                                       fullWidth
                                       size="small"
                                       className="btn-outline-first font-size-lg font-weight-bold hover-scale-sm mt-2">
                                       <span>Connect</span>
-                                    </Button>
+                                    </Button> */}
                                   </div>
                                 </div>
                               </Grid>
@@ -344,15 +356,13 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
-                                  Availability :{' '}
+                                  Location :{' '}
                                 </span>
                               </Grid>
                               <Grid item xs={12} sm={8}>
                                 <div>
                                   <p className="mb-0">
-                                    {can.availability === 'available_from'
-                                      ? can.available_date
-                                      : can.availability}
+                                    {com.location}
                                   </p>
                                 </div>
                               </Grid>
@@ -362,12 +372,12 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
-                                  Description :{' '}
+                                  Establised On:{' '}
                                 </span>
                               </Grid>
                               <Grid item xs={12} sm={8}>
                                 <div>
-                                  <p className="mb-0">{can.description}</p>
+                                  <p className="mb-0">{com.establised_on}</p>
                                 </div>
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>
@@ -375,12 +385,12 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
-                                  Job Title :{' '}
+                                  Description :{' '}
                                 </span>
                               </Grid>
                               <Grid item xs={12} sm={8}>
                                 <div>
-                                  <p className="mb-0">{can.job_title}</p>
+                                  <p className="mb-0">{com.description}</p>
                                 </div>
                               </Grid>
                               <Grid item xs={12} sm={2}></Grid>
@@ -399,7 +409,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
               </>
             )}
 
-            {candidate.length >= 1 && (
+            {company.length >= 1 && (
               <div className="p-3 d-flex justify-content-center">
                 <Pagination
                   className="pagination-primary"

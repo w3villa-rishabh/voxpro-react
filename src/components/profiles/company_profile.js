@@ -79,7 +79,6 @@ export default function LivePreviewExample() {
   const [company, setCompany] = useState({});
 
   useEffect(() => {
-    debugger
     getCompanyDetails();
   }, []);
 
