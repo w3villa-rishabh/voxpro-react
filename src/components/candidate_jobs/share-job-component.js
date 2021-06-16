@@ -23,8 +23,7 @@ const ShareJobComponent = (props) => {
 
   const [errors, setErrors] = useState({
     email: '',
-    subject: '',
-    description: ''
+    subject: ''
   });
 
   const validateForm = (error) => {
