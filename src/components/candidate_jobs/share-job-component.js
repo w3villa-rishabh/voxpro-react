@@ -12,7 +12,7 @@ import {
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { validEmailRegex, SmartText } from 'helper';
+import { validEmailRegex } from 'helper';
 import api from '../../api';
 
 const ShareJobComponent = (props) => {
@@ -23,8 +23,7 @@ const ShareJobComponent = (props) => {
 
   const [errors, setErrors] = useState({
     email: '',
-    subject: '',
-    description: ''
+    subject: ''
   });
 
   const validateForm = (error) => {
@@ -169,7 +168,7 @@ const ShareJobComponent = (props) => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                <b>Description</b> <br/>
+                <b>Description (optional)</b>
                 <TextField
                   fullWidth
                   multiline
