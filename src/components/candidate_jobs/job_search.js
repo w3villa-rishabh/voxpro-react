@@ -293,8 +293,8 @@ const JobSearchComponent = (props) => {
     e.preventDefault();
     handleClose();
     confirmAlert({
-      title: 'Confirm to delete',
-      message: 'Are you sure to do this.',
+      title: 'Confirm to Hide',
+      message: 'Are you sure to hide this job.',
       buttons: [
         {
           label: 'Yes',
@@ -739,7 +739,7 @@ const JobSearchComponent = (props) => {
                                 onClick={(e) => viewJob(e, job.id)}>
                                 {job.job_title}
                               </h2>
-                              <p>Posted 1 week ago</p>
+                              <p>Posted On: {job.created_date}</p>
                             </div>
                           </div>
                           <div className="">
