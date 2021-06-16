@@ -110,7 +110,7 @@ export default function JobSearchComponent() {
                 <div className="card-header--title">
                   <h2>{job.job_title}</h2>
                   <p>
-                    Posted 1 week ago
+                    Posted On: {job.created_date}
                     {/* Posted 1 week ago by{' '}
                   <a
                     href="#/"

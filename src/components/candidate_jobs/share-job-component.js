@@ -7,7 +7,8 @@ import {
   Button,
   TextField,
   Dialog,
-  DialogActions
+  DialogActions,
+  TextareaAutosize
 } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,7 +24,8 @@ const ShareJobComponent = (props) => {
 
   const [errors, setErrors] = useState({
     email: '',
-    subject: ''
+    subject: '',
+    description: ''
   });
 
   const validateForm = (error) => {
@@ -89,7 +91,8 @@ const ShareJobComponent = (props) => {
   const openModal = () => {
     let obj = {
       email: '',
-      subject: ''
+      subject: '',
+      description: ''
     };
     setAccount(obj);
     setErrors(obj);
@@ -167,10 +170,21 @@ const ShareJobComponent = (props) => {
                 )}
               </Grid>
               <Grid item xs={12}>
-                <b>Description</b>
-                <div className="mt-2">
-                  <SmartText text={props.job.description} />
-                </div>
+                <b>Description</b> <br/>
+                <textarea
+                 style={{
+                  minWidth: '100%',
+                  minHeight: '100px'
+                }}
+                fullWidth
+                variant="outlined"
+                size="small"
+                placeholder="Enter description"
+                id="input-with-icon-textfield2"
+                value={account.description}
+                name="description"
+                onChange={handleChange}
+                />
               </Grid>
             </Grid>
 
