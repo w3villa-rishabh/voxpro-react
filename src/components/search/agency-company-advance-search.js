@@ -20,7 +20,7 @@ import Pagination from '@material-ui/lab/Pagination';
 
 import LoaderComponent from 'components/loader';
 import SearchLocationComponent from './search-location';
-import SearchJobsComponent from './search-jobs';
+import SearchJobsByNumberComponent from './search-jobs-by-number';
 import SearchIndustriesComponent from './search-industries';
 
 import { useLocation } from 'react-router';
@@ -38,7 +38,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
           industry: [],
           location: [],
           locationName: '',
-          jobTitles: [],
+          jobNumber: '',
           page: 1
         }
   );
@@ -133,26 +133,26 @@ const CompanyAgencyAdvanceSearchComponent = () => {
               <div className="px-3 py-2">
                 <b>Jobs</b>
                 <ul className="cards-filter">
-                  {searchQuery.jobTitles.map((filter, index) => (
-                    <li key={index} className="cards__item_search">
+                  {searchQuery.jobNumber && (
+                    <li className="cards__item_search">
                       <div>
-                        <span>{filter.name}</span>
+                        <span>{searchQuery.jobNumber}</span>
                         <FontAwesomeIcon
                           className="ml-2 pt-1 a-blue"
                           icon={['fas', 'times']}
                           onClick={() => {
-                            searchQuery.jobTitles.splice(index, 1);
+                            searchQuery.jobNumber = '';
                             setSearchQuery({ ...searchQuery });
                             searchCompanies(searchQuery);
                           }}
                         />
                       </div>
                     </li>
-                  ))}
+                  )}
                   <li>
                     <div className="ml-3 pt-2 pointer text-black-50">
-                      {!searchQuery.jobTitles.length && (
-                        <span className="mr-2">Add jobs</span>
+                      {!searchQuery.jobNumber && (
+                        <span className="mr-2">Add job number</span>
                       )}
                       <FontAwesomeIcon
                         icon={['fas', 'plus']}
@@ -414,7 +414,7 @@ const CompanyAgencyAdvanceSearchComponent = () => {
           <span>Jobs Titles</span>
         </DialogTitle>
         <div className="p-3">
-          <SearchJobsComponent
+          <SearchJobsByNumberComponent
             searchQuery={searchQuery}
             return={true}
             jobsCallback={modalCallback}

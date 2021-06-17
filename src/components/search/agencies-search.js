@@ -12,7 +12,7 @@ import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
 
 import LoaderComponent from 'components/loader';
 import SearchLocationComponent from './search-location';
-import SearchJobsComponent from './search-jobs';
+import SearchJobsByNumberComponent from './search-jobs-by-number';
 import SearchIndustriesComponent from './search-industries';
 
 export default function AgenciesSearchComponent() {
@@ -26,8 +26,7 @@ export default function AgenciesSearchComponent() {
     name: '',
     location: [],
     locationName: '',
-    jobTitles: [],
-    jobName: '',
+    jobNumber: '',
     industryName: '',
     industry: [],
     page: 1
@@ -120,7 +119,10 @@ export default function AgenciesSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Jobs</b>
-            <SearchJobsComponent searchQuery={searchQuery} return={false} />
+            <SearchJobsByNumberComponent
+              searchQuery={searchQuery}
+              return={false}
+            />
           </Grid>
           <Grid item md={2} xs={12}>
             <Button
