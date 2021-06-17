@@ -62,12 +62,13 @@ export default function SearchJobsComponent(props) {
           onKeyUp={(e) => {
             if (e.key === 'Backspace' && e.target.value.length < 2) {
               props.searchQuery[e.target.name] = '';
-              props.searchQuery.jobTitles = [];
               setSearch('');
               setSearchJobs([]);
               setSearchJobStatus(false);
               if (props.return) {
                 props.jobsCallback();
+              } else {
+                props.searchQuery.jobTitles = [];
               }
             }
           }}

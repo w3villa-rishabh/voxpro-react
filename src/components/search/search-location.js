@@ -50,10 +50,11 @@ export default function SearchLocationComponent(props) {
           onKeyUp={(e) => {
             if (e.key === 'Backspace' && e.target.value.length < 2) {
               props.searchQuery[e.target.name] = '';
-              props.searchQuery.location = [];
               setCountryCity([]);
               if (props.return) {
                 props.locationCallback('remove', '');
+              } else {
+                props.searchQuery.location = [];
               }
             }
           }}

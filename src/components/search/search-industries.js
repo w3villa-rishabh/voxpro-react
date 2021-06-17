@@ -50,10 +50,11 @@ export default function SearchIndustriesComponent(props) {
           onKeyUp={(e) => {
             if (e.key === 'Backspace' && e.target.value.length < 2) {
               props.searchQuery[e.target.name] = '';
-              props.searchQuery.industry = [];
               setIndustries([]);
               if (props.return) {
                 props.industryCallback();
+              } else {
+                props.searchQuery.industry = [];
               }
             }
           }}
