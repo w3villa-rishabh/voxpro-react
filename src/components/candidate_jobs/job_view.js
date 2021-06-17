@@ -269,45 +269,6 @@ export default function JobSearchComponent() {
                   </div>
                 </Grid>
               </Grid>
-              <div className="card-footer mt-4">
-                <b>
-                  Not quite what you are looking for? Try these similar searches
-                </b>
-                <Grid container spacing={0} className="mt-3">
-                  <Grid item xs={12} sm={6}>
-                    <a
-                      href="#/"
-                      className="a-blue"
-                      onClick={(e) => e.preventDefault()}>
-                      Implement Technology jobs in Holbein
-                    </a>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <a
-                      href="#/"
-                      className="a-blue"
-                      onClick={(e) => e.preventDefault()}>
-                      Developer jobs in Holbein
-                    </a>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <a
-                      href="#/"
-                      className="a-blue"
-                      onClick={(e) => e.preventDefault()}>
-                      Jobs in Holbein
-                    </a>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <a
-                      href="#/"
-                      className="a-blue"
-                      onClick={(e) => e.preventDefault()}>
-                      Information Technology jobs
-                    </a>
-                  </Grid>
-                </Grid>
-              </div>
             </Card>
           </Grid>
           <Grid item xs={12} sm={3}>

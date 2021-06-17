@@ -7,21 +7,7 @@ import { validEmailRegex } from 'helper';
 
 import SearchJobsComponent from '../search/search-jobs';
 import SearchLocationComponent from '../search/search-location';
-
-const jobType = [
-  {
-    value: 0,
-    label: 'Full time'
-  },
-  {
-    value: 1,
-    label: 'Permanent'
-  },
-  {
-    value: 2,
-    label: 'Contract'
-  }
-];
+import { jobType } from '../../constants'; //import from your constants.js
 
 export default function AddJobsComponent() {
   let search = window.location.search;

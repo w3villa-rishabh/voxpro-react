@@ -185,13 +185,21 @@ const ShareJobComponent = (props) => {
             </Grid>
 
             <DialogActions className="mt-4">
-              <Button
-                disabled={isAction}
-                onClick={() => handleShareJob()}
-                className="btn-primary font-weight-bold hover-scale-lg float-right"
-                size="small">
-                Share
-              </Button>
+              <div className="float-right">
+                <Button
+                  onClick={handleModalClose}
+                  className="btn-primary font-weight-bold hover-scale-lg mr-3"
+                  size="small">
+                  Cancel
+                </Button>
+                <Button
+                  disabled={isAction}
+                  onClick={() => handleShareJob()}
+                  className="btn-primary font-weight-bold hover-scale-lg"
+                  size="small">
+                  Share
+                </Button>
+              </div>
             </DialogActions>
           </div>
         </Card>

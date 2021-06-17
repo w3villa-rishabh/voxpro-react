@@ -27,6 +27,7 @@ import getDay from 'date-fns/getDay';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { availabilityType, shift } from '../../constants'; //import from your constants.js
 
 // let allViews = Object.keys(Views).map((k) => Views[k]);
 
@@ -47,36 +48,6 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales
 });
-
-const availabilityType = [
-  {
-    value: 'Available',
-    label: 'Available'
-  },
-  {
-    value: 'Unavailable',
-    label: 'Unavailable'
-  },
-  {
-    value: 'Sick',
-    label: 'Sick'
-  }
-];
-
-const shift = [
-  {
-    value: 'Full Day',
-    label: 'Full Day'
-  },
-  {
-    value: 'PM',
-    label: 'PM'
-  },
-  {
-    value: 'AM',
-    label: 'AM'
-  }
-];
 
 function generateTimeIncrement(minIncrementProp = '30') {
   // Create an array of all possible times that can be selected
