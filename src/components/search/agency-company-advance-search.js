@@ -315,20 +315,6 @@ const CompanyAgencyAdvanceSearchComponent = () => {
                             <Grid container spacing={1}>
                               <Grid item xs={12} sm={2}>
                                 <span className="text-black-50 nowrap float-right">
-                                  Location :{' '}
-                                </span>
-                              </Grid>
-                              <Grid item xs={12} sm={8}>
-                                <div>
-                                  <p className="mb-0">{com.location}</p>
-                                </div>
-                              </Grid>
-                              <Grid item xs={12} sm={2}></Grid>
-                            </Grid>
-
-                            <Grid container spacing={1}>
-                              <Grid item xs={12} sm={2}>
-                                <span className="text-black-50 nowrap float-right">
                                   Establised On:{' '}
                                 </span>
                               </Grid>

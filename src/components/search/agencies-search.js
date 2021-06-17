@@ -90,7 +90,7 @@ export default function AgenciesSearchComponent() {
       <div className="page-title">
         <WorkIcon />
         <div className="title pt-3">
-          <b className="heading">Search Companies</b>
+          <b className="heading">Agencies Companies</b>
         </div>
       </div>
 
