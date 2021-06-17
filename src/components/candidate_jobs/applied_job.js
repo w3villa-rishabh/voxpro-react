@@ -39,11 +39,11 @@ export default function AppliedJobComponent() {
 
   const status = [
     {
-      value: 'live',
+      value: 0,
       label: 'Live'
     },
     {
-      value: 'expired',
+      value: 1,
       label: 'Expired'
     }
   ];
@@ -66,6 +66,8 @@ export default function AppliedJobComponent() {
       (response) => {
         setIsLoading(false);
         if (response.data.success) {
+          setAppliedJob([...response.data.jobs]);
+        } else {
           setAppliedJob([...response.data.jobs]);
         }
       },
