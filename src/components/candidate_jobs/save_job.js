@@ -12,25 +12,7 @@ import api from '../../api';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
 import ApplyNewJob from './apply-new-job';
-
-const jobposted = [
-  {
-    value: 'anytime',
-    label: 'Anytime'
-  },
-  {
-    value: 'last_3_days',
-    label: 'Last 3 Days'
-  },
-  {
-    value: 'last_week',
-    label: 'Last Week'
-  },
-  {
-    value: 'last_2-weeks',
-    label: 'Last 2 Weeks'
-  }
-];
+import { jobPosted } from '../../constants'; //import from your constants.js
 
 export default function SaveJobComponent() {
   const history = useHistory();
@@ -122,7 +104,7 @@ export default function SaveJobComponent() {
               </div>
               <div className="w-25">
                 <Select
-                  options={jobposted}
+                  options={jobPosted}
                   value={postValue}
                   onChange={changeHandler}
                   placeholder="Date Posted"
