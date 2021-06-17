@@ -10,28 +10,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { toast } from 'react-toastify';
 import { getCurrentUser } from 'helper';
 import api from '../../api';
-
-const agencyFiltersOptions = [
-  {
-    value: 'candidate',
-    label: 'Candidate'
-  },
-  {
-    value: 'company',
-    label: 'Company'
-  }
-];
-
-const companyFiltersOptions = [
-  {
-    value: 'candidate',
-    label: 'Candidate'
-  },
-  {
-    value: 'agency',
-    label: 'Agency'
-  }
-];
+import { agencyFiltersOptions, companyFiltersOptions } from '../../constants'; //import from your constants.js
 
 export default function AddNewRequestComponent() {
   const [currentUser] = useState(getCurrentUser());

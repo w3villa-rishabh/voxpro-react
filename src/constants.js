@@ -97,3 +97,55 @@ export const dolorPrice = [
     label: '90,000'
   }
 ];
+
+export const availabilityType = [
+  {
+    value: 'Available',
+    label: 'Available'
+  },
+  {
+    value: 'Unavailable',
+    label: 'Unavailable'
+  },
+  {
+    value: 'Sick',
+    label: 'Sick'
+  }
+];
+
+export const shift = [
+  {
+    value: 'Full Day',
+    label: 'Full Day'
+  },
+  {
+    value: 'PM',
+    label: 'PM'
+  },
+  {
+    value: 'AM',
+    label: 'AM'
+  }
+];
+
+export const agencyFiltersOptions = [
+  {
+    value: 'candidate',
+    label: 'Candidate'
+  },
+  {
+    value: 'company',
+    label: 'Company'
+  }
+];
+
+export const companyFiltersOptions = [
+  {
+    value: 'candidate',
+    label: 'Candidate'
+  },
+  {
+    value: 'agency',
+    label: 'Agency'
+  }
+];
