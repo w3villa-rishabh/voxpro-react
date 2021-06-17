@@ -20,6 +20,7 @@ import AddsComponents from 'components/add_component';
 import api from '../../api';
 import SearchLocationComponent from '../search/search-location';
 import SearchJobsComponent from '../search/search-jobs';
+import Pagination from '@material-ui/lab/Pagination';
 
 export default function AppliedJobComponent() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -48,6 +49,12 @@ export default function AppliedJobComponent() {
     }
   ];
 
+  const [searchPageCount, setSearchPageCount] = useState({
+    total_pages: 0,
+    page: 0,
+    total: 0
+  });
+
   useEffect(() => {
     getAppliedJobs(searchQuery);
     window.addEventListener('resize', handleWindowSizeChange);
@@ -66,9 +73,10 @@ export default function AppliedJobComponent() {
       (response) => {
         setIsLoading(false);
         if (response.data.success) {
+          setSearchPageCount({ ...response.data.page_info });
           setAppliedJob([...response.data.jobs]);
         } else {
-          setAppliedJob([...response.data.jobs]);
+          setAppliedJob([]);
         }
       },
       () => {
@@ -79,6 +87,12 @@ export default function AppliedJobComponent() {
 
   const search = (event, action) => {
     searchQuery[event] = action;
+    setSearchQuery({ ...searchQuery });
+    getAppliedJobs(searchQuery);
+  };
+
+  const viewMoreResult = (event, newPage) => {
+    searchQuery.page = newPage;
     setSearchQuery({ ...searchQuery });
     getAppliedJobs(searchQuery);
   };
@@ -382,11 +396,17 @@ export default function AppliedJobComponent() {
               )}
             </PerfectScrollbar>
           </div>
-          <div className="card-footer py-3 text-center">
-            <Button size="small" className="btn-outline-second" variant="text">
-              View more
-            </Button>
-          </div>
+
+          {appliedJob.length >= 1 && (
+            <div className="p-3 d-flex justify-content-center">
+              <Pagination
+                className="pagination-primary"
+                onChange={viewMoreResult}
+                page={searchPageCount.page}
+                count={searchPageCount.total_pages}
+              />
+            </div>
+          )}
         </Card>
       </div>
 
