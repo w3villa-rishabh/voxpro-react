@@ -7,8 +7,10 @@ import TableComponent from './table_component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import WorkIcon from '@material-ui/icons/Work';
+import { useHistory } from 'react-router';
 
 export default function LiveComponent() {
+  const history = useHistory();
   const [width, setWidth] = useState(window.innerWidth);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -29,6 +31,11 @@ export default function LiveComponent() {
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth);
+  };
+
+  const addNewJob = () => {
+    handleClose();
+    // history.push('/add-job');
   };
 
   return (
@@ -70,9 +77,7 @@ export default function LiveComponent() {
                 onClick={handleClose}>
                 Import
               </MenuItem>
-              <MenuItem
-                className="pr-5 px-3 text-primary"
-                onClick={handleClose}>
+              <MenuItem className="pr-5 px-3 text-primary" onClick={addNewJob}>
                 Add Manually
               </MenuItem>
             </div>
