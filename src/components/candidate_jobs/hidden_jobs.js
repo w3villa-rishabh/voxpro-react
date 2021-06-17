@@ -7,7 +7,7 @@ import WorkIcon from '@material-ui/icons/Work';
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddsComponents from 'components/add_component';
-
+import { convertDate } from 'helper';
 import Select from 'react-select';
 import api from '../../api';
 import LoaderComponent from 'components/loader';
@@ -151,7 +151,7 @@ export default function HideJobComponent() {
                                   {job.location}
                                 </small>
                                 <small className="text-black-50">
-                                  Hidden: {job.created_date}
+                                  Hidden: {convertDate(job.hidden_date)}
                                 </small>
                               </div>
                             </td>

@@ -118,7 +118,7 @@ export default function AgenciesSearchComponent() {
             <SearchLocationComponent searchQuery={searchQuery} return={false} />
           </Grid>
           <Grid item md={3} xs={12}>
-            <b>Jobs</b>
+            <b>No Of Jobs</b>
             <SearchJobsByNumberComponent
               searchQuery={searchQuery}
               return={false}

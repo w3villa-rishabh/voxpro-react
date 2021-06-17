@@ -6,6 +6,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import WorkIcon from '@material-ui/icons/Work';
 import { useHistory } from 'react-router';
 import AddsComponents from 'components/add_component';
+import { convertDate } from 'helper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 import api from '../../api';
@@ -146,7 +147,7 @@ export default function SaveJobComponent() {
                                   {job.location}
                                 </small>
                                 <small className="text-black-50">
-                                  Saved: {job.created_date}
+                                  Saved: {convertDate(job.saved_date)}
                                 </small>
                               </div>
                             </td>
