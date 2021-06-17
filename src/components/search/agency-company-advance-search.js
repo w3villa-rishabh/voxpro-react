@@ -7,15 +7,12 @@ import {
   Grid,
   Button,
   CardContent,
-  TextField,
   Dialog,
-  DialogTitle,
-  InputAdornment
+  DialogTitle
 } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import api from '../../api';
 import { toast } from 'react-toastify';
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +21,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import LoaderComponent from 'components/loader';
 import SearchLocationComponent from './search-location';
 import SearchJobsComponent from './search-jobs';
+import SearchIndustriesComponent from './search-industries';
 
 import { useLocation } from 'react-router';
 
@@ -458,31 +456,11 @@ const CompanyAgencyAdvanceSearchComponent = () => {
           <span>Industry</span>
         </DialogTitle>
         <div className="p-3">
-          <div className="user-new-request">
-            <TextField
-              variant="outlined"
-              size="small"
-              name="industry"
-              fullWidth
-              autoComplete="off"
-              label="Industry"
-              placeholder="e.g. 'industry'"
-              className="w-100"
-              onChange={(e) => {
-                return e.target.value;
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchTwoToneIcon />
-                  </InputAdornment>
-                ),
-                style: {
-                  height: '37px'
-                }
-              }}
-            />
-          </div>
+          <SearchIndustriesComponent
+            searchQuery={searchQuery}
+            return={true}
+            industryCallback={modalCallback}
+          />
         </div>
       </Dialog>
     </>

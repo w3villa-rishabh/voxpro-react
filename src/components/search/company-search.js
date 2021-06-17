@@ -13,6 +13,7 @@ import { getCurrentUser, convertDate } from '../../helper';
 import projectLogo from '../../assets/images/voxpro-images/logo_small.png';
 import SearchLocationComponent from './search-location';
 import SearchJobsComponent from './search-jobs';
+import SearchIndustriesComponent from './search-industries';
 
 export default function CompaniesSearchComponent() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -108,18 +109,9 @@ export default function CompaniesSearchComponent() {
           </Grid>
           <Grid item md={3} xs={12}>
             <b>Industry</b>
-            <TextField
-              variant="outlined"
-              size="small"
-              placeholder="Search by industry"
-              className="w-100"
-              name="industryName"
-              onChange={handlerSearch}
-              InputProps={{
-                style: {
-                  height: '37px'
-                }
-              }}
+            <SearchIndustriesComponent
+              searchQuery={searchQuery}
+              return={false}
             />
           </Grid>
           <Grid item md={3} xs={12}>
