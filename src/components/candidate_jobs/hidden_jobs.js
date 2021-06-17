@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 import { Card, Button, Grid, Table } from '@material-ui/core';
@@ -12,7 +13,6 @@ import api from '../../api';
 import LoaderComponent from 'components/loader';
 import { toast } from 'react-toastify';
 import ApplyNewJob from './apply-new-job';
-import { join } from 'lodash';
 
 const jobposted = [
   {
@@ -35,18 +35,21 @@ const jobposted = [
 
 export default function HideJobComponent() {
   const history = useHistory();
-  const [value2, setValue2] = useState('');
+  const [postValue, setPostValue] = useState({
+    value: 'anytime',
+    label: 'Anytime'
+  });
   const [hiddenJob, setHiddenJob] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getHiddenJobs();
+    getHiddenJobs(postValue.value);
   }, []);
 
-  function getHiddenJobs() {
+  function getHiddenJobs(filter) {
     setIsLoading(true);
-    api.get(`/api/v1/jobs/candidate_hidden_jobs`).then(
+    api.get(`/api/v1/jobs/candidate_hidden_jobs?filter=${filter}`).then(
       (response) => {
         setIsLoading(false);
         if (response.data.success) {
@@ -89,10 +92,10 @@ export default function HideJobComponent() {
     );
   };
 
-  const changeHandler2 = (value2) => {
-    setValue2(value2);
+  const changeHandler = (event) => {
+    setPostValue(event);
+    getHiddenJobs(event.value);
   };
-
   const jobApplyCallback = (id) => {
     // the callback. Use a better name
     let index = hiddenJob.findIndex((a) => a.id === id);
@@ -131,8 +134,8 @@ export default function HideJobComponent() {
               <div className="w-25">
                 <Select
                   options={jobposted}
-                  value={value2}
-                  onChange={changeHandler2}
+                  value={postValue}
+                  onChange={changeHandler}
                   placeholder="Date Posted"
                 />
               </div>
