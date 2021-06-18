@@ -100,16 +100,12 @@ export const dolorPrice = [
 
 export const availabilityType = [
   {
-    value: 'Available',
-    label: 'Available'
+    value: 1,
+    label: 'Available for interview'
   },
   {
-    value: 'Unavailable',
-    label: 'Unavailable'
-  },
-  {
-    value: 'Sick',
-    label: 'Sick'
+    value: 2,
+    label: 'Available for working'
   }
 ];
 

@@ -82,6 +82,16 @@ export default function JobSearchComponent() {
     setJob({ ...job });
   };
 
+  const viewCompany = (event, id) => {
+    event.preventDefault();
+    history.push({
+      pathname: '/view-company',
+      state: {
+        id
+      }
+    });
+  };
+
   return (
     <>
       <SearchComponent />
@@ -252,12 +262,16 @@ export default function JobSearchComponent() {
                   <ShareJob job={job} />
                   <div className="d-flex mt-3 border flex-column justify-content-between">
                     <div>
-                      <img
-                        style={{ height: '90px', width: '100%' }}
-                        className=""
-                        alt="..."
-                        src={job.company_logo}
-                      />
+                      <a
+                        href="#/"
+                        onClick={(e) => viewCompany(e, job.company_id)}>
+                        <img
+                          style={{ height: '90px', width: '100%' }}
+                          className=""
+                          alt="..."
+                          src={job.company_logo}
+                        />
+                      </a>
                     </div>
                     <div className="d-flex flex-column"></div>
                     <Button
