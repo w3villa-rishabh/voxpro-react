@@ -103,6 +103,7 @@ export default function TasksCalendarComponent() {
   const [currentUser] = useState(getCurrentUser());
   const [filterApplied, setFilterApplied] = useState([
     { name: 'Full time', checked: true },
+    { name: 'Permanent', checked: true },
     { name: 'Contract', checked: true },
     { name: 'Part time', checked: true },
     { name: 'Internship', checked: false },
