@@ -11,7 +11,7 @@ export function getCurrentUser() {
 }
 
 export function convertDate(date) {
-  return moment(date).format('MM-DD-YYYY');
+  return moment(date).format('DD-MM-YYYY');
 }
 
 export function validEmailRegex(email) {

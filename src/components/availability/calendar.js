@@ -280,7 +280,7 @@ export default function TasksCalendarComponent() {
         </div>
       </div>
       <Card className="p-3 mb-3">
-        <b>Job type</b>
+        <b>Job types</b>
         <ul className="cards-filter">
           {filterApplied.map((filter, index) => (
             <li
