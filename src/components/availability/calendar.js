@@ -21,7 +21,6 @@ import { toast } from 'react-toastify';
 
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import BallotTwoToneIcon from '@material-ui/icons/BallotTwoTone';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -304,7 +303,7 @@ export default function TasksCalendarComponent() {
               <div className="card-body mb-0">
                 <form method="post" onSubmit={editInfo}>
                   <div className="mb-2">
-                    <PerfectScrollbar>
+                    <div>
                       {availability.map((value, index) => (
                         <Grid container spacing={1} wrap={'nowrap'} key={index}>
                           <Grid item xs={12} sm={3} className="text-center">
@@ -623,7 +622,7 @@ export default function TasksCalendarComponent() {
                           </Grid>
                         </Grid>
                       ))}
-                    </PerfectScrollbar>
+                    </div>
                     <div>
                       <Button
                         variant="contained"

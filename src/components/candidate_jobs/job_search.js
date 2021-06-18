@@ -257,6 +257,16 @@ const JobSearchComponent = (props) => {
     props.setSearchResult([...props.searchResult]);
   };
 
+  const viewCompany = (event, id) => {
+    event.preventDefault();
+    history.push({
+      pathname: '/view-company',
+      state: {
+        id
+      }
+    });
+  };
+
   return (
     <>
       <SearchComponent />
@@ -676,12 +686,16 @@ const JobSearchComponent = (props) => {
                         <Grid item xs={12} sm={3} className="px-3 py-2">
                           <div className="d-flex border flex-column justify-content-between">
                             <div>
-                              <img
-                                style={{ height: '90px', width: '100%' }}
-                                className=""
-                                alt="..."
-                                src={job.company_logo}
-                              />
+                              <a
+                                href="#/"
+                                onClick={(e) => viewCompany(e, job.company_id)}>
+                                <img
+                                  style={{ height: '90px', width: '100%' }}
+                                  className=""
+                                  alt="..."
+                                  src={job.company_logo}
+                                />
+                              </a>
                             </div>
                             <div className="d-flex flex-column"></div>
                           </div>
