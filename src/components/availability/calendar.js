@@ -4,6 +4,7 @@ import {
   Button,
   Dialog,
   Grid,
+  Card,
   Checkbox,
   TextField,
   DialogTitle,
@@ -100,6 +101,23 @@ export default function TasksCalendarComponent() {
   const [time] = useState(generateTimeIncrement());
   const [picDate, setPicDate] = useState('');
   const [currentUser] = useState(getCurrentUser());
+  const [filterApplied, setFilterApplied] = useState([
+    { name: 'Full time', checked: true },
+    { name: 'Contract', checked: true },
+    { name: 'Part time', checked: true },
+    { name: 'Internship', checked: false },
+    { name: 'Temporary', checked: true }
+  ]);
+
+  const [filterAppliedWeek, setFilterAppliedWeek] = useState([
+    { name: 'Weekdays', checked: false },
+    { name: 'Weekends', checked: false },
+    { name: 'Full day', checked: false },
+    { name: 'AM', checked: false },
+    { name: 'PM', checked: false },
+    { name: 'Evenings', checked: false },
+    { name: 'Nights', checked: false }
+  ]);
 
   const addMoreRow = () => {
     availabilityObj.startDate = picDate;
@@ -261,6 +279,53 @@ export default function TasksCalendarComponent() {
           <b className="heading">Availability Calendar</b>
         </div>
       </div>
+      <Card className="p-3 mb-3">
+        <b>Job type</b>
+        <ul className="cards-filter">
+          {filterApplied.map((filter, index) => (
+            <li
+              key={index}
+              className="cards__item_calender pointer"
+              style={{
+                background: filter.checked ? 'green' : 'white',
+                color: filter.checked ? 'white' : ''
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                filterApplied[index].checked = !filter.checked;
+                setFilterApplied([...filterApplied]);
+              }}>
+              <div>
+                <span>{filter.name}</span>
+                <FontAwesomeIcon
+                  className="ml-2 pt-1"
+                  icon={filter.checked ? ['fas', 'check'] : ['fas', 'plus']}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+        <ul className="cards-filter mt-2">
+          {filterAppliedWeek.map((filter, index) => (
+            <li key={index}>
+              <div>
+                <span>{filter.name}</span>
+                <FormControlLabel
+                  value="top"
+                  checked={filter.checked}
+                  control={<Checkbox color="primary" />}
+                  labelPlacement="top"
+                  onChange={(e) => {
+                    filterAppliedWeek[index].checked = e.target.checked;
+                    setFilterAppliedWeek([...filterAppliedWeek]);
+                  }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Card>
+
       <div className="app-inner-content-layout">
         <div className="app-inner-content-layout--main p-0">
           <Calendar

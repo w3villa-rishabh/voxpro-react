@@ -815,6 +815,17 @@ tbody.scroll {
   overflow: auto;
 }
 
+.cards__item_calender {
+  display: flex;
+  padding: 6px 16px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  margin: 10px;
+  // color: white;
+  font-weight: 800;
+}
+
 // For mobile
 @media (max-width: 767px) {
   .chat-menu {
