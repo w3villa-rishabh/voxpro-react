@@ -34,6 +34,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { availabilityType, shift } from '../../constants'; //import from your constants.js
 import { useEffect } from 'react';
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 // let allViews = Object.keys(Views).map((k) => Views[k]);
 
 const ColoredDateCellWrapper = ({ children }) =>
@@ -195,13 +198,16 @@ export default function TasksCalendarComponent() {
     let newArr = [availabilityObj];
     setAvailability(newArr);
     setOpenCalendar(false);
+    setOpenCalendarUpdate(false);
   };
 
   //Example 2
   const [openCalendar, setOpenCalendar] = useState(false);
+  const [openCalendarUpdate, setOpenCalendarUpdate] = useState(false);
 
-  const handleClose1 = () => {
+  const handleCloseCalendar = () => {
     setOpenCalendar(false);
+    setOpenCalendarUpdate(false);
   };
 
   function handleSelect({ start, end }) {
@@ -228,6 +234,28 @@ export default function TasksCalendarComponent() {
 
   let editInfo = (e) => {
     e.preventDefault();
+  };
+
+  const selectEvent = (event) => {
+    console.log('select event', event);
+    setOpenCalendarUpdate(true);
+    setAvailability([
+      {
+        startDate: new Date(event.start),
+        endDate: new Date(event.end),
+        type: event.title === 'Available for Interview' ? 1 : 2,
+        shift: 0,
+        startTime: 0,
+        endTime: 0,
+        mon: false,
+        tue: false,
+        wed: false,
+        thu: false,
+        fri: false,
+        sat: false,
+        sun: false
+      }
+    ]);
   };
 
   const createAvailability = (e) => {
@@ -261,6 +289,99 @@ export default function TasksCalendarComponent() {
     }
   };
 
+  const updateAvailability = () => {
+    confirmAlert({
+      title: 'Confirm to update',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Update',
+          onClick: () => {
+            console.log('availability', availability);
+            let isDo = true;
+            availability.map((value) => {
+              if (value.type && value.endDate) {
+                console.log('calender active');
+              } else {
+                isDo = false;
+                toast.dismiss();
+                toast.error('End Date id required, Please select required..');
+              }
+            });
+
+            if (isDo) {
+              api
+                .put('/api/v1/tasks', {
+                  task: availability
+                })
+                .then(
+                  (response) => {
+                    toast.success(response.data.message);
+                    if (response.data.success) {
+                      console.log('response', response.data);
+                      handleCloseCalendar();
+                    }
+                  },
+                  (error) => {
+                    toast.error('Something went wrong');
+                    console.error('error', error);
+                  }
+                );
+            }
+          }
+        },
+        {
+          label: 'Cancel',
+          onClick: () => {
+            console.log('not change');
+            return;
+          }
+        }
+      ],
+      closeOnClickOutside: false,
+      overlayClassName: 'alert-overlay-custom'
+    });
+  };
+
+  const deleteTask = () => {
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Delete',
+          onClick: () => {
+            handleCloseCalendar();
+          }
+        },
+        {
+          label: 'Cancel',
+          onClick: () => {
+            console.log('not change');
+            return;
+          }
+        }
+      ],
+      closeOnClickOutside: false,
+      overlayClassName: 'alert-overlay-custom'
+    });
+  };
+
+  const updateAvailabilityToWeek = (update) => {
+    api.put('/api/v1/users/add_available_to_work', update).then(
+      (response) => {
+        toast.success(response.data.message);
+        if (response.data.success) {
+          console.log('add_available_to_work update');
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        console.error(error);
+      }
+    );
+  };
+
   const eventStyleGetter = (event, start, end, isSelected) => {
     console.log(event);
     var backgroundColor;
@@ -287,11 +408,6 @@ export default function TasksCalendarComponent() {
     };
   };
 
-  const selectEvent = (event, e) => {
-    console.log('select event', event);
-    debugger;
-  };
-
   return (
     <>
       <div className="page-title">
@@ -313,8 +429,13 @@ export default function TasksCalendarComponent() {
               }}
               onClick={(e) => {
                 e.preventDefault();
-                filterApplied[index].checked = !filter.checked;
+                let checked = !filter.checked;
+                filterApplied[index].checked = checked;
                 setFilterApplied([...filterApplied]);
+                updateAvailabilityToWeek({
+                  field: filter.name,
+                  select: checked
+                });
               }}>
               <div>
                 <span>{filter.name}</span>
@@ -339,6 +460,10 @@ export default function TasksCalendarComponent() {
                   onChange={(e) => {
                     filterAppliedWeek[index].checked = e.target.checked;
                     setFilterAppliedWeek([...filterAppliedWeek]);
+                    updateAvailabilityToWeek({
+                      field: filter.name,
+                      select: e.target.checked
+                    });
                   }}
                 />
               </div>
@@ -373,13 +498,13 @@ export default function TasksCalendarComponent() {
         </div>
       </div>
 
-      {/* About dialog modal open */}
+      {/* Calender add task dialog modal open */}
       <Dialog
         classes={{ paper: 'modal-content' }}
         scroll="body"
         maxWidth="lg"
         open={openCalendar}
-        onClose={handleClose1}
+        onClose={handleCloseCalendar}
         aria-labelledby="form-dialog-title2">
         <DialogTitle id="form-dialog-title">Create Availability</DialogTitle>
 
@@ -723,6 +848,361 @@ export default function TasksCalendarComponent() {
                         onClick={createAvailability}
                         className="font-weight-bold btn-second px-4 my-1">
                         Create
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        onClick={handleCancel}
+                        className="font-weight-bold btn-second px-4 my-1">
+                        Cancel
+                      </Button>
+                    </DialogActions>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Update Calender add task dialog modal open */}
+      <Dialog
+        classes={{ paper: 'modal-content' }}
+        scroll="body"
+        maxWidth="lg"
+        open={openCalendarUpdate}
+        onClose={handleCloseCalendar}
+        aria-labelledby="form-dialog-title2">
+        <DialogTitle id="form-dialog-title">Update Availability</DialogTitle>
+
+        <DialogContent className="p-0">
+          <div>
+            <div className="border-0">
+              <div className="card-body mb-0">
+                <form method="post" onSubmit={editInfo}>
+                  <div className="mb-2">
+                    <div>
+                      {availability.map((value, index) => (
+                        <Grid container spacing={1} wrap={'nowrap'} key={index}>
+                          <Grid item xs={12} sm={3} className="text-center">
+                            {index === 0 && (
+                              <label className="font-weight-bold mb-1">
+                                Start Date
+                              </label>
+                            )}
+                            <DatePicker
+                              // value={availability[index].startDate}
+                              minDate={new Date()}
+                              dateFormat="dd-MM-yyyy"
+                              placeholderText="Start Date"
+                              selected={availability[index].startDate}
+                              selectsStart
+                              startDate={availability[index].startDate}
+                              endDate={availability[index].endDate}
+                              onChange={(date) => {
+                                // setStartDate(date);
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.startDate = date;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={3} className="text-center">
+                            {index === 0 && (
+                              <label className="font-weight-bold mb-1">
+                                End Date
+                              </label>
+                            )}
+                            <DatePicker
+                              // value={availability[index].endDate}
+                              dateFormat="dd-MM-yyyy"
+                              placeholderText="End Date"
+                              selected={availability[index].endDate}
+                              selectsEnd
+                              startDate={availability[index].startDate}
+                              endDate={availability[index].endDate}
+                              minDate={availability[index].startDate}
+                              onChange={(date) => {
+                                // setEndDate(date);
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.endDate = date;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={3} className="text-center">
+                            {index === 0 && (
+                              <label className="font-weight-bold mb-1">
+                                Type
+                              </label>
+                            )}
+
+                            {index < 1 ? (
+                              <select
+                                value={availability[index].type}
+                                onChange={(e) => {
+                                  const newClicks = [...availability];
+                                  let newVote = { ...newClicks[index] };
+                                  newVote.type = e.target.value;
+                                  newClicks[index] = newVote;
+                                  setAvailability(newClicks);
+                                }}>
+                                <option value={0} disabled>
+                                  Select type
+                                </option>
+                                {availabilityType.map((value, index) => (
+                                  <option key={index} value={value.value}>
+                                    {value.label}
+                                  </option>
+                                ))}
+                              </select>
+                            ) : (
+                              <TextField
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                                type="text"
+                                name="salary_low"
+                                style={{
+                                  width: '172px'
+                                }}
+                                onChange={(e) => {
+                                  const newClicks = [...availability];
+                                  let newVote = { ...newClicks[index] };
+                                  newVote.other = e.target.value;
+                                  newClicks[index] = newVote;
+                                  setAvailability(newClicks);
+                                }}
+                                placeholder="Enter your salary low"
+                              />
+                            )}
+                          </Grid>
+                          <Grid item xs={12} sm={3} className="text-center">
+                            {index === 0 && (
+                              <label className="font-weight-bold mb-1">
+                                Shift
+                              </label>
+                            )}
+
+                            <select
+                              value={availability[index].shift}
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.shift = e.target.value;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}>
+                              <option value={0} disabled>
+                                Select shift
+                              </option>
+                              {shift.map((value, index) => (
+                                <option key={index} value={value.value}>
+                                  {value.label}
+                                </option>
+                              ))}
+                            </select>
+                          </Grid>
+                          <Grid item xs={12} sm={3} className="text-center">
+                            {index === 0 && (
+                              <label className="font-weight-bold mb-1">
+                                Start Time
+                              </label>
+                            )}
+
+                            <select
+                              disabled={
+                                availability[index].shift === 'Full Day'
+                              }
+                              value={availability[index].startTime}
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.startTime = e.target.value;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}>
+                              <option value={0} disabled>
+                                Start Time
+                              </option>
+                              {time
+                                .filter(
+                                  (f) => f.period === availability[index].shift
+                                )
+                                .map((value, index) => (
+                                  <option key={index} value={value.value}>
+                                    {value.label}
+                                  </option>
+                                ))}
+                            </select>
+                          </Grid>
+                          <Grid item xs={12} sm={3} className="text-center">
+                            {index === 0 && (
+                              <label className="font-weight-bold mb-1">
+                                End Time
+                              </label>
+                            )}
+
+                            <select
+                              disabled={
+                                availability[index].shift === 'Full Day'
+                              }
+                              value={availability[index].endTime}
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                if (
+                                  !!newVote.startTime &&
+                                  e.target.value > newVote.startTime
+                                ) {
+                                  newVote.endTime = e.target.value;
+                                  newClicks[index] = newVote;
+                                  setAvailability(newClicks);
+                                  // setEndTime(e.label);
+                                } else {
+                                  toast.dismiss();
+                                  toast.error(
+                                    'End time should be greater then Start time'
+                                  );
+                                }
+                              }}>
+                              <option value={0} disabled>
+                                End Time
+                              </option>
+                              {time
+                                .filter(
+                                  (f) => f.period === availability[index].shift
+                                )
+                                .map((value, index) => (
+                                  <option key={index} value={value.value}>
+                                    {value.label}
+                                  </option>
+                                ))}
+                            </select>
+                          </Grid>
+
+                          <Grid item className="d-flex week-remove-m">
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Mon' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.mon = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Tue' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.tue = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Wed' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.web = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Thu' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.thu = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Fri' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.fri = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Sat' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.sat = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+
+                            <FormControlLabel
+                              value="top"
+                              control={<Checkbox color="primary" />}
+                              label={index === 0 ? 'Sun' : ''}
+                              labelPlacement="top"
+                              onChange={(e) => {
+                                const newClicks = [...availability];
+                                let newVote = { ...newClicks[index] };
+                                newVote.sun = e.target.checked;
+                                newClicks[index] = newVote;
+                                setAvailability(newClicks);
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <DialogActions>
+                      <Button
+                        variant="contained"
+                        onClick={updateAvailability}
+                        className="font-weight-bold btn-second px-4 my-1">
+                        Update
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        onClick={deleteTask}
+                        className="font-weight-bold btn-second px-4 my-1">
+                        Delete
                       </Button>
 
                       <Button
