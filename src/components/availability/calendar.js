@@ -131,44 +131,7 @@ export default function TasksCalendarComponent() {
       (response) => {
         if (response.data.success) {
           console.log('response.data', response.data);
-          const events = [];
-          response.data.task.map((value) => {
-            var newEvent = {
-              id: value.id,
-              task_id: value.task_id,
-              start: value.date,
-              end: value.date,
-              // start: new Date(
-              //   value.start_date.getFullYear(),
-              //   value.start_date.getMonth(),
-              //   value.start_date.getDate(),
-              //   17,
-              //   0,
-              //   0,
-              //   0
-              // ),
-              // end: new Date(
-              //   value.end_date.getFullYear(),
-              //   value.end_date.getMonth(),
-              //   value.end_date.getDate(),
-              //   17,
-              //   30,
-              //   0,
-              //   0
-              // ),
-              title: value.task_type,
-              desc: 'Big conference for important people',
-              duration: '02:00',
-              borderColor: 'white',
-              backgroundColor: 'pink',
-              display: 'background'
-            };
-            // YearView, month, date, hh, mm, ss,ss,z
-            // start: new Date(2015, 3, 12, 17, 0, 0, 0),
-            // end: new Date(2015, 3, 12, 17, 30, 0, 0),
-            events.push(newEvent);
-          });
-          setEventsList([...eventsList, ...events]);
+          updateCalendarEvent(response.data.task);
         } else {
           toast.error(response.data.message);
         }
@@ -178,6 +141,47 @@ export default function TasksCalendarComponent() {
         console.error(error);
       }
     );
+  };
+
+  const updateCalendarEvent = (data) => {
+    const events = [];
+    data.map((value) => {
+      var newEvent = {
+        id: value.id,
+        task_id: value.task_id,
+        start: value.date,
+        end: value.date,
+        // start: new Date(
+        //   value.start_date.getFullYear(),
+        //   value.start_date.getMonth(),
+        //   value.start_date.getDate(),
+        //   17,
+        //   0,
+        //   0,
+        //   0
+        // ),
+        // end: new Date(
+        //   value.end_date.getFullYear(),
+        //   value.end_date.getMonth(),
+        //   value.end_date.getDate(),
+        //   17,
+        //   30,
+        //   0,
+        //   0
+        // ),
+        title: value.task_type,
+        desc: 'Big conference for important people',
+        duration: '02:00',
+        borderColor: 'white',
+        backgroundColor: 'pink',
+        display: 'background'
+      };
+      // YearView, month, date, hh, mm, ss,ss,z
+      // start: new Date(2015, 3, 12, 17, 0, 0, 0),
+      // end: new Date(2015, 3, 12, 17, 30, 0, 0),
+      events.push(newEvent);
+    });
+    setEventsList([...events]);
   };
 
   const addMoreRow = () => {
@@ -244,6 +248,8 @@ export default function TasksCalendarComponent() {
         startDate: new Date(event.start),
         endDate: new Date(event.end),
         type: event.title === 'Available for Interview' ? 1 : 2,
+        other: event.title,
+        id: event.id,
         shift: 0,
         startTime: 0,
         endTime: 0,
@@ -316,10 +322,11 @@ export default function TasksCalendarComponent() {
                 })
                 .then(
                   (response) => {
-                    toast.success(response.data.message);
                     if (response.data.success) {
-                      console.log('response', response.data);
+                      toast.success(response.data.message);
                       handleCloseCalendar();
+                    } else {
+                      toast.error(response.data.message);
                     }
                   },
                   (error) => {
@@ -351,7 +358,18 @@ export default function TasksCalendarComponent() {
         {
           label: 'Delete',
           onClick: () => {
-            handleCloseCalendar();
+            let id = availability[0].id;
+            api
+              .delete(`/api/v1/tasks/${id}/task_time_delete`)
+              .then((response) => {
+                if (response.data.success) {
+                  toast.success(response.data.message);
+                  getTask();
+                  handleCloseCalendar();
+                } else {
+                  toast.error(response.data.message);
+                }
+              });
           }
         },
         {
@@ -383,7 +401,7 @@ export default function TasksCalendarComponent() {
   };
 
   const eventStyleGetter = (event, start, end, isSelected) => {
-    console.log(event);
+    // console.log(event);
     var backgroundColor;
 
     if (event.title === 'Unavailable') {
@@ -599,7 +617,7 @@ export default function TasksCalendarComponent() {
                                 size="small"
                                 fullWidth
                                 type="text"
-                                name="salary_low"
+                                name="description"
                                 style={{
                                   width: '172px'
                                 }}
@@ -610,7 +628,7 @@ export default function TasksCalendarComponent() {
                                   newClicks[index] = newVote;
                                   setAvailability(newClicks);
                                 }}
-                                placeholder="Enter your salary low"
+                                placeholder="Enter description"
                               />
                             )}
                           </Grid>
@@ -942,7 +960,7 @@ export default function TasksCalendarComponent() {
                               </label>
                             )}
 
-                            {index < 1 ? (
+                            {value.type === 1 ? (
                               <select
                                 value={availability[index].type}
                                 onChange={(e) => {
@@ -967,7 +985,8 @@ export default function TasksCalendarComponent() {
                                 size="small"
                                 fullWidth
                                 type="text"
-                                name="salary_low"
+                                name="description"
+                                value={value.other}
                                 style={{
                                   width: '172px'
                                 }}
@@ -978,7 +997,7 @@ export default function TasksCalendarComponent() {
                                   newClicks[index] = newVote;
                                   setAvailability(newClicks);
                                 }}
-                                placeholder="Enter your salary low"
+                                placeholder="Enter description"
                               />
                             )}
                           </Grid>
