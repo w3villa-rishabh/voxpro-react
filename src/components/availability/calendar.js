@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 
 import {
@@ -31,6 +32,7 @@ import getDay from 'date-fns/getDay';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { availabilityType, shift } from '../../constants'; //import from your constants.js
+import { useEffect } from 'react';
 
 // let allViews = Object.keys(Views).map((k) => Views[k]);
 
@@ -94,10 +96,7 @@ const availabilityObj = {
 };
 export default function TasksCalendarComponent() {
   const [eventsList, setEventsList] = useState([]);
-  const [availability, setAvailability] = useState([
-    availabilityObj,
-    availabilityObj
-  ]);
+  const [availability, setAvailability] = useState([availabilityObj]);
   const [time] = useState(generateTimeIncrement());
   const [picDate, setPicDate] = useState('');
   const [currentUser] = useState(getCurrentUser());
@@ -120,9 +119,67 @@ export default function TasksCalendarComponent() {
     { name: 'Nights', checked: false }
   ]);
 
+  useEffect(() => {
+    getTask();
+  }, []);
+
+  const getTask = () => {
+    api.get('/api/v1/tasks').then(
+      (response) => {
+        if (response.data.success) {
+          console.log('response.data', response.data);
+          const events = [];
+          response.data.task.map((value) => {
+            var newEvent = {
+              id: value.id,
+              task_id: value.task_id,
+              start: value.date,
+              end: value.date,
+              // start: new Date(
+              //   value.start_date.getFullYear(),
+              //   value.start_date.getMonth(),
+              //   value.start_date.getDate(),
+              //   17,
+              //   0,
+              //   0,
+              //   0
+              // ),
+              // end: new Date(
+              //   value.end_date.getFullYear(),
+              //   value.end_date.getMonth(),
+              //   value.end_date.getDate(),
+              //   17,
+              //   30,
+              //   0,
+              //   0
+              // ),
+              title: value.task_type,
+              desc: 'Big conference for important people',
+              duration: '02:00',
+              borderColor: 'white',
+              backgroundColor: 'pink',
+              display: 'background'
+            };
+            // YearView, month, date, hh, mm, ss,ss,z
+            // start: new Date(2015, 3, 12, 17, 0, 0, 0),
+            // end: new Date(2015, 3, 12, 17, 30, 0, 0),
+            events.push(newEvent);
+          });
+          setEventsList([...eventsList, ...events]);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+      (error) => {
+        toast.error('Something went wrong');
+        console.error(error);
+      }
+    );
+  };
+
   const addMoreRow = () => {
     availabilityObj.startDate = picDate;
-    availabilityObj.type = 3;
+    availabilityObj.type = 2;
     availability.push(availabilityObj);
     setAvailability([...availability]);
   };
@@ -135,7 +192,7 @@ export default function TasksCalendarComponent() {
   };
 
   const handleCancel = () => {
-    let newArr = [availabilityObj, availabilityObj];
+    let newArr = [availabilityObj];
     setAvailability(newArr);
     setOpenCalendar(false);
   };
@@ -155,15 +212,15 @@ export default function TasksCalendarComponent() {
 
       const newClicks = [...availability];
       let fist = { ...newClicks[0] };
-      let second = { ...newClicks[1] };
+      // let second = { ...newClicks[1] };
 
       fist.startDate = start;
       fist.type = 1;
       newClicks[0] = fist;
 
-      second.startDate = start;
-      second.type = 2;
-      newClicks[1] = second;
+      // second.startDate = start;
+      // second.type = 2;
+      // newClicks[1] = second;
 
       setAvailability(newClicks);
     }
@@ -193,6 +250,7 @@ export default function TasksCalendarComponent() {
           toast.success(response.data.message);
           if (response.data.success) {
             console.log('response', response.data);
+            setOpenCalendar(false);
           }
         },
         (error) => {
@@ -201,49 +259,6 @@ export default function TasksCalendarComponent() {
         }
       );
     }
-    // const events = [];
-    // availability.map((value, index) => {
-    //   if (value.type && value.endDate) {
-    //     var newEvent = {
-    //       id: index,
-    //       start: new Date(
-    //         value.startDate.getFullYear(),
-    //         value.startDate.getMonth(),
-    //         value.startDate.getDate(),
-    //         17,
-    //         0,
-    //         0,
-    //         0
-    //       ),
-    //       end: new Date(
-    //         value.endDate.getFullYear(),
-    //         value.endDate.getMonth(),
-    //         value.endDate.getDate(),
-    //         17,
-    //         30,
-    //         0,
-    //         0
-    //       ),
-    //       title: value.type,
-    //       desc: 'Big conference for important people',
-    //       duration: '02:00',
-    //       borderColor: 'white',
-    //       backgroundColor: 'pink',
-    //       display: 'background'
-    //     };
-    //     // YearView, month, date, hh, mm, ss,ss,z
-    //     // start: new Date(2015, 3, 12, 17, 0, 0, 0),
-    //     // end: new Date(2015, 3, 12, 17, 30, 0, 0),
-    //     events.push(newEvent);
-    //   } else {
-    //     toast.dismiss();
-    //     toast.error('Date and type required, Please select required..');
-    //   }
-    // });
-    // setEventsList([...eventsList, ...events]);
-    // setOpenCalendar(false);
-    // let newArr = [availabilityObj];
-    // setAvailability(newArr);
   };
 
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -270,6 +285,11 @@ export default function TasksCalendarComponent() {
     return {
       style: style
     };
+  };
+
+  const selectEvent = (event, e) => {
+    console.log('select event', event);
+    debugger;
   };
 
   return (
@@ -332,7 +352,7 @@ export default function TasksCalendarComponent() {
           <Calendar
             defaultView="month"
             selectable
-            // onSelectEvent={selectEvent}
+            onSelectEvent={selectEvent}
             onSelectSlot={handleSelect}
             localizer={localizer}
             // views={allViews}
@@ -429,7 +449,7 @@ export default function TasksCalendarComponent() {
                               </label>
                             )}
 
-                            {index < 2 ? (
+                            {index < 1 ? (
                               <select
                                 value={availability[index].type}
                                 onChange={(e) => {
@@ -672,7 +692,7 @@ export default function TasksCalendarComponent() {
                               }}
                             />
 
-                            {index > 1 && (
+                            {index > 0 && (
                               <FontAwesomeIcon
                                 icon={['fas', 'trash-alt']}
                                 className="mt-12 pointer"
@@ -682,9 +702,7 @@ export default function TasksCalendarComponent() {
                               />
                             )}
 
-                            {(index === 0 || index === 1) && (
-                              <span className="ml-14"></span>
-                            )}
+                            {index === 0 && <span className="ml-14"></span>}
                           </Grid>
                         </Grid>
                       ))}

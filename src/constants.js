@@ -102,10 +102,6 @@ export const availabilityType = [
   {
     value: 1,
     label: 'Available for interview'
-  },
-  {
-    value: 2,
-    label: 'Available for working'
   }
 ];
 
